@@ -4,10 +4,10 @@ import java.net.InetSocketAddress;
 
 public interface Server {
 
-	public InetSocketAddress getSocketAddress();
+    public InetSocketAddress getSocketAddress();
 
-	public short getPort();
+    public short getPort();
 
-	public void shutdown();
+    public void shutdown();
 
 }
