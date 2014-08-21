@@ -13,9 +13,9 @@
     </properties>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:ProjectBlueshift/Blueshift.git</developerConnection>
-        <connection>scm:git:git://github.com/ProjectBlueshift/Blueshift.git</connection>
-        <url>https://github.com/ProjectBlueshift/Blueshift/tree/master/</url>
+        <developerConnection>scm:git:git@github.com:ProjectBlueshift/BlueshiftAPI.git</developerConnection>
+        <connection>scm:git:git://github.com/ProjectBlueshift/BlueshiftAPI.git</connection>
+        <url>https://github.com/ProjectBlueshift/BlueshiftAPI/tree/master/</url>
     </scm>
 
 
