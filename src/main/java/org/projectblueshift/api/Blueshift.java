@@ -1,5 +1,5 @@
 package org.projectblueshift.api;
 
-public class Blueshift {
+public final class Blueshift {
 
 }
