@@ -9,6 +9,4 @@ public interface Server {
     public short getPort();
 
     public void shutdown();
-
-    public void init();
 }
