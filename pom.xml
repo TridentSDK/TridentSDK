@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.projectblueshift</groupId>
-    <artifactId>blueshift-api</artifactId>
+    <groupId>net.tridentsdk</groupId>
+    <artifactId>tridentsdk</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Blueshift API</name>
-    <url>http://www.projectblueshift.org</url>
+    <name>TridentSDK</name>
+    <url>http://www.tridentsdk.net/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:ProjectBlueshift/BlueshiftAPI.git</developerConnection>
-        <connection>scm:git:git://github.com/ProjectBlueshift/BlueshiftAPI.git</connection>
-        <url>https://github.com/ProjectBlueshift/BlueshiftAPI/tree/master/</url>
+        <developerConnection>scm:git:git@github.com:TridentSDK/TridentSDK.git</developerConnection>
+        <connection>scm:git:git://github.com/TridentSDK/TridentSDK.git</connection>
+        <url>https://github.com/TridentSDK/TridentSDK/tree/master/</url>
     </scm>
 
 

@@ -1,4 +1,4 @@
-package org.projectblueshift.api;
+package net.tridentsdk.api;
 
 public interface Server {
 
