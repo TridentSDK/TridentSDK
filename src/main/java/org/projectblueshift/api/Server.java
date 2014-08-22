@@ -10,4 +10,5 @@ public interface Server {
 
     public void shutdown();
 
+    public void init();
 }
