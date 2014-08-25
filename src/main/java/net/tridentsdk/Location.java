@@ -40,10 +40,10 @@ public class Location implements Serializable, Cloneable {
      * References the point on the world as a location that wraps the coordinates
      *
      * @param world the world which the point resides in
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
-     * @param yaw goes side to side, in degrees
+     * @param x     the x coordinate
+     * @param y     the y coordinate
+     * @param z     the z coordinate
+     * @param yaw   goes side to side, in degrees
      * @param pitch goes up and down, in degrees TODO specify value range
      */
     public Location(String world, double x, double y, double z, float yaw, float pitch) {
@@ -61,9 +61,9 @@ public class Location implements Serializable, Cloneable {
      * Wraps the point without specific yaw and pitch (set to 0)
      *
      * @param world the world which the point resides in
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param x     the x coordinate
+     * @param y     the y coordinate
+     * @param z     the z coordinate
      */
     public Location(String world, double x, double y, double z) {
         this(world, x, y, z, 0.0F, 0.0F);

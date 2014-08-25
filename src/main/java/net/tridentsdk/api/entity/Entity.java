@@ -102,8 +102,8 @@ public interface Entity {
     /**
      * Checks if the entity is currently on the ground, or at least touching the ground
      *
-     * @return {@code true} if the entity touches the ground, {@code false} if it is in the air
-     *         (such as if it was falling)
+     * @return {@code true} if the entity touches the ground, {@code false} if it is in the air (such as if it was
+     * falling)
      */
     boolean isOnGround();
 
@@ -128,7 +128,8 @@ public interface Entity {
     void remove();
 
     /**
-     * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO LivingEntity)
+     * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO
+     * LivingEntity)
      *
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */

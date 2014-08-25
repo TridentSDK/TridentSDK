@@ -34,13 +34,4 @@ public interface Server {
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
      */
     void shutdown();
-
-    /**
-     * Internal use ONLY
-     *
-     * @param toSet the server instance to set for the trident accessor
-     */
-    static void setServer(Server toSet) {
-        Trident.setServer(toSet);
-    }
 }

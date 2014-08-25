@@ -43,7 +43,7 @@ public final class Trident {
      *
      * @param s the server to set
      */
-    static void setServer(Server s) {
+    public static void setServer(Server s) {
         Preconditions.checkArgument(Trident.server != null, "Can only set server instance once!");
         Trident.server = s;
     }
