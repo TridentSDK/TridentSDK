@@ -39,12 +39,22 @@ public final class Trident {
     }
 
     /**
-     * Do not call.
+     * Do not call
+     * <p/>
+     * <p>Will throw an exception if you are not calling from a trusted source</p>
      *
      * @param s the server to set
      */
     public static void setServer(Server s) {
-        Preconditions.checkArgument(Trident.server != null, "Can only set server instance once!");
+        Preconditions.checkState(Trident.canSet(), "Can only set server instance once!");
         Trident.server = s;
+    }
+
+    private static boolean canSet() {
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        StackTraceElement element = elements[3];
+
+        return "net.tridentsdk.server.TridentServer".equals(element.getClassName()) &&
+               "createServer".equals(element.getMethodName());
     }
 }

@@ -58,7 +58,7 @@ public class Vector implements Serializable, Cloneable {
      * @param y the y value of the vector
      * @param z the z value of the vector
      */
-    public Vector(int x, int y, int z) {
+    private Vector(int x, int y, int z) {
         this.setX((double) x);
         this.setY((double) y);
         this.setZ((double) z);
@@ -82,7 +82,7 @@ public class Vector implements Serializable, Cloneable {
      * @param z the z value of the vector to add
      * @return the current vector with updated coordinates
      */
-    public Vector add(double x, double y, double z) {
+    Vector add(double x, double y, double z) {
         this.setX(this.getX() + x);
         this.setY(this.getY() + y);
         this.setZ(this.getZ() + z);
@@ -126,7 +126,7 @@ public class Vector implements Serializable, Cloneable {
      * @param z the z value of the vector to subtract
      * @return the current vector with updated coordinates
      */
-    public Vector subtract(double x, double y, double z) {
+    Vector subtract(double x, double y, double z) {
         this.setX(this.getX() - x);
         this.setY(this.getY() - y);
         this.setZ(this.getZ() - z);
@@ -164,7 +164,7 @@ public class Vector implements Serializable, Cloneable {
      * @param z the z value of the vector to multiply
      * @return the current vector with updated coordinates
      */
-    public Vector multiply(double x, double y, double z) {
+    Vector multiply(double x, double y, double z) {
         this.setX(this.getX() * x);
         this.setY(this.getY() * y);
         this.setZ(this.getZ() * z);
@@ -202,7 +202,7 @@ public class Vector implements Serializable, Cloneable {
      * @param z the z value of the vector to divide
      * @return the current vector with updated coordinates
      */
-    public Vector divide(double x, double y, double z) {
+    Vector divide(double x, double y, double z) {
         this.setX(this.getX() / x);
         this.setY(this.getY() / y);
         this.setZ(this.getZ() / z);
@@ -227,7 +227,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @return the vector x value
      */
-    public double getX() {
+    double getX() {
         return this.x;
     }
 
@@ -236,7 +236,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @param x the x value to set this vector
      */
-    public void setX(double x) {
+    void setX(double x) {
         this.x = x;
     }
 
@@ -245,7 +245,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @return the vector y value
      */
-    public double getY() {
+    double getY() {
         return this.y;
     }
 
@@ -254,7 +254,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @param y the y value to set this vector
      */
-    public void setY(double y) {
+    void setY(double y) {
         this.y = y;
     }
 
@@ -263,7 +263,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @return the vector z value
      */
-    public double getZ() {
+    double getZ() {
         return this.z;
     }
 
@@ -272,7 +272,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @param z the z value to set this vector
      */
-    public void setZ(double z) {
+    void setZ(double z) {
         this.z = z;
     }
 }

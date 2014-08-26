@@ -46,7 +46,7 @@ public class Location implements Serializable, Cloneable {
      * @param yaw   goes side to side, in degrees
      * @param pitch goes up and down, in degrees TODO specify value range
      */
-    public Location(String world, double x, double y, double z, float yaw, float pitch) {
+    private Location(String world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
 
         this.x = x;
