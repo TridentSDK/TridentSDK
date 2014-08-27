@@ -39,9 +39,7 @@ public final class Trident {
     }
 
     /**
-     * Do not call
-     * <p/>
-     * <p>Will throw an exception if you are not calling from a trusted source</p>
+     * Do not call <p/> <p>Will throw an exception if you are not calling from a trusted source</p>
      *
      * @param s the server to set
      */
