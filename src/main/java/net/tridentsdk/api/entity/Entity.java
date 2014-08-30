@@ -17,8 +17,9 @@
 
 package net.tridentsdk.api.entity;
 
-import net.tridentsdk.Location;
+import net.tridentsdk.api.Location;
 import net.tridentsdk.api.util.Vector;
+import net.tridentsdk.api.world.World;
 
 import java.util.List;
 import java.util.UUID;
@@ -57,7 +58,7 @@ public interface Entity {
      *
      * @return the world that contains the entity
      */
-    String getWorld(); // TODO: Change to world object
+    World getWorld();
 
     /**
      * The location of the entity with respect to the coordinate grid

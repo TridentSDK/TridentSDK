@@ -15,7 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.tridentsdk;
+package net.tridentsdk.api;
+
+import net.tridentsdk.api.util.Vector;
+import net.tridentsdk.api.world.World;
 
 import java.io.Serializable;
 
@@ -31,7 +34,7 @@ public class Location implements Serializable, Cloneable {
     private double y;
     private double z;
 
-    private String world; // TODO: Change to world object
+    private World world;
 
     private float yaw;
     private float pitch;
@@ -44,9 +47,9 @@ public class Location implements Serializable, Cloneable {
      * @param y     the y coordinate
      * @param z     the z coordinate
      * @param yaw   goes side to side, in degrees
-     * @param pitch goes up and down, in degrees TODO specify value range
+     * @param pitch goes up and down, in degrees
      */
-    private Location(String world, double x, double y, double z, float yaw, float pitch) {
+    private Location(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
 
         this.x = x;
@@ -65,7 +68,7 @@ public class Location implements Serializable, Cloneable {
      * @param y     the y coordinate
      * @param z     the z coordinate
      */
-    public Location(String world, double x, double y, double z) {
+    public Location(World world, double x, double y, double z) {
         this(world, x, y, z, 0.0F, 0.0F);
     }
 
@@ -128,7 +131,7 @@ public class Location implements Serializable, Cloneable {
      *
      * @return the world where the location is
      */
-    public String getWorld() {
+    public World getWorld() {
         return this.world;
     }
 
@@ -137,7 +140,7 @@ public class Location implements Serializable, Cloneable {
      *
      * @param world the world to set the location to
      */
-    public void setWorld(String world) {
+    public void setWorld(World world) {
         this.world = world;
     }
 
@@ -175,5 +178,18 @@ public class Location implements Serializable, Cloneable {
      */
     public void setPitch(float pitch) {
         this.pitch = pitch;
+    }
+
+    public Location add(Vector vector) {
+        setX(vector.getX());
+        setY(vector.getY());
+        setZ(vector.getZ());
+
+        return this;
+    }
+
+    public Location getRelative(Vector vector) {
+        return new Location(getWorld(), vector.getX() + getX(), vector.getY() + getY(),
+                vector.getZ() + getZ(), getYaw(), getPitch());
     }
 }
