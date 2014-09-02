@@ -58,7 +58,7 @@ public class Vector implements Serializable, Cloneable {
      * @param y the y value of the vector
      * @param z the z value of the vector
      */
-    private Vector(int x, int y, int z) {
+    public Vector(int x, int y, int z) {
         this.setX((double) x);
         this.setY((double) y);
         this.setZ((double) z);
