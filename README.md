@@ -3,7 +3,7 @@ TridentSDK
 
 The TridentSDK is a new development API which can be used to develop plugins for the popular game Minecraft. This SDK has a few things that its' older sisters do not. 
 
-- Evades Mojangs dictatorship
+- Evades Mojangs EULA
 - Adds more features as requested by the community
 - Replaces the Bukkit API.
 - Does not use Mojangs code.
