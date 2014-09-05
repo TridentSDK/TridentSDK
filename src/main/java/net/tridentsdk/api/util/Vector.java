@@ -58,7 +58,7 @@ public class Vector implements Serializable, Cloneable {
      * @param y the y value of the vector
      * @param z the z value of the vector
      */
-    private Vector(int x, int y, int z) {
+    public Vector(int x, int y, int z) {
         this.setX((double) x);
         this.setY((double) y);
         this.setZ((double) z);
@@ -100,12 +100,12 @@ public class Vector implements Serializable, Cloneable {
      */
     public Vector add(int x, int y, int z) {
         return this.add((double) x, (double) y, (double) z);
-        // Implementation detail:
-        // DO NOT CREATE A NEW VECTOR HERE JUST BECAUSE (!)
-        // Doing so wastes memory and adds unnecessary object
-        // creation overhead, therefore, delegate to the
-        // setters instead of the previous implementation.
-        // Same with the other methods
+        /* Implementation detail:
+        DO NOT CREATE A NEW VECTOR HERE JUST BECAUSE (!)
+        Doing so wastes memory and adds unnecessary object
+        creation overhead, therefore, delegate to the
+        setters instead of the previous implementation.
+        Same with the other methods */
     }
 
     /**

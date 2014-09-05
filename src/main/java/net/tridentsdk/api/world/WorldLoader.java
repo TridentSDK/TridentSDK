@@ -6,7 +6,9 @@ public interface WorldLoader {
 
     public boolean worldExists(String world);
     public boolean chunkExists(World world, int x, int z);
+    public boolean chunkExists(World world, ChunkLocation location);
 
     public Chunk loadChunk(World world, int x, int z);
+    public Chunk loadChunk(World world, ChunkLocation location);
     public void saveChunk(Chunk chunk);
 }

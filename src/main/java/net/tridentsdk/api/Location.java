@@ -49,7 +49,7 @@ public class Location implements Serializable, Cloneable {
      * @param yaw   goes side to side, in degrees
      * @param pitch goes up and down, in degrees
      */
-    private Location(World world, double x, double y, double z, float yaw, float pitch) {
+    public Location(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
 
         this.x = x;
