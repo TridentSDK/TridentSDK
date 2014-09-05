@@ -195,7 +195,9 @@ public class Location implements Serializable, Cloneable {
     }
 
     /**
-     *  Returns the location as a vector
+     *  Creates new Vector with Location's coordinates
+     *
+     *  @return New Vector containing this Location's coordinates
      */
     public Vector toVector() {
         return new Vector(getX(), getY(), getZ());
