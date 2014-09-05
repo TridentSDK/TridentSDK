@@ -233,6 +233,23 @@ public class Vector implements Serializable, Cloneable {
     }
 
     /**
+     * Sets the current vector to the crossproduct between this vector and another one
+     * @param vector the vector to crossproduct with
+     * @return this vector, updated with the crossproduct with the other vector
+     */
+    public Vector crossProduct(Vector vector) {
+        double x = this.x;
+        double y = this.y;
+        double z = this.z;
+
+        this.setX(y * vector.getZ() - vector.getY() * z);
+        this.setY(z * vector.getX() - vector.getZ() - x);
+        this.setZ(x * vector.getY() - vector.getX() * y);
+
+        return this;
+    }
+
+    /**
      * Gets the x directional-magnitude value
      *
      * @return the vector x value
