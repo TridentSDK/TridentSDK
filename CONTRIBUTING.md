@@ -37,7 +37,7 @@ Keep in mind that you will be asked before accepting your PR if you agree to our
 
     These whitespace requirements are easily and often overlooked.  They are critical formatting requirements designed to help simplify a shared heterogeneous development environment.  Learn how your IDE functions in order to show you these characters and verify them.  Analyse the git diff closely to verify every character and if the PR should include the character change.  It is tedious and it is critical.
 
-    [Eclipse](http://stackoverflow.com/a/11596227/532590)
+    [Eclipse](http://stackoverflow.com/a/11596227/532590),
     [NetBeans](http://stackoverflow.com/a/1866385/532590)
 
 * No 80 column limit or 'weird' mid-statement newlines.
