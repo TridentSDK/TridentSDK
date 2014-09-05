@@ -202,20 +202,22 @@ public class Location implements Serializable, Cloneable {
     }
 
     /**
-     *  Returns the distance this from location to another.
+     *  The distance this from location to another.
      *  Math.sqrt is costly, ergo calling this method a lot is not
      *  advised.
      *
      *  @param location the location to measure distance with
+     *  @return distance from this location to another
      */
     public double distance(Location location) {
         return Math.sqrt(distanceSquared(location));
     }
 
     /**
-     *  Returns the distance squared from this location to another
+     *  The distance squared from this location to another
      *
      *  @param location the location to measure distance with
+     *  @return distance squared from this location to another
      */
     public double distanceSquared(Location location) {
         Validate.notNull(location, "Location cannot be null.");
