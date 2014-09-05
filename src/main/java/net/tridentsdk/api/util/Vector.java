@@ -228,7 +228,7 @@ public class Vector implements Serializable, Cloneable {
      * @param vec the other vector
      * @return dot product of the two vectors
      */
-    public double dot(Vector vec) {
+    public double dotProduct(Vector vec) {
         return x * vec.x + y * vec.y + z * vec.z;
     }
 
