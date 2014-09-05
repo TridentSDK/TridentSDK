@@ -19,6 +19,7 @@ package net.tridentsdk.api;
 
 import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
+import org.apache.commons.lang.Validate;
 
 import java.io.Serializable;
 
@@ -191,5 +192,38 @@ public class Location implements Serializable, Cloneable {
     public Location getRelative(Vector vector) {
         return new Location(getWorld(), vector.getX() + getX(), vector.getY() + getY(),
                 vector.getZ() + getZ(), getYaw(), getPitch());
+    }
+
+    /**
+     *  Returns the location as a vector
+     */
+    public Vector toVector() {
+        return new Vector(getX(), getY(), getZ());
+    }
+
+    /**
+     *  Returns the distance this from location to another.
+     *  Math.sqrt is costly, ergo calling this method a lot is not
+     *  advised.
+     *
+     *  @param location the location to measure distance with
+     */
+    public double distance(Location location) {
+        return Math.sqrt(distanceSquared(location));
+    }
+
+    /**
+     *  Returns the distance squared from this location to another
+     *
+     *  @param location the location to measure distance with
+     */
+    public double distanceSquared(Location location) {
+        Validate.notNull(location, "Location cannot be null.");
+        if(getWorld() != location.getWorld()) return 0;
+        return square(getX() - location.getX()) + square(getY() - location.getY()) + square(getZ() - location.getZ());
+    }
+
+    private double square(double d) {
+        return d * d;
     }
 }
