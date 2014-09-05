@@ -17,6 +17,7 @@
 
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.util.MathHelper;
 import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
 
@@ -191,5 +192,29 @@ public class Location implements Serializable, Cloneable {
     public Location getRelative(Vector vector) {
         return new Location(getWorld(), vector.getX() + getX(), vector.getY() + getY(),
                 vector.getZ() + getZ(), getYaw(), getPitch());
+    }
+
+    /**
+     *  Returns the location as a vector
+     */
+    public Vector toVector() {
+        return new Vector(getX(), getY(), getZ());
+    }
+
+    /**
+     *  Returns the distance this location to another
+     *
+     *  @param location the location to measure distance with
+     */
+    public double distance(Location location) {
+        if(location == null) {
+            throw new IllegalArgumentException("Location cannot be null");
+        }
+        else if(location.getWorld() == null || getWorld() == null) {
+            throw new IllegalArgumentException("World cannot be null.");
+        } else if(location.getWorld() != getWorld()) {
+            throw new IllegalArgumentException("Cannot measure distance between worlds.");
+        }
+        return Math.sqrt(MathHelper.square(getX() - location.getX()) + MathHelper.square(getY() - location.getY()) + MathHelper.square(getZ() - location.getZ()));
     }
 }
