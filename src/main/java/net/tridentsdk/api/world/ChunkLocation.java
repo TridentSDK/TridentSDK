@@ -7,12 +7,12 @@ package net.tridentsdk.api.world;
  *
  */
 
-public class ChunkLocation{
+public class ChunkLocation {
 
 	private int x;
 	private int z;
 	
-	public ChunkLocation(int x, int z){
+	public ChunkLocation(int x, int z) {
 		this.x = x;
 		this.z = z;
 	}

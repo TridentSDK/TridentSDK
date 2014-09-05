@@ -100,12 +100,12 @@ public class Vector implements Serializable, Cloneable {
      */
     public Vector add(int x, int y, int z) {
         return this.add((double) x, (double) y, (double) z);
-        // Implementation detail:
-        // DO NOT CREATE A NEW VECTOR HERE JUST BECAUSE (!)
-        // Doing so wastes memory and adds unnecessary object
-        // creation overhead, therefore, delegate to the
-        // setters instead of the previous implementation.
-        // Same with the other methods
+        /* Implementation detail:
+        DO NOT CREATE A NEW VECTOR HERE JUST BECAUSE (!)
+        Doing so wastes memory and adds unnecessary object
+        creation overhead, therefore, delegate to the
+        setters instead of the previous implementation.
+        Same with the other methods */
     }
 
     /**
