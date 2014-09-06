@@ -26,6 +26,7 @@ Keep in mind that you will be asked before accepting your PR if you agree to our
 * Tabs shouldn't be used, please reference these threads to find how to make your IDE use spaces:
 
     Eclipse: http://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html
+    IntelliJ: http://www.jetbrains.com/idea/webhelp/general.html (Default indent options)
 
 * Comments in code are encouraged to understand what your code does and how it works
 
