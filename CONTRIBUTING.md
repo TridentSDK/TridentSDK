@@ -33,7 +33,7 @@ Keep in mind that you will be asked before accepting your PR if you agree to our
 
 * Your commit messages must follow the format below
 
-* Any PRs that are racist and/or offensive to anyone through commit messages or code-comments will be rejected immediately and reported to GitHub. We have a zero tolerance for any type of offensive content.
+* Any PRs that are racist and/or offensive to anyone through commit messages or code-comments will be rejected immediately and reported to GitHub. We have zero tolerance for any type of offensive content.
 
 ### Commit Message Format
 
