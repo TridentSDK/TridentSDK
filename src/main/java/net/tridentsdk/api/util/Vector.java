@@ -158,6 +158,7 @@ public class Vector implements Serializable, Cloneable {
 
     /**
      * Multiplies the magnitude of this vector by a double
+     *
      * @param amount The amount to multiply by
      * @return This vector, with updated coordinates
      */
@@ -205,6 +206,7 @@ public class Vector implements Serializable, Cloneable {
 
     /**
      * Divides the magnitude of this vector by a given amount.
+     *
      * @param amount The amount to divide by
      * @return this vector
      */
@@ -242,6 +244,7 @@ public class Vector implements Serializable, Cloneable {
 
     /**
      * Sets the current vector to the crossproduct between this vector and another one
+     *
      * @param vector the vector to crossproduct with
      * @return this vector, updated with the crossproduct with the other vector
      */
@@ -259,6 +262,7 @@ public class Vector implements Serializable, Cloneable {
 
     /**
      * Gets the square of the magnitude of this vector
+     *
      * @return The magnitude of this vector, squared
      */
     public double magnitudeSquared() {
@@ -269,6 +273,7 @@ public class Vector implements Serializable, Cloneable {
      * Gets the magnitude for this vector
      *
      * Note that this is an expensive operation, and if possible, you should use magnitudeSquared() instead
+     *
      * @return The magnitude of this vector
      */
     public double magnitude() {
@@ -277,6 +282,7 @@ public class Vector implements Serializable, Cloneable {
 
     /**
      * Normalizes this vector (changes the magnitude to 1 without changing the direction)
+     *
      * @return This vector
      */
     public Vector normalize() {
