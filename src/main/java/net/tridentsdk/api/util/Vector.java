@@ -167,6 +167,16 @@ public class Vector implements Serializable, Cloneable {
     }
 
     /**
+     * Multiplies the magnitude of this vector by a double
+     *
+     * @param amount The amount to multiply by
+     * @return This vector, with updated coordinates
+     */
+    public Vector multiply(double amount) {
+        return multiply(amount, amount, amount);
+    }
+
+    /**
      * Multiplies the coordinate values to the current vector's coordinates with double accuracy
      *
      * @param x the x value of the vector to multiply
@@ -205,6 +215,16 @@ public class Vector implements Serializable, Cloneable {
     }
 
     /**
+     * Divides the magnitude of this vector by a given amount.
+     *
+     * @param amount The amount to divide by
+     * @return this vector
+     */
+    public Vector divide(double amount) {
+        return divide(amount, amount, amount);
+    }
+
+    /**
      * Takes the the current vector's coordinates and divides them from the coordinate values with double accuracy
      *
      * @param x the x value of the vector to divide
@@ -230,6 +250,53 @@ public class Vector implements Serializable, Cloneable {
      */
     public Vector divide(int x, int y, int z) {
         return this.divide((double) x, (double) y, (double) z);
+    }
+
+    /**
+     * Sets the current vector to the crossproduct between this vector and another one
+     *
+     * @param vector the vector to crossproduct with
+     * @return this vector, updated with the crossproduct with the other vector
+     */
+    public Vector crossProduct(Vector vector) {
+        double x = this.x;
+        double y = this.y;
+        double z = this.z;
+
+        this.setX(y * vector.getZ() - vector.getY() * z);
+        this.setY(z * vector.getX() - vector.getZ() - x);
+        this.setZ(x * vector.getY() - vector.getX() * y);
+
+        return this;
+    }
+
+    /**
+     * Gets the square of the magnitude of this vector
+     *
+     * @return The magnitude of this vector, squared
+     */
+    public double magnitudeSquared() {
+        return (x * x) + (y * y) + (z * z);
+    }
+
+    /**
+     * Gets the magnitude for this vector
+     *
+     * Note that this is an expensive operation, and if possible, you should use magnitudeSquared() instead
+     *
+     * @return The magnitude of this vector
+     */
+    public double magnitude() {
+        return Math.sqrt(magnitudeSquared());
+    }
+
+    /**
+     * Normalizes this vector (changes the magnitude to 1 without changing the direction)
+     *
+     * @return This vector
+     */
+    public Vector normalize() {
+        return this.divide(this.magnitude());
     }
 
     /**
