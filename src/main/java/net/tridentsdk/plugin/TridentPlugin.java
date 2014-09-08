@@ -36,22 +36,28 @@ public class TridentPlugin {
     private File pluginFile;
     private PluginDescription description;
 
-    private TridentPlugin() {} // avoid any plugin initiation outside of this package
+    protected TridentPlugin() {} // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description) {
         this.pluginFile = pluginFile;
         this.description = description;
     }
 
-    void startup() {
+    public void onEnable() {
+    }
+
+    public void onDisable() {
+    }
+
+    final void startup() {
         // TODO
     }
 
-    public File getFile() {
+    public final File getFile() {
         return this.pluginFile;
     }
 
-    public PluginDescription getDescription() {
+    public final PluginDescription getDescription() {
         return this.description;
     }
 }
