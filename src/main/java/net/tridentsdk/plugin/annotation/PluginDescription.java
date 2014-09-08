@@ -37,7 +37,7 @@ public @interface PluginDescription {
 
     String name();
 
-    double version() default 1.0;
+    String version() default "1.0";
 
     String description() default "Plugin made for TridentSDK";
 
