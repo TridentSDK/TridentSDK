@@ -30,27 +30,12 @@ package net.tridentsdk.api.nbt;
 /**
  * @author The TridentSDK Team
  */
-public class ShortTag extends NBTTag {
-    short value;
-    
-    public ShortTag(String name) {
-        super(name);
+public class NBTException extends Exception {
+
+    public NBTException(String string) {
+       super(string);
     }
-    
-    public short getValue() {
-        return value;
-    }
-    
-    public void setValue(short value) {
-        this.value = value;
-    }
-    
-    /* (non-Javadoc)
-     * @see net.tridentsdk.api.nbt.NBTTag#getType()
-     */
-    @Override
-    public TagType getType() {
-        return TagType.SHORT;
-    }
+
+    private static final long serialVersionUID = -1801178872689804597L;
 
 }
