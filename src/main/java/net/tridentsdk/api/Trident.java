@@ -28,6 +28,7 @@
 package net.tridentsdk.api;
 
 import com.google.common.base.Preconditions;
+import net.tridentsdk.api.util.TridentLogger;
 
 /**
  * Utility accessor to the {@link net.tridentsdk.api.Server}
@@ -36,6 +37,7 @@ import com.google.common.base.Preconditions;
  */
 public final class Trident {
     private static Server server;
+    private static TridentLogger logger;
 
     private Trident() {}
 
@@ -64,5 +66,18 @@ public final class Trident {
 
         return "net.tridentsdk.server.TridentServer".equals(element.getClassName()) &&
                "createServer".equals(element.getMethodName());
+    }
+
+    /**
+     * Gets the logger which the server is currently using
+     *
+     * @return the logger which is being used
+     */
+    public static TridentLogger getLogger() {
+        return logger;
+    }
+
+    public static void setLogger(TridentLogger logger) {
+        Trident.logger = logger;
     }
 }
