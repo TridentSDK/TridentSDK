@@ -41,8 +41,9 @@ public class LongTag extends NBTTag {
         return value;
     }
     
-    public void setValue(long value) {
+    public LongTag setValue(long value) {
         this.value = value;
+        return this;
     }
     
     /* (non-Javadoc)

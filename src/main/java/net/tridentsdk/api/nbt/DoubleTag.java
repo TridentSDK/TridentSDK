@@ -41,8 +41,9 @@ public class DoubleTag extends NBTTag {
         return value;
     }
     
-    public void setValue(double value) {
+    public DoubleTag setValue(double value) {
         this.value = value;
+        return this;
     }
     
     /* (non-Javadoc)

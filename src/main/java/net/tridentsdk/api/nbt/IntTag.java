@@ -41,8 +41,9 @@ public class IntTag extends NBTTag {
         return value;
     }
     
-    public void setValue(int value) {
+    public IntTag setValue(int value) {
         this.value = value;
+        return this;
     }
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()

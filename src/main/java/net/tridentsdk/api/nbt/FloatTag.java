@@ -41,8 +41,9 @@ public class FloatTag extends NBTTag {
         return value;
     }
     
-    public void setValue(float value) {
+    public FloatTag setValue(float value) {
         this.value = value;
+        return this;
     }
     
     /* (non-Javadoc)

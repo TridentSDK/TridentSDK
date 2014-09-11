@@ -41,8 +41,9 @@ public class StringTag extends NBTTag {
         return value;
     }
     
-    public void setValue(String value) {
+    public StringTag setValue(String value) {
         this.value = value;
+        return this;
     }
 
     /* (non-Javadoc)

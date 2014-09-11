@@ -69,6 +69,10 @@ public enum TagType {
         return implClass;
     }
     
+    public int getId() {
+        return id;
+    }
+    
     public static TagType fromId(byte fromId) {
         for (TagType type : values()) {
             if (type.id == fromId) {

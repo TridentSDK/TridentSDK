@@ -41,8 +41,9 @@ public class ShortTag extends NBTTag {
         return value;
     }
     
-    public void setValue(short value) {
+    public ShortTag setValue(short value) {
         this.value = value;
+        return this;
     }
     
     /* (non-Javadoc)

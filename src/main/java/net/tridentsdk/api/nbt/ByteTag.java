@@ -41,8 +41,9 @@ public class ByteTag extends NBTTag {
         return value;
     }
     
-    public void setValue(byte value) {
+    public ByteTag setValue(byte value) {
         this.value = value;
+        return this;
     }
     
     /* (non-Javadoc)

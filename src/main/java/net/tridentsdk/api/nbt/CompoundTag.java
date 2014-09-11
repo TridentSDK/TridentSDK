@@ -37,7 +37,7 @@ import com.google.common.collect.Lists;
 /**
  * @author The TridentSDK Team
  */
-public class CompoundTag extends NBTTag {
+public class CompoundTag extends NBTTag implements TagContainer {
     Map<String, NBTTag> tags = new HashMap<>(); //Hashmap for quick lookup with names
     
     public CompoundTag(String name) {

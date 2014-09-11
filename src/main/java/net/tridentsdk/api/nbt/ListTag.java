@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
 /**
  * @author The TridentSDK Team
  */
-public class ListTag extends NBTTag {
+public class ListTag extends NBTTag implements TagContainer {
     List<NBTTag> tags = new ArrayList<>();
     TagType innerType;
     
@@ -64,6 +64,10 @@ public class ListTag extends NBTTag {
     
     public void removeTag(NBTTag tag) {
         tags.remove(tag);
+    }
+    
+    public TagType getInnerType() {
+        return innerType;
     }
     
     /* (non-Javadoc)
