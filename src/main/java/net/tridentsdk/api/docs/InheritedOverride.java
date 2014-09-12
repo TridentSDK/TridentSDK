@@ -31,7 +31,7 @@ import java.lang.annotation.*;
 
 /**
  * This annotation is for the use of documentation. This means that no protected and above methods are found in the
- * class, and/or the class only has overriden members, not documented, and does not have any particular implementation
+ * class, and/or the class only has overridden members, not documented, and does not have any particular implementation
  * differences <p/> <p>This annotation doesn't do anything</p>
  *
  * @author The TridentSDK Team

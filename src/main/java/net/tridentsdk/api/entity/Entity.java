@@ -115,9 +115,9 @@ public interface Entity {
     /**
      * The identifier for this entity
      *
-     * @return the UUID object unique to all entities on the server
+     * @return the unique id to all entities on the server
      */
-    UUID getUniqueId();
+    int getId();
 
     /**
      * Removes the entity from the world and destroys it, freeing all memory associated with it

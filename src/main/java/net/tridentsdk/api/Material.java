@@ -32,7 +32,7 @@ package net.tridentsdk.api;
  */
 public enum Material {
 
-    ;
+    AIR("0");
 
     private final String id;
     private final String data;

@@ -1,5 +1,7 @@
 package net.tridentsdk.api.entity;
 
+import net.tridentsdk.api.Location;
+
 public interface LivingEntity extends Entity {
 
     /**
@@ -15,6 +17,24 @@ public interface LivingEntity extends Entity {
      * @param entity the entity to make visible to this entity
      */
     void show(Entity entity);
+
+    double getHealth();
+
+    double getMaxHealth();
+
+    long getRemainingAir();
+
+    String getDisplayName();
+
+    Location getEyeLocation();
+
+    boolean canPickupItems();
+
+    void setRemainingAir(long ticks);
+
+    void setHealth(double health);
+
+    void setMaxHealth(double maxHealth);
 
     /**
      * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO
