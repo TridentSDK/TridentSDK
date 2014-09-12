@@ -74,7 +74,7 @@ public final class Trident {
      * @return the logger which is being used
      */
     public static TridentLogger getLogger() {
-        return logger;
+        return Trident.logger;
     }
 
     public static void setLogger(TridentLogger logger) {

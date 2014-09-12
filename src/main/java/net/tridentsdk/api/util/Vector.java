@@ -173,7 +173,7 @@ public class Vector implements Serializable, Cloneable {
      * @return This vector, with updated coordinates
      */
     public Vector multiply(double amount) {
-        return multiply(amount, amount, amount);
+        return this.multiply(amount, amount, amount);
     }
 
     /**
@@ -221,7 +221,7 @@ public class Vector implements Serializable, Cloneable {
      * @return this vector
      */
     public Vector divide(double amount) {
-        return divide(amount, amount, amount);
+        return this.divide(amount, amount, amount);
     }
 
     /**
@@ -276,18 +276,17 @@ public class Vector implements Serializable, Cloneable {
      * @return The magnitude of this vector, squared
      */
     public double magnitudeSquared() {
-        return (x * x) + (y * y) + (z * z);
+        return this.x * this.x + this.y * this.y + this.z * this.z;
     }
 
     /**
-     * Gets the magnitude for this vector
-     *
-     * Note that this is an expensive operation, and if possible, you should use magnitudeSquared() instead
+     * Gets the magnitude for this vector <p/> Note that this is an expensive operation, and if possible, you should use
+     * magnitudeSquared() instead
      *
      * @return The magnitude of this vector
      */
     public double magnitude() {
-        return Math.sqrt(magnitudeSquared());
+        return Math.sqrt(this.magnitudeSquared());
     }
 
     /**
@@ -298,15 +297,15 @@ public class Vector implements Serializable, Cloneable {
     public Vector normalize() {
         return this.divide(this.magnitude());
     }
-    
-	/**
+
+    /**
      * Calculates the dot product of this vector and another
      *
      * @param vec the other vector
      * @return dot product of the two vectors
      */
     public double dotProduct(Vector vec) {
-        return x * vec.x + y * vec.y + z * vec.z;
+        return this.x * vec.x + this.y * vec.y + this.z * vec.z;
     }
 
     /**

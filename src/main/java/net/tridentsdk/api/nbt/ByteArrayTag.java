@@ -32,20 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class ByteArrayTag extends NBTTag {
     byte[] value;
-    
+
     public ByteArrayTag(String name) {
         super(name);
     }
-    
+
     public byte[] getValue() {
-        return value;
+        return this.value;
     }
-    
-    public ByteArrayTag setValue(byte[] value) {
+
+    public ByteArrayTag setValue(byte... value) {
         this.value = value;
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +53,4 @@ public class ByteArrayTag extends NBTTag {
     public TagType getType() {
         return TagType.BYTE_ARRAY;
     }
-
 }

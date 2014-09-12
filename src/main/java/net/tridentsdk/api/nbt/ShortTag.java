@@ -32,20 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class ShortTag extends NBTTag {
     short value;
-    
+
     public ShortTag(String name) {
         super(name);
     }
-    
+
     public short getValue() {
-        return value;
+        return this.value;
     }
-    
+
     public ShortTag setValue(short value) {
         this.value = value;
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +53,4 @@ public class ShortTag extends NBTTag {
     public TagType getType() {
         return TagType.SHORT;
     }
-
 }

@@ -32,20 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class FloatTag extends NBTTag {
     float value;
-    
+
     public FloatTag(String name) {
         super(name);
     }
-    
+
     public float getValue() {
-        return value;
+        return this.value;
     }
-    
+
     public FloatTag setValue(float value) {
         this.value = value;
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +53,4 @@ public class FloatTag extends NBTTag {
     public TagType getType() {
         return TagType.FLOAT;
     }
-
 }

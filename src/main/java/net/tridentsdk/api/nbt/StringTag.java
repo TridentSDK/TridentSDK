@@ -38,9 +38,9 @@ public class StringTag extends NBTTag {
     }
 
     public String getValue() {
-        return value;
+        return this.value;
     }
-    
+
     public StringTag setValue(String value) {
         this.value = value;
         return this;
@@ -53,5 +53,4 @@ public class StringTag extends NBTTag {
     public TagType getType() {
         return TagType.STRING;
     }
-
 }

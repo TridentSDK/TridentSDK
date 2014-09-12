@@ -32,20 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class DoubleTag extends NBTTag {
     double value;
-    
+
     public DoubleTag(String name) {
         super(name);
     }
-    
+
     public double getValue() {
-        return value;
+        return this.value;
     }
-    
+
     public DoubleTag setValue(double value) {
         this.value = value;
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +53,4 @@ public class DoubleTag extends NBTTag {
     public TagType getType() {
         return TagType.DOUBLE;
     }
-
 }

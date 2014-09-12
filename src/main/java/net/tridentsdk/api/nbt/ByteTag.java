@@ -32,20 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class ByteTag extends NBTTag {
     byte value;
-    
+
     public ByteTag(String name) {
         super(name);
     }
-        
+
     public byte getValue() {
-        return value;
+        return this.value;
     }
-    
+
     public ByteTag setValue(byte value) {
         this.value = value;
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +53,4 @@ public class ByteTag extends NBTTag {
     public TagType getType() {
         return TagType.BYTE;
     }
-
 }

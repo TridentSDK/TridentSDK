@@ -33,25 +33,25 @@ package net.tridentsdk.api.nbt;
 public abstract class NBTTag {
     String name;
     boolean hasName;
-    
+
     public NBTTag(String name) {
         if (name != null) {
             this.name = name;
-            hasName = true;
+            this.hasName = true;
         }
     }
-    
+
     public <T extends NBTTag> T asType(Class<T> type) {
         return (T) this;
     }
-    
+
     public String getName() {
-        return name;
+        return this.name;
     }
-    
+
     public abstract TagType getType();
-    
+
     public boolean hasName() {
-        return hasName;
+        return this.hasName;
     }
 }

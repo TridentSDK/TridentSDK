@@ -83,6 +83,10 @@ public class Location implements Serializable, Cloneable {
         this(world, x, y, z, 0.0F, 0.0F);
     }
 
+    private static double square(double d) {
+        return d * d;
+    }
+
     /**
      * The x position of the location
      *
@@ -205,39 +209,34 @@ public class Location implements Serializable, Cloneable {
     }
 
     /**
-     *  Creates new Vector with Location's coordinates
+     * Creates new Vector with Location's coordinates
      *
-     *  @return New Vector containing this Location's coordinates
+     * @return New Vector containing this Location's coordinates
      */
     public Vector toVector() {
-        return new Vector(getX(), getY(), getZ());
+        return new Vector(this.getX(), this.getY(), this.getZ());
     }
 
     /**
-     *  The distance this from location to another.
-     *  Math.sqrt is costly, ergo calling this method a lot is not
-     *  advised.
+     * The distance this from location to another. Math.sqrt is costly, ergo calling this method a lot is not advised.
      *
-     *  @param location the location to measure distance with
-     *  @return distance from this location to another
+     * @param location the location to measure distance with
+     * @return distance from this location to another
      */
     public double distance(Location location) {
-        return Math.sqrt(distanceSquared(location));
+        return Math.sqrt(this.distanceSquared(location));
     }
 
     /**
-     *  The distance squared from this location to another
+     * The distance squared from this location to another
      *
-     *  @param location the location to measure distance with
-     *  @return distance squared from this location to another
+     * @param location the location to measure distance with
+     * @return distance squared from this location to another
      */
     public double distanceSquared(Location location) {
         Validate.notNull(location, "Location cannot be null.");
-        if(getWorld() != location.getWorld()) return 0;
-        return square(getX() - location.getX()) + square(getY() - location.getY()) + square(getZ() - location.getZ());
-    }
-
-    private double square(double d) {
-        return d * d;
+        if (!this.getWorld().equals(location.getWorld())) return 0.0;
+        return this.square(this.getX() - location.getX()) + this.square(this.getY() - location.getY()) + this.square(
+                this.getZ() - location.getZ());
     }
 }

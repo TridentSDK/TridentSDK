@@ -32,19 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class IntArrayTag extends NBTTag {
     int[] value;
-    
+
     public IntArrayTag(String name) {
         super(name);
     }
-    
+
     public int[] getValue() {
-        return value;
+        return this.value;
     }
-    
-    public IntArrayTag setValue(int[] value) {
+
+    public IntArrayTag setValue(int... value) {
         this.value = value;
         return this;
     }
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +54,4 @@ public class IntArrayTag extends NBTTag {
         // TODO Auto-generated method stub
         return TagType.INT_ARRAY;
     }
-
 }

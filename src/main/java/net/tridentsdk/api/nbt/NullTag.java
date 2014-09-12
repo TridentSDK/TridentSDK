@@ -29,11 +29,11 @@ package net.tridentsdk.api.nbt;
 
 /**
  * Default Tag used to obey the NullObject pattern (and avoid NPEs)
- * 
+ *
  * @author The TridentSDK Team
  */
 public class NullTag extends NBTTag {
-    
+
     public NullTag(String name) {
         super(name);
     }
@@ -45,5 +45,4 @@ public class NullTag extends NBTTag {
     public TagType getType() {
         return TagType.NULL;
     }
-
 }

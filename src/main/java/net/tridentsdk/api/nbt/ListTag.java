@@ -27,49 +27,48 @@
 
 package net.tridentsdk.api.nbt;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.Lists;
+
+import java.util.*;
 
 /**
  * @author The TridentSDK Team
  */
 public class ListTag extends NBTTag implements TagContainer {
-    List<NBTTag> tags = new ArrayList<>();
+    Collection<NBTTag> tags = new ArrayList<>();
     TagType innerType;
-    
+
     public ListTag(String name, TagType innerType) {
         super(name);
         this.innerType = innerType;
     }
-    
+
     public List<NBTTag> listTags() {
-        return Lists.newArrayList(tags);
+        return Lists.newArrayList(this.tags);
     }
-    
+
     public void clearTags() {
-        tags.clear();
+        this.tags.clear();
     }
-    
+
     public boolean containsTag(NBTTag tag) {
-        return tags.contains(tag);
+        return this.tags.contains(tag);
     }
-    
-    public void addTag(NBTTag tag) {
-        if (tag.getType().equals(innerType)) {
-            tags.add(tag);
+
+    @Override public void addTag(NBTTag tag) {
+        if (tag.getType() == innerType) {
+            this.tags.add(tag);
         }
     }
-    
+
     public void removeTag(NBTTag tag) {
-        tags.remove(tag);
+        this.tags.remove(tag);
     }
-    
+
     public TagType getInnerType() {
-        return innerType;
+        return this.innerType;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -78,5 +77,4 @@ public class ListTag extends NBTTag implements TagContainer {
         // TODO Auto-generated method stub
         return TagType.LIST;
     }
-
 }

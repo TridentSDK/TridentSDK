@@ -32,20 +32,20 @@ package net.tridentsdk.api.nbt;
  */
 public class LongTag extends NBTTag {
     long value;
-    
+
     public LongTag(String name) {
         super(name);
     }
-    
+
     public long getValue() {
-        return value;
+        return this.value;
     }
-    
+
     public LongTag setValue(long value) {
         this.value = value;
         return this;
     }
-    
+
     /* (non-Javadoc)
      * @see net.tridentsdk.api.nbt.NBTTag#getType()
      */
@@ -53,5 +53,4 @@ public class LongTag extends NBTTag {
     public TagType getType() {
         return TagType.LONG;
     }
-
 }

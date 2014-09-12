@@ -42,10 +42,11 @@ public class TridentPluginLoader {
     private final List<TridentPlugin> plugins = new ArrayList<>();
 
     public void load(File pluginFile) {
+        JarFile jarFile = null;
         try {
             // load all classes
             PluginClassLoader loader = new PluginClassLoader(pluginFile);
-            JarFile jarFile = new JarFile(pluginFile);
+            jarFile = new JarFile(pluginFile);
             Enumeration<JarEntry> entries = jarFile.entries();
 
             while (entries.hasMoreElements()) {
@@ -77,6 +78,13 @@ public class TridentPluginLoader {
         } catch (IOException | ClassNotFoundException | NoSuchMethodException
                 | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
             throw new PluginLoadException(ex);
+        } finally {
+            if (jarFile != null)
+                try {
+                    jarFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 

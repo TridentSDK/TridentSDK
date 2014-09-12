@@ -32,53 +32,53 @@ package net.tridentsdk.api.nbt;
  */
 public enum TagType {
     NULL(-1, NullTag.class),
-    
+
     END(0, null),
-    
+
     BYTE(1, ByteTag.class),
-    
+
     SHORT(2, ShortTag.class),
-    
+
     INT(3, IntTag.class),
-    
+
     LONG(4, LongTag.class),
-    
+
     FLOAT(5, FloatTag.class),
-    
+
     DOUBLE(6, DoubleTag.class),
-    
+
     BYTE_ARRAY(7, ByteArrayTag.class),
-    
+
     STRING(8, StringTag.class),
-    
+
     LIST(9, ListTag.class),
-    
+
     COMPOUND(10, CompoundTag.class),
-    
+
     INT_ARRAY(11, IntArrayTag.class);
-    
+
     int id;
     Class<? extends NBTTag> implClass;
-    
+
     TagType(int id, Class<? extends NBTTag> implClass) {
         this.id = id;
         this.implClass = implClass;
     }
-    
-    public Class<? extends NBTTag> getImplementation() {
-        return implClass;
-    }
-    
-    public int getId() {
-        return id;
-    }
-    
+
     public static TagType fromId(byte fromId) {
-        for (TagType type : values()) {
+        for (TagType type : TagType.values()) {
             if (type.id == fromId) {
                 return type;
             }
         }
-        return NULL;
+        return TagType.NULL;
+    }
+
+    public Class<? extends NBTTag> getImplementation() {
+        return this.implClass;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

@@ -32,10 +32,9 @@ package net.tridentsdk.api.nbt;
  */
 public class NBTException extends Exception {
 
-    public NBTException(String string) {
-       super(string);
-    }
-
     private static final long serialVersionUID = -1801178872689804597L;
 
+    public NBTException(String string) {
+        super(string);
+    }
 }
