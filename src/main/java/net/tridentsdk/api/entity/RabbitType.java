@@ -14,7 +14,7 @@ public enum RabbitType {
     
     SALT_AND_PEPPER(5),
     
-    KILLER_RABBOT(99)
+    KILLER_RABBIT(99)
     ;
     
     private int id;
