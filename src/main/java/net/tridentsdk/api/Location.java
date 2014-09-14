@@ -205,7 +205,7 @@ public class Location implements Serializable, Cloneable {
 
     public Location getRelative(Vector vector) {
         return new Location(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                            vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
+                vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
     }
 
     /**

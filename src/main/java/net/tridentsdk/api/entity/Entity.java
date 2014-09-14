@@ -27,11 +27,11 @@
 
 package net.tridentsdk.api.entity;
 
-import java.util.List;
-
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
+
+import java.util.List;
 
 /**
  * Represents the abstraction for a mob, player, animal, or other "object" that is not a block type
@@ -148,10 +148,10 @@ public interface Entity {
      * @return the entity type that is represented
      */
     EntityType getType();
-    
+
     /**
      * Sets the properties of this entity to the specified properties
-     * 
+     *
      * @param properties the properties to set
      */
     void applyProperties(EntityProperties properties);
