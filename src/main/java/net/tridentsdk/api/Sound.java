@@ -33,7 +33,7 @@ package net.tridentsdk.api;
 /**
  * TODO more darude sandstorm's
  */
-public enum SoundName {
+public enum Sound {
 
     AMBIENT_CAVE("ambient.cove.cave"),
     AMBIENT_WEATHER_RAIN("ambient.weather.rain"),
@@ -61,7 +61,7 @@ public enum SoundName {
 
     private final String s;
 
-    SoundName(String s) {
+    Sound(String s) {
         this.s = s;
     }
 
