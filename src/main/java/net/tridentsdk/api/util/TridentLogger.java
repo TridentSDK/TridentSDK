@@ -30,13 +30,48 @@
 
 package net.tridentsdk.api.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public class TridentLogger extends Logger {
 
-    public TridentLogger() {
-        super("Trident", null);
-    }
+	public static TridentLogger logger;
+	SimpleDateFormat df2 = new SimpleDateFormat("HH:mm:ss"); //TODO Decide on a formatting (or maybe configurable?)
 
-    // TODO: override methods to fit Trident
+	public TridentLogger() {
+		super("Trident", null);
+		logger = this;
+
+		logger.setUseParentHandlers(false);
+		Handler conHdlr = new ConsoleHandler();
+		conHdlr.setFormatter(new Formatter() {
+			public String format(LogRecord record) {
+				Date date = new Date(record.getMillis());
+				String datestring = df2.format(date);
+
+				return datestring + " [" + record.getLevel() + "] " + record.getMessage() + "\n";
+			}
+		});
+		logger.addHandler(conHdlr);
+	}
+
+	// TODO: override methods to fit Trident
+
+	public static TridentLogger getLogger() {
+		return logger;
+	}
+
+	public void logMessage(String msg) {
+		logger.log(Level.INFO, msg);
+	}
+
+	public void logMessage(Level level, String msg) {
+		logger.log(level, msg);
+	}
 }
