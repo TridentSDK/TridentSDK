@@ -27,7 +27,10 @@
 
 package net.tridentsdk.api.docs;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Target;
 
 /**
  * This annotation is for the use of documentation. This means that the access-level is not broad enough so that extra

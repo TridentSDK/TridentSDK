@@ -39,7 +39,8 @@ public final class Trident {
     private static Server server;
     private static TridentLogger logger;
 
-    private Trident() {}
+    private Trident() {
+    }
 
     /**
      * Gets the server singleton that is currently running
@@ -65,7 +66,7 @@ public final class Trident {
         StackTraceElement element = elements[3];
 
         return "net.tridentsdk.server.TridentServer".equals(element.getClassName()) &&
-               "createServer".equals(element.getMethodName());
+                "createServer".equals(element.getMethodName());
     }
 
     /**
