@@ -35,6 +35,7 @@ public enum Gamemode {
     SURVIVAL(0),
     CREATIVE(1),
     ADVENTURE(2),
+    SPECTATE(3),
     HARDCORE(0x8);
 
     private byte b;
