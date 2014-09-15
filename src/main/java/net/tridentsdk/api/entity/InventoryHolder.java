@@ -57,5 +57,5 @@ public interface InventoryHolder extends Entity {
      * @param slot the target slot
      * @return the contents of the specified slot
      */
-    ItemStack getContents(int slot);
+    ItemStack getContent(int slot);
 }

@@ -29,7 +29,7 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.entity.Player;
+import net.tridentsdk.api.entity.living.Player;
 
 public class BlockBreakEvent extends BlockEvent{
 

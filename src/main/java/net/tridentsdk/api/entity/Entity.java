@@ -32,6 +32,7 @@ import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Represents the abstraction for a mob, player, animal, or other "object" that is not a block type
@@ -112,11 +113,46 @@ public interface Entity {
     List<Entity> getNearbyEntities(double radius);
 
     /**
-     * The identifier for this entity
+     * Gets the display name for the entity, used on inventories and deaths
      *
-     * @return the unique id to all entities on the server
+     * @return Display name
+     */
+    String getDisplayName();
+
+    /**
+     * Sets the entity's display name, effects inventories (if applicable) and death messages
+     *
+     * @param name Entity name
+     */
+    void setDisplayName(String name);
+
+    /**
+     * Gets if the entity's display name visible
+     *
+     * @return if the entity's display name visible
+     */
+    boolean isNameVisible();
+
+    /**
+     * Gets if the entity is silent (sounds)
+     * @return if the entity is silent
+     */
+    boolean isSilent();
+
+    /**
+     * The identifier for this entity for runtime, see getUniqueId for a set id of the entity
+     *
+     * @return the id to all entities on the server at runtime
+     * @see net.tridentsdk.api.entity.Entity#getUniqueId()
      */
     int getId();
+
+    /**
+     * The unique id for the entity to the server
+     *
+     * @return The unique id for the entity
+     */
+    UUID getUniqueId();
 
     /**
      * Removes the entity from the world and destroys it, freeing all memory associated with it

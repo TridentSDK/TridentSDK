@@ -29,7 +29,7 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.entity.Player;
+import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
 public class PlayerInteractEvent extends PlayerEvent implements Cancellable{

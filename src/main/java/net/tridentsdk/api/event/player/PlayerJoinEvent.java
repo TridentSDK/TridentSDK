@@ -1,6 +1,6 @@
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.entity.Player;
+import net.tridentsdk.api.entity.living.Player;
 
 public class PlayerJoinEvent extends PlayerEvent{
 

@@ -49,7 +49,7 @@ public interface Tameable extends Ageable {
     /**
      * The UUID of this entity's owner
      *
-     * @return the UUID of the {@link net.tridentsdk.api.entity.Player}Player that owns this entity, {@code null} if untamed
+     * @return the UUID of the {@link net.tridentsdk.api.entity.living.Player}Player that owns this entity, {@code null} if untamed
      */
     UUID getOwner();
 
