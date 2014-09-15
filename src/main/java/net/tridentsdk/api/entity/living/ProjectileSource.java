@@ -27,30 +27,19 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.tridentsdk.api.entity.living;
 
-package net.tridentsdk.api.entity;
-
-import net.tridentsdk.api.Block;
-import net.tridentsdk.api.entity.living.ProjectileSource;
+import net.tridentsdk.api.entity.*;
 
 /**
- * Represents a Projectile
- *
- * @author TridentSDK Team
+ * Represents the source of a launched Projectile
  */
-public interface Projectile extends Entity {
-
-    /**
-     * Represents the shooter of this Projectile, if applicable
-     *
-     * @return the shooter of this Projectile
-     */
-    ProjectileSource getProjectileSource();
-
-    /**
-     * Represents the current tile (Block) that this Projectile is located in
-     *
-     * @return the current tile this Projectile is in
-     */
-    Block getCurrentTile();
+public interface ProjectileSource{
+	
+	/**
+	 * Launch a projectile based on the given EntityProperties
+	 * 
+	 * @return the Projectile that was launched
+	 */
+	<T extends Projectile> T launchProjectile(EntityProperties properties);
 }

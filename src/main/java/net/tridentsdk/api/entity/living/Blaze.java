@@ -28,29 +28,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.entity;
+package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.Block;
-import net.tridentsdk.api.entity.living.ProjectileSource;
+import net.tridentsdk.api.entity.Hostile;
+import net.tridentsdk.api.entity.LivingEntity;
 
 /**
- * Represents a Projectile
- *
- * @author TridentSDK Team
+ * Represents a Blaze
  */
-public interface Projectile extends Entity {
+public interface Blaze extends LivingEntity, Hostile {
 
-    /**
-     * Represents the shooter of this Projectile, if applicable
-     *
-     * @return the shooter of this Projectile
-     */
-    ProjectileSource getProjectileSource();
-
-    /**
-     * Represents the current tile (Block) that this Projectile is located in
-     *
-     * @return the current tile this Projectile is in
-     */
-    Block getCurrentTile();
 }

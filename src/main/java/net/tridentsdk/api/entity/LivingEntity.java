@@ -31,8 +31,9 @@
 package net.tridentsdk.api.entity;
 
 import net.tridentsdk.api.Location;
+import net.tridentsdk.api.entity.living.ProjectileSource;
 
-public interface LivingEntity extends Entity {
+public interface LivingEntity extends Entity, ProjectileSource {
 
     /**
      * Makes the specified entity invisible to the current entity
