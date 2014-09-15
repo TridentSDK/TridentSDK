@@ -26,41 +26,46 @@
  */
 
 
-package net.tridentsdk.api.event.player;
+package net.tridentsdk.api.event.entity;
 
-import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.Location;
+import net.tridentsdk.api.entity.Entity;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerEvent extends Event {
+public class EntitySpawnEvent extends EntityEvent implements Cancellable{
 
-	private Player player;
+	private boolean cancel = false;
+	
+	private Location location;
 	
 	/**
 	 * 
-	 * @param player the player associated with the event
+	 * @param entity the entity spawned
+	 * @param location the location of the spawning
 	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
+	
+	public EntitySpawnEvent(final Entity entity, final Location location){
+		super(entity);
+		this.location = location;
 	}
 	
 	/**
 	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @return return the location where the entity was spawned
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public Location getLocation(){
+		return location;
 	}
 	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
 	
-	public final Player getPlayer(){
-		return player;
+	public void setCancelled(boolean cancel){
+		this.cancel = cancel;
 	}
+	
+	
+	public boolean isCancelled(){
+		return cancel;
+	}
+	
 }

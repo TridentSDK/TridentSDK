@@ -30,10 +30,12 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.Player;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerMoveEvent extends PlayerEvent{
+public class PlayerMoveEvent extends PlayerEvent implements Cancellable{
 
-	private boolean isCancelled;
+	private boolean cancel = false;
+	
 	private Location fromLoc;
 	private Location toLoc;
 	
@@ -63,4 +65,13 @@ public class PlayerMoveEvent extends PlayerEvent{
 		return toLoc;
 	}
 	
+	
+	public void setCancelled(boolean cancel){
+		this.cancel = cancel;
+	}
+	
+	
+	public boolean isCancelled(){
+		return cancel;
+	}
 }

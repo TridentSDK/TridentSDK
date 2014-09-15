@@ -32,12 +32,15 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.event.Event;
 
-public class BlockEvent extends Event implements Cancellable {
+public class BlockEvent extends Event {
 
 	private Block block;
 	
-	private boolean isCancelled = false;
-
+	/**
+	 * 
+	 * @param block the block associated with the event
+	 */
+	
 	public BlockEvent(final Block block){
 		this(block, false);
 	}
@@ -55,14 +58,4 @@ public class BlockEvent extends Event implements Cancellable {
 	public Block getBlock(){
 		return block;
 	}
-	
-	public void setCancelled(boolean b) {
-		isCancelled = b;
-	}
-
-	public boolean isCancelled() {
-		return isCancelled;
-	}
-	
-	
 }

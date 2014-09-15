@@ -26,41 +26,32 @@
  */
 
 
-package net.tridentsdk.api.event.player;
+package net.tridentsdk.api.event.block;
 
-import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.Block;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerEvent extends Event {
+public class BlockBurnEvent extends BlockEvent implements Cancellable{
 
-	private Player player;
+	private boolean cancel = false;
 	
 	/**
 	 * 
-	 * @param player the player associated with the event
-	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
-	}
-	
-	/**
-	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @param block the block being burnt in this event
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public BlockBurnEvent(final Block block) {
+		super(block);
 	}
+
 	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
-	
-	public final Player getPlayer(){
-		return player;
+	public void setCancelled(boolean cancel) {
+		this.cancel = cancel;
 	}
+
+	
+	public boolean isCancelled() {
+		return cancel;
+	}
+
 }

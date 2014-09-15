@@ -26,41 +26,20 @@
  */
 
 
-package net.tridentsdk.api.event.player;
+package net.tridentsdk.api.event.entity;
 
-import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.entity.Entity;
 
-public class PlayerEvent extends Event {
-
-	private Player player;
+public class EntityDeathEvent extends EntityEvent{
 	
 	/**
+	 * TODO add cause of death
 	 * 
-	 * @param player the player associated with the event
-	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
-	}
-	
-	/**
-	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @param entity the entity that has died
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public EntityDeathEvent(final Entity entity) {
+		super(entity);
 	}
-	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
-	
-	public final Player getPlayer(){
-		return player;
-	}
+
 }

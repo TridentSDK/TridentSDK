@@ -30,7 +30,17 @@ package net.tridentsdk.api.event;
 
 public interface Cancellable {
 	
-	public void setCancelled(boolean b);
+	/**
+	 * 
+	 * @param cancel set the cancellation state of the event
+	 */
+	
+	public void setCancelled(boolean cancel);
+	
+	/**
+	 * 
+	 * @return return true if event is set to cancelled
+	 */
 	
 	public boolean isCancelled();
 	

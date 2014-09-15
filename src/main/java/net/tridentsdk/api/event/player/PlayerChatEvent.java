@@ -29,38 +29,53 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerEvent extends Event {
+public class PlayerChatEvent extends PlayerEvent implements Cancellable{
 
-	private Player player;
+	private boolean cancel = false;
+	
+	private String message;
 	
 	/**
 	 * 
-	 * @param player the player associated with the event
+	 * @param player the player associated with this event
+	 * @param message the message sent by the player
 	 */
+	
+	public PlayerChatEvent(final Player player, final String message) {
+		super(player);
+		this.setMessage(message);
+	}
+
+	/**
+	 * 
+	 * @param message the message associated with this event
+	 */
+	
+	public void setMessage(String message){
+		this.message = message;
+	}
+	
+	/**
+	 * 
+	 * @return return the message sent
+	 */
+	
+	public String getMessage(){
+		return message;
+	}
+	
+	
+	public void setCancelled(boolean cancel) {
+		this.cancel = cancel;
 		
-	public PlayerEvent(final Player player){
-		this(player, false);
 	}
+
 	
-	/**
-	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
-	 */
-	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public boolean isCancelled() {
+		return cancel;
 	}
+
 	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
-	
-	public final Player getPlayer(){
-		return player;
-	}
 }

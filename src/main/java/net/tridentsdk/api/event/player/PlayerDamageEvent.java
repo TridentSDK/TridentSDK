@@ -29,38 +29,55 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerEvent extends Event {
-
-	private Player player;
+public class PlayerDamageEvent extends PlayerEvent implements Cancellable{
+	
+	private boolean cancel = false;
+	
+	private double damage;
 	
 	/**
+	 * TODO add damage cause
 	 * 
-	 * @param player the player associated with the event
+	 * @param player the player associated with this event
+	 * @param damage the amount of damage dealt to the player
 	 */
 		
-	public PlayerEvent(final Player player){
-		this(player, false);
+	public PlayerDamageEvent(final Player player, final double damage) {
+		super(player);
+		this.setDamage(damage);
+	}
+	
+	/**
+	 * Change the damage value dealt
+	 * 
+	 * @param damage the amount of damage dealt
+	 */
+	
+	public void setDamage(double damage){
+		this.damage = damage;
 	}
 	
 	/**
 	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @return return the amount of damage dealt
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public double getDamage(){
+		return damage;
 	}
+
 	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
-	
-	public final Player getPlayer(){
-		return player;
+	public void setCancelled(boolean cancel) {
+		this.cancel = cancel;
 	}
+
+	
+	public boolean isCancelled() {
+		return cancel;
+	}
+
+	
+	
 }

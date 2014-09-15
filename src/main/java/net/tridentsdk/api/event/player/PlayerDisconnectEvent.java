@@ -29,38 +29,17 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
 
-public class PlayerEvent extends Event {
+public class PlayerDisconnectEvent extends PlayerEvent{
 
-	private Player player;
-	
 	/**
+	 * TODO perhaps include disconnection reason (quit, timeout, etc)
 	 * 
-	 * @param player the player associated with the event
-	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
-	}
-	
-	/**
-	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @param player the player associated with this event
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public PlayerDisconnectEvent(final Player player) {
+		super(player);
 	}
-	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
-	
-	public final Player getPlayer(){
-		return player;
-	}
+
 }

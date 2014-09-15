@@ -28,39 +28,66 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerEvent extends Event {
+public class PlayerConsumeEvent extends PlayerEvent implements Cancellable{
 
-	private Player player;
+	private boolean cancel = false;
+	
+	private double feed;
+	
+	private Item item;
 	
 	/**
 	 * 
-	 * @param player the player associated with the event
+	 * @param player the player associated with this event
+	 * @param feed the amount of hunger replenished
+	 * @param item the item consumed
 	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
+	
+	public PlayerConsumeEvent(final Player player, final double feed, final Item item){
+		super(player);
+		this.setReplenishAmount(feed);
+		this.item = item;
 	}
 	
 	/**
 	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @param feed the amount of hunger replenished
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public void setReplenishAmount(double feed){
+		this.feed = feed;
 	}
 	
 	/**
 	 * 
-	 * @return return the player associated with the event
+	 * @return return the amount of hunger replenished
 	 */
 	
-	public final Player getPlayer(){
-		return player;
+	public double getReplenishAmount(){
+		return feed;
 	}
+	
+	/**
+	 * 
+	 * @return return the item consumed
+	 */
+	
+	public Item getItem(){
+		return item;
+	}
+	
+
+	public void setCancelled(boolean cancel) {
+		this.cancel = cancel;
+	}
+
+	
+	public boolean isCancelled() {
+		return cancel;
+	}
+	
 }

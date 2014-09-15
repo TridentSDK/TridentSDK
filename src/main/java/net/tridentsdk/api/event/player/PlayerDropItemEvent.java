@@ -28,39 +28,36 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.Player;
-import net.tridentsdk.api.event.Event;
 
-public class PlayerEvent extends Event {
+public class PlayerDropItemEvent extends PlayerEvent{
 
-	private Player player;
+	private boolean cancel = false;
 	
-	/**
-	 * 
-	 * @param player the player associated with the event
-	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
+	private Item item;
+	
+	public PlayerDropItemEvent(final Player player, final Item item) {
+		super(player);
+		this.item = item;
 	}
 	
 	/**
 	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
+	 * @return return the dropped item
 	 */
 	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
+	public Item getItem(){
+		return item;
+	}
+
+	
+	public void setCancelled(boolean cancel){
+		this.cancel = cancel;
 	}
 	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
 	
-	public final Player getPlayer(){
-		return player;
+	public boolean isCancelled(){
+		return cancel;
 	}
 }

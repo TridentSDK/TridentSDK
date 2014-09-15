@@ -44,12 +44,21 @@ public class EntityEvent extends Event implements Cancellable {
 	
 	public EntityEvent(final Entity entity, boolean async){
 		super(async);
+		this.setEntity(entity);
+	}
+	
+	/**
+	 * 
+	 * @return set the entity associated with this event
+	 */
+	
+	public void setEntity(Entity entity){
 		this.entity = entity;
 	}
 	
 	/**
 	 * 
-	 * @return return the entity associated with this event
+	 * @return return entity associated with this event
 	 */
 	
 	public Entity getEntity(){

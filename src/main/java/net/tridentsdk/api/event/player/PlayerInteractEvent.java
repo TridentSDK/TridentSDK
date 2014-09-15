@@ -30,10 +30,13 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.Player;
+import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerInteractEvent extends PlayerEvent{
-
-	public boolean isCancelled;
+public class PlayerInteractEvent extends PlayerEvent implements Cancellable{
+	
+	private boolean cancel = false;
+	
+	private Block block;
 	
 	/**
 	 * TODO add action detection and blockface(?)
@@ -44,6 +47,35 @@ public class PlayerInteractEvent extends PlayerEvent{
 	
 	public PlayerInteractEvent(final Player player, final Block block) {
 		super(player);
+		this.setBlock(block);
+	}
+	
+	/**
+	 * 
+	 * @param block the block that was interacted with
+	 */
+	
+	public void setBlock(Block block){
+		this.block = block;
+	}
+	
+	/**
+	 * 
+	 * @return return the interacted block (null means no block was interacted with)
+	 */
+	
+	public Block getBlock(){
+		return block;
+	}
+	
+	
+	public void setCancelled(boolean cancel){
+		this.cancel = cancel;
+	}
+	
+	
+	public boolean isCancelled(){
+		return cancel;
 	}
 
 }

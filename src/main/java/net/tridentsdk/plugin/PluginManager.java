@@ -35,11 +35,11 @@ import net.tridentsdk.api.event.Event;
 import net.tridentsdk.api.event.EventHandler;
 import net.tridentsdk.api.event.Importance;
 import net.tridentsdk.api.event.Listener;
-import net.tridentsdk.api.event.ListenerList;
+import net.tridentsdk.api.event.ManagerList;
 import net.tridentsdk.api.event.RegisteredListener;
 
 public class PluginManager {
-
+	
 	/**
 	 * Register a listener from a plugin. Reflects any method with the @EventHandler annotation,
 	 * creates a RegisteredListener for each individual listener method, and registers the RegisteredListener
@@ -56,7 +56,7 @@ public class PluginManager {
 	    	
 	    	//Isolate methods using @EventHandler annotation
 	    	if(method.isAnnotationPresent(EventHandler.class)) {
-	    		
+
 	    		//Get importance of method from handler
 	    		EventHandler handler = method.getAnnotation(EventHandler.class);
 	    		Importance importance = handler.importance();
@@ -64,8 +64,10 @@ public class PluginManager {
 
 	    		if(params.length == 1) {
 	    			
+	    			Class<?> clazz = params[0];
+	    			
 	    			//Loop to get the superclass below Object of the parameter (should be Event)
-	    			Class<?> c = params[0];
+	    			Class<?> c = clazz;
 	    			boolean b = true;
 
 	    			while(b) {
@@ -79,14 +81,20 @@ public class PluginManager {
 	    			
 	    			//Check to make sure class is an event
 	    			if(c.equals(Event.class)) {
-						Class<? extends Event> eventType = c.asSubclass(Event.class);
 	    				
-	    				//If this event type has not been used yet, create new EventList
-	    				if(!ListenerList.getManagers().containsKey(eventType)) ListenerList.getManagers().put(eventType, new ListenerList());
-	    				
+						Class<? extends Event> eventType = clazz.asSubclass(Event.class);
+						ManagerList listeners = ManagerList.getManagers().get(eventType);
+						
+						if(listeners == null) {
+							
+							listeners = new ManagerList();
+							ManagerList.getManagers().put(eventType, listeners);
+							
+						}
+						
 	    				//Create RegisteredListener and register it to the appropriate EventList
 	    				RegisteredListener rl = new RegisteredListener(listener, importance, method);
-	    				ListenerList.getManagers().get(eventType).register(rl);
+	    				listeners.register(rl);
 	    			}
 	    		}else{
 	    			// TODO Listener methods must only have one event parameter (output error message)
@@ -97,7 +105,7 @@ public class PluginManager {
 	
 	/**
 	 * 
-	 * When there is an action, the event for that action is throw through this method
+	 * When there is an action, the event for that action is called through this method
 	 * 
 	 * TODO: Exception handling in a more robust way
 	 * 
@@ -108,7 +116,7 @@ public class PluginManager {
 	 */
 	
 	public static void passEvent(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		ListenerList listenerlist = ListenerList.getManagers().get(event.getClass());
+		ManagerList listenerlist = ManagerList.getManagers().get(event.getClass());
 		if(listenerlist != null) listenerlist.execute(event);
 	}
 }

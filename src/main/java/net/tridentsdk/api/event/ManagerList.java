@@ -34,12 +34,13 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListenerList {
-
-	/*
-	 * Static list of managers for each registered event type
+public class ManagerList {
+	
+	/**
+	 * Map of ListenerLists with respect to the event
 	 */
-	private static HashMap<Class<? extends Event>, ListenerList> managers = new HashMap<>();
+	
+	private static HashMap<Class<? extends Event>, ManagerList> managers = new HashMap<Class<? extends Event>, ManagerList>();
 	
 	/*
 	 * Array of listeners sorted from lowest priority to highest (order of execution)
@@ -53,15 +54,21 @@ public class ListenerList {
 	
 	private EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
 			new EnumMap<>(Importance.class);
-
-    public static HashMap<Class<? extends Event>, ListenerList> getManagers() {
-        return managers;
-    }
-
+	
+	/**
+	 * 
+	 * @return return the managers map
+	 */
+	
+	public static HashMap<Class<? extends Event>, ManagerList> getManagers(){
+		return managers;
+	}
+	
 	/**
 	 * Load importance values from Importance enum to importanceMap
 	 */
-	public ListenerList(){
+	
+	public ManagerList(){
 		for(Importance i : Importance.values()){
 			importanceMap.put(i, new ArrayList<RegisteredListener>());
 		}
@@ -108,6 +115,7 @@ public class ListenerList {
 	 */
 	
 	public void execute(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		if(listeners == null) this.toArray();
 		for(RegisteredListener l : listeners){
 			l.execute(event);
 		}
