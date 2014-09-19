@@ -57,16 +57,15 @@ public final class Trident {
      * @param s the server to set
      */
     public static void setServer(Server s) {
-        Preconditions.checkState(Trident.canSet(), "Can only set server instance once!");
+        Preconditions.checkState(Trident.isTrident(), "Server instance can only be set by TridentSDK!");
         Trident.server = s;
     }
 
-    private static boolean canSet() {
+    public static boolean isTrident() {
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         StackTraceElement element = elements[3];
 
-        return "net.tridentsdk.server.TridentServer".equals(element.getClassName()) &&
-                "createServer".equals(element.getMethodName());
+        return element.getClassName().startsWith("net.tridentsdk");
     }
 
     /**
