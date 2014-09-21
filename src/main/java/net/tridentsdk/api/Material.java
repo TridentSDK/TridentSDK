@@ -31,8 +31,22 @@ package net.tridentsdk.api;
  * TODO
  */
 public enum Material {
-
-    AIR("0");
+    
+    /**
+     *Blocks
+     */
+    AIR("0"),
+    STONE("1"),
+    GRASS("2"),
+    DIRT("3"),
+    COBBLESTONE("4"),
+    WOOD("5"),
+    SAPLING("6"),
+    BEDROCK("7"),
+    WATER("8"),
+    STATIONARY_WATER("9"),
+    LAVA("10"),
+    STATIONARY_LAVA("11");
 
     private final String id;
     private final String data;
