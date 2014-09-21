@@ -232,7 +232,7 @@ public enum Material {
     BIRCH_DOOR("194"),
     JUNGLE_DOOR("195"),
     ACACIA_DOOR("196"),
-    DARK_OAK_DOOR("197"),
+    DARK_OAK_DOOR("197");
 
     private final String id;
     private final String data;
