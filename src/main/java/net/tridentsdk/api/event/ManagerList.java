@@ -31,11 +31,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class ManagerList {
-
     /**
      * Map of ListenerLists with respect to the event
      */
-
     private static final Map<Class<? extends Event>, ManagerList> managers =
             new HashMap<>();
 
@@ -55,9 +53,7 @@ public class ManagerList {
      */
 
     public ManagerList() {
-        for (Importance i : Importance.values()) {
-            this.importanceMap.put(i, new ArrayList<RegisteredListener>());
-        }
+        for (Importance i : Importance.values()) this.importanceMap.put(i, new ArrayList<RegisteredListener>());
     }
 
     /**

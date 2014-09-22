@@ -33,7 +33,6 @@ package net.tridentsdk.api.util;
  * @author TridentSDK Team
  */
 public class PartRotation {
-
     private int rotX;
     private int rotY;
     private int rotZ;

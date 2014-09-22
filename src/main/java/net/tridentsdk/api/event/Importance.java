@@ -28,7 +28,6 @@
 package net.tridentsdk.api.event;
 
 public enum Importance {
-
     /*
      * Levels of priority an event is given, where the events fire from LOWEST to HIGHEST
      */

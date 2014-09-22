@@ -28,7 +28,6 @@
 package net.tridentsdk.api.board;
 
 public enum TagVisibility {
-
     ALWAYS("always"),
     HIDE_OTHER_TEAMS("hideFromOtherTeams"),
     HIDE_OWN_TEAM("hideFromOwnTeam"),

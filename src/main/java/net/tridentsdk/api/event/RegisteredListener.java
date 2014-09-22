@@ -31,7 +31,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class RegisteredListener {
-
     private final Listener listener;
     private final Importance importance;
     private final Method method;

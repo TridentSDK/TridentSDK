@@ -31,7 +31,6 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Location;
 
 public interface World {
-
     String getName();
 
     Chunk getChunkAt(ChunkLocation loc, boolean generateIfNotFound);

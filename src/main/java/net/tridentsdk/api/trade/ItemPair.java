@@ -35,7 +35,6 @@ import net.tridentsdk.api.inventory.ItemStack;
  * @author TridentSDK Team
  */
 public class ItemPair {
-
     private final ItemStack one;
     private final ItemStack two;
 
