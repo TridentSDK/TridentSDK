@@ -27,9 +27,6 @@
 
 package net.tridentsdk.api;
 
-/**
- * TODO Items
- */
 public enum Material {
     
     /**
@@ -387,7 +384,7 @@ public enum Material {
     PRISMARINE_CRYSTALS("410"),
     RABBIT("411"),
     COOKED_RABBIT("412"),
-    RABBIT_STEW("413"),
+    RABBIT_STEW("413", 1),
     RABBIT_FOOT("414"),
     RABBIT_HIDE("415"),
     ARMOR_STAND("416"),
@@ -421,11 +418,14 @@ public enum Material {
     private final String id;
     private final String data;
     private final int maxStack;
+    private final int idInt;
 
     Material(String id, int stack, String data) {
         this.id = id;
         this.maxStack = stack;
         this.data = data;
+        
+        this.idInt = Integer.parseInt(id);
         
     }
     
@@ -469,7 +469,7 @@ public enum Material {
      * 
      * @return True if the material is a block
      */
-    public boolean isBlock(){
+    public boolean isBlock() {
         if(Integer.parseInt(id) < 255){
             return true;
         } else {
@@ -482,8 +482,80 @@ public enum Material {
      * 
      * @return The maximum size of a stack for this Material
      */
-    public int getMaxStackSize(){
+    public int getMaxStackSize() {
         return this.maxStack;
+    }
+    
+    /**
+     * Checks if the material is edible or not
+     * 
+     * @return True if the material is edible
+     */
+    public boolean isEdible() {
+        switch (this){
+        case BREAD:
+        case CARROT_ITEM:
+        case BAKED_POTATO:
+        case POTATO_ITEM:
+        case POISONOUS_POTATO:
+        case GOLDEN_CARROT:
+        case PUMPKIN_PIE:
+        case COOKIE:
+        case MELON:
+        case MUSHROOM_SOUP:
+        case RAW_CHICKEN:
+        case COOKED_CHICKEN:
+        case RAW_BEEF:
+        case COOKED_BEEF:
+        case RAW_FISH:
+        case COOKED_FISH:
+        case PORK:
+        case GRILLED_PORK:
+        case APPLE:
+        case GOLDEN_APPLE:
+        case ROTTEN_FLESH:
+        case SPIDER_EYE:
+        case RABBIT:
+        case COOKED_RABBIT:
+        case RABBIT_STEW:
+        case MUTTON:
+        case COOKED_MUTTON:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    /**
+     * Check if a item is a disc (record)
+     * 
+     * @return True if the item is a disc (record)
+     */
+    public boolean isDisc(){
+        if(!isBlock()){
+            if(idInt >= 2256){
+                return true;
+            }
+            return false;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check if a item is wearable (armor)
+     * 
+     * @return True if the item is wearable (armor)
+     */
+    public boolean isWearable() {
+        if(!isBlock()){
+            if(idInt >= 298 && idInt <= 317){
+                return true;
+            }
+            return false;
+        }
+        
+        return false;
     }
     
     /**
@@ -491,7 +563,7 @@ public enum Material {
      * 
      * @return True if the block is solid
      */
-    public boolean isSolid(){
+    public boolean isSolid() {
         if(!isBlock()){
             return false;
         }
@@ -512,7 +584,7 @@ public enum Material {
      * 
      * @return True if a block is flammable
      */
-    public boolean isFlammable(){
+    public boolean isFlammable() {
         if(!isBlock()){
             return false;
         }
@@ -576,7 +648,7 @@ public enum Material {
      * 
      * @return True if a block can burn away
      */
-    public boolean isBurnable(){
+    public boolean isBurnable() {
         if(!isBlock()){
             return false;
         }
@@ -629,7 +701,7 @@ public enum Material {
      * @return True if the block is affected by gravity, and falls when you 
      * place it.
      */
-    public boolean hasGravity(){
+    public boolean hasGravity() {
         if(!isBlock()){
             return false;
         }
