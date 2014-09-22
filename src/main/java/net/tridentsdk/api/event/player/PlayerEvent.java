@@ -25,7 +25,6 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
@@ -33,34 +32,31 @@ import net.tridentsdk.api.event.Event;
 
 public class PlayerEvent extends Event {
 
-	private Player player;
-	
-	/**
-	 * 
-	 * @param player the player associated with the event
-	 */
-		
-	public PlayerEvent(final Player player){
-		this(player, false);
-	}
-	
-	/**
-	 * 
-	 * @param player the player associated with that event
-	 * @param async the boolean that determines if event is asynchronous
-	 */
-	
-	public PlayerEvent(final Player player, boolean async){
-		super(async);
-		this.player = player;
-	}
-	
-	/**
-	 * 
-	 * @return return the player associated with the event
-	 */
-	
-	public final Player getPlayer(){
-		return player;
-	}
+    private final Player player;
+
+    /**
+     * @param player the player associated with the event
+     */
+
+    public PlayerEvent(Player player) {
+        this(player, false);
+    }
+
+    /**
+     * @param player the player associated with that event
+     * @param async  the boolean that determines if event is asynchronous
+     */
+
+    public PlayerEvent(Player player, boolean async) {
+        super(async);
+        this.player = player;
+    }
+
+    /**
+     * @return return the player associated with the event
+     */
+
+    public final Player getPlayer() {
+        return this.player;
+    }
 }

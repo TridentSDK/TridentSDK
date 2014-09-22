@@ -25,57 +25,48 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerChatEvent extends PlayerEvent implements Cancellable{
+public class PlayerChatEvent extends PlayerEvent implements Cancellable {
 
-	private boolean cancel = false;
-	
-	private String message;
-	
-	/**
-	 * 
-	 * @param player the player associated with this event
-	 * @param message the message sent by the player
-	 */
-	
-	public PlayerChatEvent(final Player player, final String message) {
-		super(player);
-		this.setMessage(message);
-	}
+    private boolean cancel;
 
-	/**
-	 * 
-	 * @param message the message associated with this event
-	 */
-	
-	public void setMessage(String message){
-		this.message = message;
-	}
-	
-	/**
-	 * 
-	 * @return return the message sent
-	 */
-	
-	public String getMessage(){
-		return message;
-	}
-	
-	
-	public void setCancelled(boolean cancel) {
-		this.cancel = cancel;
-		
-	}
+    private String message;
 
-	
-	public boolean isCancelled() {
-		return cancel;
-	}
+    /**
+     * @param player  the player associated with this event
+     * @param message the message sent by the player
+     */
 
-	
+    public PlayerChatEvent(Player player, String message) {
+        super(player);
+        this.setMessage(message);
+    }
+
+    /**
+     * @return return the message sent
+     */
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    /**
+     * @param message the message associated with this event
+     */
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

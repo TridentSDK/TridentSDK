@@ -25,53 +25,49 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerMoveEvent extends PlayerEvent implements Cancellable{
+public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
 
-	private boolean cancel = false;
-	
-	private Location fromLoc;
-	private Location toLoc;
-	
-	public PlayerMoveEvent(final Player player, final Location from, final Location to){
-		super(player);
-		fromLoc = from;
-		toLoc = to;
-	}
-	
-	/**
-	 * Return previous location
-	 * 
-	 * @return returns the previous player location
-	 */
-	
-	public Location getFromLocation(){
-		return fromLoc;
-	}
-	
-	/**
-	 * Return next location
-	 * 
-	 * @return returns the next player location
-	 */
-	
-	public Location getToLocation(){
-		return toLoc;
-	}
-	
-	
-	public void setCancelled(boolean cancel){
-		this.cancel = cancel;
-	}
-	
-	
-	public boolean isCancelled(){
-		return cancel;
-	}
+    private final Location fromLoc;
+    private final Location toLoc;
+    private boolean cancel;
+
+    public PlayerMoveEvent(Player player, Location from, Location to) {
+        super(player);
+        this.fromLoc = from;
+        this.toLoc = to;
+    }
+
+    /**
+     * Return previous location
+     *
+     * @return returns the previous player location
+     */
+
+    public Location getFromLocation() {
+        return this.fromLoc;
+    }
+
+    /**
+     * Return next location
+     *
+     * @return returns the next player location
+     */
+
+    public Location getToLocation() {
+        return this.toLoc;
+    }
+
+    @Override public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

@@ -25,69 +25,59 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerConsumeEvent extends PlayerEvent implements Cancellable{
+public class PlayerConsumeEvent extends PlayerEvent implements Cancellable {
 
-	private boolean cancel = false;
-	
-	private double feed;
-	
-	private Item item;
-	
-	/**
-	 * 
-	 * @param player the player associated with this event
-	 * @param feed the amount of hunger replenished
-	 * @param item the item consumed
-	 */
-	
-	public PlayerConsumeEvent(final Player player, final double feed, final Item item){
-		super(player);
-		this.setReplenishAmount(feed);
-		this.item = item;
-	}
-	
-	/**
-	 * 
-	 * @param feed the amount of hunger replenished
-	 */
-	
-	public void setReplenishAmount(double feed){
-		this.feed = feed;
-	}
-	
-	/**
-	 * 
-	 * @return return the amount of hunger replenished
-	 */
-	
-	public double getReplenishAmount(){
-		return feed;
-	}
-	
-	/**
-	 * 
-	 * @return return the item consumed
-	 */
-	
-	public Item getItem(){
-		return item;
-	}
-	
+    private final Item item;
+    private boolean cancel;
+    private double feed;
 
-	public void setCancelled(boolean cancel) {
-		this.cancel = cancel;
-	}
+    /**
+     * @param player the player associated with this event
+     * @param feed   the amount of hunger replenished
+     * @param item   the item consumed
+     */
 
-	
-	public boolean isCancelled() {
-		return cancel;
-	}
-	
+    public PlayerConsumeEvent(Player player, double feed, Item item) {
+        super(player);
+        this.setReplenishAmount(feed);
+        this.item = item;
+    }
+
+    /**
+     * @return return the amount of hunger replenished
+     */
+
+    public double getReplenishAmount() {
+        return this.feed;
+    }
+
+    /**
+     * @param feed the amount of hunger replenished
+     */
+
+    public void setReplenishAmount(double feed) {
+        this.feed = feed;
+    }
+
+    /**
+     * @return return the item consumed
+     */
+
+    public Item getItem() {
+        return this.item;
+    }
+
+    @Override public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

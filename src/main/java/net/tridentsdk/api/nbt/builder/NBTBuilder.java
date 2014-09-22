@@ -33,7 +33,7 @@ import net.tridentsdk.api.nbt.CompoundTag;
  * @author The TridentSDK Team
  */
 public class NBTBuilder {
-    CompoundTag base;
+    final CompoundTag base;
 
     private NBTBuilder(CompoundTag base) {
         this.base = base;

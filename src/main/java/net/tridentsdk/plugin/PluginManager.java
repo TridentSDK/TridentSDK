@@ -25,98 +25,88 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.plugin;
+
+import net.tridentsdk.api.event.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import net.tridentsdk.api.event.Event;
-import net.tridentsdk.api.event.EventHandler;
-import net.tridentsdk.api.event.Importance;
-import net.tridentsdk.api.event.Listener;
-import net.tridentsdk.api.event.ManagerList;
-import net.tridentsdk.api.event.RegisteredListener;
-
 public class PluginManager {
-	
-	/**
-	 * Register a listener from a plugin. Reflects any method with the @EventHandler annotation,
-	 * creates a RegisteredListener for each individual listener method, and registers the RegisteredListener
-	 * to its appropriate EventList (creates an event list if it is null). EventLists are sorted by event type.
-	 * 
-	 * @param listener the listener class registered from a plugin
-	 */
-	
-	public void registerListener(Listener listener){
-		//Iterate through list of methods from listener
-	    Method[] methods = listener.getClass().getMethods();
 
-	    for(Method method : methods) {
-	    	
-	    	//Isolate methods using @EventHandler annotation
-	    	if(method.isAnnotationPresent(EventHandler.class)) {
+    /**
+     * When there is an action, the event for that action is called through this method
+     * <p/>
+     * TODO: Exception handling in a more robust way
+     *
+     * @param event the event that has been called
+     */
 
-	    		//Get importance of method from handler
-	    		EventHandler handler = method.getAnnotation(EventHandler.class);
-	    		Importance importance = handler.importance();
-	    		Class<?>[] params = method.getParameterTypes();
+    public static void passEvent(Event event)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        ManagerList listenerlist = ManagerList.getManagers().get(event.getClass());
+        if (listenerlist != null) listenerlist.execute(event);
+    }
 
-	    		if(params.length == 1) {
-	    			
-	    			Class<?> clazz = params[0];
-	    			
-	    			//Loop to get the superclass below Object of the parameter (should be Event)
-	    			Class<?> c = clazz;
-	    			boolean b = true;
+    /**
+     * Register a listener from a plugin. Reflects any method with the @EventHandler annotation, creates a
+     * RegisteredListener for each individual listener method, and registers the RegisteredListener to its appropriate
+     * EventList (creates an event list if it is null). EventLists are sorted by event type.
+     *
+     * @param listener the listener class registered from a plugin
+     */
 
-	    			while(b) {
-	    				if(!c.getSuperclass().equals(Object.class)) {
-	    					c = c.getSuperclass();
-	    				}else{
-	    					//End loop
-	    					b = false;
-	    				}
-	    			}
-	    			
-	    			//Check to make sure class is an event
-	    			if(c.equals(Event.class)) {
-	    				
-						Class<? extends Event> eventType = clazz.asSubclass(Event.class);
-						ManagerList listeners = ManagerList.getManagers().get(eventType);
-						
-						if(listeners == null) {
-							
-							listeners = new ManagerList();
-							ManagerList.getManagers().put(eventType, listeners);
-							
-						}
-						
-	    				//Create RegisteredListener and register it to the appropriate EventList
-	    				RegisteredListener rl = new RegisteredListener(listener, importance, method);
-	    				listeners.register(rl);
-	    			}
-	    		}else{
-	    			// TODO Listener methods must only have one event parameter (output error message)
-	    		}
-	    	}
-	    }
-	}
-	
-	/**
-	 * 
-	 * When there is an action, the event for that action is called through this method
-	 * 
-	 * TODO: Exception handling in a more robust way
-	 * 
-	 * @param event the event that has been called
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	
-	public static void passEvent(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		ManagerList listenerlist = ManagerList.getManagers().get(event.getClass());
-		if(listenerlist != null) listenerlist.execute(event);
-	}
+    public void registerListener(Listener listener) {
+        //Iterate through list of methods from listener
+        Method[] methods = listener.getClass().getMethods();
+
+        for (Method method : methods) {
+
+            //Isolate methods using @EventHandler annotation
+            if (method.isAnnotationPresent(EventHandler.class)) {
+
+                //Get importance of method from handler
+                EventHandler handler = method.getAnnotation(EventHandler.class);
+                Importance importance = handler.importance();
+                Class<?>[] params = method.getParameterTypes();
+
+                if (params.length == 1) {
+
+                    Class<?> clazz = params[0];
+
+                    //Loop to get the superclass below Object of the parameter (should be Event)
+                    Class<?> c = clazz;
+                    boolean b = true;
+
+                    while (b) {
+                        if (!c.getSuperclass().equals(Object.class)) {
+                            c = c.getSuperclass();
+                        } else {
+                            //End loop
+                            b = false;
+                        }
+                    }
+
+                    //Check to make sure class is an event
+                    if (c.equals(Event.class)) {
+
+                        Class<? extends Event> eventType = clazz.asSubclass(Event.class);
+                        ManagerList listeners = ManagerList.getManagers().get(eventType);
+
+                        if (listeners == null) {
+
+                            listeners = new ManagerList();
+                            ManagerList.getManagers().put(eventType, listeners);
+                        }
+
+                        //Create RegisteredListener and register it to the appropriate EventList
+                        RegisteredListener rl = new RegisteredListener(listener, importance, method);
+                        listeners.register(rl);
+                    }
+                } else {
+                    // TODO Listener methods must only have one event parameter (output error message)
+                }
+            }
+        }
+    }
 }

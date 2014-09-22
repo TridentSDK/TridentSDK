@@ -25,99 +25,90 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ManagerList {
-	
-	/**
-	 * Map of ListenerLists with respect to the event
-	 */
-	
-	private static HashMap<Class<? extends Event>, ManagerList> managers = new HashMap<Class<? extends Event>, ManagerList>();
-	
-	/*
-	 * Array of listeners sorted from lowest priority to highest (order of execution)
-	 */
-	
-	private RegisteredListener[] listeners = null;
-	
-	/*
-	 * EnumMap used to sort listeners by importance
-	 */
-	
-	private EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
-			new EnumMap<>(Importance.class);
-	
-	/**
-	 * 
-	 * @return return the managers map
-	 */
-	
-	public static HashMap<Class<? extends Event>, ManagerList> getManagers(){
-		return managers;
-	}
-	
-	/**
-	 * Load importance values from Importance enum to importanceMap
-	 */
-	
-	public ManagerList(){
-		for(Importance i : Importance.values()){
-			importanceMap.put(i, new ArrayList<RegisteredListener>());
-		}
-	}
-	
-	/**
-	 * Register a RegisteredListener to importanceMap
-	 * 
-	 * @param l the RegisteredListener being registered for this event
-	 */
-	
-	public void register(RegisteredListener l){
-		importanceMap.get(l.getImportance()).add(l);
-	}
-	
-	/**
-	 * Unregister a RegisteredListener from importanceMap
-	 * 
-	 * @param l the RegisteredListener being unregistered from this event
-	 */
-	
-	public void unregister(RegisteredListener l){
-		importanceMap.get(l.getListener()).remove(l);
-	}
-	
-	/**
-	 * Convert importanceMap map into listeners array
-	 */
-	
-	public void toArray(){
-		ArrayList<RegisteredListener> l = new ArrayList<>();
-		for(Map.Entry<Importance, ArrayList<RegisteredListener>> entry : importanceMap.entrySet()){
-			l.addAll(entry.getValue());
-		}
-		listeners = l.toArray(new RegisteredListener[l.size()]);
-	}
-	
-	/**
-	 * 
-	 * @param event the event that is being passed
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
-	 */
-	
-	public void execute(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		if(listeners == null) this.toArray();
-		for(RegisteredListener l : listeners){
-			l.execute(event);
-		}
-	}
+
+    /**
+     * Map of ListenerLists with respect to the event
+     */
+
+    private static final Map<Class<? extends Event>, ManagerList> managers =
+            new HashMap<>();
+
+    /*
+     * Array of listeners sorted from lowest priority to highest (order of execution)
+     */
+    private final EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
+            new EnumMap<>(Importance.class);
+
+    /*
+     * EnumMap used to sort listeners by importance
+     */
+    private RegisteredListener[] listeners;
+
+    /**
+     * Load importance values from Importance enum to importanceMap
+     */
+
+    public ManagerList() {
+        for (Importance i : Importance.values()) {
+            this.importanceMap.put(i, new ArrayList<RegisteredListener>());
+        }
+    }
+
+    /**
+     * @return return the managers map
+     */
+
+    public static Map<Class<? extends Event>, ManagerList> getManagers() {
+        return ManagerList.managers;
+    }
+
+    /**
+     * Register a RegisteredListener to importanceMap
+     *
+     * @param l the RegisteredListener being registered for this event
+     */
+
+    public void register(RegisteredListener l) {
+        this.importanceMap.get(l.getImportance()).add(l);
+    }
+
+    /**
+     * Unregister a RegisteredListener from importanceMap
+     *
+     * @param l the RegisteredListener being unregistered from this event
+     */
+
+    public void unregister(RegisteredListener l) {
+        this.importanceMap.get(l.getListener()).remove(l);
+    }
+
+    /**
+     * Convert importanceMap map into listeners array
+     */
+
+    public void toArray() {
+        ArrayList<RegisteredListener> l = new ArrayList<>();
+        for (Map.Entry<Importance, ArrayList<RegisteredListener>> entry : this.importanceMap.entrySet()) {
+            l.addAll(entry.getValue());
+        }
+        this.listeners = l.toArray(new RegisteredListener[l.size()]);
+    }
+
+    /**
+     * @param event the event that is being passed
+     */
+
+    public void execute(Event event)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        if (this.listeners == null) this.toArray();
+        for (RegisteredListener l : this.listeners) {
+            l.execute(event);
+        }
+    }
 }

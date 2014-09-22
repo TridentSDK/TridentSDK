@@ -28,23 +28,22 @@
 package net.tridentsdk.api.event;
 
 public abstract class Event {
-	
-	private final boolean isAsync;
-	
-	public Event(){
-		this(false);
-	}
-	
-	public Event(boolean async) {
-		this.isAsync = async;
-	}
-	
-	/**
-	 * @return return true if Event is asynchronous
-	 */
-	
-	public boolean isAsync(){
-		return isAsync;
-	}
-	
+
+    private final boolean isAsync;
+
+    public Event() {
+        this(false);
+    }
+
+    public Event(boolean async) {
+        this.isAsync = async;
+    }
+
+    /**
+     * @return return true if Event is asynchronous
+     */
+
+    public boolean isAsync() {
+        return this.isAsync;
+    }
 }

@@ -25,7 +25,6 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.entity.Entity;
@@ -34,43 +33,39 @@ import net.tridentsdk.api.event.Event;
 
 public class EntityEvent extends Event implements Cancellable {
 
-	private Entity entity;
-	
-	private boolean isCancelled = false;
-		
-	public EntityEvent(final Entity entity){
-		this(entity, false);
-	}
-	
-	public EntityEvent(final Entity entity, boolean async){
-		super(async);
-		this.setEntity(entity);
-	}
-	
-	/**
-	 * 
-	 * @return set the entity associated with this event
-	 */
-	
-	public void setEntity(Entity entity){
-		this.entity = entity;
-	}
-	
-	/**
-	 * 
-	 * @return return entity associated with this event
-	 */
-	
-	public Entity getEntity(){
-		return entity;
-	}
-	
-	public void setCancelled(boolean b) {
-		isCancelled = b;
-	}
+    private Entity entity;
 
-	public boolean isCancelled() {
-		return isCancelled;
-	}
+    private boolean isCancelled;
 
+    public EntityEvent(Entity entity) {
+        this(entity, false);
+    }
+
+    public EntityEvent(Entity entity, boolean async) {
+        super(async);
+        this.setEntity(entity);
+    }
+
+    /**
+     * @return return entity associated with this event
+     */
+
+    public Entity getEntity() {
+        return this.entity;
+    }
+
+    /**
+     * set the entity associated with this event
+     */
+    public void setEntity(Entity entity) {
+        this.entity = entity;
+    }
+
+    @Override public boolean isCancelled() {
+        return this.isCancelled;
+    }
+
+    @Override public void setCancelled(boolean b) {
+        this.isCancelled = b;
+    }
 }

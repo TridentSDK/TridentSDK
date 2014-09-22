@@ -25,47 +25,39 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.Entity;
-import net.tridentsdk.api.event.Cancellable;
 
-public class EntitySpawnEvent extends EntityEvent implements Cancellable{
+public class EntitySpawnEvent extends EntityEvent {
 
-	private boolean cancel = false;
-	
-	private Location location;
-	
-	/**
-	 * 
-	 * @param entity the entity spawned
-	 * @param location the location of the spawning
-	 */
-	
-	public EntitySpawnEvent(final Entity entity, final Location location){
-		super(entity);
-		this.location = location;
-	}
-	
-	/**
-	 * 
-	 * @return return the location where the entity was spawned
-	 */
-	
-	public Location getLocation(){
-		return location;
-	}
-	
-	
-	public void setCancelled(boolean cancel){
-		this.cancel = cancel;
-	}
-	
-	
-	public boolean isCancelled(){
-		return cancel;
-	}
-	
+    private final Location location;
+    private boolean cancel;
+
+    /**
+     * @param entity   the entity spawned
+     * @param location the location of the spawning
+     */
+
+    public EntitySpawnEvent(Entity entity, Location location) {
+        super(entity);
+        this.location = location;
+    }
+
+    /**
+     * @return return the location where the entity was spawned
+     */
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    @Override public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

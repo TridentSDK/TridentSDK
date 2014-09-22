@@ -25,59 +25,52 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerDamageEvent extends PlayerEvent implements Cancellable{
-	
-	private boolean cancel = false;
-	
-	private double damage;
-	
-	/**
-	 * TODO add damage cause
-	 * 
-	 * @param player the player associated with this event
-	 * @param damage the amount of damage dealt to the player
-	 */
-		
-	public PlayerDamageEvent(final Player player, final double damage) {
-		super(player);
-		this.setDamage(damage);
-	}
-	
-	/**
-	 * Change the damage value dealt
-	 * 
-	 * @param damage the amount of damage dealt
-	 */
-	
-	public void setDamage(double damage){
-		this.damage = damage;
-	}
-	
-	/**
-	 * 
-	 * @return return the amount of damage dealt
-	 */
-	
-	public double getDamage(){
-		return damage;
-	}
+public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
 
-	
-	public void setCancelled(boolean cancel) {
-		this.cancel = cancel;
-	}
+    private boolean cancel;
 
-	
-	public boolean isCancelled() {
-		return cancel;
-	}
+    private double damage;
 
-	
-	
+    /**
+     * TODO add damage cause
+     *
+     * @param player the player associated with this event
+     * @param damage the amount of damage dealt to the player
+     */
+
+    public PlayerDamageEvent(Player player, double damage) {
+        super(player);
+        this.setDamage(damage);
+    }
+
+    /**
+     * @return return the amount of damage dealt
+     */
+
+    public double getDamage() {
+        return this.damage;
+    }
+
+    /**
+     * Change the damage value dealt
+     *
+     * @param damage the amount of damage dealt
+     */
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    @Override public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

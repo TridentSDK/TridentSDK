@@ -25,21 +25,19 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.entity.Entity;
 
-public class EntityDeathEvent extends EntityEvent{
-	
-	/**
-	 * TODO add cause of death
-	 * 
-	 * @param entity the entity that has died
-	 */
-	
-	public EntityDeathEvent(final Entity entity) {
-		super(entity);
-	}
+public class EntityDeathEvent extends EntityEvent {
 
+    /**
+     * TODO add cause of death
+     *
+     * @param entity the entity that has died
+     */
+
+    public EntityDeathEvent(Entity entity) {
+        super(entity);
+    }
 }

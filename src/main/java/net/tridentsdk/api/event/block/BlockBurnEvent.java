@@ -25,33 +25,28 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
-public class BlockBurnEvent extends BlockEvent implements Cancellable{
+public class BlockBurnEvent extends BlockEvent implements Cancellable {
 
-	private boolean cancel = false;
-	
-	/**
-	 * 
-	 * @param block the block being burnt in this event
-	 */
-	
-	public BlockBurnEvent(final Block block) {
-		super(block);
-	}
+    private boolean cancel;
 
-	
-	public void setCancelled(boolean cancel) {
-		this.cancel = cancel;
-	}
+    /**
+     * @param block the block being burnt in this event
+     */
 
-	
-	public boolean isCancelled() {
-		return cancel;
-	}
+    public BlockBurnEvent(Block block) {
+        super(block);
+    }
 
+    @Override public boolean isCancelled() {
+        return this.cancel;
+    }
+
+    @Override public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
 }

@@ -135,6 +135,7 @@ public interface Entity {
 
     /**
      * Gets if the entity is silent (sounds)
+     *
      * @return if the entity is silent
      */
     boolean isSilent();

@@ -36,7 +36,7 @@ import java.util.Map;
  * @author The TridentSDK Team
  */
 public class CompoundTag extends NBTTag implements TagContainer {
-    Map<String, NBTTag> tags = new HashMap<>(); //Hashmap for quick lookup with names
+    final Map<String, NBTTag> tags = new HashMap<>(); //Hashmap for quick lookup with names
 
     public CompoundTag(String name) {
         super(name);

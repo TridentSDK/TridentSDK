@@ -57,8 +57,8 @@ public enum TagType {
 
     INT_ARRAY(11, IntArrayTag.class);
 
-    int id;
-    Class<? extends NBTTag> implClass;
+    final int id;
+    final Class<? extends NBTTag> implClass;
 
     TagType(int id, Class<? extends NBTTag> implClass) {
         this.id = id;

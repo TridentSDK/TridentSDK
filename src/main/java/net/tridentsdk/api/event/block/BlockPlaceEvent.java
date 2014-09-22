@@ -25,28 +25,25 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.Player;
 
-public class BlockPlaceEvent extends BlockEvent{
+public class BlockPlaceEvent extends BlockEvent {
 
-	private Player player;
-	
-	public BlockPlaceEvent(final Player player, final Block block) {
-		super(block);
-		this.player = player;
-	}
-	
-	/**
-	 * 
-	 * @return return the player associated with this event
-	 */
-	
-	public Player getPlayer(){
-		return player;
-	}
+    private final Player player;
 
+    public BlockPlaceEvent(Player player, Block block) {
+        super(block);
+        this.player = player;
+    }
+
+    /**
+     * @return return the player associated with this event
+     */
+
+    public Player getPlayer() {
+        return this.player;
+    }
 }

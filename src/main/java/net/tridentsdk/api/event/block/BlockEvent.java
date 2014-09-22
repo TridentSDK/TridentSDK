@@ -25,37 +25,33 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.event.Event;
 
 public class BlockEvent extends Event {
 
-	private Block block;
-	
-	/**
-	 * 
-	 * @param block the block associated with the event
-	 */
-	
-	public BlockEvent(final Block block){
-		this(block, false);
-	}
-	
-	public BlockEvent(final Block block, boolean async){
-		super(async);
-		this.block = block;
-	}
-	
-	/**
-	 * 
-	 * @return return the block associated with the event
-	 */
-	
-	public Block getBlock(){
-		return block;
-	}
+    private final Block block;
+
+    /**
+     * @param block the block associated with the event
+     */
+
+    public BlockEvent(Block block) {
+        this(block, false);
+    }
+
+    public BlockEvent(Block block, boolean async) {
+        super(async);
+        this.block = block;
+    }
+
+    /**
+     * @return return the block associated with the event
+     */
+
+    public Block getBlock() {
+        return this.block;
+    }
 }
