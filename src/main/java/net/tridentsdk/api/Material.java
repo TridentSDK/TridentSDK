@@ -531,7 +531,7 @@ public enum Material {
      * 
      * @return True if the item is a disc (record)
      */
-    public boolean isDisc(){
+    public boolean isDisc() {
         if(!isBlock()){
             if(idInt >= 2256){
                 return true;
