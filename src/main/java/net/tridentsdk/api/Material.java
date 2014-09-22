@@ -285,6 +285,23 @@ public enum Material {
     }
     
     /**
+     * Gets if a block is solid.
+     * 
+     * @return True if the block is solid
+     */
+    public boolean isSolid(){
+        switch (this){
+        case WATER:
+        case STATIONARY_WATER:
+        case LAVA:
+        case STATIONARY_LAVA:
+            return false;
+        default:
+            return true;
+        }
+    }
+    
+    /**
      * Gets if a block is affected by gravity, and falls when you place it.
      * 
      * @return True if the block is affected by gravity, and falls when you 
@@ -298,7 +315,7 @@ public enum Material {
             return true;
         default:
             return false;
-    }
+        }
     }
     
 }
