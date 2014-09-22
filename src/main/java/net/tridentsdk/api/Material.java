@@ -101,7 +101,7 @@ public enum Material {
     SIGN_POST("63"),
     WOODEN_DOOR("64"),
     LADDER("65"),
-    RAILS("66",
+    RAILS("66"),
     COBBLESTONE_STAIRS("67"),
     WALL_SIGN("68"),
     LEVER("69"),
@@ -233,17 +233,19 @@ public enum Material {
     JUNGLE_DOOR("195"),
     ACACIA_DOOR("196"),
     DARK_OAK_DOOR("197");
-
+    
     private final String id;
     private final String data;
+    private final int maxStack;
 
-    Material(String id, String data) {
+    Material(String id, String data, int stack) {
         this.id = id;
         this.data = data;
+        this.maxStack = stack;
     }
 
     Material(String id) {
-        this(id, "");
+        this(id, "", 0);
     }
 
     public static Material fromString(String id) {
@@ -254,12 +256,49 @@ public enum Material {
 
         return null;
     }
-
+    
+    /**
+     * Gets the block ID of the Material
+     * 
+     * @return ID of the Material
+     */
     public String getId() {
         return this.id;
     }
-
+    
+    /**
+     * Gets data of this Material
+     * 
+     * @return Data of this Material
+     */
     public String getData() {
         return this.data;
     }
+    
+    /**
+     * Gets the maximum size of a stack for this Material
+     * 
+     * @return The maximum size of a stack for this Material
+     */
+    public int getMaxStackSize(){
+        return this.maxStack;
+    }
+    
+    /**
+     * Gets if a block is affected by gravity, and falls when you place it.
+     * 
+     * @return True if the block is affected by gravity, and falls when you 
+     * place it.
+     */
+    public boolean hasGravity(){
+        switch (this) {
+        case SAND:
+        case ANVIL:        
+        case GRAVEL:
+            return true;
+        default:
+            return false;
+    }
+    }
+    
 }
