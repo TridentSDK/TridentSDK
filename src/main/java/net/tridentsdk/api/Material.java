@@ -228,24 +228,213 @@ public enum Material {
     JUNGLE_FENCE("190"),
     DARK_OAK_FENCE("191"),
     ACACIA_FENCE("192"),
-    SPRUCE_DOOR("193"),
-    BIRCH_DOOR("194"),
-    JUNGLE_DOOR("195"),
-    ACACIA_DOOR("196"),
-    DARK_OAK_DOOR("197");
+    /**
+     * Items
+     */
+    IRON_SPADE("256", 1),
+    IRON_PICKAXE("257", 1),
+    IRON_AXE("258", 1),
+    FLINT_AND_STEEL("259", 1),
+    APPLE("260"),
+    BOW("261", 1),
+    ARROW("262"),
+    COAL("263"),
+    DIAMOND("264"),
+    IRON_INGOT("265"),
+    GOLD_INGOT("266"),
+    IRON_SWORD("267", 1),
+    WOOD_SWORD("268", 1),
+    WOOD_SPADE("269", 1),
+    WOOD_PICKAXE("270", 1),
+    WOOD_AXE("271", 1),
+    STONE_SWORD("272", 1),
+    STONE_SPADE("273", 1),
+    STONE_PICKAXE("274", 1),
+    STONE_AXE("275", 1),
+    DIAMOND_SWORD("276", 1),
+    DIAMOND_SPADE("277", 1),
+    DIAMOND_PICKAXE("278", 1),
+    DIAMOND_AXE("279", 1),
+    STICK("280"),
+    BOWL("281"),
+    MUSHROOM_SOUP("282"),
+    GOLD_SWORD("283", 1),
+    GOLD_SPADE("284", 1),
+    GOLD_PICKAXE("285", 1),
+    GOLD_AXE("286", 1),
+    STRING("287"),
+    FEATHER("288"),
+    SULPHUR("289"),
+    WOOD_HOE("290", 1),
+    STONE_HOE("291", 1),
+    IRON_HOE("292", 1),
+    DIAMOND_HOE("293", 1),
+    GOLD_HOE("294", 1),
+    SEEDS("295"),
+    WHEAT("296"),
+    BREAD("297"),
+    LEATHER_HELMET("298", 1),
+    LEATHER_CHESTPLATE("299", 1),
+    LEATHER_LEGGINGS("300", 1),
+    LEATHER_BOOTS("301", 1),
+    CHAINMAIL_HELMET("302", 1),
+    CHAINMAIL_CHESTPLATE("303", 1),
+    CHAINMAIL_LEGGINGS("304", 1),
+    CHAINMAIL_BOOTS("305", 1),
+    IRON_HELMET("306", 1),
+    IRON_CHESTPLATE("307", 1),
+    IRON_LEGGINGS("308", 1),
+    IRON_BOOTS("309", 1),
+    DIAMOND_HELMET("310",1),
+    DIAMOND_CHESTPLATE("311", 1),
+    DIAMOND_LEGGINGS("312", 1),
+    DIAMOND_BOOTS("313", 1),
+    GOLD_HELMET("314", 1),
+    GOLD_CHESTPLATE("315", 1),
+    GOLD_LEGGINGS("316", 1),
+    GOLD_BOOTS("317", 1),
+    FLINT("318"),
+    PORK("319"),
+    GRILLED_PORK("320"),
+    PAINTING("321"),
+    GOLDEN_APPLE("322"),
+    SIGN("323", 16),
+    WOOD_DOOR("324"),
+    BUCKET("325", 16),
+    WATER_BUCKET("326", 1),
+    LAVA_BUCKET("327", 1),
+    MINECART("328", 1),
+    SADDLE("329", 1),
+    IRON_DOOR("330", 1),
+    REDSTONE("331"),
+    SNOW_BALL("332", 16),
+    BOAT("333", 1),
+    LEATHER("334"),
+    MILK_BUCKET("335", 1),
+    CLAY_BRICK("336"),
+    CLAY_BALL("337"),
+    SUGAR_CANE("338"),
+    PAPER("339"),
+    BOOK("340"),
+    SLIME_BALL("341"),
+    STORAGE_MINECART("342", 1),
+    POWERED_MINECART("343", 1),
+    EGG("344", 16),
+    COMPASS("345"),
+    FISHING_ROD("346", 1),
+    WATCH("347"),
+    GLOWSTONE_DUST("348"),
+    RAW_FISH("349"),
+    COOKED_FISH("350"),
+    INK_SACK("351"),
+    BONE("352"),
+    SUGAR("353"),
+    CAKE("354, 1"),
+    BED("355, 1"),
+    DIODE("356"),
+    COOKIE("357"),
+    MAP("358"),
+    SHEARS("359", 1),
+    MELON("360"),
+    PUMPKIN_SEEDS("361"),
+    MELON_SEEDS("362"),
+    RAW_BEEF("363"),
+    COOKED_BEEF("364"),
+    RAW_CHICKEN("365"),
+    COOKED_CHICKEN("366"),
+    ROTTEN_FLESH("367"),
+    ENDER_PEARL("368", 16),
+    BLAZE_ROD("369"),
+    GHAST_TEAR("370"),
+    GOLD_NUGGET("371"),
+    POTION("373", 1),
+    GLASS_BOTTLE("374"),
+    SPIDER_EYE("375"),
+    FERMENTED_SPIDER_EYE("376"),
+    BLAZE_POWDER("377"),
+    MAGMA_CREAM("378"),
+    BREWING_STAND_ITEM("379"),
+    CAULDRON_ITEM("380"),
+    EYE_OF_ENDER("381"),
+    SPECKLED_MELON("382"),
+    MONSTER_EGG("383", 64),
+    EXP_BOTTLE("384", 64),
+    FIREBALL("385", 64),
+    BOOK_AND_QUILL("386", 1),
+    WRITTEN_BOOK("387", 16),
+    EMERALD("388", 64),
+    ITEM_FRAME("389"),
+    FLOWER_POT_ITEM("390"),
+    CARROT_ITEM("391"),
+    POTATO_ITEM("392"),
+    BAKED_POTATO("393"),
+    POISONOUS_POTATO("394"),
+    EMPTY_MAP("395"),
+    GOLDEN_CARROT("396"),
+    SKULL_ITEM("397"),
+    CARROT_STICK("398", 1),
+    NETHER_STAR("399"),
+    PUMPKIN_PIE("400"),
+    FIREWORK("401"),
+    FIREWORK_CHARGE("402"),
+    ENCHANTED_BOOK("403", 1),
+    REDSTONE_COMPARATOR("404"),
+    NETHER_BRICK_ITEM("405"),
+    QUARTZ("406"),
+    EXPLOSIVE_MINECART("407", 1),
+    HOPPER_MINECART("408", 1),
+    PRISMARINE_SHARD("409"),
+    PRISMARINE_CRYSTALS("410"),
+    RABBIT("411"),
+    COOKED_RABBIT("412"),
+    RABBIT_STEW("413"),
+    RABBIT_FOOT("414"),
+    RABBIT_HIDE("415"),
+    ARMOR_STAND("416"),
+    IRON_BARDING("417", 1),
+    GOLD_BARDING("418", 1),
+    DIAMOND_BARDING("419", 1),
+    LEASH("420"),
+    NAME_TAG("421"),
+    COMMAND_MINECART("422", 1),
+    MUTTON("423"),
+    COOKED_MUTTON("424"),
+    BANNER("425"),
+    SPRUCE_DOOR("427"),
+    BIRCH_DOOR("428"),
+    JUNGLE_DOOR("429"),
+    ACACIA_DOOR("430"),
+    DARK_OAK_DOOR("431"),
+    GOLD_RECORD("2256", 1),
+    GREEN_RECORD("2257", 1),
+    RECORD_3("2258", 1),
+    RECORD_4("2259", 1),
+    RECORD_5("2260", 1),
+    RECORD_6("2261", 1),
+    RECORD_7("2262", 1),
+    RECORD_8("2263", 1),
+    RECORD_9("2264", 1),
+    RECORD_10("2265", 1),
+    RECORD_11("2266", 1),
+    RECORD_12("2267", 1);
     
     private final String id;
     private final String data;
     private final int maxStack;
 
-    Material(String id, String data, int stack) {
+    Material(String id, int stack, String data) {
         this.id = id;
-        this.data = data;
         this.maxStack = stack;
+        this.data = data;
+        
+    }
+    
+    Material(String id, int stack) {
+        this(id, stack, "");
     }
 
     Material(String id) {
-        this(id, "", 0);
+        this(id, 0, "");
     }
 
     public static Material fromString(String id) {
@@ -276,6 +465,19 @@ public enum Material {
     }
     
     /**
+     * Checks if the material is a block
+     * 
+     * @return True if the material is a block
+     */
+    public boolean isBlock(){
+        if(Integer.parseInt(id) < 255){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
      * Check the maximum size of a stack for this Material
      * 
      * @return The maximum size of a stack for this Material
@@ -290,6 +492,10 @@ public enum Material {
      * @return True if the block is solid
      */
     public boolean isSolid(){
+        if(!isBlock()){
+            return false;
+        }
+        
         switch (this){
         case WATER:
         case STATIONARY_WATER:
@@ -307,6 +513,10 @@ public enum Material {
      * @return True if a block is flammable
      */
     public boolean isFlammable(){
+        if(!isBlock()){
+            return false;
+        }
+        
         switch (this){
         case WOOD:
         case LOG:
@@ -360,12 +570,17 @@ public enum Material {
 
         }
     }
+    
     /**
      * Check if a block can burn away
      * 
      * @return True if a block can burn away
      */
     public boolean isBurnable(){
+        if(!isBlock()){
+            return false;
+        }
+        
         switch (this){
         case WOOD:
         case LOG:
@@ -415,6 +630,10 @@ public enum Material {
      * place it.
      */
     public boolean hasGravity(){
+        if(!isBlock()){
+            return false;
+        }
+        
         switch (this) {
         case SAND:
         case ANVIL:        
