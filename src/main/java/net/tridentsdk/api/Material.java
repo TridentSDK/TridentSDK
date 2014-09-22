@@ -276,7 +276,7 @@ public enum Material {
     }
     
     /**
-     * Gets the maximum size of a stack for this Material
+     * Check the maximum size of a stack for this Material
      * 
      * @return The maximum size of a stack for this Material
      */
@@ -285,7 +285,7 @@ public enum Material {
     }
     
     /**
-     * Gets if a block is solid.
+     * Check if a block is solid.
      * 
      * @return True if the block is solid
      */
@@ -298,6 +298,113 @@ public enum Material {
             return false;
         default:
             return true;
+        }
+    }
+    
+    /**
+     * Check if a block is flammable or not
+     * 
+     * @return True if a block is flammable
+     */
+    public boolean isFlammable(){
+        switch (this){
+        case WOOD:
+        case LOG:
+        case LEAVES:
+        case NOTE_BLOCK:
+        case BED_BLOCK:
+        case LONG_GRASS:
+        case DEAD_BUSH:
+        case WOOL:
+        case TNT:
+        case BOOKSHELF:
+        case WOOD_STAIRS:
+        case CHEST:
+        case WORKBENCH:
+        case SIGN_POST:
+        case WOODEN_DOOR:
+        case WALL_SIGN:
+        case WOOD_PLATE:
+        case JUKEBOX:
+        case FENCE:
+        case TRAP_DOOR:
+        case HUGE_MUSHROOM_1:
+        case HUGE_MUSHROOM_2:
+        case VINE:
+        case FENCE_GATE:
+        case WOOD_DOUBLE_STEP:
+        case WOOD_STEP:
+        case SPRUCE_WOOD_STAIRS:
+        case BIRCH_WOOD_STAIRS:
+        case JUNGLE_WOOD_STAIRS:
+        case TRAPPED_CHEST:
+        case DAYLIGHT_DETECTOR:
+        case CARPET:
+        case LEAVES_2:
+        case LOG_2:
+        case ACACIA_STAIRS:
+        case DARK_OAK_STAIRS:
+        case SPRUCE_FENCE_GATE:
+        case BIRCH_FENCE_GATE:
+        case JUNGLE_FENCE_GATE:
+        case DARK_OAK_FENCE_GATE:
+        case ACACIA_FENCE_GATE:
+        case SPRUCE_FENCE:
+        case BIRCH_FENCE:
+        case JUNGLE_FENCE:
+        case DARK_OAK_FENCE:
+        case ACACIA_FENCE:
+            return true;
+        default:
+            return false;
+
+        }
+    }
+    /**
+     * Check if a block can burn away
+     * 
+     * @return True if a block can burn away
+     */
+    public boolean isBurnable(){
+        switch (this){
+        case WOOD:
+        case LOG:
+        case LEAVES:
+        case LONG_GRASS:
+        case WOOL:
+        case YELLOW_FLOWER:
+        case RED_ROSE:
+        case TNT:
+        case BOOKSHELF:
+        case WOOD_STAIRS:
+        case FENCE:
+        case VINE:
+        case WOOD_DOUBLE_STEP:
+        case WOOD_STEP:
+        case SPRUCE_WOOD_STAIRS:
+        case BIRCH_WOOD_STAIRS:
+        case JUNGLE_WOOD_STAIRS:
+        case HAY_BLOCK:
+        case COAL_BLOCK:
+        case LEAVES_2:
+        case LOG_2:
+        case CARPET:
+        case DOUBLE_PLANT:
+        case ACACIA_STAIRS:
+        case DARK_OAK_STAIRS:
+        case SPRUCE_FENCE_GATE:
+        case BIRCH_FENCE_GATE:
+        case JUNGLE_FENCE_GATE:
+        case DARK_OAK_FENCE_GATE:
+        case ACACIA_FENCE_GATE:
+        case SPRUCE_FENCE:
+        case BIRCH_FENCE:
+        case JUNGLE_FENCE:
+        case DARK_OAK_FENCE:
+        case ACACIA_FENCE:
+            return true;
+        default:
+            return false;
         }
     }
     
