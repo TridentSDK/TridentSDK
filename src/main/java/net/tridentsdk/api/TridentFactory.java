@@ -37,7 +37,6 @@ import net.tridentsdk.api.trade.ItemPair;
 import net.tridentsdk.api.util.TridentLogger;
 import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.*;
-import net.tridentsdk.world.TridentWorldLoader;
 
 import java.util.logging.Logger;
 
@@ -98,7 +97,9 @@ public final class TridentFactory {
 
     // Not thread safe
     public static WorldLoader createWorldLoader() {
-        return new TridentWorldLoader() {
+        return null;
+        //TODO:
+        /*return new TridentWorldLoader() {
             private World world;
 
             @Override public World load(String world) {
@@ -121,7 +122,7 @@ public final class TridentFactory {
             @Override public void saveChunk(Chunk chunk) {
                 // TODO
             }
-        };
+        };*/
     }
 
     public static World createWorld(String name) {
