@@ -31,18 +31,12 @@
 package net.tridentsdk.api.config;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import com.google.common.base.Charsets;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -88,7 +82,7 @@ public class JsonConfig extends ConfigSection {
 
     public void reload() {
         try {
-            this.jsonHandle = Files.isReadable(path) ? new JsonParser().parse(Files.newBufferedReader(path)).getAsJsonObject() : new JsonObject();
+            this.jsonHandle = Files.isReadable(path) ? new JsonParser().parse(Files.newBufferedReader(path, Charsets.UTF_8)).getAsJsonObject() : new JsonObject();
         }catch(JsonIOException | JsonSyntaxException | IOException e) {
             //TODO: Handle
         }
