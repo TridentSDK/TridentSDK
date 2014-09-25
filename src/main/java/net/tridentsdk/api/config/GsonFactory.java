@@ -30,68 +30,32 @@
 
 package net.tridentsdk.api.config;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.lang.reflect.Type;
 
-import com.google.common.base.Charsets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 
 /**
- * Represents the root ConfigSection of a Configuration file
- * Controls all IO actions of the file
+ * Used for advanced interaction with the Config API for custom serializing/deserializing of Java Objects
  * 
  * @author The TridentSDK Team
  */
-public class JsonConfig extends ConfigSection { 
-    private final Path path;
+public class GsonFactory {
+    private static GsonBuilder builder;
+    private static Gson gson;
     
-    public JsonConfig(Path path) {
-        this.path = path;
-        reload();
-    }
-    
-    public JsonConfig(File file) {
-        this.path = file.toPath();
-        reload();
+    static {
+        builder = new GsonBuilder().setPrettyPrinting();
+        gson = builder.create();
     }
     
-    @Override
-    public void save() {
-        try {
-           Files.write(path, GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8), StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public static void registerTypeAdapter(Type type, Object adapter) {
+        builder.registerTypeAdapter(type, adapter);
+        gson = builder.create();
     }
     
-    @Override
-    public JsonConfig getRootSection() {
-        return this;
+    protected static Gson getGson() {
+        return gson;
     }
     
-    @Override
-    public JsonConfig getParentSection() {
-        return this;
-    }
-
-    public void reload() {
-        try {
-            this.jsonHandle = Files.isReadable(path) ? new JsonParser().parse(Files.newBufferedReader(path)).getAsJsonObject() : new JsonObject();
-        }catch(JsonIOException | JsonSyntaxException | IOException e) {
-            //TODO: Handle
-        }
-    }
-
 }
