@@ -48,20 +48,24 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     @Override
     public boolean add(V element) {
         boolean changed = super.add(element);
+
         if (changed) {
             jsonHandle.add(((ConfigSection) element).asJsonObject());
         }
+
         return changed;
     }
     
     @Override
     public boolean addAll(Collection<? extends V> coll) {
         boolean changed = super.addAll(coll);
+
         if (changed) {
             for (V element : coll) {
                 add(element);
             }
         }
+
         return changed;
     }
     
@@ -84,9 +88,11 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     @Override
     public boolean remove(Object element) {
         boolean success = super.remove(element);
+
         if (success) {
             jsonHandle.remove(((ConfigSection) element).asJsonObject());
         }
+
         return success;
     }
     
@@ -96,11 +102,13 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     @Override
     public boolean removeAll(Collection<?> coll) {
         boolean changed = super.removeAll(coll);
+
         if (changed) {
             for (Object o : coll) {
                 remove(o);
             }
         }
+
         return changed;
     }
     
@@ -110,6 +118,7 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     @Override
     protected void removeRange(int start, int end) {
         super.removeRange(start, end);
+
         for (int i = start; i < end; i++) {
             jsonHandle.remove(i);
         }

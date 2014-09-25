@@ -32,12 +32,7 @@ package net.tridentsdk.api.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
-import java.util.stream.Stream;
 
 import com.google.gson.JsonArray;
 
@@ -135,22 +130,6 @@ public class ConfigList<V> extends ArrayList<V> {
     }
 
     /* (non-Javadoc)
-     * @see java.util.Collection#parallelStream()
-     */
-    @Override
-    public Stream<V> parallelStream() {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
-    }
-
-    /* (non-Javadoc)
-     * @see java.util.Collection#stream()
-     */
-    @Override
-    public Stream<V> stream() {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
-    }
-
-    /* (non-Javadoc)
      * @see java.util.ArrayList#add(int, java.lang.Object)
      */
     @Override
@@ -167,23 +146,6 @@ public class ConfigList<V> extends ArrayList<V> {
     }
 
     /* (non-Javadoc)
-     * @see java.util.ArrayList#removeIf(java.util.function.Predicate)
-     */
-    @Override
-    public boolean removeIf(Predicate<? super V> arg0) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
-    }
-
-
-    /* (non-Javadoc)
-     * @see java.util.ArrayList#replaceAll(java.util.function.UnaryOperator)
-     */
-    @Override
-    public void replaceAll(UnaryOperator<V> arg0) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
-    }
-
-    /* (non-Javadoc)
      * @see java.util.ArrayList#retainAll(java.util.Collection)
      */
     @Override
@@ -192,20 +154,8 @@ public class ConfigList<V> extends ArrayList<V> {
     }
 
     /* (non-Javadoc)
-     * @see java.util.ArrayList#sort(java.util.Comparator)
-     */
-    @Override
-    public void sort(Comparator<? super V> arg0) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
-    }
-
-    /* (non-Javadoc)
      * @see java.util.ArrayList#spliterator()
      */
-    @Override
-    public Spliterator<V> spliterator() {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
-    }
 
     /* (non-Javadoc)
      * @see java.util.ArrayList#subList(int, int)
