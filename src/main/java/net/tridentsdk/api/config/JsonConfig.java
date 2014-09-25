@@ -32,6 +32,7 @@ package net.tridentsdk.api.config;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.*;
@@ -58,12 +59,20 @@ public class JsonConfig {
         return getInt(tag, 0);
     }
 
+    public void setInt(String tag, int in) {
+        obj.addProperty(tag, in);
+    }
+
     public double getDouble(String tag, double def) {
         return (contains(tag)) ? obj.get(tag).getAsDouble() : def;
     }
 
     public double getDouble(String tag) {
         return getDouble(tag, 0D);
+    }
+
+    public void setDouble(String tag, double d) {
+        obj.addProperty(tag, d);
     }
 
     public float getFloat(String tag, float def) {
@@ -74,12 +83,20 @@ public class JsonConfig {
         return getFloat(tag, 0F);
     }
 
+    public void setFloat(String tag, float f) {
+        obj.addProperty(tag, f);
+    }
+
     public char getChar(String tag, char def) {
         return (contains(tag)) ? obj.get(tag).getAsCharacter() : def;
     }
 
     public char getChar(String tag) {
         return getChar(tag, '\u0000');
+    }
+
+    public void setChar(String tag, char c) {
+        obj.addProperty(tag, c);
     }
 
     public boolean getBoolean(String tag, boolean def) {
@@ -90,12 +107,20 @@ public class JsonConfig {
         return getBoolean(tag, false);
     }
 
+    public void setBoolean(String tag, boolean b) {
+        obj.addProperty(tag, b);
+    }
+
     public byte getByte(String tag, byte def) {
         return (contains(tag)) ? obj.get(tag).getAsByte() : def;
     }
 
     public byte getByte(String tag) {
         return getByte(tag, (byte) 0);
+    }
+
+    public void setByte(String tag, byte b) {
+        obj.addProperty(tag, b);
     }
 
     public String getString(String tag, String def) {
@@ -106,12 +131,20 @@ public class JsonConfig {
         return getString(tag, null);
     }
 
+    public void setString(String tag, String s) {
+        obj.addProperty(tag, s);
+    }
+
     public JsonObject getJsonObject(String tag, JsonObject def) {
         return (contains(tag)) ? obj.get(tag).getAsJsonObject() : def;
     }
 
     public JsonObject getJsonObject(String tag) {
         return getJsonObject(tag, null);
+    }
+
+    public void setJsonObject(String tag, JsonObject o) {
+        obj.add(tag, o);
     }
 
     public JsonArray getJsonArray(String tag, JsonArray def) {
@@ -122,6 +155,10 @@ public class JsonConfig {
         return getJsonArray(tag, null);
     }
 
+    public void setJsonArray(String tag, JsonArray array) {
+        obj.add(tag, array);
+    }
+
     public BigInteger getBigInteger(String tag, BigInteger def) {
         return (contains(tag)) ? obj.get(tag).getAsBigInteger() : def;
     }
@@ -130,12 +167,24 @@ public class JsonConfig {
         return getBigInteger(tag, null);
     }
 
+    public void setBigInteger(String s, BigInteger bi) {
+        setString(s, bi.toString());
+    }
+
     public BigDecimal getBigDecimal(String tag, BigDecimal def) {
         return (contains(tag)) ? obj.get(tag).getAsBigDecimal() : def;
     }
 
     public BigDecimal getBigDecimal(String tag) {
         return getBigDecimal(tag, null);
+    }
+
+    public void setBigDecimal(String tag, BigDecimal bd) {
+        setString(tag, bd.toPlainString());
+    }
+
+    public JsonElement remove(String tag) {
+        return obj.remove(tag);
     }
 
     public String toJson() {
