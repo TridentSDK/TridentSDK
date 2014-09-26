@@ -39,10 +39,9 @@ import java.lang.reflect.Field;
  * NOTE: This class only applies to any field which is not private
  */
 public class FastField {
-
-    private FieldAccess access;
-    private String field;
-    private Object instance;
+    private final FieldAccess access;
+    private final String field;
+    private final Object instance;
 
     FastField(Object instance, FieldAccess access, String field) {
         this.access = access;
