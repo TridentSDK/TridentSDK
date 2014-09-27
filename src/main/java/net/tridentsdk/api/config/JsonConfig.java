@@ -28,11 +28,16 @@
 package net.tridentsdk.api.config;
 
 import com.google.common.base.Charsets;
-import com.google.gson.*;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 /**
  * Represents the root ConfigSection of a Configuration file Controls all IO actions of the file
@@ -56,8 +61,8 @@ public class JsonConfig extends ConfigSection {
     public void save() {
         try {
             Files.write(this.path,
-                        GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8),
-                        StandardOpenOption.TRUNCATE_EXISTING);
+                    GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8),
+                    StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -76,9 +81,9 @@ public class JsonConfig extends ConfigSection {
     public void reload() {
         try {
             this.jsonHandle = Files.isReadable(this.path) ?
-                              new JsonParser().parse(Files.newBufferedReader(this.path, Charsets.UTF_8))
-                                              .getAsJsonObject() :
-                              new JsonObject();
+                    new JsonParser().parse(Files.newBufferedReader(this.path, Charsets.UTF_8))
+                            .getAsJsonObject() :
+                    new JsonObject();
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             //TODO: Handle
         }

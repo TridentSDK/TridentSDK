@@ -29,7 +29,9 @@ package net.tridentsdk.api.nbt;
 
 import com.google.common.collect.Lists;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author The TridentSDK Team

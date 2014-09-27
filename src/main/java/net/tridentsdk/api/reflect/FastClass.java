@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.reflect;
 
-import com.esotericsoftware.reflectasm.*;
+import com.esotericsoftware.reflectasm.ConstructorAccess;
+import com.esotericsoftware.reflectasm.FieldAccess;
+import com.esotericsoftware.reflectasm.MethodAccess;
 
 public class FastClass {
 

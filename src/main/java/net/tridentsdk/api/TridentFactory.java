@@ -34,7 +34,9 @@ import net.tridentsdk.api.inventory.ItemStack;
 import net.tridentsdk.api.trade.ItemPair;
 import net.tridentsdk.api.util.TridentLogger;
 import net.tridentsdk.api.util.Vector;
-import net.tridentsdk.api.world.*;
+import net.tridentsdk.api.world.ChunkLocation;
+import net.tridentsdk.api.world.World;
+import net.tridentsdk.api.world.WorldLoader;
 
 import java.util.logging.Logger;
 
@@ -44,7 +46,8 @@ import java.util.logging.Logger;
  * @author The TridentSDK Team
  */
 public final class TridentFactory {
-    private TridentFactory() {}
+    private TridentFactory() {
+    }
 
     /* Block */
 
@@ -153,7 +156,8 @@ public final class TridentFactory {
 
     public static Inventory createInventory() {
         return new Inventory() {
-            @Override public ItemStack[] getContents() {
+            @Override
+            public ItemStack[] getContents() {
                 return new ItemStack[0]; // TODO
             }
         };

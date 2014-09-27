@@ -27,4 +27,5 @@
 
 package net.tridentsdk.api.event;
 
-public interface Listener {}
+public interface Listener {
+}
