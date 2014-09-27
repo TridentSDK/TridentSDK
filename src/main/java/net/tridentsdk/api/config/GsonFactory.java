@@ -41,7 +41,8 @@ public final class GsonFactory {
     private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
     private static Gson gson = GsonFactory.builder.create();
 
-    private GsonFactory() {}
+    private GsonFactory() {
+    }
 
     public static void registerTypeAdapter(Type type, Object adapter) {
         GsonFactory.builder.registerTypeAdapter(type, adapter);

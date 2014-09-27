@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.msg;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.tridentsdk.api.ChatColor;
 import net.tridentsdk.api.entity.living.Player;
 
@@ -54,24 +56,24 @@ public final class MessageBuilder {
 
     public MessageBuilder link(String url) {
         this.buildingObject.clickEvent(new ClickEvent()
-                                               .action(ClickEvent.ClickAction.OPEN_URL)
-                                               .value(url));
+                .action(ClickEvent.ClickAction.OPEN_URL)
+                .value(url));
 
         return this;
     }
 
     public MessageBuilder file(String file) {
         this.buildingObject.clickEvent(new ClickEvent()
-                                               .action(ClickEvent.ClickAction.OPEN_FILE)
-                                               .value(file));
+                .action(ClickEvent.ClickAction.OPEN_FILE)
+                .value(file));
 
         return this;
     }
 
     public MessageBuilder hover(String message) {
         this.buildingObject.hoverEvent(new HoverEvent()
-                                               .action(HoverEvent.HoverAction.SHOW_TEXT)
-                                               .value(message));
+                .action(HoverEvent.HoverAction.SHOW_TEXT)
+                .value(message));
 
         return this;
     }
