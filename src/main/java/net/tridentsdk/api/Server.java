@@ -27,6 +27,15 @@
 
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.world.World;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.InetAddress;
+import java.util.List;
+import java.util.logging.Logger;
+
 /**
  * The access to the server internals
  *
@@ -44,4 +53,82 @@ public interface Server {
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
      */
     void shutdown();
+
+    /**
+     * Get all the worlds loaded on the server
+     * @return a {@link java.util.List} of all the worlds
+     */
+    List<World> getWorlds();
+
+    /**
+     * Gets the Internet Address of this server
+     * @return the address of this server
+     */
+    InetAddress getServerIp();
+
+    /**
+     * Asks the server to execute a task, will be run immediately on an alternate thread
+     * @param runnable The code to execute
+     */
+    void addTask(Runnable runnable);
+
+    /**
+     * Gets the logger that Trident uses, not necessarily the same logger your plugin should be using
+     * @return that represents the Logger Trident is using
+     */
+    Logger getLogger();
+
+    /**
+     * A string containing the current broadcast MOTD of the server
+     * @return a string containing the MOTD of the server, may be empty, never null
+     */
+    String getMotd();
+
+    /**
+     * Returns the {@link java.io.File} that represents the picture displayed next to the server listing on clients
+     * @return the file that represents the picture sent to clients when they ping the server
+     * @see net.tridentsdk.api.Server#getMotdPictureImage() for the representing the image sent to
+     * clients
+     */
+    File getMotdPicture();
+
+    /**
+     * Gets the {@link java.awt.image.BufferedImage} that represents the Motd picture sent to clients
+     *
+     * @return the image sent to clients
+     * @see net.tridentsdk.api.Server#getMotdPicture() for the file itself
+     */
+    BufferedImage getMotdPictureImage();
+
+    /**
+     * Sets the MOTD image sent to clients, may or may not take a server restart to take effect
+     * @param image the image to set it to
+     * @return 0 for success, -1 if this feature is disabled in config, -2 for generic failure
+     */
+    int setMotdImage(Image image);
+
+    /**
+     * Gets the maximum number of players allowed on the server
+     * @return the maximum number of players the server will allow
+     */
+    int getMaxPlayers();
+
+    /**
+     * Returns the number of players currently on the server
+     * @return a number representing the number of players on the server
+     */
+    int getCurrentPlayerCount();
+
+    /**
+     * Gets the current difficulty that the server is set to (Worlds can have their own difficulty)
+     * @return the difficulty of the server
+     */
+    Difficulty getDifficulty();
+
+    /**
+     * Gets the version of Trident that the server is currently running
+     * @return a String representing the current version of the Trident server that the server is running
+     */
+    String getVersion();
+
 }
