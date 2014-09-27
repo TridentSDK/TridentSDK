@@ -30,12 +30,10 @@
 
 package net.tridentsdk.api.msg;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.tridentsdk.api.ChatColor;
 
 public final class Message {
-    private static final Gson gson = new Gson();
 
     JsonObject message;
 
@@ -75,6 +73,6 @@ public final class Message {
     }
 
     public String toJson() {
-        return gson.toJson(message);
+        return MessageBuilder.GSON.toJson(message);
     }
 }

@@ -33,35 +33,76 @@ package net.tridentsdk.api.msg;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import net.tridentsdk.api.ChatColor;
 import net.tridentsdk.api.entity.living.Player;
 
-public class MessageBuilder {
-    private static final Gson GSON = new Gson();
+public final class MessageBuilder {
+    static final Gson GSON = new Gson();
 
     private JsonObject obj;
     private JsonArray extra;
+    private Message buildingObject;
 
-    public MessageBuilder() {
+    public MessageBuilder(String message) {
         obj = new JsonObject();
         extra = new JsonArray();
 
         // setup required properties
         obj.addProperty("text", "");
+        buildingObject = new Message().text(message);
     }
 
-    public MessageBuilder append(Message message) {
-        extra.add(message.message);
+    public MessageBuilder color(ChatColor color) {
+        buildingObject.color(color);
         return this;
     }
 
-    public MessageBuilder append(String text) {
-        extra.add(new JsonPrimitive(text));
+    public MessageBuilder link(String url) {
+        buildingObject.clickEvent(new ClickEvent()
+                      .action(ClickEvent.ClickAction.OPEN_URL)
+                      .value(url));
+
         return this;
     }
 
+    public MessageBuilder file(String file) {
+        buildingObject.clickEvent(new ClickEvent()
+                      .action(ClickEvent.ClickAction.OPEN_FILE)
+                      .value(file));
+
+        return this;
+    }
+
+    public MessageBuilder hover(String message) {
+        buildingObject.hoverEvent(new HoverEvent()
+                      .action(HoverEvent.HoverAction.SHOW_TEXT)
+                      .value(message));
+
+        return this;
+    }
+
+    public MessageBuilder then(String message) {
+        extra.add(buildingObject.message);
+        buildingObject = new Message().text(message);
+
+        return this;
+    }
+
+    public MessageBuilder then(Message message) {
+        extra.add(buildingObject.message);
+        buildingObject = message;
+
+        return this;
+    }
+
+    /**
+     * Completes the building of the message, after this call no change should be made.
+     * If any change were to be made, an NPE will be thrown
+     */
     public MessageBuilder build() {
         obj.add("extra", extra);
+        buildingObject = null;
+
         return this;
     }
 
