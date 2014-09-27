@@ -27,8 +27,6 @@
 
 package net.tridentsdk.api;
 
-import net.tridentsdk.api.Block;
-import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.event.ManagerList;
 import net.tridentsdk.api.inventory.Inventory;
@@ -189,8 +187,6 @@ public final class TridentFactory {
         // TODO
         return null;
     }
-
-
 
     /* Board not ready */
 

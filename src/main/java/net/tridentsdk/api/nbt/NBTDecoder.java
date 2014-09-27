@@ -27,10 +27,10 @@
 
 package net.tridentsdk.api.nbt;
 
+import com.google.common.base.Charsets;
+
 import java.io.DataInput;
 import java.io.IOException;
-
-import com.google.common.base.Charsets;
 
 /**
  * @author The TridentSDK Team
@@ -64,7 +64,7 @@ public class NBTDecoder {
             return this.resolveCompoundTag(this.readString());
         } catch (IOException e) {
             throw new NBTException("IO Error decoding the NBT Data", e);
-        } 
+        }
     }
 
     private CompoundTag resolveCompoundTag(String name) throws IOException {
@@ -134,7 +134,7 @@ public class NBTDecoder {
                 result = new ByteArrayTag(name);
                 int balength = this.input.readInt();
                 byte[] babytes = new byte[balength];
-                
+
                 this.input.readFully(babytes);
                 result.asType(ByteArrayTag.class).setValue(babytes);
 

@@ -4,143 +4,150 @@
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
+ *     1. Redistributions of source code must retain the above copyright
+ *        notice, this list of conditions and the following disclaimer.
+ *     2. Redistributions in binary form must reproduce the above copyright
+ *        notice, this list of conditions and the following disclaimer in the
+ *        documentation and/or other materials provided with the distribution.
+ *     3. Neither the name of the The TridentSDK Team nor the
+ *        names of its contributors may be used to endorse or promote products
+ *        derived from this software without specific prior written permission.
  *
- *     1. Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- *     3. Neither the name of TridentSDK nor the names of its
- *   contributors may be used to endorse or promote products derived from
- *   this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL The TridentSDK Team BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package net.tridentsdk.api.config;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Represents a section of the Config file
- * 
+ *
  * @author The TridentSDK Team
  */
 public class ConfigSection {
     ConfigSection parent;
     JsonObject jsonHandle;
-    
-    protected ConfigSection() { };
-    
+
+    protected ConfigSection() { }
+
     protected ConfigSection(ConfigSection parent, JsonObject obj) {
         this.parent = parent;
         this.jsonHandle = obj;
     }
 
+    //TODO: Better way?
+    public static <V> ConfigSection addToList(Collection<V> list) {
+        if (!(list instanceof ConfigSectionList)) {
+            throw new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList");
+        }
+        ConfigSection section = new ConfigSection(((ConfigSectionList) list).getParent(), new JsonObject());
+        list.add((V) section);
+
+        return section;
+    }
+
     public int getInt(String tag, int def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsInt() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsInt() : def;
     }
 
     public int getInt(String tag) {
-        return getInt(tag, 0);
+        return this.getInt(tag, 0);
     }
 
     public void setInt(String tag, int in) {
-        jsonHandle.addProperty(tag, in);
+        this.jsonHandle.addProperty(tag, in);
     }
 
     public double getDouble(String tag, double def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsDouble() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsDouble() : def;
     }
 
     public double getDouble(String tag) {
-        return getDouble(tag, 0D);
+        return this.getDouble(tag, 0.0D);
     }
 
     public void setDouble(String tag, double d) {
-        jsonHandle.addProperty(tag, d);
+        this.jsonHandle.addProperty(tag, d);
     }
 
     public float getFloat(String tag, float def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsFloat() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsFloat() : def;
     }
 
     public float getFloat(String tag) {
-        return getFloat(tag, 0F);
+        return this.getFloat(tag, 0.0F);
     }
 
     public void setFloat(String tag, float f) {
-        jsonHandle.addProperty(tag, f);
+        this.jsonHandle.addProperty(tag, f);
     }
 
     public char getChar(String tag, char def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsCharacter() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsCharacter() : def;
     }
 
     public char getChar(String tag) {
-        return getChar(tag, '\u0000');
+        return this.getChar(tag, '\u0000');
     }
 
     public void setChar(String tag, char c) {
-        jsonHandle.addProperty(tag, c);
+        this.jsonHandle.addProperty(tag, c);
     }
 
     public boolean getBoolean(String tag, boolean def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsBoolean() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsBoolean() : def;
     }
 
     public boolean getBoolean(String tag) {
-        return getBoolean(tag, false);
+        return this.getBoolean(tag, false);
     }
 
     public void setBoolean(String tag, boolean b) {
-        jsonHandle.addProperty(tag, b);
+        this.jsonHandle.addProperty(tag, b);
     }
 
     public byte getByte(String tag, byte def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsByte() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsByte() : def;
     }
 
     public byte getByte(String tag) {
-        return getByte(tag, (byte) 0);
+        return this.getByte(tag, (byte) 0);
     }
 
     public void setByte(String tag, byte b) {
-        jsonHandle.addProperty(tag, b);
+        this.jsonHandle.addProperty(tag, b);
     }
 
     public String getString(String tag, String def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsString() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsString() : def;
     }
 
     public String getString(String tag) {
-        return getString(tag, null);
+        return this.getString(tag, null);
     }
 
     public void setString(String tag, String s) {
-        jsonHandle.addProperty(tag, s);
+        this.jsonHandle.addProperty(tag, s);
     }
-    
+
     public <V> List<V> getList(String tag, Class<V> type) {
-        JsonArray array = jsonHandle.get(tag).getAsJsonArray();
-        
+        JsonArray array = this.jsonHandle.get(tag).getAsJsonArray();
+
         //Handle ConfigSection seperately as it is special
         if (type.equals(ConfigSection.class)) {
             List<V> result = new ConfigSectionList<>(this, array);
@@ -156,85 +163,74 @@ public class ConfigSection {
             return result;
         }
     }
-    
+
     public <V> List<V> addList(String tag, Class<V> type) {
-        jsonHandle.add(tag, new JsonArray());
-        return getList(tag, type);
+        this.jsonHandle.add(tag, new JsonArray());
+        return this.getList(tag, type);
     }
 
     public BigInteger getBigInteger(String tag, BigInteger def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsBigInteger() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsBigInteger() : def;
     }
 
     public BigInteger getBigInteger(String tag) {
-        return getBigInteger(tag, null);
+        return this.getBigInteger(tag, null);
     }
 
     public void setBigInteger(String s, BigInteger bi) {
-        setString(s, bi.toString());
+        this.setString(s, bi.toString());
     }
 
     public BigDecimal getBigDecimal(String tag, BigDecimal def) {
-        return (contains(tag)) ? jsonHandle.get(tag).getAsBigDecimal() : def;
+        return this.contains(tag) ? this.jsonHandle.get(tag).getAsBigDecimal() : def;
     }
 
     public BigDecimal getBigDecimal(String tag) {
-        return getBigDecimal(tag, null);
+        return this.getBigDecimal(tag, null);
     }
 
     public void setBigDecimal(String tag, BigDecimal bd) {
-        setString(tag, bd.toPlainString());
+        this.setString(tag, bd.toPlainString());
     }
-    
+
     public <V> V getObject(String tag, Class<V> clazz) {
-        return contains(tag) ? GsonFactory.getGson().fromJson(jsonHandle.get(tag), clazz) : null;
+        return this.contains(tag) ? GsonFactory.getGson().fromJson(this.jsonHandle.get(tag), clazz) : null;
     }
-    
+
     public void setObject(String tag, Object object) {
-        jsonHandle.add(tag, GsonFactory.getGson().toJsonTree(object));
+        this.jsonHandle.add(tag, GsonFactory.getGson().toJsonTree(object));
     }
 
     public void remove(String tag) {
-        jsonHandle.remove(tag);
+        this.jsonHandle.remove(tag);
     }
 
     public boolean contains(String tag) {
-        return jsonHandle.has(tag);
+        return this.jsonHandle.has(tag);
     }
-    
+
     public JsonObject asJsonObject() {
-        return jsonHandle;
+        return this.jsonHandle;
     }
-    
+
     public JsonConfig getRootSection() {
-        return parent.getRootSection();
+        return this.parent.getRootSection();
     }
-    
+
     public ConfigSection getParentSection() {
-        return parent;
+        return this.parent;
     }
-    
+
     public ConfigSection getConfigSection(String tag) {
-        if (contains(tag)) {
-            return new ConfigSection(this, jsonHandle.get(tag).getAsJsonObject());
+        if (this.contains(tag)) {
+            return new ConfigSection(this, this.jsonHandle.get(tag).getAsJsonObject());
         } else {
-            jsonHandle.add(tag, new JsonObject());
-            return new ConfigSection(this, jsonHandle.get(tag).getAsJsonObject());
+            this.jsonHandle.add(tag, new JsonObject());
+            return new ConfigSection(this, this.jsonHandle.get(tag).getAsJsonObject());
         }
     }
-    
+
     public void save() {
-        parent.save();
-    }
-    
-    //TODO: Better way?
-    public static <V> ConfigSection addToList(List<V> list) {
-        if (!(list instanceof ConfigSectionList)) {
-            throw new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList");
-        }
-        ConfigSection section = new ConfigSection(((ConfigSectionList) list).getParent(), new JsonObject());
-        list.add((V) section);
-        
-        return section;
+        this.parent.save();
     }
 }

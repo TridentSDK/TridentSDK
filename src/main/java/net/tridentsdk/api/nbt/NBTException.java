@@ -37,11 +37,11 @@ public class NBTException extends Exception {
     public NBTException(String message) {
         super(message);
     }
-    
+
     public NBTException(String message, Throwable cause) {
         super(message, cause);
     }
-    
+
     public NBTException(Throwable cause) {
         super(cause);
     }

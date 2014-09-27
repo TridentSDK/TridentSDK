@@ -27,11 +27,11 @@
 
 package net.tridentsdk.api.nbt;
 
+import com.google.common.base.Charsets;
+
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.List;
-
-import com.google.common.base.Charsets;
 
 /**
  * @author The TridentSDK Team
