@@ -1,22 +1,27 @@
 package net.tridentsdk.api.event.block;
 
-
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
-/**
- * Called when a crop grows or a block spreads
- */
-public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable {
+public class BlockFlowEvent extends BlockEvent implements Cancellable {
+    private final Block to;
     private boolean cancelled;
 
-    public BlockGrowthEvent(Block block) {
-        super(block);
+    public BlockFlowEvent(Block from, Block to) {
+        super(from);
+        this.to = to;
+    }
+
+    public Block getTo() {
+        return to;
+    }
+
+    public Block getFrom() {
+        return super.getBlock();
     }
 
     @Override
     public boolean isCancelled() {
-
         return cancelled;
     }
 

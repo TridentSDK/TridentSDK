@@ -6,7 +6,7 @@ import net.tridentsdk.api.event.Cancellable;
 /**
  * Called when a block spreads, like grass or mycelium
  */
-public class BlockSpreadEvent extends BlockGrowthEvent implements Cancellable{
+public class BlockSpreadEvent extends BlockGrowthEvent implements Cancellable {
     private final Block blockFrom;
 
     public BlockSpreadEvent(Block to, Block from) {
@@ -14,7 +14,7 @@ public class BlockSpreadEvent extends BlockGrowthEvent implements Cancellable{
         this.blockFrom = from;
     }
 
-    public Block getFrom () {
+    public Block getFrom() {
         return blockFrom;
     }
 

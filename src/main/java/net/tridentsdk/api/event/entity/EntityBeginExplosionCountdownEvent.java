@@ -8,18 +8,18 @@ import net.tridentsdk.api.event.Cancellable;
  */
 public class EntityBeginExplosionCountdownEvent extends EntityEvent implements Cancellable {
 
+    private int length;
+
+    public EntityBeginExplosionCountdownEvent(Entity entity, int length) {
+        super(entity);
+        this.length = length;
+    }
+
     public int getLength() {
         return length;
     }
 
     public void setLength(int length) {
-        this.length = length;
-    }
-
-    private int length;
-
-    public EntityBeginExplosionCountdownEvent(Entity entity, int length) {
-        super(entity);
         this.length = length;
     }
 

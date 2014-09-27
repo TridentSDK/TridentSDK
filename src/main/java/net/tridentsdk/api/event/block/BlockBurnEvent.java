@@ -45,11 +45,13 @@ public class BlockBurnEvent extends BlockEvent implements Cancellable {
         super(block);
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.cancel;
     }
 
-    @Override public void setCancelled(boolean cancel) {
+    @Override
+    public void setCancelled(boolean cancel) {
         this.cancel = cancel;
     }
 }

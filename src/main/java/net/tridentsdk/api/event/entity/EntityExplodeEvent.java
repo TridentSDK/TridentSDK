@@ -10,17 +10,17 @@ import net.tridentsdk.api.event.Cancellable;
 public class EntityExplodeEvent extends EntityEvent implements Cancellable {
     private float strength;
 
+    public EntityExplodeEvent(Entity entity, float strength) {
+
+        super(entity);
+        this.strength = strength;
+    }
+
     public float getStrength() {
         return strength;
     }
 
     public void setStrength(float strength) {
-        this.strength = strength;
-    }
-
-    public EntityExplodeEvent(Entity entity, float strength) {
-
-        super(entity);
         this.strength = strength;
     }
 }

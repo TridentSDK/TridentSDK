@@ -1,16 +1,16 @@
 package net.tridentsdk.api.event.block;
 
-
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
 /**
- * Called when a crop grows or a block spreads
+ * Called when a block is broken due to an explosion, handled separately than other reasons to reduce
+ * lag caused by BlockBreak event listeners during explosions
  */
-public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable {
+public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;
 
-    public BlockGrowthEvent(Block block) {
+    public MultiBlockBreakEvent(Block block) {
         super(block);
     }
 
@@ -22,6 +22,6 @@ public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable
 
     @Override
     public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+        cancelled = cancel;
     }
 }

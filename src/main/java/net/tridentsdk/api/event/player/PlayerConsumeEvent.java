@@ -31,7 +31,7 @@ import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
-public class PlayerConsumeEvent extends PlayerEvent implements Cancellable {
+public class PlayerConsumeEvent extends PlayerHungerEvent implements Cancellable {
 
     private final Item item;
     private boolean cancel;
@@ -43,8 +43,8 @@ public class PlayerConsumeEvent extends PlayerEvent implements Cancellable {
      * @param item   the item consumed
      */
 
-    public PlayerConsumeEvent(Player player, double feed, Item item) {
-        super(player);
+    public PlayerConsumeEvent(Player player,Item item, double feed) {
+        super(player,item,feed);
         this.setReplenishAmount(feed);
         this.item = item;
     }
@@ -54,7 +54,7 @@ public class PlayerConsumeEvent extends PlayerEvent implements Cancellable {
      */
 
     public double getReplenishAmount() {
-        return this.feed;
+        return super.getFeed();
     }
 
     /**
@@ -62,7 +62,7 @@ public class PlayerConsumeEvent extends PlayerEvent implements Cancellable {
      */
 
     public void setReplenishAmount(double feed) {
-        this.feed = feed;
+        super.setFeed(feed);
     }
 
     /**
@@ -73,11 +73,13 @@ public class PlayerConsumeEvent extends PlayerEvent implements Cancellable {
         return this.item;
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.cancel;
     }
 
-    @Override public void setCancelled(boolean cancel) {
+    @Override
+    public void setCancelled(boolean cancel) {
         this.cancel = cancel;
     }
 }

@@ -7,6 +7,11 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     private float strength;
     private boolean cancelled;
 
+    public BedExplodeEvent(Block block, float strength) {
+        super(block);
+        this.strength = strength;
+    }
+
     @Override
     public boolean isCancelled() {
         return cancelled;
@@ -15,11 +20,6 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;
-    }
-
-    public BedExplodeEvent(Block block, float strength) {
-        super(block);
-        this.strength = strength;
     }
 
     public float getStrength() {
