@@ -31,54 +31,50 @@
 package net.tridentsdk.api.msg;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.ChatColor;
 
-public class MessageBuilder {
-    private static final Gson GSON = new Gson();
+public final class Message {
+    private static final Gson gson = new Gson();
 
-    private JsonObject obj;
-    private JsonArray extra;
+    JsonObject message;
 
-    public MessageBuilder() {
-        obj = new JsonObject();
-        extra = new JsonArray();
-
-        // setup required properties
-        obj.addProperty("text", "");
+    public Message() {
+        message = new JsonObject();
     }
 
-    public MessageBuilder append(Message message) {
-        extra.add(message.message);
+    public Message text(String input) {
+        message.addProperty("text", input);
         return this;
     }
 
-    public MessageBuilder append(String text) {
-        extra.add(new JsonPrimitive(text));
+    public Message color(ChatColor color) {
+        message.addProperty("color", color.toString());
+
         return this;
     }
 
-    public MessageBuilder build() {
-        obj.add("extra", extra);
+    public Message clickEvent(ClickEvent event) {
+        JsonObject obj = new JsonObject();
+
+        obj.addProperty("action", event.action.toString());
+        obj.addProperty("value", event.value);
+
+        message.add("clickEvent", obj);
         return this;
     }
 
-    @Override
-    public String toString() {
-        return GSON.toJson(obj);
+    public Message hoverEvent(HoverEvent event) {
+        JsonObject obj = new JsonObject();
+
+        obj.addProperty("action", event.action.toString());
+        obj.addProperty("value", event.value);
+
+        message.add("hoverEvent", obj);
+        return this;
     }
 
     public String toJson() {
-        return toString();
-    }
-
-    public MessageBuilder sendTo(Player... players) {
-        for(Player p : players) {
-            // TODO: send message
-        }
-
-        return this;
+        return gson.toJson(message);
     }
 }
