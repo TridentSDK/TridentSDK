@@ -30,6 +30,9 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
+/**
+ * Called when a block breaks due to being on fire for too long
+ */
 public class BlockBurnEvent extends BlockEvent implements Cancellable {
 
     private boolean cancel;
