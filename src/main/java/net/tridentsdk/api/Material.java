@@ -527,11 +527,7 @@ public enum Material {
      * @return True if the item is a disc (record)
      */
     public boolean isDisc() {
-        if (!this.isBlock()) {
-            return this.idInt >= 2256;
-        }
-
-        return false;
+        return !this.isBlock() && this.idInt >= 2256;
     }
 
     /**
@@ -540,11 +536,7 @@ public enum Material {
      * @return True if the item is wearable (armor)
      */
     public boolean isWearable() {
-        if (!this.isBlock()) {
-            return this.idInt >= 298 && this.idInt <= 317;
-        }
-
-        return false;
+        return !this.isBlock() && this.idInt >= 298 && this.idInt <= 317;
     }
 
     /**
