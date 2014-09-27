@@ -38,13 +38,8 @@ import java.lang.reflect.Type;
  * @author The TridentSDK Team
  */
 public final class GsonFactory {
-    private static final GsonBuilder builder;
-    private static Gson gson;
-
-    static {
-        GsonFactory.builder = new GsonBuilder().setPrettyPrinting();
-        GsonFactory.gson = GsonFactory.builder.create();
-    }
+    private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+    private static Gson gson = GsonFactory.builder.create();
 
     private GsonFactory() {}
 
