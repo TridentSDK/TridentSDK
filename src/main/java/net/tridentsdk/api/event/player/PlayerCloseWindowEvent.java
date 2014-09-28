@@ -28,21 +28,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.entity.living;
+package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.window.Window;
 
-import java.util.Locale;
+public class PlayerCloseWindowEvent extends Event implements Cancellable {
 
-/**
- * TODO
- */
-public interface Player extends LivingEntity {
+    private final Window window;
+    private volatile boolean cancelled;
 
-    public float getFlyingSpeed();
+    public PlayerCloseWindowEvent(Window window) {
+        this.window = window;
+        this.cancelled = false;
+    }
 
-    public void setFlyingSpeed(float flyingSpeed);
+    public Window getWindow() {
+        return window;
+    }
 
-    public Locale getLocale();
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
 
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
 }

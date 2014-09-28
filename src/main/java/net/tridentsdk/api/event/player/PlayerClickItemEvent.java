@@ -28,21 +28,46 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.entity.living;
+package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.window.Window;
 
-import java.util.Locale;
+public class PlayerClickItemEvent extends Event implements Cancellable {
 
-/**
- * TODO
- */
-public interface Player extends LivingEntity {
+    private final Window window;
+    private final short clickedSlot;
+    private final int actionId;
 
-    public float getFlyingSpeed();
+    private boolean cancelled;
 
-    public void setFlyingSpeed(float flyingSpeed);
+    public PlayerClickItemEvent(Window window, short clickedSlot, int actionId) {
+        this.window = window;
+        this.clickedSlot = clickedSlot;
+        this.actionId = actionId;
+        this.cancelled = false;
+    }
 
-    public Locale getLocale();
+    public Window getWindow() {
+        return window;
+    }
 
+    public short getClickedSlot() {
+        return clickedSlot;
+    }
+
+    public int getActionId() {
+        return actionId;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
 }

@@ -28,21 +28,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.entity.living;
+package net.tridentsdk.api.window;
 
-import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.inventory.ItemStack;
 
-import java.util.Locale;
+public interface Window {
 
-/**
- * TODO
- */
-public interface Player extends LivingEntity {
+    int getId();
 
-    public float getFlyingSpeed();
+    ItemStack[] getContents();
 
-    public void setFlyingSpeed(float flyingSpeed);
+    int getLength();
 
-    public Locale getLocale();
+    void setSlot(int index, ItemStack value);
 
+    String getName();
 }
