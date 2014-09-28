@@ -30,34 +30,41 @@ package net.tridentsdk.api.event.player;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
+import java.util.List;
+import java.util.UUID;
+
 public class PlayerChatEvent extends PlayerEvent implements Cancellable {
 
     private boolean cancel;
 
     private String message;
+    private List<UUID> recipients;
 
     /**
      * @param player  the player associated with this event
      * @param message the message sent by the player
+     * @param recipients the players receiving the message
      */
-
-    public PlayerChatEvent(Player player, String message) {
+    public PlayerChatEvent(Player player, String message, List<UUID> recipients) {
         super(player);
+        this.recipients = recipients;
         this.setMessage(message);
     }
 
     /**
      * @return return the message sent
      */
-
     public String getMessage() {
         return this.message;
+    }
+
+    public List<UUID> getRecipients() {
+        return recipients;
     }
 
     /**
      * @param message the message associated with this event
      */
-
     public void setMessage(String message) {
         this.message = message;
     }
@@ -70,5 +77,9 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
     @Override
     public void setCancelled(boolean cancel) {
         this.cancel = cancel;
+    }
+
+    public void setRecipients(List<UUID> recipients) {
+        this.recipients = recipients;
     }
 }

@@ -31,13 +31,32 @@ import net.tridentsdk.api.entity.living.Player;
 
 public class PlayerDisconnectEvent extends PlayerEvent {
 
+    private Cause cause;
+
     /**
-     * TODO perhaps include disconnection reason (quit, timeout, etc)
-     *
      * @param player the player associated with this event
      */
-
-    public PlayerDisconnectEvent(Player player) {
+    public PlayerDisconnectEvent(Player player, Cause cause) {
         super(player);
+        this.cause = cause;
+    }
+
+    public Cause getCause() {
+        return cause;
+    }
+
+    public enum Cause {
+        /**
+         * The player was disconnected by the server (e.g. Kick)
+         */
+        SERVER,
+        /**
+         * The player was disconnected because of the player's actions (e.g. Quit)
+         */
+        PLAYER,
+        /**
+         * The player list connection to the server
+         */
+        LOST_CONNECTION
     }
 }
