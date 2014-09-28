@@ -36,25 +36,6 @@ public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
     private boolean cancel;
     private double damage;
 
-    public enum Cause {
-        STARVATION,
-        FIRE,
-        FALL,
-        EXPLOSION,
-        HIT,
-        ENDER_PEARL,
-        PROJECTILE,
-        LIGHTNING,
-        DROWNING,
-        SUFFOCATION,
-        ANVIL,
-        CONTACT,
-        LAVA,
-        POISON,
-        WITHER,
-        VOID
-    }
-
     /**
      * TODO add damage cause
      *
@@ -69,7 +50,7 @@ public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
     }
 
     public Cause getCause() {
-        return cause;
+        return this.cause;
     }
 
     /**
@@ -100,5 +81,22 @@ public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
         this.cancel = cancel;
     }
 
-
+    public enum Cause {
+        STARVATION,
+        FIRE,
+        FALL,
+        EXPLOSION,
+        HIT,
+        ENDER_PEARL,
+        PROJECTILE,
+        LIGHTNING,
+        DROWNING,
+        SUFFOCATION,
+        ANVIL,
+        CONTACT,
+        LAVA,
+        POISON,
+        WITHER,
+        VOID
+    }
 }

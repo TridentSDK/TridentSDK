@@ -35,9 +35,8 @@ import java.lang.reflect.Method;
 public class PluginManager {
 
     /**
-     * When there is an action, the event for that action is called through this method
-     * <p/>
-     * TODO: Exception handling in a more robust way
+     * When there is an action, the event for that action is called through this method <p/> TODO: Exception handling in
+     * a more robust way
      *
      * @param event the event that has been called
      */

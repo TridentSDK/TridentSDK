@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.entity.*;
+import net.tridentsdk.api.entity.Ageable;
+import net.tridentsdk.api.entity.Peaceful;
+import net.tridentsdk.api.entity.Saddleable;
 
 /**
  * Represents a Pig

@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.config;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -43,7 +45,8 @@ public class ConfigSection {
     ConfigSection parent;
     JsonObject jsonHandle;
 
-    protected ConfigSection() { }
+    protected ConfigSection() {
+    }
 
     protected ConfigSection(ConfigSection parent, JsonObject obj) {
         this.parent = parent;
