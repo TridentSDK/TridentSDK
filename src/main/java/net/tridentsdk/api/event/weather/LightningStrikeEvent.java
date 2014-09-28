@@ -24,41 +24,25 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.tridentsdk.api.event.weather;
 
-package net.tridentsdk.api.event.player;
-
-import net.tridentsdk.api.entity.Item;
-import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.Location;
 import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.world.World;
 
 /**
- * Called when a Player's hunger level changes
+ * Called when lightning strikes somewhere in the world
  */
-public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
-    private double feed;
-    private boolean cancelled;
+public class LightningStrikeEvent extends WeatherEvent implements Cancellable {
+    private final Location location;
 
-    public PlayerHungerEvent(Player player, double feed) {
-        super(player);
-        this.feed = feed;
+    public LightningStrikeEvent(World world, Location location) {
+        super(world);
+        this.location = location;
+
     }
 
-    public double getFeed() {
-        return this.feed;
-    }
-
-    public void setFeed(double feed) {
-        this.feed = feed;
-    }
-
-
-    @Override
-    public boolean isCancelled() {
-        return this.cancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+    public Location getLocation() {
+        return location;
     }
 }

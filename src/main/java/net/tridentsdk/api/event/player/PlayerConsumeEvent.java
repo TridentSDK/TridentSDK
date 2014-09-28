@@ -34,7 +34,6 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
 
     private final Item item;
     private boolean cancel;
-    private double feed;
 
     /**
      * @param player the player associated with this event
@@ -43,7 +42,7 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
      */
 
     public PlayerConsumeEvent(Player player, Item item, double feed) {
-        super(player, item, feed);
+        super(player, feed);
         this.setReplenishAmount(feed);
         this.item = item;
     }
@@ -68,7 +67,7 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
      * @return return the item consumed
      */
 
-    public Item getItem() {
+    public Item getFood() {
         return this.item;
     }
 

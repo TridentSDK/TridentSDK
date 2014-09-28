@@ -24,41 +24,61 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package net.tridentsdk.api.event.block;
 
-package net.tridentsdk.api.event.player;
-
-import net.tridentsdk.api.entity.Item;
-import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
 /**
- * Called when a Player's hunger level changes
+ * Called when a block's redstone state is updated, called on each individual section of wire when they change, etc.
  */
-public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
-    private double feed;
+public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
+
+    private final int strength;
+    private final Block causer;
+    private final RedstoneCause cause;
     private boolean cancelled;
 
-    public PlayerHungerEvent(Player player, double feed) {
-        super(player);
-        this.feed = feed;
+    public BlockRedstoneEvent(Block block, int strength, Block causer, RedstoneCause cause) {
+        super(block);
+        this.strength = strength;
+        this.causer = causer;
+        this.cause = cause;
+
     }
 
-    public double getFeed() {
-        return this.feed;
+    public Block getCauser() {
+        return causer;
     }
 
-    public void setFeed(double feed) {
-        this.feed = feed;
+    public RedstoneCause getCause() {
+        return cause;
     }
 
+    public int getStrength() {
+        return strength;
+    }
 
     @Override
     public boolean isCancelled() {
-        return this.cancelled;
+        return cancelled;
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+        cancelled = cancel;
+    }
+
+    public enum RedstoneCause {
+        LEVER,
+        BUTTON,
+        WIRE,
+        TORCH,
+        PRESSURE_PLATE,
+        HOOK,
+        TRAP_CHEST,
+        SENSOR,
+        REPEATER,
+        COMPARATOR
     }
 }
