@@ -235,10 +235,10 @@ public class Location implements Serializable, Cloneable {
      */
     public double distanceSquared(Location location) {
         Validate.notNull(location, "Location cannot be null.");
-        if (!this.getWorld().equals(location.getWorld())) return 0.0;
+        if (!this.getWorld().equals(location.getWorld())) {
+            return 0.0;
+        }
         return Location.square(this.getX() - location.getX()) + Location.square(this.getY() - location.getY()) +
-                Location
-                        .square(
-                                this.getZ() - location.getZ());
+                Location.square(this.getZ() - location.getZ());
     }
 }

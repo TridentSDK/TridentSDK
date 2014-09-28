@@ -82,12 +82,13 @@ public class TridentPluginLoader {
                 | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
             throw new PluginLoadException(ex);
         } finally {
-            if (jarFile != null)
+            if (jarFile != null) {
                 try {
                     jarFile.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
         }
     }
 

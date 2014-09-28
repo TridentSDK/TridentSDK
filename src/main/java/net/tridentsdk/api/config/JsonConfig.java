@@ -60,8 +60,7 @@ public class JsonConfig extends ConfigSection {
     @Override
     public void save() {
         try {
-            Files.write(this.path,
-                    GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8),
+            Files.write(this.path, GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8),
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -81,8 +80,7 @@ public class JsonConfig extends ConfigSection {
     public void reload() {
         try {
             this.jsonHandle = Files.isReadable(this.path) ?
-                    new JsonParser().parse(Files.newBufferedReader(this.path, Charsets.UTF_8))
-                            .getAsJsonObject() :
+                    new JsonParser().parse(Files.newBufferedReader(this.path, Charsets.UTF_8)).getAsJsonObject() :
                     new JsonObject();
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             //TODO: Handle

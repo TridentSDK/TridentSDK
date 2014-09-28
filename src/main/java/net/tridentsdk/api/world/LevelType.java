@@ -31,7 +31,8 @@ public enum LevelType {
 
     DEFAULT("default"),
     FLAT("flat"),
-    LARGE_BIOMES("largeBiomes"), // why lowerCamelCase I'll never know
+    LARGE_BIOMES("largeBiomes"),
+    // why lowerCamelCase I'll never know
     AMPLIFIED("amplified"),
     DEFAULT_1_1("default_1_1"); // I don't even...
 
