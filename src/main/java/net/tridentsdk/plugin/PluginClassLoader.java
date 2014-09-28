@@ -27,6 +27,8 @@
 
 package net.tridentsdk.plugin;
 
+import net.tridentsdk.plugin.exception.PluginLoadException;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -52,6 +54,7 @@ public class PluginClassLoader extends URLClassLoader {
         if (name.startsWith("net.tridentsdk")) {
             throw new ClassNotFoundException(name);
         }
+
         Class<?> result = this.classes.get(name);
 
         if (result == null) {

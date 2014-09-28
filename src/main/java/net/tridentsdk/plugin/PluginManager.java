@@ -28,6 +28,7 @@
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.api.event.*;
+import net.tridentsdk.api.util.TridentLogger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,7 +41,6 @@ public class PluginManager {
      *
      * @param event the event that has been called
      */
-
     public static void passEvent(Event event)
             throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ManagerList listenerlist = ManagerList.getManagers().get(event.getClass());
@@ -54,7 +54,6 @@ public class PluginManager {
      *
      * @param listener the listener class registered from a plugin
      */
-
     public void registerListener(Listener listener) {
         //Iterate through list of methods from listener
         Method[] methods = listener.getClass().getMethods();
@@ -88,7 +87,6 @@ public class PluginManager {
 
                     //Check to make sure class is an event
                     if (c.equals(Event.class)) {
-
                         Class<? extends Event> eventType = clazz.asSubclass(Event.class);
                         ManagerList listeners = ManagerList.getManagers().get(eventType);
 
@@ -103,7 +101,7 @@ public class PluginManager {
                         listeners.register(rl);
                     }
                 } else {
-                    // TODO Listener methods must only have one event parameter (output error message)
+                    TridentLogger.getGlobal().warning("Listener " + method.getName() + " has " + (params.length == 0 ? "no parameters!" : "more than one parameter") + "!");
                 }
             }
         }
