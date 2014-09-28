@@ -70,8 +70,7 @@ public class TridentPluginLoader {
                 throw new PluginLoadException("Description annotation does not exist!");
             }
 
-            Constructor<? extends TridentPlugin> defaultConstructor =
-                    pluginClass.getConstructor(File.class, PluginDescription.class);
+            Constructor<? extends TridentPlugin> defaultConstructor = pluginClass.getConstructor(File.class, PluginDescription.class);
             TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
 
             this.plugins.add(plugin);
@@ -82,12 +81,13 @@ public class TridentPluginLoader {
                 | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
             throw new PluginLoadException(ex);
         } finally {
-            if (jarFile != null)
+            if (jarFile != null) {
                 try {
                     jarFile.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
         }
     }
 

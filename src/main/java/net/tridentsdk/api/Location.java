@@ -204,8 +204,7 @@ public class Location implements Serializable, Cloneable {
     }
 
     public Location getRelative(Vector vector) {
-        return new Location(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
+        return new Location(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(), vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
     }
 
     /**
@@ -235,10 +234,10 @@ public class Location implements Serializable, Cloneable {
      */
     public double distanceSquared(Location location) {
         Validate.notNull(location, "Location cannot be null.");
-        if (!this.getWorld().equals(location.getWorld())) return 0.0;
+        if (!this.getWorld().equals(location.getWorld())) {
+            return 0.0;
+        }
         return Location.square(this.getX() - location.getX()) + Location.square(this.getY() - location.getY()) +
-                Location
-                        .square(
-                                this.getZ() - location.getZ());
+                Location.square(this.getZ() - location.getZ());
     }
 }

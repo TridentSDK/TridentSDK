@@ -438,8 +438,9 @@ public enum Material {
 
     public static Material fromString(String id) {
         for (Material mat : Material.values()) {
-            if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id))
+            if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id)) {
                 return mat;
+            }
         }
 
         return null;

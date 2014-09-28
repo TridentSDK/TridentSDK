@@ -37,14 +37,12 @@ public class ManagerList {
     /**
      * Map of ListenerLists with respect to the event
      */
-    private static final Map<Class<? extends Event>, ManagerList> managers =
-            new HashMap<>();
+    private static final Map<Class<? extends Event>, ManagerList> managers = new HashMap<>();
 
     /*
      * Array of listeners sorted from lowest priority to highest (order of execution)
      */
-    private final EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
-            new EnumMap<>(Importance.class);
+    private final EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap = new EnumMap<>(Importance.class);
 
     /*
      * EnumMap used to sort listeners by importance
@@ -56,7 +54,9 @@ public class ManagerList {
      */
 
     public ManagerList() {
-        for (Importance i : Importance.values()) this.importanceMap.put(i, new ArrayList<RegisteredListener>());
+        for (Importance i : Importance.values()) {
+            this.importanceMap.put(i, new ArrayList<RegisteredListener>());
+        }
     }
 
     /**
@@ -103,9 +103,10 @@ public class ManagerList {
      * @param event the event that is being passed
      */
 
-    public void execute(Event event)
-            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        if (this.listeners == null) this.toArray();
+    public void execute(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        if (this.listeners == null) {
+            this.toArray();
+        }
         for (RegisteredListener l : this.listeners) {
             l.execute(event);
         }

@@ -32,7 +32,11 @@ public enum Importance {
      * Levels of priority an event is given, where the events fire from LOWEST to HIGHEST
      */
 
-    LOWEST(0), LOW(1), MEDIUM(2), HIGH(3), HIGHEST(4);
+    LOWEST(0),
+    LOW(1),
+    MEDIUM(2),
+    HIGH(3),
+    HIGHEST(4);
 
     private final int importance;
 
