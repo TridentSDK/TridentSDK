@@ -70,6 +70,17 @@ public class TridentPluginLoader {
                 throw new PluginLoadException("Description annotation does not exist!");
             }
 
+            if (description.name() == null) {
+                throw new PluginLoadException("Plugin has no name!");
+            }
+
+            if (description.name().equalsIgnoreCase("Trident")
+                    || description.name().equalsIgnoreCase("TridentSDK")
+                    || description.name().equalsIgnoreCase("Mojang")
+                    || description.name().equalsIgnoreCase("Microsoft")) {
+                throw new PluginLoadException("Plugin is using invalid name!");
+            }
+
             Constructor<? extends TridentPlugin> defaultConstructor =
                     pluginClass.getConstructor(File.class, PluginDescription.class);
             TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);

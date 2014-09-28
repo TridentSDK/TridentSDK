@@ -43,9 +43,7 @@ public @interface PluginDescription {
 
     String description() default "Plugin made for TridentSDK";
 
-    String author() default "";
+    String[] authors();
 
-    String[] authors() default {};
-
-    String[] dependencies() default {};
+    String[] dependencies();
 }
