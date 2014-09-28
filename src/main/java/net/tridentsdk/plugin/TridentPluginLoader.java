@@ -28,6 +28,7 @@
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.plugin.annotation.PluginDescription;
+import net.tridentsdk.plugin.exception.PluginLoadException;
 
 import java.io.File;
 import java.io.IOException;

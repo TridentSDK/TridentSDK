@@ -25,7 +25,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.plugin;
+package net.tridentsdk.plugin.exception;
 
 public class PluginLoadException extends RuntimeException {
 

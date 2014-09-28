@@ -28,6 +28,7 @@
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.api.event.*;
+import net.tridentsdk.plugin.exception.PluginLoadException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -88,7 +89,6 @@ public class PluginManager {
 
                     //Check to make sure class is an event
                     if (c.equals(Event.class)) {
-
                         Class<? extends Event> eventType = clazz.asSubclass(Event.class);
                         ManagerList listeners = ManagerList.getManagers().get(eventType);
 
@@ -103,7 +103,7 @@ public class PluginManager {
                         listeners.register(rl);
                     }
                 } else {
-                    // TODO Listener methods must only have one event parameter (output error message)
+                    throw new PluginLoadException("Listener " + method.getName() + " has " + (params.length == 0 ? "no parameters!" : "more than one parameter") + "!");
                 }
             }
         }
