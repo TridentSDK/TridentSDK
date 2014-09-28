@@ -63,7 +63,8 @@ public class RegisteredListener {
      * @param event the event that is being executed
      */
 
-    public void execute(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void execute(Event event)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         this.method.invoke(this.listener, event);
     }
 }

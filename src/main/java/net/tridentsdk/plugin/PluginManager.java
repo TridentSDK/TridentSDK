@@ -41,7 +41,8 @@ public class PluginManager {
      * @param event the event that has been called
      */
 
-    public static void passEvent(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public static void passEvent(Event event)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ManagerList listenerlist = ManagerList.getManagers().get(event.getClass());
         if (listenerlist != null) {
             listenerlist.execute(event);

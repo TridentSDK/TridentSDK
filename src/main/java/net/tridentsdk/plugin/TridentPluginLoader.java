@@ -70,7 +70,8 @@ public class TridentPluginLoader {
                 throw new PluginLoadException("Description annotation does not exist!");
             }
 
-            Constructor<? extends TridentPlugin> defaultConstructor = pluginClass.getConstructor(File.class, PluginDescription.class);
+            Constructor<? extends TridentPlugin> defaultConstructor =
+                    pluginClass.getConstructor(File.class, PluginDescription.class);
             TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
 
             this.plugins.add(plugin);

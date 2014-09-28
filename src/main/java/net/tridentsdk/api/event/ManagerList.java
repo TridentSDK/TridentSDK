@@ -103,7 +103,8 @@ public class ManagerList {
      * @param event the event that is being passed
      */
 
-    public void execute(Event event) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void execute(Event event)
+            throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (this.listeners == null) {
             this.toArray();
         }
