@@ -49,11 +49,19 @@ public class Block {
         return this.material;
     }
 
+    public Material getMaterial() {
+        return material;
+    }
+
     public Location getLocation() {
         return this.location;
     }
 
     public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public void setType(Material material) {
         this.material = material;
     }
 

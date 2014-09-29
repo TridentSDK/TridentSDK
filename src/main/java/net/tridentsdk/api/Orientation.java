@@ -48,8 +48,5 @@ public enum Orientation {
     NORTH_NORTH_EAST,
     NORTH_EAST_EAST,
     SOUTH_SOUTH_EAST,
-    SOUTH_EAST_EAST,
-
-    UP,
-    DOWN
+    SOUTH_EAST_EAST
 }
