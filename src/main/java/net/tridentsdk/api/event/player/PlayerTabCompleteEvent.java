@@ -28,35 +28,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.event;
+package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.reflect.FastMethod;
+import net.tridentsdk.api.entity.living.Player;
 
-public class RegisteredListener {
+public class PlayerTabCompleteEvent extends PlayerEvent {
 
-    private final FastMethod method;
-    private final Class<? extends Event> eventClass;
-    private final Importance importance;
+    private final String message;
+    private final String[] suggestions;
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
-        this.method = method;
-        this.eventClass = eventClass;
-        this.importance = importance;
+    public PlayerTabCompleteEvent(Player player, String message) {
+        super(player);
+
+        this.message = message;
+        this.suggestions = new String[] { };
     }
 
-    public FastMethod getMethod() {
-        return method;
+    public String getMessage() {
+        return message;
     }
 
-    public Class<? extends Event> getEventClass() {
-        return eventClass;
+    public String[] getSuggestions() {
+        return suggestions;
     }
 
-    public Importance getImportance() {
-        return importance;
-    }
-
-    public void execute(Event event) {
-        method.invoke(event);
+    public void addSuggestion(String suggestion) {
+        suggestions[suggestions.length] = suggestion;
     }
 }

@@ -27,21 +27,37 @@
 
 package net.tridentsdk.plugin;
 
+import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public class TridentPlugin {
 
-    private File pluginFile;
-    private PluginDescription description;
+    private final File pluginFile;
+    private final File configDirectory;
+    private final PluginDescription description;
+    private final JsonConfig defaultConfig;
+
+    final PluginClassLoader classLoader;
 
     protected TridentPlugin() {
+        this.pluginFile = null;
+        this.description = null;
+        this.defaultConfig = null;
+        this.configDirectory = null;
+        this.classLoader = null;
     } // avoid any plugin initiation outside of this package
 
-    TridentPlugin(File pluginFile, PluginDescription description) {
+    TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
         this.pluginFile = pluginFile;
         this.description = description;
+        this.configDirectory = new File("plugins/" + description.name() + "/");
+        this.defaultConfig = new JsonConfig(new File(configDirectory, "config.json"));
+        this.classLoader = loader;
     }
 
     public void onEnable() {
@@ -54,8 +70,39 @@ public class TridentPlugin {
         // TODO
     }
 
+    public void saveDefaultConfig() {
+        saveResource("config.json", false);
+    }
+
+    public void saveResource(String name, boolean replace) {
+        try {
+            InputStream is = getClass().getResourceAsStream("/" + name);
+            File file = new File(configDirectory, name);
+
+            if(is == null) {
+                return;
+            }
+
+            if(replace && file.exists()) {
+                file.delete();
+            }
+
+            Files.copy(is, file.getAbsoluteFile().toPath());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public final File getFile() {
         return this.pluginFile;
+    }
+
+    public JsonConfig getDefaultConfig() {
+        return defaultConfig;
+    }
+
+    public File getConfigDirectory() {
+        return configDirectory;
     }
 
     public final PluginDescription getDescription() {

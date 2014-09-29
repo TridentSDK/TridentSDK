@@ -28,35 +28,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.event;
+package net.tridentsdk.plugin.channel;
 
-import net.tridentsdk.api.reflect.FastMethod;
+import net.tridentsdk.api.Trident;
 
-public class RegisteredListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    private final FastMethod method;
-    private final Class<? extends Event> eventClass;
-    private final Importance importance;
+public abstract class PluginChannel {
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
-        this.method = method;
-        this.eventClass = eventClass;
-        this.importance = importance;
+    private List<Byte[]> history = new ArrayList<>();
+
+    public void process(byte[] message) {
+        if(!(Trident.isTrident())) {
+            throw new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!");
+        }
+
+        Byte[] bytes = new Byte[message.length - 1];
+
+        for(int i = 0; i < message.length; i++) {
+            bytes[i] = message[i];
+        }
+
+        history.add(bytes);
+        onMessage(message);
     }
 
-    public FastMethod getMethod() {
-        return method;
-    }
+    public abstract void onMessage(byte[] message);
 
-    public Class<? extends Event> getEventClass() {
-        return eventClass;
-    }
-
-    public Importance getImportance() {
-        return importance;
-    }
-
-    public void execute(Event event) {
-        method.invoke(event);
+    public List<Byte[]> getHistory() {
+        return history;
     }
 }

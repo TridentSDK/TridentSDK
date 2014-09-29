@@ -28,6 +28,7 @@
 package net.tridentsdk.api.entity.living;
 
 import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.inventory.ItemStack;
 
 import java.util.Locale;
 
@@ -41,5 +42,7 @@ public interface Player extends LivingEntity {
     public void setFlyingSpeed(float flyingSpeed);
 
     public Locale getLocale();
+
+    public ItemStack getItemInHand();
 
 }

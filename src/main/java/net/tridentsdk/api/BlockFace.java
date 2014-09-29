@@ -28,35 +28,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.event;
+package net.tridentsdk.api;
 
-import net.tridentsdk.api.reflect.FastMethod;
+import net.tridentsdk.api.util.Vector;
 
-public class RegisteredListener {
+public enum BlockFace {
+    TOP(new Vector(0D, 1D, 0D)),
+    BOTTOM(new Vector(0D, -1D, 0D)),
+    /* TODO */;
 
-    private final FastMethod method;
-    private final Class<? extends Event> eventClass;
-    private final Importance importance;
+    private final Vector difference;
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
-        this.method = method;
-        this.eventClass = eventClass;
-        this.importance = importance;
+    BlockFace(Vector difference) {
+        this.difference = difference;
     }
 
-    public FastMethod getMethod() {
-        return method;
+    public Vector getDifference() {
+        return difference;
     }
 
-    public Class<? extends Event> getEventClass() {
-        return eventClass;
-    }
-
-    public Importance getImportance() {
-        return importance;
-    }
-
-    public void execute(Event event) {
-        method.invoke(event);
+    public Location apply(Location loc) {
+        return loc.getRelative(difference);
     }
 }

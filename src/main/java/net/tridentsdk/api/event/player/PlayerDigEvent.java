@@ -28,35 +28,41 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.event;
+package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.reflect.FastMethod;
+import net.tridentsdk.api.BlockFace;
+import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.event.Cancellable;
 
-public class RegisteredListener {
+public class PlayerDigEvent extends PlayerEvent implements Cancellable {
 
-    private final FastMethod method;
-    private final Class<? extends Event> eventClass;
-    private final Importance importance;
+    private final BlockFace face;
+    private final short status;
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
-        this.method = method;
-        this.eventClass = eventClass;
-        this.importance = importance;
+    private boolean cancelled = false;
+
+    public PlayerDigEvent(Player player, BlockFace face, short status) {
+        super(player);
+
+        this.face = face;
+        this.status = status;
     }
 
-    public FastMethod getMethod() {
-        return method;
+    public BlockFace getFace() {
+        return face;
     }
 
-    public Class<? extends Event> getEventClass() {
-        return eventClass;
+    public short getStatus() {
+        return status;
     }
 
-    public Importance getImportance() {
-        return importance;
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
     }
 
-    public void execute(Event event) {
-        method.invoke(event);
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

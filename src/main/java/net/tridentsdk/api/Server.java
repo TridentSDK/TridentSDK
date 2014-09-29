@@ -27,8 +27,10 @@
 
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.event.EventManager;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
+import net.tridentsdk.plugin.TridentPluginHandler;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -143,4 +145,10 @@ public interface Server {
     String getVersion();
 
     Window getWindow(int id);
+
+    EventManager getEventManager();
+
+    void sendPluginMessage(String channel, byte[] data);
+
+    TridentPluginHandler getPluginHandler();
 }

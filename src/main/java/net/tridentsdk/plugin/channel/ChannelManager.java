@@ -28,35 +28,37 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.event;
+package net.tridentsdk.plugin.channel;
 
-import net.tridentsdk.api.reflect.FastMethod;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class RegisteredListener {
+public final class ChannelManager {
 
-    private final FastMethod method;
-    private final Class<? extends Event> eventClass;
-    private final Importance importance;
+    private static final ChannelManager INSTANCE = new ChannelManager();
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
-        this.method = method;
-        this.eventClass = eventClass;
-        this.importance = importance;
+    private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
+
+    private ChannelManager() {
     }
 
-    public FastMethod getMethod() {
-        return method;
+    public void registerChannel(String name, PluginChannel channel) {
+        if(channels.containsKey(name)) {
+            throw new IllegalArgumentException("Channel " + name + " is already registered!");
+        }
+
+        channels.put(name, channel);
     }
 
-    public Class<? extends Event> getEventClass() {
-        return eventClass;
+    public void unregisterChannel(String name) {
+        channels.remove(name);
     }
 
-    public Importance getImportance() {
-        return importance;
+    public PluginChannel getPluginChannel(String name) {
+        return channels.get(name);
     }
 
-    public void execute(Event event) {
-        method.invoke(event);
+    public static ChannelManager getInstance() {
+        return INSTANCE;
     }
 }
