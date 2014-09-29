@@ -27,17 +27,22 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.DisconnectCause;
 import net.tridentsdk.api.entity.living.Player;
 
 public class PlayerDisconnectEvent extends PlayerEvent {
 
+    private DisconnectCause disconnectCause;
+
     /**
-     * TODO perhaps include disconnection reason (quit, timeout, etc)
-     *
      * @param player the player associated with this event
      */
-
-    public PlayerDisconnectEvent(Player player) {
+    public PlayerDisconnectEvent(Player player, DisconnectCause disconnectCause) {
         super(player);
+        this.disconnectCause = disconnectCause;
+    }
+
+    public DisconnectCause getDisconnectCause() {
+        return disconnectCause;
     }
 }

@@ -27,12 +27,13 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.DamageCause;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
 public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
 
-    private final Cause cause;
+    private final DamageCause cause;
     private boolean cancel;
     private double damage;
 
@@ -43,13 +44,13 @@ public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
      * @param damage the amount of damage dealt to the player
      */
 
-    public PlayerDamageEvent(Player player, double damage, Cause cause) {
+    public PlayerDamageEvent(Player player, double damage, DamageCause cause) {
         super(player);
         this.setDamage(damage);
         this.cause = cause;
     }
 
-    public Cause getCause() {
+    public DamageCause getCause() {
         return this.cause;
     }
 
@@ -79,24 +80,5 @@ public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
     @Override
     public void setCancelled(boolean cancel) {
         this.cancel = cancel;
-    }
-
-    public enum Cause {
-        STARVATION,
-        FIRE,
-        FALL,
-        EXPLOSION,
-        HIT,
-        ENDER_PEARL,
-        PROJECTILE,
-        LIGHTNING,
-        DROWNING,
-        SUFFOCATION,
-        ANVIL,
-        CONTACT,
-        LAVA,
-        POISON,
-        WITHER,
-        VOID
     }
 }

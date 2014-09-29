@@ -27,17 +27,22 @@
 
 package net.tridentsdk.api.event.entity;
 
+import net.tridentsdk.api.DeathCause;
 import net.tridentsdk.api.entity.Entity;
 
+/**
+ * Called when an Entity dies
+ */
 public class EntityDeathEvent extends EntityEvent {
 
-    /**
-     * TODO add cause of death
-     *
-     * @param entity the entity that has died
-     */
+    private DeathCause deathCause;
 
-    public EntityDeathEvent(Entity entity) {
+    public EntityDeathEvent(Entity entity, DeathCause deathCause) {
         super(entity);
+        this.deathCause = deathCause;
+    }
+
+    public DeathCause getDeathCause() {
+        return deathCause;
     }
 }
