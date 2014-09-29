@@ -30,6 +30,9 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
+/**
+ * Called when water or lava flows from a block to another
+ */
 public class BlockFlowEvent extends BlockEvent implements Cancellable {
     private final Block to;
     private boolean cancelled;
@@ -46,6 +49,7 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
     public Block getFrom() {
         return super.getBlock();
     }
+
 
     @Override
     public boolean isCancelled() {
