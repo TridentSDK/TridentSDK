@@ -29,74 +29,22 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.entity.EntityDamageEvent;
 
-public class PlayerDamageEvent extends PlayerEvent implements Cancellable {
-
-    private final Cause cause;
-    private boolean cancel;
-    private double damage;
+public class PlayerDamageEvent extends EntityDamageEvent implements Cancellable {
 
     /**
-     * TODO add damage cause
      *
      * @param player the player associated with this event
      * @param damage the amount of damage dealt to the player
      */
 
-    public PlayerDamageEvent(Player player, double damage, Cause cause) {
-        super(player);
-        this.setDamage(damage);
-        this.cause = cause;
+    public PlayerDamageEvent(Player player, double damage, EntityDamageEvent.Cause cause) {
+        super(player,damage ,cause);
     }
 
-    public Cause getCause() {
-        return this.cause;
+    public Player getPlayer() {
+        return (Player) super.getEntity();
     }
 
-    /**
-     * @return return the amount of damage dealt
-     */
-
-    public double getDamage() {
-        return this.damage;
-    }
-
-    /**
-     * Change the damage value dealt
-     *
-     * @param damage the amount of damage dealt
-     */
-
-    public void setDamage(double damage) {
-        this.damage = damage;
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return this.cancel;
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        this.cancel = cancel;
-    }
-
-    public enum Cause {
-        STARVATION,
-        FIRE,
-        FALL,
-        EXPLOSION,
-        HIT,
-        ENDER_PEARL,
-        PROJECTILE,
-        LIGHTNING,
-        DROWNING,
-        SUFFOCATION,
-        ANVIL,
-        CONTACT,
-        LAVA,
-        POISON,
-        WITHER,
-        VOID
-    }
 }

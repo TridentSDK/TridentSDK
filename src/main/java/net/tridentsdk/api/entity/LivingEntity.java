@@ -28,7 +28,9 @@
 package net.tridentsdk.api.entity;
 
 import net.tridentsdk.api.Location;
+import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.entity.living.ProjectileSource;
+import net.tridentsdk.api.event.entity.EntityDamageEvent;
 
 public interface LivingEntity extends Entity, ProjectileSource {
 
@@ -64,6 +66,16 @@ public interface LivingEntity extends Entity, ProjectileSource {
     Location getEyeLocation();
 
     boolean canPickupItems();
+
+    EntityDamageEvent getLastDamageCause();
+
+    /**
+     * Returns a player if a player has done damage to this entity since its last full heal, else returns null
+     * Used for death messages
+     * @return
+     */
+    Player hurtByPlayer();
+
 
     /**
      * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO
