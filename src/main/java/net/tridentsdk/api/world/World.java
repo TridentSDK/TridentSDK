@@ -33,25 +33,81 @@ import net.tridentsdk.api.Gamemode;
 import net.tridentsdk.api.Location;
 
 public interface World {
+    
+    /**
+     * Gets the name of the world
+     * 
+     * @return the name of the world
+     */
     String getName();
-
+    
+    /**
+     * Gets the chunk on the given location, and generates the chunk if it does not exist.
+     * 
+     * @return The chunk on the given location
+     */
     Chunk getChunkAt(ChunkLocation loc, boolean generateIfNotFound);
-
+    
+    /**
+     * Gets the chunk on the given x and z , and generates the chunk if it does not exist
+     * 
+     * @return The chunk on the given location
+     */
     Chunk getChunkAt(int x, int z, boolean generateIfNotFound);
-
+    
+    /**
+     * Generates the chunk on the given location
+     * 
+     * @return The generated chunk
+     */
     Chunk generateChunk(int x, int z);
-
+    
+    /**
+     * Generates the chunk on the given location
+     * 
+     * @return The generated chunk
+     */
     Chunk generateChunk(ChunkLocation location);
-
+    
+    /**
+     * Gets the block on the given location
+     * 
+     * @return The block on the given location
+     */
     Block getBlockAt(Location location);
-
+    
+    /**
+     * Gets the ChunkSnapshot
+     * 
+     * @return The ChunkSnapshot
+     */
     ChunkSnapshot getChunkSnapshot();
-
-    Dimension getDimesion();
-
+    
+    /**
+     * Gets the dimension of a world
+     * 
+     * @return The dimension of a world
+     */
+    Dimension getDimension();
+    
+    /**
+     * Gets the difficulty set in a world
+     * 
+     * @return The difficulty set in a world
+     */
     Difficulty getDifficulity();
-
+    
+    /**
+     * Gets the default gamemode in a given chunk
+     * 
+     * @return The default gamemode in a given chunk
+     */
     Gamemode getDefaultGamemode();
-
+    
+    /**
+     * Gets the type of a world
+     * 
+     * @return The type of a world
+     */
     LevelType getLevelType();
 }
