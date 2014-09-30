@@ -97,8 +97,6 @@ public interface World {
      */
     Difficulty getDifficulity();
     
-    boolean isDifficultyLocked();
-    
     /**
      * Gets the default gamemode in a given chunk
      * 
