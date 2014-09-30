@@ -97,6 +97,8 @@ public interface World {
      */
     Difficulty getDifficulity();
     
+    boolean isDifficultyLocked();
+    
     /**
      * Gets the default gamemode in a given chunk
      * 
@@ -110,4 +112,90 @@ public interface World {
      * @return The type of a world
      */
     LevelType getLevelType();
+    
+    /**
+     * Gets the set boolean for the given gamerule
+     * 
+     * @return The set boolean for the given gamerule
+     */
+    boolean getGamerule(String rule);
+    
+    /**
+     * Gets the time in a world
+     * 
+     * @return The time in a world
+     */
+    long getTime();
+    
+    /**
+     * Gets the spawn location of a world
+     * 
+     * @return The spawn location in a world
+     */
+    Location getSpawn();
+    
+    /**
+     * Checks if it is raining in a world
+     * 
+     * @return True if it is raining in a world
+     */
+    boolean isRaining();
+    
+    /**
+     * Gets the number of ticks before raining is toggled
+     * 
+     * @return The number of ticks before raining is toggled
+     */
+    int getRainTime();
+    
+    /**
+     * Checks if it is thundering in a world
+     * 
+     * @return True if it is thundering in a world
+     */
+    boolean isThundering();
+    
+    /**
+     * Gets the number of ticks before thundering is toggled
+     * 
+     * @return The number of ticks before thundering is toggled
+     */
+    int getThunderTime();
+    
+    /**
+     * Checks if structures are generated in a world (Stronghold, villages, dungeons)
+     * 
+     * @return True if structures are generated in a world (Stronghold, villages, dungeons)
+     */
+    boolean canGenerateStructures();
+    
+    /**
+     * Gets the size of the worldborder
+     * 
+     * @return The size of the worldborder
+     */
+    int getBorderSize();
+    
+    /**
+     * Gets the location where the worldborder is centered
+     * 
+     * @return The location where the worldborder is centered
+     */
+    Location getBorderCenter();
+    
+    /**
+     * Gets to what size a border is contracting, 60000000 by default
+     * 
+     * @return To what size a border is contracting, 60000000 by default
+     */
+    int getBorderSizeContraction();
+    
+    /**
+     * Gets the time the border has to contract to the contraction target
+     * 
+     * @return The time the border has to contract to the contraction target
+     */
+    int getBorderSizeContractionTime();
+    
+    
 }
