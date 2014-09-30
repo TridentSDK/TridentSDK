@@ -29,7 +29,7 @@ package net.tridentsdk.api.world;
 
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Difficulty;
-import net.tridentsdk.api.GameMode;
+import net.tridentsdk.api.Gamemode;
 import net.tridentsdk.api.Location;
 
 public interface World {
@@ -51,7 +51,7 @@ public interface World {
 
     Difficulty getDifficulity();
 
-    GameMode getDefaultGamemode();
+    Gamemode getDefaultGamemode();
 
     LevelType getLevelType();
 }

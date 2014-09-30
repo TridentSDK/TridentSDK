@@ -27,7 +27,7 @@
 
 package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.GameMode;
+import net.tridentsdk.api.Gamemode;
 import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.inventory.ItemStack;
 
@@ -46,7 +46,7 @@ public interface Player extends LivingEntity {
 
     public ItemStack getItemInHand();
 
-    GameMode getGameMode();
+    Gamemode getGameMode();
 
     public float getMoveSpeed();
 
