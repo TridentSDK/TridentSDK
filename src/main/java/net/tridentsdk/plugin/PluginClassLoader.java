@@ -84,6 +84,12 @@ public class PluginClassLoader extends URLClassLoader {
         throw new ClassNotFoundException(name);
     }
 
+    public void unloadClasses() {
+        for(Class<?> cls : classes.values()) {
+            // TODO: unload class
+        }
+    }
+
     public Class<? extends TridentPlugin> getPluginClass() {
         return this.pluginClass;
     }

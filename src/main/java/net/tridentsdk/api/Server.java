@@ -27,9 +27,12 @@
 
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.event.EventManager;
+import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
+import net.tridentsdk.plugin.TridentPluginHandler;
 
-import java.awt.*;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.InetAddress;
@@ -140,4 +143,12 @@ public interface Server {
      * @return a String representing the current version of the Trident server that the server is running
      */
     String getVersion();
+
+    Window getWindow(int id);
+
+    EventManager getEventManager();
+
+    void sendPluginMessage(String channel, byte[] data);
+
+    TridentPluginHandler getPluginHandler();
 }

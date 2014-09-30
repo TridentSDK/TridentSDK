@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class TridentPluginLoader {
+public class TridentPluginHandler {
 
     private final List<TridentPlugin> plugins = new ArrayList<>();
 
@@ -89,6 +89,13 @@ public class TridentPluginLoader {
                     e.printStackTrace();
                 }
         }
+    }
+
+    public void disable(TridentPlugin plugin) {
+        plugin.onDisable();
+
+        plugins.remove(plugin);
+        plugin.classLoader.unloadClasses();
     }
 
     public List<TridentPlugin> getPlugins() {

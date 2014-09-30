@@ -53,7 +53,7 @@ public enum Sound {
 
     MOB_CAT_HISS("mob.cat.hiss"),
     MOB_CAT_HITT("mob.cat.hitt"),
-    MOB_CAT_MOEW("mob.cat.meow"),
+    MOB_CAT_MEOW("mob.cat.meow"),
     MOB_CAT_PURREOW("mob.cat.purreow");
 
     private final String s;

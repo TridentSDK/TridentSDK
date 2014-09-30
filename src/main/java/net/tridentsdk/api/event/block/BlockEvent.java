@@ -30,7 +30,7 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Event;
 
-public class BlockEvent extends Event {
+public abstract class BlockEvent extends Event {
     private final Block block;
 
     /**

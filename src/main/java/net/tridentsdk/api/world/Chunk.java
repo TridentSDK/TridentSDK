@@ -28,7 +28,6 @@
 package net.tridentsdk.api.world;
 
 public interface Chunk {
-
     void generate();
 
     ChunkLocation getLocation();
