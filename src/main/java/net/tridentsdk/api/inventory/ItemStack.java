@@ -27,8 +27,41 @@
 
 package net.tridentsdk.api.inventory;
 
-/**
- * Mock ItemStack for purposes to dictate its uses until a valid ItemStack is implemented
- */
+import net.tridentsdk.api.Material;
+
 public class ItemStack {
+
+    private final int id;
+    private final Material mat;
+
+    private volatile short quantity;
+    private volatile short damageValue;
+
+    public ItemStack(Material mat) {
+        this(mat, (short) 1);
+    }
+
+    public ItemStack(Material mat, short quantity) {
+        this.id = Integer.valueOf(mat.getId());
+        this.mat = mat;
+
+        this.quantity = quantity;
+        this.damageValue = 100; // psudeo-value
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Material getType() {
+        return mat;
+    }
+
+    public short getQuantity() {
+        return quantity;
+    }
+
+    public short getDamageValue() {
+        return damageValue;
+    }
 }

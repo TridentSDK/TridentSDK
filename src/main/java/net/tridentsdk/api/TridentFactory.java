@@ -28,9 +28,11 @@
 package net.tridentsdk.api;
 
 import net.tridentsdk.api.entity.Entity;
-import net.tridentsdk.api.event.ManagerList;
 import net.tridentsdk.api.inventory.Inventory;
 import net.tridentsdk.api.inventory.ItemStack;
+import net.tridentsdk.api.nbt.CompoundTag;
+import net.tridentsdk.api.nbt.builder.CompoundTagBuilder;
+import net.tridentsdk.api.nbt.builder.NBTBuilder;
 import net.tridentsdk.api.trade.ItemPair;
 import net.tridentsdk.api.util.TridentLogger;
 import net.tridentsdk.api.util.Vector;
@@ -150,17 +152,16 @@ public final class TridentFactory {
 
     /* Inventory */
 
-    public static ItemStack createItemStack() {
-        return new ItemStack();
+    public static ItemStack createItemStack(Material mat) {
+        return new ItemStack(mat);
+    }
+
+    public static ItemStack createItemStack(Material mat, short quantity) {
+        return new ItemStack(mat, quantity);
     }
 
     public static Inventory createInventory() {
-        return new Inventory() {
-            @Override
-            public ItemStack[] getContents() {
-                return new ItemStack[0]; // TODO
-            }
-        };
+        return null; // do this properly
     }
 
     /* Trade */
@@ -177,12 +178,14 @@ public final class TridentFactory {
         return new ItemPair(itemStack, itemStack0);
     }
 
-    /* No provided NBT or todo */
+    /* NBT */
 
-    /* Event */
+    public static CompoundTagBuilder<NBTBuilder> createNbtBuilder(String tagName) {
+        return NBTBuilder.newBase(tagName);
+    }
 
-    public static ManagerList createManagerList() {
-        return new ManagerList();
+    public static CompoundTagBuilder<NBTBuilder> createNbtBuilder(CompoundTag base) {
+        return NBTBuilder.fromBase(base);
     }
 
     /* Entity */
