@@ -28,15 +28,49 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
+import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.inventory.ItemStack;
 
-public class BlockBreakEvent extends BlockEvent {
+public class BlockBreakEvent extends BlockEvent implements Cancellable {
 
     private final Player player;
 
-    public BlockBreakEvent(Player player, Block block) {
+    private final BlockFace blockFace;
+
+    private final ItemStack itemInHand;
+
+    private boolean cancelled;
+
+    public BlockBreakEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
         super(block);
         this.player = player;
+        this.blockFace = blockFace;
+
+        this.itemInHand = itemInHand;
+
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
+    public ItemStack getItemInHand() {
+        return itemInHand;
+    }
+
+    /**
+     * Returns the block face clicked to break this block
+     *
+     * @return
+     */
+    public BlockFace getBlockFace() {
+        return blockFace;
     }
 
     /**

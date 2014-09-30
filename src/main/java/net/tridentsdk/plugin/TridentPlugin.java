@@ -27,6 +27,7 @@
 
 package net.tridentsdk.plugin;
 
+import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
@@ -53,6 +54,14 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
+
+
+        for(TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
+            if(plugin.getDescription().name().equalsIgnoreCase(description.name())) {
+                throw new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
+                        "Name: " + description.name());
+            }
+        }
         this.pluginFile = pluginFile;
         this.description = description;
         this.configDirectory = new File("plugins/" + description.name() + "/");
@@ -61,9 +70,15 @@ public class TridentPlugin {
     }
 
     public void onEnable() {
+        // Method intentionally left blank
+    }
+
+    public void onLoad() {
+        // Method intentionally left blank
     }
 
     public void onDisable() {
+        // Method intentionally left blank
     }
 
     final void startup() {
