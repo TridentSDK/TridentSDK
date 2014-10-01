@@ -28,6 +28,7 @@
 package net.tridentsdk.api;
 
 import net.tridentsdk.api.event.EventManager;
+import net.tridentsdk.api.scheduling.Scheduler;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
@@ -151,4 +152,6 @@ public interface Server {
     void sendPluginMessage(String channel, byte[] data);
 
     TridentPluginHandler getPluginHandler();
+
+    Scheduler getSchdeuler();
 }
