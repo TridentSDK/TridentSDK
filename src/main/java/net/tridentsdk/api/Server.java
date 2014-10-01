@@ -153,5 +153,5 @@ public interface Server {
 
     TridentPluginHandler getPluginHandler();
 
-    Scheduler getSchdeuler();
+    Scheduler getScheduler();
 }
