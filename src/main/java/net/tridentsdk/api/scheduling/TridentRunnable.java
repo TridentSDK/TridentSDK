@@ -10,7 +10,7 @@ public abstract class TridentRunnable implements Runnable {
     /**
      * Id of this runnable, unique to this runtime
      */
-    private int id;
+    private Integer id;
 
     private AtomicLong interval = new AtomicLong();
 

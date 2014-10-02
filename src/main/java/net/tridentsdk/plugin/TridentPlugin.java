@@ -123,4 +123,19 @@ public class TridentPlugin {
     public final PluginDescription getDescription() {
         return this.description;
     }
+
+    @Override
+    public boolean equals(Object other ) {
+        if(other instanceof TridentPlugin) {
+            TridentPlugin otherPlugin = (TridentPlugin) other;
+            if(otherPlugin.getDescription().name().equals(this.getDescription().name())) {
+                if(otherPlugin.getDescription().author().equals(this.getDescription().author())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // TODO: override hashvalue as well
 }
