@@ -3,7 +3,6 @@ package net.tridentsdk.api.scheduling;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.plugin.TridentPlugin;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class TridentRunnable implements Runnable {
@@ -74,6 +73,22 @@ public abstract class TridentRunnable implements Runnable {
 
     public final void cancel() {
         Trident.getServer().getScheduler().cancel(this.id);
+    }
+
+    /**
+     * Gets how long between runs this is supposed to wait if it is a repeating task
+     * @return
+     */
+    public final synchronized long getInterval() {
+        return interval.get();
+    }
+
+    /**
+     * Sets how long this runnable should wait between executions if this is a repeating task
+     * @param interval
+     */
+    public final synchronized void setInterval(long interval) {
+        this.interval.set(interval);
     }
 
 
