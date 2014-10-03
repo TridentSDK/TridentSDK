@@ -27,6 +27,7 @@
 
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.api.event.EventManager;
 import net.tridentsdk.api.scheduling.Scheduler;
 import net.tridentsdk.api.window.Window;
@@ -154,4 +155,6 @@ public interface Server {
     TridentPluginHandler getPluginHandler();
 
     Scheduler getScheduler();
+
+    JsonConfig getConfig();
 }
