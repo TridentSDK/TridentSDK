@@ -27,13 +27,15 @@
 
 package net.tridentsdk.api.world;
 
+import java.io.Serializable;
+
 /**
  * Stores the location of a Chunk
  *
  * @author drew
  */
-
-public class ChunkLocation {
+public class ChunkLocation implements Serializable, Cloneable {
+    private static final long serialVersionUID = 9083698035337137603L;
     private int x;
     private int z;
 

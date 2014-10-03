@@ -53,7 +53,7 @@ public enum Instrument {
      * Returns the Byte value of an Instrument
      *
      * @param instrument Instrument
-     * @return Byte value of instrument
+     * @return Byte value of the instrument
      */
     public static byte toByte(Instrument instrument) {
         return instrument.id;

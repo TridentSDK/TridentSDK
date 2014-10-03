@@ -29,6 +29,9 @@ package net.tridentsdk.api.window;
 
 import net.tridentsdk.api.inventory.ItemStack;
 
+/**
+ * TODO
+ */
 public interface Window {
 
     int getId();

@@ -148,10 +148,26 @@ public interface Server {
 
     Window getWindow(int id);
 
+    /**
+     * Get the event manager
+     *
+     * @return the EventManager instance
+     */
     EventManager getEventManager();
 
+    /**
+     * Send a plugin message
+     *
+     * @param channel name of the channel
+     * @param data the data to send
+     */
     void sendPluginMessage(String channel, byte[] data);
 
+    /**
+     * Get the Trident Plugin Handler
+     *
+     * @return the TridentPluginHandler instance
+     */
     TridentPluginHandler getPluginHandler();
 
     Scheduler getScheduler();

@@ -40,7 +40,22 @@ public enum GameMode {
         this.b = (byte) i;
     }
 
+    /**
+     * Returns the Byte value of the GameMode
+     *
+     * @return Byte value of the GameMode
+     */
     public byte toByte() {
         return this.b;
+    }
+
+    /**
+     * Returns the Byte value of an GameMode
+     *
+     * @param gameMode GameMode
+     * @return Byte value of the GameMode
+     */
+    public static byte toByte(GameMode gameMode) {
+        return gameMode.b;
     }
 }
