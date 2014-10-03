@@ -27,6 +27,7 @@
 
 package net.tridentsdk.api.event.entity;
 
+import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.Entity;
 
 /**
@@ -34,7 +35,28 @@ import net.tridentsdk.api.entity.Entity;
  */
 public class EntityTeleportEvent extends EntityMoveEvent {
 
-    public EntityTeleportEvent(Entity entity) {
+    private Location fromLoc;
+    private Location toLoc;
+
+    public EntityTeleportEvent(Entity entity, Location from, Location to) {
         super(entity);
+        fromLoc = from;
+        toLoc = to;
+    }
+
+    public Location getFrom() {
+        return fromLoc;
+    }
+
+    public Location getTo() {
+        return toLoc;
+    }
+
+    public void setFrom(Location fromLoc) {
+        this.fromLoc = fromLoc;
+    }
+
+    public void setTo(Location toLoc) {
+        this.toLoc = toLoc;
     }
 }

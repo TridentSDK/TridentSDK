@@ -31,14 +31,23 @@ import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.event.entity.EntityDeathEvent;
 
+/**
+ * Called when a Player dies
+ */
 public class PlayerDeathEvent extends EntityDeathEvent implements Cancellable {
+
+    private Cause cause;
 
     /**
      * @param player the player associated with this event (that died)
      */
-
-    public PlayerDeathEvent(Player player) {
+    public PlayerDeathEvent(Player player, EntityDeathEvent.Cause cause) {
         super(player);
+        this.cause = cause;
+    }
+
+    public EntityDeathEvent.Cause getCause() {
+        return cause;
     }
 
     public Player getPlayer() {

@@ -27,19 +27,42 @@
 
 package net.tridentsdk.api.event.entity;
 
-import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when an Entity dies
+ */
 public class EntityDeathEvent extends EntityEvent {
 
-    /**
-     *
-     * @param entity the entity that has died
-     */
+    private Cause cause;
 
-    public EntityDeathEvent(LivingEntity entity) {
+    public EntityDeathEvent(LivingEntity entity, Cause cause) {
         super(entity);
+        this.cause = cause;
+    }
+
+    public Cause getCause() {
+        return cause;
+    }
+
+    public enum Cause {
+        STARVATION,
+        FIRE,
+        FALL,
+        EXPLOSION,
+        HIT,
+        ENDER_PEARL,
+        PROJECTILE,
+        LIGHTNING,
+        DROWNING,
+        SUFFOCATION,
+        ANVIL,
+        CONTACT,
+        LAVA,
+        POISON,
+        WITHER,
+        VOID
     }
 
     public EntityDamageEvent getDeathCause() {
