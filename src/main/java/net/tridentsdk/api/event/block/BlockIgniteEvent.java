@@ -59,7 +59,7 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     /**
      * Set if the event is cancelled
      *
-     * @param cancel Boolean
+     * @param cancel Boolean cancellation state of event
      */
     @Override
     public void setCancelled(boolean cancel) {
@@ -69,7 +69,7 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     /**
      * Returns the cause of this event
      *
-     * @return Cause
+     * @return Cause of this event
      */
     public Cause getCause() {
         return this.cause;

@@ -56,7 +56,7 @@ public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable
     /**
      * Set if the event is cancelled
      *
-     * @param cancel Boolean
+     * @param cancel Boolean cancellation state of event
      */
     @Override
     public void setCancelled(boolean cancel) {

@@ -59,7 +59,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     /**
      * Gets the block face of the block that was clicked on to place this block
      *
-     * @return BlockFace
+     * @return BlockFace of the clicked block
      */
     public BlockFace getFaceClicked() {
         return faceClicked;
@@ -68,7 +68,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     /**
      * Get the Material of the placed block
      *
-     * @return Material
+     * @return Material of the placed block
      */
     public Material getTypePlaced() {
         return getBlock().getMaterial();
@@ -87,7 +87,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     /**
      * Set if the event is cancelled
      *
-     * @param cancel Boolean
+     * @param cancel Boolean cancellation state of event
      */
     @Override
     public void setCancelled(boolean cancel) {
@@ -97,7 +97,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     /**
      * Gets the block clicked on to place this block
      *
-     * @return Block
+     * @return Block that was clicked
      */
     public Block getBlockClicked() {
         return blockClicked;
@@ -106,7 +106,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     /**
      * Returns the player associated with this event
      *
-     * @return Player
+     * @return Player who placed the block
      */
     public Player getPlayer() {
         return this.player;

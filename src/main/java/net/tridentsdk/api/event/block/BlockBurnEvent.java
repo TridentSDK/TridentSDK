@@ -40,7 +40,7 @@ public class BlockBurnEvent extends BlockEvent implements Cancellable {
     /**
      * The block being burnt in this event
      *
-     * @param block Block
+     * @param block Block associated with this event
      */
     public BlockBurnEvent(Block block) {
         super(block);
@@ -59,7 +59,7 @@ public class BlockBurnEvent extends BlockEvent implements Cancellable {
     /**
      * Set if the event is cancelled
      *
-     * @param cancel Boolean
+     * @param cancel Boolean cancellation state of event
      */
     @Override
     public void setCancelled(boolean cancel) {

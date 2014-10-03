@@ -59,7 +59,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     /**
      * Set if the event is cancelled
      *
-     * @param cancel Boolean
+     * @param cancel Boolean cancellation state of event
      */
     @Override
     public void setCancelled(boolean cancel) {
@@ -69,7 +69,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     /**
      * Get the strength of the explosion
      *
-     * @return Float
+     * @return Float strength of explosion
      */
     public float getStrength() {
         return this.strength;
@@ -78,7 +78,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     /**
      * Set the strength of the explosion
      *
-     * @param strength Float
+     * @param strength Float strength of explosion
      */
     public void setStrength(float strength) {
         this.strength = strength;

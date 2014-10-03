@@ -42,7 +42,7 @@ public abstract class BlockEvent extends Event {
 
     /**
      * @param block the block associated with the event
-     * @param async
+     * @param async if this event is asynchronous
      */
     public BlockEvent(Block block, boolean async) {
         super(async);
