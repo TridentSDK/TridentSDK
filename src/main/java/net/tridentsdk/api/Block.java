@@ -36,6 +36,9 @@ public class Block {
     private final Location location;
     private Material material;
 
+    /**
+     * @param location Location of the Block
+     */
     public Block(Location location) {
         this.location = location;
 
@@ -45,26 +48,49 @@ public class Block {
         this.material = worldBlock.material;
     }
 
+    /**
+     * Returns the Material of the Block
+     *
+     * @return Material of the Block
+     */
     public Material getType() {
         return this.material;
     }
 
+    // TODO: Verify the redundancy
     public Material getMaterial() {
         return material;
     }
 
+    /**
+     * Returns the Location of the Block
+     *
+     * @return Location of the Block
+     */
     public Location getLocation() {
         return this.location;
     }
 
+    /**
+     * Set the Material of this Block
+     * @param material Material to set this Block to
+     */
     public void setMaterial(Material material) {
         this.material = material;
     }
 
+    // TODO: Verify the redundancy
     public void setType(Material material) {
         this.material = material;
     }
 
+    /**
+     * TODO: This
+     * Returns a relative block
+     *
+     * @param vector
+     * @return
+     */
     public Block getRelative(Vector vector) {
         return new Block(this.location.getRelative(vector));
     }

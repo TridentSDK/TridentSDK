@@ -35,11 +35,20 @@ import net.tridentsdk.api.Block;
 public class BlockSpreadEvent extends BlockGrowthEvent {
     private final Block blockFrom;
 
+    /**
+     * @param to Block representing the location of the spread
+     * @param from Block which represents the origin
+     */
     public BlockSpreadEvent(Block to, Block from) {
         super(to);
         this.blockFrom = from;
     }
 
+    /**
+     * Returns the origin block of the spread
+     *
+     * @return Block representing the origin of the spread
+     */
     public Block getFrom() {
         return this.blockFrom;
     }
