@@ -373,4 +373,19 @@ public class Vector implements Serializable, Cloneable {
     public void setZ(double z) {
         this.z = z;
     }
+
+    /**
+     * Clones this Vector.
+     *
+     * @return the cloned vector
+     */
+    @Override
+    public Vector clone(){
+        try{
+            return (Vector) super.clone();
+        }
+        catch(CloneNotSupportedException e){
+            return null;
+        }
+    }
 }
