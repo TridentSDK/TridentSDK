@@ -59,14 +59,30 @@ package net.tridentsdk.api;
 import net.tridentsdk.api.util.Vector;
 
 public enum BlockFace {
+
+    NORTH(new Vector(0, 0, -1)),
+    SOUTH(new Vector(0, 0, 1)),
+    EAST(new Vector(1, 0, 0)),
+    WEST(new Vector(-1, 0, 0)),
+
+    NORTH_EAST(NORTH, EAST),
+    NORTH_WEST(NORTH, WEST),
+    SOUTH_EAST(SOUTH, EAST),
+    SOUTH_WEST(SOUTH, WEST),
+
     TOP(new Vector(0D, 1D, 0D)),
     BOTTOM(new Vector(0D, -1D, 0D)),
-    /* TODO */;
+
+    SELF(new Vector(0, 0, 0));
 
     private final Vector difference;
 
     BlockFace(Vector difference) {
         this.difference = difference;
+    }
+
+    BlockFace(BlockFace face1, BlockFace face2){
+        this.difference = face1.getDifference().add(face2.getDifference());
     }
 
     public Vector getDifference() {
