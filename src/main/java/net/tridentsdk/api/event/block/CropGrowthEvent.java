@@ -30,9 +30,12 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 
 /**
- * Called when a crop grows, like wheat or netherwart
+ * Called when a crop grows
  */
 public class CropGrowthEvent extends BlockGrowthEvent {
+    /**
+     * @param block Block which has grown
+     */
     public CropGrowthEvent(Block block) {
         super(block);
     }
