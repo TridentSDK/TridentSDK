@@ -56,4 +56,9 @@ public interface Projectile extends Entity {
      * @return the current tile this Projectile is in
      */
     Block getCurrentTile();
+
+    /**
+     * @return
+     */
+    ProjectileSource getProjectileSource();
 }
