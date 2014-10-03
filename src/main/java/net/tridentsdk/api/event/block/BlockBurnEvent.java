@@ -31,25 +31,36 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
 /**
- * Called when a block breaks due to being on fire for too long
+ * Called when a block is destroyed due to fire
  */
 public class BlockBurnEvent extends BlockEvent implements Cancellable {
 
     private boolean cancel;
 
     /**
-     * @param block the block being burnt in this event
+     * The block being burnt in this event
+     *
+     * @param block Block associated with this event
      */
-
     public BlockBurnEvent(Block block) {
         super(block);
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
         return this.cancel;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancel = cancel;
