@@ -37,26 +37,47 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     private final Cause cause;
     private boolean cancelled;
 
+    /**
+     * @param block Block associated with this event
+     * @param cause Cause of this event
+     */
     public BlockIgniteEvent(Block block, Cause cause) {
         super(block);
         this.cause = cause;
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
-
         return this.cancelled;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;
     }
 
+    /**
+     * Returns the cause of this event
+     *
+     * @return Cause
+     */
     public Cause getCause() {
         return this.cause;
     }
 
+    /**
+     * Cause of block ignition
+     */
     public enum Cause {
         FIRE_SPREAD,
         PLAYER,

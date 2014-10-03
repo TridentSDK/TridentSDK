@@ -33,33 +33,52 @@ import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.inventory.ItemStack;
 
+/**
+ * Called whenever a Block is broken
+ */
 public class BlockBreakEvent extends BlockEvent implements Cancellable {
 
     private final Player player;
-
     private final BlockFace blockFace;
-
     private final ItemStack itemInHand;
+    private boolean cancel;
 
-    private boolean cancelled;
-
+    /**
+     * @param player Player associated with this event
+     * @param block Block associated with this event
+     * @param blockFace BlockFace
+     * @param itemInHand ItemStack
+     */
     public BlockBreakEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
         super(block);
         this.player = player;
         this.blockFace = blockFace;
-
         this.itemInHand = itemInHand;
-
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     public boolean isCancelled() {
-        return cancelled;
+        return cancel;
     }
 
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean
+     */
+    public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
     }
 
+    /**
+     * Returns the item in the player's hand
+     *
+     * @return ItemStack
+     */
     public ItemStack getItemInHand() {
         return itemInHand;
     }
@@ -67,16 +86,17 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
     /**
      * Returns the block face clicked to break this block
      *
-     * @return
+     * @return BlockFlace
      */
     public BlockFace getBlockFace() {
         return blockFace;
     }
 
     /**
-     * @return return the player associated with this event
+     * Get the player associated with this event
+     *
+     * @return Player
      */
-
     public Player getPlayer() {
         return this.player;
     }

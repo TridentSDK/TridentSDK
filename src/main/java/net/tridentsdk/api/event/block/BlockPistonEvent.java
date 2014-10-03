@@ -53,7 +53,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      * end of a block, then the Direction that this event returns will be north, does not change depending on whether
      * this piston is extending or retracting, so a block may actually be moving south if this is returns north
      *
-     * @return
+     * @return Orientation
      */
     public Orientation getDirection() {
         return direction;
@@ -62,7 +62,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
     /**
      * Returns true if this piston is retracting
      *
-     * @return
+     * @return Boolean
      */
     public boolean isRetracting() {
         return retract;
@@ -71,7 +71,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
     /**
      * Returns true if this piston is extending, convenience for !isRetracting()
      *
-     * @return
+     * @return Boolean
      */
     public boolean isExtending() {
         return !retract;

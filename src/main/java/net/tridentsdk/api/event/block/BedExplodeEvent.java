@@ -30,30 +30,56 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
+/**
+ * Called when a Bed explodes
+ */
 public class BedExplodeEvent extends BlockEvent implements Cancellable {
     private float strength;
     private boolean cancelled;
 
+    /**
+     * @param block Block associated with this event
+     * @param strength Strength of the explosion
+     */
     public BedExplodeEvent(Block block, float strength) {
         super(block);
         this.strength = strength;
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
         return this.cancelled;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;
     }
 
+    /**
+     * Get the strength of the explosion
+     *
+     * @return Float
+     */
     public float getStrength() {
-
         return this.strength;
     }
 
+    /**
+     * Set the strength of the explosion
+     *
+     * @param strength Float
+     */
     public void setStrength(float strength) {
         this.strength = strength;
     }
