@@ -70,7 +70,7 @@ public enum BlockFace {
     }
 
     public Vector getDifference() {
-        return difference;
+        return difference.clone();
     }
 
     public Location apply(Location loc) {
