@@ -44,13 +44,6 @@ public interface Projectile extends Entity {
      */
     ProjectileSource getShooter();
 
-    /**
-     * Returns the shooter of the Projectile
-     *
-     * @param shooter the ProjectileSource of the Projectile
-     */
-    void setShooter(ProjectileSource shooter);
-
     boolean doesBounce();
 
     void setBounce(boolean bouncy);
@@ -61,9 +54,4 @@ public interface Projectile extends Entity {
      * @return the current tile this Projectile is in
      */
     Block getCurrentTile();
-
-    /**
-     * @return
-     */
-    ProjectileSource getProjectileSource();
 }
