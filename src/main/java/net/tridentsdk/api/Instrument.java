@@ -17,8 +17,14 @@ public enum Instrument {
         id = (byte) i;
     }
 
+    /**
+     * Resolves the Instrument from its respective Byte value
+     *
+     * @param b Byte representing the Instrument
+     * @return Instrument from the supplied Byte
+     */
     public static Instrument fromByte(byte b) {
-        switch((int)b) {
+        switch((int) b) {
             case 0x0:
                 return PIANO;
             case 0x1:
@@ -34,10 +40,21 @@ public enum Instrument {
         }
     }
 
+    /**
+     * Returns the Byte value of the Instrument
+     *
+     * @return Byte value of the Instrument
+     */
     public byte toByte() {
         return id;
     }
 
+    /**
+     * Returns the Byte value of an Instrument
+     *
+     * @param instrument Instrument
+     * @return Byte value of the instrument
+     */
     public static byte toByte(Instrument instrument) {
         return instrument.id;
     }

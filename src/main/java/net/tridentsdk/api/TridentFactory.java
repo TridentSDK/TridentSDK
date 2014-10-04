@@ -53,33 +53,97 @@ public final class TridentFactory {
 
     /* Block */
 
+    /**
+     * Creates a Block instance without location
+     *
+     * @return Block created instance without location
+     */
     public static Block createBlock() {
         return new Block(null);
     }
 
+    /**
+     * Creates a Block instance with a location
+     *
+     * @param location Location of the block
+     * @return Block created instance with a location
+     */
     public static Block createBlock(Location location) {
         return new Block(location);
     }
 
+    /**
+     * Creates a Block instance from specified co-ordinates
+     *
+     * @param world World in which the Block belongs in
+     * @param x X co-ordinate of the block
+     * @param y Y co-ordinate of the block
+     * @param z Z co-ordinate of the block
+     * @return Block created instance
+     */
     public static Block createBlock(World world, double x, double y, double z) {
         return new Block(TridentFactory.createLocation(world, x, y, z));
     }
 
     /* Location */
 
+    /**
+     * Creates a Location with no world
+     * <p>The created Location's co-ordinates will default to 0.</p>
+     *
+     * @return Location created instance with no world
+     */
     public static Location createLocation() {
-        return new Location(null, 0.0, 0.0, 0.0);
-        // TODO make default world, or stay null?
+        return new Location(null, 0, 0, 0);
     }
 
+    /**
+     * Creates a Location with no specified co-ordinates
+     * <p>The created Location's co-ordinates will default to 0.</p>
+     *
+     * @param world World in which the Location is targeting
+     * @return Location with the specified world, but no co-coordinates
+     */
+    public static Location createLocation(World world) {
+        return new Location(world, 0, 0, 0);
+    }
+
+    /**
+     * Creates a Location with the specified co-ordinates
+     *
+     * @param world World
+     * @param x X co-ordinate
+     * @param y Y co-ordinate
+     * @param z Z co-ordinate
+     * @return Location
+     */
     public static Location createLocation(World world, double x, double y, double z) {
         return new Location(world, x, y, z);
     }
 
+    /**
+     * Creates a Location with the specified co-ordinates and direction
+     *
+     * @param world World
+     * @param x X co-ordinate
+     * @param y Y co-ordinate
+     * @param z Z co-ordinate
+     * @param yaw Yaw absolute rotation on the x-plane, in degrees
+     * @param pitch Pitch absolute rotation on the y-plane, in degrees
+     * @return Location
+     */
     public static Location createLocation(World world, double x, double y, double z, float yaw, float pitch) {
         return new Location(world, x, y, z, yaw, pitch);
     }
 
+    /**
+     * Creates a Location from an existing Location, and a direction
+     *
+     * @param location Location
+     * @param yaw Yaw absolute rotation on the x-plane, in degrees
+     * @param pitch Pitch absolute rotation on the y-plane, in degrees
+     * @return Location
+     */
     public static Location createLocation(Location location, float yaw, float pitch) {
         return new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
     }
@@ -98,10 +162,10 @@ public final class TridentFactory {
         return new ChunkLocation(chunkLocation);
     }
 
-    // Not thread safe
+    // TODO: Not thread safe
     public static WorldLoader createWorldLoader() {
         return null;
-        //TODO:
+        // TODO:
         /*return new TridentWorldLoader() {
             private World world;
 

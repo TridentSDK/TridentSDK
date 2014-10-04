@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.api.event.EventManager;
+import net.tridentsdk.api.scheduling.Scheduler;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
@@ -146,9 +148,29 @@ public interface Server {
 
     Window getWindow(int id);
 
+    /**
+     * Get the event manager
+     *
+     * @return the EventManager instance
+     */
     EventManager getEventManager();
 
+    /**
+     * Send a plugin message
+     *
+     * @param channel name of the channel
+     * @param data the data to send
+     */
     void sendPluginMessage(String channel, byte[] data);
 
+    /**
+     * Get the Trident Plugin Handler
+     *
+     * @return the TridentPluginHandler instance
+     */
     TridentPluginHandler getPluginHandler();
+
+    Scheduler getScheduler();
+
+    JsonConfig getConfig();
 }

@@ -36,40 +36,72 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
 
     private final int strength;
     private final Block causer;
-    private final RedstoneCause cause;
+    private final Cause cause;
     private boolean cancelled;
 
-    public BlockRedstoneEvent(Block block, int strength, Block causer, RedstoneCause cause) {
+    /**
+     * @param block Block which redstone state was updated
+     * @param strength Integer representing the strength (power level) of the redstone
+     * @param causer Block which caused the redstone update
+     * @param cause Cause for the redstone update
+     */
+    public BlockRedstoneEvent(Block block, int strength, Block causer, Cause cause) {
         super(block);
         this.strength = strength;
         this.causer = causer;
         this.cause = cause;
-
     }
 
+    /**
+     * Returns the block which caused the redstone update
+     *
+     * @return Block which caused the redstone updaye
+     */
     public Block getCauser() {
         return causer;
     }
 
-    public RedstoneCause getCause() {
+    /**
+     * Returns the cause of the redstone update
+     * @return Cause of the redstone update
+     */
+    public Cause getCause() {
         return cause;
     }
 
+    /**
+     * Returns the strength (power level) of the redstone
+     *
+     * @return Integer representing the power level of the redstone
+     */
     public int getStrength() {
         return strength;
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
         return cancelled;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
     }
 
-    public enum RedstoneCause {
+    /**
+     * Representing the cause of a redstone update
+     */
+    public enum Cause {
         LEVER,
         BUTTON,
         WIRE,

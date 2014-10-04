@@ -36,16 +36,28 @@ import net.tridentsdk.api.event.Cancellable;
 public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;
 
+    /**
+     * @param block Block associated with this event
+     */
     public BlockGrowthEvent(Block block) {
         super(block);
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
-
         return this.cancelled;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;

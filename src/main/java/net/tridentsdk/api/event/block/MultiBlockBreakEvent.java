@@ -37,16 +37,28 @@ import net.tridentsdk.api.event.Cancellable;
 public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;
 
+    /**
+     * @param block Block representing the destroyed block.
+     */
     public MultiBlockBreakEvent(Block block) {
         super(block);
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
-
         return this.cancelled;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;

@@ -38,6 +38,8 @@ import java.util.Locale;
  */
 public interface Player extends LivingEntity {
 
+    public void sendMessage(String... message);
+
     public float getFlyingSpeed();
 
     public void setFlyingSpeed(float flyingSpeed);

@@ -27,6 +27,9 @@
 
 package net.tridentsdk.api;
 
+/**
+ * TODO:
+ */
 public enum ChatColor {
     BLACK,
     DARK_BLUE,

@@ -20,6 +20,7 @@ public class Note {
 
     /**
      * Returns a note one step sharper than this
+     *
      * @return
      */
     public Note sharpen() {
@@ -40,5 +41,5 @@ public class Note {
         return new Note(id - 1);
     }
 
-    // TODO: make this more notable
+    // TODO: make this more notable & remove the horrible puns
 }

@@ -69,7 +69,7 @@ public final class ChannelManager {
     }
 
     public void registerChannel(String name, PluginChannel channel) {
-        if(channels.containsKey(name)) {
+        if (channels.containsKey(name)) {
             throw new IllegalArgumentException("Channel " + name + " is already registered!");
         }
 

@@ -40,7 +40,22 @@ public enum Difficulty {
         this.b = (byte) i;
     }
 
+    /**
+     * Returns the Byte value of the Difficulty
+     *
+     * @return Byte value of the Difficulty
+     */
     public byte toByte() {
         return this.b;
+    }
+
+    /**
+     * Returns the Byte value of an Difficulty
+     *
+     * @param difficulty Difficulty
+     * @return Byte value of the Difficulty
+     */
+    public static byte toByte(Difficulty difficulty) {
+        return difficulty.b;
     }
 }

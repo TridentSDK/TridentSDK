@@ -5,7 +5,7 @@ import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.event.Cancellable;
 
 /**
- * Created by Snake on 9/30/2014.
+ * Called when an Entity is set on fire by a block
  */
 public class EntityBurnByBlockEvent extends EntityBurnEvent implements Cancellable {
     private final Block causer;

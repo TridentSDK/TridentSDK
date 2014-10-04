@@ -54,14 +54,13 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-
-
         for(TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
             if(plugin.getDescription().name().equalsIgnoreCase(description.name())) {
                 throw new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
                         "Name: " + description.name());
             }
         }
+
         this.pluginFile = pluginFile;
         this.description = description;
         this.configDirectory = new File("plugins/" + description.name() + "/");
@@ -123,4 +122,19 @@ public class TridentPlugin {
     public final PluginDescription getDescription() {
         return this.description;
     }
+
+    @Override
+    public boolean equals(Object other ) {
+        if(other instanceof TridentPlugin) {
+            TridentPlugin otherPlugin = (TridentPlugin) other;
+            if(otherPlugin.getDescription().name().equals(this.getDescription().name())) {
+                if(otherPlugin.getDescription().author().equals(this.getDescription().author())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // TODO: override hashvalue as well
 }

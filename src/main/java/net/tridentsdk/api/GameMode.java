@@ -27,8 +27,7 @@
 
 package net.tridentsdk.api;
 
-public enum Gamemode {
-
+public enum GameMode {
     SURVIVAL(0),
     CREATIVE(1),
     ADVENTURE(2),
@@ -37,11 +36,26 @@ public enum Gamemode {
 
     private final byte b;
 
-    Gamemode(int i) {
+    GameMode(int i) {
         this.b = (byte) i;
     }
 
+    /**
+     * Returns the Byte value of the GameMode
+     *
+     * @return Byte value of the GameMode
+     */
     public byte toByte() {
         return this.b;
+    }
+
+    /**
+     * Returns the Byte value of an GameMode
+     *
+     * @param gameMode GameMode
+     * @return Byte value of the GameMode
+     */
+    public static byte toByte(GameMode gameMode) {
+        return gameMode.b;
     }
 }

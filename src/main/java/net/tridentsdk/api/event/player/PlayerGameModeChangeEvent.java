@@ -7,12 +7,12 @@ import net.tridentsdk.api.event.Cancellable;
 /**
  * Called <i>before</i> a Player's game mode changes
  */
-public class PlayerGameModeChangeEVent extends PlayerEvent implements Cancellable {
+public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellable {
     private GameMode gameMode;
 
     private boolean cancelled;
 
-    public PlayerGameModeChangeEVent(Player player, GameMode gameMode) {
+    public PlayerGameModeChangeEvent(Player player, GameMode gameMode) {
         super(player);
         this.gameMode = gameMode;
     }

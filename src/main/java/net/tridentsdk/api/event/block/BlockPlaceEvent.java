@@ -33,14 +33,22 @@ import net.tridentsdk.api.Material;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
+/**
+ * Called whenever a block is placed
+ */
 public class BlockPlaceEvent extends BlockEvent implements Cancellable {
-
     private final Player player;
     private final Block blockClicked;
     private final BlockFace faceClicked;
 
-    private boolean cancelled;
+    private boolean cancel;
 
+    /**
+     * @param player Player who placed this block
+     * @param block Block that was placed
+     * @param blockClicked Block
+     * @param faceClicked BlockFace
+     */
     public BlockPlaceEvent(Player player, Block block, Block blockClicked, BlockFace faceClicked) {
         super(block);
         this.player = player;
@@ -50,41 +58,56 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
 
     /**
      * Gets the block face of the block that was clicked on to place this block
-     * @return
+     *
+     * @return BlockFace of the clicked block
      */
     public BlockFace getFaceClicked() {
         return faceClicked;
     }
 
+    /**
+     * Get the Material of the placed block
+     *
+     * @return Material of the placed block
+     */
     public Material getTypePlaced() {
         return getBlock().getMaterial();
     }
 
-    public Material getMaterialPlaced() {
-        return getTypePlaced();
-    }
-
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
+    @Override
     public boolean isCancelled() {
-
-        return cancelled;
+        return cancel;
     }
 
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
     }
 
     /**
      * Gets the block clicked on to place this block
-     * @return
+     *
+     * @return Block that was clicked
      */
     public Block getBlockClicked() {
         return blockClicked;
     }
 
     /**
-     * @return return the player associated with this event
+     * Returns the player associated with this event
+     *
+     * @return Player who placed the block
      */
-
     public Player getPlayer() {
         return this.player;
     }

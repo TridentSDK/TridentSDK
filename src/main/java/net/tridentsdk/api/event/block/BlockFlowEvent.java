@@ -31,31 +31,54 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Cancellable;
 
 /**
- * Called when water or lava flows from a block to another
+ * Called when a liquid flows from a block to another
  */
 public class BlockFlowEvent extends BlockEvent implements Cancellable {
     private final Block to;
     private boolean cancelled;
 
+    /**
+     * @param from Block where the liquid is flowing from
+     * @param to Block where the liquid is flowing too
+     */
     public BlockFlowEvent(Block from, Block to) {
         super(from);
         this.to = to;
     }
 
+    /**
+     * Return where the block is flowing too
+     *
+     * @return Block where the liquid is flowing too
+     */
     public Block getTo() {
         return this.to;
     }
 
+    /**
+     * Return where the liquid is flowing from
+     *
+     * @return Block where the liquid is flowing from
+     */
     public Block getFrom() {
         return super.getBlock();
     }
 
-
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
         return this.cancelled;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
     public void setCancelled(boolean cancel) {
         this.cancelled = cancel;

@@ -436,6 +436,12 @@ public enum Material {
         this(id, 0, "");
     }
 
+    /**
+     * Matches a Material from a String
+     *
+     * @param id String to be matched
+     * @return Material which was matched using id
+     */
     public static Material fromString(String id) {
         for (Material mat : Material.values()) {
             if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id))
