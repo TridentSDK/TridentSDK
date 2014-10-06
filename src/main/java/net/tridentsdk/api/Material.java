@@ -27,8 +27,12 @@
 
 package net.tridentsdk.api;
 
+/**
+ * Enumeration of possible materials in minecraft
+ *
+ * @author The TridentSDK Team
+ */
 public enum Material {
-
     /**
      * Blocks
      */

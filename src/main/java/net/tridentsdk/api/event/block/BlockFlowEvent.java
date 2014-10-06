@@ -39,7 +39,7 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
 
     /**
      * @param from Block where the liquid is flowing from
-     * @param to Block where the liquid is flowing too
+     * @param to   Block where the liquid is flowing too
      */
     public BlockFlowEvent(Block from, Block to) {
         super(from);

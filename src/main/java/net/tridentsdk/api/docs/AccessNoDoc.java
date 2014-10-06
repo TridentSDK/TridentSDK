@@ -27,17 +27,15 @@
 
 package net.tridentsdk.api.docs;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * This annotation is for the use of documentation. This means that the access-level is not broad enough so that extra
- * documentation is needed. This should be annotated on classes that are less than {@code protected}, and not documented
+ * documentation is needed. This should be annotated on classes that are less than {@code protected}, and not
+ * documented
  *
- * <p>This annotation is inherited because only the classes that are subtypes of the non-documented classes have to
- * be within the same package (under protected) OR private (under protected), so they are also not documented.</p>
+ * <p>This annotation is inherited because only the classes that are subtypes of the non-documented classes have to be
+ * within the same package (under protected) OR private (under protected), so they are also not documented.</p>
  *
  * <p>This annotation doesn't do anything</p>
  *

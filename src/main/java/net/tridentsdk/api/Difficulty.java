@@ -27,8 +27,14 @@
 
 package net.tridentsdk.api;
 
+/**
+ * Minecraft difficulty for the players
+ *
+ * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Difficulty">Minecraft Wiki</a>.</p>
+ *
+ * @author The TridentSDK Team
+ */
 public enum Difficulty {
-
     PEACEFUL(0),
     EASY(1),
     NORMAL(2),
@@ -41,21 +47,11 @@ public enum Difficulty {
     }
 
     /**
-     * Returns the Byte value of the Difficulty
+     * Returns the {@code byte} value of the Difficulty
      *
-     * @return Byte value of the Difficulty
+     * @return {@code byte} value of the Difficulty
      */
     public byte toByte() {
         return this.b;
-    }
-
-    /**
-     * Returns the Byte value of an Difficulty
-     *
-     * @param difficulty Difficulty
-     * @return Byte value of the Difficulty
-     */
-    public static byte toByte(Difficulty difficulty) {
-        return difficulty.b;
     }
 }

@@ -27,9 +27,7 @@
 
 package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.entity.OcelotType;
-import net.tridentsdk.api.entity.Peaceful;
-import net.tridentsdk.api.entity.Tameable;
+import net.tridentsdk.api.entity.*;
 
 /**
  * Represents an Ocelot

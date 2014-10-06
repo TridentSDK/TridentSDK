@@ -68,23 +68,23 @@ public final class ChannelManager {
     private ChannelManager() {
     }
 
+    public static ChannelManager getInstance() {
+        return ChannelManager.INSTANCE;
+    }
+
     public void registerChannel(String name, PluginChannel channel) {
-        if (channels.containsKey(name)) {
+        if (this.channels.containsKey(name)) {
             throw new IllegalArgumentException("Channel " + name + " is already registered!");
         }
 
-        channels.put(name, channel);
+        this.channels.put(name, channel);
     }
 
     public void unregisterChannel(String name) {
-        channels.remove(name);
+        this.channels.remove(name);
     }
 
     public PluginChannel getPluginChannel(String name) {
-        return channels.get(name);
-    }
-
-    public static ChannelManager getInstance() {
-        return INSTANCE;
+        return this.channels.get(name);
     }
 }

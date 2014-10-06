@@ -27,17 +27,17 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.event.entity.EntityDeathEvent;
 
-public class PlayerDeathEvent extends EntityDeathEvent implements Cancellable {
+public class PlayerDeathEvent extends EntityDeathEvent {
 
     /**
      * @param player the player associated with this event (that died)
      */
 
-    public PlayerDeathEvent(Player player) {
+    public PlayerDeathEvent(LivingEntity player) {
         super(player);
     }
 

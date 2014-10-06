@@ -27,9 +27,7 @@
 
 package net.tridentsdk.api.event.block;
 
-import net.tridentsdk.api.Block;
-import net.tridentsdk.api.BlockFace;
-import net.tridentsdk.api.Material;
+import net.tridentsdk.api.*;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
@@ -44,10 +42,10 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     private boolean cancel;
 
     /**
-     * @param player Player who placed this block
-     * @param block Block that was placed
+     * @param player       Player who placed this block
+     * @param block        Block that was placed
      * @param blockClicked Block
-     * @param faceClicked BlockFace
+     * @param faceClicked  BlockFace
      */
     public BlockPlaceEvent(Player player, Block block, Block blockClicked, BlockFace faceClicked) {
         super(block);
@@ -62,7 +60,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * @return BlockFace of the clicked block
      */
     public BlockFace getFaceClicked() {
-        return faceClicked;
+        return this.faceClicked;
     }
 
     /**
@@ -71,7 +69,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * @return Material of the placed block
      */
     public Material getTypePlaced() {
-        return getBlock().getMaterial();
+        return this.getBlock().getMaterial();
     }
 
     /**
@@ -81,7 +79,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      */
     @Override
     public boolean isCancelled() {
-        return cancel;
+        return this.cancel;
     }
 
     /**
@@ -100,7 +98,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * @return Block that was clicked
      */
     public Block getBlockClicked() {
-        return blockClicked;
+        return this.blockClicked;
     }
 
     /**

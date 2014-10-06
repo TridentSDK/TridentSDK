@@ -27,22 +27,20 @@
 package net.tridentsdk.api.event.weather;
 
 import net.tridentsdk.api.Location;
-import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.world.World;
 
 /**
  * Called when lightning strikes somewhere in the world
  */
-public class LightningStrikeEvent extends WeatherEvent implements Cancellable {
+public class LightningStrikeEvent extends WeatherEvent {
     private final Location location;
 
     public LightningStrikeEvent(World world, Location location) {
         super(world);
         this.location = location;
-
     }
 
     public Location getLocation() {
-        return location;
+        return this.location;
     }
 }

@@ -27,9 +27,7 @@
 
 package net.tridentsdk.api.docs;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * This annotation is for the use of documentation. This means that no protected and above methods are found in the

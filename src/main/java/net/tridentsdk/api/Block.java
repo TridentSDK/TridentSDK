@@ -30,13 +30,17 @@ package net.tridentsdk.api;
 import net.tridentsdk.api.util.Vector;
 
 /**
- * TODO
+ * A basic structure in minecraft, a material bearing piece set at a given location
+ *
+ * @author The TridentSDK Team
  */
 public class Block {
     private final Location location;
     private Material material;
 
     /**
+     * Constructs the wrapper representing the block
+     *
      * @param location Location of the Block
      */
     public Block(Location location) {
@@ -58,8 +62,22 @@ public class Block {
     }
 
     // TODO: Verify the redundancy
+    public void setType(Material material) {
+        this.material = material;
+    }
+
+    // TODO: Verify the redundancy
     public Material getMaterial() {
-        return material;
+        return this.material;
+    }
+
+    /**
+     * Set the Material of this Block
+     *
+     * @param material Material to set this Block to
+     */
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     /**
@@ -72,24 +90,10 @@ public class Block {
     }
 
     /**
-     * Set the Material of this Block
-     * @param material Material to set this Block to
-     */
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
-    // TODO: Verify the redundancy
-    public void setType(Material material) {
-        this.material = material;
-    }
-
-    /**
-     * TODO: This
-     * Returns a relative block
+     * Returns a block immediately to the direction specified
      *
-     * @param vector
-     * @return
+     * @param vector the direction to look for the block adjacent to the current
+     * @return the block adjacent to the current
      */
     public Block getRelative(Vector vector) {
         return new Block(this.location.getRelative(vector));

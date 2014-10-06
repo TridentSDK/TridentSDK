@@ -29,9 +29,7 @@ package net.tridentsdk.api.config;
 
 import com.google.gson.JsonArray;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * An ArrayList that also makes changes to the underlying JsonArray object

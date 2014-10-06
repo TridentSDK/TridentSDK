@@ -60,9 +60,7 @@ import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.reflect.FastClass;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 public class EventManager {
 
@@ -71,24 +69,24 @@ public class EventManager {
     private RegisteredListener[] listeners;
 
     public EventManager() {
-        if(!(Trident.isTrident())) {
+        if (!Trident.isTrident()) {
             throw new UnsupportedOperationException("EventManager must be initiated by TridentSDK!");
         }
 
-        listeners = new RegisteredListener[] { };
+        this.listeners = new RegisteredListener[] { };
 
-        for(Importance importance : Importance.values()) {
-            importanceMap.put(importance, new ArrayList<RegisteredListener>());
+        for (Importance importance : Importance.values()) {
+            this.importanceMap.put(importance, new ArrayList<RegisteredListener>());
         }
     }
 
     public void registerListener(Listener listener) {
         FastClass fastClass = FastClass.get(listener.getClass());
 
-        for(Method method : listener.getClass().getDeclaredMethods()) {
+        for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if(parameterTypes.length == 1 || !(Event.class.isAssignableFrom(parameterTypes[0])) ||
+            if (parameterTypes.length == 1 || !Event.class.isAssignableFrom(parameterTypes[0]) ||
                     method.isAnnotationPresent(EventHandler.class)) {
                 continue;
             }
@@ -96,11 +94,12 @@ public class EventManager {
             Class<? extends Event> eventClass = parameterTypes[0].asSubclass(Event.class);
             Importance importance = method.getAnnotation(EventHandler.class).importance();
 
-            importanceMap.get(importance).add(new RegisteredListener(fastClass.getMethod(listener, method.getName()),
-                    eventClass, importance));
+            this.importanceMap.get(importance)
+                    .add(new RegisteredListener(fastClass.getMethod(listener, method.getName()),
+                            eventClass, importance));
         }
 
-        updateListeners();
+        this.updateListeners();
     }
 
     public void updateListeners() {
@@ -114,7 +113,7 @@ public class EventManager {
     }
 
     public void call(Event event) {
-        for(RegisteredListener listener : listeners) {
+        for (RegisteredListener listener : this.listeners) {
             listener.execute(event);
         }
     }

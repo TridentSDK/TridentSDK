@@ -38,7 +38,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;
 
     /**
-     * @param block Block associated with this event
+     * @param block    Block associated with this event
      * @param strength Strength of the explosion
      */
     public BedExplodeEvent(Block block, float strength) {

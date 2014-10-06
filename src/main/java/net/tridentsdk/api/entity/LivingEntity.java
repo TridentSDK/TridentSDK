@@ -60,8 +60,7 @@ public interface LivingEntity extends Entity, ProjectileSource {
 
     void setRemainingAir(long ticks);
 
-    @Override
-    String getDisplayName();
+    @Override String getDisplayName();
 
     Location getEyeLocation();
 
@@ -70,12 +69,10 @@ public interface LivingEntity extends Entity, ProjectileSource {
     EntityDamageEvent getLastDamageCause();
 
     /**
-     * Returns a player if a player has done damage to this entity since its last full heal, else returns null
-     * Used for death messages
-     * @return
+     * Returns a player if a player has done damage to this entity since its last full heal, else returns null Used for
+     * death messages
      */
     Player hurtByPlayer();
-
 
     /**
      * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO

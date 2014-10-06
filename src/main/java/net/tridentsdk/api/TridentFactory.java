@@ -36,9 +36,7 @@ import net.tridentsdk.api.nbt.builder.NBTBuilder;
 import net.tridentsdk.api.trade.ItemPair;
 import net.tridentsdk.api.util.TridentLogger;
 import net.tridentsdk.api.util.Vector;
-import net.tridentsdk.api.world.ChunkLocation;
-import net.tridentsdk.api.world.World;
-import net.tridentsdk.api.world.WorldLoader;
+import net.tridentsdk.api.world.*;
 
 import java.util.logging.Logger;
 
@@ -76,9 +74,9 @@ public final class TridentFactory {
      * Creates a Block instance from specified co-ordinates
      *
      * @param world World in which the Block belongs in
-     * @param x X co-ordinate of the block
-     * @param y Y co-ordinate of the block
-     * @param z Z co-ordinate of the block
+     * @param x     X co-ordinate of the block
+     * @param y     Y co-ordinate of the block
+     * @param z     Z co-ordinate of the block
      * @return Block created instance
      */
     public static Block createBlock(World world, double x, double y, double z) {
@@ -88,8 +86,7 @@ public final class TridentFactory {
     /* Location */
 
     /**
-     * Creates a Location with no world
-     * <p>The created Location's co-ordinates will default to 0.</p>
+     * Creates a Location with no world <p>The created Location's co-ordinates will default to 0.</p>
      *
      * @return Location created instance with no world
      */
@@ -98,8 +95,7 @@ public final class TridentFactory {
     }
 
     /**
-     * Creates a Location with no specified co-ordinates
-     * <p>The created Location's co-ordinates will default to 0.</p>
+     * Creates a Location with no specified co-ordinates <p>The created Location's co-ordinates will default to 0.</p>
      *
      * @param world World in which the Location is targeting
      * @return Location with the specified world, but no co-coordinates
@@ -112,9 +108,9 @@ public final class TridentFactory {
      * Creates a Location with the specified co-ordinates
      *
      * @param world World
-     * @param x X co-ordinate
-     * @param y Y co-ordinate
-     * @param z Z co-ordinate
+     * @param x     X co-ordinate
+     * @param y     Y co-ordinate
+     * @param z     Z co-ordinate
      * @return Location
      */
     public static Location createLocation(World world, double x, double y, double z) {
@@ -125,10 +121,10 @@ public final class TridentFactory {
      * Creates a Location with the specified co-ordinates and direction
      *
      * @param world World
-     * @param x X co-ordinate
-     * @param y Y co-ordinate
-     * @param z Z co-ordinate
-     * @param yaw Yaw absolute rotation on the x-plane, in degrees
+     * @param x     X co-ordinate
+     * @param y     Y co-ordinate
+     * @param z     Z co-ordinate
+     * @param yaw   Yaw absolute rotation on the x-plane, in degrees
      * @param pitch Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
@@ -140,8 +136,8 @@ public final class TridentFactory {
      * Creates a Location from an existing Location, and a direction
      *
      * @param location Location
-     * @param yaw Yaw absolute rotation on the x-plane, in degrees
-     * @param pitch Pitch absolute rotation on the y-plane, in degrees
+     * @param yaw      Yaw absolute rotation on the x-plane, in degrees
+     * @param pitch    Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
     public static Location createLocation(Location location, float yaw, float pitch) {

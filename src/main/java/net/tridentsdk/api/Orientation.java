@@ -28,6 +28,8 @@ package net.tridentsdk.api;
 
 /**
  * The 16 different orientations available in MineCraft, plus up and down
+ *
+ * @author The TridentSDK Team
  */
 public enum Orientation {
     NORTH,

@@ -33,10 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -94,11 +91,11 @@ public class TridentPluginHandler {
     public void disable(TridentPlugin plugin) {
         plugin.onDisable();
 
-        plugins.remove(plugin);
+        this.plugins.remove(plugin);
         plugin.classLoader.unloadClasses();
     }
 
-    public List<TridentPlugin> getPlugins() {
+    public Iterable<TridentPlugin> getPlugins() {
         return Collections.unmodifiableList(this.plugins);
     }
 }
