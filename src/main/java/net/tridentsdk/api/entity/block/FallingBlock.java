@@ -27,13 +27,26 @@
 
 package net.tridentsdk.api.entity.block;
 
-import net.tridentsdk.api.entity.Projectile;
+import net.tridentsdk.api.entity.Entity;
 
 /**
- * Represents a WitherSkull
+ * Represents a dynamic tile
  *
  * @author TridentSDK Team
  */
-public interface WitherSkull extends Projectile {
+public interface FallingBlock extends Entity {
 
+    /**
+     * The state this FallingBlock represents
+     *
+     * @return the BlockState of this falling block
+     */
+    Object getState();  /* TODO: Change return type to valid implementation of BlockState */
+
+    /**
+     * Whether or not this FallingBlock should drop when it breaks
+     *
+     * @return whether or not this FallingBlock should drop its item when it breaks
+     */
+    boolean shouldDrop();
 }
