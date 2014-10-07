@@ -26,9 +26,7 @@
  */
 package net.tridentsdk.api.event.block;
 
-import net.tridentsdk.api.Block;
-import net.tridentsdk.api.Material;
-import net.tridentsdk.api.Orientation;
+import net.tridentsdk.api.*;
 import net.tridentsdk.api.event.Cancellable;
 
 /**
@@ -45,7 +43,6 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
         this.direction = direction;
         this.retract = retract;
         this.influenced = influenced;
-
     }
 
     /**
@@ -56,7 +53,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      * @return Orientation
      */
     public Orientation getDirection() {
-        return direction;
+        return this.direction;
     }
 
     /**
@@ -65,7 +62,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      * @return Boolean
      */
     public boolean isRetracting() {
-        return retract;
+        return this.retract;
     }
 
     /**
@@ -74,28 +71,27 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      * @return Boolean
      */
     public boolean isExtending() {
-        return !retract;
+        return !this.retract;
     }
 
     /**
      * Gets the block that is being moved by this piston, if any
      *
-     * <p>If this is a piston extend event, this will return the first block in the series of blocks
-     * being pushed.</p>
+     * <p>If this is a piston extend event, this will return the first block in the series of blocks being pushed.</p>
      *
      * @return the block being moved, may be null if air, or retracting from a block without this piston being sticky
      */
     public Block getInfluencedBlock() {
-        return influenced;
+        return this.influenced;
     }
 
     public boolean isSticky() {
-        return getBlock().getType() == Material.PISTON_STICKY_BASE;
+        return this.getBlock().getType() == Material.PISTON_STICKY_BASE;
     }
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

@@ -34,8 +34,8 @@ public class ItemStack {
     private final int id;
     private final Material mat;
 
-    private volatile short quantity;
-    private volatile short damageValue;
+    private final short quantity;
+    private final short damageValue;
 
     public ItemStack(Material mat) {
         this(mat, (short) 1);
@@ -50,18 +50,18 @@ public class ItemStack {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public Material getType() {
-        return mat;
+        return this.mat;
     }
 
     public short getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public short getDamageValue() {
-        return damageValue;
+        return this.damageValue;
     }
 }

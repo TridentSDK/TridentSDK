@@ -313,11 +313,9 @@ public class Vector implements Serializable, Cloneable {
 
     /**
      * Returns a new location in this world, with the coordinates the x, y, and z values
-     * @param world
-     * @return
      */
     public Location toLocation(World world) {
-        return new Location(world, x, y, z);
+        return new Location(world, this.x, this.y, this.z);
     }
 
     /**
@@ -380,11 +378,10 @@ public class Vector implements Serializable, Cloneable {
      * @return the cloned vector
      */
     @Override
-    public Vector clone(){
-        try{
+    public Vector clone() {
+        try {
             return (Vector) super.clone();
-        }
-        catch(CloneNotSupportedException e){
+        } catch (CloneNotSupportedException e) {
             return null;
         }
     }

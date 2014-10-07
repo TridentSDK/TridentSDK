@@ -65,7 +65,7 @@ public class PlayerDigEvent extends PlayerEvent implements Cancellable {
     private final BlockFace face;
     private final short status;
 
-    private boolean cancelled = false;
+    private boolean cancelled;
 
     public PlayerDigEvent(Player player, BlockFace face, short status) {
         super(player);
@@ -75,16 +75,16 @@ public class PlayerDigEvent extends PlayerEvent implements Cancellable {
     }
 
     public BlockFace getFace() {
-        return face;
+        return this.face;
     }
 
     public short getStatus() {
-        return status;
+        return this.status;
     }
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

@@ -34,7 +34,7 @@ import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
 
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.InetAddress;
@@ -146,6 +146,12 @@ public interface Server {
      */
     String getVersion();
 
+    /**
+     * Gets an inventory window
+     *
+     * @param id the ID of the window to be searched
+     * @return the window with the ID
+     */
     Window getWindow(int id);
 
     /**
@@ -159,7 +165,7 @@ public interface Server {
      * Send a plugin message
      *
      * @param channel name of the channel
-     * @param data the data to send
+     * @param data    the data to send
      */
     void sendPluginMessage(String channel, byte[] data);
 
@@ -170,7 +176,17 @@ public interface Server {
      */
     TridentPluginHandler getPluginHandler();
 
+    /**
+     * The trident task scheduler
+     *
+     * @return the scheduler for submitting tasks to
+     */
     Scheduler getScheduler();
 
+    /**
+     * The server configuration file
+     *
+     * @return the server config
+     */
     JsonConfig getConfig();
 }

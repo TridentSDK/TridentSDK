@@ -27,23 +27,23 @@
 
 package net.tridentsdk.plugin;
 
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 
 public class TridentPlugin {
+    private static final HashFunction HASHER = Hashing.murmur3_32();
 
+    final PluginClassLoader classLoader;
     private final File pluginFile;
     private final File configDirectory;
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
-
-    final PluginClassLoader classLoader;
 
     protected TridentPlugin() {
         this.pluginFile = null;
@@ -54,8 +54,8 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for(TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
-            if(plugin.getDescription().name().equalsIgnoreCase(description.name())) {
+        for (TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
+            if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
                 throw new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
                         "Name: " + description.name());
             }
@@ -64,7 +64,7 @@ public class TridentPlugin {
         this.pluginFile = pluginFile;
         this.description = description;
         this.configDirectory = new File("plugins/" + description.name() + "/");
-        this.defaultConfig = new JsonConfig(new File(configDirectory, "config.json"));
+        this.defaultConfig = new JsonConfig(new File(this.configDirectory, "config.json"));
         this.classLoader = loader;
     }
 
@@ -85,19 +85,19 @@ public class TridentPlugin {
     }
 
     public void saveDefaultConfig() {
-        saveResource("config.json", false);
+        this.saveResource("config.json", false);
     }
 
     public void saveResource(String name, boolean replace) {
         try {
-            InputStream is = getClass().getResourceAsStream("/" + name);
-            File file = new File(configDirectory, name);
+            InputStream is = this.getClass().getResourceAsStream("/" + name);
+            File file = new File(this.configDirectory, name);
 
-            if(is == null) {
+            if (is == null) {
                 return;
             }
 
-            if(replace && file.exists()) {
+            if (replace && file.exists()) {
                 file.delete();
             }
 
@@ -112,11 +112,11 @@ public class TridentPlugin {
     }
 
     public JsonConfig getDefaultConfig() {
-        return defaultConfig;
+        return this.defaultConfig;
     }
 
     public File getConfigDirectory() {
-        return configDirectory;
+        return this.configDirectory;
     }
 
     public final PluginDescription getDescription() {
@@ -124,16 +124,27 @@ public class TridentPlugin {
     }
 
     @Override
-    public boolean equals(Object other ) {
-        if(other instanceof TridentPlugin) {
+    public boolean equals(Object other) {
+        if (other instanceof TridentPlugin) {
             TridentPlugin otherPlugin = (TridentPlugin) other;
-            if(otherPlugin.getDescription().name().equals(this.getDescription().name())) {
-                if(otherPlugin.getDescription().author().equals(this.getDescription().author())) {
+            if (otherPlugin.getDescription().name().equals(this.getDescription().name())) {
+                if (otherPlugin.getDescription().author().equals(this.getDescription().author())) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    @Override public int hashCode() {
+        // Find constants
+        String name = this.getDescription().name();
+        String author = this.getDescription().author();
+
+        return TridentPlugin.HASHER.newHasher()
+                .putUnencodedChars(name)
+                .putUnencodedChars(author)
+                .hash().hashCode();
     }
 
     // TODO: override hashvalue as well

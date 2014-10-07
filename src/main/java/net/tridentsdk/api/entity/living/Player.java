@@ -38,27 +38,27 @@ import java.util.Locale;
  */
 public interface Player extends LivingEntity {
 
-    public void sendMessage(String... message);
+    void sendMessage(String... message);
 
-    public float getFlyingSpeed();
+    float getFlyingSpeed();
 
-    public void setFlyingSpeed(float flyingSpeed);
+    void setFlyingSpeed(float flyingSpeed);
 
-    public Locale getLocale();
+    Locale getLocale();
 
-    public ItemStack getItemInHand();
+    ItemStack getItemInHand();
 
     GameMode getGameMode();
 
-    public float getMoveSpeed();
+    float getMoveSpeed();
 
-    public void setMoveSpeed(float speed);
+    void setMoveSpeed(float speed);
 
-    public float getSneakSpeed();
+    float getSneakSpeed();
 
-    public void setSneakSpeed(float speed);
+    void setSneakSpeed(float speed);
 
-    public void setWalkSpeed(float speed);
+    float getWalkSpeed();
 
-    public float getWalkSpeed();
+    void setWalkSpeed(float speed);
 }

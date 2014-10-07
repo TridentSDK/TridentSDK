@@ -27,14 +27,12 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a player's hunger bar decreases
  */
-public class PlayerFamishEvent extends PlayerHungerEvent implements Cancellable {
+public class PlayerFamishEvent extends PlayerHungerEvent {
     public PlayerFamishEvent(Player player, double feed) {
         super(player, feed);
     }
-
 }

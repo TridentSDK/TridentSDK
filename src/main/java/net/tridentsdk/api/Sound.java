@@ -31,7 +31,6 @@ package net.tridentsdk.api;
  * TODO more darude sandstorm's
  */
 public enum Sound {
-
     AMBIENT_CAVE("ambient.cove.cave"),
     AMBIENT_WEATHER_RAIN("ambient.weather.rain"),
     AMBIENT_WEATHER_THUNDER("ambient.weather.thunder"),

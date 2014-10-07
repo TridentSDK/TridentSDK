@@ -27,24 +27,22 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.event.entity.EntityDamageEvent;
 
-public class PlayerDamageEvent extends EntityDamageEvent implements Cancellable {
+public class PlayerDamageEvent extends EntityDamageEvent {
 
     /**
-     *
      * @param player the player associated with this event
      * @param damage the amount of damage dealt to the player
      */
 
-    public PlayerDamageEvent(Player player, double damage, EntityDamageEvent.Cause cause) {
-        super(player,damage ,cause);
+    public PlayerDamageEvent(Entity player, double damage, Cause cause) {
+        super(player, damage, cause);
     }
 
     public Player getPlayer() {
         return (Player) super.getEntity();
     }
-
 }

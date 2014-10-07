@@ -40,10 +40,10 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;
 
     /**
-     * @param block Block which redstone state was updated
+     * @param block    Block which redstone state was updated
      * @param strength Integer representing the strength (power level) of the redstone
-     * @param causer Block which caused the redstone update
-     * @param cause Cause for the redstone update
+     * @param causer   Block which caused the redstone update
+     * @param cause    Cause for the redstone update
      */
     public BlockRedstoneEvent(Block block, int strength, Block causer, Cause cause) {
         super(block);
@@ -58,15 +58,16 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
      * @return Block which caused the redstone updaye
      */
     public Block getCauser() {
-        return causer;
+        return this.causer;
     }
 
     /**
      * Returns the cause of the redstone update
+     *
      * @return Cause of the redstone update
      */
     public Cause getCause() {
-        return cause;
+        return this.cause;
     }
 
     /**
@@ -75,7 +76,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
      * @return Integer representing the power level of the redstone
      */
     public int getStrength() {
-        return strength;
+        return this.strength;
     }
 
     /**
@@ -85,7 +86,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
      */
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     /**
@@ -95,7 +96,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
      */
     @Override
     public void setCancelled(boolean cancel) {
-        cancelled = cancel;
+        this.cancelled = cancel;
     }
 
     /**

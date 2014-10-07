@@ -58,21 +58,58 @@ package net.tridentsdk.api;
 
 import net.tridentsdk.api.util.Vector;
 
+/**
+ * Represents an orientation towards a given direction set from a {@link net.tridentsdk.api.util.Vector}
+ *
+ * @author The TridentSDK Team
+ */
 public enum BlockFace {
-
+    /**
+     * Facing north
+     */
     NORTH(new Vector(0, 0, -1)),
+    /**
+     * Facing south
+     */
     SOUTH(new Vector(0, 0, 1)),
+    /**
+     * Facing east
+     */
     EAST(new Vector(1, 0, 0)),
+    /**
+     * Facing west
+     */
     WEST(new Vector(-1, 0, 0)),
 
-    NORTH_EAST(NORTH, EAST),
-    NORTH_WEST(NORTH, WEST),
-    SOUTH_EAST(SOUTH, EAST),
-    SOUTH_WEST(SOUTH, WEST),
+    /**
+     * Facing north east
+     */
+    NORTH_EAST(BlockFace.NORTH, BlockFace.EAST),
+    /**
+     * Facing north west
+     */
+    NORTH_WEST(BlockFace.NORTH, BlockFace.WEST),
+    /**
+     * Facing south east
+     */
+    SOUTH_EAST(BlockFace.SOUTH, BlockFace.EAST),
+    /**
+     * Facing south west
+     */
+    SOUTH_WEST(BlockFace.SOUTH, BlockFace.WEST),
 
-    TOP(new Vector(0D, 1D, 0D)),
-    BOTTOM(new Vector(0D, -1D, 0D)),
+    /**
+     * Facing up
+     */
+    TOP(new Vector(0.0D, 1.0D, 0.0D)),
+    /**
+     * Facing down
+     */
+    BOTTOM(new Vector(0.0D, -1.0D, 0.0D)),
 
+    /**
+     * The given component direction not leading anywhere
+     */
     SELF(new Vector(0, 0, 0));
 
     private final Vector difference;
@@ -81,15 +118,26 @@ public enum BlockFace {
         this.difference = difference;
     }
 
-    BlockFace(BlockFace face1, BlockFace face2){
+    BlockFace(BlockFace face1, BlockFace face2) {
         this.difference = face1.getDifference().add(face2.getDifference());
     }
 
+    /**
+     * The copy of the directional vector
+     *
+     * @return the cloned vector pointing to the specified face
+     */
     public Vector getDifference() {
-        return difference.clone();
+        return this.difference.clone();
     }
 
+    /**
+     * Gets the location relative to the given direction
+     *
+     * @param loc the location to get relative to
+     * @return the relative location
+     */
     public Location apply(Location loc) {
-        return loc.getRelative(difference);
+        return loc.getRelative(this.difference);
     }
 }

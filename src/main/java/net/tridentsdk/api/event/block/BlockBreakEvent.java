@@ -44,9 +44,9 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
     private boolean cancel;
 
     /**
-     * @param player Player associated with this event
-     * @param block Block associated with this event
-     * @param blockFace BlockFace
+     * @param player     Player associated with this event
+     * @param block      Block associated with this event
+     * @param blockFace  BlockFace
      * @param itemInHand ItemStack
      */
     public BlockBreakEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
@@ -62,7 +62,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      * @return true if cancelled
      */
     public boolean isCancelled() {
-        return cancel;
+        return this.cancel;
     }
 
     /**
@@ -80,7 +80,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      * @return ItemStack in the player's hand
      */
     public ItemStack getItemInHand() {
-        return itemInHand;
+        return this.itemInHand;
     }
 
     /**
@@ -89,7 +89,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      * @return BlockFlace of the clicked block
      */
     public BlockFace getBlockFace() {
-        return blockFace;
+        return this.blockFace;
     }
 
     /**

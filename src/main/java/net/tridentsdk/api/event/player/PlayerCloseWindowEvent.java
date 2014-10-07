@@ -42,12 +42,12 @@ public class PlayerCloseWindowEvent extends Event implements Cancellable {
     }
 
     public Window getWindow() {
-        return window;
+        return this.window;
     }
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

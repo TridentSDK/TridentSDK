@@ -71,18 +71,18 @@ public class RegisteredListener {
     }
 
     public FastMethod getMethod() {
-        return method;
+        return this.method;
     }
 
     public Class<? extends Event> getEventClass() {
-        return eventClass;
+        return this.eventClass;
     }
 
     public Importance getImportance() {
-        return importance;
+        return this.importance;
     }
 
     public void execute(Event event) {
-        method.invoke(event);
+        this.method.invoke(event);
     }
 }

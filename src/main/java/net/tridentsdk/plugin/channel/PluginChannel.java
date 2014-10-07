@@ -63,26 +63,26 @@ import java.util.List;
 
 public abstract class PluginChannel {
 
-    private List<Byte[]> history = new ArrayList<>();
+    private final List<Byte[]> history = new ArrayList<>();
 
     public void process(byte[] message) {
-        if(!(Trident.isTrident())) {
+        if (!Trident.isTrident()) {
             throw new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!");
         }
 
         Byte[] bytes = new Byte[message.length - 1];
 
-        for(int i = 0; i < message.length; i++) {
+        for (int i = 0; i < message.length; i++) {
             bytes[i] = message[i];
         }
 
-        history.add(bytes);
-        onMessage(message);
+        this.history.add(bytes);
+        this.onMessage(message);
     }
 
     public abstract void onMessage(byte[] message);
 
     public List<Byte[]> getHistory() {
-        return history;
+        return this.history;
     }
 }

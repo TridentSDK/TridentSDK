@@ -47,20 +47,20 @@ public class PlayerClickItemEvent extends Event implements Cancellable {
     }
 
     public Window getWindow() {
-        return window;
+        return this.window;
     }
 
     public short getClickedSlot() {
-        return clickedSlot;
+        return this.clickedSlot;
     }
 
     public int getActionId() {
-        return actionId;
+        return this.actionId;
     }
 
     @Override
     public boolean isCancelled() {
-        return cancelled;
+        return this.cancelled;
     }
 
     @Override

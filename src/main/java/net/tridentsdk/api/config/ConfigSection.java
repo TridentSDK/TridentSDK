@@ -27,9 +27,7 @@
 
 package net.tridentsdk.api.config;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

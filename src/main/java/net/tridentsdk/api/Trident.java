@@ -77,6 +77,11 @@ public final class Trident {
         return Trident.logger;
     }
 
+    /**
+     * Sets the output console logger
+     *
+     * @param logger the logger to use
+     */
     public static void setLogger(TridentLogger logger) {
         Trident.logger = logger;
     }

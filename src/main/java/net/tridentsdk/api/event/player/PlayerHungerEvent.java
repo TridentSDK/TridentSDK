@@ -27,7 +27,6 @@
 
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Cancellable;
 
@@ -50,7 +49,6 @@ public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
     public void setFeed(double feed) {
         this.feed = feed;
     }
-
 
     @Override
     public boolean isCancelled() {

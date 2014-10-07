@@ -71,14 +71,14 @@ public class PlayerTabCompleteEvent extends PlayerEvent {
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public String[] getSuggestions() {
-        return suggestions;
+        return this.suggestions;
     }
 
     public void addSuggestion(String suggestion) {
-        suggestions[suggestions.length] = suggestion;
+        this.suggestions[this.suggestions.length] = suggestion;
     }
 }
