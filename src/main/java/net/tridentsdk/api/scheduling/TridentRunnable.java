@@ -39,7 +39,7 @@ public abstract class TridentRunnable implements Runnable {
     private final Integer id = -1;
 
     private final AtomicLong interval = new AtomicLong();
-    private final boolean inAHurry;
+    private final boolean inAHurry = false;
 
     /**
      * Returns if this runnable is in a hurry, usually indicating that the server is shutting down
