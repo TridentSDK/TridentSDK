@@ -63,7 +63,7 @@ public class TridentPlugin {
 
         this.pluginFile = pluginFile;
         this.description = description;
-        this.configDirectory = new File("plugins/" + description.name() + "/");
+        this.configDirectory = new File("plugins/" + description.name() + '/');
         this.defaultConfig = new JsonConfig(new File(this.configDirectory, "config.json"));
         this.classLoader = loader;
     }
@@ -90,7 +90,7 @@ public class TridentPlugin {
 
     public void saveResource(String name, boolean replace) {
         try {
-            InputStream is = this.getClass().getResourceAsStream("/" + name);
+            InputStream is = this.getClass().getResourceAsStream('/' + name);
             File file = new File(this.configDirectory, name);
 
             if (is == null) {

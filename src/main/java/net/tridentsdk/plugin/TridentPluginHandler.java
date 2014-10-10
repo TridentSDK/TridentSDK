@@ -38,7 +38,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TridentPluginHandler {
-
     private final List<TridentPlugin> plugins = new ArrayList<>();
 
     public void load(File pluginFile) {

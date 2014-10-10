@@ -65,7 +65,7 @@ public abstract class PluginChannel {
 
     private final List<Byte[]> history = new ArrayList<>();
 
-    public void process(byte[] message) {
+    public void process(byte... message) {
         if (!Trident.isTrident()) {
             throw new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!");
         }
@@ -80,7 +80,7 @@ public abstract class PluginChannel {
         this.onMessage(message);
     }
 
-    public abstract void onMessage(byte[] message);
+    public abstract void onMessage(byte... message);
 
     public List<Byte[]> getHistory() {
         return this.history;

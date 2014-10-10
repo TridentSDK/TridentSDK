@@ -43,11 +43,11 @@ public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancella
         this.projectile = projectile;
     }
 
-    public boolean isCancelled() {
+    @Override public boolean isCancelled() {
         return this.cancelled;
     }
 
-    public void setCancelled(boolean cancelled) {
+    @Override public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 

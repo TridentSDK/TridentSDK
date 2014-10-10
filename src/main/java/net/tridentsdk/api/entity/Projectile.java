@@ -63,7 +63,9 @@ public interface Projectile extends Entity {
     Block getCurrentTile();
 
     /**
-     * @return
+     * The projectile source
+     *
+     * @return gets the source of the projectile
      */
     ProjectileSource getProjectileSource();
 }

@@ -45,12 +45,12 @@ public class EntityTameEvent extends EntityEvent {
         return this.tamer;
     }
 
-    public boolean isCancelled() {
+    @Override public boolean isCancelled() {
 
         return this.cancelled;
     }
 
-    public void setCancelled(boolean cancelled) {
+    @Override public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

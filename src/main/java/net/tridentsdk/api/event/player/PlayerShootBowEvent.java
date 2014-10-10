@@ -26,7 +26,7 @@
  */
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.entity.Projectile;
+import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.entity.projectile.Arrow;
 
@@ -34,7 +34,7 @@ import net.tridentsdk.api.entity.projectile.Arrow;
  * Called when a player shoots a bow
  */
 public class PlayerShootBowEvent extends PlayerLaunchProjectileEvent {
-    public PlayerShootBowEvent(Player player, Projectile projectile) {
+    public PlayerShootBowEvent(Player player, Entity projectile) {
         super(player, projectile);
     }
 

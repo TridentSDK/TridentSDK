@@ -35,7 +35,7 @@ public class EntityDamageEvent extends EntityEvent {
     private double damage;
 
     /**
-     * @param player the player associated with this event
+     * @param entity the entity associated with this event
      * @param damage the amount of damage dealt to the player
      */
 

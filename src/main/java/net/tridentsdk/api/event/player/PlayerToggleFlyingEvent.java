@@ -49,11 +49,11 @@ public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable 
         return this.toggleState;
     }
 
-    public boolean isCancelled() {
+    @Override public boolean isCancelled() {
         return this.cancelled;
     }
 
-    public void setCancelled(boolean cancelled) {
+    @Override public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

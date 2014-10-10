@@ -27,7 +27,7 @@
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an Entity is set on fire by a block
@@ -35,7 +35,7 @@ import net.tridentsdk.api.entity.LivingEntity;
 public class EntityBurnByBlockEvent extends EntityBurnEvent {
     private final Block causer;
 
-    public EntityBurnByBlockEvent(LivingEntity entity, int fireTicks, Block causer) {
+    public EntityBurnByBlockEvent(Entity entity, int fireTicks, Block causer) {
         super(entity, fireTicks);
         this.causer = causer;
     }

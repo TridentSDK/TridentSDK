@@ -40,17 +40,17 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
     private String[] contents;
     private boolean cancelled;
 
-    public SignChangeEvent(Block block, Player editor, String[] contents) {
+    public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
         this.editor = editor;
         this.contents = contents;
     }
 
-    public boolean isCancelled() {
+    @Override public boolean isCancelled() {
         return this.cancelled;
     }
 
-    public void setCancelled(boolean cancelled) {
+    @Override public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -58,7 +58,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
         return this.contents;
     }
 
-    public void setContents(String[] contents) {
+    public void setContents(String... contents) {
         this.contents = contents;
     }
 

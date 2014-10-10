@@ -91,7 +91,7 @@ public final class TridentFactory {
      * @return Location created instance with no world
      */
     public static Location createLocation() {
-        return new Location(null, 0, 0, 0);
+        return new Location(null, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -101,7 +101,7 @@ public final class TridentFactory {
      * @return Location with the specified world, but no co-coordinates
      */
     public static Location createLocation(World world) {
-        return new Location(world, 0, 0, 0);
+        return new Location(world, 0.0, 0.0, 0.0);
     }
 
     /**
