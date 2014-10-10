@@ -48,11 +48,13 @@ public class EntityLaunchProjectileEvent extends EntityEvent {
         return this.projectile;
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.cancelled;
     }
 
-    @Override public void setCancelled(boolean cancelled) {
+    @Override
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 

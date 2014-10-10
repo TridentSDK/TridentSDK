@@ -136,7 +136,8 @@ public class TridentPlugin {
         return false;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         // Find constants
         String name = this.getDescription().name();
         String author = this.getDescription().author();

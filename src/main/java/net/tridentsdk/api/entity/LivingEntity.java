@@ -60,7 +60,8 @@ public interface LivingEntity extends Entity, ProjectileSource {
 
     void setRemainingAir(long ticks);
 
-    @Override String getDisplayName();
+    @Override
+    String getDisplayName();
 
     Location getEyeLocation();
 

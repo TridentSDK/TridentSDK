@@ -54,11 +54,13 @@ public abstract class EntityBurnEvent extends EntityEvent {
         this.fireTicks = fireTicks;
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.cancelled;
     }
 
-    @Override public void setCancelled(boolean cancelled) {
+    @Override
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

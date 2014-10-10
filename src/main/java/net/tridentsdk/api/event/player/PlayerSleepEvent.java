@@ -42,11 +42,13 @@ public class PlayerSleepEvent extends PlayerEvent implements Cancellable {
         this.bed = bed;
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.cancelled;
     }
 
-    @Override public void setCancelled(boolean cancelled) {
+    @Override
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 

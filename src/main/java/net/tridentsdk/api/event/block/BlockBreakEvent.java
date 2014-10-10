@@ -61,7 +61,8 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return true if cancelled
      */
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.cancel;
     }
 
@@ -70,7 +71,8 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @param cancel Boolean cancellation state of event
      */
-    @Override public void setCancelled(boolean cancel) {
+    @Override
+    public void setCancelled(boolean cancel) {
         this.cancel = cancel;
     }
 
