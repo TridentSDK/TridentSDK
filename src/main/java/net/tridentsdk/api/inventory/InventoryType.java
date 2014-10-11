@@ -48,6 +48,11 @@ public enum InventoryType {
         this.s = s;
     }
 
+    /**
+     * Returns the Minecraft ID for the entity or block which holds the InventoryType
+     *
+     * @return String Minecraft ID for the entity or block which holds the InventoryType
+     */
     @Override
     public String toString() {
         return this.s;

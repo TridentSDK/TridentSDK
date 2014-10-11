@@ -38,7 +38,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
 
     private final Player editor;
     private String[] contents;
-    private boolean cancelled;
+    private boolean cancel;
 
     public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
@@ -46,35 +46,76 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
         this.contents = contents;
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
-        return this.cancelled;
+        return this.cancel;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
     }
 
+    /**
+     * Returns the contents of the Sign
+     *
+     * @return String[] contents of the Sign
+     */
     public String[] getContents() {
         return this.contents;
     }
 
+    /**
+     * Sets the contents of the Sign
+     * @param contents String[] contents of the Sign
+     */
     public void setContents(String... contents) {
         this.contents = contents;
     }
 
+    /**
+     * Returns the text of the specified lign
+     *
+     * @param i line of the Sign
+     * @return String text of the specified line
+     */
     public String getLine(int i) {
+        Validate.isTrue(i >= 0, "Sign line is below 0");
+        Validate.isTrue(i <= 3, "Sign line is above 3");
         return this.contents[i];
     }
 
-    public String setLine(int i, String contents) {
-        Validate.isTrue(contents.length() <= 16, "Sign line length too long");
-        String temp = this.contents[i];
-        this.contents[i] = contents;
-        return temp;
+    /**
+     * Sets the value of a line
+     *
+     * @param i line of the Sign
+     * @param text String text to set the line as
+     * @return String previous text on the specified line
+     */
+    public String setLine(int i, String text) {
+        Validate.isTrue(text.length() > 0, "Sign line length is below 0 characters");
+        Validate.isTrue(text.length() <= 16, "Sign line length is above 16 characters");
+
+        String previous = this.contents[i];
+        this.contents[i] = text;
+        return previous;
     }
 
+    /**
+     * Returns the Player who edited the Sign
+     *
+     * @return Player editor of the sign, null if no player
+     */
     public Player getEditor() {
         return this.editor;
     }

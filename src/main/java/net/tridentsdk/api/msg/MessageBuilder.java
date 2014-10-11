@@ -31,6 +31,7 @@ import com.google.gson.*;
 import net.tridentsdk.api.ChatColor;
 import net.tridentsdk.api.entity.living.Player;
 
+// TODO: JavaDoc
 public final class MessageBuilder {
     static final Gson GSON = new Gson();
 

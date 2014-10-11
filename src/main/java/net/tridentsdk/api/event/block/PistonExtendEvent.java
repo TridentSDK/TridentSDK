@@ -34,7 +34,7 @@ import java.util.List;
 
 public class PistonExtendEvent extends BlockPistonEvent {
     private final ImmutableList<Block> blocksInfluenced;
-    private boolean cancelled;
+    private boolean cancel;
 
     public PistonExtendEvent(Block block, Orientation direction, List<Block> influenced) {
         super(block, direction, false, influenced.get(0));
@@ -42,14 +42,24 @@ public class PistonExtendEvent extends BlockPistonEvent {
         this.blocksInfluenced = ImmutableList.copyOf(influenced);
     }
 
+    /**
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
+     */
     @Override
     public boolean isCancelled() {
-        return this.cancelled;
+        return this.cancel;
     }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
     }
 
     /**

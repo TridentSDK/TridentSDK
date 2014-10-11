@@ -30,7 +30,7 @@ package net.tridentsdk.api;
 /**
  * Minecraft game modes
  *
- * <p>If you need more help, take a look at <a href="http://minecraft.wikia.com/wiki/Category:Gamemodes">Wikia</a></p>
+ * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Gameplay#Game_modes">Wiki</a></p>
  */
 public enum GameMode {
     SURVIVAL(0),
@@ -52,5 +52,15 @@ public enum GameMode {
      */
     public byte toByte() {
         return this.b;
+    }
+
+    /**
+     * Returns the {@code byte} value of the GameMode
+     *
+     * @param gameMode GameMode
+     * @return {@code byte} value of the GameMode
+     */
+    public static byte toByte(GameMode gameMode) {
+        return gameMode.toByte();
     }
 }

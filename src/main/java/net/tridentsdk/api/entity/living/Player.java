@@ -37,27 +37,89 @@ import java.util.Locale;
  * TODO
  */
 public interface Player extends LivingEntity {
+    /**
+     * Send an array of messages to the Player
+     * <p></p>
+     * 
+     * @param message String[] messages to be sent
+     */
     void sendMessage(String... message);
 
+    /**
+     * Returns the flying speed of the Player
+     * 
+     * @return float flying speed of the Player
+     */
     float getFlyingSpeed();
 
+    /**
+     * Set the flying speed of the Player
+     * 
+     * @param flyingSpeed float flying speed of the Player
+     */
     void setFlyingSpeed(float flyingSpeed);
 
+    // TODO: Use word settings?
+    /**
+     * Returns the Player's {@link Locale} settings
+     * 
+     * @return Locale the Player's Locale settings
+     */
     Locale getLocale();
 
+    /**
+     * Returns the ItemStack in the Player's hand
+     * 
+     * @return ItemStack current ItemStack in the Player's hand
+     */
     ItemStack getItemInHand();
 
+    /**
+     * Returns the GameMode the Player is in
+     *
+     * @return GameMode current GameMode of the Player
+     */
     GameMode getGameMode();
 
+    /**
+     * Returns the move speed of the player
+     *
+     * @return float the Player's current move speed
+     */
     float getMoveSpeed();
 
+    /**
+     * Sets the Player's move speed
+     *
+     * @param speed float Player's move speed
+     */
     void setMoveSpeed(float speed);
 
+    /**
+     * Returns the sneak speed of the player
+     *
+     * @return float the Player's current sneak speed
+     */
     float getSneakSpeed();
 
+    /**
+     * Sets the Player's sneak speed
+     *
+     * @param speed float Player's sneak speed
+     */
     void setSneakSpeed(float speed);
 
+    /**
+     * Returns the walk speed of the player
+     *
+     * @return float the Player's current walk speed
+     */
     float getWalkSpeed();
 
+    /**
+     * Sets the Player's walk speed
+     *
+     * @param speed float Player's walk speed
+     */
     void setWalkSpeed(float speed);
 }

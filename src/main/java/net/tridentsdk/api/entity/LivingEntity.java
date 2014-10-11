@@ -48,36 +48,92 @@ public interface LivingEntity extends Entity, ProjectileSource {
      */
     void show(Entity entity);
 
+    /**
+     * Returns the health of the Entity
+     *
+     * @return double health of the Entity
+     */
     double getHealth();
 
+    /**
+     * Sets the health of the Entity
+     *
+     * @param health health of the Entity
+     */
     void setHealth(double health);
 
+    /**
+     * Returns the maximum health of the Entity
+     *
+     * @return double maximum health of the Entity
+     */
     double getMaxHealth();
 
+    /**
+     * Sets the maximum health of the Entity
+     * <p>maxHealth cannot be above the current health of the Entity</p>
+     * TODO: Rephrase?
+     *
+     * @param maxHealth maximum health of the Entity
+     */
     void setMaxHealth(double maxHealth);
 
+    /**
+     * Returns the amount of remaining air for the Entity
+     *
+     * @return long remaining amount of air in ticks
+     */
     long getRemainingAir();
 
+    /**
+     * Sets the amount of remaining air for the LivingAir
+     *
+     * @param ticks long amount of remaining air in ticks
+     */
     void setRemainingAir(long ticks);
 
+    /**
+     * Returns the display name for the Entity
+     *
+     * @return String the display name for the Entity
+     */
     @Override
     String getDisplayName();
 
+    /**
+     * Returns the location of the Entity's eye
+     *
+     * @return Location the location of the Entity's eye
+     */
     Location getEyeLocation();
 
+    /**
+     * Returns if the Entity can pickup items
+     *
+     * @return true if the Entity can pickup items
+     */
     boolean canPickupItems();
 
+    /**
+     * Returns the last EntityDamageEvent which inflicted this Entity
+     * <p>The event may be cancelled.</p>
+     * 
+     * @return EntityDamageEvent the last Entity to inflict this Entity
+     */
     EntityDamageEvent getLastDamageCause();
 
     /**
-     * Returns a player if a player has done damage to this entity since its last full heal, else returns null Used for
-     * death messages
+     * Returns the player who dealt damage to this Entity since its last full heal
+     * <p>Used for death messages</p>
+     *
+     * @return Player the player who dealt damage to this entity since last full heal
+     *          Returns null if no player has damaged the Entity
      */
     Player hurtByPlayer();
 
     /**
      * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO
-     * LivingEntity)
+     * Entity)
      *
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */

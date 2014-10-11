@@ -30,6 +30,7 @@ package net.tridentsdk.api.msg;
 import com.google.gson.JsonObject;
 import net.tridentsdk.api.ChatColor;
 
+// TODO: JavaDoc
 public final class Message {
 
     JsonObject message;

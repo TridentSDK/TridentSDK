@@ -100,9 +100,9 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
     }
 
     /**
-     * Return if the event is cancel
+     * Return if the event is cancelled
      *
-     * @return true if cancel
+     * @return true if cancelled
      */
     @Override
     public boolean isCancelled() {
@@ -110,7 +110,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
     }
 
     /**
-     * Set if the event is cancel
+     * Set if the event is cancelled
      *
      * @param cancel Boolean cancellation state of event
      */
