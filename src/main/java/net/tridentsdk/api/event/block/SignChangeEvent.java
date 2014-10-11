@@ -84,7 +84,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
     }
 
     /**
-     * Returns the text of the specified lign
+     * Returns the text of the specified line
      *
      * @param i line of the Sign
      * @return String text of the specified line
