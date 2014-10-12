@@ -1,9 +1,12 @@
 language: java
 notifications:
   email: false
+  hipchat:
+    rooms:
+      secure: Qyvl3jyo/+lP84q7oxzserKaTZ2Woc6aYK8ZhvHf2D258JaHfx2tVMtxWf8oWHpYmWjrpz9eKwVfGUdfV87eZyoFA3dmxSQfdBtJakg9+obTPRDl+roVrxMKhcyDvZGeBu6qEUgcaaSMTaq+ot8IfJaMQUojuUXCNnhxvmnnzus=
 install: true
 script:
-  - mvn clean install
+- mvn clean install
 matrix:
   include:
   - jdk: openjdk7
