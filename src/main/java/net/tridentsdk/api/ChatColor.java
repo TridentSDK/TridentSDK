@@ -27,21 +27,39 @@
 
 package net.tridentsdk.api;
 
-public enum Gamemode {
+/**
+ * A color able to be used in the chat text
+ *
+ * <p>These should be self-explanatory, if you need more help, take a look at <a href="http://minecraft.gamepedia
+ * .com/Formatting_codes">Minecraft Wiki</a>.</p>
+ *
+ * @author The TridentSDK Team
+ */
+public enum ChatColor {
+    BLACK,
+    DARK_BLUE,
+    DARK_GREEN,
+    DARK_AQUA,
+    DARK_RED,
+    DARK_PURPLE,
+    GOLD,
+    GRAY,
+    DARK_GRAY,
+    BLUE,
+    GREEN,
+    AQUA,
+    RED,
+    LIGHT_PURPLE,
+    WHITE,
+    OBFUSCATED,
+    BOLD,
+    STRIKETHROUGH,
+    UNDERLINE,
+    ITALIC,
+    RESET;
 
-    SURVIVAL(0),
-    CREATIVE(1),
-    ADVENTURE(2),
-    SPECTATE(3),
-    HARDCORE(0x8);
-
-    private final byte b;
-
-    Gamemode(int i) {
-        this.b = (byte) i;
-    }
-
-    public byte toByte() {
-        return this.b;
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
     }
 }

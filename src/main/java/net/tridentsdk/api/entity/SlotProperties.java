@@ -33,7 +33,6 @@ package net.tridentsdk.api.entity;
  * @author TridentSDK Team
  */
 public interface SlotProperties {
-
     /*
      * TODO: Toggle set/get of various Slots
      */

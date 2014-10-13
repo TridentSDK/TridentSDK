@@ -36,7 +36,6 @@ import net.tridentsdk.api.entity.Peaceful;
  * @author TridentSDK Team
  */
 public interface Chicken extends Ageable, Peaceful {
-
     /**
      * Whether or not this Chicken is a 'Chicken Jockey', defined by whether or not this Chicken will naturally despawn
      *

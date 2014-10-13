@@ -27,9 +27,12 @@
 
 package net.tridentsdk.api.inventory;
 
+import net.tridentsdk.api.window.Window;
+
 /**
  * Mock Inventory to provide reference to its uses until valid Inventory is implemented
+ *
+ * @author The TridentSDK Team
  */
-public interface Inventory {
-    ItemStack[] getContents();
+public interface Inventory extends Window {
 }

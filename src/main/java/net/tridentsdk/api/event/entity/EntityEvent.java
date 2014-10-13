@@ -57,15 +57,17 @@ public class EntityEvent extends Event implements Cancellable {
     /**
      * set the entity associated with this event
      */
-    public void setEntity(Entity entity) {
+    protected void setEntity(Entity entity) {
         this.entity = entity;
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return this.isCancelled;
     }
 
-    @Override public void setCancelled(boolean b) {
+    @Override
+    public void setCancelled(boolean b) {
         this.isCancelled = b;
     }
 }

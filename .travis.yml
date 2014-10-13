@@ -1,0 +1,16 @@
+before_install: "git clone -b travis `git config --get remote.origin.url` target/travis"
+script: "mvn clean install deploy --settings target/travis/settings.xml"
+language: java
+notifications:
+  email: false
+  hipchat:
+    rooms:
+      secure: Yw7l3qr8ymHAXAFujkjbC8TKBYxMXZF9eWSgbAr4kJLMCL6GXcWYbVL6gcYcPXgBJyeUzcAoy+XSmU+F+jUv5aNN19171kKaJaTyFi8OAxjxSqyqwnlqhmYMzo7gMKnOiuLzQVuE8OBd3kizBKyvMFsrhTjA+iYYc5fPG20XrY8=
+install: true
+matrix:
+  include:
+  - jdk: openjdk7
+env:
+  global:
+    - secure: "ewpnnG41+tNBDWHcU69RlQlqItVHQcCso+Dc+gEJdEUSXTHowj18lQR7DpOIsZmnOrg9yP35dXQnoTgnsduvBCZWoUToqoHyiIXBswBmv+s3zwoJ1gBl6l4Wt7uVEW+W8+eCJxxU1NXs43KcCyjx/vL6PHOaDSGBuZYLRdF/3fM="
+    - secure: "M8cFHpjB09qIebLFosrU7udDyiLas9iEQ+Wr74Ao5sqZQ9lOdmqco3bV96W/eblDU3KqMpCXHdgmDhpzgAHZQMEpxDZqu6ifpeNu6uuET4tX5NEj2xudbLf3CUCSc7GSzhxen3Oz1aP9MxNmjS6aXSgddZmmeG/LIGx7g3YQW+Y="

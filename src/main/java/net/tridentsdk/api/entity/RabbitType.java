@@ -27,8 +27,10 @@
 
 package net.tridentsdk.api.entity;
 
+/**
+ * Possible rabbit types, color and friendliness
+ */
 public enum RabbitType {
-
     BROWN(0),
 
     WHITE(1),
@@ -42,11 +44,13 @@ public enum RabbitType {
     SALT_AND_PEPPER(5),
 
     KILLER_RABBIT(99);
+
     private static final RabbitType[] byId = new RabbitType[7];
 
     static {
         for (RabbitType type : RabbitType.values()) {
             RabbitType.byId[type.id] = type;
+            // TODO by ordinal?
         }
     }
 
@@ -56,4 +60,22 @@ public enum RabbitType {
         this.id = id;
     }
 
+    /**
+     * Returns the {@code int} value of the RabbitType
+     *
+     * @return {@code int} value of the RabbitType
+     */
+    public int toInt() {
+        return this.id;
+    }
+
+    /**
+     * Returns the {@code int} value of the RabbitType
+     *
+     * @param rabbitType RabbitType
+     * @return {@code int} value of the RabbitType
+     */
+    public static int toInt(RabbitType rabbitType) {
+        return rabbitType.toInt();
+    }
 }

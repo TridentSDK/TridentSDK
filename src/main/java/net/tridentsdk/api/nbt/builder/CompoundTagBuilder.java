@@ -61,6 +61,21 @@ public class CompoundTagBuilder<B> {
         return new ListTagBuilder<>(name, this.current, this, type);
     }
 
+    public CompoundTagBuilder<B> compoundTag(CompoundTag value) {
+        this.current.addTag(value);
+        return this;
+    }
+
+    public CompoundTagBuilder<B> listTag(ListTag tag) {
+        this.current.addTag(tag);
+        return this;
+    }
+
+    public CompoundTagBuilder<B> nullTag(String name) {
+        this.current.addTag(new NullTag(name));
+        return this;
+    }
+
     public CompoundTagBuilder<B> byteArrayTag(String name, byte... value) {
         this.current.addTag(new ByteArrayTag(name).setValue(value));
         return this;

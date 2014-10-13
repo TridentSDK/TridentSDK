@@ -36,7 +36,6 @@ import net.tridentsdk.api.entity.Peaceful;
  * @author TridentSDK Team
  */
 public interface Sheep extends Ageable, Peaceful {
-
     /**
      * The color of this sheep's wool
      *

@@ -31,7 +31,6 @@ package net.tridentsdk.api;
  * TODO more darude sandstorm's
  */
 public enum Sound {
-
     AMBIENT_CAVE("ambient.cove.cave"),
     AMBIENT_WEATHER_RAIN("ambient.weather.rain"),
     AMBIENT_WEATHER_THUNDER("ambient.weather.thunder"),
@@ -53,7 +52,7 @@ public enum Sound {
 
     MOB_CAT_HISS("mob.cat.hiss"),
     MOB_CAT_HITT("mob.cat.hitt"),
-    MOB_CAT_MOEW("mob.cat.meow"),
+    MOB_CAT_MEOW("mob.cat.meow"),
     MOB_CAT_PURREOW("mob.cat.purreow");
 
     private final String s;

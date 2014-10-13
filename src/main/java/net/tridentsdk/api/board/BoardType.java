@@ -27,6 +27,11 @@
 
 package net.tridentsdk.api.board;
 
+/**
+ * The type of board, also where it is displayed
+ *
+ * @author The TridentSDK Team
+ */
 public enum BoardType {
     LIST(0),
     SIDEBAR(1),
@@ -38,7 +43,22 @@ public enum BoardType {
         this.position = (byte) position;
     }
 
+    /**
+     * Returns the {@code byte} value of the BoardType
+     *
+     * @return {@code byte} value of the BoardType
+     */
     public byte toByte() {
         return this.position;
+    }
+
+    /**
+     * Returns the {@code byte} value of the BoardType
+     *
+     * @param boardType BoardType
+     * @return {@code byte} value of the BoardType
+     */
+    public static byte toByte(BoardType boardType) {
+        return boardType.toByte();
     }
 }

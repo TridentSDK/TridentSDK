@@ -28,21 +28,77 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
+import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.inventory.ItemStack;
 
-public class BlockBreakEvent extends BlockEvent {
+/**
+ * Called whenever a Block is broken
+ */
+public class BlockBreakEvent extends BlockEvent implements Cancellable {
 
     private final Player player;
+    private final BlockFace blockFace;
+    private final ItemStack itemInHand;
+    private boolean cancel;
 
-    public BlockBreakEvent(Player player, Block block) {
+    /**
+     * @param player     Player associated with this event
+     * @param block      Block associated with this event
+     * @param blockFace  BlockFace
+     * @param itemInHand ItemStack
+     */
+    public BlockBreakEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
         super(block);
         this.player = player;
+        this.blockFace = blockFace;
+        this.itemInHand = itemInHand;
     }
 
     /**
-     * @return return the player associated with this event
+     * Return if the event is cancelled
+     *
+     * @return true if cancelled
      */
+    @Override
+    public boolean isCancelled() {
+        return this.cancel;
+    }
 
+    /**
+     * Set if the event is cancelled
+     *
+     * @param cancel Boolean cancellation state of event
+     */
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.cancel = cancel;
+    }
+
+    /**
+     * Returns the item in the player's hand
+     *
+     * @return ItemStack in the player's hand
+     */
+    public ItemStack getItemInHand() {
+        return this.itemInHand;
+    }
+
+    /**
+     * Returns the block face clicked to break this block
+     *
+     * @return BlockFlace of the clicked block
+     */
+    public BlockFace getBlockFace() {
+        return this.blockFace;
+    }
+
+    /**
+     * Get the player associated with this event
+     *
+     * @return Player assoctaed with this event
+     */
     public Player getPlayer() {
         return this.player;
     }

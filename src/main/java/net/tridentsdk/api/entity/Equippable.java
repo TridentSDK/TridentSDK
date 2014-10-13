@@ -35,9 +35,16 @@ import net.tridentsdk.api.inventory.ItemStack;
  * @author TridentSDK Team
  */
 public interface Equippable extends Entity {
-
     /**
      * This entity's equipment
+     *
+     * <p>Layout:
+     * <ul>
+     *     <li>Index 0: Helmet</li>
+     *     <li>Index 1: Chestplate</li>
+     *     <li>Index 2: Leggings</li>
+     *     <li>Index 3: Boots</li>
+     * </ul></p>
      *
      * @return this entity's equipment
      */

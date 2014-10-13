@@ -30,12 +30,20 @@ package net.tridentsdk.api;
 import net.tridentsdk.api.util.Vector;
 
 /**
- * TODO
+ * A basic structure in minecraft, a material bearing piece set at a given location
+ *
+ * @author The TridentSDK Team
  */
 public class Block {
     private final Location location;
-    private Material material;
+    protected Material material;
+    protected byte data;
 
+    /**
+     * Constructs the wrapper representing the block
+     *
+     * @param location Location of the Block
+     */
     public Block(Location location) {
         this.location = location;
 
@@ -45,18 +53,63 @@ public class Block {
         this.material = worldBlock.material;
     }
 
+    /**
+     * For internal use only
+     */
+    protected Block(Location location, boolean createdByServer) {
+        this.location = location;
+    }
+    /**
+     * Returns the Material of the Block
+     *
+     * @return Material of the Block
+     */
     public Material getType() {
         return this.material;
     }
 
-    public Location getLocation() {
-        return this.location;
+    // TODO: Verify the redundancy
+    public void setType(Material material) {
+        this.material = material;
     }
 
+    // TODO: Verify the redundancy
+    public Material getMaterial() {
+        return this.material;
+    }
+
+    /**
+     * Set the Material of this Block
+     *
+     * @param material Material to set this Block to
+     */
     public void setMaterial(Material material) {
         this.material = material;
     }
 
+    /**
+     * Returns the Location of the Block
+     *
+     * @return Location of the Block
+     */
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public byte getData() {
+        return data;
+    }
+
+    public void setData(byte data) {
+        this.data = data;
+    }
+
+    /**
+     * Returns a block immediately to the direction specified
+     *
+     * @param vector the direction to look for the block adjacent to the current
+     * @return the block adjacent to the current
+     */
     public Block getRelative(Vector vector) {
         return new Block(this.location.getRelative(vector));
     }

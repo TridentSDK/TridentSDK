@@ -33,7 +33,6 @@ package net.tridentsdk.api.entity;
  * @author TridentSDK Team
  */
 public interface MinecartBase extends Vehicle {
-
     /**
      * Represents this Minecart's display tile, in the form of a BlockState
      *

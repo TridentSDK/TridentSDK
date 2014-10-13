@@ -36,7 +36,6 @@ import net.tridentsdk.api.inventory.ItemStack;
  * @author TridentSDK Team
  */
 public interface ItemFrame extends Hanging {
-
     /**
      * Get the current ItemStack this ItemFrame has
      *

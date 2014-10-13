@@ -34,7 +34,15 @@ public class NBTException extends Exception {
 
     private static final long serialVersionUID = -1801178872689804597L;
 
-    public NBTException(String string) {
-        super(string);
+    public NBTException(String message) {
+        super(message);
+    }
+
+    public NBTException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public NBTException(Throwable cause) {
+        super(cause);
     }
 }

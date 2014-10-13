@@ -28,16 +28,41 @@
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.entity.Entity;
+import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.entity.living.Player;
 
 public class EntityDeathEvent extends EntityEvent {
 
     /**
-     * TODO add cause of death
-     *
      * @param entity the entity that has died
      */
 
     public EntityDeathEvent(Entity entity) {
         super(entity);
     }
+
+    public EntityDamageEvent getDeathCause() {
+        return this.getEntity().getLastDamageCause();
+    }
+
+    /**
+     * Returns a Player if a player was involved in the killing of this entity, else null
+     */
+    public Player killedByPlayer() {
+        return this.getEntity().hurtByPlayer();
+    }
+
+    /**
+     * Returns whether or not a player was involved in the killing of this entity
+     */
+    public boolean wasKilledByPlayer() {
+        return this.killedByPlayer() == null;
+    }
+
+    @Override
+    public LivingEntity getEntity() {
+        return (LivingEntity) super.getEntity();
+    }
 }
+
+

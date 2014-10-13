@@ -30,18 +30,20 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Event;
 
-public class BlockEvent extends Event {
-
+public abstract class BlockEvent extends Event {
     private final Block block;
 
     /**
      * @param block the block associated with the event
      */
-
     public BlockEvent(Block block) {
         this(block, false);
     }
 
+    /**
+     * @param block the block associated with the event
+     * @param async if this event is asynchronous
+     */
     public BlockEvent(Block block, boolean async) {
         super(async);
         this.block = block;
@@ -50,7 +52,6 @@ public class BlockEvent extends Event {
     /**
      * @return return the block associated with the event
      */
-
     public Block getBlock() {
         return this.block;
     }

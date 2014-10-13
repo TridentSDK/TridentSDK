@@ -32,6 +32,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface PluginDescription {
+    // TODO: Provide documentation on what this priority actually is
     int priority() default 1;
 
     String name();

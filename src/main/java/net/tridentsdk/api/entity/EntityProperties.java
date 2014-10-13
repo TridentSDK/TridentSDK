@@ -33,4 +33,5 @@ package net.tridentsdk.api.entity;
  * @author TridentSDK Team
  */
 public interface EntityProperties {
+
 }

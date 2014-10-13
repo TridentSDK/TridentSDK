@@ -27,18 +27,21 @@
 
 package net.tridentsdk.plugin;
 
+import net.tridentsdk.api.Trident;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class TridentPluginLoader {
-
+public class TridentPluginHandler {
     private final List<TridentPlugin> plugins = new ArrayList<>();
 
     public void load(File pluginFile) {
@@ -69,10 +72,15 @@ public class TridentPluginLoader {
 
             Constructor<? extends TridentPlugin> defaultConstructor =
                     pluginClass.getConstructor(File.class, PluginDescription.class);
-            TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
+            final TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
 
             this.plugins.add(plugin);
-            plugin.startup();
+            Trident.getServer().provideThreads().providePluginThread(plugin).addTask(new Runnable() {
+                @Override
+                public void run() {
+                    plugin.startup();
+                }
+            });
 
             // TODO: Register commands and listeners
         } catch (IOException | ClassNotFoundException | NoSuchMethodException
@@ -88,7 +96,14 @@ public class TridentPluginLoader {
         }
     }
 
-    public List<TridentPlugin> getPlugins() {
+    public void disable(TridentPlugin plugin) {
+        plugin.onDisable();
+
+        this.plugins.remove(plugin);
+        plugin.classLoader.unloadClasses();
+    }
+
+    public Iterable<TridentPlugin> getPlugins() {
         return Collections.unmodifiableList(this.plugins);
     }
 }

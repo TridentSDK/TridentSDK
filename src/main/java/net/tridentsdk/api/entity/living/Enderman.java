@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.Neutral;
  * @author TridentSDK Team
  */
 public interface Enderman extends Neutral {
-
     /**
      * Get the block that this enderman is currently carrying
      *

@@ -28,7 +28,6 @@
 package net.tridentsdk.api.entity;
 
 public enum HorseType {
-
     /**
      * Generic Horse
      */

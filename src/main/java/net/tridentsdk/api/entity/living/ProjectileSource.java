@@ -24,6 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package net.tridentsdk.api.entity.living;
 
 import net.tridentsdk.api.entity.EntityProperties;
@@ -31,9 +32,10 @@ import net.tridentsdk.api.entity.Projectile;
 
 /**
  * Represents the source of a launched Projectile
+ *
+ * @author The TridentSDK Team
  */
 public interface ProjectileSource {
-
     /**
      * Launch a projectile based on the given EntityProperties
      *

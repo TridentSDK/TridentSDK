@@ -37,32 +37,67 @@ public class PartRotation {
     private int rotY;
     private int rotZ;
 
+    /**
+     * @param rotX Rotation value on the X plane
+     * @param rotY Rotation value on the Y plane
+     * @param rotZ Rotation value on the Z plane
+     */
     public PartRotation(int rotX, int rotY, int rotZ) {
         this.rotX = rotX;
         this.rotY = rotY;
         this.rotZ = rotZ;
     }
 
+    /**
+     * Get the rotation on the X plane
+     *
+     * @return Integer rotation on the X plane
+     */
     public int getRotX() {
         return this.rotX;
     }
 
+    /**
+     * Set the rotation on the X plane
+     *
+     * @param rotX rotation on the X plane
+     */
     public void setRotX(int rotX) {
         this.rotX = rotX;
     }
 
+    /**
+     * Get the rotation on the Y plane
+     *
+     * @return Integer rotation on the Y plane
+     */
     public int getRotY() {
         return this.rotY;
     }
 
+    /**
+     * Set the rotation on the Y plane
+     *
+     * @param rotY rotation on the Y plane
+     */
     public void setRotY(int rotY) {
         this.rotY = rotY;
     }
 
+    /**
+     * Get the rotation on the Z plane
+     *
+     * @return Integer rotation on the Z plane
+     */
     public int getRotZ() {
         return this.rotZ;
     }
 
+    /**
+     * Set the rotation on the Z plane
+     *
+     * @param rotZ rotation on the Z plane
+     */
     public void setRotZ(int rotZ) {
         this.rotZ = rotZ;
     }

@@ -27,8 +27,7 @@
 
 package net.tridentsdk.api.world;
 
-import net.tridentsdk.api.Block;
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.*;
 
 public interface World {
     String getName();
@@ -44,4 +43,12 @@ public interface World {
     Block getBlockAt(Location location);
 
     ChunkSnapshot getChunkSnapshot();
+
+    Dimension getDimesion();
+
+    Difficulty getDifficulty();
+
+    GameMode getDefaultGamemode();
+
+    LevelType getLevelType();
 }

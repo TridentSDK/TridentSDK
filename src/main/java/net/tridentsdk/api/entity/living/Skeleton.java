@@ -30,8 +30,12 @@ package net.tridentsdk.api.entity.living;
 import net.tridentsdk.api.entity.Equippable;
 import net.tridentsdk.api.entity.Hostile;
 
+/**
+ * Represents a skeleton mob
+ *
+ * @author The TridentSDK Team
+ */
 public interface Skeleton extends Hostile, Equippable {
-
     /**
      * Whether or not this is a Wither Skeleton
      *

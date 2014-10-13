@@ -27,17 +27,21 @@
 
 package net.tridentsdk.api.event.player;
 
+import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.event.entity.EntityDeathEvent;
 
-public class PlayerDeathEvent extends PlayerEvent {
+public class PlayerDeathEvent extends EntityDeathEvent {
 
     /**
-     * TODO add cause of death
-     *
      * @param player the player associated with this event (that died)
      */
 
-    public PlayerDeathEvent(Player player) {
+    public PlayerDeathEvent(Entity player) {
         super(player);
+    }
+
+    public Player getPlayer() {
+        return (Player) super.getEntity();
     }
 }

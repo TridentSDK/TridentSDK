@@ -27,6 +27,9 @@
 
 package net.tridentsdk.api.util;
 
+import net.tridentsdk.api.Location;
+import net.tridentsdk.api.world.World;
+
 import java.io.Serializable;
 
 /**
@@ -110,7 +113,7 @@ public class Vector implements Serializable, Cloneable {
      */
     public Vector add(int x, int y, int z) {
         return this.add((double) x, (double) y, (double) z);
-        /* Implementation detail:
+        /* TODO: Implementation detail:
         DO NOT CREATE A NEW VECTOR HERE JUST BECAUSE (!)
         Doing so wastes memory and adds unnecessary object
         creation overhead, therefore, delegate to the
@@ -309,6 +312,13 @@ public class Vector implements Serializable, Cloneable {
     }
 
     /**
+     * Returns a new location in this world, with the coordinates the x, y, and z values
+     */
+    public Location toLocation(World world) {
+        return new Location(world, this.x, this.y, this.z);
+    }
+
+    /**
      * Gets the x directional-magnitude value
      *
      * @return the vector x value
@@ -360,5 +370,19 @@ public class Vector implements Serializable, Cloneable {
      */
     public void setZ(double z) {
         this.z = z;
+    }
+
+    /**
+     * Clones this Vector.
+     *
+     * @return the cloned vector
+     */
+    @Override
+    public Vector clone() {
+        try {
+            return (Vector) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 }

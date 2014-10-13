@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.Hostile;
  * @author TridentSDK Team
  */
 public interface Creeper extends Hostile {
-
     /**
      * Whether or not this creeper is powered (Struck by lightning)
      *
