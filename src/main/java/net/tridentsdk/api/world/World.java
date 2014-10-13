@@ -46,7 +46,7 @@ public interface World {
 
     Dimension getDimesion();
 
-    Difficulty getDifficulity();
+    Difficulty getDifficulty();
 
     GameMode getDefaultGamemode();
 
