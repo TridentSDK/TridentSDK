@@ -36,7 +36,8 @@ import net.tridentsdk.api.util.Vector;
  */
 public class Block {
     private final Location location;
-    private Material material;
+    protected Material material;
+    protected byte data;
 
     /**
      * Constructs the wrapper representing the block
@@ -52,6 +53,12 @@ public class Block {
         this.material = worldBlock.material;
     }
 
+    /**
+     * For internal use only
+     */
+    protected Block(Location location, boolean createdByServer) {
+        this.location = location;
+    }
     /**
      * Returns the Material of the Block
      *
@@ -87,6 +94,14 @@ public class Block {
      */
     public Location getLocation() {
         return this.location;
+    }
+
+    public byte getData() {
+        return data;
+    }
+
+    public void setData(byte data) {
+        this.data = data;
     }
 
     /**
