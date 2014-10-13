@@ -35,7 +35,7 @@ import java.util.*;
  * @author The TridentSDK Team
  */
 public class ListTag extends NBTTag implements TagContainer {
-    final Collection<NBTTag> tags = new ArrayList<>();
+    final ArrayList<NBTTag> tags = new ArrayList<>();
     final TagType innerType;
 
     public ListTag(String name, TagType innerType) {
@@ -45,6 +45,10 @@ public class ListTag extends NBTTag implements TagContainer {
 
     public List<NBTTag> listTags() {
         return Lists.newArrayList(this.tags);
+    }
+
+    public NBTTag getTag(int index) {
+        return tags.get(index);
     }
 
     public void clearTags() {
