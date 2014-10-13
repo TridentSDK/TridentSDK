@@ -33,7 +33,6 @@ package net.tridentsdk.api.entity;
  * @author TridentSDK Team
  */
 public interface Guardian extends Hostile {
-
     /**
      * Whether this Guardian is an Elder Guardian or not
      *

@@ -24,41 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-package net.tridentsdk.api.board;
-
 /**
- * The type of board, also where it is displayed
- *
- * @author The TridentSDK Team
+ * Entities that can be thrown (such as potions) or can be launched (arrows, fireballs, snowballs, etc.)
  */
-public enum BoardType {
-    LIST(0),
-    SIDEBAR(1),
-    BELOW_NAME(2);
-
-    private final byte position;
-
-    BoardType(int position) {
-        this.position = (byte) position;
-    }
-
-    /**
-     * Returns the {@code byte} value of the BoardType
-     *
-     * @return {@code byte} value of the BoardType
-     */
-    public byte toByte() {
-        return this.position;
-    }
-
-    /**
-     * Returns the {@code byte} value of the BoardType
-     *
-     * @param boardType BoardType
-     * @return {@code byte} value of the BoardType
-     */
-    public static byte toByte(BoardType boardType) {
-        return boardType.toByte();
-    }
-}
+package net.tridentsdk.api.entity.projectile;

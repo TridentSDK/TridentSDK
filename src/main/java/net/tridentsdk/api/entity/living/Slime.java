@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.Hostile;
  * @author TridentSDK Team
  */
 public interface Slime extends Hostile {
-
     /**
      * Returns the size of this slime
      *

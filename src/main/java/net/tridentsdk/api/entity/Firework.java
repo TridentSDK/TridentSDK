@@ -30,7 +30,6 @@ package net.tridentsdk.api.entity;
 import net.tridentsdk.api.inventory.FireworkProperties;
 
 public interface Firework extends Entity {
-
     /**
      * Get the number of ticks that this Firework will explode at
      *

@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.*;
  * @author TridentSDK Team
  */
 public interface Villager extends Ageable, Tradeable, Peaceful {
-
     /**
      * The profession of this villager
      *

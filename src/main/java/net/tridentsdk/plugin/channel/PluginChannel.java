@@ -62,7 +62,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PluginChannel {
-
     private final List<Byte[]> history = new ArrayList<>();
 
     public void process(byte... message) {

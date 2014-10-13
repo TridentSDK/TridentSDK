@@ -33,7 +33,6 @@ package net.tridentsdk.api.entity;
  * @author TridentSDK Team
  */
 public interface Item extends Entity {
-
     /**
      * Represents the age of this Item entity
      *

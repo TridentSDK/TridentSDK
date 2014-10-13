@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.Entity;
  * @author TridentSDK Team
  */
 public interface FallingBlock extends Entity {
-
     /**
      * The state this FallingBlock represents
      *

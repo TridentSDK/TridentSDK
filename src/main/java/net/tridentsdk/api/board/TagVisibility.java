@@ -27,10 +27,27 @@
 
 package net.tridentsdk.api.board;
 
+/**
+ * Visibility flag of the player tag
+ *
+ * @author The TridentSDK Team
+ */
 public enum TagVisibility {
+    /**
+     * Always visible
+     */
     ALWAYS("always"),
+    /**
+     * Hidden from the other team
+     */
     HIDE_OTHER_TEAMS("hideFromOtherTeams"),
+    /**
+     * Hidden from own team
+     */
     HIDE_OWN_TEAM("hideFromOwnTeam"),
+    /**
+     * Never shown
+     */
     NEVER("never");
 
     private final String s;

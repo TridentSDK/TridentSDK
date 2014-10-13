@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.Neutral;
  * @author TridentSDK Team
  */
 public interface Bat extends Neutral {
-
     /**
      * Whether or not the bat is hanging
      *

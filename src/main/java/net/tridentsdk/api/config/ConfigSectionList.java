@@ -33,14 +33,17 @@ import java.util.Collection;
 
 // TODO: Javadoc
 /**
+ * Section of the config dedicated to storing values from a collection
+ *
  * @author The TridentSDK Team
  */
 public class ConfigSectionList<V> extends ConfigList<V> {
     private static final long serialVersionUID = -5809487198383216782L;
-    private ConfigSection parent;
+    private final ConfigSection parent;
 
     protected ConfigSectionList(ConfigSection parent, JsonArray handle) {
         super(handle);
+        this.parent = parent;
     }
 
     @Override

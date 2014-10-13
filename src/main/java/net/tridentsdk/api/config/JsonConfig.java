@@ -43,11 +43,21 @@ import java.nio.file.*;
 public class JsonConfig extends ConfigSection {
     private final Path path;
 
+    /**
+     * Creates a new JSON configuration file from NIO path
+     *
+     * @param path the NIO path for file directory
+     */
     public JsonConfig(Path path) {
         this.path = path;
         this.reload();
     }
 
+    /**
+     * Creates a new JSON configuration file using the file that may or may not exist
+     *
+     * @param file the file to use as a JSON config, preferably suffixed with {@code .json}
+     */
     public JsonConfig(File file) {
         this.path = file.toPath();
         this.reload();
@@ -74,6 +84,9 @@ public class JsonConfig extends ConfigSection {
         return this;
     }
 
+    /**
+     * Reloads the configuration
+     */
     public void reload() {
         try {
             this.jsonHandle = Files.isReadable(this.path) ?

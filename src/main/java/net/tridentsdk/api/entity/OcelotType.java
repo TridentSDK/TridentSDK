@@ -33,7 +33,6 @@ package net.tridentsdk.api.entity;
  * @author TridentSDK Team
  */
 public enum OcelotType {
-
     /**
      * Wild
      */
@@ -53,11 +52,13 @@ public enum OcelotType {
      * Siamese
      */
     SIAMESE(3);
+
     private static final OcelotType[] byId = new OcelotType[4];
 
     static {
         for (OcelotType type : OcelotType.values()) {
             OcelotType.byId[type.id] = type;
+            // TODO by ordinal?
         }
     }
 

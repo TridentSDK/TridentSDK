@@ -37,7 +37,6 @@ import java.util.Collection;
  * @author TridentSDK Team
  */
 public interface Tradeable {
-
     /**
      * The trades this entity offers
      *

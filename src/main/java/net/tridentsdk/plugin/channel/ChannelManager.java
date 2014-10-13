@@ -60,7 +60,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class ChannelManager {
-
     private static final ChannelManager INSTANCE = new ChannelManager();
 
     private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();

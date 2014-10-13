@@ -32,9 +32,10 @@ import net.tridentsdk.api.entity.Projectile;
 
 /**
  * Represents the source of a launched Projectile
+ *
+ * @author The TridentSDK Team
  */
 public interface ProjectileSource {
-
     /**
      * Launch a projectile based on the given EntityProperties
      *

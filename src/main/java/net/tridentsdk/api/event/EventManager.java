@@ -63,7 +63,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public class EventManager {
-
     private final EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
             new EnumMap<>(Importance.class);
     private RegisteredListener[] listeners;

@@ -35,7 +35,6 @@ import net.tridentsdk.api.entity.Projectile;
  * @author TridentSDK Team
  */
 public interface Arrow extends Projectile {
-
     /**
      * Represents whether or not you can pickup this Arrow
      *

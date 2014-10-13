@@ -36,7 +36,6 @@ import net.tridentsdk.api.entity.Hostile;
  * @author TridentSDK Team
  */
 public interface Zombie extends Hostile, Equippable {
-
     /**
      * Represents if this zombie is a Zombie Villager or not
      *

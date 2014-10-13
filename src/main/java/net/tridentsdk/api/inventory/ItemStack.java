@@ -29,8 +29,12 @@ package net.tridentsdk.api.inventory;
 
 import net.tridentsdk.api.Material;
 
+/**
+ * Inventory item, holding all properties of the item
+ *
+ * @author The TridentSDK Team
+ */
 public class ItemStack {
-
     private final int id;
     private final Material mat;
 

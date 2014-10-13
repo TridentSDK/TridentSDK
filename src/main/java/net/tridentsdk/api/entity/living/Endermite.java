@@ -30,7 +30,7 @@ package net.tridentsdk.api.entity.living;
 import net.tridentsdk.api.entity.Hostile;
 
 /**
- * Represents an Endermite.
+ * Represents an Endermite
  *
  * @author TridentSDK Team
  */

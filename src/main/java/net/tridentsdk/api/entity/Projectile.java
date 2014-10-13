@@ -36,7 +36,6 @@ import net.tridentsdk.api.entity.living.ProjectileSource;
  * @author TridentSDK Team
  */
 public interface Projectile extends Entity {
-
     /**
      * Represents the shooter of this Projectile, if applicable
      *

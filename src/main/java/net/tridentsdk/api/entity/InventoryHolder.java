@@ -36,7 +36,6 @@ import net.tridentsdk.api.inventory.ItemStack;
  * @author TridentSDK Team
  */
 public interface InventoryHolder extends Entity {
-
     /*
      * TODO: Convert the return types into a valid representation of their respective objects
      */

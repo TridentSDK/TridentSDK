@@ -27,8 +27,12 @@
 
 package net.tridentsdk.api.inventory;
 
+/**
+ * Type of inventories
+ *
+ * @author The TridentSDK Team
+ */
 public enum InventoryType {
-
     CHEST("minecraft:chest"),
     CRAFTING_TABLE("minecraft:crafting_table"),
     FURNACE("minecraft:furnace"),

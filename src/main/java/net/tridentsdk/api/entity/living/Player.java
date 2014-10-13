@@ -34,12 +34,13 @@ import net.tridentsdk.api.inventory.ItemStack;
 import java.util.Locale;
 
 /**
- * TODO
+ * Represents a player entity after joining the server
+ *
+ * @author The TridentSDK Team
  */
 public interface Player extends LivingEntity {
     /**
      * Send an array of messages to the Player
-     * <p></p>
      * 
      * @param message String[] messages to be sent
      */
