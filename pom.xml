@@ -50,12 +50,12 @@
         <repository>
             <id>deployment-vilsol</id>
             <name>Internal Releases</name>
-            <url>http://repo.vil.so/nexus/content/repositories/releases/</url>
+            <url>http://repo.tridentsdk.net/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>deployment-vilsol</id>
             <name>Internal Snapshots</name>
-            <url>http://repo.vil.so/nexus/content/repositories/snapshots/</url>
+            <url>http://repo.tridentsdk.net/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
