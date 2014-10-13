@@ -33,7 +33,7 @@ import net.tridentsdk.api.ChatColor;
 // TODO: JavaDoc
 public final class Message {
 
-    JsonObject message;
+    final JsonObject message;
 
     public Message() {
         this.message = new JsonObject();

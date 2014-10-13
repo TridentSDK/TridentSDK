@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.reflect;
 
-import com.esotericsoftware.reflectasm.*;
+import com.esotericsoftware.reflectasm.ConstructorAccess;
+import com.esotericsoftware.reflectasm.FieldAccess;
+import com.esotericsoftware.reflectasm.MethodAccess;
 
 import java.lang.reflect.Field;
 
@@ -51,7 +53,7 @@ public class FastClass {
     }
 
     public static FastClass get(Object obj) {
-        return get(obj.getClass());
+        return FastClass.get(obj.getClass());
     }
 
     /**
@@ -77,18 +79,18 @@ public class FastClass {
     }
 
     public FastField[] getFields(Object instance) {
-        Field[] fields = cls.getFields();
+        Field[] fields = this.cls.getFields();
         FastField[] fastFields = new FastField[fields.length];
 
         for(int i = 0; i < fields.length; i += 1) {
-            fastFields[i] = new FastField(instance, fieldAccess, fields[i].getName());
+            fastFields[i] = new FastField(instance, this.fieldAccess, fields[i].getName());
         }
 
         return fastFields;
     }
 
     public FastField[] getFields() {
-        return getFields(null);
+        return this.getFields(null);
     }
 
     /**

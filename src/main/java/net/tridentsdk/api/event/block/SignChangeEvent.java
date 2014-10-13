@@ -103,7 +103,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      * @return String previous text on the specified line
      */
     public String setLine(int i, String text) {
-        Validate.isTrue(text.length() > 0, "Sign line length is below 0 characters");
+        Validate.isTrue(!text.isEmpty(), "Sign line length is below 0 characters");
         Validate.isTrue(text.length() <= 16, "Sign line length is above 16 characters");
 
         String previous = this.contents[i];

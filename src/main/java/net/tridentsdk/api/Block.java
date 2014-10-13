@@ -97,7 +97,7 @@ public class Block {
     }
 
     public byte getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(byte data) {

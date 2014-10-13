@@ -29,13 +29,14 @@ package net.tridentsdk.api.nbt;
 
 import com.google.common.collect.Lists;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author The TridentSDK Team
  */
 public class ListTag extends NBTTag implements TagContainer {
-    final ArrayList<NBTTag> tags = new ArrayList<>();
+    final List<NBTTag> tags = new ArrayList<>();
     final TagType innerType;
 
     public ListTag(String name, TagType innerType) {
@@ -48,7 +49,7 @@ public class ListTag extends NBTTag implements TagContainer {
     }
 
     public NBTTag getTag(int index) {
-        return tags.get(index);
+        return this.tags.get(index);
     }
 
     public void clearTags() {

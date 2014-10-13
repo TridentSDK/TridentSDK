@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.msg;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.tridentsdk.api.ChatColor;
 import net.tridentsdk.api.entity.living.Player;
 

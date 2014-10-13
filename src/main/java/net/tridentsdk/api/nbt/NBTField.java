@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface NBTField {
 
-    public String name();
+    String name();
 
-    public TagType type();
+    TagType type();
 }

@@ -27,7 +27,12 @@
 
 package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.entity.*;
+import net.tridentsdk.api.entity.HorseType;
+import net.tridentsdk.api.entity.HorseVariant;
+import net.tridentsdk.api.entity.InventoryHolder;
+import net.tridentsdk.api.entity.Peaceful;
+import net.tridentsdk.api.entity.Saddleable;
+import net.tridentsdk.api.entity.Tameable;
 
 /**
  * Represents a Horse

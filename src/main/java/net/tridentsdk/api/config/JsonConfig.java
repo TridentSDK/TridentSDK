@@ -28,11 +28,16 @@
 package net.tridentsdk.api.config;
 
 import com.google.common.base.Charsets;
-import com.google.gson.*;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 // TODO: Javadoc
 /**

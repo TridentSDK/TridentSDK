@@ -41,7 +41,7 @@ public final class NBTSerializer {
     }
 
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
-        if((NBTSerializable.class.isAssignableFrom(clzz))) {
+        if(NBTSerializable.class.isAssignableFrom(clzz)) {
             throw new IllegalArgumentException("Provided object is not serializable!");
         }
 
@@ -51,14 +51,14 @@ public final class NBTSerializer {
         for(FastField field : cls.getFields(instance)) {
             Field f = field.toField();
 
-            if(!(f.isAnnotationPresent(NBTField.class))) {
+            if(!f.isAnnotationPresent(NBTField.class)) {
                 continue;
             }
 
             String tagName = f.getAnnotation(NBTField.class).name();
             TagType type = f.getAnnotation(NBTField.class).type();
 
-            if(!(tag.containsTag(tagName)))
+            if(!tag.containsTag(tagName))
                 new IllegalArgumentException(StringUtil.concat(tagName, " was unable to be found in provided compound tag!"))
                         .printStackTrace();
 
@@ -80,7 +80,7 @@ public final class NBTSerializer {
                     break;
 
                 case COMPOUND:
-                    field.set((CompoundTag) value);
+                    field.set(value);
                     break;
 
                 case DOUBLE:
@@ -108,7 +108,7 @@ public final class NBTSerializer {
                     break;
 
                 case LIST:
-                    field.set((ListTag) value);
+                    field.set(value);
                     break;
 
                 case STRING:
@@ -135,7 +135,7 @@ public final class NBTSerializer {
         for(FastField field : cls.getFields(serializable)) {
             Field f = field.toField();
 
-            if(!(f.isAnnotationPresent(NBTField.class))) {
+            if(!f.isAnnotationPresent(NBTField.class)) {
                 continue;
             }
 

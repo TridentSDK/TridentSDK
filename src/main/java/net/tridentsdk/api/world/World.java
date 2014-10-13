@@ -27,7 +27,10 @@
 
 package net.tridentsdk.api.world;
 
-import net.tridentsdk.api.*;
+import net.tridentsdk.api.Block;
+import net.tridentsdk.api.Difficulty;
+import net.tridentsdk.api.GameMode;
+import net.tridentsdk.api.Location;
 
 public interface World {
     String getName();

@@ -33,7 +33,9 @@ import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 
 public class TridentPlugin {

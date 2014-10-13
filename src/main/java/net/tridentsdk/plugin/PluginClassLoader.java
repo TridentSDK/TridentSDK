@@ -28,7 +28,9 @@
 package net.tridentsdk.plugin;
 
 import java.io.File;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +38,7 @@ public class PluginClassLoader extends URLClassLoader {
     private final Map<String, Class<?>> classes = new HashMap<>();
     private Class<? extends TridentPlugin> pluginClass;
 
-    PluginClassLoader(File pluginFile) throws MalformedURLException {
+    public PluginClassLoader(File pluginFile) throws MalformedURLException {
         super(new URL[] { pluginFile.toURI().toURL() });
     }
 

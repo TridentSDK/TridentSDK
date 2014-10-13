@@ -27,7 +27,9 @@
 
 package net.tridentsdk.api.config;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -391,8 +393,8 @@ public class ConfigSection {
      *
      * <p>Defaults to {@code null} if the tag is not found</p>
      *
-     * @param tag
-     * @return
+     * @param tag the tag to find the value from
+     * @return the value of the tag
      */
     public BigDecimal getBigDecimal(String tag) {
         return this.getBigDecimal(tag, null);

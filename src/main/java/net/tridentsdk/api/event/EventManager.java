@@ -60,7 +60,9 @@ import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.reflect.FastClass;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class EventManager {
     private final EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
@@ -85,13 +87,13 @@ public class EventManager {
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if (parameterTypes.length == 1 || !(Event.class.isAssignableFrom(parameterTypes[0]))) {
+            if (parameterTypes.length == 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
                 continue;
             }
 
             Class<? extends Event> eventClass = parameterTypes[0].asSubclass(Event.class);
             EventHandler handler = method.getAnnotation(EventHandler.class);
-            Importance importance = (handler == null) ? Importance.MEDIUM : handler.importance();
+            Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
             this.importanceMap.get(importance)
                     .add(new RegisteredListener(fastClass.getMethod(listener, method.getName()),

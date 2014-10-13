@@ -26,7 +26,9 @@
  */
 package net.tridentsdk.api.event.block;
 
-import net.tridentsdk.api.*;
+import net.tridentsdk.api.Block;
+import net.tridentsdk.api.Material;
+import net.tridentsdk.api.Orientation;
 import net.tridentsdk.api.event.Cancellable;
 
 /**

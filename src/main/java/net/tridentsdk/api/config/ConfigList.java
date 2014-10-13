@@ -29,7 +29,9 @@ package net.tridentsdk.api.config;
 
 import com.google.gson.JsonArray;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 // TODO: Javadoc
 /**
