@@ -91,7 +91,7 @@ public final class TridentFactory {
      * @return Location created instance with no world
      */
     public static Location createLocation() {
-        return new Location(null, 0, 0, 0);
+        return new Location(null, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -101,7 +101,7 @@ public final class TridentFactory {
      * @return Location with the specified world, but no co-coordinates
      */
     public static Location createLocation(World world) {
-        return new Location(world, 0, 0, 0);
+        return new Location(world, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -165,24 +165,29 @@ public final class TridentFactory {
         /*return new TridentWorldLoader() {
             private World world;
 
-            @Override public World load(String world) {
+            @Override
+            public World load(String world) {
                 this.world = super.load(world);
                 return this.world;
             }
 
-            @Override public boolean chunkExists(World world, ChunkLocation location) {
+            @Override
+            public boolean chunkExists(World world, ChunkLocation location) {
                 return world.getChunkAt(location, false) != null;
             }
 
-            @Override public Chunk loadChunk(World world, int x, int z) {
+            @Override
+            public Chunk loadChunk(World world, int x, int z) {
                 return world.getChunkAt(TridentFactory.createChunkLoc(x, z), true);
             }
 
-            @Override public Chunk loadChunk(World world, ChunkLocation location) {
+            @Override
+            public Chunk loadChunk(World world, ChunkLocation location) {
                 return world.getChunkAt(location, true);
             }
 
-            @Override public void saveChunk(Chunk chunk) {
+            @Override
+            public void saveChunk(Chunk chunk) {
                 // TODO
             }
         };*/

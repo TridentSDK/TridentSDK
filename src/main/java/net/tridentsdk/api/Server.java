@@ -30,6 +30,7 @@ package net.tridentsdk.api;
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.api.event.EventManager;
 import net.tridentsdk.api.scheduling.Scheduler;
+import net.tridentsdk.api.threads.ThreadProvider;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
@@ -167,7 +168,7 @@ public interface Server {
      * @param channel name of the channel
      * @param data    the data to send
      */
-    void sendPluginMessage(String channel, byte[] data);
+    void sendPluginMessage(String channel, byte... data);
 
     /**
      * Get the Trident Plugin Handler
@@ -189,4 +190,11 @@ public interface Server {
      * @return the server config
      */
     JsonConfig getConfig();
+
+    /**
+     * Requests the thread handler
+     *
+     * @return the thread provider for the server
+     */
+    ThreadProvider provideThreads();
 }

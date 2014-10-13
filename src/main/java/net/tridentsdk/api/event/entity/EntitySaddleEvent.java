@@ -48,10 +48,12 @@ public class EntitySaddleEvent extends EntityEvent {
         return this.player;
     }
 
+    @Override
     public boolean isCancelled() {
         return this.cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }

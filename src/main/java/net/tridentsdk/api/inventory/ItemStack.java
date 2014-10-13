@@ -46,7 +46,7 @@ public class ItemStack {
         this.mat = mat;
 
         this.quantity = quantity;
-        this.damageValue = 100; // psudeo-value
+        this.damageValue = (short) 100; // psudeo-value
     }
 
     public int getId() {

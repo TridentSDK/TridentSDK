@@ -43,10 +43,12 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellabl
         this.gameMode = gameMode;
     }
 
+    @Override
     public boolean isCancelled() {
         return this.cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }

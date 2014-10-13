@@ -25,26 +25,15 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.tridentsdk.api.entity;
+package net.tridentsdk.api.entity.projectile;
+
+import net.tridentsdk.api.entity.Projectile;
 
 /**
- * Represents a dynamic tile
+ * Represents a WitherSkull
  *
  * @author TridentSDK Team
  */
-public interface FallingBlock extends Entity {
+public interface WitherSkull extends Projectile {
 
-    /**
-     * The state this FallingBlock represents
-     *
-     * @return the BlockState of this falling block
-     */
-    Object getState();  /* TODO: Change return type to valid implementation of BlockState */
-
-    /**
-     * Whether or not this FallingBlock should drop when it breaks
-     *
-     * @return whether or not this FallingBlock should drop its item when it breaks
-     */
-    boolean shouldDrop();
 }

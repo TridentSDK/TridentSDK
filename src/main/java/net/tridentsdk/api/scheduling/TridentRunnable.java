@@ -39,7 +39,7 @@ public abstract class TridentRunnable implements Runnable {
     private final Integer id = -1;
 
     private final AtomicLong interval = new AtomicLong();
-    private final boolean inAHurry;
+    private final boolean inAHurry = false;
 
     /**
      * Returns if this runnable is in a hurry, usually indicating that the server is shutting down
@@ -67,39 +67,51 @@ public abstract class TridentRunnable implements Runnable {
     public void runAfterSync() {
     }
 
-    public final synchronized TridentRunnable runTaskSynchronously(TridentPlugin plugin) {
-        this.checkState();
-        return Trident.getServer().getScheduler().runTaskSynchronously(plugin, this);
+    public final TridentRunnable runTaskSynchronously(TridentPlugin plugin) {
+        synchronized (this) {
+            this.checkState();
+            return Trident.getServer().getScheduler().runTaskSynchronously(plugin, this);
+        }
     }
 
-    public final synchronized TridentRunnable runTaskAsynchronously(TridentPlugin plugin) {
-        this.checkState();
+    public final TridentRunnable runTaskAsynchronously(TridentPlugin plugin) {
+        synchronized (this) {
+            this.checkState();
 
-        return Trident.getServer().getScheduler().runTaskAsynchronously(plugin, this);
+            return Trident.getServer().getScheduler().runTaskAsynchronously(plugin, this);
+        }
     }
 
-    public final synchronized TridentRunnable runTaskSyncLater(TridentPlugin plugin, long delay) {
-        this.checkState();
-        return Trident.getServer().getScheduler().runTaskSyncLater(plugin, this, delay);
+    public final TridentRunnable runTaskSyncLater(TridentPlugin plugin, long delay) {
+        synchronized (this) {
+            this.checkState();
+            return Trident.getServer().getScheduler().runTaskSyncLater(plugin, this, delay);
+        }
     }
 
-    public final synchronized TridentRunnable runTaskAsyncLater(TridentPlugin plugin, long delay) {
-        this.checkState();
-        return Trident.getServer().getScheduler().runTaskAsyncLater(plugin, this, delay);
+    public final TridentRunnable runTaskAsyncLater(TridentPlugin plugin, long delay) {
+        synchronized (this) {
+            this.checkState();
+            return Trident.getServer().getScheduler().runTaskAsyncLater(plugin, this, delay);
+        }
     }
 
-    public final synchronized TridentRunnable runTaskSyncRepeating(TridentPlugin plugin, long delay, long interval) {
-        this.checkState();
-        Trident.getServer().getScheduler().runTaskSyncRepeating(plugin, this, delay, interval);
-        this.interval.set(interval);
-        return this;
+    public final TridentRunnable runTaskSyncRepeating(TridentPlugin plugin, long delay, long interval) {
+        synchronized (this) {
+            this.checkState();
+            Trident.getServer().getScheduler().runTaskSyncRepeating(plugin, this, delay, interval);
+            this.interval.set(interval);
+            return this;
+        }
     }
 
-    public final synchronized TridentRunnable runTaskAsyncRepeating(TridentPlugin plugin, long delay, long interval) {
-        this.checkState();
-        Trident.getServer().getScheduler().runTaskAsyncRepeating(plugin, this, delay, interval);
-        this.interval.set(interval);
-        return this;
+    public final TridentRunnable runTaskAsyncRepeating(TridentPlugin plugin, long delay, long interval) {
+        synchronized (this) {
+            this.checkState();
+            Trident.getServer().getScheduler().runTaskAsyncRepeating(plugin, this, delay, interval);
+            this.interval.set(interval);
+            return this;
+        }
     }
 
     private void checkState() {
@@ -115,8 +127,10 @@ public abstract class TridentRunnable implements Runnable {
     /**
      * Gets how long between runs this is supposed to wait if it is a repeating task
      */
-    public final synchronized long getInterval() {
-        return this.interval.get();
+    public final long getInterval() {
+        synchronized (this) {
+            return this.interval.get();
+        }
     }
 
     /**
@@ -124,8 +138,10 @@ public abstract class TridentRunnable implements Runnable {
      * synchronous to the main thread, the change will be immediate, if it is not, the change may take an iteration to
      * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p>
      */
-    public final synchronized void setInterval(long interval) {
-        this.interval.set(interval);
+    public final void setInterval(long interval) {
+        synchronized (this) {
+            this.interval.set(interval);
+        }
     }
 
     /**

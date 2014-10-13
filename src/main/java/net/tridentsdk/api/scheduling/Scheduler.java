@@ -29,7 +29,6 @@ package net.tridentsdk.api.scheduling;
 import net.tridentsdk.plugin.TridentPlugin;
 
 public interface Scheduler {
-
     /**
      * Schedules a runnable to be run next tick
      *

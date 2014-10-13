@@ -56,10 +56,12 @@ public class PlayerToggleSprintEvent extends PlayerEvent implements Cancellable 
         return !this.toggle;
     }
 
+    @Override
     public boolean isCancelled() {
         return this.cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }

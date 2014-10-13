@@ -27,7 +27,7 @@
 
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.entity.LivingEntity;
+import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.entity.EntityDeathEvent;
 
@@ -37,7 +37,7 @@ public class PlayerDeathEvent extends EntityDeathEvent {
      * @param player the player associated with this event (that died)
      */
 
-    public PlayerDeathEvent(LivingEntity player) {
+    public PlayerDeathEvent(Entity player) {
         super(player);
     }
 

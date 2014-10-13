@@ -46,10 +46,12 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
         this.item = item;
     }
 
+    @Override
     public boolean isCancelled() {
         return this.cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
