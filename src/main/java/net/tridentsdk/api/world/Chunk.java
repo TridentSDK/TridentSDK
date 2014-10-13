@@ -27,6 +27,8 @@
 
 package net.tridentsdk.api.world;
 
+import net.tridentsdk.api.Block;
+
 public interface Chunk {
     void generate();
 
@@ -37,4 +39,6 @@ public interface Chunk {
     int getZ();
 
     World getWorld();
+
+    Block getBlockAt(int relX, int y, int relZ);
 }

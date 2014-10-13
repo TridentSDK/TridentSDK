@@ -86,13 +86,13 @@ public class EventManager {
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if (parameterTypes.length == 1 || !Event.class.isAssignableFrom(parameterTypes[0]) ||
-                    method.isAnnotationPresent(EventHandler.class)) {
+            if (parameterTypes.length == 1 || !(Event.class.isAssignableFrom(parameterTypes[0]))) {
                 continue;
             }
 
             Class<? extends Event> eventClass = parameterTypes[0].asSubclass(Event.class);
-            Importance importance = method.getAnnotation(EventHandler.class).importance();
+            EventHandler handler = method.getAnnotation(EventHandler.class);
+            Importance importance = (handler == null) ? Importance.MEDIUM : handler.importance();
 
             this.importanceMap.get(importance)
                     .add(new RegisteredListener(fastClass.getMethod(listener, method.getName()),
