@@ -86,7 +86,7 @@ public interface Server {
      *
      * @return that represents the Logger Trident is using
      */
-    Logger getLogger();
+    org.slf4j.Logger getLogger();
 
     /**
      * A string containing the current broadcast MOTD of the server
