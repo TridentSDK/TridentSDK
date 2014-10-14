@@ -51,7 +51,7 @@ public class TridentPluginHandler {
         JarFile jarFile = null;
         try {
             // load all classes
-            PluginClassLoader loader = new PluginClassLoader(pluginFile);
+            final PluginClassLoader loader = new PluginClassLoader(pluginFile);
             jarFile = new JarFile(pluginFile);
             Enumeration<JarEntry> entries = jarFile.entries();
 
@@ -66,7 +66,7 @@ public class TridentPluginHandler {
             }
 
             // start initiating the plugin class and registering commands and listeners
-            Class<? extends TridentPlugin> pluginClass = loader.getPluginClass();
+            final Class<? extends TridentPlugin> pluginClass = loader.getPluginClass();
             PluginDescription description = pluginClass.getAnnotation(PluginDescription.class);
 
             if (description == null) {
@@ -93,6 +93,19 @@ public class TridentPluginHandler {
             Trident.getServer().provideThreads().providePluginThread(plugin).addTask(new Runnable() {
                 @Override
                 public void run() {
+                    try {
+                        ImmutableSet<ClassPath.ClassInfo> set =
+                                ClassPath.from(loader).getTopLevelClassesRecursive(pluginClass.getPackage().getName());
+                        for (ClassPath.ClassInfo classInfo : set) {
+                            FastClass fastClass = FastClass.get(classInfo.load());
+                            if (fastClass.toClass().getInterfaces()[0].equals(Listener.class)) {
+                                Trident.getServer().getEventManager().registerListener(
+                                        fastClass.getConstructor().<Listener>newInstance());
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     plugin.startup();
                 }
             });
