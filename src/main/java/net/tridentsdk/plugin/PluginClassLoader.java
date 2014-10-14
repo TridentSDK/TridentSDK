@@ -33,9 +33,10 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PluginClassLoader extends URLClassLoader {
-    private final Map<String, Class<?>> classes = new HashMap<>();
+    final Map<String, Class<?>> classes = new ConcurrentHashMap<>();
     private Class<? extends TridentPlugin> pluginClass;
 
     public PluginClassLoader(File pluginFile) throws MalformedURLException {

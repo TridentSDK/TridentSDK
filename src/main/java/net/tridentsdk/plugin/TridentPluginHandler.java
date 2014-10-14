@@ -28,6 +28,9 @@
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.api.Trident;
+import net.tridentsdk.api.event.Listener;
+import net.tridentsdk.api.reflect.FastClass;
+import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
 import java.io.File;
@@ -75,14 +78,24 @@ public class TridentPluginHandler {
             final TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
 
             this.plugins.add(plugin);
+
+            for(Class<?> cls : plugin.classLoader.classes.values()) {
+                if(Listener.class.isAssignableFrom(cls) && !(cls.isAnnotationPresent(IgnoreRegistration.class))) {
+                    FastClass fastClass = FastClass.get(cls);
+                    Listener listener = fastClass.getConstructor().newInstance();
+
+                    Trident.getServer().getEventManager().registerListener(listener);
+                }
+
+                //TODO: register commands
+            }
+
             Trident.getServer().provideThreads().providePluginThread(plugin).addTask(new Runnable() {
                 @Override
                 public void run() {
                     plugin.startup();
                 }
             });
-
-            // TODO: Register commands and listeners
         } catch (IOException | ClassNotFoundException | NoSuchMethodException
                 | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
             throw new PluginLoadException(ex);
