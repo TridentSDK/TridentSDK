@@ -50,7 +50,7 @@ public class EventManager {
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if (parameterTypes.length == 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
+            if (parameterTypes.length != 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
                 continue;
             }
 
