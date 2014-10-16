@@ -28,9 +28,7 @@ import java.io.Serializable;
  *
  * @author The TridentSDK Team
  */
-public class Location implements Serializable, Cloneable {
-    private static final long serialVersionUID = 142870546231866867L;
-
+public class Location implements Cloneable {
     private double x;
     private double y;
     private double z;
@@ -230,5 +228,14 @@ public class Location implements Serializable, Cloneable {
                 Location
                         .square(
                                 this.getZ() - location.getZ());
+    }
+
+    @Override
+    public Location clone() {
+        try {
+            return (Location) super.clone();
+        } catch (CloneNotSupportedException ignored) {
+            return null;
+        }
     }
 }
