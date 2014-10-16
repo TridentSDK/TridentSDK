@@ -24,13 +24,13 @@ import net.tridentsdk.api.threads.ThreadProvider;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
+import org.slf4j.Logger;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * The access to the server internals
@@ -76,7 +76,7 @@ public interface Server {
      *
      * @return that represents the Logger Trident is using
      */
-    org.slf4j.Logger getLogger();
+    Logger getLogger();
 
     /**
      * A string containing the current broadcast MOTD of the server
