@@ -17,6 +17,7 @@
  */
 package net.tridentsdk.api.entity.living;
 
+import net.tridentsdk.api.CommandIssuer;
 import net.tridentsdk.api.GameMode;
 import net.tridentsdk.api.Messagable;
 import net.tridentsdk.api.entity.LivingEntity;
@@ -29,7 +30,7 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity, Messagable{
+public interface Player extends LivingEntity, Messagable, CommandIssuer {
 
     /**
      * Returns the flying speed of the Player
