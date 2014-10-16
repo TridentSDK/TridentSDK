@@ -17,7 +17,6 @@
  */
 package net.tridentsdk.api.entity;
 
-import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.ProjectileSource;
 
 /**
@@ -27,44 +26,23 @@ import net.tridentsdk.api.entity.living.ProjectileSource;
  */
 public interface Projectile extends Entity {
     /**
-     * Represents the shooter of this Projectile, if applicable
+     * Returns the block/entity that was impaled by the projectile
      *
-     * @return the shooter of this Projectile
+     * @return the impaled object by the projectile
      */
-    ProjectileSource getShooter();
+    Impalable getImpaled();
 
     /**
      * Returns the shooter of the Projectile
      *
      * @param shooter the ProjectileSource of the Projectile
      */
-    void setShooter(ProjectileSource shooter);
-
-    /**
-     * Returns if the Projectile can bounce
-     *
-     * @return true if the Projectile can bounce, false if it cannot
-     */
-    boolean doesBounce();
-
-    /**
-     * Sets whether the Projectile can bounce
-     *
-     * @param bounce Boolean whether the Projectile can bounce
-     */
-    void setBounce(boolean bounce);
-
-    /**
-     * Represents the current tile (Block) that this Projectile is located in
-     *
-     * @return the current tile this Projectile is in
-     */
-    Block getCurrentTile();
+    void setSource(ProjectileSource shooter);
 
     /**
      * The projectile source
      *
      * @return gets the source of the projectile
      */
-    ProjectileSource getProjectileSource();
+    ProjectileSource getSource();
 }
