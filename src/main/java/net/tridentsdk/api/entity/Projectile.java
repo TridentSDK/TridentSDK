@@ -39,21 +39,6 @@ public interface Projectile extends Entity {
      * @param shooter the ProjectileSource of the Projectile
      */
     void setShooter(ProjectileSource shooter);
-
-    /**
-     * Returns if the Projectile can bounce
-     *
-     * @return true if the Projectile can bounce, false if it cannot
-     */
-    boolean doesBounce();
-
-    /**
-     * Sets whether the Projectile can bounce
-     *
-     * @param bounce Boolean whether the Projectile can bounce
-     */
-    void setBounce(boolean bounce);
-
     /**
      * Represents the current tile (Block) that this Projectile is located in
      *

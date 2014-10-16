@@ -22,7 +22,7 @@ package net.tridentsdk.api.entity;
  *
  * @author TridentSDK Team
  */
-public interface MinecartBase extends Vehicle {
+public interface MinecartBase extends Entity {
     /**
      * Represents this Minecart's display tile, in the form of a BlockState
      *

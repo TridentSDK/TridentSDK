@@ -17,15 +17,15 @@
  */
 package net.tridentsdk.api.entity.vehicle;
 
+import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.InventoryHolder;
-import net.tridentsdk.api.entity.Vehicle;
 
 /**
  * Represents a Furnace Minecart
  *
  * @author TridentSDK Team
  */
-public interface FurnaceMinecart extends Vehicle, InventoryHolder {
+public interface FurnaceMinecart extends InventoryHolder, Entity {
 
     /**
      * The number of fuel ticks this Furnace Minecart has
