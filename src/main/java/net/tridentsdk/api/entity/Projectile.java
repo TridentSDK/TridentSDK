@@ -17,6 +17,7 @@
  */
 package net.tridentsdk.api.entity;
 
+import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.ProjectileSource;
 
 /**
@@ -49,5 +50,5 @@ public interface Projectile extends Entity {
      *
      * @return gets the source of the projectile
      */
-    ProjectileSource getSource();
+    ProjectileSource getProjectileSource();
 }

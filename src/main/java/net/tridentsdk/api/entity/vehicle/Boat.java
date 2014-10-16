@@ -17,13 +17,13 @@
  */
 package net.tridentsdk.api.entity.vehicle;
 
-import net.tridentsdk.api.entity.Vehicle;
+import net.tridentsdk.api.entity.Entity;
 
 /**
  * Represents a Boat
  *
  * @author TridentSDK Team
  */
-public interface Boat extends Vehicle {
+public interface Boat extends Entity {
 
 }

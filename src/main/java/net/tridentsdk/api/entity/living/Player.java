@@ -18,6 +18,7 @@
 package net.tridentsdk.api.entity.living;
 
 import net.tridentsdk.api.GameMode;
+import net.tridentsdk.api.Messagable;
 import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.inventory.ItemStack;
 
@@ -28,13 +29,7 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity {
-    /**
-     * Send an array of messages to the Player
-     * 
-     * @param message String[] messages to be sent
-     */
-    void sendMessage(String... message);
+public interface Player extends LivingEntity, Messagable{
 
     /**
      * Returns the flying speed of the Player
