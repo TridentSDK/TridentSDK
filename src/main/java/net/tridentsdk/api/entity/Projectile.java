@@ -17,7 +17,6 @@
  */
 package net.tridentsdk.api.entity;
 
-import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.ProjectileSource;
 
 /**
