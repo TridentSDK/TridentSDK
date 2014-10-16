@@ -78,7 +78,7 @@ public class EventManager {
 
     public void call(Event event) {
         for (RegisteredListener listener : this.listeners) {
-            if(event.getClass().equals(listener.getEventClass())) {
+            if(event.getClass().isAssignableFrom(listener.getEventClass())) {
                 listener.execute(event);
             }
         }
