@@ -25,5 +25,4 @@ import net.tridentsdk.api.entity.Projectile;
  * @author TridentSDK Team
  */
 public interface WitherSkull extends Projectile {
-
 }

@@ -27,24 +27,18 @@ import net.tridentsdk.api.entity.living.ProjectileSource;
  */
 public interface Projectile extends Entity {
     /**
-     * Represents the shooter of this Projectile, if applicable
+     * Returns the block/entity that was impaled by the projectile
      *
-     * @return the shooter of this Projectile
+     * @return the impaled object by the projectile
      */
-    ProjectileSource getShooter();
+    Impalable getImpaled();
 
     /**
      * Returns the shooter of the Projectile
      *
      * @param shooter the ProjectileSource of the Projectile
      */
-    void setShooter(ProjectileSource shooter);
-    /**
-     * Represents the current tile (Block) that this Projectile is located in
-     *
-     * @return the current tile this Projectile is in
-     */
-    Block getCurrentTile();
+    void setSource(ProjectileSource shooter);
 
     /**
      * The projectile source
