@@ -26,6 +26,11 @@ import net.tridentsdk.api.entity.living.ProjectileSource;
  */
 public interface Projectile extends Entity {
     /**
+     * Performs hit action
+     */
+    void doHit();
+
+    /**
      * Returns the block/entity that was impaled by the projectile
      *
      * @return the impaled object by the projectile

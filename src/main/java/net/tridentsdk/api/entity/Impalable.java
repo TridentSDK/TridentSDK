@@ -13,19 +13,19 @@ public interface Impalable {
      *
      * @return {@code true} if the impaled object is an entity, {@code false} if it is a tile
      */
-    boolean isEntity();
+    boolean isImpaledEntity();
 
     /**
      * Whether or not the impalable is a block (tile)
      *
      * @return {@code true} if the impaled object is a block (tile), {@code false} if it is an entity
      */
-    boolean isTile();
+    boolean isImpaledTile();
 
     /**
      * Gets the entity that was impaled by the projectile
      *
-     * <p>Returns {@code null} if {@code isEntity == false}</p>
+     * <p>Returns {@code null} if {@code isImpaledEntity == false}</p>
      *
      * @return the entity impaled by the projectile
      */
@@ -34,7 +34,7 @@ public interface Impalable {
     /**
      * Gets the block (tile) that was impaled by the projectile
      *
-     * <p>Returns {@code null} if {@code isTile == false}</p>
+     * <p>Returns {@code null} if {@code isImpaledTile == false}</p>
      *
      * @return the impaled block (tile)
      */

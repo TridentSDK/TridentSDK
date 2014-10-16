@@ -22,7 +22,7 @@ import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.entity.living.ProjectileSource;
 import net.tridentsdk.api.event.entity.EntityDamageEvent;
 
-public interface LivingEntity extends Entity, ProjectileSource {
+public interface LivingEntity extends Entity, ProjectileSource, Impalable {
     /**
      * Makes the specified entity invisible to the current entity
      *

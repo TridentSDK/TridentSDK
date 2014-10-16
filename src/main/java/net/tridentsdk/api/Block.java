@@ -17,6 +17,9 @@
  */
 package net.tridentsdk.api;
 
+import net.tridentsdk.api.entity.Entity;
+import net.tridentsdk.api.entity.Impalable;
+import net.tridentsdk.api.entity.Projectile;
 import net.tridentsdk.api.util.Vector;
 
 /**
@@ -24,10 +27,14 @@ import net.tridentsdk.api.util.Vector;
  *
  * @author The TridentSDK Team
  */
-public class Block {
+public class Block implements Impalable {
     private final Location location;
     protected Material material;
     protected byte data;
+    /**
+     * Describes projectile logic
+     */
+    public Projectile hit;
 
     /**
      * Constructs the wrapper representing the block
@@ -102,5 +109,27 @@ public class Block {
      */
     public Block getRelative(Vector vector) {
         return new Block(this.location.getRelative(vector));
+    }
+
+    @Override public boolean isImpaledEntity() {
+        return false;
+    }
+
+    @Override public boolean isImpaledTile() {
+        return true;
+    }
+
+    @Override public Entity impaledEntity() {
+        return null;
+    }
+
+    @Override public Block impaledTile() {
+        if (!this.isImpaledTile())
+            return null;
+        return this;
+    }
+
+    @Override public Projectile projectile() {
+        return this.hit;
     }
 }
