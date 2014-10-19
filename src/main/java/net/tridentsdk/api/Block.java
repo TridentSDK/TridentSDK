@@ -17,15 +17,17 @@
  */
 package net.tridentsdk.api;
 
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.Impalable;
 import net.tridentsdk.api.entity.Projectile;
 import net.tridentsdk.api.util.Vector;
 
-import java.util.Collection;
+import java.lang.ref.WeakReference;
 import java.util.Collections;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.List;
 
 /**
  * A basic structure in minecraft, a material bearing piece set at a given location
@@ -39,7 +41,8 @@ public class Block implements Impalable {
     /**
      * Describes projectile logic
      */
-    public final Map<Integer, Projectile> hit = Collections.synchronizedMap(new WeakHashMap<Integer, Projectile>());
+    public final List<WeakReference<Projectile>> hit = Collections.synchronizedList(
+            Lists.<WeakReference<Projectile>>newArrayList());
 
     /**
      * Constructs the wrapper representing the block
@@ -139,7 +142,29 @@ public class Block implements Impalable {
     }
 
     @Override
-    public Collection<Projectile> projectiles() {
-        return this.hit.values();
+    public void put(Projectile projectile) {
+        this.hit.add(new WeakReference<>(projectile));
+    }
+
+    @Override
+    public boolean remove(Projectile projectile) {
+        return this.hit.remove(new WeakReference<>(projectile));
+    }
+
+    @Override
+    public void clear() {
+        // TODO remove the projectile entities
+        this.hit.clear();
+    }
+
+    @Override
+    public List<Projectile> projectiles() {
+        return new ImmutableList.Builder<Projectile>().addAll(Lists.transform(this.hit, new Function<WeakReference<Projectile>,
+                Projectile>() {
+            @Override
+            public Projectile apply(WeakReference<Projectile> projectileWeakReference) {
+                return projectileWeakReference.get();
+            }
+        })).build();
     }
 }

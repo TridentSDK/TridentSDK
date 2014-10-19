@@ -43,6 +43,27 @@ public interface Impalable {
     Block impaledTile();
 
     /**
+     * Places the projectile into the hit collection
+     *
+     * @param projectile the projectile that hit the impalable
+     */
+    void put(Projectile projectile);
+
+    /**
+     * Removes the projectile from the impalable
+     *
+     * @param projectile the projectile to remove from the impalable
+     * @return {@code true} if the projectile was removed, {@code false} if the projectile isn't in the impalable,
+     *         or it doesn't exist
+     */
+    boolean remove(Projectile projectile);
+
+    /**
+     * Removes all projectiles from the impalable
+     */
+    void clear();
+
+    /**
      * Gets the projectiles that impaled the object
      *
      * <p>The list is ordered by first is oldest available arrow, and the last projectile is the newest projectile
