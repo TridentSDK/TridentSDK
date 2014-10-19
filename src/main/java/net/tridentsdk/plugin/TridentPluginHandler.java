@@ -70,7 +70,7 @@ public class TridentPluginHandler {
             this.plugins.add(plugin);
 
             for(Class<?> cls : plugin.classLoader.classes.values()) {
-                if(Listener.class.isAssignableFrom(cls) && !(cls.isAnnotationPresent(IgnoreRegistration.class))) {
+                if(Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
                     FastClass fastClass = FastClass.get(cls);
                     Listener listener = fastClass.getConstructor().newInstance();
 

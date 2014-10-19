@@ -8,7 +8,8 @@ public interface CommandIssuer {
 
     /**
      * Gets the last command executed by this CommandIssuer, without the preceding "/"
-     * @return
+     *
+     * @return the last command executed by commandissuer
      */
     String getLastCommand();
 

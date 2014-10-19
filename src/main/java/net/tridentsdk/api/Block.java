@@ -22,6 +22,11 @@ import net.tridentsdk.api.entity.Impalable;
 import net.tridentsdk.api.entity.Projectile;
 import net.tridentsdk.api.util.Vector;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.WeakHashMap;
+
 /**
  * A basic structure in minecraft, a material bearing piece set at a given location
  *
@@ -34,7 +39,7 @@ public class Block implements Impalable {
     /**
      * Describes projectile logic
      */
-    public Projectile hit;
+    public final Map<Integer, Projectile> hit = Collections.synchronizedMap(new WeakHashMap<Integer, Projectile>());
 
     /**
      * Constructs the wrapper representing the block
@@ -111,25 +116,30 @@ public class Block implements Impalable {
         return new Block(this.location.getRelative(vector));
     }
 
-    @Override public boolean isImpaledEntity() {
+    @Override
+    public boolean isImpaledEntity() {
         return false;
     }
 
-    @Override public boolean isImpaledTile() {
+    @Override
+    public boolean isImpaledTile() {
         return true;
     }
 
-    @Override public Entity impaledEntity() {
+    @Override
+    public Entity impaledEntity() {
         return null;
     }
 
-    @Override public Block impaledTile() {
+    @Override
+    public Block impaledTile() {
         if (!this.isImpaledTile())
             return null;
         return this;
     }
 
-    @Override public Projectile projectile() {
-        return this.hit;
+    @Override
+    public Collection<Projectile> projectiles() {
+        return this.hit.values();
     }
 }

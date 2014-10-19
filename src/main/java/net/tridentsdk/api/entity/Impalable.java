@@ -2,6 +2,8 @@ package net.tridentsdk.api.entity;
 
 import net.tridentsdk.api.Block;
 
+import java.util.Collection;
+
 /**
  * A tile or entity that can be hit by a projectile
  *
@@ -41,12 +43,17 @@ public interface Impalable {
     Block impaledTile();
 
     /**
-     * Gets the last projectile that impaled the object
+     * Gets the projectiles that impaled the object
+     *
+     * <p>The list is ordered by first is oldest available arrow, and the last projectile is the newest projectile
+     * impaling the tile/entity.</p>
      *
      * <p>Returns {@code null} if the current impalable was never hit by a projectile, or
      * {@code impaledEntity == null && impaledTile == null}</p>
      *
+     * <p>This is a thread-safe weakreference collection</p>
+     *
      * @return the last projectile that impaled the object
      */
-    Projectile projectile();
+    Collection<Projectile> projectiles();
 }
