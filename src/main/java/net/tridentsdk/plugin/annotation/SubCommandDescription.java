@@ -1,6 +1,6 @@
 package net.tridentsdk.plugin.annotation;
 
-import net.tridentsdk.plugin.Command.SubCommandHandler;
+import net.tridentsdk.api.CommandIssuer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,15 +8,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface CommandDescription {
-    String name();
-
-    int priority() default 1;
-
+@Target(ElementType.METHOD)
+public @interface SubCommandDescription {
+    String name ();
     String permission();
+    Class<? extends CommandIssuer> [] targets() default {CommandIssuer.class};
 
-    String [] aliases();
-
-    Class<? extends SubCommandHandler> [] subCommands() default {};
 }
