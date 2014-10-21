@@ -30,17 +30,17 @@ import java.lang.reflect.Type;
  */
 public final class GsonFactory {
     private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
-    private static Gson gson = GsonFactory.builder.create();
+    private static Gson gson = builder.create();
 
     private GsonFactory() {
     }
 
     public static void registerTypeAdapter(Type type, Object adapter) {
-        GsonFactory.builder.registerTypeAdapter(type, adapter);
-        GsonFactory.gson = GsonFactory.builder.create();
+        builder.registerTypeAdapter(type, adapter);
+        gson = builder.create();
     }
 
     protected static Gson getGson() {
-        return GsonFactory.gson;
+        return gson;
     }
 }

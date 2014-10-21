@@ -92,7 +92,7 @@ public enum VillagerCareer {
             if (current == carrer.parent) {
                 parentColl.add(carrer);
             } else {
-                VillagerCareer.byProfession.put(current, parentColl);
+                byProfession.put(current, parentColl);
                 parentColl = Lists.newArrayList();
                 current = carrer.parent;
             }

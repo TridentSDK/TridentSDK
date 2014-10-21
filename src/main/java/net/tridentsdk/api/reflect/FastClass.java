@@ -43,7 +43,7 @@ public class FastClass {
     }
 
     public static FastClass get(Object obj) {
-        return FastClass.get(obj.getClass());
+        return get(obj.getClass());
     }
 
     /**

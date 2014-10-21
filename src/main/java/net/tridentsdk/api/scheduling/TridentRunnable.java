@@ -18,16 +18,15 @@
 package net.tridentsdk.api.scheduling;
 
 import net.tridentsdk.api.Trident;
-import net.tridentsdk.plugin.TridentPlugin;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class TridentRunnable implements Runnable {
-
     /**
      * Id of this runnable, unique to this runtime
      */
-    private final Integer id = -1;
+    private final AtomicInteger id = new AtomicInteger(-1);
 
     private final AtomicLong interval = new AtomicLong();
     private final boolean inAHurry = false;
@@ -58,70 +57,56 @@ public abstract class TridentRunnable implements Runnable {
     public void runAfterSync() {
     }
 
+    /*  um, what?
+
     public final TridentRunnable runTaskSynchronously(TridentPlugin plugin) {
-        synchronized (this) {
-            this.checkState();
-            return Trident.getServer().getScheduler().runTaskSynchronously(plugin, this);
-        }
+        this.checkState();
+        return Trident.getServer().getScheduler().runTaskSynchronously(plugin, this);
     }
 
     public final TridentRunnable runTaskAsynchronously(TridentPlugin plugin) {
-        synchronized (this) {
-            this.checkState();
+        this.checkState();
 
-            return Trident.getServer().getScheduler().runTaskAsynchronously(plugin, this);
-        }
+        return Trident.getServer().getScheduler().runTaskAsynchronously(plugin, this);
     }
 
     public final TridentRunnable runTaskSyncLater(TridentPlugin plugin, long delay) {
-        synchronized (this) {
-            this.checkState();
-            return Trident.getServer().getScheduler().runTaskSyncLater(plugin, this, delay);
-        }
+        this.checkState();
+        return Trident.getServer().getScheduler().runTaskSyncLater(plugin, this, delay);
     }
 
     public final TridentRunnable runTaskAsyncLater(TridentPlugin plugin, long delay) {
-        synchronized (this) {
-            this.checkState();
-            return Trident.getServer().getScheduler().runTaskAsyncLater(plugin, this, delay);
-        }
+        this.checkState();
+        return Trident.getServer().getScheduler().runTaskAsyncLater(plugin, this, delay);
     }
 
     public final TridentRunnable runTaskSyncRepeating(TridentPlugin plugin, long delay, long interval) {
-        synchronized (this) {
-            this.checkState();
-            Trident.getServer().getScheduler().runTaskSyncRepeating(plugin, this, delay, interval);
-            this.interval.set(interval);
-            return this;
-        }
+        this.checkState();
+        Trident.getServer().getScheduler().runTaskSyncRepeating(plugin, this, delay, interval);
+        this.interval.set(interval);
+        return this;
     }
 
     public final TridentRunnable runTaskAsyncRepeating(TridentPlugin plugin, long delay, long interval) {
-        synchronized (this) {
-            this.checkState();
-            Trident.getServer().getScheduler().runTaskAsyncRepeating(plugin, this, delay, interval);
-            this.interval.set(interval);
-            return this;
-        }
+        this.checkState();
+        Trident.getServer().getScheduler().runTaskAsyncRepeating(plugin, this, delay, interval);
+        this.interval.set(interval);
+        return this;
     }
 
     private void checkState() {
-        if (this.id != -1) {
-            throw new IllegalStateException("This runnable has already been scheduled!");
-        }
-    }
+        if (this.id.get() != -1) throw new IllegalStateException("This runnable has already been scheduled!");
+    } */
 
     public final void cancel() {
-        Trident.getServer().getScheduler().cancel(this.id);
+        Trident.getServer().getScheduler().cancel(this);
     }
 
     /**
      * Gets how long between runs this is supposed to wait if it is a repeating task
      */
     public final long getInterval() {
-        synchronized (this) {
-            return this.interval.get();
-        }
+        return this.interval.get();
     }
 
     /**
@@ -130,16 +115,14 @@ public abstract class TridentRunnable implements Runnable {
      * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p>
      */
     public final void setInterval(long interval) {
-        synchronized (this) {
-            this.interval.set(interval);
-        }
+        this.interval.set(interval);
     }
 
     /**
      * Used internally to refer to this runnable, probably shouldn't be used by plugins
      */
     public final int getId() {
-        return this.id;
+        return this.id.get();
     }
 
     /**

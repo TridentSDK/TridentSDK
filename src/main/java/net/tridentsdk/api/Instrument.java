@@ -59,15 +59,15 @@ public enum Instrument {
     public static Instrument fromByte(byte b) {
         switch ((int) b) {
             case 0x0:
-                return Instrument.PIANO;
+                return PIANO;
             case 0x1:
-                return Instrument.BASS_DRUM;
+                return BASS_DRUM;
             case 0x2:
-                return Instrument.SNARE_DRUM;
+                return SNARE_DRUM;
             case 0x3:
-                return Instrument.STICKS;
+                return STICKS;
             case 0x4:
-                return Instrument.BASS_GUITAR;
+                return BASS_GUITAR;
             default:
                 return null;
         }

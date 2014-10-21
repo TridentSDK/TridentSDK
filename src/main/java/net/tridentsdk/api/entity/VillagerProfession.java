@@ -46,7 +46,7 @@ public enum VillagerProfession {
 
     static {
         for (VillagerProfession profession : VillagerProfession.values()) {
-            VillagerProfession.byId[profession.id] = profession;
+            byId[profession.id] = profession;
         }
     }
 

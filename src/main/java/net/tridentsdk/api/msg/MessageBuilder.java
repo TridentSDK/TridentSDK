@@ -96,7 +96,7 @@ public final class MessageBuilder {
 
     @Override
     public String toString() {
-        return MessageBuilder.GSON.toJson(this.obj);
+        return GSON.toJson(this.obj);
     }
 
     public String toJson() {

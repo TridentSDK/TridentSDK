@@ -72,7 +72,7 @@ public final class TridentFactory {
      * @return Block created instance
      */
     public static Block createBlock(World world, double x, double y, double z) {
-        return new Block(TridentFactory.createLocation(world, x, y, z));
+        return new Block(createLocation(world, x, y, z));
     }
 
     /* Location */
@@ -186,7 +186,7 @@ public final class TridentFactory {
     }
 
     public static World createWorld(String name) {
-        return TridentFactory.createWorldLoader().load(name);
+        return createWorldLoader().load(name);
     }
 
     /* Utils */

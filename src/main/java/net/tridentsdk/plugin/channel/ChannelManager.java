@@ -31,7 +31,7 @@ public final class ChannelManager {
     }
 
     public static ChannelManager getInstance() {
-        return ChannelManager.INSTANCE;
+        return INSTANCE;
     }
 
     public void registerChannel(String name, PluginChannel channel) {

@@ -134,7 +134,7 @@ public class TridentPlugin {
         String name = this.getDescription().name();
         String author = this.getDescription().author();
 
-        return TridentPlugin.HASHER.newHasher()
+        return HASHER.newHasher()
                 .putUnencodedChars(name)
                 .putUnencodedChars(author)
                 .hash().hashCode();

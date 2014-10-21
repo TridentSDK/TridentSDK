@@ -72,7 +72,7 @@ public interface Impalable {
      * <p>Returns {@code null} if the current impalable was never hit by a projectile, or
      * {@code impaledEntity == null && impaledTile == null}</p>
      *
-     * <p>This is a thread-safe weakreference collection</p>
+     * <p>This is a immutable collection</p>
      *
      * @return the last projectile that impaled the object
      */

@@ -47,7 +47,7 @@ public enum OcelotType {
 
     static {
         for (OcelotType type : OcelotType.values()) {
-            OcelotType.byId[type.id] = type;
+            byId[type.id] = type;
             // TODO by ordinal?
         }
     }

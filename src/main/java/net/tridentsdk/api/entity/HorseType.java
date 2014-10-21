@@ -46,7 +46,7 @@ public enum HorseType {
 
     static {
         for (HorseType type : HorseType.values()) {
-            HorseType.byId[type.id] = type;
+            byId[type.id] = type;
         }
     }
 

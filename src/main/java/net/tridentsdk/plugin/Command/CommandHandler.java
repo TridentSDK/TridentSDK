@@ -15,14 +15,14 @@ import java.util.Map;
 public class CommandHandler {
 
     // TODO: Make this a dictionary tree for fast lookup
-    private HashMap<String,CommandData> commands = new HashMap<>();
+    private final HashMap<String,CommandData> commands = new HashMap<>();
 
     /**
      * Handles the message sent from the player, without the preceding "/"
      * @param message
      */
     public void handleCommand (String message, CommandIssuer issuer) {
-        if(message.length() == 0) {
+        if(message.isEmpty()) {
             return;
         }
 
@@ -30,8 +30,8 @@ public class CommandHandler {
 
         String label = contents[0].toLowerCase();
 
-        if(commands.containsKey(label)) {
-            CommandData command = commands.get(label);
+        if(this.commands.containsKey(label)) {
+            CommandData command = this.commands.get(label);
             String args = message.substring(label.length());
 
             if(issuer instanceof Player) {
@@ -44,7 +44,7 @@ public class CommandHandler {
             command.getCommand().handle(issuer, args, contents[0]);
         }
 
-        for(Map.Entry<String,CommandData> entry: commands.entrySet()) {
+        for(Map.Entry<String,CommandData> entry: this.commands.entrySet()) {
             if(entry.getValue().hasAlias(label)) {
                 CommandData command = entry.getValue();
                 String args = message.substring(label.length());
@@ -74,14 +74,14 @@ public class CommandHandler {
         String [] aliases = description.aliases();
         String permission = description.permission();
         
-        if(name == null || name.equals("")) {
+        if(name == null || "".equals(name)) {
             throw new PluginLoadException("Command does not declare a valid name!");
         }
         
-        if(commands.containsKey(name.toLowerCase())) {
-            if(commands.get(name.toLowerCase()).getPriority() > priority) {
+        if(this.commands.containsKey(name.toLowerCase())) {
+            if(this.commands.get(name.toLowerCase()).getPriority() > priority) {
                 // put the new, more important command in place and notify the old command that it has been overriden
-                commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
+                this.commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
                         .getCommand().notifyOverriden();
             }
             else {
@@ -94,11 +94,11 @@ public class CommandHandler {
     }
 
     private class CommandData {
-        private String permission;
-        private int priority;
-        private String[] aliases;
-        private String name;
-        private Command encapsulated;
+        private final String permission;
+        private final int priority;
+        private final String[] aliases;
+        private final String name;
+        private final Command encapsulated;
 
         public CommandData(String name, int priority, String[] aliases, String permission, Command command) {
             this.priority = priority;
@@ -109,11 +109,11 @@ public class CommandHandler {
         }
 
         public Command getCommand() {
-            return encapsulated;
+            return this.encapsulated;
         }
 
         public boolean hasAlias(String alias) {
-            for(String string: aliases) {
+            for(String string: this.aliases) {
                 if(alias.equalsIgnoreCase(string)) {
                     return true;
                 }
@@ -122,7 +122,7 @@ public class CommandHandler {
         }
 
         public int getPriority() {
-            return priority;
+            return this.priority;
         }
     }
 }

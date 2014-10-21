@@ -39,7 +39,7 @@ public enum RabbitType {
 
     static {
         for (RabbitType type : RabbitType.values()) {
-            RabbitType.byId[type.id] = type;
+            byId[type.id] = type;
             // TODO by ordinal?
         }
     }

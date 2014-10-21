@@ -47,19 +47,19 @@ public enum BlockFace {
     /**
      * Facing north east
      */
-    NORTH_EAST(BlockFace.NORTH, BlockFace.EAST),
+    NORTH_EAST(NORTH, EAST),
     /**
      * Facing north west
      */
-    NORTH_WEST(BlockFace.NORTH, BlockFace.WEST),
+    NORTH_WEST(NORTH, WEST),
     /**
      * Facing south east
      */
-    SOUTH_EAST(BlockFace.SOUTH, BlockFace.EAST),
+    SOUTH_EAST(SOUTH, EAST),
     /**
      * Facing south west
      */
-    SOUTH_WEST(BlockFace.SOUTH, BlockFace.WEST),
+    SOUTH_WEST(SOUTH, WEST),
 
     /**
      * Facing up

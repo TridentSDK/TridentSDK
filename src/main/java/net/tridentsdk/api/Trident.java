@@ -38,7 +38,7 @@ public final class Trident {
      * @return the server that is running
      */
     public static Server getServer() {
-        return Trident.server;
+        return server;
     }
 
     /**
@@ -47,8 +47,8 @@ public final class Trident {
      * @param s the server to set
      */
     public static void setServer(Server s) {
-        Preconditions.checkState(Trident.isTrident(), "Server instance can only be set by TridentSDK!");
-        Trident.server = s;
+        Preconditions.checkState(isTrident(), "Server instance can only be set by TridentSDK!");
+        server = s;
     }
 
     public static boolean isTrident() {
@@ -64,7 +64,7 @@ public final class Trident {
      * @return the logger which is being used
      */
     public static TridentLogger getLogger() {
-        return Trident.logger;
+        return logger;
     }
 
     /**

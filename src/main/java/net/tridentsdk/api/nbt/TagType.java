@@ -61,7 +61,7 @@ public enum TagType {
                 return type;
             }
         }
-        return TagType.NULL;
+        return NULL;
     }
 
     public Class<? extends NBTTag> getImplementation() {

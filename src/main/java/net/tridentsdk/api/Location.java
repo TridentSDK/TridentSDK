@@ -224,10 +224,9 @@ public class Location implements Cloneable {
     public double distanceSquared(Location location) {
         Validate.notNull(location, "Location cannot be null.");
         if (!this.getWorld().equals(location.getWorld())) return 0.0;
-        return Location.square(this.getX() - location.getX()) + Location.square(this.getY() - location.getY()) +
-                Location
-                        .square(
-                                this.getZ() - location.getZ());
+        return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
+                square(
+                        this.getZ() - location.getZ());
     }
 
     @Override
