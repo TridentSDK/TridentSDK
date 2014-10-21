@@ -21,8 +21,6 @@ import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
 import org.apache.commons.lang.Validate;
 
-import java.io.Serializable;
-
 /**
  * Represents a point on the coordinate grid of the world
  *
@@ -183,17 +181,53 @@ public class Location implements Cloneable {
         this.pitch = pitch;
     }
 
-    public Location add(Vector vector) {
-        this.setX(vector.getX());
-        this.setY(vector.getY());
-        this.setZ(vector.getZ());
+    /**
+     * Adds the given x/y/z to this Location's x/y/z.
+     *
+     * @param x the x coordinate to add
+     * @param y the y coordinate to add
+     * @param z the z coordinate to add
+     * @return this Location
+     */
+    public Location add(double x, double y, double z){
+        setX(getX() + x);
+        setY(getY() + y);
+        setZ(getZ() + z);
 
         return this;
     }
 
+    /**
+     * Adds the Vector's x/y/z to this Location's x/y/z.
+     *
+     * @param vector the the Vector to add
+     * @return this Location
+     */
+    public Location add(Vector vector) {
+        Validate.notNull(vector, "Vector cannot be null.");
+        return add(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    /**
+     * Adds the Location's x/y/z to this Location's x/y/z. Does not modify pitch/yaw.
+     *
+     * @param location the Location to add
+     * @return this Location
+     */
+    public Location add(Location location){
+        Validate.notNull(location, "Location can not be null.");
+        return add(location.getX(), location.getY(), location.getZ());
+    }
+
+    /**
+     * Creates a new Location with the position of this Location added to a vector.
+     *
+     * @param vector the Vector to add
+     * @return new Location with this Location's x/y/z added to the Vector's x/y/z
+     */
     public Location getRelative(Vector vector) {
-        return new Location(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
+        Validate.notNull(vector, "Vector cannot be null.");
+        return this.clone().add(vector);
     }
 
     /**
@@ -212,6 +246,7 @@ public class Location implements Cloneable {
      * @return distance from this location to another
      */
     public double distance(Location location) {
+        Validate.notNull(location, "Location cannot be null.");
         return Math.sqrt(this.distanceSquared(location));
     }
 
@@ -223,10 +258,14 @@ public class Location implements Cloneable {
      */
     public double distanceSquared(Location location) {
         Validate.notNull(location, "Location cannot be null.");
-        if (!this.getWorld().equals(location.getWorld())) return 0.0;
-        return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
-                square(
-                        this.getZ() - location.getZ());
+        Validate.notNull(getWorld(), "Can't measure distance from a null world.");
+        Validate.notNull(location.getWorld(), "Can't measure distance to a null world.");
+        Validate.isTrue(this.getWorld().equals(location.getWorld()),
+                "Can't measure distance between different worlds.");
+
+        return square(this.getX() - location.getX()) +
+                square(this.getY() - location.getY()) +
+                square(this.getZ() - location.getZ());
     }
 
     @Override
