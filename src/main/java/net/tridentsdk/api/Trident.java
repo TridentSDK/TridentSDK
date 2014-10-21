@@ -18,7 +18,21 @@
 package net.tridentsdk.api;
 
 import com.google.common.base.Preconditions;
+import net.tridentsdk.api.config.JsonConfig;
+import net.tridentsdk.api.event.EventManager;
+import net.tridentsdk.api.scheduling.Scheduler;
+import net.tridentsdk.api.threads.ThreadProvider;
 import net.tridentsdk.api.util.TridentLogger;
+import net.tridentsdk.api.window.*;
+import net.tridentsdk.api.window.Window;
+import net.tridentsdk.api.world.World;
+import net.tridentsdk.plugin.TridentPluginHandler;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.InetAddress;
+import java.util.List;
 
 /**
  * Utility accessor to the {@link net.tridentsdk.api.Server}
@@ -74,5 +88,85 @@ public final class Trident {
      */
     public static void setLogger(TridentLogger logger) {
         Trident.logger = logger;
+    }
+    
+    public int getPort() {
+        return server.getPort();
+    }
+    
+    public void shutdown() {
+        server.shutdown();
+    }
+    
+    public List<World> getWorlds() {
+        return server.getWorlds();
+    }
+    
+    public InetAddress getServerIp() {
+        return server.getServerIp();
+    }
+    
+    public void addTask(Runnable runnable) {
+        server.addTask(runnable);
+    }
+    
+    public String getMotd() {
+        return server.getMotd();
+    }
+    
+    public File getMotdPicture() {
+        return server.getMotdPicture();
+    }
+    
+    public BufferedImage getMotdPictureImage() {
+        return server.getMotdPictureImage();
+    }
+
+    public int setMotdImage(Image image) {
+        return server.setMotdImage(image);
+    }
+    
+    public int getMaxPlayers() {
+        return server.getMaxPlayers();
+    }
+    
+    public int getCurrentPlayerCount() {
+        return server.getCurrentPlayerCount();
+    }
+    
+    public Difficulty getDifficulty() {
+        return server.getDifficulty();
+    }
+    
+    public String getVersion() {
+        return server.getVersion();
+    }
+    
+    public Window getWindow(int id) {
+        return server.getWindow(id);
+    }
+    
+    public EventManager getEventManager() {
+        return server.getEventManager();
+    }
+    
+    public void sendPluginMessage(String channel, byte... data) {
+        server.sendPluginMessage(channel, data);
+    }
+    
+    public TridentPluginHandler getPluginHandler() {
+        return server.getPluginHandler();
+    }
+    
+    public Scheduler getScheduler() {
+        return server.getScheduler();
+    }
+
+    public JsonConfig getConfig() {
+        return server.getConfig();
+    }
+    
+    public ThreadProvider provideThreads() {
+        return server.provideThreads();
     }
 }

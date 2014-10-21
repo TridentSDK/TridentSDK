@@ -39,6 +39,16 @@ public final class NBTSerializer {
         FastClass cls = FastClass.get(clzz);
         T instance = cls.getConstructor().newInstance();
 
+        return deserialize(instance, tag);
+    }
+
+    public static <T> T deserialize(T instance, CompoundTag tag) {
+        if(NBTSerializable.class.isAssignableFrom(instance.getClass())) {
+            throw new IllegalArgumentException("Provided object is not serializable!");
+        }
+
+        FastClass cls = FastClass.get(instance.getClass());
+
         for(FastField field : cls.getFields(instance)) {
             Field f = field.toField();
 
@@ -48,12 +58,13 @@ public final class NBTSerializer {
 
             String tagName = f.getAnnotation(NBTField.class).name();
             TagType type = f.getAnnotation(NBTField.class).type();
+            NBTTag value;
 
-            if(!tag.containsTag(tagName))
-                new IllegalArgumentException(StringUtil.concat(tagName, " was unable to be found in provided compound tag!"))
-                        .printStackTrace();
-
-            NBTTag value = tag.getTag(tagName);
+            if(!tag.containsTag(tagName)) {
+                value = new NullTag(tagName);
+            } else {
+                value = tag.getTag(tagName);
+            }
 
             if(value.getType() != type) {
                 new IllegalArgumentException(StringUtil.concat(tagName, "'s tag type ", type,
@@ -63,11 +74,11 @@ public final class NBTSerializer {
 
             switch(value.getType()) {
                 case BYTE:
-                    field.set(((ByteTag) value).getValue());
+                    field.set(value.asType(ByteTag.class).getValue());
                     break;
 
                 case BYTE_ARRAY:
-                    field.set(((ByteArrayTag) value).getValue());
+                    field.set(value.asType(ByteArrayTag.class).getValue());
                     break;
 
                 case COMPOUND:
@@ -75,35 +86,35 @@ public final class NBTSerializer {
                     break;
 
                 case DOUBLE:
-                    field.set(((DoubleTag) value).getValue());
+                    field.set(value.asType(DoubleTag.class).getValue());
                     break;
 
                 case FLOAT:
-                    field.set(((FloatTag) value).getValue());
+                    field.set(value.asType(FloatTag.class).getValue());
                     break;
 
                 case INT:
-                    field.set(((IntTag) value).getValue());
+                    field.set(value.asType(IntTag.class).getValue());
                     break;
 
                 case INT_ARRAY:
-                    field.set(((IntArrayTag) value).getValue());
+                    field.set(value.asType(IntArrayTag.class).getValue());
                     break;
 
                 case LONG:
-                    field.set(((LongTag) value).getValue());
+                    field.set(value.asType(LongTag.class).getValue());
                     break;
 
                 case SHORT:
-                    field.set(((ShortTag) value).getValue());
+                    field.set(value.asType(ShortTag.class).getValue());
                     break;
 
                 case LIST:
-                    field.set(value);
+                    field.set(value.asType(ListTag.class));
                     break;
 
                 case STRING:
-                    field.set(((StringTag) value).getValue());
+                    field.set(value.asType(StringTag.class).getValue());
                     break;
 
                 case NULL:
