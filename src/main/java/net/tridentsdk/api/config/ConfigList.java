@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @author The TridentSDK Team
  */
-public final class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V>, Cloneable {
+public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V>, Cloneable {
     private static final long serialVersionUID = -7535821700183585211L;
 
     JsonArray jsonHandle;
