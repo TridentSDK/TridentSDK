@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @author The TridentSDK Team
  */
-public final class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V> {
+public final class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V>, Cloneable {
     private static final long serialVersionUID = -7535821700183585211L;
 
     JsonArray jsonHandle;
@@ -105,6 +105,9 @@ public final class ConfigList<V> extends AbstractList<V> implements List<V>, Ite
         Node<V> previous = getNode(index - 1);
         final V value = previous.next.value;
         previous.next = previous.next.next;
+
+        size -= 1;
+        modCount -= 1;
 
         return value;
     }
@@ -193,6 +196,15 @@ public final class ConfigList<V> extends AbstractList<V> implements List<V>, Ite
     @Override
     public <T> T[] toArray(T[] arg0) {
         throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+    }
+
+    @Override
+    public ConfigList<V> clone() {
+        try {
+            return (ConfigList<V>) super.clone();
+        } catch (CloneNotSupportedException ignored) {}
+
+        return null;
     }
 
     private void checkElementIndex(int index) {
