@@ -26,22 +26,26 @@ import java.util.List;
 // TODO: Javadoc
 
 /**
- * An LinkedList [implementation] that also makes changes to the underlying JsonArray object
+ * A LinkedList [implementation] that also makes changes to the underlying JsonArray object
  *
  * @author The TridentSDK Team
  */
-public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V>, Cloneable {
+public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V> {
     private static final long serialVersionUID = -7535821700183585211L;
 
     JsonArray jsonHandle;
 
     private Node<V> head;
+    private Node<V> footer;
 
     private int size = 0;
 
     protected ConfigList(JsonArray handle) {
         this.jsonHandle = handle;
-        head = new Node<>(null, null);
+        head = new Node<>(null, null, null);
+        footer = new Node<>(null, null, head);
+
+        head.next = footer;
     }
 
     protected ConfigList(JsonArray handle, Collection<V> c) {
@@ -52,7 +56,7 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
     @Override
     public V get(int index) {
         checkElementIndex(index);
-        return getNode(index).value;
+        return getNode(index + 1).value;
     }
 
     @Override
@@ -62,9 +66,9 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
 
     @Override
     public boolean add(V element) {
-        Node<V> last = getNode(size - 1);
+        Node<V> prev = (size == 0) ? head : getNode(size - 1);
 
-        last.next = new Node<>(element, null);
+        prev.next = new Node<>(element, footer, prev);
         size += 1;
         modCount += 1;
 
@@ -136,7 +140,6 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
     @Override
     protected void removeRange(int start, int end) {
         for (int i = start; i < end; i++) {
-            this.jsonHandle.remove(i);
             remove(i);
         }
     }
@@ -198,15 +201,6 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
     }
 
-    @Override
-    public ConfigList<V> clone() {
-        try {
-            return (ConfigList<V>) super.clone();
-        } catch (CloneNotSupportedException ignored) {}
-
-        return null;
-    }
-
     private void checkElementIndex(int index) {
         if (index < 0 && index > size)
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -215,8 +209,14 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
     private Node<V> getNode(int index) {
         Node<V> node = head;
 
-        for(int i = 0; i < index && node.next != null; i += 1) {
-            node = node.next;
+        if(index > (size >> 2)) {
+            for(int i = 0; i < index && node.next != footer; i += 1) {
+                node = node.next;
+            }
+        } else {
+            for(int i = (size - 1); i < index && node.prev != head; i -= 1) {
+                node = node.prev;
+            }
         }
 
         return node;
@@ -225,8 +225,9 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
     private static class Node<V> {
         V value;
         Node<V> next;
+        Node<V> prev;
 
-        private Node(V value, Node<V> next) {
+        private Node(V value, Node<V> next, Node<V> prev) {
             this.value = value;
             this.next = next;
         }
