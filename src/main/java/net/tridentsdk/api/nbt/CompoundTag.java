@@ -44,6 +44,10 @@ public class CompoundTag extends NBTTag implements TagContainer {
         return this.tags.containsKey(name) ? this.tags.get(name) : new NullTag(name);
     }
 
+    public <T extends NBTTag> T getTagAs(String name) {
+        return (T) getTag(name);
+    }
+
     @Override
     public void addTag(NBTTag tag) {
         this.tags.put(tag.getName(), tag);
