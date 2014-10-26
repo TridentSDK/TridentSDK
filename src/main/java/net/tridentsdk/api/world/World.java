@@ -95,7 +95,7 @@ public interface World {
      * 
      * @return The difficulty set in a world
      */
-    Difficulty getDifficulity();
+    Difficulty getDifficulty();
     
     /**
      * Gets the default gamemode in a given chunk
