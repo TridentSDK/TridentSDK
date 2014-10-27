@@ -32,4 +32,14 @@ public enum Dimension {
     public byte toByte() {
         return this.b;
     }
+
+    public static Dimension getDimension(int i) {
+        for(Dimension dimension : values()) {
+            if(dimension.b == i) {
+                return dimension;
+            }
+        }
+
+        return null;
+    }
 }

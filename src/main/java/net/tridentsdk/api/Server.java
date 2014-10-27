@@ -18,6 +18,7 @@
 package net.tridentsdk.api;
 
 import net.tridentsdk.api.config.JsonConfig;
+import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.EventManager;
 import net.tridentsdk.api.scheduling.Scheduler;
 import net.tridentsdk.api.threads.ThreadProvider;
@@ -31,6 +32,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The access to the server internals
@@ -55,7 +58,7 @@ public interface Server {
      *
      * @return a {@link java.util.List} of all the worlds
      */
-    List<World> getWorlds();
+    Set<World> getWorlds();
 
     /**
      * Gets the Internet Address of this server
@@ -187,4 +190,6 @@ public interface Server {
      * @return the thread provider for the server
      */
     ThreadProvider provideThreads();
+
+    Player getPlayer(UUID id);
 }

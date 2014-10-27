@@ -44,4 +44,6 @@ public interface World {
     GameMode getDefaultGamemode();
 
     LevelType getLevelType();
+
+    Location getSpawnLocation();
 }

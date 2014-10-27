@@ -129,10 +129,10 @@ public final class NBTSerializer {
         return instance;
     }
 
-    public static CompoundTag serialize(NBTSerializable serializable) {
+    public static CompoundTag serialize(NBTSerializable serializable, String name) {
         FastClass cls = FastClass.get(serializable.getClass());
         CompoundTagBuilder<NBTBuilder> builder =
-                TridentFactory.createNbtBuilder(cls.toClass().getSimpleName());
+                TridentFactory.createNbtBuilder(name);
 
         for(FastField field : cls.getFields(serializable)) {
             Field f = field.toField();
@@ -200,5 +200,9 @@ public final class NBTSerializer {
         }
 
         return builder.endCompoundTag().build();
+    }
+
+    public static CompoundTag serialize(NBTSerializable serializable) {
+        return serialize(serializable, serializable.getClass().getSimpleName());
     }
 }

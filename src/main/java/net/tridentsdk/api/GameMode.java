@@ -53,4 +53,14 @@ public enum GameMode {
     public static byte toByte(GameMode gameMode) {
         return gameMode.toByte();
     }
+
+    public static GameMode getGameMode(int i) {
+        for(GameMode mode : values()) {
+            if(mode.b == i) {
+                return mode;
+            }
+        }
+
+        return null;
+    }
 }
