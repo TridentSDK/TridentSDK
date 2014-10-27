@@ -129,6 +129,13 @@ public interface Entity {
      * @return if the entity is silent
      */
     boolean isSilent();
+    
+    /**
+     * Gets if the entity is on fire
+     * 
+     * @return if the entity is on fire
+     */
+    boolean isOnFire();
 
     /**
      * The identifier for this entity for runtime, see getUniqueId for a set id of the entity
