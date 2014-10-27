@@ -23,7 +23,6 @@ import net.tridentsdk.api.event.EventManager;
 import net.tridentsdk.api.scheduling.Scheduler;
 import net.tridentsdk.api.threads.ThreadProvider;
 import net.tridentsdk.api.util.TridentLogger;
-import net.tridentsdk.api.window.*;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
@@ -32,7 +31,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.InetAddress;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Utility accessor to the {@link net.tridentsdk.api.Server}
@@ -98,7 +97,7 @@ public final class Trident {
         server.shutdown();
     }
     
-    public List<World> getWorlds() {
+    public Set<World> getWorlds() {
         return server.getWorlds();
     }
     
