@@ -1,32 +1,24 @@
 /*
- * Copyright (c) 2014, The TridentSDK Team
- * All rights reserved.
+ *     TridentSDK - A Minecraft Server API
+ *     Copyright (C) 2014, The TridentSDK Team
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     1. Redistributions of source code must retain the above copyright
- *        notice, this list of conditions and the following disclaimer.
- *     2. Redistributions in binary form must reproduce the above copyright
- *        notice, this list of conditions and the following disclaimer in the
- *        documentation and/or other materials provided with the distribution.
- *     3. Neither the name of the The TridentSDK Team nor the
- *        names of its contributors may be used to endorse or promote products
- *        derived from this software without specific prior written permission.
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL The TridentSDK Team BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.tridentsdk.plugin;
 
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
@@ -37,13 +29,13 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 public class TridentPlugin {
+    private static final HashFunction HASHER = Hashing.murmur3_32();
 
+    final PluginClassLoader classLoader;
     private final File pluginFile;
     private final File configDirectory;
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
-
-    final PluginClassLoader classLoader;
 
     protected TridentPlugin() {
         this.pluginFile = null;
@@ -54,8 +46,8 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for(TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
-            if(plugin.getDescription().name().equalsIgnoreCase(description.name())) {
+        for (TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
+            if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
                 throw new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
                         "Name: " + description.name());
             }
@@ -63,8 +55,8 @@ public class TridentPlugin {
 
         this.pluginFile = pluginFile;
         this.description = description;
-        this.configDirectory = new File("plugins/" + description.name() + "/");
-        this.defaultConfig = new JsonConfig(new File(configDirectory, "config.json"));
+        this.configDirectory = new File("plugins/" + description.name() + '/');
+        this.defaultConfig = new JsonConfig(new File(this.configDirectory, "config.json"));
         this.classLoader = loader;
     }
 
@@ -85,19 +77,19 @@ public class TridentPlugin {
     }
 
     public void saveDefaultConfig() {
-        saveResource("config.json", false);
+        this.saveResource("config.json", false);
     }
 
     public void saveResource(String name, boolean replace) {
         try {
-            InputStream is = getClass().getResourceAsStream("/" + name);
-            File file = new File(configDirectory, name);
+            InputStream is = this.getClass().getResourceAsStream('/' + name);
+            File file = new File(this.configDirectory, name);
 
-            if(is == null) {
+            if (is == null) {
                 return;
             }
 
-            if(replace && file.exists()) {
+            if (replace && file.exists()) {
                 file.delete();
             }
 
@@ -112,11 +104,11 @@ public class TridentPlugin {
     }
 
     public JsonConfig getDefaultConfig() {
-        return defaultConfig;
+        return this.defaultConfig;
     }
 
     public File getConfigDirectory() {
-        return configDirectory;
+        return this.configDirectory;
     }
 
     public final PluginDescription getDescription() {
@@ -124,16 +116,28 @@ public class TridentPlugin {
     }
 
     @Override
-    public boolean equals(Object other ) {
-        if(other instanceof TridentPlugin) {
+    public boolean equals(Object other) {
+        if (other instanceof TridentPlugin) {
             TridentPlugin otherPlugin = (TridentPlugin) other;
-            if(otherPlugin.getDescription().name().equals(this.getDescription().name())) {
-                if(otherPlugin.getDescription().author().equals(this.getDescription().author())) {
+            if (otherPlugin.getDescription().name().equals(this.getDescription().name())) {
+                if (otherPlugin.getDescription().author().equals(this.getDescription().author())) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        // Find constants
+        String name = this.getDescription().name();
+        String author = this.getDescription().author();
+
+        return HASHER.newHasher()
+                .putUnencodedChars(name)
+                .putUnencodedChars(author)
+                .hash().hashCode();
     }
 
     // TODO: override hashvalue as well

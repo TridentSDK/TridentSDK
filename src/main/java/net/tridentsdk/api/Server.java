@@ -1,45 +1,39 @@
 /*
- * Copyright (c) 2014, The TridentSDK Team
- * All rights reserved.
+ *     TridentSDK - A Minecraft Server API
+ *     Copyright (C) 2014, The TridentSDK Team
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     1. Redistributions of source code must retain the above copyright
- *        notice, this list of conditions and the following disclaimer.
- *     2. Redistributions in binary form must reproduce the above copyright
- *        notice, this list of conditions and the following disclaimer in the
- *        documentation and/or other materials provided with the distribution.
- *     3. Neither the name of the The TridentSDK Team nor the
- *        names of its contributors may be used to endorse or promote products
- *        derived from this software without specific prior written permission.
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL The TridentSDK Team BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.tridentsdk.api;
 
 import net.tridentsdk.api.config.JsonConfig;
+import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.EventManager;
 import net.tridentsdk.api.scheduling.Scheduler;
+import net.tridentsdk.api.threads.ThreadProvider;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
+import org.slf4j.Logger;
 
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The access to the server internals
@@ -64,7 +58,7 @@ public interface Server {
      *
      * @return a {@link java.util.List} of all the worlds
      */
-    List<World> getWorlds();
+    Set<World> getWorlds();
 
     /**
      * Gets the Internet Address of this server
@@ -146,6 +140,12 @@ public interface Server {
      */
     String getVersion();
 
+    /**
+     * Gets an inventory window
+     *
+     * @param id the ID of the window to be searched
+     * @return the window with the ID
+     */
     Window getWindow(int id);
 
     /**
@@ -159,9 +159,9 @@ public interface Server {
      * Send a plugin message
      *
      * @param channel name of the channel
-     * @param data the data to send
+     * @param data    the data to send
      */
-    void sendPluginMessage(String channel, byte[] data);
+    void sendPluginMessage(String channel, byte... data);
 
     /**
      * Get the Trident Plugin Handler
@@ -170,7 +170,26 @@ public interface Server {
      */
     TridentPluginHandler getPluginHandler();
 
+    /**
+     * The trident task scheduler
+     *
+     * @return the scheduler for submitting tasks to
+     */
     Scheduler getScheduler();
 
+    /**
+     * The server configuration file
+     *
+     * @return the server config
+     */
     JsonConfig getConfig();
+
+    /**
+     * Requests the thread handler
+     *
+     * @return the thread provider for the server
+     */
+    ThreadProvider provideThreads();
+
+    Player getPlayer(UUID id);
 }

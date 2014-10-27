@@ -1,3 +1,20 @@
+/*
+ *     TridentSDK - A Minecraft Server API
+ *     Copyright (C) 2014, The TridentSDK Team
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
@@ -12,16 +29,15 @@ import java.util.List;
  * Called when a note is played, has a list of players that will hear this note
  */
 public class NotePlayEvent extends BlockEvent implements Cancellable {
+    private final List<Player> players;
     private Note note;
     private Instrument instrument;
-    private List<Player> players;
-
     private boolean cancel;
 
     /**
-     * @param block Block playing the Note
-     * @param players List of Players who can hear the Note
-     * @param note Note representing the sound being played
+     * @param block      Block playing the Note
+     * @param players    List of Players who can hear the Note
+     * @param note       Note representing the sound being played
      * @param instrument Instrument of the Note
      */
     public NotePlayEvent(Block block, List<Player> players, Note note, Instrument instrument) {
@@ -37,7 +53,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      * @return Note representing the sound that is being played
      */
     public Note getNote() {
-        return note;
+        return this.note;
     }
 
     /**
@@ -55,7 +71,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      * @return Instrument being used to play the Note
      */
     public Instrument getInstrument() {
-        return instrument;
+        return this.instrument;
     }
 
     /**
@@ -73,21 +89,21 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      * @return List of Players who can hear the Note
      */
     public List<Player> getPlayers() {
-        return players;
+        return this.players;
     }
 
     /**
-     * Return if the event is cancel
+     * Return if the event is cancelled
      *
-     * @return true if cancel
+     * @return true if cancelled
      */
     @Override
     public boolean isCancelled() {
-        return cancel;
+        return this.cancel;
     }
 
     /**
-     * Set if the event is cancel
+     * Set if the event is cancelled
      *
      * @param cancel Boolean cancellation state of event
      */

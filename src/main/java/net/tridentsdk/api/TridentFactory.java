@@ -1,30 +1,20 @@
 /*
- * Copyright (c) 2014, The TridentSDK Team
- * All rights reserved.
+ *     TridentSDK - A Minecraft Server API
+ *     Copyright (C) 2014, The TridentSDK Team
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     1. Redistributions of source code must retain the above copyright
- *        notice, this list of conditions and the following disclaimer.
- *     2. Redistributions in binary form must reproduce the above copyright
- *        notice, this list of conditions and the following disclaimer in the
- *        documentation and/or other materials provided with the distribution.
- *     3. Neither the name of the The TridentSDK Team nor the
- *        names of its contributors may be used to endorse or promote products
- *        derived from this software without specific prior written permission.
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL The TridentSDK Team BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.tridentsdk.api;
 
 import net.tridentsdk.api.entity.Entity;
@@ -76,45 +66,43 @@ public final class TridentFactory {
      * Creates a Block instance from specified co-ordinates
      *
      * @param world World in which the Block belongs in
-     * @param x X co-ordinate of the block
-     * @param y Y co-ordinate of the block
-     * @param z Z co-ordinate of the block
+     * @param x     X co-ordinate of the block
+     * @param y     Y co-ordinate of the block
+     * @param z     Z co-ordinate of the block
      * @return Block created instance
      */
     public static Block createBlock(World world, double x, double y, double z) {
-        return new Block(TridentFactory.createLocation(world, x, y, z));
+        return new Block(createLocation(world, x, y, z));
     }
 
     /* Location */
 
     /**
-     * Creates a Location with no world
-     * <p>The created Location's co-ordinates will default to 0.</p>
+     * Creates a Location with no world <p>The created Location's co-ordinates will default to 0.</p>
      *
      * @return Location created instance with no world
      */
     public static Location createLocation() {
-        return new Location(null, 0, 0, 0);
+        return new Location(null, 0.0, 0.0, 0.0);
     }
 
     /**
-     * Creates a Location with no specified co-ordinates
-     * <p>The created Location's co-ordinates will default to 0.</p>
+     * Creates a Location with no specified co-ordinates <p>The created Location's co-ordinates will default to 0.</p>
      *
      * @param world World in which the Location is targeting
      * @return Location with the specified world, but no co-coordinates
      */
     public static Location createLocation(World world) {
-        return new Location(world, 0, 0, 0);
+        return new Location(world, 0.0, 0.0, 0.0);
     }
 
     /**
      * Creates a Location with the specified co-ordinates
      *
      * @param world World
-     * @param x X co-ordinate
-     * @param y Y co-ordinate
-     * @param z Z co-ordinate
+     * @param x     X co-ordinate
+     * @param y     Y co-ordinate
+     * @param z     Z co-ordinate
      * @return Location
      */
     public static Location createLocation(World world, double x, double y, double z) {
@@ -125,10 +113,10 @@ public final class TridentFactory {
      * Creates a Location with the specified co-ordinates and direction
      *
      * @param world World
-     * @param x X co-ordinate
-     * @param y Y co-ordinate
-     * @param z Z co-ordinate
-     * @param yaw Yaw absolute rotation on the x-plane, in degrees
+     * @param x     X co-ordinate
+     * @param y     Y co-ordinate
+     * @param z     Z co-ordinate
+     * @param yaw   Yaw absolute rotation on the x-plane, in degrees
      * @param pitch Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
@@ -140,8 +128,8 @@ public final class TridentFactory {
      * Creates a Location from an existing Location, and a direction
      *
      * @param location Location
-     * @param yaw Yaw absolute rotation on the x-plane, in degrees
-     * @param pitch Pitch absolute rotation on the y-plane, in degrees
+     * @param yaw      Yaw absolute rotation on the x-plane, in degrees
+     * @param pitch    Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
     public static Location createLocation(Location location, float yaw, float pitch) {
@@ -169,31 +157,36 @@ public final class TridentFactory {
         /*return new TridentWorldLoader() {
             private World world;
 
-            @Override public World load(String world) {
+            @Override
+            public World load(String world) {
                 this.world = super.load(world);
                 return this.world;
             }
 
-            @Override public boolean chunkExists(World world, ChunkLocation location) {
+            @Override
+            public boolean chunkExists(World world, ChunkLocation location) {
                 return world.getChunkAt(location, false) != null;
             }
 
-            @Override public Chunk loadChunk(World world, int x, int z) {
+            @Override
+            public Chunk loadChunk(World world, int x, int z) {
                 return world.getChunkAt(TridentFactory.createChunkLoc(x, z), true);
             }
 
-            @Override public Chunk loadChunk(World world, ChunkLocation location) {
+            @Override
+            public Chunk loadChunk(World world, ChunkLocation location) {
                 return world.getChunkAt(location, true);
             }
 
-            @Override public void saveChunk(Chunk chunk) {
+            @Override
+            public void saveChunk(Chunk chunk) {
                 // TODO
             }
         };*/
     }
 
     public static World createWorld(String name) {
-        return TridentFactory.createWorldLoader().load(name);
+        return createWorldLoader().load(name);
     }
 
     /* Utils */

@@ -1,42 +1,52 @@
 /*
- * Copyright (c) 2014, The TridentSDK Team
- * All rights reserved.
+ *     TridentSDK - A Minecraft Server API
+ *     Copyright (C) 2014, The TridentSDK Team
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     1. Redistributions of source code must retain the above copyright
- *        notice, this list of conditions and the following disclaimer.
- *     2. Redistributions in binary form must reproduce the above copyright
- *        notice, this list of conditions and the following disclaimer in the
- *        documentation and/or other materials provided with the distribution.
- *     3. Neither the name of the The TridentSDK Team nor the
- *        names of its contributors may be used to endorse or promote products
- *        derived from this software without specific prior written permission.
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL The TridentSDK Team BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.tridentsdk.api;
 
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import net.tridentsdk.api.entity.Entity;
+import net.tridentsdk.api.entity.Impalable;
+import net.tridentsdk.api.entity.Projectile;
 import net.tridentsdk.api.util.Vector;
 
+import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.List;
+
 /**
- * TODO
+ * A basic structure in minecraft, a material bearing piece set at a given location
+ *
+ * @author The TridentSDK Team
  */
-public class Block {
+public class Block implements Impalable {
     private final Location location;
-    private Material material;
+    protected Material material;
+    protected byte data;
+    /**
+     * Describes projectile logic
+     */
+    public final List<WeakReference<Projectile>> hit = Collections.synchronizedList(
+            Lists.<WeakReference<Projectile>>newArrayList());
 
     /**
+     * Constructs the wrapper representing the block
+     *
      * @param location Location of the Block
      */
     public Block(Location location) {
@@ -49,6 +59,12 @@ public class Block {
     }
 
     /**
+     * For internal use only
+     */
+    protected Block(Location location, boolean createdByServer) {
+        this.location = location;
+    }
+    /**
      * Returns the Material of the Block
      *
      * @return Material of the Block
@@ -58,8 +74,22 @@ public class Block {
     }
 
     // TODO: Verify the redundancy
+    public void setType(Material material) {
+        this.material = material;
+    }
+
+    // TODO: Verify the redundancy
     public Material getMaterial() {
-        return material;
+        return this.material;
+    }
+
+    /**
+     * Set the Material of this Block
+     *
+     * @param material Material to set this Block to
+     */
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     /**
@@ -71,27 +101,70 @@ public class Block {
         return this.location;
     }
 
-    /**
-     * Set the Material of this Block
-     * @param material Material to set this Block to
-     */
-    public void setMaterial(Material material) {
-        this.material = material;
+    public byte getData() {
+        return this.data;
     }
 
-    // TODO: Verify the redundancy
-    public void setType(Material material) {
-        this.material = material;
+    public void setData(byte data) {
+        this.data = data;
     }
 
     /**
-     * TODO: This
-     * Returns a relative block
+     * Returns a block immediately to the direction specified
      *
-     * @param vector
-     * @return
+     * @param vector the direction to look for the block adjacent to the current
+     * @return the block adjacent to the current
      */
     public Block getRelative(Vector vector) {
         return new Block(this.location.getRelative(vector));
+    }
+
+    @Override
+    public boolean isImpaledEntity() {
+        return false;
+    }
+
+    @Override
+    public boolean isImpaledTile() {
+        return true;
+    }
+
+    @Override
+    public Entity impaledEntity() {
+        return null;
+    }
+
+    @Override
+    public Block impaledTile() {
+        if (!this.isImpaledTile())
+            return null;
+        return this;
+    }
+
+    @Override
+    public void put(Projectile projectile) {
+        this.hit.add(new WeakReference<>(projectile));
+    }
+
+    @Override
+    public boolean remove(Projectile projectile) {
+        return this.hit.remove(new WeakReference<>(projectile));
+    }
+
+    @Override
+    public void clear() {
+        // TODO remove the projectile entities
+        this.hit.clear();
+    }
+
+    @Override
+    public List<Projectile> projectiles() {
+        return new ImmutableList.Builder<Projectile>().addAll(Lists.transform(this.hit, new Function<WeakReference<Projectile>,
+                Projectile>() {
+            @Override
+            public Projectile apply(WeakReference<Projectile> projectileWeakReference) {
+                return projectileWeakReference.get();
+            }
+        })).build();
     }
 }
