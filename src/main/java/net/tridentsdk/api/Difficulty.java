@@ -44,4 +44,14 @@ public enum Difficulty {
     public byte toByte() {
         return this.b;
     }
+
+    public static Difficulty getDifficulty(int i) {
+        for(Difficulty difficulty : values()) {
+            if(difficulty.b == i) {
+                return difficulty;
+            }
+        }
+
+        return Difficulty.NORMAL;
+    }
 }
