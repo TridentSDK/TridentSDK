@@ -53,6 +53,7 @@ public class NBTDecoder {
         try {
             return this.resolveCompoundTag(this.readString());
         } catch (IOException e) {
+            e.printStackTrace();
             throw new NBTException("IO Error decoding the NBT Data", e);
         }
     }
