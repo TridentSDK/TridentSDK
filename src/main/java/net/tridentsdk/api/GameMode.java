@@ -19,7 +19,7 @@ package net.tridentsdk.api;
 
 /**
  * Minecraft game modes
- *
+ * <p/>
  * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Gameplay#Game_modes">Wiki</a></p>
  */
 public enum GameMode {
@@ -55,8 +55,8 @@ public enum GameMode {
     }
 
     public static GameMode getGameMode(int i) {
-        for(GameMode mode : values()) {
-            if(mode.b == i) {
+        for (GameMode mode : values()) {
+            if (mode.b == i) {
                 return mode;
             }
         }

@@ -209,12 +209,12 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
     private Node<V> getNode(int index) {
         Node<V> node = head;
 
-        if(index > (size >> 2)) {
-            for(int i = 0; i < index && node.next != footer; i += 1) {
+        if (index > (size >> 2)) {
+            for (int i = 0; i < index && node.next != footer; i += 1) {
                 node = node.next;
             }
         } else {
-            for(int i = (size - 1); i < index && node.prev != head; i -= 1) {
+            for (int i = (size - 1); i < index && node.prev != head; i -= 1) {
                 node = node.prev;
             }
         }

@@ -88,35 +88,35 @@ public final class Trident {
     public static void setLogger(TridentLogger logger) {
         Trident.logger = logger;
     }
-    
+
     public int getPort() {
         return server.getPort();
     }
-    
+
     public void shutdown() {
         server.shutdown();
     }
-    
+
     public Set<World> getWorlds() {
         return server.getWorlds();
     }
-    
+
     public InetAddress getServerIp() {
         return server.getServerIp();
     }
-    
+
     public void addTask(Runnable runnable) {
         server.addTask(runnable);
     }
-    
+
     public String getMotd() {
         return server.getMotd();
     }
-    
+
     public File getMotdPicture() {
         return server.getMotdPicture();
     }
-    
+
     public BufferedImage getMotdPictureImage() {
         return server.getMotdPictureImage();
     }
@@ -124,39 +124,39 @@ public final class Trident {
     public int setMotdImage(Image image) {
         return server.setMotdImage(image);
     }
-    
+
     public int getMaxPlayers() {
         return server.getMaxPlayers();
     }
-    
+
     public int getCurrentPlayerCount() {
         return server.getCurrentPlayerCount();
     }
-    
+
     public Difficulty getDifficulty() {
         return server.getDifficulty();
     }
-    
+
     public String getVersion() {
         return server.getVersion();
     }
-    
+
     public Window getWindow(int id) {
         return server.getWindow(id);
     }
-    
+
     public EventManager getEventManager() {
         return server.getEventManager();
     }
-    
+
     public void sendPluginMessage(String channel, byte... data) {
         server.sendPluginMessage(channel, data);
     }
-    
+
     public TridentPluginHandler getPluginHandler() {
         return server.getPluginHandler();
     }
-    
+
     public Scheduler getScheduler() {
         return server.getScheduler();
     }
@@ -164,7 +164,7 @@ public final class Trident {
     public JsonConfig getConfig() {
         return server.getConfig();
     }
-    
+
     public ThreadProvider provideThreads() {
         return server.provideThreads();
     }

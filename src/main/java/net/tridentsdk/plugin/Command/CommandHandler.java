@@ -18,8 +18,6 @@
 package net.tridentsdk.plugin.Command;
 
 
-
-
 import net.tridentsdk.api.CommandIssuer;
 import net.tridentsdk.api.ConsoleSender;
 import net.tridentsdk.api.entity.living.Player;
@@ -32,14 +30,15 @@ import java.util.Map;
 public class CommandHandler {
 
     // TODO: Make this a dictionary tree for fast lookup
-    private final HashMap<String,CommandData> commands = new HashMap<>();
+    private final HashMap<String, CommandData> commands = new HashMap<>();
 
     /**
      * Handles the message sent from the player, without the preceding "/"
+     *
      * @param message
      */
-    public void handleCommand (String message, CommandIssuer issuer) {
-        if(message.isEmpty()) {
+    public void handleCommand(String message, CommandIssuer issuer) {
+        if (message.isEmpty()) {
             return;
         }
 
@@ -47,13 +46,13 @@ public class CommandHandler {
 
         String label = contents[0].toLowerCase();
 
-        if(this.commands.containsKey(label)) {
+        if (this.commands.containsKey(label)) {
             CommandData command = this.commands.get(label);
             String args = message.substring(label.length());
 
-            if(issuer instanceof Player) {
+            if (issuer instanceof Player) {
                 command.getCommand().handlePlayer(
-                        (Player) issuer,args, contents[0]);
+                        (Player) issuer, args, contents[0]);
             } else if (issuer instanceof ConsoleSender) {
                 command.getCommand().handleConsole(
                         (ConsoleSender) issuer, args, contents[0]);
@@ -61,13 +60,13 @@ public class CommandHandler {
             command.getCommand().handle(issuer, args, contents[0]);
         }
 
-        for(Map.Entry<String,CommandData> entry: this.commands.entrySet()) {
-            if(entry.getValue().hasAlias(label)) {
+        for (Map.Entry<String, CommandData> entry : this.commands.entrySet()) {
+            if (entry.getValue().hasAlias(label)) {
                 CommandData command = entry.getValue();
                 String args = message.substring(label.length());
-                if(issuer instanceof Player) {
+                if (issuer instanceof Player) {
                     command.getCommand().handlePlayer(
-                            (Player) issuer,args, contents[0]);
+                            (Player) issuer, args, contents[0]);
                 } else if (issuer instanceof ConsoleSender) {
                     command.getCommand().handleConsole(
                             (ConsoleSender) issuer, args, contents[0]);
@@ -77,31 +76,30 @@ public class CommandHandler {
         }
     }
 
-    public int addCommand (Command command) throws PluginLoadException {
+    public int addCommand(Command command) throws PluginLoadException {
 
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
-        if(description == null) {
+        if (description == null) {
             throw new PluginLoadException("Error in registering commands: Class does not have annotation " +
                     "\"CommandDescription\"!");
         }
 
         String name = description.name();
         int priority = description.priority();
-        String [] aliases = description.aliases();
+        String[] aliases = description.aliases();
         String permission = description.permission();
-        
-        if(name == null || "".equals(name)) {
+
+        if (name == null || "".equals(name)) {
             throw new PluginLoadException("Command does not declare a valid name!");
         }
-        
-        if(this.commands.containsKey(name.toLowerCase())) {
-            if(this.commands.get(name.toLowerCase()).getPriority() > priority) {
+
+        if (this.commands.containsKey(name.toLowerCase())) {
+            if (this.commands.get(name.toLowerCase()).getPriority() > priority) {
                 // put the new, more important command in place and notify the old command that it has been overriden
                 this.commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
                         .getCommand().notifyOverriden();
-            }
-            else {
+            } else {
                 // don't register this command and notify it has been overriden
                 command.notifyOverriden();
             }
@@ -130,8 +128,8 @@ public class CommandHandler {
         }
 
         public boolean hasAlias(String alias) {
-            for(String string: this.aliases) {
-                if(alias.equalsIgnoreCase(string)) {
+            for (String string : this.aliases) {
+                if (alias.equalsIgnoreCase(string)) {
                     return true;
                 }
             }

@@ -36,7 +36,7 @@ public @interface PluginDescription {
 
     String author() default "";
 
-    String[] authors() default { };
+    String[] authors() default {};
 
-    String[] dependencies() default { };
+    String[] dependencies() default {};
 }

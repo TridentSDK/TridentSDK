@@ -34,8 +34,8 @@ public enum Dimension {
     }
 
     public static Dimension getDimension(int i) {
-        for(Dimension dimension : values()) {
-            if(dimension.b == i) {
+        for (Dimension dimension : values()) {
+            if (dimension.b == i) {
                 return dimension;
             }
         }

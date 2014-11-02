@@ -37,7 +37,7 @@ public class EventManager {
             throw new UnsupportedOperationException("EventManager must be initiated by TridentSDK!");
         }
 
-        this.listeners = new RegisteredListener[] { };
+        this.listeners = new RegisteredListener[]{};
 
         for (Importance importance : Importance.values()) {
             this.importanceMap.put(importance, new ArrayList<RegisteredListener>());
@@ -78,7 +78,7 @@ public class EventManager {
 
     public void call(Event event) {
         for (RegisteredListener listener : this.listeners) {
-            if(event.getClass().isAssignableFrom(listener.getEventClass())) {
+            if (event.getClass().isAssignableFrom(listener.getEventClass())) {
                 listener.execute(event);
             }
         }

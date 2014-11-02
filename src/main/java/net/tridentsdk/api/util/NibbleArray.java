@@ -45,7 +45,7 @@ public final class NibbleArray {
     public byte get(int index) {
         byte b = data[index / 2];
 
-        if((index & 1) == 0) {
+        if ((index & 1) == 0) {
             return (byte) (b & 0x0f);
         }
 
@@ -58,7 +58,7 @@ public final class NibbleArray {
         int half = index / 2;
         byte prev = data[half];
 
-        if((index & 1) == 0) {
+        if ((index & 1) == 0) {
             data[half] = (byte) ((prev & 0xf0) | value);
             return;
         }

@@ -25,6 +25,7 @@ public abstract class Command {
 
     /**
      * Called when this command is invoked by a player
+     *
      * @param player
      * @param arguments may be null
      * @param alias
@@ -35,6 +36,7 @@ public abstract class Command {
 
     /**
      * Called when this command is invoked by the console
+     *
      * @param sender
      * @param arguments may be null
      * @param alias
@@ -45,11 +47,12 @@ public abstract class Command {
 
     /**
      * Called when this command is invoked by a player, console, or other sender
+     *
      * @param sender
      * @param arguments may be null
      * @param alias
      */
-    public void handle (CommandIssuer sender, String arguments, String alias) {
+    public void handle(CommandIssuer sender, String arguments, String alias) {
         // Method intentionally left blank
     }
 

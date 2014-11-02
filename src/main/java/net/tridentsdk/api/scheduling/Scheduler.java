@@ -36,10 +36,10 @@ public interface Scheduler {
     TridentRunnable runTaskSyncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
 
     TridentRunnable runTaskAsyncRepeating(TridentPlugin plugin, TridentRunnable runnable,
-            long delay, long initialInterval);
+                                          long delay, long initialInterval);
 
     TridentRunnable runTaskSyncRepeating(TridentPlugin plugin, TridentRunnable runnable,
-            long delay, long intialInterval);
+                                         long delay, long intialInterval);
 
     void cancel(int id);
 

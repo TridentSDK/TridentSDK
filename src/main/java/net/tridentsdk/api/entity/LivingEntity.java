@@ -60,7 +60,7 @@ public interface LivingEntity extends Entity, ProjectileSource, Impalable {
 
     /**
      * Sets the maximum health of the Entity
-     *
+     * <p/>
      * <p>maxHealth cannot be above the current health of the Entity</p>
      * TODO: Rephrase?
      *
@@ -106,9 +106,9 @@ public interface LivingEntity extends Entity, ProjectileSource, Impalable {
 
     /**
      * Returns the last EntityDamageEvent which inflicted this Entity
-     *
+     * <p/>
      * <p>The event may be cancelled.</p>
-     * 
+     *
      * @return EntityDamageEvent the last Entity to inflict this Entity
      */
     EntityDamageEvent getLastDamageCause();
@@ -118,7 +118,7 @@ public interface LivingEntity extends Entity, ProjectileSource, Impalable {
      * <p>Used for death messages</p>
      *
      * @return Player the player who dealt damage to this entity since last full heal
-     *         Returns null if no player has damaged the Entity
+     * Returns null if no player has damaged the Entity
      */
     Player hurtByPlayer();
 

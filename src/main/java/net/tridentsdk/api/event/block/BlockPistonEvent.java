@@ -69,7 +69,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
 
     /**
      * Gets the block that is being moved by this piston, if any
-     *
+     * <p/>
      * <p>If this is a piston extend event, this will return the first block in the series of blocks being pushed.</p>
      *
      * @return the block being moved, may be null if air, or retracting from a block without this piston being sticky

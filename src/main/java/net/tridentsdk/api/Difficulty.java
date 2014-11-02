@@ -19,7 +19,7 @@ package net.tridentsdk.api;
 
 /**
  * Minecraft difficulty for the players
- *
+ * <p/>
  * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Difficulty">Minecraft Wiki</a>.</p>
  *
  * @author The TridentSDK Team
@@ -46,8 +46,8 @@ public enum Difficulty {
     }
 
     public static Difficulty getDifficulty(int i) {
-        for(Difficulty difficulty : values()) {
-            if(difficulty.b == i) {
+        for (Difficulty difficulty : values()) {
+            if (difficulty.b == i) {
                 return difficulty;
             }
         }

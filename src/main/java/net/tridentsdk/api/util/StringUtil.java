@@ -31,7 +31,7 @@ public final class StringUtil {
     public static String concat(Object... objects) {
         StringBuilder builder = new StringBuilder();
 
-        for(Object o : objects) {
+        for (Object o : objects) {
             builder.append(o);
         }
 

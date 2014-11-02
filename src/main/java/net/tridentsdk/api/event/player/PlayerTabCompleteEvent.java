@@ -30,7 +30,7 @@ public class PlayerTabCompleteEvent extends PlayerEvent {
         super(player);
 
         this.message = message;
-        this.suggestions = new String[] { };
+        this.suggestions = new String[]{};
     }
 
     public String getMessage() {

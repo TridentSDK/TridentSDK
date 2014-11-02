@@ -32,5 +32,5 @@ public @interface CommandDescription {
 
     String permission();
 
-    String [] aliases();
+    String[] aliases();
 }
