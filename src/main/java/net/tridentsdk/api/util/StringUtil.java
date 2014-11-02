@@ -38,4 +38,13 @@ public final class StringUtil {
         return builder.toString();
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+
+        return true;
+    }
 }
