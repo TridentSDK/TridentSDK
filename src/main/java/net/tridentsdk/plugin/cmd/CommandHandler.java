@@ -15,7 +15,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.plugin.Command;
+package net.tridentsdk.plugin.cmd;
 
 
 import net.tridentsdk.api.CommandIssuer;
@@ -91,16 +91,16 @@ public class CommandHandler {
         String permission = description.permission();
 
         if (name == null || "".equals(name)) {
-            throw new PluginLoadException("Command does not declare a valid name!");
+            throw new PluginLoadException("cmd does not declare a valid name!");
         }
 
         if (this.commands.containsKey(name.toLowerCase())) {
             if (this.commands.get(name.toLowerCase()).getPriority() > priority) {
-                // put the new, more important command in place and notify the old command that it has been overriden
+                // put the new, more important cmd in place and notify the old cmd that it has been overriden
                 this.commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
                         .getCommand().notifyOverriden();
             } else {
-                // don't register this command and notify it has been overriden
+                // don't register this cmd and notify it has been overriden
                 command.notifyOverriden();
             }
         }
