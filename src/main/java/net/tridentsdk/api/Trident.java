@@ -89,83 +89,83 @@ public final class Trident {
         Trident.logger = logger;
     }
 
-    public int getPort() {
+    public static int getPort() {
         return server.getPort();
     }
 
-    public void shutdown() {
+    public static void shutdown() {
         server.shutdown();
     }
 
-    public Set<World> getWorlds() {
+    public static Set<World> getWorlds() {
         return server.getWorlds();
     }
 
-    public InetAddress getServerIp() {
+    public static InetAddress getServerIp() {
         return server.getServerIp();
     }
 
-    public void addTask(Runnable runnable) {
+    public static void addTask(Runnable runnable) {
         server.addTask(runnable);
     }
 
-    public String getMotd() {
+    public static String getMotd() {
         return server.getMotd();
     }
 
-    public File getMotdPicture() {
+    public static File getMotdPicture() {
         return server.getMotdPicture();
     }
 
-    public BufferedImage getMotdPictureImage() {
+    public static BufferedImage getMotdPictureImage() {
         return server.getMotdPictureImage();
     }
 
-    public int setMotdImage(Image image) {
+    public static int setMotdImage(Image image) {
         return server.setMotdImage(image);
     }
 
-    public int getMaxPlayers() {
+    public static int getMaxPlayers() {
         return server.getMaxPlayers();
     }
 
-    public int getCurrentPlayerCount() {
+    public static int getCurrentPlayerCount() {
         return server.getCurrentPlayerCount();
     }
 
-    public Difficulty getDifficulty() {
+    public static Difficulty getDifficulty() {
         return server.getDifficulty();
     }
 
-    public String getVersion() {
+    public static String getVersion() {
         return server.getVersion();
     }
 
-    public Window getWindow(int id) {
+    public static Window getWindow(int id) {
         return server.getWindow(id);
     }
 
-    public EventManager getEventManager() {
+    public static EventManager getEventManager() {
         return server.getEventManager();
     }
 
-    public void sendPluginMessage(String channel, byte... data) {
+    public static void sendPluginMessage(String channel, byte... data) {
         server.sendPluginMessage(channel, data);
     }
 
-    public TridentPluginHandler getPluginHandler() {
+    public static TridentPluginHandler getPluginHandler() {
         return server.getPluginHandler();
     }
 
-    public Scheduler getScheduler() {
+    public static Scheduler getScheduler() {
         return server.getScheduler();
     }
 
-    public JsonConfig getConfig() {
+    public static JsonConfig getConfig() {
         return server.getConfig();
     }
 
-    public ThreadProvider provideThreads() {
+    public static ThreadProvider provideThreads() {
         return server.provideThreads();
     }
 }
