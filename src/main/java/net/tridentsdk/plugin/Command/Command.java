@@ -21,7 +21,7 @@ import net.tridentsdk.api.CommandIssuer;
 import net.tridentsdk.api.ConsoleSender;
 import net.tridentsdk.api.entity.living.Player;
 
-public abstract class Command {
+public interface Command {
 
     /**
      * Called when this command is invoked by a player
@@ -30,7 +30,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias
      */
-    public abstract void handlePlayer(Player player, String arguments, String alias);
+    public void handlePlayer(Player player, String arguments, String alias);
 
     /**
      * Called when this command is invoked by the console
@@ -39,7 +39,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias
      */
-    public abstract void handleConsole(ConsoleSender sender, String arguments, String alias);
+    public void handleConsole(ConsoleSender sender, String arguments, String alias);
 
     /**
      * Called when this command is invoked by a player, console, or other sender
@@ -48,11 +48,11 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias
      */
-    public abstract void handle(CommandIssuer sender, String arguments, String alias);
+    public void handle(CommandIssuer sender, String arguments, String alias);
 
     /**
      * Called if this command is overriden by another
      */
-    public abstract void notifyOverriden();
+    public void notifyOverriden();
 
 }
