@@ -20,22 +20,26 @@ package net.tridentsdk.plugin.Command;
 
 import net.tridentsdk.api.CommandIssuer;
 import net.tridentsdk.api.ConsoleSender;
+import net.tridentsdk.api.Messagable;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 
 import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * Handles all commands issued in Trident
+ */
 public class CommandHandler {
-
-    // TODO: Make this a dictionary tree for fast lookup
-    private final HashMap<String, CommandData> commands = new HashMap<>();
+    // Contains all registered commands on the server.
+    // And yes, a hash map is the best structure for this.
+    private final HashMap<String, Command> commands = new HashMap<>();
 
     /**
      * Handles the message sent from the player, without the preceding "/"
      *
-     * @param message
+     * @param message the message inputed
+     * @param issuer the method by which the message was delivered
      */
     public void handleCommand(String message, CommandIssuer issuer) {
         if (message.isEmpty()) {
@@ -46,98 +50,71 @@ public class CommandHandler {
 
         String label = contents[0].toLowerCase();
 
-        if (this.commands.containsKey(label)) {
-            CommandData command = this.commands.get(label);
+        // Check if the command exists
+        if (commands.containsKey(label)) {
+            // Grab reference to command
+            Command command = commands.get(label);
+
+            // Assemble command arguments
             String args = message.substring(label.length());
 
+            // Check if player console, or other issued command
             if (issuer instanceof Player) {
-                command.getCommand().handlePlayer(
-                        (Player) issuer, args, contents[0]);
+                command.handlePlayer((Player) issuer, args, contents[0]);
             } else if (issuer instanceof ConsoleSender) {
-                command.getCommand().handleConsole(
-                        (ConsoleSender) issuer, args, contents[0]);
+                command.handleConsole((ConsoleSender) issuer, args, contents[0]);
+            } else {
+                command.handle(issuer, args, contents[0]);
             }
-            command.getCommand().handle(issuer, args, contents[0]);
-        }
-
-        for (Map.Entry<String, CommandData> entry : this.commands.entrySet()) {
-            if (entry.getValue().hasAlias(label)) {
-                CommandData command = entry.getValue();
-                String args = message.substring(label.length());
-                if (issuer instanceof Player) {
-                    command.getCommand().handlePlayer(
-                            (Player) issuer, args, contents[0]);
-                } else if (issuer instanceof ConsoleSender) {
-                    command.getCommand().handleConsole(
-                            (ConsoleSender) issuer, args, contents[0]);
-                }
-                command.getCommand().handle(issuer, args, contents[0]);
-            }
+        } else if (issuer instanceof Messagable) {
+            // Return an error
+            ((Messagable) issuer).sendMessage("Invalid command");
         }
     }
 
+    /**
+     * Adds a command to the command structure
+     * 
+     * @param command the command to add
+     * @throws PluginLoadException if the command lacks a description or valid name
+     * @return 0: all is good with the world
+     *         1: new command overrides another one
+     *         2: new command is overridden by another
+     */
     public int addCommand(Command command) throws PluginLoadException {
 
+        // Grabs the command description
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
+        // Check for a lack of description
         if (description == null) {
             throw new PluginLoadException("Error in registering commands: Class does not have annotation " +
                     "\"CommandDescription\"!");
         }
 
-        String name = description.name();
+        // Readability reference variables
+        String name = description.name().toLowerCase();
         int priority = description.priority();
-        String[] aliases = description.aliases();
-        String permission = description.permission();
 
+        // Check for invalid name
         if (name == null || "".equals(name)) {
             throw new PluginLoadException("Command does not declare a valid name!");
         }
 
-        if (this.commands.containsKey(name.toLowerCase())) {
-            if (this.commands.get(name.toLowerCase()).getPriority() > priority) {
+        // Check if there is already a command with that name
+        if (commands.containsKey(name)) {
+            // Check if the new command has priority over the old
+            if (commands.get(name).getClass().getAnnotation(CommandDescription.class).priority() > priority) {
+                
                 // put the new, more important command in place and notify the old command that it has been overriden
-                this.commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
-                        .getCommand().notifyOverriden();
+                this.commands.put(name.toLowerCase(), command).notifyOverriden();
+                return 1;
             } else {
                 // don't register this command and notify it has been overriden
                 command.notifyOverriden();
+                return 2;
             }
         }
-        // TODO: return something meaningful
         return 0;
-    }
-
-    private class CommandData {
-        private final String permission;
-        private final int priority;
-        private final String[] aliases;
-        private final String name;
-        private final Command encapsulated;
-
-        public CommandData(String name, int priority, String[] aliases, String permission, Command command) {
-            this.priority = priority;
-            this.name = name;
-            this.aliases = aliases;
-            this.permission = permission;
-            this.encapsulated = command;
-        }
-
-        public Command getCommand() {
-            return this.encapsulated;
-        }
-
-        public boolean hasAlias(String alias) {
-            for (String string : this.aliases) {
-                if (alias.equalsIgnoreCase(string)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public int getPriority() {
-            return this.priority;
-        }
     }
 }

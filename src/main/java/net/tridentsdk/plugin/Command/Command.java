@@ -30,9 +30,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias
      */
-    public void handlePlayer(Player player, String arguments, String alias) {
-        // Method intentionally left blank
-    }
+    public abstract void handlePlayer(Player player, String arguments, String alias);
 
     /**
      * Called when this command is invoked by the console
@@ -41,9 +39,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias
      */
-    public void handleConsole(ConsoleSender sender, String arguments, String alias) {
-        // Method intentionally left blank
-    }
+    public abstract void handleConsole(ConsoleSender sender, String arguments, String alias);
 
     /**
      * Called when this command is invoked by a player, console, or other sender
@@ -52,16 +48,11 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias
      */
-    public void handle(CommandIssuer sender, String arguments, String alias) {
-        // Method intentionally left blank
-    }
+    public abstract void handle(CommandIssuer sender, String arguments, String alias);
 
     /**
      * Called if this command is overriden by another
      */
-    public void notifyOverriden() {
-        // Method intentionally left blank
-
-    }
+    public abstract void notifyOverriden();
 
 }
