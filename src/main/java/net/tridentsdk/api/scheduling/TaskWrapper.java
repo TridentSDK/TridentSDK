@@ -17,6 +17,8 @@ public interface TaskWrapper extends Runnable {
      */
     void setInterval(long interval);
 
+    long getInterval();
+
     Type getType();
 
     TridentRunnable getRunnable();

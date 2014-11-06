@@ -44,4 +44,8 @@ public interface Scheduler {
     void cancel(int id);
 
     void cancel(TridentRunnable runnable);
+
+    TaskWrapper wrapperById(int id);
+
+    TaskWrapper wrapperByRun(TridentRunnable runnable);
 }
