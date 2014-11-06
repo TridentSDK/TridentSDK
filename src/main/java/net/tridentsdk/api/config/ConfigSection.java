@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.List;
 
 // TODO: Javadoc
+
 /**
  * Represents a section of the Config file
  *
@@ -46,7 +47,7 @@ public class ConfigSection {
      * Creates a config section for the parent section
      *
      * @param parent the section to be sub-sectioned under
-     * @param obj the section handler, used to store values
+     * @param obj    the section handler, used to store values
      */
     protected ConfigSection(ConfigSection parent, JsonObject obj) {
         this.parent = parent;
@@ -59,7 +60,7 @@ public class ConfigSection {
      * Gets a config section with the elements defined in the specified collection
      *
      * @param list the collection of objects to serialize to a config section
-     * @param <V> the type in the collection
+     * @param <V>  the type in the collection
      * @return the config section with all the values in the list
      */
     public static <V> ConfigSection addToList(Collection<V> list) {
@@ -85,7 +86,7 @@ public class ConfigSection {
 
     /**
      * Gets an integer from the config with the given tag
-     *
+     * <p/>
      * <p>Gives {@code 0} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
@@ -99,7 +100,7 @@ public class ConfigSection {
      * Sets the value at the tag to a specified integer
      *
      * @param tag the tag to set the value
-     * @param in the integer value to set the tag
+     * @param in  the integer value to set the tag
      */
     public void setInt(String tag, int in) {
         this.jsonHandle.addProperty(tag, in);
@@ -118,7 +119,7 @@ public class ConfigSection {
 
     /**
      * Gets a double from the config with the given tag
-     *
+     * <p/>
      * <p>Gives {@code 0.0D} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
@@ -132,7 +133,7 @@ public class ConfigSection {
      * Sets a double at the tag to a specified double
      *
      * @param tag the tag to set the value
-     * @param d the double to set to the tag
+     * @param d   the double to set to the tag
      */
     public void setDouble(String tag, double d) {
         this.jsonHandle.addProperty(tag, d);
@@ -151,7 +152,7 @@ public class ConfigSection {
 
     /**
      * Gets an float from the config with the given tag
-     *
+     * <p/>
      * <p>Gives {@code 0.0F if the value could not be found}</p>
      *
      * @param tag the tag to find the value from
@@ -165,7 +166,7 @@ public class ConfigSection {
      * Sets the float at the tag to a specified float
      *
      * @param tag the tag to set the value
-     * @param f the float to set the tag to
+     * @param f   the float to set the tag to
      */
     public void setFloat(String tag, float f) {
         this.jsonHandle.addProperty(tag, f);
@@ -184,7 +185,7 @@ public class ConfigSection {
 
     /**
      * Gets a character from the config with the given tag
-     *
+     * <p/>
      * <p>Gives {@code \u0000} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
@@ -198,7 +199,7 @@ public class ConfigSection {
      * Sets a character at the tag to the specified character
      *
      * @param tag the tag to set the value
-     * @param c the character to set the tag to
+     * @param c   the character to set the tag to
      */
     public void setChar(String tag, char c) {
         this.jsonHandle.addProperty(tag, c);
@@ -217,7 +218,7 @@ public class ConfigSection {
 
     /**
      * Gets a boolean from the config with the given tag
-     *
+     * <p/>
      * <p>Gives {@code false} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
@@ -231,7 +232,7 @@ public class ConfigSection {
      * Sets the boolean the specified tag
      *
      * @param tag the tag to set the value
-     * @param b the boolean to set to at the tag
+     * @param b   the boolean to set to at the tag
      */
     public void setBoolean(String tag, boolean b) {
         this.jsonHandle.addProperty(tag, b);
@@ -250,7 +251,7 @@ public class ConfigSection {
 
     /**
      * Gets a character from the config with the given tag
-     *
+     * <p/>
      * <p>Gives {@code (byte) 0} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
@@ -264,7 +265,7 @@ public class ConfigSection {
      * Sets the byte the specified tag
      *
      * @param tag the tag to set the value
-     * @param b the byte to set to at the tag
+     * @param b   the byte to set to at the tag
      */
     public void setByte(String tag, byte b) {
         this.jsonHandle.addProperty(tag, b);
@@ -288,7 +289,7 @@ public class ConfigSection {
      * Sets the string the specified tag
      *
      * @param tag the tag to set the value
-     * @param s the string to set at the tag
+     * @param s   the string to set at the tag
      */
     public void setString(String tag, String s) {
         this.jsonHandle.addProperty(tag, s);
@@ -297,9 +298,9 @@ public class ConfigSection {
     /**
      * Gets the list at the tag
      *
-     * @param tag the tag to find the value from
+     * @param tag  the tag to find the value from
      * @param type the types contained in the list
-     * @param <V> the list type
+     * @param <V>  the list type
      * @return the list from the section
      */
     public <V> List<V> getList(String tag, Class<V> type) {
@@ -324,9 +325,9 @@ public class ConfigSection {
     /**
      * Adds an empty list into the tag
      *
-     * @param tag the tag to set the value
+     * @param tag  the tag to set the value
      * @param type the types in the list
-     * @param <V> the list type
+     * @param <V>  the list type
      * @return the list added to the section
      */
     public <V> List<V> addList(String tag, Class<V> type) {
@@ -347,7 +348,7 @@ public class ConfigSection {
 
     /**
      * Gets the BigInteger at the tag
-     *
+     * <p/>
      * <p>Defaults to {@code null} if not found</p>
      *
      * @param tag the tag to find the value from
@@ -360,7 +361,7 @@ public class ConfigSection {
     /**
      * Sets the {@link java.math.BigInteger} the specified tag
      *
-     * @param s the tag to set the integer to
+     * @param s  the tag to set the integer to
      * @param bi the BigInteger ot set the tag to
      */
     public void setBigInteger(String s, BigInteger bi) {
@@ -380,7 +381,7 @@ public class ConfigSection {
 
     /**
      * Gets a BigDecimal at the specified tag
-     *
+     * <p/>
      * <p>Defaults to {@code null} if the tag is not found</p>
      *
      * @param tag the tag to find the value from
@@ -394,7 +395,7 @@ public class ConfigSection {
      * Sets the {@link java.math.BigDecimal} the specified tag
      *
      * @param tag the tag to set the value
-     * @param bd the BigDecimal to set the tag to
+     * @param bd  the BigDecimal to set the tag to
      */
     public void setBigDecimal(String tag, BigDecimal bd) {
         this.setString(tag, bd.toPlainString());
@@ -403,9 +404,9 @@ public class ConfigSection {
     /**
      * Gets the Object at the specified tag
      *
-     * @param tag the tag to find the value from
+     * @param tag   the tag to find the value from
      * @param clazz the type of the object
-     * @param <V> the object type
+     * @param <V>   the object type
      * @return the value
      */
     public <V> V getObject(String tag, Class<V> clazz) {
@@ -415,7 +416,7 @@ public class ConfigSection {
     /**
      * Sets the object at the specified tag
      *
-     * @param tag the tag to set the value
+     * @param tag    the tag to set the value
      * @param object the value to set the tag to
      */
     public void setObject(String tag, Object object) {

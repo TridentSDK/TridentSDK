@@ -31,7 +31,7 @@ public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
     private final ItemStack blockInHand;
 
     public PlayerBucketEmptyEvent(Player player, Block block, Block blockClicked,
-            BlockFace faceClicked, ItemStack blockInHand) {
+                                  BlockFace faceClicked, ItemStack blockInHand) {
         super(player, block, blockClicked, faceClicked);
         this.blockInHand = blockInHand;
     }

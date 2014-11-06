@@ -22,6 +22,7 @@ import com.google.gson.JsonArray;
 import java.util.Collection;
 
 // TODO: Javadoc
+
 /**
  * Section of the config dedicated to storing values from a collection
  *

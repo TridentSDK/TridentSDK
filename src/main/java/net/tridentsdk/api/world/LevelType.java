@@ -37,8 +37,8 @@ public enum LevelType {
     }
 
     public static LevelType getLevelType(String s) {
-        for(LevelType level : values()) {
-            if(level.s.equalsIgnoreCase(s)) {
+        for (LevelType level : values()) {
+            if (level.s.equalsIgnoreCase(s)) {
                 return level;
             }
         }

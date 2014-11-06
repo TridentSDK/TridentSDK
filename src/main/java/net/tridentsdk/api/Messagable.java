@@ -24,10 +24,11 @@ public interface Messagable {
      *
      * @param messages String[] messages to be sent
      */
-    void sendMessage (String... messages);
+    void sendMessage(String... messages);
 
     /**
      * Gets the last message sent to this Messagable
+     *
      * @return the last method sent to this messagable
      */
     String getLastMessage();

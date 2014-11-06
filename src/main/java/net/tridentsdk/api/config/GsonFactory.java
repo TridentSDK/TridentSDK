@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import java.lang.reflect.Type;
 
 // TODO: Javadoc
+
 /**
  * Used for advanced interaction with the Config API for custom serializing/deserializing of Java Objects
  *

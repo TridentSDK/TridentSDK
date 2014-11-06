@@ -34,29 +34,30 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer {
 
     /**
      * Returns the flying speed of the Player
-     * 
+     *
      * @return float flying speed of the Player
      */
     float getFlyingSpeed();
 
     /**
      * Set the flying speed of the Player
-     * 
+     *
      * @param flyingSpeed float flying speed of the Player
      */
     void setFlyingSpeed(float flyingSpeed);
 
     // TODO: Use word settings?
+
     /**
      * Returns the Player's {@link Locale} settings
-     * 
+     *
      * @return Locale the Player's Locale settings
      */
     Locale getLocale();
 
     /**
      * Returns the ItemStack in the Player's hand
-     * 
+     *
      * @return ItemStack current ItemStack in the Player's hand
      */
     ItemStack getItemInHand();

@@ -72,7 +72,7 @@ public class FastClass {
         Field[] fields = this.cls.getFields();
         FastField[] fastFields = new FastField[fields.length];
 
-        for(int i = 0; i < fields.length; i += 1) {
+        for (int i = 0; i < fields.length; i += 1) {
             fastFields[i] = new FastField(instance, this.fieldAccess, fields[i].getName());
         }
 

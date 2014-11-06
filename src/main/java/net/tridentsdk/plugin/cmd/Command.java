@@ -15,7 +15,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.plugin.Command;
+package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.api.CommandIssuer;
 import net.tridentsdk.api.ConsoleSender;
@@ -24,7 +24,8 @@ import net.tridentsdk.api.entity.living.Player;
 public abstract class Command {
 
     /**
-     * Called when this command is invoked by a player
+     * Called when this cmd is invoked by a player
+     *
      * @param player
      * @param arguments may be null
      * @param alias
@@ -34,7 +35,8 @@ public abstract class Command {
     }
 
     /**
-     * Called when this command is invoked by the console
+     * Called when this cmd is invoked by the console
+     *
      * @param sender
      * @param arguments may be null
      * @param alias
@@ -44,17 +46,18 @@ public abstract class Command {
     }
 
     /**
-     * Called when this command is invoked by a player, console, or other sender
+     * Called when this cmd is invoked by a player, console, or other sender
+     *
      * @param sender
      * @param arguments may be null
      * @param alias
      */
-    public void handle (CommandIssuer sender, String arguments, String alias) {
+    public void handle(CommandIssuer sender, String arguments, String alias) {
         // Method intentionally left blank
     }
 
     /**
-     * Called if this command is overriden by another
+     * Called if this cmd is overriden by another
      */
     public void notifyOverriden() {
         // Method intentionally left blank

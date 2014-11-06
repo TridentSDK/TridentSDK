@@ -21,8 +21,6 @@ import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
 import org.apache.commons.lang.Validate;
 
-import java.io.Serializable;
-
 /**
  * Represents a point on the coordinate grid of the world
  *

@@ -43,7 +43,7 @@ public interface Impalable {
 
     /**
      * Gets the entity that was impaled by the projectile
-     *
+     * <p/>
      * <p>Returns {@code null} if {@code isImpaledEntity == false}</p>
      *
      * @return the entity impaled by the projectile
@@ -52,7 +52,7 @@ public interface Impalable {
 
     /**
      * Gets the block (tile) that was impaled by the projectile
-     *
+     * <p/>
      * <p>Returns {@code null} if {@code isImpaledTile == false}</p>
      *
      * @return the impaled block (tile)
@@ -71,7 +71,7 @@ public interface Impalable {
      *
      * @param projectile the projectile to remove from the impalable
      * @return {@code true} if the projectile was removed, {@code false} if the projectile isn't in the impalable,
-     *         or it doesn't exist
+     * or it doesn't exist
      */
     boolean remove(Projectile projectile);
 
@@ -82,13 +82,13 @@ public interface Impalable {
 
     /**
      * Gets the projectiles that impaled the object
-     *
+     * <p/>
      * <p>The list is ordered by first is oldest available arrow, and the last projectile is the newest projectile
      * impaling the tile/entity.</p>
-     *
+     * <p/>
      * <p>Returns {@code null} if the current impalable was never hit by a projectile, or
      * {@code impaledEntity == null && impaledTile == null}</p>
-     *
+     * <p/>
      * <p>This is a immutable collection</p>
      *
      * @return the last projectile that impaled the object

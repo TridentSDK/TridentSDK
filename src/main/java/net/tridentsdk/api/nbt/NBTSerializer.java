@@ -32,7 +32,7 @@ public final class NBTSerializer {
     }
 
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
-        if(NBTSerializable.class.isAssignableFrom(clzz)) {
+        if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
             throw new IllegalArgumentException("Provided object is not serializable!");
         }
 
@@ -43,16 +43,16 @@ public final class NBTSerializer {
     }
 
     public static <T> T deserialize(T instance, CompoundTag tag) {
-        if(NBTSerializable.class.isAssignableFrom(instance.getClass())) {
+        if (!(NBTSerializable.class.isAssignableFrom(instance.getClass()))) {
             throw new IllegalArgumentException("Provided object is not serializable!");
         }
 
         FastClass cls = FastClass.get(instance.getClass());
 
-        for(FastField field : cls.getFields(instance)) {
+        for (FastField field : cls.getFields(instance)) {
             Field f = field.toField();
 
-            if(!f.isAnnotationPresent(NBTField.class)) {
+            if (!f.isAnnotationPresent(NBTField.class)) {
                 continue;
             }
 
@@ -60,19 +60,19 @@ public final class NBTSerializer {
             TagType type = f.getAnnotation(NBTField.class).type();
             NBTTag value;
 
-            if(!tag.containsTag(tagName)) {
+            if (!tag.containsTag(tagName)) {
                 value = new NullTag(tagName);
             } else {
                 value = tag.getTag(tagName);
             }
 
-            if(value.getType() != type) {
+            if (value.getType() != type) {
                 new IllegalArgumentException(StringUtil.concat(tagName, "'s tag type ", type,
                         " is not applicable to ", value.getType(), "! Ignoring...")).printStackTrace();
                 continue;
             }
 
-            switch(value.getType()) {
+            switch (value.getType()) {
                 case BYTE:
                     field.set(value.asType(ByteTag.class).getValue());
                     break;
@@ -134,10 +134,10 @@ public final class NBTSerializer {
         CompoundTagBuilder<NBTBuilder> builder =
                 TridentFactory.createNbtBuilder(name);
 
-        for(FastField field : cls.getFields(serializable)) {
+        for (FastField field : cls.getFields(serializable)) {
             Field f = field.toField();
 
-            if(!f.isAnnotationPresent(NBTField.class)) {
+            if (!f.isAnnotationPresent(NBTField.class)) {
                 continue;
             }
 
@@ -145,7 +145,7 @@ public final class NBTSerializer {
             TagType tagType = f.getAnnotation(NBTField.class).type();
             Object value = field.get();
 
-            switch(tagType) {
+            switch (tagType) {
                 case BYTE:
                     builder.byteTag(tagName, (byte) value);
                     break;

@@ -17,11 +17,7 @@
  */
 package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.entity.Ageable;
-import net.tridentsdk.api.entity.Peaceful;
-import net.tridentsdk.api.entity.Tradeable;
-import net.tridentsdk.api.entity.VillagerCareer;
-import net.tridentsdk.api.entity.VillagerProfession;
+import net.tridentsdk.api.entity.*;
 
 /**
  * Represents a Villager

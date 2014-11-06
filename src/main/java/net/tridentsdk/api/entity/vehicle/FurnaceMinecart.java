@@ -17,7 +17,6 @@
  */
 package net.tridentsdk.api.entity.vehicle;
 
-import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.InventoryHolder;
 
 /**

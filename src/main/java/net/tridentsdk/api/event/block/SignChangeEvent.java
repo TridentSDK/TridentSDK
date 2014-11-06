@@ -68,6 +68,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
 
     /**
      * Sets the contents of the Sign
+     *
      * @param contents String[] contents of the Sign
      */
     public void setContents(String... contents) {
@@ -89,7 +90,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
     /**
      * Sets the value of a line
      *
-     * @param i line of the Sign
+     * @param i    line of the Sign
      * @param text String text to set the line as
      * @return String previous text on the specified line
      */

@@ -64,6 +64,7 @@ public class Block implements Impalable {
     protected Block(Location location, boolean createdByServer) {
         this.location = location;
     }
+
     /**
      * Returns the Material of the Block
      *
