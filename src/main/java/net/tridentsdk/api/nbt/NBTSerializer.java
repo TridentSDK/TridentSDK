@@ -32,7 +32,7 @@ public final class NBTSerializer {
     }
 
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
-        if (NBTSerializable.class.isAssignableFrom(clzz)) {
+        if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
             throw new IllegalArgumentException("Provided object is not serializable!");
         }
 
@@ -43,7 +43,7 @@ public final class NBTSerializer {
     }
 
     public static <T> T deserialize(T instance, CompoundTag tag) {
-        if (NBTSerializable.class.isAssignableFrom(instance.getClass())) {
+        if (!(NBTSerializable.class.isAssignableFrom(instance.getClass()))) {
             throw new IllegalArgumentException("Provided object is not serializable!");
         }
 
