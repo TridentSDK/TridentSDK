@@ -26,7 +26,7 @@ import org.apache.commons.lang.Validate;
  *
  * @author The TridentSDK Team
  */
-public class Location implements Cloneable {
+public class Place implements Cloneable {
     private double x;
     private double y;
     private double z;
