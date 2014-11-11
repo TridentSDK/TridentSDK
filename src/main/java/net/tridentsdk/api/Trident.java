@@ -50,7 +50,7 @@ public final class Trident {
      *
      * @return the server that is running
      */
-    public static Server getServer() {
+    public static Server server() {
         return server;
     }
 
@@ -76,7 +76,7 @@ public final class Trident {
      *
      * @return the logger which is being used
      */
-    public static TridentLogger getLogger() {
+    public static TridentLogger logger() {
         return logger;
     }
 
@@ -89,63 +89,63 @@ public final class Trident {
         Trident.logger = logger;
     }
 
-    public static int getPort() {
+    public static int port() {
         return server.getPort();
     }
 
-    public static void shutdown() {
+    public static void exit() {
         server.shutdown();
     }
 
-    public static Set<World> getWorlds() {
+    public static Set<World> worlds() {
         return server.getWorlds();
     }
 
-    public static InetAddress getServerIp() {
+    public static InetAddress ipAddress() {
         return server.getServerIp();
     }
 
-    public static void addTask(Runnable runnable) {
+    public static void run(Runnable runnable) {
         server.addTask(runnable);
     }
 
-    public static String getMotd() {
+    public static String motd() {
         return server.getMotd();
     }
 
-    public static File getMotdPicture() {
+    public static File serverLogoFile() {
         return server.getMotdPicture();
     }
 
-    public static BufferedImage getMotdPictureImage() {
+    public static BufferedImage serverLogoImage() {
         return server.getMotdPictureImage();
     }
 
-    public static int setMotdImage(Image image) {
+    public static int setLogo(Image image) {
         return server.setMotdImage(image);
     }
 
-    public static int getMaxPlayers() {
+    public static int maxPlayers() {
         return server.getMaxPlayers();
     }
 
-    public static int getCurrentPlayerCount() {
+    public static int playerCount() {
         return server.getCurrentPlayerCount();
     }
 
-    public static Difficulty getDifficulty() {
+    public static Difficulty difficulty() {
         return server.getDifficulty();
     }
 
-    public static String getVersion() {
+    public static String version() {
         return server.getVersion();
     }
 
-    public static Window getWindow(int id) {
+    public static Window windowBy(int id) {
         return server.getWindow(id);
     }
 
-    public static EventManager getEventManager() {
+    public static EventManager eventManager() {
         return server.getEventManager();
     }
 
@@ -153,15 +153,15 @@ public final class Trident {
         server.sendPluginMessage(channel, data);
     }
 
-    public static TridentPluginHandler getPluginHandler() {
+    public static TridentPluginHandler pluginHandler() {
         return server.getPluginHandler();
     }
 
-    public static Scheduler getScheduler() {
+    public static Scheduler scheduler() {
         return server.getScheduler();
     }
 
-    public static JsonConfig getConfig() {
+    public static JsonConfig configuration() {
         return server.getConfig();
     }
 
