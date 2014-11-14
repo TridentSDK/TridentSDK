@@ -19,68 +19,57 @@
 
 package net.tridentsdk.api.event;
 
+import com.google.common.collect.Maps;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.reflect.FastClass;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.EnumMap;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class EventManager {
-    private final EnumMap<Importance, ArrayList<RegisteredListener>> importanceMap =
-            new EnumMap<>(Importance.class);
-    private RegisteredListener[] listeners;
+    private final Map<Class<? extends Listenable>, List<EventCaller>> callers = Maps.newHashMap();
 
     public EventManager() {
         if (!Trident.isTrident()) {
             throw new UnsupportedOperationException("EventManager must be initiated by TridentSDK!");
         }
-
-        this.listeners = new RegisteredListener[]{};
-
-        for (Importance importance : Importance.values()) {
-            this.importanceMap.put(importance, new ArrayList<RegisteredListener>());
-        }
     }
 
+    /**
+     * Normally not needed to be used. Plugin listeners are automatically registered when they are loaded.
+     *
+     * @param listener the listener instance to use to register
+     */
     public void registerListener(Listener listener) {
         FastClass fastClass = FastClass.get(listener.getClass());
 
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if (parameterTypes.length != 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
+            if (parameterTypes.length != 1 || !Listenable.class.isAssignableFrom(parameterTypes[0])) {
                 continue;
             }
 
-            Class<? extends Event> eventClass = parameterTypes[0].asSubclass(Event.class);
-            EventHandler handler = method.getAnnotation(EventHandler.class);
+            Class<? extends Listenable> eventClass = parameterTypes[0].asSubclass(Listenable.class);
+            EventOpts handler = method.getAnnotation(EventOpts.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-            this.importanceMap.get(importance)
-                    .add(new RegisteredListener(fastClass.getMethod(listener, method.getName()),
-                            eventClass, importance));
+            List<EventCaller> eventCallers = this.callers.get(eventClass);
+            eventCallers.add(new EventCaller(fastClass.getMethod(listener, method.getName()), eventClass, importance));
+            Collections.sort(eventCallers);
+            callers.put(eventClass, eventCallers);
         }
-
-        this.updateListeners();
     }
 
-    public void updateListeners() {
-        ArrayList<RegisteredListener> l = new ArrayList<>();
-
-        for (Map.Entry<Importance, ArrayList<RegisteredListener>> entry : this.importanceMap.entrySet()) {
-            l.addAll(entry.getValue());
-        }
-
-        this.listeners = l.toArray(new RegisteredListener[l.size()]);
-    }
-
-    public void call(Event event) {
-        for (RegisteredListener listener : this.listeners) {
-            if (event.getClass().isAssignableFrom(listener.getEventClass())) {
-                listener.execute(event);
-            }
-        }
+    /**
+     * Calls an event
+     *
+     * @param event the event to call
+     */
+    public void call(Listenable event) {
+        for (EventCaller listener : this.callers.get(event.getClass()))
+            listener.call(event);
     }
 }

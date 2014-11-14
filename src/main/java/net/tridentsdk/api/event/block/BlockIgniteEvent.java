@@ -18,12 +18,12 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called when something lights a block on fire
  */
-public class BlockIgniteEvent extends BlockEvent implements Cancellable {
+public class BlockIgniteEvent extends BlockEvent implements CancelHandle {
     private final Cause cause;
     private boolean cancelled;
 

@@ -16,36 +16,64 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package net.tridentsdk.api.event;
 
 import net.tridentsdk.api.reflect.FastMethod;
 
-public class RegisteredListener {
-
+/**
+ * The invocation handler for event listener methods
+ *
+ * @author The TridentSDK Team
+ */
+public class EventCaller implements Comparable<EventCaller> {
     private final FastMethod method;
-    private final Class<? extends Event> eventClass;
+    private final Class<? extends Listenable> eventClass;
     private final Importance importance;
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
+    EventCaller(FastMethod method, Class<? extends Listenable> eventClass, Importance importance) {
         this.method = method;
         this.eventClass = eventClass;
         this.importance = importance;
     }
 
+    /**
+     * Gets the method wrapper that invokes the {@code public} listener
+     *
+     * @return the {@link net.tridentsdk.api.reflect.FastMethod} that invokes the event
+     */
     public FastMethod getMethod() {
         return this.method;
     }
 
-    public Class<? extends Event> getEventClass() {
+    /**
+     * The event that the method listens for
+     *
+     * @return the {@code class} being listened to
+     */
+    public Class<? extends Listenable> getEventClass() {
         return this.eventClass;
     }
 
+    /**
+     * The event priority order based on the listener nnotation
+     *
+     * @return the importance of the event
+     */
     public Importance getImportance() {
         return this.importance;
     }
 
-    public void execute(Event event) {
+    /**
+     * Invokes the method with the ASM reflection wrapper
+     *
+     * @param event the instance of the event class to be using for the event data
+     */
+    public void call(Listenable event) {
         this.method.invoke(event);
+    }
+
+    @Override
+    public int compareTo(EventCaller eventCaller) {
+        return importance.compareTo(eventCaller.getImportance());
     }
 }

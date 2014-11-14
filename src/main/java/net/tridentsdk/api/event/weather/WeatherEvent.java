@@ -17,11 +17,11 @@
  */
 package net.tridentsdk.api.event.weather;
 
-import net.tridentsdk.api.event.Cancellable;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.CancelHandle;
+import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.world.World;
 
-public class WeatherEvent extends Event implements Cancellable {
+public class WeatherEvent extends Listenable implements CancelHandle {
     public final World world;
     private boolean cancelled;
 

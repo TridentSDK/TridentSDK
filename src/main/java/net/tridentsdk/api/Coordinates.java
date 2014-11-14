@@ -26,7 +26,7 @@ import org.apache.commons.lang.Validate;
  *
  * @author The TridentSDK Team
  */
-public class Location implements Cloneable {
+public class Coordinates {
     private double x;
     private double y;
     private double z;
@@ -46,7 +46,7 @@ public class Location implements Cloneable {
      * @param yaw   goes side to side, in degrees
      * @param pitch goes up and down, in degrees
      */
-    public Location(World world, double x, double y, double z, float yaw, float pitch) {
+    public Coordinates(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
 
         this.x = x;
@@ -65,7 +65,7 @@ public class Location implements Cloneable {
      * @param y     the y coordinate
      * @param z     the z coordinate
      */
-    public Location(World world, double x, double y, double z) {
+    public Coordinates(World world, double x, double y, double z) {
         this(world, x, y, z, 0.0F, 0.0F);
     }
 
@@ -181,7 +181,7 @@ public class Location implements Cloneable {
         this.pitch = pitch;
     }
 
-    public Location add(Vector vector) {
+    public Coordinates add(Vector vector) {
         this.setX(vector.getX());
         this.setY(vector.getY());
         this.setZ(vector.getZ());
@@ -189,8 +189,8 @@ public class Location implements Cloneable {
         return this;
     }
 
-    public Location getRelative(Vector vector) {
-        return new Location(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
+    public Coordinates getRelative(Vector vector) {
+        return new Coordinates(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
                 vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
     }
 
@@ -209,7 +209,7 @@ public class Location implements Cloneable {
      * @param location the location to measure distance with
      * @return distance from this location to another
      */
-    public double distance(Location location) {
+    public double distance(Coordinates location) {
         return Math.sqrt(this.distanceSquared(location));
     }
 
@@ -219,7 +219,7 @@ public class Location implements Cloneable {
      * @param location the location to measure distance with
      * @return distance squared from this location to another
      */
-    public double distanceSquared(Location location) {
+    public double distanceSquared(Coordinates location) {
         Validate.notNull(location, "Location cannot be null.");
         if (!this.getWorld().equals(location.getWorld())) return 0.0;
         return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
@@ -227,10 +227,9 @@ public class Location implements Cloneable {
                         this.getZ() - location.getZ());
     }
 
-    @Override
-    public Location clone() {
+    public Coordinates duplicate() {
         try {
-            return (Location) super.clone();
+            return (Coordinates) super.clone();
         } catch (CloneNotSupportedException ignored) {
             return null;
         }

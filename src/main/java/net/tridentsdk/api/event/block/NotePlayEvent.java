@@ -21,14 +21,14 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Instrument;
 import net.tridentsdk.api.Note;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 import java.util.List;
 
 /**
  * Called when a note is played, has a list of players that will hear this note
  */
-public class NotePlayEvent extends BlockEvent implements Cancellable {
+public class NotePlayEvent extends BlockEvent implements CancelHandle {
     private final List<Player> players;
     private Note note;
     private Instrument instrument;

@@ -17,17 +17,17 @@
  */
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
-public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
+public class PlayerMoveEvent extends PlayerEvent implements CancelHandle {
 
-    private final Location fromLoc;
-    private final Location toLoc;
+    private final Coordinates fromLoc;
+    private final Coordinates toLoc;
     private boolean cancel;
 
-    public PlayerMoveEvent(Player player, Location from, Location to) {
+    public PlayerMoveEvent(Player player, Coordinates from, Coordinates to) {
         super(player);
         this.fromLoc = from;
         this.toLoc = to;
@@ -39,7 +39,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
      * @return returns the previous player location
      */
 
-    public Location getFromLocation() {
+    public Coordinates getFromLocation() {
         return this.fromLoc;
     }
 
@@ -49,7 +49,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
      * @return returns the next player location
      */
 
-    public Location getToLocation() {
+    public Coordinates getToLocation() {
         return this.toLoc;
     }
 

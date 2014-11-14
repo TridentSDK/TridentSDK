@@ -19,12 +19,12 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called when a player launches a projectile e.g. an arrow or snowball
  */
-public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancellable {
+public class PlayerLaunchProjectileEvent extends PlayerEvent implements CancelHandle {
     private final Entity projectile;
 
     private boolean cancelled;

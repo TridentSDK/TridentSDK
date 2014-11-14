@@ -18,12 +18,12 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called when a block's redstone state is updated, called on each individual section of wire when they change, etc.
  */
-public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
+public class BlockRedstoneEvent extends BlockEvent implements CancelHandle {
 
     private final int strength;
     private final Block causer;

@@ -20,7 +20,7 @@ package net.tridentsdk.api.world;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Difficulty;
 import net.tridentsdk.api.GameMode;
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 
 public interface World {
     String getName();
@@ -33,7 +33,7 @@ public interface World {
 
     Chunk generateChunk(ChunkLocation location);
 
-    Block getBlockAt(Location location);
+    Block getBlockAt(Coordinates location);
 
     ChunkSnapshot getChunkSnapshot();
 
@@ -45,5 +45,5 @@ public interface World {
 
     LevelType getLevelType();
 
-    Location getSpawnLocation();
+    Coordinates getSpawnLocation();
 }

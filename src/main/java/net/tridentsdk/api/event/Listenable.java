@@ -17,22 +17,33 @@
  */
 package net.tridentsdk.api.event;
 
-public abstract class Event {
-
+/**
+ * Represents a callable, listenable occurence that is registered with the information regarding the event
+ *
+ * @author The TridentSDK Team
+ */
+public abstract class Listenable {
     private final boolean isAsync;
 
-    public Event() {
+    /**
+     * Creates a non-async event
+     */
+    public Listenable() {
         this(false);
     }
 
-    public Event(boolean async) {
+    /**
+     * Creates an event that may or may not be thread-safe
+     *
+     * @param async if {@code true}, then the event must be guaranteed to be thread safe
+     */
+    public Listenable(boolean async) {
         this.isAsync = async;
     }
 
     /**
-     * @return return true if Event is asynchronous
+     * @return {@code true} if Listenable is asynchronous
      */
-
     public boolean isAsync() {
         return this.isAsync;
     }

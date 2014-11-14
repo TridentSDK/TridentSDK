@@ -35,7 +35,7 @@ import java.util.List;
  * @author The TridentSDK Team
  */
 public class Block implements Impalable {
-    private final Location location;
+    private final Coordinates location;
     protected Material material;
     protected byte data;
     /**
@@ -49,7 +49,7 @@ public class Block implements Impalable {
      *
      * @param location Location of the Block
      */
-    public Block(Location location) {
+    public Block(Coordinates location) {
         this.location = location;
 
         // Note: Avoid recursion by not creating a new instance from World#getBlockAt(Location)
@@ -61,7 +61,7 @@ public class Block implements Impalable {
     /**
      * For internal use only
      */
-    protected Block(Location location, boolean createdByServer) {
+    protected Block(Coordinates location, boolean createdByServer) {
         this.location = location;
     }
 
@@ -98,7 +98,7 @@ public class Block implements Impalable {
      *
      * @return Location of the Block
      */
-    public Location getLocation() {
+    public Coordinates getLocation() {
         return this.location;
     }
 

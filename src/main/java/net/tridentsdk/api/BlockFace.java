@@ -100,7 +100,7 @@ public enum BlockFace {
      * @param loc the location to get relative to
      * @return the relative location
      */
-    public Location apply(Location loc) {
+    public Coordinates apply(Coordinates loc) {
         return loc.getRelative(this.difference);
     }
 }

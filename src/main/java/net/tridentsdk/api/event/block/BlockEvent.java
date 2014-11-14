@@ -18,9 +18,9 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.Listenable;
 
-public abstract class BlockEvent extends Event {
+public abstract class BlockEvent extends Listenable {
     private final Block block;
 
     /**

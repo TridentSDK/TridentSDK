@@ -17,11 +17,11 @@
  */
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.event.Cancellable;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.CancelHandle;
+import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.window.Window;
 
-public class PlayerCloseWindowEvent extends Event implements Cancellable {
+public class PlayerCloseWindowEvent extends Listenable implements CancelHandle {
 
     private final Window window;
     private volatile boolean cancelled;

@@ -45,7 +45,7 @@ public interface Server {
      *
      * @return the port the server runs on
      */
-    int getPort();
+    int port();
 
     /**
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
@@ -57,19 +57,19 @@ public interface Server {
      *
      * @return a {@link java.util.List} of all the worlds
      */
-    Set<World> getWorlds();
+    Set<World> worlds();
 
     /**
      * Gets the Internet Address of this server
      *
      * @return the address of this server
      */
-    InetAddress getServerIp();
+    InetAddress serverIp();
 
     /**
-     * Asks the server to execute a task, will be run immediately on an alternate thread
+     * Asks the server to call a task, will be run immediately on an alternate thread
      *
-     * @param runnable The code to execute
+     * @param runnable The code to call
      */
     void addTask(Runnable runnable);
 
@@ -78,30 +78,30 @@ public interface Server {
      *
      * @return that represents the Logger Trident is using
      */
-    Logger getLogger();
+    Logger logger();
 
     /**
      * A string containing the current broadcast MOTD of the server
      *
      * @return a string containing the MOTD of the server, may be empty, never null
      */
-    String getMotd();
+    String motd();
 
     /**
      * Returns the {@link java.io.File} that represents the picture displayed next to the server listing on clients
      *
      * @return the file that represents the picture sent to clients when they ping the server
-     * @see net.tridentsdk.api.Server#getMotdPictureImage() for the representing the image sent to clients
+     * @see net.tridentsdk.api.Server#motdImage() for the representing the image sent to clients
      */
-    File getMotdPicture();
+    File motdPicture();
 
     /**
      * Gets the {@link java.awt.image.BufferedImage} that represents the Motd picture sent to clients
      *
      * @return the image sent to clients
-     * @see net.tridentsdk.api.Server#getMotdPicture() for the file itself
+     * @see net.tridentsdk.api.Server#motdPicture() for the file itself
      */
-    BufferedImage getMotdPictureImage();
+    BufferedImage motdImage();
 
     /**
      * Sets the MOTD image sent to clients, may or may not take a server restart to take effect
@@ -109,35 +109,35 @@ public interface Server {
      * @param image the image to set it to
      * @return 0 for success, -1 if this feature is disabled in config, -2 for generic failure
      */
-    int setMotdImage(Image image);
+    int motdImage(Image image);
 
     /**
      * Gets the maximum number of players allowed on the server
      *
      * @return the maximum number of players the server will allow
      */
-    int getMaxPlayers();
+    int maxPlayers();
 
     /**
      * Returns the number of players currently on the server
      *
      * @return a number representing the number of players on the server
      */
-    int getCurrentPlayerCount();
+    int playerCount();
 
     /**
      * Gets the current difficulty that the server is set to (Worlds can have their own difficulty)
      *
      * @return the difficulty of the server
      */
-    Difficulty getDifficulty();
+    Difficulty difficulty();
 
     /**
      * Gets the version of Trident that the server is currently running
      *
      * @return a String representing the current version of the Trident server that the server is running
      */
-    String getVersion();
+    String version();
 
     /**
      * Gets an inventory window
@@ -145,14 +145,14 @@ public interface Server {
      * @param id the ID of the window to be searched
      * @return the window with the ID
      */
-    Window getWindow(int id);
+    Window windowFor(int id);
 
     /**
      * Get the event manager
      *
      * @return the EventManager instance
      */
-    EventManager getEventManager();
+    EventManager eventManager();
 
     /**
      * Send a plugin message
@@ -167,21 +167,21 @@ public interface Server {
      *
      * @return the TridentPluginHandler instance
      */
-    TridentPluginHandler getPluginHandler();
+    TridentPluginHandler pluginHandler();
 
     /**
      * The trident task scheduler
      *
      * @return the scheduler for submitting tasks to
      */
-    Scheduler getScheduler();
+    Scheduler scheduler();
 
     /**
      * The server configuration file
      *
      * @return the server config
      */
-    JsonConfig getConfig();
+    JsonConfig config();
 
     /**
      * Requests the thread handler
@@ -190,5 +190,11 @@ public interface Server {
      */
     ThreadProvider provideThreads();
 
-    Player getPlayer(UUID id);
+    /**
+     * Acquires a player by their UUID which was given by Mojang to the account the player is playing with
+     *
+     * @param id the UUID object
+     * @return the player with the given UUID
+     */
+    Player playerFor(UUID id);
 }

@@ -17,7 +17,7 @@
  */
 package net.tridentsdk.api.entity;
 
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 import net.tridentsdk.api.util.Vector;
 import net.tridentsdk.api.world.World;
 
@@ -51,7 +51,7 @@ public interface Entity {
      *
      * @param location the location to move the entity to
      */
-    void teleport(Location location);
+    void teleport(Coordinates location);
 
     /**
      * The world which the entity resides in
@@ -65,7 +65,7 @@ public interface Entity {
      *
      * @return the entity's location
      */
-    Location getLocation();
+    Coordinates getLocation();
 
     /**
      * The direction and movement magnitude of the entity
