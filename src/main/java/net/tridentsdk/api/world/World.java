@@ -20,7 +20,7 @@ package net.tridentsdk.api.world;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Difficulty;
 import net.tridentsdk.api.GameMode;
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 
 public interface World {
     
@@ -58,6 +58,11 @@ public interface World {
      * @return The generated chunk
      */
     Chunk generateChunk(ChunkLocation location);
+<<<<<<< HEAD
+
+    Block getBlockAt(Coordinates location);
+
+=======
     
     /**
      * Gets the block on the given location
@@ -71,6 +76,7 @@ public interface World {
      * 
      * @return The ChunkSnapshot
      */
+>>>>>>> ea1fa565d12491cb89ab9d078959ec1b9853b0b4
     ChunkSnapshot getChunkSnapshot();
     
     /**
@@ -101,6 +107,9 @@ public interface World {
      */
     LevelType getLevelType();
 
+<<<<<<< HEAD
+    Coordinates getSpawnLocation();
+=======
     /**
      * Gets the spawn location of a world
      *
@@ -191,4 +200,5 @@ public interface World {
      * @return The time the border has to contract to the contraction target
      */
     int getBorderSizeContractionTime();
+>>>>>>> ea1fa565d12491cb89ab9d078959ec1b9853b0b4
 }

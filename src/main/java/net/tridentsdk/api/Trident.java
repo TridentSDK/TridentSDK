@@ -50,7 +50,7 @@ public final class Trident {
      *
      * @return the server that is running
      */
-    public static Server getServer() {
+    public static Server server() {
         return server;
     }
 
@@ -59,7 +59,7 @@ public final class Trident {
      *
      * @param s the server to set
      */
-    public static void setServer(Server s) {
+    public static void server(Server s) {
         Preconditions.checkState(isTrident(), "Server instance can only be set by TridentSDK!");
         server = s;
     }
@@ -76,7 +76,7 @@ public final class Trident {
      *
      * @return the logger which is being used
      */
-    public static TridentLogger getLogger() {
+    public static TridentLogger logger() {
         return logger;
     }
 
@@ -85,84 +85,84 @@ public final class Trident {
      *
      * @param logger the logger to use
      */
-    public static void setLogger(TridentLogger logger) {
+    public static void logger(TridentLogger logger) {
         Trident.logger = logger;
     }
 
-    public static int getPort() {
-        return server.getPort();
+    public static int port() {
+        return server.port();
     }
 
     public static void shutdown() {
         server.shutdown();
     }
 
-    public static Set<World> getWorlds() {
-        return server.getWorlds();
+    public static Set<World> worlds() {
+        return server.worlds();
     }
 
-    public static InetAddress getServerIp() {
-        return server.getServerIp();
+    public static InetAddress serverIp() {
+        return server.serverIp();
     }
 
     public static void addTask(Runnable runnable) {
         server.addTask(runnable);
     }
 
-    public static String getMotd() {
-        return server.getMotd();
+    public static String motd() {
+        return server.motd();
     }
 
-    public static File getMotdPicture() {
-        return server.getMotdPicture();
+    public static File motdPicture() {
+        return server.motdPicture();
     }
 
-    public static BufferedImage getMotdPictureImage() {
-        return server.getMotdPictureImage();
+    public static BufferedImage motdImage() {
+        return server.motdImage();
     }
 
-    public static int setMotdImage(Image image) {
-        return server.setMotdImage(image);
+    public static int motdImage(Image image) {
+        return server.motdImage(image);
     }
 
-    public static int getMaxPlayers() {
-        return server.getMaxPlayers();
+    public static int maxPlayers() {
+        return server.maxPlayers();
     }
 
-    public static int getCurrentPlayerCount() {
-        return server.getCurrentPlayerCount();
+    public static int playerCount() {
+        return server.playerCount();
     }
 
-    public static Difficulty getDifficulty() {
-        return server.getDifficulty();
+    public static Difficulty difficulty() {
+        return server.difficulty();
     }
 
-    public static String getVersion() {
-        return server.getVersion();
+    public static String version() {
+        return server.version();
     }
 
-    public static Window getWindow(int id) {
-        return server.getWindow(id);
+    public static Window windowFor(int id) {
+        return server.windowFor(id);
     }
 
-    public static EventManager getEventManager() {
-        return server.getEventManager();
+    public static EventManager eventManager() {
+        return server.eventManager();
     }
 
     public static void sendPluginMessage(String channel, byte... data) {
         server.sendPluginMessage(channel, data);
     }
 
-    public static TridentPluginHandler getPluginHandler() {
-        return server.getPluginHandler();
+    public static TridentPluginHandler pluginHandler() {
+        return server.pluginHandler();
     }
 
-    public static Scheduler getScheduler() {
-        return server.getScheduler();
+    public static Scheduler scheduler() {
+        return server.scheduler();
     }
 
-    public static JsonConfig getConfig() {
-        return server.getConfig();
+    public static JsonConfig config() {
+        return server.config();
     }
 
     public static ThreadProvider provideThreads() {

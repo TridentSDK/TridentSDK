@@ -71,7 +71,7 @@ public abstract class TridentRunnable implements Runnable {
      * Gets how long between runs this is supposed to wait if it is a repeating task
      */
     public final long getInterval() {
-        return Trident.getScheduler().wrapperByRun(this).getInterval();
+        return Trident.scheduler().wrapperByRun(this).getInterval();
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class TridentRunnable implements Runnable {
      * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p>
      */
     public final void setInterval(long interval) {
-        Trident.getScheduler().wrapperByRun(this).setInterval(interval);
+        Trident.scheduler().wrapperByRun(this).setInterval(interval);
     }
 
     /**

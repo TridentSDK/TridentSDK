@@ -18,13 +18,13 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called when a block is broken due to an explosion, handled separately than other reasons to reduce lag caused by
  * BlockBreak event listeners during explosions
  */
-public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
+public class MultiBlockBreakEvent extends BlockEvent implements CancelHandle {
     private boolean cancelled;
 
     /**

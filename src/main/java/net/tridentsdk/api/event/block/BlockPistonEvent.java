@@ -20,12 +20,12 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Material;
 import net.tridentsdk.api.Orientation;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called whenever a piston extends or retracts
  */
-public abstract class BlockPistonEvent extends BlockEvent implements Cancellable {
+public abstract class BlockPistonEvent extends BlockEvent implements CancelHandle {
     private final Orientation direction;
     private final boolean retract;
     private final Block influenced;

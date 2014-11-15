@@ -18,13 +18,13 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 import net.tridentsdk.api.inventory.ItemStack;
 
 /**
  * Called when a player's fishing state changes,e.g. throws line, catches a fish, catches an entity, etc.
  */
-public class PlayerFishEvent extends PlayerEvent implements Cancellable {
+public class PlayerFishEvent extends PlayerEvent implements CancelHandle {
     private final State state;
     private int exp;
     private ItemStack item;

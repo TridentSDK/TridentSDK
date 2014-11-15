@@ -21,12 +21,12 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.Material;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called whenever a block is placed
  */
-public class BlockPlaceEvent extends BlockEvent implements Cancellable {
+public class BlockPlaceEvent extends BlockEvent implements CancelHandle {
     private final Player player;
     private final Block blockClicked;
     private final BlockFace faceClicked;

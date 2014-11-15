@@ -17,21 +17,21 @@
  */
 package net.tridentsdk.api.event.weather;
 
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 import net.tridentsdk.api.world.World;
 
 /**
  * Called when lightning strikes somewhere in the world
  */
 public class LightningStrikeEvent extends WeatherEvent {
-    private final Location location;
+    private final Coordinates location;
 
-    public LightningStrikeEvent(World world, Location location) {
+    public LightningStrikeEvent(World world, Coordinates location) {
         super(world);
         this.location = location;
     }
 
-    public Location getLocation() {
+    public Coordinates getLocation() {
         return this.location;
     }
 }

@@ -17,7 +17,7 @@
  */
 package net.tridentsdk.api.entity;
 
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.entity.living.ProjectileSource;
 import net.tridentsdk.api.event.entity.EntityDamageEvent;
@@ -95,7 +95,7 @@ public interface LivingEntity extends Entity, ProjectileSource, Impalable {
      *
      * @return Location the location of the Entity's eye
      */
-    Location getEyeLocation();
+    Coordinates getEyeLocation();
 
     /**
      * Returns if the Entity can pickup items

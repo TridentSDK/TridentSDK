@@ -18,12 +18,12 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.CancelHandle;
 
 /**
  * Called when a player attempts to change their flying state i.e. double-taps jump
  */
-public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable {
+public class PlayerToggleFlyingEvent extends PlayerEvent implements CancelHandle {
 
     private final boolean toggleState;
     private boolean cancelled;

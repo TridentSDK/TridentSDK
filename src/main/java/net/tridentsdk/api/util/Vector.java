@@ -17,7 +17,7 @@
  */
 package net.tridentsdk.api.util;
 
-import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Coordinates;
 import net.tridentsdk.api.world.World;
 
 import java.io.Serializable;
@@ -304,8 +304,8 @@ public class Vector implements Serializable, Cloneable {
     /**
      * Returns a new location in this world, with the coordinates the x, y, and z values
      */
-    public Location toLocation(World world) {
-        return new Location(world, this.x, this.y, this.z);
+    public Coordinates toLocation(World world) {
+        return new Coordinates(world, this.x, this.y, this.z);
     }
 
     /**

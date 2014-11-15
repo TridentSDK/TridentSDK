@@ -58,7 +58,7 @@ public final class TridentFactory {
      * @param location Location of the block
      * @return Block created instance with a location
      */
-    public static Block createBlock(Location location) {
+    public static Block createBlock(Coordinates location) {
         return new Block(location);
     }
 
@@ -82,8 +82,8 @@ public final class TridentFactory {
      *
      * @return Location created instance with no world
      */
-    public static Location createLocation() {
-        return new Location(null, 0.0, 0.0, 0.0);
+    public static Coordinates createLocation() {
+        return new Coordinates(null, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -92,8 +92,8 @@ public final class TridentFactory {
      * @param world World in which the Location is targeting
      * @return Location with the specified world, but no co-coordinates
      */
-    public static Location createLocation(World world) {
-        return new Location(world, 0.0, 0.0, 0.0);
+    public static Coordinates createLocation(World world) {
+        return new Coordinates(world, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -105,8 +105,8 @@ public final class TridentFactory {
      * @param z     Z co-ordinate
      * @return Location
      */
-    public static Location createLocation(World world, double x, double y, double z) {
-        return new Location(world, x, y, z);
+    public static Coordinates createLocation(World world, double x, double y, double z) {
+        return new Coordinates(world, x, y, z);
     }
 
     /**
@@ -120,8 +120,8 @@ public final class TridentFactory {
      * @param pitch Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
-    public static Location createLocation(World world, double x, double y, double z, float yaw, float pitch) {
-        return new Location(world, x, y, z, yaw, pitch);
+    public static Coordinates createLocation(World world, double x, double y, double z, float yaw, float pitch) {
+        return new Coordinates(world, x, y, z, yaw, pitch);
     }
 
     /**
@@ -132,8 +132,8 @@ public final class TridentFactory {
      * @param pitch    Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
-    public static Location createLocation(Location location, float yaw, float pitch) {
-        return new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
+    public static Coordinates createLocation(Coordinates location, float yaw, float pitch) {
+        return new Coordinates(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
     }
 
     /* World */
