@@ -21,8 +21,7 @@ package net.tridentsdk.api.event;
 
 import net.tridentsdk.api.reflect.FastMethod;
 
-public class RegisteredListener {
-
+public class RegisteredListener implements Comparable<RegisteredListener> {
     private final FastMethod method;
     private final Class<? extends Event> eventClass;
     private final Importance importance;
@@ -47,5 +46,9 @@ public class RegisteredListener {
 
     public void execute(Event event) {
         this.method.invoke(event);
+    }
+
+    @Override public int compareTo(RegisteredListener registeredListener) {
+        return importance.compareTo(registeredListener.getImportance());
     }
 }
