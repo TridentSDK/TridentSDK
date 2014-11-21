@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EventListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +61,8 @@ public class EventManager {
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
             List<RegisteredListener> eventCallers = this.callers.get(eventClass);
+            if (eventCallers == null) eventCallers = new ArrayList<>();
+            
             eventCallers.add(new RegisteredListener(fastClass.getMethod(listener, method.getName()), eventClass, importance));
             Collections.sort(eventCallers);
             callers.put(eventClass, eventCallers);
