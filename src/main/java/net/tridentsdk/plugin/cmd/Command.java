@@ -17,8 +17,6 @@
  */
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.api.CommandIssuer;
-import net.tridentsdk.api.ConsoleSender;
 import net.tridentsdk.api.entity.living.Player;
 
 public abstract class Command {
@@ -26,9 +24,9 @@ public abstract class Command {
     /**
      * Called when this cmd is invoked by a player
      *
-     * @param player
+     * @param player player executing the command
      * @param arguments may be null
-     * @param alias
+     * @param alias the alias of the command
      */
     public void handlePlayer(Player player, String arguments, String alias) {
         // Method intentionally left blank
@@ -37,9 +35,9 @@ public abstract class Command {
     /**
      * Called when this cmd is invoked by the console
      *
-     * @param sender
+     * @param sender the command sender
      * @param arguments may be null
-     * @param alias
+     * @param alias the alias for the command
      */
     public void handleConsole(ConsoleSender sender, String arguments, String alias) {
         // Method intentionally left blank
@@ -48,9 +46,9 @@ public abstract class Command {
     /**
      * Called when this cmd is invoked by a player, console, or other sender
      *
-     * @param sender
+     * @param sender the command sender
      * @param arguments may be null
-     * @param alias
+     * @param alias the command alias
      */
     public void handle(CommandIssuer sender, String arguments, String alias) {
         // Method intentionally left blank

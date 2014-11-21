@@ -17,10 +17,9 @@
  */
 package net.tridentsdk.api.scheduling;
 
-import net.tridentsdk.api.Trident;
-
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class TridentRunnable implements Runnable {
     private static int currentId = 0;
@@ -32,6 +31,8 @@ public abstract class TridentRunnable implements Runnable {
 
     private final AtomicLong interval = new AtomicLong();
     private final boolean inAHurry = false;
+
+    private final AtomicReference<Task> task = new AtomicReference<>();
 
     public TridentRunnable() {
         id.set(currentId += 1);
@@ -63,24 +64,36 @@ public abstract class TridentRunnable implements Runnable {
     public void runAfterSync() {
     }
 
+    /**
+     * Cancels the task and removes from execution. See {@link net.tridentsdk.api.scheduling.Task#cancel()}
+     *
+     * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
+     * will be thrown. This can be called when {@code getTask() != null}.
+     */
     public final void cancel() {
-        Trident.getServer().getScheduler().cancel(this);
+        task.get().cancel();
     }
 
     /**
      * Gets how long between runs this is supposed to wait if it is a repeating task
+     *
+     * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
+     * will be thrown. This can be called when {@code getTask() != null}.
      */
     public final long getInterval() {
-        return Trident.getScheduler().wrapperByRun(this).getInterval();
+        return task.get().getInterval();
     }
 
     /**
      * Sets how long this runnable should wait between executions if this is a repeating task <p>If this task is
      * synchronous to the main thread, the change will be immediate, if it is not, the change may take an iteration to
      * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p>
+     *
+     * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
+     * will be thrown. This can be called when {@code getTask() != null}.
      */
     public final void setInterval(long interval) {
-        Trident.getScheduler().wrapperByRun(this).setInterval(interval);
+        task.get().setInterval(interval);
     }
 
     /**
@@ -95,5 +108,23 @@ public abstract class TridentRunnable implements Runnable {
      */
     public boolean usesInAHurry() {
         return false;
+    }
+
+    /**
+     * The scheduled representation of the runnable
+     *
+     * @return the {@link net.tridentsdk.api.scheduling.Task} object held within the scheduling implementation
+     */
+    public Task getTask() {
+        return this.task.get();
+    }
+
+    /**
+     * Invoked by the scheduler to mark that the task has been scheduled.
+     *
+     * @param task the task handed down to delegate off functionality
+     */
+    public void markSchedule(Task task) {
+        this.task.set(task);
     }
 }

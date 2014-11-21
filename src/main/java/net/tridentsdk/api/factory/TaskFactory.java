@@ -15,8 +15,22 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.api;
+package net.tridentsdk.api.factory;
 
-public interface ConsoleSender extends Messagable, CommandIssuer {
-    // TODO
+import net.tridentsdk.api.scheduling.Task;
+import net.tridentsdk.api.scheduling.TridentRunnable;
+import net.tridentsdk.plugin.TridentPlugin;
+
+public interface TaskFactory {
+    public Task asyncRun(TridentPlugin plugin, TridentRunnable runnable);
+
+    public Task syncRun(TridentPlugin plugin, TridentRunnable runnable);
+
+    public Task asyncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
+
+    public Task syncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
+
+    public Task asyncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
+
+    public Task syncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
 }

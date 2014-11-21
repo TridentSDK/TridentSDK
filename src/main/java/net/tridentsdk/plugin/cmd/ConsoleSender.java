@@ -15,8 +15,10 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.api.perf;
+package net.tridentsdk.plugin.cmd;
 
-public interface UnsafeReflector {
-    long address();
+import net.tridentsdk.api.Messagable;
+
+public interface ConsoleSender extends Messagable, CommandIssuer {
+    // TODO
 }

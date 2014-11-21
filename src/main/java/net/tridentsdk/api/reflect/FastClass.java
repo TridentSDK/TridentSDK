@@ -24,7 +24,6 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 import java.lang.reflect.Field;
 
 public class FastClass {
-
     private final Class<?> cls;
 
     private final FieldAccess fieldAccess;

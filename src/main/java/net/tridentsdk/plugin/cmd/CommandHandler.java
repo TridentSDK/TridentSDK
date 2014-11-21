@@ -18,8 +18,6 @@
 package net.tridentsdk.plugin.cmd;
 
 
-import net.tridentsdk.api.CommandIssuer;
-import net.tridentsdk.api.ConsoleSender;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
@@ -35,7 +33,7 @@ public class CommandHandler {
     /**
      * Handles the message sent from the player, without the preceding "/"
      *
-     * @param message
+     * @param message the command executed
      */
     public void handleCommand(String message, CommandIssuer issuer) {
         if (message.isEmpty()) {

@@ -22,7 +22,7 @@ import net.tridentsdk.api.Difficulty;
 import net.tridentsdk.api.GameMode;
 import net.tridentsdk.api.Location;
 
-public interface World {
+public interface World extends Cloneable {
     
     /**
      * Gets the name of the world

@@ -35,8 +35,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
 
     JsonArray jsonHandle;
 
-    private Node<V> head;
-    private Node<V> footer;
+    private final Node<V> head;
+    private final Node<V> footer;
 
     private int size = 0;
 

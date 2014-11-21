@@ -20,8 +20,6 @@ package net.tridentsdk.api;
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.EventManager;
-import net.tridentsdk.api.scheduling.Scheduler;
-import net.tridentsdk.api.threads.ThreadProvider;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
@@ -169,12 +167,6 @@ public interface Server {
      */
     TridentPluginHandler getPluginHandler();
 
-    /**
-     * The trident task scheduler
-     *
-     * @return the scheduler for submitting tasks to
-     */
-    Scheduler getScheduler();
 
     /**
      * The server configuration file
@@ -182,13 +174,6 @@ public interface Server {
      * @return the server config
      */
     JsonConfig getConfig();
-
-    /**
-     * Requests the thread handler
-     *
-     * @return the thread provider for the server
-     */
-    ThreadProvider provideThreads();
 
     Player getPlayer(UUID id);
 }

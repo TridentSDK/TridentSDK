@@ -17,7 +17,7 @@
  */
 package net.tridentsdk.api.entity.living;
 
-import net.tridentsdk.api.CommandIssuer;
+import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.api.GameMode;
 import net.tridentsdk.api.Messagable;
 import net.tridentsdk.api.entity.LivingEntity;

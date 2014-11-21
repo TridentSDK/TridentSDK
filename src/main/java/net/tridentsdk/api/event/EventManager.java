@@ -24,9 +24,7 @@ import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.reflect.FastClass;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.EventListener;
 import java.util.ArrayList;
 import java.util.List;

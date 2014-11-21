@@ -19,7 +19,9 @@ package net.tridentsdk.plugin;
 
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.event.Listener;
+import net.tridentsdk.api.factory.Factories;
 import net.tridentsdk.api.reflect.FastClass;
+import net.tridentsdk.api.threads.TaskExecutor;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
@@ -80,7 +82,8 @@ public class TridentPluginHandler {
                 //TODO: register commands
             }
 
-            Trident.getServer().provideThreads().providePluginThread(plugin).addTask(new Runnable() {
+            TaskExecutor executor = Factories.threadFactory().pluginThread(plugin);
+            executor.addTask(new Runnable() {
                 @Override
                 public void run() {
                     plugin.startup();

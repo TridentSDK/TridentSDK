@@ -17,7 +17,7 @@
  */
 package net.tridentsdk.api.nbt;
 
-import net.tridentsdk.api.TridentFactory;
+import net.tridentsdk.api.factory.TridentFactory;
 import net.tridentsdk.api.nbt.builder.CompoundTagBuilder;
 import net.tridentsdk.api.nbt.builder.NBTBuilder;
 import net.tridentsdk.api.reflect.FastClass;

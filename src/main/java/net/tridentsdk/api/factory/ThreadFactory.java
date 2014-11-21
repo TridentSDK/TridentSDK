@@ -15,19 +15,22 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.api.threads;
+package net.tridentsdk.api.factory;
 
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.api.threads.TaskExecutor;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPlugin;
 
-public interface ThreadProvider {
-    TaskExecutor provideEntityThread(Entity entity);
+public interface ThreadFactory {
+    TaskExecutor entityThread(Entity entity);
 
-    TaskExecutor providePlayerThread(Player player);
+    TaskExecutor playerThread(Player player);
 
-    TaskExecutor providePluginThread(TridentPlugin plugin);
+    TaskExecutor pluginThread(TridentPlugin plugin);
 
-    TaskExecutor provideWorldThread(World world);
+    TaskExecutor worldThread(World world);
+
+    <T> ExecutorFactory<T> executor(int threads);
 }

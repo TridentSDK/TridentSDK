@@ -15,8 +15,11 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.api;
+package net.tridentsdk.api.factory;
 
+import net.tridentsdk.api.Block;
+import net.tridentsdk.api.Location;
+import net.tridentsdk.api.Material;
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.inventory.Inventory;
 import net.tridentsdk.api.inventory.ItemStack;

@@ -1,3 +1,20 @@
+/*
+ *     TridentSDK - A Minecraft Server API
+ *     Copyright (C) 2014, The TridentSDK Team
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.tridentsdk.api.perf;
 
 import sun.misc.Unsafe;
@@ -10,8 +27,8 @@ public class ReImplLinkedQueue<E> implements AddTakeQueue<E> {
     private static final Unsafe UNSAFE = Performance.getUnsafe();
 
     // DO NOT FINALIZE THESE
-    private volatile Node<E> head = new Node<>(null, null);
-    private volatile Node<E> tail = head;
+    private final Node<E> head = new Node<>(null, null);
+    private final Node<E> tail = head;
 
     private final Lock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
@@ -83,8 +100,8 @@ public class ReImplLinkedQueue<E> implements AddTakeQueue<E> {
 
     private static class Node<E> {
         // DO NOT FINALIZE THESE
-        private volatile E item;
-        private volatile Node<E> next;
+        private final E item;
+        private final Node<E> next;
 
         public Node(E item, Node<E> next) {
             this.item = item;

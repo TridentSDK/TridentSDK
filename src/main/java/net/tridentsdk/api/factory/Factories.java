@@ -15,8 +15,25 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.tridentsdk.api.perf;
+package net.tridentsdk.api.factory;
 
-public interface UnsafeReflector {
-    long address();
+public class Factories {
+    private static TaskFactory taskFactory;
+    private static ThreadFactory threadFactory;
+
+    public static void init(TaskFactory factory) {
+        taskFactory = factory;
+    }
+
+    public static void init(ThreadFactory factory) {
+        threadFactory = factory;
+    }
+
+    public static TaskFactory taskFactory() {
+        return taskFactory;
+    }
+
+    public static ThreadFactory threadFactory() {
+        return threadFactory;
+    }
 }
