@@ -45,6 +45,9 @@ public class FastField {
 
     public FastField(Object instance, FieldAccess access, String field) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
