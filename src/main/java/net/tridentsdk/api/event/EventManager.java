@@ -62,12 +62,15 @@ public class EventManager {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             List<RegisteredListener> eventCallers = this.callers.get(eventClass);
             if (eventCallers == null) eventCallers = new ArrayList<>();
             
             eventCallers.add(new RegisteredListener(fastClass.getMethod(method.getName()), eventClass, importance));
             Collections.sort(eventCallers);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -82,6 +85,9 @@ public class EventManager {
             eventCallers.add(registeredListener);
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

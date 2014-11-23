@@ -44,6 +44,9 @@ public class FastField {
     private final Object instance;
 
     public FastField(Object instance, FieldAccess access, String field) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         this.access = access;
         this.field = field;
