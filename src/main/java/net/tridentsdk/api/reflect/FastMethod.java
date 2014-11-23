@@ -31,7 +31,12 @@ public class FastMethod {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     FastMethod(MethodAccess access, String name) {
+=======
+    @InternalUseOnly
+    public FastMethod(Object instance, MethodAccess access, String name) {
+>>>>>>> Stashed changes
 =======
     @InternalUseOnly
     public FastMethod(Object instance, MethodAccess access, String name) {
@@ -46,6 +51,7 @@ public class FastMethod {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Object invoke(Object instance, Object... args) {
         return this.access.invoke(instance, this.name, args);
     }
@@ -53,6 +59,8 @@ public class FastMethod {
     public Object invoke(Object instance) {
         return this.access.invoke(instance, this.name);
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     /**
@@ -73,6 +81,15 @@ public class FastMethod {
     public Object invoke() {
         return this.access.invoke(this.instance, this.name);
 >>>>>>> Stashed changes
+    }
+
+    /**
+     * Gets the object instance used by this class
+     *
+     * @return the instance for method invocation
+     */
+    public Object getInstance() {
+        return instance;
     }
 
     /**

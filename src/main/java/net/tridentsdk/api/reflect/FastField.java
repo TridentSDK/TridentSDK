@@ -28,6 +28,7 @@ import java.lang.reflect.Field;
 public class FastField {
     private final FieldAccess access;
     private final String field;
+<<<<<<< Updated upstream
     private final FastClass owner;
 
 <<<<<<< Updated upstream
@@ -37,6 +38,11 @@ public class FastField {
     public FastField(Object instance, FieldAccess access, String field) {
 >>>>>>> Stashed changes
 =======
+    public FastField(Object instance, FieldAccess access, String field) {
+>>>>>>> Stashed changes
+=======
+    private final Object instance;
+
     public FastField(Object instance, FieldAccess access, String field) {
 >>>>>>> Stashed changes
         this.access = access;
