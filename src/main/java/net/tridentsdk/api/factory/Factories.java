@@ -17,23 +17,52 @@
  */
 package net.tridentsdk.api.factory;
 
+import net.tridentsdk.api.docs.InternalUseOnly;
+
+/**
+ * Available creational factories for basic objects
+ *
+ * @author The TridentSDK Team
+ */
 public class Factories {
     private static TaskFactory taskFactory;
     private static ThreadFactory threadFactory;
+    private static final ReflectFactory reflectionFactory = new ReflectFactory();
 
+    @InternalUseOnly
     public static void init(TaskFactory factory) {
         taskFactory = factory;
     }
 
+    @InternalUseOnly
     public static void init(ThreadFactory factory) {
         threadFactory = factory;
     }
 
-    public static TaskFactory taskFactory() {
+    /**
+     * Schedulers and task executors
+     *
+     * @return the task factory
+     */
+    public static TaskFactory tasks() {
         return taskFactory;
     }
 
-    public static ThreadFactory threadFactory() {
+    /**
+     * Thread management, thread creators/assignment
+     *
+     * @return the threads factory
+     */
+    public static ThreadFactory threads() {
         return threadFactory;
+    }
+
+    /**
+     * Reflection shortcuts and fast wrappers
+     *
+     * @return the reflection factory
+     */
+    public static ReflectFactory reflect() {
+        return reflectionFactory;
     }
 }

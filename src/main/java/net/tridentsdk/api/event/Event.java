@@ -32,7 +32,6 @@ public abstract class Event {
     /**
      * @return return true if Event is asynchronous
      */
-
     public boolean isAsync() {
         return this.isAsync;
     }

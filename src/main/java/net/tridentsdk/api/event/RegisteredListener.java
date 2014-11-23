@@ -16,12 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package net.tridentsdk.api.event;
 
 import net.tridentsdk.api.reflect.FastMethod;
 
-public class RegisteredListener implements Comparable<RegisteredListener> {
+import java.util.Comparator;
+
+public class RegisteredListener implements Comparator<RegisteredListener> {
     private final FastMethod method;
     private final Class<? extends Event> eventClass;
     private final Importance importance;
@@ -48,7 +49,8 @@ public class RegisteredListener implements Comparable<RegisteredListener> {
         this.method.invoke(event);
     }
 
-    @Override public int compareTo(RegisteredListener registeredListener) {
-        return importance.compareTo(registeredListener.getImportance());
+    @Override
+    public int compare(RegisteredListener registeredListener, RegisteredListener t1) {
+        return registeredListener.importance.compareTo(t1.importance);
     }
 }

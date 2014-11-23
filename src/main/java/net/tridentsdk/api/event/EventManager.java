@@ -16,23 +16,25 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package net.tridentsdk.api.event;
 
 import com.google.common.collect.Maps;
 import net.tridentsdk.api.Trident;
-import net.tridentsdk.api.reflect.FastClass;
+import net.tridentsdk.api.docs.InternalUseOnly;
+import net.tridentsdk.api.factory.Factories;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.EventListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
+@NotThreadSafe
 public class EventManager {
-    private final Map<Class<? extends Event>, List<RegisteredListener>> callers = Maps.newHashMap();
+    private final Map<Class<? extends Event>, PriorityQueue<RegisteredListener>> callers = Maps.newHashMap();
 
+    @InternalUseOnly
     public EventManager() {
         if (!Trident.isTrident()) {
             throw new UnsupportedOperationException("EventManager must be initiated by TridentSDK!");
@@ -44,13 +46,12 @@ public class EventManager {
      *
      * @param listener the listener instance to use to register
      */
+    @InternalUseOnly
     public void registerListener(Listener listener) {
-        FastClass fastClass = FastClass.get(listener.getClass());
-
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if (parameterTypes.length != 1 || !EventListener.class.isAssignableFrom(parameterTypes[0])) {
+            if (parameterTypes.length != 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
                 continue;
             }
 
@@ -58,11 +59,22 @@ public class EventManager {
             EventHandler handler = method.getAnnotation(EventHandler.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
+<<<<<<< Updated upstream
             List<RegisteredListener> eventCallers = this.callers.get(eventClass);
             if (eventCallers == null) eventCallers = new ArrayList<>();
             
             eventCallers.add(new RegisteredListener(fastClass.getMethod(method.getName()), eventClass, importance));
             Collections.sort(eventCallers);
+=======
+            RegisteredListener registeredListener = new RegisteredListener(
+                    Factories.reflect().getMethod(listener, method.getName()),
+                    eventClass,
+                    importance);
+            PriorityQueue<RegisteredListener> eventCallers = callers.get(eventClass);
+            if (eventCallers == null)
+                eventCallers = new PriorityQueue<>(11, registeredListener);
+            eventCallers.add(registeredListener);
+>>>>>>> Stashed changes
             callers.put(eventClass, eventCallers);
         }
     }
@@ -73,7 +85,27 @@ public class EventManager {
      * @param event the event to call
      */
     public void call(Event event) {
-        for (RegisteredListener listener : this.callers.get(event.getClass()))
+        Queue<RegisteredListener> listeners = callers.get(event.getClass().asSubclass(Event.class));
+        if (listeners == null) return;
+        for (RegisteredListener listener : listeners)
             listener.execute(event);
+    }
+
+    /**
+     * Removes the listener from the caller queue, preventing it from being invoked
+     *
+     * @param listener the listener to unregister
+     */
+    public void unregister(Listener listener) {
+        for (Map.Entry<Class<? extends Event>, PriorityQueue<RegisteredListener>> entry : this.callers.entrySet()) {
+            for (Iterator<RegisteredListener> iterator = entry.getValue().iterator(); iterator.hasNext();) {
+                RegisteredListener it = iterator.next();
+                if (it.getMethod().getInstance().equals(listener)) {
+                    iterator.remove();
+                    callers.put(entry.getKey(), entry.getValue());
+                    break;
+                }
+            }
+        }
     }
 }

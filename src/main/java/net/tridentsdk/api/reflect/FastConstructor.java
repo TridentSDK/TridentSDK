@@ -20,10 +20,9 @@ package net.tridentsdk.api.reflect;
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 
 public class FastConstructor {
-
     private final ConstructorAccess access;
 
-    FastConstructor(ConstructorAccess access) {
+    public FastConstructor(ConstructorAccess access) {
         this.access = access;
     }
 

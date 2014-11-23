@@ -82,7 +82,7 @@ public class TridentPluginHandler {
                 //TODO: register commands
             }
 
-            TaskExecutor executor = Factories.threadFactory().pluginThread(plugin);
+            TaskExecutor executor = Factories.threads().pluginThread(plugin);
             executor.addTask(new Runnable() {
                 @Override
                 public void run() {

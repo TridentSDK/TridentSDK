@@ -18,22 +18,61 @@
 package net.tridentsdk.api.reflect;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import net.tridentsdk.api.docs.InternalUseOnly;
 
+/**
+ * Wrapper for the provided ReflectASM method library
+ *
+ * @author The TridentSDK Team
+ */
 public class FastMethod {
-
     private final MethodAccess access;
     private final String name;
 
+<<<<<<< Updated upstream
     FastMethod(MethodAccess access, String name) {
+=======
+    @InternalUseOnly
+    public FastMethod(Object instance, MethodAccess access, String name) {
+>>>>>>> Stashed changes
         this.access = access;
         this.name = name;
     }
 
+<<<<<<< Updated upstream
     public Object invoke(Object instance, Object... args) {
         return this.access.invoke(instance, this.name, args);
     }
 
     public Object invoke(Object instance) {
         return this.access.invoke(instance, this.name);
+=======
+    /**
+     * Invokes the method with parameters
+     *
+     * @param args the method parameters
+     * @return the return value after calling the method
+     */
+    public Object invoke(Object... args) {
+        return this.access.invoke(this.instance, this.name, args);
+    }
+
+    /**
+     * Invokes a no-arg method
+     *
+     * @return the return value after calling the method
+     */
+    public Object invoke() {
+        return this.access.invoke(this.instance, this.name);
+>>>>>>> Stashed changes
+    }
+
+    /**
+     * Gets the object instance used by this class
+     *
+     * @return the instance for method invocation
+     */
+    public Object getInstance() {
+        return instance;
     }
 }

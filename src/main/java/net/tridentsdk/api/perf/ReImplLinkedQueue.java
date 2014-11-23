@@ -19,107 +19,112 @@ package net.tridentsdk.api.perf;
 
 import sun.misc.Unsafe;
 
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.Date;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.*;
 
 public class ReImplLinkedQueue<E> implements AddTakeQueue<E> {
-    private static final Unsafe UNSAFE = Performance.getUnsafe();
+    private Node<E> head = new Node<>(null);
+    private Node<E> tail = head;
 
-    // DO NOT FINALIZE THESE
-    private final Node<E> head = new Node<>(null, null);
-    private final Node<E> tail = head;
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final Condition condition = new Condition() {
+        private final Unsafe unsafe = Performance.getUnsafe();
+        private final ConcurrentLinkedQueue<Thread> queue = new ConcurrentLinkedQueue<>();
 
-    private final Lock lock = new ReentrantLock();
-    private final Condition condition = lock.newCondition();
+        @Override
+        public void await() throws InterruptedException {
+            unsafe.park(false, 0L);
+            queue.add(Thread.currentThread());
+        }
+
+        @Override
+        public void awaitUninterruptibly() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public long awaitNanos(long l) throws InterruptedException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public boolean await(long l, TimeUnit timeUnit) throws InterruptedException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public boolean awaitUntil(Date date) throws InterruptedException {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void signal() {
+            Thread thread = queue.poll();
+            unsafe.unpark(thread);
+        }
+
+        @Override
+        public void signalAll() {
+            for (Thread thread : queue) {
+                unsafe.unpark(thread);
+            }
+        }
+    };
 
     @Override
     public boolean add(E e) {
-        Node<E> n = new Node<>(e, null);
-        for (;;) {
-            Node<E> t = tail;
-            Node<E> s = t.getNext();
-            if (t == tail) {
-                if (s == null) {
-                    if (t.casNext(null, n)) {
-                        casTail(t, n);
-                        lock.lock();
-                        try {
-                            condition.signalAll();
-                            return true;
-                        } finally {
-                            lock.unlock();
-                        }
-                    }
-                } else {
-                    casTail(t, s);
-                }
-            }
+        Node<E> node = new Node<>(e);
+        Lock lock = this.lock.writeLock();
+        lock.lock();
+
+        try {
+            this.tail = this.tail.next = node;
+            condition.signal();
+        } finally {
+            lock.unlock();
         }
+
+        return true;
     }
 
     @Override
     public E take() throws InterruptedException {
-        while (head == tail) {
-            lock.lock();
-            try {
-                condition.await();
-            } finally {
-                lock.unlock();
-            }
+        Lock lock = this.lock.writeLock();
+        lock.lockInterruptibly();
+
+        E item;
+        try {
+            Node<E> h = this.head;
+            Node<E> first = h.next;
+
+            this.head = first;
+            while (first == null)
+                this.condition.await();
+            item = first.getItem();
+            first.item = null;
+        } finally {
+            lock.unlock();
         }
 
-        for (;;) {
-            Node<E> h = head;
-            Node<E> t = tail;
-            Node<E> first = h.getNext();
-
-            if (h == head) {
-                if (h == t) {
-                    casTail(t, first);
-                } else if (casHead(h, first)) {
-                    E item = first.getItem();
-                    if (item != null) {
-                        first.setItem(null);
-                        return item;
-                    }
-                }
-            }
-        }
-    }
-
-    private static final long HEAD = Performance.wrap("head").address();
-    public boolean casHead(Node<E> old, Node<E> node) {
-        return UNSAFE.compareAndSwapObject(this, HEAD, old, node);
-    }
-
-    private static final long TAIL = Performance.wrap("tail").address();
-    public boolean casTail(Node<E> old, Node<E> node) {
-        return UNSAFE.compareAndSwapObject(this, TAIL, old, node);
+        return item;
     }
 
     private static class Node<E> {
-        // DO NOT FINALIZE THESE
-        private final E item;
-        private final Node<E> next;
+        private E item;
+        private Node<E> next;
 
-        public Node(E item, Node<E> next) {
+        public Node(E item) {
             this.item = item;
-            this.next = next;
         }
 
-        private static final long ITEM = Performance.wrap("item").address();
         public void setItem(E item) {
-            UNSAFE.putObjectVolatile(this, ITEM, item);
+            this.item = item;
         }
 
         public E getItem() {
             return item;
-        }
-
-        private static final long NEXT = Performance.wrap("next").address();
-        public boolean casNext(Node<E> old, Node<E> node) {
-            return UNSAFE.compareAndSwapObject(this, NEXT, old, node);
         }
 
         public Node<E> getNext() {
