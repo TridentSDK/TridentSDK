@@ -68,7 +68,7 @@ public class FastClass {
     }
 
     public FastField[] getFields(Object instance) {
-        Field[] fields = this.cls.getFields();
+        Field[] fields = this.cls.getDeclaredFields();
         FastField[] fastFields = new FastField[fields.length];
 
         for (int i = 0; i < fields.length; i += 1) {

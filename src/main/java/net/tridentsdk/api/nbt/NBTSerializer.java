@@ -67,8 +67,6 @@ public final class NBTSerializer {
             }
 
             if (value.getType() != type) {
-                new IllegalArgumentException(StringUtil.concat(tagName, "'s tag type ", type,
-                        " is not applicable to ", value.getType(), "! Ignoring...")).printStackTrace();
                 continue;
             }
 
