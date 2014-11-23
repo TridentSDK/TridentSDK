@@ -60,12 +60,15 @@ public class EventManager {
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             List<RegisteredListener> eventCallers = this.callers.get(eventClass);
             if (eventCallers == null) eventCallers = new ArrayList<>();
             
             eventCallers.add(new RegisteredListener(fastClass.getMethod(method.getName()), eventClass, importance));
             Collections.sort(eventCallers);
 =======
+=======
+>>>>>>> Stashed changes
             RegisteredListener registeredListener = new RegisteredListener(
                     Factories.reflect().getMethod(listener, method.getName()),
                     eventClass,
@@ -74,6 +77,9 @@ public class EventManager {
             if (eventCallers == null)
                 eventCallers = new PriorityQueue<>(11, registeredListener);
             eventCallers.add(registeredListener);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             callers.put(eventClass, eventCallers);
         }

@@ -31,7 +31,11 @@ public class FastField {
     private final FastClass owner;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     FastField(FastClass owner, FieldAccess access, String field) {
+=======
+    public FastField(Object instance, FieldAccess access, String field) {
+>>>>>>> Stashed changes
 =======
     public FastField(Object instance, FieldAccess access, String field) {
 >>>>>>> Stashed changes
