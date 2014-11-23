@@ -17,6 +17,8 @@
  */
 package net.tridentsdk.plugin;
 
+import net.tridentsdk.api.reflect.FastClass;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,6 +69,7 @@ public class PluginClassLoader extends URLClassLoader {
             }
 
             this.classes.put(result.getName(), result);
+            FastClass.get(result);
 
             return result;
         }

@@ -49,7 +49,7 @@ public final class NBTSerializer {
 
         FastClass cls = FastClass.get(instance.getClass());
 
-        for (FastField field : cls.getFields(instance)) {
+        for (FastField field : cls.getFields()) {
             Field f = field.toField();
 
             if (!f.isAnnotationPresent(NBTField.class)) {
@@ -72,51 +72,51 @@ public final class NBTSerializer {
 
             switch (value.getType()) {
                 case BYTE:
-                    field.set(value.asType(ByteTag.class).getValue());
+                    field.set(instance, value.asType(ByteTag.class).getValue());
                     break;
 
                 case BYTE_ARRAY:
-                    field.set(value.asType(ByteArrayTag.class).getValue());
+                    field.set(instance, value.asType(ByteArrayTag.class).getValue());
                     break;
 
                 case COMPOUND:
-                    field.set(value);
+                    field.set(instance, value);
                     break;
 
                 case DOUBLE:
-                    field.set(value.asType(DoubleTag.class).getValue());
+                    field.set(instance, value.asType(DoubleTag.class).getValue());
                     break;
 
                 case FLOAT:
-                    field.set(value.asType(FloatTag.class).getValue());
+                    field.set(instance, value.asType(FloatTag.class).getValue());
                     break;
 
                 case INT:
-                    field.set(value.asType(IntTag.class).getValue());
+                    field.set(instance, value.asType(IntTag.class).getValue());
                     break;
 
                 case INT_ARRAY:
-                    field.set(value.asType(IntArrayTag.class).getValue());
+                    field.set(instance, value.asType(IntArrayTag.class).getValue());
                     break;
 
                 case LONG:
-                    field.set(value.asType(LongTag.class).getValue());
+                    field.set(instance, value.asType(LongTag.class).getValue());
                     break;
 
                 case SHORT:
-                    field.set(value.asType(ShortTag.class).getValue());
+                    field.set(instance, value.asType(ShortTag.class).getValue());
                     break;
 
                 case LIST:
-                    field.set(value.asType(ListTag.class));
+                    field.set(instance, value.asType(ListTag.class));
                     break;
 
                 case STRING:
-                    field.set(value.asType(StringTag.class).getValue());
+                    field.set(instance, value.asType(StringTag.class).getValue());
                     break;
 
                 case NULL:
-                    field.set(null);
+                    field.set(instance, null);
                     break;
 
                 default:
@@ -132,7 +132,7 @@ public final class NBTSerializer {
         CompoundTagBuilder<NBTBuilder> builder =
                 TridentFactory.createNbtBuilder(name);
 
-        for (FastField field : cls.getFields(serializable)) {
+        for (FastField field : cls.getFields()) {
             Field f = field.toField();
 
             if (!f.isAnnotationPresent(NBTField.class)) {
@@ -141,7 +141,7 @@ public final class NBTSerializer {
 
             String tagName = f.getAnnotation(NBTField.class).name();
             TagType tagType = f.getAnnotation(NBTField.class).type();
-            Object value = field.get();
+            Object value = field.get(serializable);
 
             switch (tagType) {
                 case BYTE:

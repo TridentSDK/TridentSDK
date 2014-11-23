@@ -48,38 +48,32 @@ public class FastClass {
     /**
      * Get a field from the class
      *
-     * @param instance Instance of the class
      * @param name     Name of the field
      * @return FastField instance
      */
-    public FastField getField(Object instance, String name) {
-        return new FastField(instance, this.fieldAccess, name);
+    public FastField getField(String name) {
+        return new FastField(this, this.fieldAccess, name);
     }
 
     /**
      * Get a method from the class
      *
-     * @param instance Instance of the class
      * @param name     Name of the method
      * @return FastMethod instance
      */
-    public FastMethod getMethod(Object instance, String name) {
-        return new FastMethod(instance, this.methodAccess, name);
+    public FastMethod getMethod(String name) {
+        return new FastMethod(this.methodAccess, name);
     }
 
-    public FastField[] getFields(Object instance) {
+    public FastField[] getFields() {
         Field[] fields = this.cls.getDeclaredFields();
         FastField[] fastFields = new FastField[fields.length];
 
         for (int i = 0; i < fields.length; i += 1) {
-            fastFields[i] = new FastField(instance, this.fieldAccess, fields[i].getName());
+            fastFields[i] = new FastField(this, this.fieldAccess, fields[i].getName());
         }
 
         return fastFields;
-    }
-
-    public FastField[] getFields() {
-        return this.getFields(null);
     }
 
     /**

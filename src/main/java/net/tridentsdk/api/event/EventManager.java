@@ -61,7 +61,7 @@ public class EventManager {
             List<RegisteredListener> eventCallers = this.callers.get(eventClass);
             if (eventCallers == null) eventCallers = new ArrayList<>();
             
-            eventCallers.add(new RegisteredListener(fastClass.getMethod(listener, method.getName()), eventClass, importance));
+            eventCallers.add(new RegisteredListener(fastClass.getMethod(method.getName()), eventClass, importance));
             Collections.sort(eventCallers);
             callers.put(eventClass, eventCallers);
         }
