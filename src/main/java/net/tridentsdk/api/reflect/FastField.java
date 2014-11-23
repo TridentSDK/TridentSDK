@@ -28,25 +28,25 @@ import java.lang.reflect.Field;
 public class FastField {
     private final FieldAccess access;
     private final String field;
-    private final Object instance;
+    private final FastClass owner;
 
-    FastField(Object instance, FieldAccess access, String field) {
+    FastField(FastClass owner, FieldAccess access, String field) {
         this.access = access;
         this.field = field;
-        this.instance = instance;
+        this.owner = owner;
     }
 
-    public void set(Object value) {
-        this.access.set(this.instance, this.field, value);
+    public void set(Object instance, Object value) {
+        this.access.set(instance, this.field, value);
     }
 
-    public <T> T get() {
-        return (T) this.access.get(this.instance, this.field);
+    public <T> T get(Object instance) {
+        return (T) this.access.get(instance, this.field);
     }
 
     public Field toField() {
         try {
-            return this.instance.getClass().getDeclaredField(this.field);
+            return owner.toClass().getDeclaredField(this.field);
         } catch (NoSuchFieldException ignored) {
         }
 

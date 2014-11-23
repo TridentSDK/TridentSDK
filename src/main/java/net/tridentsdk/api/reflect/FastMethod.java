@@ -23,19 +23,17 @@ public class FastMethod {
 
     private final MethodAccess access;
     private final String name;
-    private final Object instance;
 
-    FastMethod(Object instance, MethodAccess access, String name) {
+    FastMethod(MethodAccess access, String name) {
         this.access = access;
         this.name = name;
-        this.instance = instance;
     }
 
-    public Object invoke(Object... args) {
-        return this.access.invoke(this.instance, this.name, args);
+    public Object invoke(Object instance, Object... args) {
+        return this.access.invoke(instance, this.name, args);
     }
 
-    public Object invoke() {
-        return this.access.invoke(this.instance, this.name);
+    public Object invoke(Object instance) {
+        return this.access.invoke(instance, this.name);
     }
 }
