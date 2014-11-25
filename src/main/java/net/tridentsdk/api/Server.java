@@ -167,7 +167,6 @@ public interface Server {
      */
     TridentPluginHandler getPluginHandler();
 
-
     /**
      * The server configuration file
      *

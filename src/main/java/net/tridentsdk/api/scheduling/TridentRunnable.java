@@ -18,18 +18,12 @@
 package net.tridentsdk.api.scheduling;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class TridentRunnable implements Runnable {
     private static int currentId = 0;
 
-    /**
-     * Id of this runnable, unique to this runtime
-     */
     private final AtomicInteger id = new AtomicInteger(-1);
-
-    private final AtomicLong interval = new AtomicLong();
     private final boolean inAHurry = false;
 
     private final AtomicReference<Task> task = new AtomicReference<>();
