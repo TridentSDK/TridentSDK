@@ -17,7 +17,7 @@
  */
 package net.tridentsdk.api.util;
 
-import org.apache.commons.lang.Validate;
+import com.google.common.base.Preconditions;
 
 import java.util.Arrays;
 
@@ -30,7 +30,7 @@ public final class NibbleArray {
     }
 
     public NibbleArray(byte... data) {
-        Validate.isTrue(((data.length % 2) == 0), "Size must be even! Size is " + data.length);
+        Preconditions.checkArgument(((data.length % 2) == 0), "Size must be even! Size is " + data.length);
         this.data = data;
     }
 
@@ -72,7 +72,7 @@ public final class NibbleArray {
     }
 
     public void setRaw(byte[] source) {
-        Validate.isTrue(data.length == source.length, "Byte array length must be the same as current size!");
+        Preconditions.checkArgument(data.length == source.length, "Byte array length must be the same as current size!");
         System.arraycopy(source, 0, data, 0, source.length);
     }
 }

@@ -1,7 +1,6 @@
 package net.tridentsdk.api.factory;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
-import com.esotericsoftware.reflectasm.FieldAccess;
 import com.esotericsoftware.reflectasm.MethodAccess;
 import net.tridentsdk.api.reflect.FastClass;
 import net.tridentsdk.api.reflect.FastConstructor;
@@ -42,7 +41,8 @@ public class ReflectFactory {
      * @return the wrapped field
      */
     public FastField getField(Object o, String name) {
-        return new FastField(o, FieldAccess.get(o.getClass()), name);
+        FastClass fastClass = FastClass.get(o.getClass());
+        return fastClass.getField(name);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ReflectFactory {
      * @return the wrapped {@code static} field
      */
     public FastField getField(Class<?> cls, String name) {
-        return new FastField(null, FieldAccess.get(cls), name);
+        return FastClass.get(cls).getField(name);
     }
 
     /**
