@@ -25,10 +25,7 @@ import net.tridentsdk.api.factory.Factories;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 @NotThreadSafe
 public class EventManager {
@@ -59,25 +56,6 @@ public class EventManager {
             EventHandler handler = method.getAnnotation(EventHandler.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            List<RegisteredListener> eventCallers = this.callers.get(eventClass);
-            if (eventCallers == null) eventCallers = new ArrayList<>();
-            
-            eventCallers.add(new RegisteredListener(fastClass.getMethod(method.getName()), eventClass, importance));
-            Collections.sort(eventCallers);
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             RegisteredListener registeredListener = new RegisteredListener(
                     Factories.reflect().getMethod(listener, method.getName()),
                     eventClass,
@@ -86,19 +64,6 @@ public class EventManager {
             if (eventCallers == null)
                 eventCallers = new PriorityQueue<>(11, registeredListener);
             eventCallers.add(registeredListener);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             callers.put(eventClass, eventCallers);
         }
     }

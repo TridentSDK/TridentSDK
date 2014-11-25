@@ -28,57 +28,15 @@ import net.tridentsdk.api.docs.InternalUseOnly;
 public class FastMethod {
     private final MethodAccess access;
     private final String name;
+    private final Object instance;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    FastMethod(MethodAccess access, String name) {
-=======
     @InternalUseOnly
     public FastMethod(Object instance, MethodAccess access, String name) {
->>>>>>> Stashed changes
-=======
-    @InternalUseOnly
-    public FastMethod(Object instance, MethodAccess access, String name) {
->>>>>>> Stashed changes
-=======
-    @InternalUseOnly
-    public FastMethod(Object instance, MethodAccess access, String name) {
->>>>>>> Stashed changes
-=======
-    @InternalUseOnly
-    public FastMethod(Object instance, MethodAccess access, String name) {
->>>>>>> Stashed changes
-=======
-    @InternalUseOnly
-    public FastMethod(Object instance, MethodAccess access, String name) {
->>>>>>> Stashed changes
         this.access = access;
         this.name = name;
+        this.instance = instance;
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public Object invoke(Object instance, Object... args) {
-        return this.access.invoke(instance, this.name, args);
-    }
-
-    public Object invoke(Object instance) {
-        return this.access.invoke(instance, this.name);
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     /**
      * Invokes the method with parameters
      *
@@ -96,43 +54,6 @@ public class FastMethod {
      */
     public Object invoke() {
         return this.access.invoke(this.instance, this.name);
->>>>>>> Stashed changes
-    }
-
-    /**
-     * Gets the object instance used by this class
-     *
-     * @return the instance for method invocation
-     */
-    public Object getInstance() {
-        return instance;
-    }
-
-    /**
-     * Gets the object instance used by this class
-     *
-     * @return the instance for method invocation
-     */
-    public Object getInstance() {
-        return instance;
-    }
-
-    /**
-     * Gets the object instance used by this class
-     *
-     * @return the instance for method invocation
-     */
-    public Object getInstance() {
-        return instance;
-    }
-
-    /**
-     * Gets the object instance used by this class
-     *
-     * @return the instance for method invocation
-     */
-    public Object getInstance() {
-        return instance;
     }
 
     /**
