@@ -25,7 +25,7 @@ import net.tridentsdk.api.entity.living.Player;
  */
 public class EntityTameEvent extends EntityEvent {
     private final Player tamer;
-    private boolean cancelled;
+    private boolean cancel;
 
     public EntityTameEvent(Entity entity, Player tamer) {
         super(entity);
@@ -37,13 +37,12 @@ public class EntityTameEvent extends EntityEvent {
     }
 
     @Override
-    public boolean isCancelled() {
-
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }
