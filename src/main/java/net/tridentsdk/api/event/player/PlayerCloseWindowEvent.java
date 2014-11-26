@@ -27,7 +27,7 @@ public class PlayerCloseWindowEvent extends Listenable implements Ignorable {
 
     public PlayerCloseWindowEvent(Window window) {
         this.window = window;
-        this.cancelled = false;
+        this.cancel= false;
     }
 
     public Window getWindow() {

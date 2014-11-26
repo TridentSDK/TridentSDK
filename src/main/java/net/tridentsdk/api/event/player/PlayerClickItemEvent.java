@@ -32,7 +32,7 @@ public class PlayerClickItemEvent extends Listenable implements Ignorable {
         this.window = window;
         this.clickedSlot = clickedSlot;
         this.actionId = actionId;
-        this.cancelled = false;
+        this.cancel = false;
     }
 
     public Window getWindow() {
