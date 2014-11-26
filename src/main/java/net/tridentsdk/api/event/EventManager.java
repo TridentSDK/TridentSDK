@@ -54,11 +54,7 @@ public class EventManager {
             Call handler = method.getAnnotation(Call.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-<<<<<<< HEAD
             EventReflector registeredListener = new EventReflector(
-=======
-            RegisteredListener registeredListener = new RegisteredListener(
->>>>>>> b93a8a1974500955d2d215605dcbc73139c48d1e
                     Factories.reflect().getMethod(listener, method.getName()),
                     eventClass,
                     importance);

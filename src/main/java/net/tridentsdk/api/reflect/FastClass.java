@@ -60,13 +60,8 @@ public class FastClass {
      * @param name     Name of the method
      * @return FastMethod instance
      */
-<<<<<<< HEAD
     public FastMethod getMethod(Object object,  String name) {
         return new FastMethod(object, this.methodAccess, name);
-=======
-    public FastMethod getMethod(Object o, String name) {
-        return new FastMethod(o, this.methodAccess, name);
->>>>>>> b93a8a1974500955d2d215605dcbc73139c48d1e
     }
 
     public FastField[] getFields() {
