@@ -21,8 +21,6 @@ import com.google.gson.JsonArray;
 
 import java.util.Collection;
 
-// TODO: Javadoc
-
 /**
  * Section of the config dedicated to storing values from a collection
  *
@@ -32,6 +30,12 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     private static final long serialVersionUID = -5809487198383216782L;
     private final ConfigSection parent;
 
+    /**
+     * Creates a new section list in the config
+     *
+     * @param parent the parent configuration section, usually a {@link net.tridentsdk.api.config.JsonConfig}.
+     * @param handle the array handler
+     */
     protected ConfigSectionList(ConfigSection parent, JsonArray handle) {
         super(handle);
         this.parent = parent;

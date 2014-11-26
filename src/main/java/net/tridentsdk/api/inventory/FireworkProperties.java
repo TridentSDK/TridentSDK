@@ -23,5 +23,4 @@ package net.tridentsdk.api.inventory;
  * @author TridentSDK Team
  */
 public interface FireworkProperties {
-
 }

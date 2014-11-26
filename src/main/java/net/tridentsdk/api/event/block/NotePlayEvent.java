@@ -21,14 +21,14 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Instrument;
 import net.tridentsdk.api.Note;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 import java.util.List;
 
 /**
  * Called when a note is played, has a list of players that will hear this note
  */
-public class NotePlayEvent extends BlockEvent implements Cancellable {
+public class NotePlayEvent extends BlockEvent implements Ignorable {
     private final List<Player> players;
     private Note note;
     private Instrument instrument;
@@ -92,23 +92,13 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
         return this.players;
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancel;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
+    public void ignore(boolean cancel) {
         this.cancel = cancel;
     }
 }

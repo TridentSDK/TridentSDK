@@ -19,7 +19,6 @@ package net.tridentsdk.api.msg;
 
 // TODO: JavaDoc
 public class ClickEvent {
-
     ClickAction action;
     String value;
 

@@ -21,14 +21,13 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
-public class PlayerDigEvent extends PlayerEvent implements Cancellable {
-
+public class PlayerDigEvent extends PlayerEvent implements Ignorable {
     private final BlockFace face;
     private final short status;
 
-    private boolean cancelled;
+    private boolean cancel;
 
     public PlayerDigEvent(Player player, BlockFace face, short status) {
         super(player);
@@ -46,12 +45,12 @@ public class PlayerDigEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

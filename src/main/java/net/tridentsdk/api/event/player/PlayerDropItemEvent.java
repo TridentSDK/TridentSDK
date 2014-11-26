@@ -19,10 +19,9 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
-public class PlayerDropItemEvent extends PlayerEvent implements Cancellable {
-
+public class PlayerDropItemEvent extends PlayerEvent implements Ignorable {
     private final Item item;
     private boolean cancel;
 
@@ -40,12 +39,12 @@ public class PlayerDropItemEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancel;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
+    public void ignore(boolean cancel) {
         this.cancel = cancel;
     }
 }

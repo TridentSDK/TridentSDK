@@ -27,7 +27,9 @@ import net.tridentsdk.api.docs.InternalUseOnly;
 public class Factories {
     private static TaskFactory taskFactory;
     private static ThreadFactory threadFactory;
+    private static ConfigFactory configFactory;
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
+    private static final DisplayInfo INFO = new DisplayInfo();
 
     @InternalUseOnly
     public static void init(TaskFactory factory) {
@@ -37,6 +39,11 @@ public class Factories {
     @InternalUseOnly
     public static void init(ThreadFactory factory) {
         threadFactory = factory;
+    }
+
+    @InternalUseOnly
+    public static void init(ConfigFactory factory) {
+        configFactory = factory;
     }
 
     /**
@@ -64,5 +71,23 @@ public class Factories {
      */
     public static ReflectFactory reflect() {
         return reflectionFactory;
+    }
+
+    /**
+     * Public server information displayed to the client
+     *
+     * @return the server information modifiers and getters
+     */
+    public static DisplayInfo serverInfo() {
+        return INFO;
+    }
+
+    /**
+     * Deals with configurations and files
+     *
+     * @return the configuration factory
+     */
+    public static ConfigFactory configs() {
+        return configFactory;
     }
 }

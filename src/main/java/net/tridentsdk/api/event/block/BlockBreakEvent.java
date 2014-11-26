@@ -20,14 +20,13 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 import net.tridentsdk.api.inventory.ItemStack;
 
 /**
  * Called whenever a Block is broken
  */
-public class BlockBreakEvent extends BlockEvent implements Cancellable {
-
+public class BlockBreakEvent extends BlockEvent implements Ignorable {
     private final Player player;
     private final BlockFace blockFace;
     private final ItemStack itemInHand;
@@ -46,23 +45,13 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
         this.itemInHand = itemInHand;
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancel;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
+    public void ignore(boolean cancel) {
         this.cancel = cancel;
     }
 

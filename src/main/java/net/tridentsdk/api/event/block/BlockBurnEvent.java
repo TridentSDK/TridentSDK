@@ -18,13 +18,12 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a block is destroyed due to fire
  */
-public class BlockBurnEvent extends BlockEvent implements Cancellable {
-
+public class BlockBurnEvent extends BlockEvent implements Ignorable {
     private boolean cancel;
 
     /**
@@ -36,23 +35,13 @@ public class BlockBurnEvent extends BlockEvent implements Cancellable {
         super(block);
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancel;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
+    public void ignore(boolean cancel) {
         this.cancel = cancel;
     }
 }

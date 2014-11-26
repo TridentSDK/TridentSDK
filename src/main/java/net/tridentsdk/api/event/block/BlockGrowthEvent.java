@@ -18,13 +18,13 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a crop grows or a block spreads
  */
-public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable {
-    private boolean cancelled;
+public abstract class BlockGrowthEvent extends BlockEvent implements Ignorable {
+    private boolean cancel;
 
     /**
      * @param block Block associated with this event
@@ -33,23 +33,13 @@ public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable
         super(block);
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

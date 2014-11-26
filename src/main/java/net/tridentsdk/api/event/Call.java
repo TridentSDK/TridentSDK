@@ -17,15 +17,13 @@
  */
 package net.tridentsdk.api.event;
 
-public interface Cancellable {
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    /**
-     * @return return true if event is set to cancelled
-     */
-    boolean isCancelled();
-
-    /**
-     * @param cancel set the cancellation state of the event
-     */
-    void setCancelled(boolean cancel);
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Call {
+    Importance importance() default Importance.MEDIUM;
 }

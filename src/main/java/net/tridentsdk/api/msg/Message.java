@@ -22,7 +22,6 @@ import net.tridentsdk.api.ChatColor;
 
 // TODO: JavaDoc
 public final class Message {
-
     final JsonObject message;
 
     public Message() {

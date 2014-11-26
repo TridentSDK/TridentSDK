@@ -17,17 +17,16 @@
  */
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.event.Cancellable;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.window.Window;
 
-public class PlayerClickItemEvent extends Event implements Cancellable {
-
+public class PlayerClickItemEvent extends Listenable implements Ignorable {
     private final Window window;
     private final short clickedSlot;
     private final int actionId;
 
-    private boolean cancelled;
+    private boolean cancel;
 
     public PlayerClickItemEvent(Window window, short clickedSlot, int actionId) {
         this.window = window;
@@ -49,12 +48,12 @@ public class PlayerClickItemEvent extends Event implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

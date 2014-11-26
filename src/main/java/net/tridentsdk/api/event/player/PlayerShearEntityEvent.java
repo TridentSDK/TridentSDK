@@ -20,15 +20,15 @@ package net.tridentsdk.api.event.player;
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player shears an entity
  */
-public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
+public class PlayerShearEntityEvent extends PlayerEvent implements Ignorable {
     private final LivingEntity sheared;
     private Item drop;
-    private boolean cancelled;
+    private boolean cancel;
 
     public PlayerShearEntityEvent(Player player, LivingEntity sheared, Item drop) {
         super(player);
@@ -58,12 +58,12 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

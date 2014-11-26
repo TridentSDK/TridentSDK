@@ -22,7 +22,6 @@ import net.tridentsdk.api.nbt.builder.CompoundTagBuilder;
 import net.tridentsdk.api.nbt.builder.NBTBuilder;
 import net.tridentsdk.api.reflect.FastClass;
 import net.tridentsdk.api.reflect.FastField;
-import net.tridentsdk.api.util.StringUtil;
 
 import java.lang.reflect.Field;
 

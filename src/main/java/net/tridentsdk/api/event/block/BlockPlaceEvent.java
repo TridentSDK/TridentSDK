@@ -21,12 +21,12 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.Material;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called whenever a block is placed
  */
-public class BlockPlaceEvent extends BlockEvent implements Cancellable {
+public class BlockPlaceEvent extends BlockEvent implements Ignorable {
     private final Player player;
     private final Block blockClicked;
     private final BlockFace faceClicked;
@@ -64,23 +64,13 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
         return this.getBlock().getMaterial();
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancel;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
+    public void ignore(boolean cancel) {
         this.cancel = cancel;
     }
 

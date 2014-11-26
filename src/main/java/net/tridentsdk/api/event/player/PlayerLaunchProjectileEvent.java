@@ -19,15 +19,14 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player launches a projectile e.g. an arrow or snowball
  */
-public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancellable {
+public class PlayerLaunchProjectileEvent extends PlayerEvent implements Ignorable {
     private final Entity projectile;
-
-    private boolean cancelled;
+    private boolean cancel;
 
     public PlayerLaunchProjectileEvent(Player player, Entity projectile) {
         super(player);
@@ -35,13 +34,13 @@ public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancella
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 
     public Entity getProjectile() {

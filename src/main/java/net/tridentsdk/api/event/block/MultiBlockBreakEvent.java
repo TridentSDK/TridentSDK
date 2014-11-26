@@ -18,14 +18,14 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a block is broken due to an explosion, handled separately than other reasons to reduce lag caused by
  * BlockBreak event listeners during explosions
  */
-public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
-    private boolean cancelled;
+public class MultiBlockBreakEvent extends BlockEvent implements Ignorable {
+    private boolean cancel;
 
     /**
      * @param block Block representing the destroyed block.
@@ -34,23 +34,13 @@ public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
         super(block);
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

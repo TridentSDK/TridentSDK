@@ -29,7 +29,7 @@ import java.util.*;
 
 @NotThreadSafe
 public class EventManager {
-    private final Map<Class<? extends Event>, PriorityQueue<RegisteredListener>> callers = Maps.newHashMap();
+    private final Map<Class<? extends Listenable>, PriorityQueue<EventReflector>> callers = Maps.newHashMap();
 
     @InternalUseOnly
     public EventManager() {
@@ -48,19 +48,19 @@ public class EventManager {
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Class<?>[] parameterTypes = method.getParameterTypes();
 
-            if (parameterTypes.length != 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
+            if (parameterTypes.length != 1 || !Listenable.class.isAssignableFrom(parameterTypes[0])) {
                 continue;
             }
 
-            Class<? extends Event> eventClass = parameterTypes[0].asSubclass(Event.class);
-            EventHandler handler = method.getAnnotation(EventHandler.class);
+            Class<? extends Listenable> eventClass = parameterTypes[0].asSubclass(Listenable.class);
+            Call handler = method.getAnnotation(Call.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-            RegisteredListener registeredListener = new RegisteredListener(
+            EventReflector registeredListener = new EventReflector(
                     Factories.reflect().getMethod(listener, method.getName()),
                     eventClass,
                     importance);
-            PriorityQueue<RegisteredListener> eventCallers = callers.get(eventClass);
+            PriorityQueue<EventReflector> eventCallers = callers.get(eventClass);
             if (eventCallers == null)
                 eventCallers = new PriorityQueue<>(11, registeredListener);
             eventCallers.add(registeredListener);
@@ -73,11 +73,11 @@ public class EventManager {
      *
      * @param event the event to call
      */
-    public void call(Event event) {
-        Queue<RegisteredListener> listeners = callers.get(event.getClass().asSubclass(Event.class));
+    public void call(Listenable event) {
+        Queue<EventReflector> listeners = callers.get(event.getClass().asSubclass(Listenable.class));
         if (listeners == null) return;
-        for (RegisteredListener listener : listeners)
-            listener.execute(event);
+        for (EventReflector listener : listeners)
+            listener.reflect(event);
     }
 
     /**
@@ -86,9 +86,9 @@ public class EventManager {
      * @param listener the listener to unregister
      */
     public void unregister(Listener listener) {
-        for (Map.Entry<Class<? extends Event>, PriorityQueue<RegisteredListener>> entry : this.callers.entrySet()) {
-            for (Iterator<RegisteredListener> iterator = entry.getValue().iterator(); iterator.hasNext();) {
-                RegisteredListener it = iterator.next();
+        for (Map.Entry<Class<? extends Listenable>, PriorityQueue<EventReflector>> entry : this.callers.entrySet()) {
+            for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext();) {
+                EventReflector it = iterator.next();
                 if (it.getMethod().getInstance().equals(listener)) {
                     iterator.remove();
                     callers.put(entry.getKey(), entry.getValue());

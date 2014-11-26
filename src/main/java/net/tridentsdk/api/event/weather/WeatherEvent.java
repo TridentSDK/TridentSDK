@@ -17,13 +17,13 @@
  */
 package net.tridentsdk.api.event.weather;
 
-import net.tridentsdk.api.event.Cancellable;
-import net.tridentsdk.api.event.Event;
+import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.world.World;
 
-public class WeatherEvent extends Event implements Cancellable {
+public class WeatherEvent extends Listenable implements Ignorable {
     public final World world;
-    private boolean cancelled;
+    private boolean cancel;
 
     public WeatherEvent(World world) {
         this.world = world;
@@ -34,12 +34,12 @@ public class WeatherEvent extends Event implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

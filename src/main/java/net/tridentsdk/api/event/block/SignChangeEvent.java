@@ -20,13 +20,12 @@ package net.tridentsdk.api.event.block;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player edits a sign, or when the sign is first created
  */
-public class SignChangeEvent extends BlockEvent implements Cancellable {
-
+public class SignChangeEvent extends BlockEvent implements Ignorable {
     private final Player editor;
     private String[] contents;
     private boolean cancel;
@@ -37,23 +36,13 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
         this.contents = contents;
     }
 
-    /**
-     * Return if the event is cancelled
-     *
-     * @return true if cancelled
-     */
     @Override
-    public boolean isCancelled() {
-        return this.cancel;
+    public boolean isIgnored() {
+        return cancel;
     }
 
-    /**
-     * Set if the event is cancelled
-     *
-     * @param cancel Boolean cancellation state of event
-     */
     @Override
-    public void setCancelled(boolean cancel) {
+    public void ignore(boolean cancel) {
         this.cancel = cancel;
     }
 

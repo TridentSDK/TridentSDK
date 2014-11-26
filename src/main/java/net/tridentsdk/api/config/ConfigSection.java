@@ -26,8 +26,6 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
-// TODO: Javadoc
-
 /**
  * Represents a section of the Config file
  *

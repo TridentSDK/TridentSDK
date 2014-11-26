@@ -17,13 +17,21 @@
  */
 package net.tridentsdk.api.event;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public abstract class Listenable {
+    private final boolean isAsync;
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface EventHandler {
-    Importance importance() default Importance.MEDIUM;
+    public Listenable() {
+        this(false);
+    }
+
+    public Listenable(boolean async) {
+        this.isAsync = async;
+    }
+
+    /**
+     * @return return true if Event is asynchronous
+     */
+    public boolean isAsync() {
+        return this.isAsync;
+    }
 }

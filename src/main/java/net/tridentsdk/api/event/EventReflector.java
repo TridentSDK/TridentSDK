@@ -22,12 +22,12 @@ import net.tridentsdk.api.reflect.FastMethod;
 
 import java.util.Comparator;
 
-public class RegisteredListener implements Comparator<RegisteredListener> {
+public class EventReflector implements Comparator<EventReflector> {
     private final FastMethod method;
-    private final Class<? extends Event> eventClass;
+    private final Class<? extends Listenable> eventClass;
     private final Importance importance;
 
-    RegisteredListener(FastMethod method, Class<? extends Event> eventClass, Importance importance) {
+    EventReflector(FastMethod method, Class<? extends Listenable> eventClass, Importance importance) {
         this.method = method;
         this.eventClass = eventClass;
         this.importance = importance;
@@ -37,7 +37,7 @@ public class RegisteredListener implements Comparator<RegisteredListener> {
         return this.method;
     }
 
-    public Class<? extends Event> getEventClass() {
+    public Class<? extends Listenable> getEventClass() {
         return this.eventClass;
     }
 
@@ -45,12 +45,12 @@ public class RegisteredListener implements Comparator<RegisteredListener> {
         return this.importance;
     }
 
-    public void execute(Event event) {
+    public void reflect(Listenable event) {
         this.method.invoke(event);
     }
 
     @Override
-    public int compare(RegisteredListener registeredListener, RegisteredListener t1) {
+    public int compare(EventReflector registeredListener, EventReflector t1) {
         return registeredListener.importance.compareTo(t1.importance);
     }
 }

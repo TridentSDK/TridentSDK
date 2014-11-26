@@ -18,14 +18,14 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a Player's hunger level changes
  */
-public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
+public class PlayerHungerEvent extends PlayerEvent implements Ignorable {
     private double feed;
-    private boolean cancelled;
+    private boolean cancel;
 
     public PlayerHungerEvent(Player player, double feed) {
         super(player);
@@ -41,12 +41,12 @@ public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 }

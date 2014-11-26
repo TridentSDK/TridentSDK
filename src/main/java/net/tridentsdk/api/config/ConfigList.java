@@ -18,12 +18,11 @@
 package net.tridentsdk.api.config;
 
 import com.google.gson.JsonArray;
+import net.tridentsdk.api.docs.AccessNoDoc;
 
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
-
-// TODO: Javadoc
 
 /**
  * A LinkedList [implementation] that also makes changes to the underlying JsonArray object
@@ -40,6 +39,11 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
 
     private int size = 0;
 
+    /**
+     * Creates a new linked list for the JSON config serializable
+     *
+     * @param handle the array handler for the list
+     */
     protected ConfigList(JsonArray handle) {
         this.jsonHandle = handle;
         head = new Node<>(null, null, null);
@@ -48,6 +52,12 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         head.next = footer;
     }
 
+    /**
+     * Creates a new linked list by transferring elements from an existing collection
+     *
+     * @param handle the array handler for the new list
+     * @param c the initializing elements
+     */
     protected ConfigList(JsonArray handle, Collection<V> c) {
         this(handle);
         addAll(c);
@@ -222,6 +232,7 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return node;
     }
 
+    @AccessNoDoc
     private static class Node<V> {
         V value;
         Node<V> next;

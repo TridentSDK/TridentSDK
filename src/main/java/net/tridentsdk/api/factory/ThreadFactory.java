@@ -23,14 +23,79 @@ import net.tridentsdk.api.threads.TaskExecutor;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPlugin;
 
+import java.util.Collection;
+
+/**
+ * Creates threads and managers for those threads
+ *
+ * <p>These methods are primarily only supposed to be used by the server only. Because they are not volatile, they are
+ * not marked with {@link net.tridentsdk.api.docs.InternalUseOnly}. However, you must be careful - data will not be
+ * wiped unless you remove it yourself, which holds true until the server exits and shutsdown. Even calling the method
+ * without using the returned {@link net.tridentsdk.api.threads.TaskExecutor} will place an additional assignment inside
+ * the backing executor.</p>
+ *
+ * @author The TridentSDK Team
+ */
 public interface ThreadFactory {
+    /**
+     * Creates a new TaskExecutor using the entity thread pool
+     *
+     * @param entity the entity to assign
+     * @return the task executor created
+     */
     TaskExecutor entityThread(Entity entity);
 
+    /**
+     * Get all of the thread entity wrappers
+     *
+     * @return the values of the entity cache
+     */
+    Collection<Entity> entities();
+
+    /**
+     * Creates a new TaskExecutor using the player thread pool
+     *
+     * @param player the player to assign
+     * @return the task executor created
+     */
     TaskExecutor playerThread(Player player);
 
+    /**
+     * Gets all of the thread player wrappers
+     *
+     * @return the values of the concurrent cache
+     */
+    Collection<Player> players();
+
+    /**
+     * Creates a new TaskExecutor using the plugin thread pool
+     *
+     * @param plugin the plugin to assign
+     * @return the created task executor
+     */
     TaskExecutor pluginThread(TridentPlugin plugin);
 
-    TaskExecutor worldThread(World world);
+    /**
+     * Gets all of the thread plugin wrappers
+     *
+     * @return the values of the concurrent cache
+     */
+    Collection<TridentPlugin> plugins();
+
+    /**
+     * Creates a new TaskExecutor using the world thread pool
+     *
+     * @param worldd the world to assign
+     * @return the created task executor
+     */
+    TaskExecutor worldThread(World worldd);
+
+    /**
+     * Get all of the wrapped world threads
+     *
+     * @return the worlds being managed by the task executors
+     */
+    Collection<World> worlds();
 
     <T> ExecutorFactory<T> executor(int threads);
 }

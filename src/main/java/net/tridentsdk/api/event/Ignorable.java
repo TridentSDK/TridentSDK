@@ -17,22 +17,19 @@
  */
 package net.tridentsdk.api.event;
 
-public abstract class Event {
-
-    private final boolean isAsync;
-
-    public Event() {
-        this(false);
-    }
-
-    public Event(boolean async) {
-        this.isAsync = async;
-    }
+/**
+ * An event that implements this supports the ability to ignore (cancel) the event actions and calling behavior
+ *
+ * @author The TridentSDK Team
+ */
+public interface Ignorable {
+    /**
+     * @return return true if event is set to cancelled
+     */
+    boolean isIgnored();
 
     /**
-     * @return return true if Event is asynchronous
+     * @param cancel set the cancellation state of the event
      */
-    public boolean isAsync() {
-        return this.isAsync;
-    }
+    void ignore(boolean cancel);
 }

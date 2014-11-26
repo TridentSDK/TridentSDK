@@ -19,14 +19,14 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player tries to leave a bed
  */
-public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
+public class PlayerLeaveSleepEvent extends PlayerEvent implements Ignorable {
     private final Block bed;
-    private boolean cancelled;
+    private boolean cancel;
 
     public PlayerLeaveSleepEvent(Player player, Block bed) {
         super(player);
@@ -34,13 +34,13 @@ public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isCancelled() {
-        return this.cancelled;
+    public boolean isIgnored() {
+        return cancel;
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void ignore(boolean cancel) {
+        this.cancel = cancel;
     }
 
     /**
