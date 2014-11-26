@@ -36,12 +36,32 @@ public class FastMethod {
         this.instance = instance;
     }
 
+<<<<<<< HEAD
     public Object invoke(Object instance, Object... args) {
         return this.access.invoke(instance, this.name, args);
     }
 
     public Object invoke(Object instance) {
         return this.access.invoke(instance, this.name);
+=======
+    /**
+     * Invokes the method with parameters
+     *
+     * @param args the method parameters
+     * @return the return value after calling the method
+     */
+    public Object invoke(Object... args) {
+        return this.access.invoke(this.instance, this.name, args);
+    }
+
+    /**
+     * Invokes a no-arg method
+     *
+     * @return the return value after calling the method
+     */
+    public Object invoke() {
+        return this.access.invoke(this.instance, this.name);
+>>>>>>> b93a8a1974500955d2d215605dcbc73139c48d1e
     }
 
     /**

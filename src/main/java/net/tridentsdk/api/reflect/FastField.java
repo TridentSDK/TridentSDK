@@ -29,7 +29,11 @@ public class FastField {
     private final String field;
     private final FastClass owner;
 
+<<<<<<< HEAD
     FastField(FastClass owner, FieldAccess access, String field) {
+=======
+    public FastField(FastClass owner, FieldAccess access, String field) {
+>>>>>>> b93a8a1974500955d2d215605dcbc73139c48d1e
         this.access = access;
         this.field = field;
         this.owner = owner;
