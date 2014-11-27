@@ -19,10 +19,11 @@ package net.tridentsdk.plugin;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.event.Listener;
 import net.tridentsdk.api.factory.Factories;
-import net.tridentsdk.api.reflect.FastClass;
 import net.tridentsdk.api.threads.TaskExecutor;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
+import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.plugin.cmd.CommandHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,13 +73,12 @@ public class TridentPluginHandler {
 
             for (Class<?> cls : plugin.classLoader.classes.values()) {
                 if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
-                    FastClass fastClass = FastClass.get(cls);
-                    Listener listener = fastClass.getConstructor().newInstance();
-
-                    Trident.getServer().getEventManager().registerListener(listener);
+                    Trident.getServer().getEventManager().registerListener((Listener) cls.newInstance());
                 }
 
-                //TODO: register commands
+                if (Command.class.isAssignableFrom(cls)) {
+                    CommandHandler.addCommand((Command) cls.newInstance());
+                }
             }
 
             TaskExecutor executor = Factories.threads().pluginThread(plugin);

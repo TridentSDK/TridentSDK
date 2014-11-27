@@ -25,16 +25,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler {
-
     // TODO: Make this a dictionary tree for fast lookup
-    private final HashMap<String, CommandData> commands = new HashMap<>();
+    private static final HashMap<String, CommandData> COMMANDS = new HashMap<>();
 
     /**
      * Handles the message sent from the player, without the preceding "/"
      *
      * @param message the command executed
      */
-    public void handleCommand(String message, CommandIssuer issuer) {
+    public static void handleCommand(String message, CommandIssuer issuer) {
         if (message.isEmpty()) {
             return;
         }
@@ -43,21 +42,21 @@ public class CommandHandler {
 
         String label = contents[0].toLowerCase();
 
-        if (this.commands.containsKey(label)) {
-            CommandData command = this.commands.get(label);
+        CommandData cmdData = COMMANDS.get(label);
+        if (cmdData != null) {
             String args = message.substring(label.length());
 
             if (issuer instanceof Player) {
-                command.getCommand().handlePlayer(
+                cmdData.getCommand().handlePlayer(
                         (Player) issuer, args, contents[0]);
             } else if (issuer instanceof ConsoleSender) {
-                command.getCommand().handleConsole(
+                cmdData.getCommand().handleConsole(
                         (ConsoleSender) issuer, args, contents[0]);
             }
-            command.getCommand().handle(issuer, args, contents[0]);
+            cmdData.getCommand().handle(issuer, args, contents[0]);
         }
 
-        for (Map.Entry<String, CommandData> entry : this.commands.entrySet()) {
+        for (Map.Entry<String, CommandData> entry : COMMANDS.entrySet()) {
             if (entry.getValue().hasAlias(label)) {
                 CommandData command = entry.getValue();
                 String args = message.substring(label.length());
@@ -73,7 +72,7 @@ public class CommandHandler {
         }
     }
 
-    public int addCommand(Command command) throws PluginLoadException {
+    public static int addCommand(Command command) throws PluginLoadException {
 
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
@@ -91,10 +90,10 @@ public class CommandHandler {
             throw new PluginLoadException("cmd does not declare a valid name!");
         }
 
-        if (this.commands.containsKey(name.toLowerCase())) {
-            if (this.commands.get(name.toLowerCase()).getPriority() > priority) {
+        if (COMMANDS.containsKey(name.toLowerCase())) {
+            if (COMMANDS.get(name.toLowerCase()).getPriority() > priority) {
                 // put the new, more important cmd in place and notify the old cmd that it has been overriden
-                this.commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
+                COMMANDS.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
                         .getCommand().notifyOverriden();
             } else {
                 // don't register this cmd and notify it has been overriden
@@ -105,7 +104,7 @@ public class CommandHandler {
         return 0;
     }
 
-    private class CommandData {
+    private static class CommandData {
         private final String permission;
         private final int priority;
         private final String[] aliases;
