@@ -25,7 +25,7 @@ import net.tridentsdk.api.event.player.PlayerEvent;
  */
 public class PlayerToggleSprintEvent extends PlayerEvent implements Ignorable {
     private final boolean toggle;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerToggleSprintEvent(Player player, boolean toggle) {
         super(player);
@@ -48,11 +48,11 @@ public class PlayerToggleSprintEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

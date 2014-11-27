@@ -25,7 +25,7 @@ public class PlayerDigEvent extends PlayerEvent implements Ignorable {
     private final BlockFace face;
     private final short status;
 
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerDigEvent(Player player, BlockFace face, short status) {
         super(player);
@@ -44,11 +44,11 @@ public class PlayerDigEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

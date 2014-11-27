@@ -27,7 +27,7 @@ import net.tridentsdk.api.event.Ignorable;
 public class SignChangeEvent extends BlockEvent implements Ignorable {
     private final Player editor;
     private String[] contents;
-    private boolean cancel;
+    private boolean ignored;
 
     public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
@@ -37,12 +37,12 @@ public class SignChangeEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

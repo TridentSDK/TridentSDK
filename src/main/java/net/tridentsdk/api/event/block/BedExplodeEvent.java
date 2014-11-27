@@ -24,7 +24,7 @@ import net.tridentsdk.api.event.Ignorable;
  */
 public class BedExplodeEvent extends BlockEvent implements Ignorable {
     private float strength;
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param block    Block associated with this event
@@ -37,12 +37,12 @@ public class BedExplodeEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

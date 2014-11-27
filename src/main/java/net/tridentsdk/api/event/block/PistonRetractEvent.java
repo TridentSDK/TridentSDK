@@ -20,7 +20,7 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Orientation;
 
 public class PistonRetractEvent extends BlockPistonEvent {
-    private boolean cancelled;
+    private boolean ignoredled;
 
     public PistonRetractEvent(Block block, Orientation direction, Block influenced) {
         super(block, direction, true, influenced);

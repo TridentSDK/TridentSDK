@@ -24,7 +24,7 @@ import net.tridentsdk.api.event.Ignorable;
  */
 public class PlayerHungerEvent extends PlayerEvent implements Ignorable {
     private double feed;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerHungerEvent(Player player, double feed) {
         super(player);
@@ -41,11 +41,11 @@ public class PlayerHungerEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

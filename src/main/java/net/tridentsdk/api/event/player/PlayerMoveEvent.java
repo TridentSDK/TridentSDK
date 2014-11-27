@@ -23,7 +23,7 @@ import net.tridentsdk.api.event.Ignorable;
 public class PlayerMoveEvent extends PlayerEvent implements Ignorable {
     private final Location fromLoc;
     private final Location toLoc;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerMoveEvent(Player player, Location from, Location to) {
         super(player);
@@ -53,11 +53,11 @@ public class PlayerMoveEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

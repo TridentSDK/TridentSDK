@@ -29,7 +29,7 @@ public class BlockBreakEvent extends BlockEvent implements Ignorable {
     private final Player player;
     private final BlockFace blockFace;
     private final ItemStack itemInHand;
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param player     Player associated with this event
@@ -46,12 +46,12 @@ public class BlockBreakEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

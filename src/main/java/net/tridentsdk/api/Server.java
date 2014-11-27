@@ -119,6 +119,13 @@ public interface Server {
     TridentPluginHandler getPluginHandler();
 
     /**
+     * Gets the server's display information on the server list
+     *
+     * @return the display information manager
+     */
+    DisplayInfo getInfo();
+
+    /**
      * The server configuration file
      *
      * @return the server config

@@ -22,11 +22,11 @@ import net.tridentsdk.api.window.Window;
 
 public class PlayerCloseWindowEvent extends Listenable implements Ignorable {
     private final Window window;
-    private volatile boolean cancel;
+    private volatile boolean ignored;
 
     public PlayerCloseWindowEvent(Window window) {
         this.window = window;
-        this.cancel= false;
+        this.ignored= false;
     }
 
     public Window getWindow() {
@@ -35,11 +35,11 @@ public class PlayerCloseWindowEvent extends Listenable implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

@@ -26,7 +26,7 @@ import net.tridentsdk.api.event.Ignorable;
 public class PlayerGameModeChangeEvent extends PlayerEvent implements Ignorable {
     private GameMode gameMode;
 
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerGameModeChangeEvent(Player player, GameMode gameMode) {
         super(player);
@@ -35,12 +35,12 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Ignorable 
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     public GameMode getNewGameMode() {

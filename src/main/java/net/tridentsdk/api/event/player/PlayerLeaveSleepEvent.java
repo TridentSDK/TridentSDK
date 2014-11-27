@@ -25,7 +25,7 @@ import net.tridentsdk.api.event.Ignorable;
  */
 public class PlayerLeaveSleepEvent extends PlayerEvent implements Ignorable {
     private final Block bed;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerLeaveSleepEvent(Player player, Block bed) {
         super(player);
@@ -34,12 +34,12 @@ public class PlayerLeaveSleepEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

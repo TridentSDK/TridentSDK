@@ -25,7 +25,7 @@ import net.tridentsdk.api.entity.Projectile;
 public class EntityLaunchProjectileEvent extends EntityEvent {
     private final Projectile projectile;
     private final Entity target;
-    private boolean cancel;
+    private boolean ignored;
 
     public EntityLaunchProjectileEvent(Entity entity, Projectile projectile, Entity target) {
 
@@ -40,12 +40,12 @@ public class EntityLaunchProjectileEvent extends EntityEvent {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

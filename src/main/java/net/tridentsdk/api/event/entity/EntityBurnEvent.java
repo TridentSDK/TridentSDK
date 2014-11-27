@@ -22,7 +22,7 @@ import net.tridentsdk.api.entity.Entity;
  * Called when an entity catches fire
  */
 public abstract class EntityBurnEvent extends EntityEvent {
-    private boolean cancel;
+    private boolean ignored;
     private int fireTicks;
 
     public EntityBurnEvent(Entity entity, int fireTicks) {
@@ -46,11 +46,11 @@ public abstract class EntityBurnEvent extends EntityEvent {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

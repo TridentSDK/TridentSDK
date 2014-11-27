@@ -25,7 +25,7 @@ import net.tridentsdk.api.event.Ignorable;
  */
 public class PlayerLaunchProjectileEvent extends PlayerEvent implements Ignorable {
     private final Entity projectile;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerLaunchProjectileEvent(Player player, Entity projectile) {
         super(player);
@@ -34,12 +34,12 @@ public class PlayerLaunchProjectileEvent extends PlayerEvent implements Ignorabl
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     public Entity getProjectile() {

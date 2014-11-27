@@ -24,7 +24,7 @@ import net.tridentsdk.api.event.Ignorable;
  */
 public class BlockFlowEvent extends BlockEvent implements Ignorable {
     private final Block to;
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param from Block where the liquid is flowing from
@@ -55,11 +55,11 @@ public class BlockFlowEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

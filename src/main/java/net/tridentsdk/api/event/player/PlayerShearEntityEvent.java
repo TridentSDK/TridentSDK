@@ -27,7 +27,7 @@ import net.tridentsdk.api.event.Ignorable;
 public class PlayerShearEntityEvent extends PlayerEvent implements Ignorable {
     private final LivingEntity sheared;
     private Item drop;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerShearEntityEvent(Player player, LivingEntity sheared, Item drop) {
         super(player);
@@ -58,11 +58,11 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

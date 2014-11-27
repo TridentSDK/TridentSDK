@@ -23,7 +23,7 @@ import net.tridentsdk.api.event.Ignorable;
  * Called when a block is destroyed due to fire
  */
 public class BlockBurnEvent extends BlockEvent implements Ignorable {
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * The block being burnt in this event
@@ -36,11 +36,11 @@ public class BlockBurnEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

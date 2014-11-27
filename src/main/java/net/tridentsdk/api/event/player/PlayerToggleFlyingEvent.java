@@ -24,7 +24,7 @@ import net.tridentsdk.api.event.Ignorable;
  */
 public class PlayerToggleFlyingEvent extends PlayerEvent implements Ignorable {
     private final boolean toggleState;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerToggleFlyingEvent(Player player, boolean toggleState) {
         super(player);
@@ -40,11 +40,11 @@ public class PlayerToggleFlyingEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

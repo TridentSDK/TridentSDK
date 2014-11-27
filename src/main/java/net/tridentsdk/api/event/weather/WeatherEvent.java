@@ -22,7 +22,7 @@ import net.tridentsdk.api.world.World;
 
 public class WeatherEvent extends Listenable implements Ignorable {
     public final World world;
-    private boolean cancel;
+    private boolean ignored;
 
     public WeatherEvent(World world) {
         this.world = world;
@@ -34,11 +34,11 @@ public class WeatherEvent extends Listenable implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

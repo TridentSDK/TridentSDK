@@ -26,7 +26,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Ignorable {
     private final int strength;
     private final Block causer;
     private final Cause cause;
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param block    Block which redstone state was updated
@@ -70,12 +70,12 @@ public class BlockRedstoneEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

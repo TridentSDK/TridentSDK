@@ -20,7 +20,7 @@ import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Ignorable;
 
 public class PlayerChatEvent extends PlayerEvent implements Ignorable {
-    private boolean cancel;
+    private boolean ignored;
 
     private String message;
 
@@ -52,11 +52,11 @@ public class PlayerChatEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

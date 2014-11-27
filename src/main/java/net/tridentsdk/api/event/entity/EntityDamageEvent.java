@@ -21,7 +21,7 @@ import net.tridentsdk.api.entity.LivingEntity;
 
 public class EntityDamageEvent extends EntityEvent {
     private final Cause cause;
-    private boolean cancel;
+    private boolean ignored;
     private double damage;
 
     /**
@@ -64,12 +64,12 @@ public class EntityDamageEvent extends EntityEvent {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     public enum Cause {

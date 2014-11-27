@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.api.factory;
 
+import net.tridentsdk.api.DisplayInfo;
 import net.tridentsdk.api.docs.InternalUseOnly;
 
 /**

@@ -28,7 +28,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Ignorable {
     private final Orientation direction;
     private final boolean retract;
     private final Block influenced;
-    private boolean cancel;
+    private boolean ignored;
 
     public BlockPistonEvent(Block block, Orientation direction, boolean retract, Block influenced) {
         super(block);
@@ -83,11 +83,11 @@ public abstract class BlockPistonEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

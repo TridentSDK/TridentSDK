@@ -23,7 +23,7 @@ import net.tridentsdk.api.event.Ignorable;
  * Called when a crop grows or a block spreads
  */
 public abstract class BlockGrowthEvent extends BlockEvent implements Ignorable {
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param block Block associated with this event
@@ -34,11 +34,11 @@ public abstract class BlockGrowthEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

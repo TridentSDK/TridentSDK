@@ -27,7 +27,7 @@ public class PlayerFishEvent extends PlayerEvent implements Ignorable {
     private final State state;
     private int exp;
     private ItemStack item;
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerFishEvent(Player player, State state, int exp, ItemStack item) {
         super(player);
@@ -38,12 +38,12 @@ public class PlayerFishEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     public State getState() {

@@ -25,13 +25,13 @@ public class PlayerClickItemEvent extends Listenable implements Ignorable {
     private final short clickedSlot;
     private final int actionId;
 
-    private boolean cancel;
+    private boolean ignored;
 
     public PlayerClickItemEvent(Window window, short clickedSlot, int actionId) {
         this.window = window;
         this.clickedSlot = clickedSlot;
         this.actionId = actionId;
-        this.cancel = false;
+        this.ignored = false;
     }
 
     public Window getWindow() {
@@ -48,11 +48,11 @@ public class PlayerClickItemEvent extends Listenable implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }

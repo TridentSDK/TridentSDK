@@ -30,7 +30,7 @@ public class BlockPlaceEvent extends BlockEvent implements Ignorable {
     private final Block blockClicked;
     private final BlockFace faceClicked;
 
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param player       Player who placed this block
@@ -65,12 +65,12 @@ public class BlockPlaceEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 
     /**

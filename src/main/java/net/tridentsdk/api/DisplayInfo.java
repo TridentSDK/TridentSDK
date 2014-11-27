@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.api.factory;
+package net.tridentsdk.api;
 
-import net.tridentsdk.api.Defaults;
+import net.tridentsdk.api.factory.Factories;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

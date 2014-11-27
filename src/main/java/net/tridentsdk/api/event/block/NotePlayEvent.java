@@ -31,7 +31,7 @@ public class NotePlayEvent extends BlockEvent implements Ignorable {
     private final List<Player> players;
     private Note note;
     private Instrument instrument;
-    private boolean cancel;
+    private boolean ignored;
 
     /**
      * @param block      Block playing the Note
@@ -93,11 +93,11 @@ public class NotePlayEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return cancel;
+        return ignored;
     }
 
     @Override
-    public void ignore(boolean cancel) {
-        this.cancel = cancel;
+    public void ignore(boolean ignored) {
+        this.ignored = ignored;
     }
 }
