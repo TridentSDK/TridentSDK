@@ -21,7 +21,7 @@ import net.tridentsdk.api.threads.TaskExecutor;
 import java.util.Collection;
 import java.util.List;
 
-public interface ExecutorFactory<Assignment> {
+public interface ExecutorFactory<E> {
     /**
      * The thread with the least amount of tasks assigned to it
      *
@@ -37,21 +37,21 @@ public interface ExecutorFactory<Assignment> {
      * @param assignment the assignment that uses the executor
      * @return the executor assigned
      */
-    TaskExecutor assign(Assignment assignment);
+    TaskExecutor assign(E assignment);
 
     /**
      * Removes the assigned thread and reduces by one the scale factor for the thread
      *
      * @param assignment the assignment that uses the executor to be removed
      */
-    void removeAssignment(Assignment assignment);
+    void removeAssignment(E assignment);
 
     /**
      * Returns the assigned objects
      *
      * @return the assignments in the maps
      */
-    Collection<Assignment> values();
+    Collection<E> values();
 
     /**
      * Lists all available task executors from the threads
