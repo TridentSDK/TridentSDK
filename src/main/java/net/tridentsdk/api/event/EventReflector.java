@@ -49,6 +49,6 @@ public class EventReflector implements Comparator<EventReflector> {
 
     @Override
     public int compare(EventReflector registeredListener, EventReflector t1) {
-        return registeredListener.importance.compareTo(t1.importance);
+        return registeredListener.importance.ordinal() - t1.importance.ordinal();
     }
 }
