@@ -1,19 +1,18 @@
 /*
- *     TridentSDK - A Minecraft Server API
- *     Copyright (C) 2014, The TridentSDK Team
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package net.tridentsdk.api;
 
@@ -25,9 +24,6 @@ import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import org.slf4j.Logger;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.InetAddress;
 import java.util.Set;
 import java.util.UUID;
@@ -65,9 +61,9 @@ public interface Server {
     InetAddress getServerIp();
 
     /**
-     * Asks the server to execute a task, will be run immediately on an alternate thread
+     * Asks the server to reflect a task, will be run immediately on an alternate thread
      *
-     * @param runnable The code to execute
+     * @param runnable The code to reflect
      */
     void addTask(Runnable runnable);
 
@@ -77,51 +73,6 @@ public interface Server {
      * @return that represents the Logger Trident is using
      */
     Logger getLogger();
-
-    /**
-     * A string containing the current broadcast MOTD of the server
-     *
-     * @return a string containing the MOTD of the server, may be empty, never null
-     */
-    String getMotd();
-
-    /**
-     * Returns the {@link java.io.File} that represents the picture displayed next to the server listing on clients
-     *
-     * @return the file that represents the picture sent to clients when they ping the server
-     * @see net.tridentsdk.api.Server#getMotdPictureImage() for the representing the image sent to clients
-     */
-    File getMotdPicture();
-
-    /**
-     * Gets the {@link java.awt.image.BufferedImage} that represents the Motd picture sent to clients
-     *
-     * @return the image sent to clients
-     * @see net.tridentsdk.api.Server#getMotdPicture() for the file itself
-     */
-    BufferedImage getMotdPictureImage();
-
-    /**
-     * Sets the MOTD image sent to clients, may or may not take a server restart to take effect
-     *
-     * @param image the image to set it to
-     * @return 0 for success, -1 if this feature is disabled in config, -2 for generic failure
-     */
-    int setMotdImage(Image image);
-
-    /**
-     * Gets the maximum number of players allowed on the server
-     *
-     * @return the maximum number of players the server will allow
-     */
-    int getMaxPlayers();
-
-    /**
-     * Returns the number of players currently on the server
-     *
-     * @return a number representing the number of players on the server
-     */
-    int getCurrentPlayerCount();
 
     /**
      * Gets the current difficulty that the server is set to (Worlds can have their own difficulty)
@@ -167,6 +118,12 @@ public interface Server {
      */
     TridentPluginHandler getPluginHandler();
 
+    /**
+     * Gets the server's display information on the server list
+     *
+     * @return the display information manager
+     */
+    DisplayInfo getInfo();
 
     /**
      * The server configuration file

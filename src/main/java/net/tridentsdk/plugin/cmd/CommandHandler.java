@@ -1,19 +1,18 @@
 /*
- *     TridentSDK - A Minecraft Server API
- *     Copyright (C) 2014, The TridentSDK Team
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package net.tridentsdk.plugin.cmd;
 
@@ -26,16 +25,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler {
-
     // TODO: Make this a dictionary tree for fast lookup
-    private final HashMap<String, CommandData> commands = new HashMap<>();
+    private static final HashMap<String, CommandData> COMMANDS = new HashMap<>();
 
     /**
      * Handles the message sent from the player, without the preceding "/"
      *
      * @param message the command executed
      */
-    public void handleCommand(String message, CommandIssuer issuer) {
+    public static void handleCommand(String message, CommandIssuer issuer) {
         if (message.isEmpty()) {
             return;
         }
@@ -44,21 +42,21 @@ public class CommandHandler {
 
         String label = contents[0].toLowerCase();
 
-        if (this.commands.containsKey(label)) {
-            CommandData command = this.commands.get(label);
+        CommandData cmdData = COMMANDS.get(label);
+        if (cmdData != null) {
             String args = message.substring(label.length());
 
             if (issuer instanceof Player) {
-                command.getCommand().handlePlayer(
+                cmdData.getCommand().handlePlayer(
                         (Player) issuer, args, contents[0]);
             } else if (issuer instanceof ConsoleSender) {
-                command.getCommand().handleConsole(
+                cmdData.getCommand().handleConsole(
                         (ConsoleSender) issuer, args, contents[0]);
             }
-            command.getCommand().handle(issuer, args, contents[0]);
+            cmdData.getCommand().handle(issuer, args, contents[0]);
         }
 
-        for (Map.Entry<String, CommandData> entry : this.commands.entrySet()) {
+        for (Map.Entry<String, CommandData> entry : COMMANDS.entrySet()) {
             if (entry.getValue().hasAlias(label)) {
                 CommandData command = entry.getValue();
                 String args = message.substring(label.length());
@@ -74,7 +72,7 @@ public class CommandHandler {
         }
     }
 
-    public int addCommand(Command command) throws PluginLoadException {
+    public static int addCommand(Command command) throws PluginLoadException {
 
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
@@ -92,10 +90,10 @@ public class CommandHandler {
             throw new PluginLoadException("cmd does not declare a valid name!");
         }
 
-        if (this.commands.containsKey(name.toLowerCase())) {
-            if (this.commands.get(name.toLowerCase()).getPriority() > priority) {
+        if (COMMANDS.containsKey(name.toLowerCase())) {
+            if (COMMANDS.get(name.toLowerCase()).getPriority() > priority) {
                 // put the new, more important cmd in place and notify the old cmd that it has been overriden
-                this.commands.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
+                COMMANDS.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
                         .getCommand().notifyOverriden();
             } else {
                 // don't register this cmd and notify it has been overriden
@@ -106,7 +104,7 @@ public class CommandHandler {
         return 0;
     }
 
-    private class CommandData {
+    private static class CommandData {
         private final String permission;
         private final int priority;
         private final String[] aliases;

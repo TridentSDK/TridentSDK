@@ -1,35 +1,45 @@
 /*
- *     TridentSDK - A Minecraft Server API
- *     Copyright (C) 2014, The TridentSDK Team
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package net.tridentsdk.api.event;
 
-import com.google.common.collect.Maps;
+import com.esotericsoftware.reflectasm.MethodAccess;
+import com.google.common.collect.HashMultimap;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.docs.InternalUseOnly;
 import net.tridentsdk.api.factory.Factories;
+import net.tridentsdk.api.threads.ConcurrentCache;
 
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.PriorityBlockingQueue;
 
-@NotThreadSafe
+@ThreadSafe
 public class EventManager {
-    private final Map<Class<? extends Event>, PriorityQueue<RegisteredListener>> callers = Maps.newHashMap();
+    private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, 0, null, null, null);
+
+    private final ConcurrentMap<Class<? extends Listenable>, PriorityBlockingQueue<EventReflector>>
+            callers = Factories.collect().createMap();
+    private final ConcurrentCache<Class<?>, MethodAccess> accessors = Factories.collect().createCache();
 
     @InternalUseOnly
     public EventManager() {
@@ -45,27 +55,47 @@ public class EventManager {
      */
     @InternalUseOnly
     public void registerListener(Listener listener) {
-        for (Method method : listener.getClass().getDeclaredMethods()) {
-            Class<?>[] parameterTypes = method.getParameterTypes();
+        final Class<?> c = listener.getClass();
+        HashMultimap<Class<? extends Listenable>, EventReflector> reflectors = reflectorsFrom(listener, c);
 
-            if (parameterTypes.length != 1 || !Event.class.isAssignableFrom(parameterTypes[0])) {
+        for (Class<? extends Listenable> eventClass : reflectors.keySet()) {
+            PriorityBlockingQueue<EventReflector> eventCallers = callers.get(eventClass);
+            if (eventCallers == null)
+                eventCallers = new PriorityBlockingQueue<>(128, COMPARATOR);
+            eventCallers.addAll(reflectors.get(eventClass));
+            callers.put(eventClass, eventCallers);
+        }
+    }
+
+    private HashMultimap<Class<? extends Listenable>, EventReflector> reflectorsFrom(Listener listener, final Class<?> c) {
+        MethodAccess access = accessors.retrieve(c, new Callable<MethodAccess>() {
+            @Override
+            public MethodAccess call() throws Exception {
+                return MethodAccess.get(c);
+            }
+        });
+
+        Method[] methods = c.getDeclaredMethods();
+
+        HashMultimap<Class<? extends Listenable>, EventReflector> map = HashMultimap.create(11, 11);
+        for (int i = 0, n = methods.length; i < n; i++) {
+            Method method = methods[i];
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            Class<?> type = parameterTypes[0];
+
+            if (parameterTypes.length != 1 || !Listenable.class.isAssignableFrom(type)) {
                 continue;
             }
 
-            Class<? extends Event> eventClass = parameterTypes[0].asSubclass(Event.class);
-            EventHandler handler = method.getAnnotation(EventHandler.class);
+            Class<? extends Listenable> eventClass = type.asSubclass(Listenable.class);
+            Call handler = method.getAnnotation(Call.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-            RegisteredListener registeredListener = new RegisteredListener(
-                    Factories.reflect().getMethod(listener, method.getName()),
-                    eventClass,
-                    importance);
-            PriorityQueue<RegisteredListener> eventCallers = callers.get(eventClass);
-            if (eventCallers == null)
-                eventCallers = new PriorityQueue<>(11, registeredListener);
-            eventCallers.add(registeredListener);
-            callers.put(eventClass, eventCallers);
+            EventReflector registeredListener = new EventReflector(
+                    access, i, listener, eventClass, importance);
         }
+
+        return map;
     }
 
     /**
@@ -73,11 +103,11 @@ public class EventManager {
      *
      * @param event the event to call
      */
-    public void call(Event event) {
-        Queue<RegisteredListener> listeners = callers.get(event.getClass().asSubclass(Event.class));
+    public void call(Listenable event) {
+        Queue<EventReflector> listeners = callers.get(event.getClass());
         if (listeners == null) return;
-        for (RegisteredListener listener : listeners)
-            listener.execute(event);
+        for (EventReflector listener : listeners)
+            listener.reflect(event);
     }
 
     /**
@@ -86,10 +116,11 @@ public class EventManager {
      * @param listener the listener to unregister
      */
     public void unregister(Listener listener) {
-        for (Map.Entry<Class<? extends Event>, PriorityQueue<RegisteredListener>> entry : this.callers.entrySet()) {
-            for (Iterator<RegisteredListener> iterator = entry.getValue().iterator(); iterator.hasNext();) {
-                RegisteredListener it = iterator.next();
-                if (it.getMethod().getInstance().equals(listener)) {
+        for (Map.Entry<Class<? extends Listenable>, PriorityBlockingQueue<EventReflector>> entry :
+                this.callers.entrySet()) {
+            for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext();) {
+                EventReflector it = iterator.next();
+                if (it.getInstance().equals(listener)) {
                     iterator.remove();
                     callers.put(entry.getKey(), entry.getValue());
                     break;

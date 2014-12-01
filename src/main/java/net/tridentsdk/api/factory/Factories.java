@@ -1,42 +1,65 @@
 /*
- *     TridentSDK - A Minecraft Server API
- *     Copyright (C) 2014, The TridentSDK Team
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package net.tridentsdk.api.factory;
 
+import net.tridentsdk.api.DisplayInfo;
 import net.tridentsdk.api.docs.InternalUseOnly;
+import net.tridentsdk.api.docs.PossiblyThreadSafe;
+import net.tridentsdk.api.threads.HeldValueLatch;
 
 /**
  * Available creational factories for basic objects
  *
+ * <p>If the factories are accessed before initialization, the caller thread will block</p>
+ *
+ * <p>This is managed by using a {@link net.tridentsdk.api.threads.HeldValueLatch}, instead of a single latch. If a
+ * class needs to be initialized that uses another factory, it will never occur because the thread is setting a value
+ * after the previous initialization is blocked because it was not fully initialized.</p>
+ *
  * @author The TridentSDK Team
  */
+@PossiblyThreadSafe
 public class Factories {
-    private static TaskFactory taskFactory;
-    private static ThreadFactory threadFactory;
+    private static final HeldValueLatch<TaskFactory> taskFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<ThreadFactory> threadFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<ConfigFactory> configFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<CollectFactory> collectFactory = new HeldValueLatch<>();
+
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
+    private static final DisplayInfo INFO = new DisplayInfo();
 
     @InternalUseOnly
     public static void init(TaskFactory factory) {
-        taskFactory = factory;
+        taskFactory.countDown(factory);
     }
 
     @InternalUseOnly
     public static void init(ThreadFactory factory) {
-        threadFactory = factory;
+        threadFactory.countDown(factory);
+    }
+
+    @InternalUseOnly
+    public static void init(ConfigFactory factory) {
+        configFactory.countDown(factory);
+    }
+
+    @InternalUseOnly
+    public static void init(CollectFactory factory) {
+        collectFactory.countDown(factory);
     }
 
     /**
@@ -45,7 +68,13 @@ public class Factories {
      * @return the task factory
      */
     public static TaskFactory tasks() {
-        return taskFactory;
+        try {
+            return taskFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 
     /**
@@ -54,7 +83,13 @@ public class Factories {
      * @return the threads factory
      */
     public static ThreadFactory threads() {
-        return threadFactory;
+        try {
+            return threadFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 
     /**
@@ -64,5 +99,44 @@ public class Factories {
      */
     public static ReflectFactory reflect() {
         return reflectionFactory;
+    }
+
+    /**
+     * Reimplemented or new backed collections
+     *
+     * @return the collection factory
+     */
+    public static CollectFactory collect() {
+        try {
+            return collectFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
+    }
+
+    /**
+     * Public server information displayed to the client
+     *
+     * @return the server information modifiers and getters
+     */
+    public static DisplayInfo serverInfo() {
+        return INFO;
+    }
+
+    /**
+     * Deals with configurations and files
+     *
+     * @return the configuration factory
+     */
+    public static ConfigFactory configs() {
+        try {
+            return configFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 }

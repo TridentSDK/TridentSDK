@@ -1,34 +1,33 @@
 /*
- *     TridentSDK - A Minecraft Server API
- *     Copyright (C) 2014, The TridentSDK Team
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package net.tridentsdk.api.event.entity;
 
+import com.google.common.base.Preconditions;
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
-import org.apache.commons.lang.Validate;
 
 public class PlayerDropItemEvent extends EntitySpawnEvent {
     private final Player player;
 
     public PlayerDropItemEvent(Entity item, Location location, Player player) {
         super(item, location);
-        Validate.isTrue(item instanceof Item, "Must drop an item!");
+        Preconditions.checkArgument(item instanceof Item, "Must drop an item!");
         this.player = player;
     }
 
