@@ -16,23 +16,28 @@
  */
 package net.tridentsdk.api.event;
 
-import net.tridentsdk.api.reflect.FastMethod;
+import com.esotericsoftware.reflectasm.MethodAccess;
 
 import java.util.Comparator;
 
 public class EventReflector implements Comparator<EventReflector> {
-    private final FastMethod method;
+    private final MethodAccess handle;
+    private final int index;
+    private final Object instance;
     private final Class<? extends Listenable> eventClass;
     private final Importance importance;
 
-    EventReflector(FastMethod method, Class<? extends Listenable> eventClass, Importance importance) {
-        this.method = method;
+    EventReflector(MethodAccess handle, int index, Object instance,
+                   Class<? extends Listenable> eventClass, Importance importance) {
+        this.handle = handle;
+        this.index = index;
+        this.instance = instance;
         this.eventClass = eventClass;
         this.importance = importance;
     }
 
-    public FastMethod getMethod() {
-        return this.method;
+    public MethodAccess getMethod() {
+        return this.handle;
     }
 
     public Class<? extends Listenable> getEventClass() {
@@ -44,7 +49,11 @@ public class EventReflector implements Comparator<EventReflector> {
     }
 
     public void reflect(Listenable event) {
-        this.method.invoke(event);
+        this.handle.invoke(this.instance, this.index, event);
+    }
+
+    public Object getInstance() {
+        return this.instance;
     }
 
     @Override

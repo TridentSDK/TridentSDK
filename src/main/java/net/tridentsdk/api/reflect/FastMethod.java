@@ -36,10 +36,23 @@ public class FastMethod {
         this.instance = instance;
     }
 
+    /**
+     * Invokes the method with parameters
+     *
+     * @param instance the instance of the class to use, to {@code null for static methods}
+     * @param args the parameter values for the method
+     * @return the return type of the method, or {@code null} for {@code void} methods
+     */
     public Object invoke(Object instance, Object... args) {
         return this.access.invoke(instance, this.name, args);
     }
 
+    /**
+     * Invokes the method without parameters (no-arg)
+     *
+     * @param instance the instance of the class to use, to {@code null for static methods}
+     * @return the return type of the method, or {@code null} for {@code void} methods
+     */
     public Object invoke(Object instance) {
         return this.access.invoke(instance, this.name);
     }

@@ -56,6 +56,15 @@ public class JsonConfig extends ConfigSection {
         this.reload();
     }
 
+    /**
+     * Gets the path to the configuration file
+     *
+     * @return the path where this configuration is stored
+     */
+    public Path getPath() {
+        return path;
+    }
+
     @Override
     public void save() {
         try {

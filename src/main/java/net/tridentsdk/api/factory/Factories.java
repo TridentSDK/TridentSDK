@@ -18,32 +18,48 @@ package net.tridentsdk.api.factory;
 
 import net.tridentsdk.api.DisplayInfo;
 import net.tridentsdk.api.docs.InternalUseOnly;
+import net.tridentsdk.api.docs.PossiblyThreadSafe;
+import net.tridentsdk.api.threads.HeldValueLatch;
 
 /**
  * Available creational factories for basic objects
  *
+ * <p>If the factories are accessed before initialization, the caller thread will block</p>
+ *
+ * <p>This is managed by using a {@link net.tridentsdk.api.threads.HeldValueLatch}, instead of a single latch. If a
+ * class needs to be initialized that uses another factory, it will never occur because the thread is setting a value
+ * after the previous initialization is blocked because it was not fully initialized.</p>
+ *
  * @author The TridentSDK Team
  */
+@PossiblyThreadSafe
 public class Factories {
-    private static TaskFactory taskFactory;
-    private static ThreadFactory threadFactory;
-    private static ConfigFactory configFactory;
+    private static final HeldValueLatch<TaskFactory> taskFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<ThreadFactory> threadFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<ConfigFactory> configFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<CollectFactory> collectFactory = new HeldValueLatch<>();
+
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
     private static final DisplayInfo INFO = new DisplayInfo();
 
     @InternalUseOnly
     public static void init(TaskFactory factory) {
-        taskFactory = factory;
+        taskFactory.countDown(factory);
     }
 
     @InternalUseOnly
     public static void init(ThreadFactory factory) {
-        threadFactory = factory;
+        threadFactory.countDown(factory);
     }
 
     @InternalUseOnly
     public static void init(ConfigFactory factory) {
-        configFactory = factory;
+        configFactory.countDown(factory);
+    }
+
+    @InternalUseOnly
+    public static void init(CollectFactory factory) {
+        collectFactory.countDown(factory);
     }
 
     /**
@@ -52,7 +68,13 @@ public class Factories {
      * @return the task factory
      */
     public static TaskFactory tasks() {
-        return taskFactory;
+        try {
+            return taskFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 
     /**
@@ -61,7 +83,13 @@ public class Factories {
      * @return the threads factory
      */
     public static ThreadFactory threads() {
-        return threadFactory;
+        try {
+            return threadFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 
     /**
@@ -71,6 +99,21 @@ public class Factories {
      */
     public static ReflectFactory reflect() {
         return reflectionFactory;
+    }
+
+    /**
+     * Reimplemented or new backed collections
+     *
+     * @return the collection factory
+     */
+    public static CollectFactory collect() {
+        try {
+            return collectFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 
     /**
@@ -88,6 +131,12 @@ public class Factories {
      * @return the configuration factory
      */
     public static ConfigFactory configs() {
-        return configFactory;
+        try {
+            return configFactory.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 }

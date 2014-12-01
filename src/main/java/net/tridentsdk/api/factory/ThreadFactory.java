@@ -84,10 +84,10 @@ public interface ThreadFactory {
     /**
      * Creates a new TaskExecutor using the world thread pool
      *
-     * @param worldd the world to assign
+     * @param world the world to assign
      * @return the created task executor
      */
-    TaskExecutor worldThread(World worldd);
+    TaskExecutor worldThread(World world);
 
     /**
      * Get all of the wrapped world threads
@@ -96,5 +96,12 @@ public interface ThreadFactory {
      */
     Collection<World> worlds();
 
+    /**
+     * A new concurren task executor reimplemented in the server
+     *
+     * @param threads the threads available in the pool
+     * @param <T> the assignment type for each thread
+     * @return the execution factory
+     */
     <T> ExecutorFactory<T> executor(int threads);
 }
