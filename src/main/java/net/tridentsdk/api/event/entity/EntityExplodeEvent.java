@@ -21,6 +21,8 @@ import net.tridentsdk.api.entity.Entity;
 /**
  * Called when an explosion is about to happen, caused by an entity (the only other explosion in the game is from a bed,
  * of all things)
+ *
+ * @author The TridentSDK Team
  */
 public class EntityExplodeEvent extends EntityEvent {
     private float strength;

@@ -20,13 +20,16 @@ import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.entity.EntityDamageEvent;
 
+/**
+ * Called when a player is damaged
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerDamageEvent extends EntityDamageEvent {
-
     /**
      * @param player the player associated with this event
      * @param damage the amount of damage dealt to the player
      */
-
     public PlayerDamageEvent(Entity player, double damage, Cause cause) {
         super(player, damage, cause);
     }

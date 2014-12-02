@@ -20,6 +20,11 @@ import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Ignorable;
 
+/**
+ * Called when a player moves their location
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerMoveEvent extends PlayerEvent implements Ignorable {
     private final Location fromLoc;
     private final Location toLoc;

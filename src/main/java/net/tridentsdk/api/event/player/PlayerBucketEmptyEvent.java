@@ -24,9 +24,10 @@ import net.tridentsdk.api.inventory.ItemStack;
 
 /**
  * Called when a player empties a bucket
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
-
     private final ItemStack blockInHand;
 
     public PlayerBucketEmptyEvent(Player player, Block block, Block blockClicked,

@@ -26,6 +26,8 @@ import java.util.List;
 
 /**
  * Called when a note is played, has a list of players that will hear this note
+ *
+ * @author The TridentSDK Team
  */
 public class NotePlayEvent extends BlockEvent implements Ignorable {
     private final List<Player> players;

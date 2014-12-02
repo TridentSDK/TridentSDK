@@ -40,6 +40,14 @@ public interface ExecutorFactory<E> {
     TaskExecutor assign(E assignment);
 
     /**
+     * Adds a scaled thread to the assignment Map, useful if the assignment is created with the thread
+     *
+     * @param executor the executor assigned
+     * @param assignment the element that is associated with the executor
+     */
+    void set(TaskExecutor executor, E assignment);
+
+    /**
      * Removes the assigned thread and reduces by one the scale factor for the thread
      *
      * @param assignment the assignment that uses the executor to be removed

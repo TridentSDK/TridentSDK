@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a Bed explodes
+ *
+ * @author The TridentSDK Team
  */
 public class BedExplodeEvent extends BlockEvent implements Ignorable {
     private float strength;

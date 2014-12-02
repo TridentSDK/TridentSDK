@@ -18,14 +18,17 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when a player disconnects from the server
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerDisconnectEvent extends PlayerEvent {
-
     /**
      * TODO perhaps include disconnection reason (quit, timeout, etc)
      *
      * @param player the player associated with this event
      */
-
     public PlayerDisconnectEvent(Player player) {
         super(player);
     }

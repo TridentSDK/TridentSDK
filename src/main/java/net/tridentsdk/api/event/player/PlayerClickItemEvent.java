@@ -20,6 +20,11 @@ import net.tridentsdk.api.event.Ignorable;
 import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.window.Window;
 
+/**
+ * Called when a player clicks an item inside a window
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerClickItemEvent extends Listenable implements Ignorable {
     private final Window window;
     private final short clickedSlot;

@@ -20,6 +20,8 @@ import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an entity catches fire
+ *
+ * @author The TridentSDK Team
  */
 public abstract class EntityBurnEvent extends EntityEvent {
     private boolean ignored;

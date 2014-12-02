@@ -19,14 +19,19 @@ package net.tridentsdk.api.event.player;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Listenable;
 
+/**
+ * Called when an event relating to a player occurs
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerEvent extends Listenable {
-
     private final Player player;
 
     /**
      * @param player the player associated with the event
      */
-
     public PlayerEvent(Player player) {
         this(player, false);
     }
@@ -35,7 +40,6 @@ public class PlayerEvent extends Listenable {
      * @param player the player associated with that event
      * @param async  the boolean that determines if event is asynchronous
      */
-
     public PlayerEvent(Player player, boolean async) {
         super(async);
         this.player = player;
@@ -44,7 +48,6 @@ public class PlayerEvent extends Listenable {
     /**
      * @return return the player associated with the event
      */
-
     public final Player getPlayer() {
         return this.player;
     }

@@ -22,9 +22,10 @@ import net.tridentsdk.api.entity.projectile.Arrow;
 
 /**
  * Called when a skeleton shoots an arrow
+ *
+ * @author The TridentSDK Team
  */
 public class EntityShootArrowEvent extends EntityLaunchProjectileEvent {
-
     public EntityShootArrowEvent(Entity entity, Projectile projectile, Entity target) {
         super(entity, projectile, target);
     }

@@ -20,6 +20,8 @@ import net.tridentsdk.api.Block;
 
 /**
  * Called when a block spreads, like grass or mycelium
+ *
+ * @author The TridentSDK Team
  */
 public class BlockSpreadEvent extends BlockGrowthEvent {
     private final Block blockFrom;

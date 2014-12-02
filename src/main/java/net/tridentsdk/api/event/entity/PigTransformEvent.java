@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.weather.LightningStrikeEvent;
 
 /**
  * Called when a lightning bolt strikes and causes a pig to turn into a zombie pigman
+ *
+ * @author The TridentSDK Team
  */
 public class PigTransformEvent extends EntityEvent {
     private final LightningStrikeEvent cause;

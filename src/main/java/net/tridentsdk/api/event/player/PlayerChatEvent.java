@@ -19,6 +19,11 @@ package net.tridentsdk.api.event.player;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Ignorable;
 
+/**
+ * Called when a player chats
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerChatEvent extends PlayerEvent implements Ignorable {
     private boolean ignored;
 

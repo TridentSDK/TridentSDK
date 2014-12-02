@@ -19,6 +19,11 @@ package net.tridentsdk.api.event.player;
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when a player consumes food, or potions
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerConsumeEvent extends PlayerHungerEvent {
     private final Item item;
     private boolean ignored;
@@ -38,7 +43,6 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @return return the amount of hunger replenished
      */
-
     public double getReplenishAmount() {
         return super.getFeed();
     }
@@ -46,7 +50,6 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @param feed the amount of hunger replenished
      */
-
     public void setReplenishAmount(double feed) {
         super.setFeed(feed);
     }
@@ -54,7 +57,6 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @return return the item consumed
      */
-
     public Item getFood() {
         return this.item;
     }

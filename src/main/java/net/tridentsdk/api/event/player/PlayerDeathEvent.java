@@ -20,12 +20,15 @@ import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.entity.EntityDeathEvent;
 
+/**
+ * Called when a player dies
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerDeathEvent extends EntityDeathEvent {
-
     /**
      * @param player the player associated with this event (that died)
      */
-
     public PlayerDeathEvent(Entity player) {
         super(player);
     }

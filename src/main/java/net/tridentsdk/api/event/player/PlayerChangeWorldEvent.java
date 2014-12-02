@@ -21,6 +21,8 @@ import net.tridentsdk.api.world.World;
 
 /**
  * Called when a player changes worlds
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerChangeWorldEvent extends PlayerEvent {
     private final World to;

@@ -20,6 +20,8 @@ import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an Entity is not longer on fire
+ *
+ * @author The TridentSDK Team
  */
 public class EntityExtinguishEvent extends EntityEvent {
     public EntityExtinguishEvent(Entity entity) {

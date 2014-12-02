@@ -20,6 +20,8 @@ import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.config.JsonConfig;
+import net.tridentsdk.api.threads.HeldValueLatch;
+import net.tridentsdk.api.threads.TaskExecutor;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
 import java.io.File;
@@ -35,6 +37,7 @@ public class TridentPlugin {
     private final File configDirectory;
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
+    private final HeldValueLatch<TaskExecutor> executor = new HeldValueLatch<>();
 
     protected TridentPlugin() {
         this.pluginFile = null;
@@ -71,8 +74,9 @@ public class TridentPlugin {
         // Method intentionally left blank
     }
 
-    final void startup() {
+    final void startup(TaskExecutor executor) {
         // TODO
+        this.executor.countDown(executor);
     }
 
     public void saveDefaultConfig() {
@@ -112,6 +116,18 @@ public class TridentPlugin {
 
     public final PluginDescription getDescription() {
         return this.description;
+    }
+
+    public TaskExecutor getExecutor() {
+        try {
+            return executor.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Should NEVER happen
+        throw new PluginLoadException(
+                "Plugin not loaded correctly, the executor is null for " + getDescription().name());
     }
 
     @Override

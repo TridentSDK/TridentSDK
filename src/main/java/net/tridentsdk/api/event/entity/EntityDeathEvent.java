@@ -20,12 +20,15 @@ import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when an entity dies, especially if it was a LivingEntity
+ *
+ * @author The TridentSDK Team
+ */
 public class EntityDeathEvent extends EntityEvent {
-
     /**
      * @param entity the entity that has died
      */
-
     public EntityDeathEvent(Entity entity) {
         super(entity);
     }

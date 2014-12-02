@@ -19,6 +19,11 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when a player uses the tab key to complete the command
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerTabCompleteEvent extends PlayerEvent {
 
     private final String message;

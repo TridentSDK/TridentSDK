@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a liquid flows from a block to another
+ *
+ * @author The TridentSDK Team
  */
 public class BlockFlowEvent extends BlockEvent implements Ignorable {
     private final Block to;

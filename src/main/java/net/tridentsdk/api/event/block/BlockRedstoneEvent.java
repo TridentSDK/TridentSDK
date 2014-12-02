@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a block's redstone state is updated, called on each individual section of wire when they change, etc.
+ *
+ * @author The TridentSDK Team
  */
 public class BlockRedstoneEvent extends BlockEvent implements Ignorable {
     private final int strength;

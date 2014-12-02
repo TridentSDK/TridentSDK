@@ -20,6 +20,11 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Ignorable;
 
+/**
+ * Called when a player interacts with something
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerInteractEvent extends PlayerEvent implements Ignorable {
     private boolean ignored;
 
@@ -31,7 +36,6 @@ public class PlayerInteractEvent extends PlayerEvent implements Ignorable {
      * @param player the player associated with the event
      * @param block  the block that was interacted with (null if none)
      */
-
     public PlayerInteractEvent(Player player, Block block) {
         super(player);
         this.setBlock(block);
@@ -40,7 +44,6 @@ public class PlayerInteractEvent extends PlayerEvent implements Ignorable {
     /**
      * @return return the interacted block (null means no block was interacted with)
      */
-
     public Block getBlock() {
         return this.block;
     }
@@ -48,7 +51,6 @@ public class PlayerInteractEvent extends PlayerEvent implements Ignorable {
     /**
      * @param block the block that was interacted with
      */
-
     public void setBlock(Block block) {
         this.block = block;
     }

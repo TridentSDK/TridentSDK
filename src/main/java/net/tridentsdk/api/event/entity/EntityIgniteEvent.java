@@ -20,6 +20,8 @@ import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an Entity catches fire
+ *
+ * @author The TridentSDK Team
  */
 public class EntityIgniteEvent extends EntityEvent {
     public EntityIgniteEvent(Entity entity) {

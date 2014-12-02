@@ -19,6 +19,13 @@ package net.tridentsdk.api.event.block;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.event.Listenable;
 
+/**
+ * Represents any event that involves a block modification
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
+ *
+ * @author The TridentSDK Team
+ */
 public abstract class BlockEvent extends Listenable {
     private final Block block;
 

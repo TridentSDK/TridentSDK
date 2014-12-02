@@ -22,6 +22,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called <i>before</i> a Player's game mode changes
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerGameModeChangeEvent extends PlayerEvent implements Ignorable {
     private GameMode gameMode;

@@ -22,6 +22,8 @@ import net.tridentsdk.api.inventory.ItemStack;
 
 /**
  * Called when a player's fishing state changes,e.g. throws line, catches a fish, catches an entity, etc.
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerFishEvent extends PlayerEvent implements Ignorable {
     private final State state;

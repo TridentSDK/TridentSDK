@@ -20,6 +20,8 @@ import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an entity moves, ignores short movements
+ *
+ * @author The TridentSDK Team
  */
 public class EntityMoveEvent extends EntityEvent {
     public EntityMoveEvent(Entity entity) {

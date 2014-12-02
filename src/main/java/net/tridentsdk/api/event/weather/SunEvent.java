@@ -20,6 +20,8 @@ import net.tridentsdk.api.world.World;
 
 /**
  * Called when the weather on the world changes to sun
+ *
+ * @author The TridentSDK Team
  */
 public class SunEvent extends WeatherEvent {
     public SunEvent(World world) {

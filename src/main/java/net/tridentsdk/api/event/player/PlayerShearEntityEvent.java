@@ -23,6 +23,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player shears an entity
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerShearEntityEvent extends PlayerEvent implements Ignorable {
     private final LivingEntity sheared;

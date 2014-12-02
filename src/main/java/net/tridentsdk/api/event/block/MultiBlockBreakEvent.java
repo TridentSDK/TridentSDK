@@ -22,6 +22,8 @@ import net.tridentsdk.api.event.Ignorable;
 /**
  * Called when a block is broken due to an explosion, handled separately than other reasons to reduce lag caused by
  * BlockBreak event listeners during explosions
+ *
+ * @author The TridentSDK Team
  */
 public class MultiBlockBreakEvent extends BlockEvent implements Ignorable {
     private boolean ignored;

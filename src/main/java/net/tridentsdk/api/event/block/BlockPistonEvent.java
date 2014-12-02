@@ -23,6 +23,10 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called whenever a piston extends or retracts
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
+ *
+ * @author The TridentSDK Team
  */
 public abstract class BlockPistonEvent extends BlockEvent implements Ignorable {
     private final Orientation direction;

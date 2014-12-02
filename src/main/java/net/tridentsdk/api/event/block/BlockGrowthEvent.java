@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a crop grows or a block spreads
+ *
+ * @author The TridentSDK Team
  */
 public abstract class BlockGrowthEvent extends BlockEvent implements Ignorable {
     private boolean ignored;

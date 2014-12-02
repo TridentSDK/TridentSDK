@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when something lights a block on fire
+ *
+ * @author The TridentSDK Team
  */
 public class BlockIgniteEvent extends BlockEvent implements Ignorable {
     private final Cause cause;

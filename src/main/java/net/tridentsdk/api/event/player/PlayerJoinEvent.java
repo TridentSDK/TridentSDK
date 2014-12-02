@@ -18,12 +18,15 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when a player joins the server
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerJoinEvent extends PlayerEvent {
-
     /**
      * @param player the player associated with this event
      */
-
     public PlayerJoinEvent(Player player) {
         super(player);
     }

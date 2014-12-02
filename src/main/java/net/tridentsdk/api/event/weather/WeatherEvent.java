@@ -20,6 +20,13 @@ import net.tridentsdk.api.event.Ignorable;
 import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.world.World;
 
+/**
+ * Called when an event relating to the world occurs
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
+ *
+ * @author The TridentSDK Team
+ */
 public class WeatherEvent extends Listenable implements Ignorable {
     public final World world;
     private boolean ignored;

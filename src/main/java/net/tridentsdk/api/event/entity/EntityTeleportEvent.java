@@ -20,9 +20,10 @@ import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an entity teleports, e.g. enderman
+ *
+ * @author The TridentSDK Team
  */
 public class EntityTeleportEvent extends EntityMoveEvent {
-
     public EntityTeleportEvent(Entity entity) {
         super(entity);
     }

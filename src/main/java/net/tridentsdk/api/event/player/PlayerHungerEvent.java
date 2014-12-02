@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a Player's hunger level changes
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerHungerEvent extends PlayerEvent implements Ignorable {
     private double feed;

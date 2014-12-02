@@ -21,6 +21,8 @@ import net.tridentsdk.api.world.World;
 
 /**
  * Called when lightning strikes somewhere in the world
+ *
+ * @author The TridentSDK Team
  */
 public class LightningStrikeEvent extends WeatherEvent {
     private final Location location;

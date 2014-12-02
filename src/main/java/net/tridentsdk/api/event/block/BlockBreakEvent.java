@@ -24,6 +24,8 @@ import net.tridentsdk.api.inventory.ItemStack;
 
 /**
  * Called whenever a Block is broken
+ *
+ * @author The TridentSDK Team
  */
 public class BlockBreakEvent extends BlockEvent implements Ignorable {
     private final Player player;

@@ -17,7 +17,6 @@
 package net.tridentsdk.api.factory;
 
 import net.tridentsdk.api.entity.Entity;
-import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.threads.TaskExecutor;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPlugin;
@@ -50,21 +49,6 @@ public interface ThreadFactory {
      * @return the values of the entity cache
      */
     Collection<Entity> entities();
-
-    /**
-     * Creates a new TaskExecutor using the player thread pool
-     *
-     * @param player the player to assign
-     * @return the task executor created
-     */
-    TaskExecutor playerThread(Player player);
-
-    /**
-     * Gets all of the thread player wrappers
-     *
-     * @return the values of the concurrent cache
-     */
-    Collection<Player> players();
 
     /**
      * Creates a new TaskExecutor using the plugin thread pool

@@ -18,14 +18,20 @@ package net.tridentsdk.api.event.block;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.api.Block;
+import net.tridentsdk.api.docs.Volatile;
 import net.tridentsdk.api.entity.living.Player;
 import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player edits a sign, or when the sign is first created
+ *
+ * @author The TridentSDK Team
  */
 public class SignChangeEvent extends BlockEvent implements Ignorable {
     private final Player editor;
+    @Volatile(policy = "No individual element modify",
+            reason = "Not thread safe",
+            fix = "Write/Read the entire field ONLY")
     private String[] contents;
     private boolean ignored;
 
@@ -51,7 +57,7 @@ public class SignChangeEvent extends BlockEvent implements Ignorable {
      * @return String[] contents of the Sign
      */
     public String[] getContents() {
-        return this.contents;
+        return contents;
     }
 
     /**
@@ -72,7 +78,9 @@ public class SignChangeEvent extends BlockEvent implements Ignorable {
     public String getLine(int i) {
         Preconditions.checkArgument(i >= 0, "Sign line is below 0");
         Preconditions.checkNotNull(i <= 3, "Sign line is above 3");
-        return this.contents[i];
+        synchronized (this) {
+            return this.contents[i];
+        }
     }
 
     /**
@@ -86,9 +94,11 @@ public class SignChangeEvent extends BlockEvent implements Ignorable {
         Preconditions.checkNotNull(!text.isEmpty(), "Sign line length is below 0 characters");
         Preconditions.checkNotNull(text.length() <= 16, "Sign line length is above 16 characters");
 
-        String previous = this.contents[i];
-        this.contents[i] = text;
-        return previous;
+        synchronized (this) {
+            String previous = this.contents[i];
+            this.contents[i] = text;
+            return previous;
+        }
     }
 
     /**

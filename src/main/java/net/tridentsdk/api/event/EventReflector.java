@@ -40,6 +40,10 @@ public class EventReflector implements Comparator<EventReflector> {
         return this.handle;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     public Class<? extends Listenable> getEventClass() {
         return this.eventClass;
     }

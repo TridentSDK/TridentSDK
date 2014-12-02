@@ -24,9 +24,10 @@ import net.tridentsdk.api.inventory.ItemStack;
 
 /**
  * Called when a player fills a bucket
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerBucketFillEvent extends BlockBreakEvent {
-
     public PlayerBucketFillEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
         super(player, block, blockFace, itemInHand);
     }

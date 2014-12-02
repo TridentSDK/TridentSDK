@@ -22,6 +22,11 @@ import net.tridentsdk.api.entity.Entity;
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.living.Player;
 
+/**
+ * Called when a player drops an item
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerDropItemEvent extends EntitySpawnEvent {
     private final Player player;
 

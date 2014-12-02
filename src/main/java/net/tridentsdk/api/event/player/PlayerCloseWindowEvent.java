@@ -20,9 +20,14 @@ import net.tridentsdk.api.event.Ignorable;
 import net.tridentsdk.api.event.Listenable;
 import net.tridentsdk.api.window.Window;
 
+/**
+ * Called when a player closes an inventory window
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerCloseWindowEvent extends Listenable implements Ignorable {
     private final Window window;
-    private volatile boolean ignored;
+    private boolean ignored;
 
     public PlayerCloseWindowEvent(Window window) {
         this.window = window;

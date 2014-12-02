@@ -20,6 +20,8 @@ import net.tridentsdk.api.entity.Entity;
 
 /**
  * Called when an entity damages another entity
+ *
+ * @author The TridentSDK Team
  */
 public class EntityDamageEntityEvent extends EntityDamageEvent {
     private final Entity damager;

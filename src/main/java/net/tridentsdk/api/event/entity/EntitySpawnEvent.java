@@ -19,6 +19,11 @@ package net.tridentsdk.api.event.entity;
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.Entity;
 
+/**
+ * Called when an entity spawns
+ *
+ * @author The TridentSDK Team
+ */
 public class EntitySpawnEvent extends EntityEvent {
     private final Location location;
     private boolean ignored;

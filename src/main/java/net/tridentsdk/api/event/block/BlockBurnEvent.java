@@ -21,6 +21,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a block is destroyed due to fire
+ *
+ * @author The TridentSDK Team
  */
 public class BlockBurnEvent extends BlockEvent implements Ignorable {
     private boolean ignored;

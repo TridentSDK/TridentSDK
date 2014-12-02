@@ -24,6 +24,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called whenever a block is placed
+ *
+ * @author The TridentSDK Team
  */
 public class BlockPlaceEvent extends BlockEvent implements Ignorable {
     private final Player player;

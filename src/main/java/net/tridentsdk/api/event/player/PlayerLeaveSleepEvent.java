@@ -22,6 +22,8 @@ import net.tridentsdk.api.event.Ignorable;
 
 /**
  * Called when a player tries to leave a bed
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerLeaveSleepEvent extends PlayerEvent implements Ignorable {
     private final Block bed;

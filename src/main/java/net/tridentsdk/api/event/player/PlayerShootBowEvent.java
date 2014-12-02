@@ -22,6 +22,8 @@ import net.tridentsdk.api.entity.projectile.Arrow;
 
 /**
  * Called when a player shoots a bow
+ *
+ * @author The TridentSDK Team
  */
 public class PlayerShootBowEvent extends PlayerLaunchProjectileEvent {
     public PlayerShootBowEvent(Player player, Entity projectile) {

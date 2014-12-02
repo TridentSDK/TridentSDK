@@ -20,6 +20,10 @@ import net.tridentsdk.api.Block;
 
 /**
  * Called when a crop grows
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
+ *
+ * @author The TridentSDK Team
  */
 public class CropGrowthEvent extends BlockGrowthEvent {
     /**

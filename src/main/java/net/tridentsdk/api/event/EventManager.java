@@ -22,6 +22,7 @@ import net.tridentsdk.api.Trident;
 import net.tridentsdk.api.docs.InternalUseOnly;
 import net.tridentsdk.api.factory.Factories;
 import net.tridentsdk.api.threads.ConcurrentCache;
+import net.tridentsdk.api.threads.TaskExecutor;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Method;
@@ -36,10 +37,18 @@ import java.util.concurrent.PriorityBlockingQueue;
 @ThreadSafe
 public class EventManager {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, 0, null, null, null);
+    private static final Callable<EventManager> CREATE_MANAGER = new Callable<EventManager>() {
+        @Override
+        public EventManager call() throws Exception {
+            return new EventManager();
+        }
+    };
 
     private final ConcurrentMap<Class<? extends Listenable>, PriorityBlockingQueue<EventReflector>>
             callers = Factories.collect().createMap();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = Factories.collect().createCache();
+
+    private final ConcurrentCache<TaskExecutor, EventManager> handles = Factories.collect().createCache();
 
     @InternalUseOnly
     public EventManager() {
@@ -54,7 +63,11 @@ public class EventManager {
      * @param listener the listener instance to use to register
      */
     @InternalUseOnly
-    public void registerListener(Listener listener) {
+    public void registerListener(TaskExecutor executor, Listener listener) {
+        handles.retrieve(executor, CREATE_MANAGER).doRegister(listener);
+    }
+
+    private void doRegister(Listener listener) {
         final Class<?> c = listener.getClass();
         HashMultimap<Class<? extends Listenable>, EventReflector> reflectors = reflectorsFrom(listener, c);
 
@@ -104,9 +117,14 @@ public class EventManager {
      * @param event the event to call
      */
     public void call(Listenable event) {
+        for (EventManager handle : handles.values())
+            handle.doCall(event);
+    }
+
+    private void doCall(Listenable event) {
         Queue<EventReflector> listeners = callers.get(event.getClass());
         if (listeners == null) return;
-        for (EventReflector listener : listeners)
+        for (final EventReflector listener : listeners)
             listener.reflect(event);
     }
 
