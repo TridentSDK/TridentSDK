@@ -82,7 +82,8 @@ public class TridentPluginHandler {
                     for (Class<?> cls : plugin.classLoader.classes.values()) {
                         if (Listener.class.isAssignableFrom(cls) &&
                                 !cls.isAnnotationPresent(IgnoreRegistration.class)) {
-                            Trident.getServer().getEventManager().registerListener((Listener) cls.newInstance());
+                            Trident.getServer().getEventManager().registerListener(executor,
+                                    (Listener) cls.newInstance());
                         }
 
                         if (Command.class.isAssignableFrom(cls)) {
