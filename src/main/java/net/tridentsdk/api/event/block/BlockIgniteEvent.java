@@ -17,16 +17,16 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when something lights a block on fire
  *
  * @author The TridentSDK Team
  */
-public class BlockIgniteEvent extends BlockEvent implements Ignorable {
+public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     private final Cause cause;
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param block Block associated with this event
@@ -39,12 +39,12 @@ public class BlockIgniteEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     /**

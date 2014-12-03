@@ -17,18 +17,18 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a block's redstone state is updated, called on each individual section of wire when they change, etc.
  *
  * @author The TridentSDK Team
  */
-public class BlockRedstoneEvent extends BlockEvent implements Ignorable {
+public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
     private final int strength;
     private final Block causer;
     private final Cause cause;
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param block    Block which redstone state was updated
@@ -72,12 +72,12 @@ public class BlockRedstoneEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     /**

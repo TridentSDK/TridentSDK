@@ -24,7 +24,7 @@ import net.tridentsdk.api.entity.living.Player;
  */
 public class EntityTameEvent extends EntityEvent {
     private final Player tamer;
-    private boolean ignored;
+    private boolean cancelled;
 
     public EntityTameEvent(Entity entity, Player tamer) {
         super(entity);
@@ -37,11 +37,11 @@ public class EntityTameEvent extends EntityEvent {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

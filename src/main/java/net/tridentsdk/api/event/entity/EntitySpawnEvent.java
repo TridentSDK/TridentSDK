@@ -26,7 +26,7 @@ import net.tridentsdk.api.entity.Entity;
  */
 public class EntitySpawnEvent extends EntityEvent {
     private final Location location;
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param entity   the entity spawned
@@ -48,11 +48,11 @@ public class EntitySpawnEvent extends EntityEvent {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

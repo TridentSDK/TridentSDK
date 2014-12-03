@@ -17,13 +17,13 @@
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.entity.Entity;
-import net.tridentsdk.api.event.Ignorable;
-import net.tridentsdk.api.event.Listenable;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Event;
 
-public class EntityEvent extends Listenable implements Ignorable {
+public class EntityEvent extends Event implements Cancellable {
     private Entity entity;
 
-    private boolean ignored;
+    private boolean cancelled;
 
     public EntityEvent(Entity entity) {
         this(entity, false);
@@ -51,11 +51,11 @@ public class EntityEvent extends Listenable implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

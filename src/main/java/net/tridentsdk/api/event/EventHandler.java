@@ -35,23 +35,23 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
 @ThreadSafe
-public class EventManager {
+public class EventHandler {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, 0, null, null, null);
-    private static final Callable<EventManager> CREATE_MANAGER = new Callable<EventManager>() {
+    private static final Callable<EventHandler> CREATE_MANAGER = new Callable<EventHandler>() {
         @Override
-        public EventManager call() throws Exception {
-            return new EventManager();
+        public EventHandler call() throws Exception {
+            return new EventHandler();
         }
     };
 
-    private final ConcurrentMap<Class<? extends Listenable>, PriorityBlockingQueue<EventReflector>>
+    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>>
             callers = Factories.collect().createMap();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = Factories.collect().createCache();
 
-    private final ConcurrentCache<TaskExecutor, EventManager> handles = Factories.collect().createCache();
+    private final ConcurrentCache<TaskExecutor, EventHandler> handles = Factories.collect().createCache();
 
     @InternalUseOnly
-    public EventManager() {
+    public EventHandler() {
         if (!Trident.isTrident()) {
             throw new UnsupportedOperationException("EventManager must be initiated by TridentSDK!");
         }
@@ -69,9 +69,9 @@ public class EventManager {
 
     private void doRegister(Listener listener) {
         final Class<?> c = listener.getClass();
-        HashMultimap<Class<? extends Listenable>, EventReflector> reflectors = reflectorsFrom(listener, c);
+        HashMultimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(listener, c);
 
-        for (Class<? extends Listenable> eventClass : reflectors.keySet()) {
+        for (Class<? extends Event> eventClass : reflectors.keySet()) {
             PriorityBlockingQueue<EventReflector> eventCallers = callers.get(eventClass);
             if (eventCallers == null)
                 eventCallers = new PriorityBlockingQueue<>(128, COMPARATOR);
@@ -80,7 +80,7 @@ public class EventManager {
         }
     }
 
-    private HashMultimap<Class<? extends Listenable>, EventReflector> reflectorsFrom(Listener listener, final Class<?> c) {
+    private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(Listener listener, final Class<?> c) {
         MethodAccess access = accessors.retrieve(c, new Callable<MethodAccess>() {
             @Override
             public MethodAccess call() throws Exception {
@@ -90,22 +90,23 @@ public class EventManager {
 
         Method[] methods = c.getDeclaredMethods();
 
-        HashMultimap<Class<? extends Listenable>, EventReflector> map = HashMultimap.create(11, 11);
+        HashMultimap<Class<? extends Event>, EventReflector> map = HashMultimap.create(11, 11);
         for (int i = 0, n = methods.length; i < n; i++) {
             Method method = methods[i];
             Class<?>[] parameterTypes = method.getParameterTypes();
             Class<?> type = parameterTypes[0];
 
-            if (parameterTypes.length != 1 || !Listenable.class.isAssignableFrom(type)) {
+            if (parameterTypes.length != 1 || !Event.class.isAssignableFrom(type)) {
                 continue;
             }
 
-            Class<? extends Listenable> eventClass = type.asSubclass(Listenable.class);
-            Call handler = method.getAnnotation(Call.class);
+            Class<? extends Event> eventClass = type.asSubclass(Event.class);
+            CallerData handler = method.getAnnotation(CallerData.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
             EventReflector registeredListener = new EventReflector(
                     access, i, listener, eventClass, importance);
+            map.put(eventClass, registeredListener);
         }
 
         return map;
@@ -116,15 +117,20 @@ public class EventManager {
      *
      * @param event the event to call
      */
-    public void call(Listenable event) {
-        for (EventManager handle : handles.values())
-            handle.doCall(event);
+    public void call(final Event event) {
+        for (final Map.Entry<TaskExecutor, EventHandler> entry : handles.entries())
+            entry.getKey().addTask(new Runnable() {
+                @Override
+                public void run() {
+                    entry.getValue().doCall(event);
+                }
+            });
     }
 
-    private void doCall(Listenable event) {
+    private void doCall(Event event) {
         Queue<EventReflector> listeners = callers.get(event.getClass());
         if (listeners == null) return;
-        for (final EventReflector listener : listeners)
+        for (EventReflector listener : listeners)
             listener.reflect(event);
     }
 
@@ -134,7 +140,7 @@ public class EventManager {
      * @param listener the listener to unregister
      */
     public void unregister(Listener listener) {
-        for (Map.Entry<Class<? extends Listenable>, PriorityBlockingQueue<EventReflector>> entry :
+        for (Map.Entry<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> entry :
                 this.callers.entrySet()) {
             for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext();) {
                 EventReflector it = iterator.next();

@@ -18,17 +18,17 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Location;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a player moves their location
  *
  * @author The TridentSDK Team
  */
-public class PlayerMoveEvent extends PlayerEvent implements Ignorable {
+public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     private final Location fromLoc;
     private final Location toLoc;
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerMoveEvent(Player player, Location from, Location to) {
         super(player);
@@ -58,11 +58,11 @@ public class PlayerMoveEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

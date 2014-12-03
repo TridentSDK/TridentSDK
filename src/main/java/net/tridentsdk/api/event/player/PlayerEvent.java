@@ -17,7 +17,7 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Listenable;
+import net.tridentsdk.api.event.Event;
 
 /**
  * Called when an event relating to a player occurs
@@ -26,7 +26,7 @@ import net.tridentsdk.api.event.Listenable;
  *
  * @author The TridentSDK Team
  */
-public class PlayerEvent extends Listenable {
+public class PlayerEvent extends Event {
     private final Player player;
 
     /**

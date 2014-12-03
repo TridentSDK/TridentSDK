@@ -17,15 +17,15 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a crop grows or a block spreads
  *
  * @author The TridentSDK Team
  */
-public abstract class BlockGrowthEvent extends BlockEvent implements Ignorable {
-    private boolean ignored;
+public abstract class BlockGrowthEvent extends BlockEvent implements Cancellable {
+    private boolean cancelled;
 
     /**
      * @param block Block associated with this event
@@ -36,11 +36,11 @@ public abstract class BlockGrowthEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

@@ -26,7 +26,7 @@ import net.tridentsdk.api.entity.living.Player;
  */
 public class PlayerConsumeEvent extends PlayerHungerEvent {
     private final Item item;
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param player the player associated with this event
@@ -63,11 +63,11 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

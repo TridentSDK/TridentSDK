@@ -16,8 +16,8 @@
  */
 package net.tridentsdk.api.event.weather;
 
-import net.tridentsdk.api.event.Ignorable;
-import net.tridentsdk.api.event.Listenable;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Event;
 import net.tridentsdk.api.world.World;
 
 /**
@@ -27,9 +27,9 @@ import net.tridentsdk.api.world.World;
  *
  * @author The TridentSDK Team
  */
-public class WeatherEvent extends Listenable implements Ignorable {
+public class WeatherEvent extends Event implements Cancellable {
     public final World world;
-    private boolean ignored;
+    private boolean cancelled;
 
     public WeatherEvent(World world) {
         this.world = world;
@@ -41,11 +41,11 @@ public class WeatherEvent extends Listenable implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

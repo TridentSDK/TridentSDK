@@ -18,7 +18,7 @@ package net.tridentsdk.api;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.api.config.JsonConfig;
-import net.tridentsdk.api.event.EventManager;
+import net.tridentsdk.api.event.EventHandler;
 import net.tridentsdk.api.util.TridentLogger;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
@@ -115,7 +115,7 @@ public final class Trident {
         return server.getWindow(id);
     }
 
-    public static EventManager getEventManager() {
+    public static EventHandler getEventManager() {
         return server.getEventManager();
     }
 

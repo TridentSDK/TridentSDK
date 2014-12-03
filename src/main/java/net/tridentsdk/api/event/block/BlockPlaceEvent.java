@@ -20,19 +20,19 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.BlockFace;
 import net.tridentsdk.api.Material;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called whenever a block is placed
  *
  * @author The TridentSDK Team
  */
-public class BlockPlaceEvent extends BlockEvent implements Ignorable {
+public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     private final Player player;
     private final Block blockClicked;
     private final BlockFace faceClicked;
 
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param player       Player who placed this block
@@ -67,12 +67,12 @@ public class BlockPlaceEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     /**

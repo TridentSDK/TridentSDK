@@ -20,20 +20,20 @@ import com.google.common.base.Preconditions;
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.docs.Volatile;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a player edits a sign, or when the sign is first created
  *
  * @author The TridentSDK Team
  */
-public class SignChangeEvent extends BlockEvent implements Ignorable {
+public class SignChangeEvent extends BlockEvent implements Cancellable {
     private final Player editor;
     @Volatile(policy = "No individual element modify",
             reason = "Not thread safe",
             fix = "Write/Read the entire field ONLY")
     private String[] contents;
-    private boolean ignored;
+    private boolean cancelled;
 
     public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
@@ -43,12 +43,12 @@ public class SignChangeEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     /**

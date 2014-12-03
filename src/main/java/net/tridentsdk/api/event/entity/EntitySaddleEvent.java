@@ -26,7 +26,7 @@ import net.tridentsdk.api.entity.living.Player;
  */
 public class EntitySaddleEvent extends EntityEvent {
     private final Player player;
-    private boolean ignored;
+    private boolean cancelled;
 
     public EntitySaddleEvent(Entity entity, Player player) {
         super(entity);
@@ -42,11 +42,11 @@ public class EntitySaddleEvent extends EntityEvent {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

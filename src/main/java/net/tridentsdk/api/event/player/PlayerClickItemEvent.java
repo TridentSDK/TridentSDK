@@ -16,8 +16,8 @@
  */
 package net.tridentsdk.api.event.player;
 
-import net.tridentsdk.api.event.Ignorable;
-import net.tridentsdk.api.event.Listenable;
+import net.tridentsdk.api.event.Cancellable;
+import net.tridentsdk.api.event.Event;
 import net.tridentsdk.api.window.Window;
 
 /**
@@ -25,18 +25,18 @@ import net.tridentsdk.api.window.Window;
  *
  * @author The TridentSDK Team
  */
-public class PlayerClickItemEvent extends Listenable implements Ignorable {
+public class PlayerClickItemEvent extends Event implements Cancellable {
     private final Window window;
     private final short clickedSlot;
     private final int actionId;
 
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerClickItemEvent(Window window, short clickedSlot, int actionId) {
         this.window = window;
         this.clickedSlot = clickedSlot;
         this.actionId = actionId;
-        this.ignored = false;
+        this.cancelled = false;
     }
 
     public Window getWindow() {
@@ -53,11 +53,11 @@ public class PlayerClickItemEvent extends Listenable implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

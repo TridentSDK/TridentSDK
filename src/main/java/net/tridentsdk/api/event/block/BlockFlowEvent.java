@@ -17,16 +17,16 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a liquid flows from a block to another
  *
  * @author The TridentSDK Team
  */
-public class BlockFlowEvent extends BlockEvent implements Ignorable {
+public class BlockFlowEvent extends BlockEvent implements Cancellable {
     private final Block to;
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param from Block where the liquid is flowing from
@@ -57,11 +57,11 @@ public class BlockFlowEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

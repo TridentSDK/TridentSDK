@@ -18,16 +18,16 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.Block;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a player tries to get in a bed
  *
  * @author The TridentSDK Team
  */
-public class PlayerSleepEvent extends PlayerEvent implements Ignorable {
+public class PlayerSleepEvent extends PlayerEvent implements Cancellable {
     private final Block bed;
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerSleepEvent(Player player, Block bed) {
         super(player);
@@ -36,12 +36,12 @@ public class PlayerSleepEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     /**

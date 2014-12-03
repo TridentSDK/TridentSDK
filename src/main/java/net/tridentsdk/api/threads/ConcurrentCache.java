@@ -19,9 +19,7 @@ package net.tridentsdk.api.threads;
 import net.tridentsdk.api.factory.Factories;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -105,5 +103,21 @@ public class ConcurrentCache<K, V> {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Returns the backing map of this cache
+     *
+     * @return the underlying map
+     */
+    public Set<Map.Entry<K, V>> entries() {
+        Set<Map.Entry<K, V>> entries = new HashSet<>();
+        for (Map.Entry<K, Future<V>> entry : cache.entrySet())
+            try {
+                entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().get()));
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        return entries;
     }
 }

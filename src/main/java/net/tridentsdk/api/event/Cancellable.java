@@ -16,31 +16,19 @@
  */
 package net.tridentsdk.api.event;
 
-import net.tridentsdk.api.docs.InheritThreadSafe;
-
 /**
- * Represents an event that could be listened by the plugin listeners
- *
- * <p>All events are thread safe, their visibility is required as the plugin threads that </p>
+ * An event that implements this supports the ability to cancel (cancel) the event actions and calling behavior
  *
  * @author The TridentSDK Team
  */
-@InheritThreadSafe
-public abstract class Listenable {
-    private final boolean isAsync;
-
-    public Listenable() {
-        this(false);
-    }
-
-    public Listenable(boolean async) {
-        this.isAsync = async;
-    }
+public interface Cancellable {
+    /**
+     * @return return true if event is set to cancelled
+     */
+    boolean isIgnored();
 
     /**
-     * @return return true if Event is asynchronous
+     * @param cancel set the cancellation state of the event
      */
-    public boolean isAsync() {
-        return this.isAsync;
-    }
+    void cancel(boolean cancel);
 }

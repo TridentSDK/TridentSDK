@@ -24,11 +24,11 @@ public class EventReflector implements Comparator<EventReflector> {
     private final MethodAccess handle;
     private final int index;
     private final Object instance;
-    private final Class<? extends Listenable> eventClass;
+    private final Class<? extends Event> eventClass;
     private final Importance importance;
 
     EventReflector(MethodAccess handle, int index, Object instance,
-                   Class<? extends Listenable> eventClass, Importance importance) {
+                   Class<? extends Event> eventClass, Importance importance) {
         this.handle = handle;
         this.index = index;
         this.instance = instance;
@@ -44,7 +44,7 @@ public class EventReflector implements Comparator<EventReflector> {
         return index;
     }
 
-    public Class<? extends Listenable> getEventClass() {
+    public Class<? extends Event> getEventClass() {
         return this.eventClass;
     }
 
@@ -52,7 +52,7 @@ public class EventReflector implements Comparator<EventReflector> {
         return this.importance;
     }
 
-    public void reflect(Listenable event) {
+    public void reflect(Event event) {
         this.handle.invoke(this.instance, this.index, event);
     }
 

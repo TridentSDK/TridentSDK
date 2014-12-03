@@ -17,7 +17,7 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a block is broken due to an explosion, handled separately than other reasons to reduce lag caused by
@@ -25,8 +25,8 @@ import net.tridentsdk.api.event.Ignorable;
  *
  * @author The TridentSDK Team
  */
-public class MultiBlockBreakEvent extends BlockEvent implements Ignorable {
-    private boolean ignored;
+public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
+    private boolean cancelled;
 
     /**
      * @param block Block representing the destroyed block.
@@ -37,11 +37,11 @@ public class MultiBlockBreakEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

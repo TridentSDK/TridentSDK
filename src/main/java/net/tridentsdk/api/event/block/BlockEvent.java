@@ -17,7 +17,7 @@
 package net.tridentsdk.api.event.block;
 
 import net.tridentsdk.api.Block;
-import net.tridentsdk.api.event.Listenable;
+import net.tridentsdk.api.event.Event;
 
 /**
  * Represents any event that involves a block modification
@@ -26,7 +26,7 @@ import net.tridentsdk.api.event.Listenable;
  *
  * @author The TridentSDK Team
  */
-public abstract class BlockEvent extends Listenable {
+public abstract class BlockEvent extends Event {
     private final Block block;
 
     /**

@@ -19,17 +19,17 @@ package net.tridentsdk.api.event.player;
 import net.tridentsdk.api.entity.Item;
 import net.tridentsdk.api.entity.LivingEntity;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a player shears an entity
  *
  * @author The TridentSDK Team
  */
-public class PlayerShearEntityEvent extends PlayerEvent implements Ignorable {
+public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     private final LivingEntity sheared;
     private Item drop;
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerShearEntityEvent(Player player, LivingEntity sheared, Item drop) {
         super(player);
@@ -60,11 +60,11 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

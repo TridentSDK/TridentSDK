@@ -18,17 +18,17 @@ package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.GameMode;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called <i>before</i> a Player's game mode changes
  *
  * @author The TridentSDK Team
  */
-public class PlayerGameModeChangeEvent extends PlayerEvent implements Ignorable {
+public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellable {
     private GameMode gameMode;
 
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerGameModeChangeEvent(Player player, GameMode gameMode) {
         super(player);
@@ -37,12 +37,12 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Ignorable 
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     public GameMode getNewGameMode() {

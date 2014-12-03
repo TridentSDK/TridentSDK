@@ -17,15 +17,15 @@
 package net.tridentsdk.api.event.entity;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 import net.tridentsdk.api.event.player.PlayerEvent;
 
 /**
  * Called when a player tries to start sprinting, even if hunger would otherwise prevent them from sprinting
  */
-public class PlayerToggleSprintEvent extends PlayerEvent implements Ignorable {
+public class PlayerToggleSprintEvent extends PlayerEvent implements Cancellable {
     private final boolean toggle;
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerToggleSprintEvent(Player player, boolean toggle) {
         super(player);
@@ -48,11 +48,11 @@ public class PlayerToggleSprintEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

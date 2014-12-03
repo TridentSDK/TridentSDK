@@ -18,7 +18,7 @@ package net.tridentsdk.api;
 
 import net.tridentsdk.api.config.JsonConfig;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.EventManager;
+import net.tridentsdk.api.event.EventHandler;
 import net.tridentsdk.api.window.Window;
 import net.tridentsdk.api.world.World;
 import net.tridentsdk.plugin.TridentPluginHandler;
@@ -101,7 +101,7 @@ public interface Server {
      *
      * @return the EventManager instance
      */
-    EventManager getEventManager();
+    EventHandler getEventManager();
 
     /**
      * Send a plugin message

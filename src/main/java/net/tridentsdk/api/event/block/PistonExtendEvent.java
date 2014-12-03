@@ -24,7 +24,7 @@ import java.util.List;
 
 public class PistonExtendEvent extends BlockPistonEvent {
     private final ImmutableList<Block> blocksInfluenced;
-    private boolean ignored;
+    private boolean cancelled;
 
     public PistonExtendEvent(Block block, Orientation direction, List<Block> influenced) {
         super(block, direction, false, influenced.get(0));
@@ -34,12 +34,12 @@ public class PistonExtendEvent extends BlockPistonEvent {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     /**

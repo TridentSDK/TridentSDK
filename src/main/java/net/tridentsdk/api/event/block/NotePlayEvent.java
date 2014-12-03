@@ -20,7 +20,7 @@ import net.tridentsdk.api.Block;
 import net.tridentsdk.api.Instrument;
 import net.tridentsdk.api.Note;
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 import java.util.List;
 
@@ -29,11 +29,11 @@ import java.util.List;
  *
  * @author The TridentSDK Team
  */
-public class NotePlayEvent extends BlockEvent implements Ignorable {
+public class NotePlayEvent extends BlockEvent implements Cancellable {
     private final List<Player> players;
     private Note note;
     private Instrument instrument;
-    private boolean ignored;
+    private boolean cancelled;
 
     /**
      * @param block      Block playing the Note
@@ -95,11 +95,11 @@ public class NotePlayEvent extends BlockEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

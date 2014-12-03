@@ -19,7 +19,7 @@ package net.tridentsdk.api.event.entity;
 import net.tridentsdk.api.entity.Entity;
 
 /**
- * Called when an entity moves, ignores short movements
+ * Called when an entity moves, cancels short movements
  *
  * @author The TridentSDK Team
  */

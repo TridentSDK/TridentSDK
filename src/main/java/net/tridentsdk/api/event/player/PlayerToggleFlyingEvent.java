@@ -17,14 +17,14 @@
 package net.tridentsdk.api.event.player;
 
 import net.tridentsdk.api.entity.living.Player;
-import net.tridentsdk.api.event.Ignorable;
+import net.tridentsdk.api.event.Cancellable;
 
 /**
  * Called when a player attempts to change their flying state i.e. double-taps jump
  */
-public class PlayerToggleFlyingEvent extends PlayerEvent implements Ignorable {
+public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable {
     private final boolean toggleState;
-    private boolean ignored;
+    private boolean cancelled;
 
     public PlayerToggleFlyingEvent(Player player, boolean toggleState) {
         super(player);
@@ -40,11 +40,11 @@ public class PlayerToggleFlyingEvent extends PlayerEvent implements Ignorable {
 
     @Override
     public boolean isIgnored() {
-        return ignored;
+        return cancelled;
     }
 
     @Override
-    public void ignore(boolean ignored) {
-        this.ignored = ignored;
+    public void cancel(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }
