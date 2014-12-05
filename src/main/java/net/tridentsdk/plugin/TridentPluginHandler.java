@@ -16,12 +16,12 @@
  */
 package net.tridentsdk.plugin;
 
-import net.tridentsdk.api.Trident;
-import net.tridentsdk.api.docs.InternalUseOnly;
-import net.tridentsdk.api.event.Listener;
-import net.tridentsdk.api.factory.ExecutorFactory;
-import net.tridentsdk.api.factory.Factories;
-import net.tridentsdk.api.threads.TaskExecutor;
+import net.tridentsdk.Trident;
+import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.event.Listener;
+import net.tridentsdk.factory.ExecutorFactory;
+import net.tridentsdk.factory.Factories;
+import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;

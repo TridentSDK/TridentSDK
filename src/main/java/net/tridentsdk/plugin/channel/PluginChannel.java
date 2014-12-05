@@ -17,7 +17,7 @@
 
 package net.tridentsdk.plugin.channel;
 
-import net.tridentsdk.api.Trident;
+import net.tridentsdk.Trident;
 
 import java.util.ArrayList;
 import java.util.List;

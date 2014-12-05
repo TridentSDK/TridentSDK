@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.entity.living.Player;
 
 public abstract class Command {
 

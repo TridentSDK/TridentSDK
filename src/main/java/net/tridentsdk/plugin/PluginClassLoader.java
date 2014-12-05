@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.plugin;
 
-import net.tridentsdk.api.reflect.FastClass;
+import net.tridentsdk.perf.FastClass;
 
 import java.io.File;
 import java.net.MalformedURLException;

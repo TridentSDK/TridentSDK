@@ -17,7 +17,7 @@
 package net.tridentsdk.plugin.cmd;
 
 
-import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 

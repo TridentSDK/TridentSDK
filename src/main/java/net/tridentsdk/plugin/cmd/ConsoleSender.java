@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.api.Messagable;
+import net.tridentsdk.Messagable;
 
 public interface ConsoleSender extends Messagable, CommandIssuer {
     // TODO
