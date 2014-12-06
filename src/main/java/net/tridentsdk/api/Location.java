@@ -180,10 +180,15 @@ public class Location implements Cloneable {
         this.pitch = pitch;
     }
 
+    /**
+     * Adds a vector to this location, returning this locacion
+     * @param vector the vector to add
+     * @return this
+     */
     public Location add(Vector vector) {
-        this.setX(vector.getX());
-        this.setY(vector.getY());
-        this.setZ(vector.getZ());
+        this.setX(this.getX() + vector.getX());
+        this.setY(this.getY() + vector.getY());
+        this.setZ(this.getZ() + vector.getZ());
 
         return this;
     }
@@ -222,8 +227,7 @@ public class Location implements Cloneable {
         Preconditions.checkNotNull(location, "Location cannot be null.");
         if (!this.getWorld().equals(location.getWorld())) return 0.0;
         return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
-                square(
-                        this.getZ() - location.getZ());
+                square(this.getZ() - location.getZ());
     }
 
     @Override
