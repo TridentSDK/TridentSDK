@@ -23,7 +23,7 @@ import java.util.UUID;
  *
  * @author TridentSDK Team
  */
-public interface Tameable extends AgeableDecorator {
+public interface Tameable extends Ageable {
     /**
      * Whether or not this entity is tamed
      *

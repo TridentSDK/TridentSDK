@@ -17,38 +17,25 @@
 
 package net.tridentsdk.entity.decorate;
 
-import net.tridentsdk.entity.Entity;
-
 /**
  * Represents a LivingEntity that has an age and has the ability to bread
  *
  * @author TridentSDK Team
  */
-public abstract class AgeableDecorator implements LivingEntity {
-    private final Entity entity;
-    private int age;
-
-    protected AgeableDecorator(Entity entity) {
-        this.entity = entity;
-    }
-
+public interface Ageable extends LivingEntity {
     /**
      * The current age of this entity, in ticks
      *
      * @return the age of this entity
      */
-    int getAge() {
-        return age;
-    }
+    int getAge();
 
     /**
      * Set the current age of this entity, in ticks
      *
      * @param ticks the age to set
      */
-    void setAge(int ticks) {
-        this.age = ticks;
-    }
+    void setAge(int ticks);
 
     /**
      * Whether or not this entity can breed or not, where the ability to breed represents whether or not this entity can
@@ -56,7 +43,7 @@ public abstract class AgeableDecorator implements LivingEntity {
      *
      * @return whether or not this entity can be bred
      */
-    abstract boolean canBreed();
+    boolean canBreed();
 
     /**
      * Whether or not this entity is "in love", such that it will actively display the particle effect for breeding
@@ -64,5 +51,5 @@ public abstract class AgeableDecorator implements LivingEntity {
      *
      * @return whether or not this entity is in love
      */
-    abstract boolean isInLove();
+    boolean isInLove();
 }

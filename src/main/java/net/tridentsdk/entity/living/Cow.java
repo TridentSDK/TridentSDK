@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.decorate.AgeableDecorator;
+import net.tridentsdk.entity.decorate.Ageable;
 import net.tridentsdk.entity.decorate.Peaceful;
 
 /**
@@ -24,6 +24,6 @@ import net.tridentsdk.entity.decorate.Peaceful;
  *
  * @author TridentSDK Team
  */
-public interface Cow extends AgeableDecorator, Peaceful {
+public interface Cow extends Ageable, Peaceful {
 
 }

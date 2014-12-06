@@ -17,7 +17,7 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.entity.*;
-import net.tridentsdk.entity.decorate.AgeableDecorator;
+import net.tridentsdk.entity.decorate.Ageable;
 import net.tridentsdk.entity.decorate.Peaceful;
 import net.tridentsdk.entity.decorate.Tradeable;
 
@@ -26,7 +26,7 @@ import net.tridentsdk.entity.decorate.Tradeable;
  *
  * @author TridentSDK Team
  */
-public interface Villager extends AgeableDecorator, Tradeable, Peaceful {
+public interface Villager extends Ageable, Tradeable, Peaceful {
     /**
      * The profession of this villager
      *

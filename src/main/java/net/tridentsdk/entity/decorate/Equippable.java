@@ -39,4 +39,6 @@ public interface Equippable extends Entity {
      * @return this entity's equipment
      */
     ItemStack[] getEquipment();
+
+    void setEquipment(ItemStack[] stack);
 }

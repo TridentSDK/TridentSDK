@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.decorate.AgeableDecorator;
+import net.tridentsdk.entity.decorate.Ageable;
 import net.tridentsdk.entity.decorate.Peaceful;
 import net.tridentsdk.entity.decorate.Saddleable;
 
@@ -25,6 +25,6 @@ import net.tridentsdk.entity.decorate.Saddleable;
  *
  * @author TridentSDK Team
  */
-public interface Pig extends AgeableDecorator, Saddleable, Peaceful {
+public interface Pig extends Ageable, Saddleable, Peaceful {
 
 }

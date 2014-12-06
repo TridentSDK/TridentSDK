@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.decorate.AgeableDecorator;
+import net.tridentsdk.entity.decorate.Ageable;
 import net.tridentsdk.entity.decorate.Peaceful;
 
 /**
@@ -24,7 +24,7 @@ import net.tridentsdk.entity.decorate.Peaceful;
  *
  * @author TridentSDK Team
  */
-public interface Chicken extends AgeableDecorator, Peaceful {
+public interface Chicken extends Ageable, Peaceful {
     /**
      * Whether or not this Chicken is a 'Chicken Jockey', defined by whether or not this Chicken will naturally despawn
      *
