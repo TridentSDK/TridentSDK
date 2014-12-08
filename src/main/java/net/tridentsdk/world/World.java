@@ -16,10 +16,10 @@
  */
 package net.tridentsdk.world;
 
-import net.tridentsdk.base.Block;
 import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Location;
+import net.tridentsdk.base.Block;
 
 public interface World extends Cloneable {
     

@@ -21,7 +21,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.tridentsdk.Location;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.projectile.Projectile;
 import net.tridentsdk.util.Vector;
 

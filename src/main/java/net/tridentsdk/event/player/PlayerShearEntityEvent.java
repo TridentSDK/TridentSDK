@@ -17,7 +17,6 @@
 package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.Item;
-import net.tridentsdk.entity.decorate.LivingEntity;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 

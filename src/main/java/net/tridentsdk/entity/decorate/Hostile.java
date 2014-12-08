@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.entity.decorate;
 
+import net.tridentsdk.entity.LivingEntity;
+
 /**
  * Represents a hostile entity Purpose of interface is to provide ease-of-access to large groups of a single type (i.e.
  * 'Hostiles', 'Friendlies')
@@ -23,5 +25,4 @@ package net.tridentsdk.entity.decorate;
  * @author TridentSDK Team
  */
 public interface Hostile extends LivingEntity {
-
 }

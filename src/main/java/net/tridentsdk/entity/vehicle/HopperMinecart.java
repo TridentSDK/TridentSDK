@@ -16,8 +16,6 @@
  */
 package net.tridentsdk.entity.vehicle;
 
-import net.tridentsdk.entity.decorate.InventoryHolder;
-
 /**
  * Represents a Hopper Minecart
  *

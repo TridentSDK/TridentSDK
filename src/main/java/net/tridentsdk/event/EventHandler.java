@@ -19,10 +19,10 @@ package net.tridentsdk.event;
 import com.esotericsoftware.reflectasm.MethodAccess;
 import com.google.common.collect.HashMultimap;
 import net.tridentsdk.Trident;
-import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.concurrent.ConcurrentCache;
 import net.tridentsdk.concurrent.TaskExecutor;
+import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.factory.Factories;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Method;

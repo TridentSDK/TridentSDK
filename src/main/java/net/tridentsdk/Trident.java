@@ -19,10 +19,10 @@ package net.tridentsdk;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.event.EventHandler;
+import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
-import net.tridentsdk.plugin.TridentPluginHandler;
 
 import java.net.InetAddress;
 import java.util.Set;

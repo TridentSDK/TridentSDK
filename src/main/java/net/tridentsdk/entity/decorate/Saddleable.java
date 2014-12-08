@@ -16,13 +16,14 @@
  */
 package net.tridentsdk.entity.decorate;
 
+import net.tridentsdk.entity.LivingEntity;
+
 /**
  * Represents a living entity that can wear a saddle
  *
  * @author TridentSDK Team
  */
 public interface Saddleable extends LivingEntity {
-
     /**
      * Whether this entity is saddled or not
      *

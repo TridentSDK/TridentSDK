@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity;
 
 import net.tridentsdk.Location;
-import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileSource;
 import net.tridentsdk.event.entity.EntityDamageEvent;

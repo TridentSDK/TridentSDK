@@ -19,9 +19,9 @@ package net.tridentsdk.plugin;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import net.tridentsdk.Trident;
-import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.TaskExecutor;
+import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 
 import java.io.File;

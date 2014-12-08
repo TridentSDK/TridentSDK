@@ -17,9 +17,9 @@
 package net.tridentsdk.factory;
 
 import net.tridentsdk.DisplayInfo;
+import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.PossiblyThreadSafe;
-import net.tridentsdk.concurrent.HeldValueLatch;
 
 /**
  * Available creational factories for basic objects

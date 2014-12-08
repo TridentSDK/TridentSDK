@@ -17,7 +17,6 @@
 package net.tridentsdk.event.entity;
 
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.decorate.LivingEntity;
 
 public class EntityDamageEvent extends EntityEvent {
     private final Cause cause;

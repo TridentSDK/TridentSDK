@@ -25,5 +25,4 @@ import net.tridentsdk.entity.decorate.Peaceful;
  * @author TridentSDK Team
  */
 public interface Cow extends Ageable, Peaceful {
-
 }

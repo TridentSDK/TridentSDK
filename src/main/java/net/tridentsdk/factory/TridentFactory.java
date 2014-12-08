@@ -16,18 +16,18 @@
  */
 package net.tridentsdk.factory;
 
-import net.tridentsdk.base.Block;
 import net.tridentsdk.Location;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Material;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.window.inventory.Inventory;
-import net.tridentsdk.window.inventory.ItemStack;
 import net.tridentsdk.meta.nbt.CompoundTag;
 import net.tridentsdk.meta.nbt.CompoundTagBuilder;
 import net.tridentsdk.meta.nbt.NBTBuilder;
-import net.tridentsdk.window.trade.ItemPair;
 import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.util.Vector;
+import net.tridentsdk.window.inventory.Inventory;
+import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.trade.ItemPair;
 import net.tridentsdk.world.ChunkLocation;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;

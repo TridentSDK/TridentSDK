@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.decorate;
 
-import net.tridentsdk.entity.decorate.LivingEntity;
+import net.tridentsdk.entity.LivingEntity;
 
 /**
  * Represents a neutral entity Purpose of interface is to provide ease-of-access to large groups of a single type (i.e.

@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.factory;
 
+import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.world.World;
 
 import java.util.Collection;

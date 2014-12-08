@@ -16,10 +16,10 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
-import net.tridentsdk.entity.decorate.LivingEntity;
+import net.tridentsdk.entity.LivingEntity;
+import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.window.inventory.ItemStack;
 
 import java.util.Locale;

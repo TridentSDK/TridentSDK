@@ -16,7 +16,8 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.*;
+import net.tridentsdk.entity.HorseType;
+import net.tridentsdk.entity.HorseVariant;
 import net.tridentsdk.entity.decorate.InventoryHolder;
 import net.tridentsdk.entity.decorate.Peaceful;
 import net.tridentsdk.entity.decorate.Saddleable;
