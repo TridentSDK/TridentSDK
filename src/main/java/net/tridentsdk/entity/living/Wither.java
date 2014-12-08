@@ -16,11 +16,12 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.entity.decorate.Hostile;
+
 /**
  * Represents a wither
  *
  * @author TridentSDK Team
  */
 public interface Wither extends Hostile {
-
 }

@@ -16,6 +16,9 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.entity.decorate.Ageable;
+import net.tridentsdk.entity.decorate.Peaceful;
+
 /**
  * Represents a Sheep
  *

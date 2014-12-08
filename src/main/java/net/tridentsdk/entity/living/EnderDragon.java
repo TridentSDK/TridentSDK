@@ -16,9 +16,10 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.entity.decorate.Hostile;
+
 /**
  * Represents an Ender Dragon (base)
  */
 public interface EnderDragon extends Hostile {
-
 }

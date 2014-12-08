@@ -16,13 +16,14 @@
  */
 package net.tridentsdk.entity.vehicle;
 
+import net.tridentsdk.entity.decorate.InventoryHolder;
+
 /**
  * Represents a Furnace Minecart
  *
  * @author TridentSDK Team
  */
 public interface FurnaceMinecart extends InventoryHolder {
-
     /**
      * The number of fuel ticks this Furnace Minecart has
      *

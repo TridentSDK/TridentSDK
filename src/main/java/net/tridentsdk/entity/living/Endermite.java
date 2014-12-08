@@ -16,11 +16,12 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.entity.decorate.Hostile;
+
 /**
  * Represents an Endermite
  *
  * @author TridentSDK Team
  */
 public interface Endermite extends Hostile {
-
 }

@@ -17,6 +17,7 @@
 package net.tridentsdk.event.entity;
 
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.living.Player;
 
 /**

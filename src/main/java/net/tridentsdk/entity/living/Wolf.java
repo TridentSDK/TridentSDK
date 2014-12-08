@@ -16,6 +16,9 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.entity.decorate.Neutral;
+import net.tridentsdk.entity.decorate.Tameable;
+
 /**
  * Represents a Wolf
  *

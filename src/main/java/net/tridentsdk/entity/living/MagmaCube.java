@@ -22,5 +22,4 @@ package net.tridentsdk.entity.living;
  * @author TridentSDK Team
  */
 public interface MagmaCube extends Slime {
-
 }

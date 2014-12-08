@@ -16,9 +16,10 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.entity.decorate.Hostile;
+
 /**
  * Represents a Blaze
  */
 public interface Blaze extends Hostile {
-
 }

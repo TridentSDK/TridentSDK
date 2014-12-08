@@ -17,6 +17,7 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.entity.RabbitType;
+import net.tridentsdk.entity.decorate.Neutral;
 
 /**
  * Represents a Rabbit
