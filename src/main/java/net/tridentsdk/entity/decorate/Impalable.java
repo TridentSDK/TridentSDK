@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.decorate;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.projectile.Projectile;
 
@@ -58,7 +58,7 @@ public interface Impalable {
      *
      * @return the impaled block (tile)
      */
-    Block impaledTile();
+    Tile impaledTile();
 
     /**
      * Places the projectile into the hit collection

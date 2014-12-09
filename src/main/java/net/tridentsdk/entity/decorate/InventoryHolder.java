@@ -18,7 +18,7 @@ package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.window.inventory.Inventory;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents an Entity that holds an Inventory
@@ -43,5 +43,5 @@ public interface InventoryHolder extends Entity {
      * @param slot the target slot
      * @return the contents of the specified slot
      */
-    ItemStack getContent(int slot);
+    Item getContent(int slot);
 }

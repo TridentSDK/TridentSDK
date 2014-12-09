@@ -20,7 +20,13 @@ import net.tridentsdk.plugin.TridentPlugin;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public interface Task extends Runnable {
+/**
+ * The internal representation of a scheduled task, implemented inside the scheduler to manage the wrapping for
+ * {@link net.tridentsdk.concurrent.TridentRunnable}
+ *
+ * @author The TridentSDk Team
+ */
+public interface ScheduledTask extends Runnable {
     /**
      * Interval is the ticks left of a specific action for repeating and delayed tasks
      *
@@ -36,7 +42,7 @@ public interface Task extends Runnable {
     /**
      * Gets the interval set or created by the task
      *
-     * @return the interval, as defined in {@link Task#setInterval(long)}
+     * @return the interval, as defined in {@link ScheduledTask#setInterval(long)}
      */
     long getInterval();
 

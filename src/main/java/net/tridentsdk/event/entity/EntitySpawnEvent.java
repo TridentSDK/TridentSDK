@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.entity;
 
-import net.tridentsdk.Location;
+import net.tridentsdk.Coordinates;
 import net.tridentsdk.entity.Entity;
 
 /**
@@ -25,7 +25,7 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntitySpawnEvent extends EntityEvent {
-    private final Location location;
+    private final Coordinates location;
     private boolean cancelled;
 
     /**
@@ -33,7 +33,7 @@ public class EntitySpawnEvent extends EntityEvent {
      * @param location the location of the spawning
      */
 
-    public EntitySpawnEvent(Entity entity, Location location) {
+    public EntitySpawnEvent(Entity entity, Coordinates location) {
         super(entity);
         this.location = location;
     }
@@ -42,7 +42,7 @@ public class EntitySpawnEvent extends EntityEvent {
      * @return return the location where the entity was spawned
      */
 
-    public Location getLocation() {
+    public Coordinates getLocation() {
         return this.location;
     }
 

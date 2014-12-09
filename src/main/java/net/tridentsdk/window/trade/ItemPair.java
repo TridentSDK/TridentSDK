@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.window.trade;
 
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents a pair of ItemStacks designated in a trade
@@ -24,14 +24,14 @@ import net.tridentsdk.window.inventory.ItemStack;
  * @author TridentSDK Team
  */
 public class ItemPair {
-    private final ItemStack one;
-    private final ItemStack two;
+    private final Item one;
+    private final Item two;
 
     /**
      * Construct a ItemPair with only one input ItemStack The second ItemStack will be considered null and thus will be
      * treated as a single input when trading
      */
-    public ItemPair(ItemStack one) {
+    public ItemPair(Item one) {
         this(one, null);
     }
 
@@ -39,16 +39,16 @@ public class ItemPair {
      * Construct a ItemPair with two input ItemStacks When used in a trade, the pair will be treated as a double input
      * when trading
      */
-    public ItemPair(ItemStack one, ItemStack two) {
+    public ItemPair(Item one, Item two) {
         this.one = one;
         this.two = two;
     }
 
-    public ItemStack getFirstInput() {
+    public Item getFirstInput() {
         return this.one;
     }
 
-    public ItemStack getSecondInput() {
+    public Item getSecondInput() {
         return this.two;
     }
 }

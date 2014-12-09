@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -31,7 +31,7 @@ public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
     /**
      * @param block Block representing the destroyed block.
      */
-    public MultiBlockBreakEvent(Block block) {
+    public MultiBlockBreakEvent(Tile block) {
         super(block);
     }
 

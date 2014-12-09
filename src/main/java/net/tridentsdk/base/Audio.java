@@ -17,36 +17,39 @@
 package net.tridentsdk.base;
 
 /**
+ * Represents sound effects played to the player
+ *
+ * @author The TridentSDK Team
  * TODO more darude sandstorm's
  */
-public enum Sound {
+public enum Audio {
     AMBIENT_CAVE("ambient.cove.cave"),
-    AMBIENT_WEATHER_RAIN("ambient.weather.rain"),
-    AMBIENT_WEATHER_THUNDER("ambient.weather.thunder"),
+    AMBIENT_RAIN("ambient.weather.rain"),
+    AMBIENT_THUNDER("ambient.weather.thunder"),
 
-    DAMAGE_FALLBIG("damage.fallbig"),
-    DAMAGE_FALLSMALL("damage.fallsmall"),
+    FALL_BIG("damage.fallbig"),
+    FALL_SMALL("damage.fallsmall"),
 
     FIRE_ACTIVE("fire.active"),
     FIRE_IGNITE("fire.ignite"),
 
-    LIQUID_LAVA("liquid.lava"),
-    LIQUID_LAVAPOP("liquid.lavapop"),
-    LIQUID_SPLASH("liquid.splash"),
-    LIQUID_WATER("liquid.water"),
+    LAVA("liquid.lava"),
+    LAVAPOP("liquid.lavapop"),
+    SPLASH("liquid.splash"),
+    WATER("liquid.water"),
 
-    MOB_BLAZE_BREATHE("mob.blaze.breathe"),
-    MOB_BLAZE_DEATH("mob.blaze.death"),
-    MOB_BLAZE_HIT("mob.blaze.hit"),
+    BLAZE_BREATH("mob.blaze.breathe"),
+    BLAZE_DEATH("mob.blaze.death"),
+    BLAZE_HIT("mob.blaze.hit"),
 
-    MOB_CAT_HISS("mob.cat.hiss"),
-    MOB_CAT_HITT("mob.cat.hitt"),
-    MOB_CAT_MEOW("mob.cat.meow"),
-    MOB_CAT_PURREOW("mob.cat.purreow");
+    CAT_HISS("mob.cat.hiss"),
+    CAT_HITT("mob.cat.hitt"),
+    CAT_MEOW("mob.cat.meow"),
+    CAT_PURREOW("mob.cat.purreow");
 
     private final String s;
 
-    Sound(String s) {
+    Audio(String s) {
         this.s = s;
     }
 

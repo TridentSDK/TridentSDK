@@ -18,13 +18,29 @@ package net.tridentsdk.perf;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 
+/**
+ * Instance creator using ASM
+ *
+ * @author The TridentSDK Team
+ */
 public class FastConstructor {
     private final ConstructorAccess access;
 
+    /**
+     * Creates a new instance accessor to assemble bytecode for fast class creation
+     *
+     * @param access the underlying access to the construction ASM facilities
+     */
     public FastConstructor(ConstructorAccess access) {
         this.access = access;
     }
 
+    /**
+     * Creates a new instance of the constructor's class
+     *
+     * @param <T> the class type
+     * @return the instance of T
+     */
     public <T> T newInstance() {
         return (T) this.access.newInstance();
     }

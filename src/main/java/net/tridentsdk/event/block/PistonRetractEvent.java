@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.base.Orientation;
 
 /**
@@ -25,7 +25,7 @@ import net.tridentsdk.base.Orientation;
  * @author The TridentSDK Team
  */
 public class PistonRetractEvent extends BlockPistonEvent {
-    public PistonRetractEvent(Block block, Orientation direction, Block influenced) {
+    public PistonRetractEvent(Tile block, Orientation direction, Tile influenced) {
         super(block, direction, true, influenced);
     }
 }

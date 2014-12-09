@@ -21,6 +21,11 @@ import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+/**
+ * Unsafe wrapper if needed for fast operations
+ *
+ * @author The TridentSDK Team
+ */
 public final class Performance {
     private static final Unsafe UNSAFE = initUnsafe();
 

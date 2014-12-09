@@ -16,13 +16,13 @@
  */
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Location;
+import net.tridentsdk.Coordinates;
 import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.entity.living.ProjectileSource;
+import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.event.entity.EntityDamageEvent;
 
-public interface LivingEntity extends Entity, ProjectileSource, Impalable {
+public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
     /**
      * Makes the specified entity invisible to the current entity
      *
@@ -95,7 +95,7 @@ public interface LivingEntity extends Entity, ProjectileSource, Impalable {
      *
      * @return Location the location of the Entity's eye
      */
-    Location getEyeLocation();
+    Coordinates getEyeLocation();
 
     /**
      * Returns if the Entity can pickup items

@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.entity;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.entity.Entity;
 
 /**
@@ -25,9 +25,9 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityBurnByBlockEvent extends EntityBurnEvent {
-    private final Block causer;
+    private final Tile causer;
 
-    public EntityBurnByBlockEvent(Entity entity, int fireTicks, Block causer) {
+    public EntityBurnByBlockEvent(Entity entity, int fireTicks, Tile causer) {
         super(entity, fireTicks);
         this.causer = causer;
     }
@@ -35,7 +35,7 @@ public class EntityBurnByBlockEvent extends EntityBurnEvent {
     /**
      * Gets the block that set this entity on fire
      */
-    public Block getBurner() {
+    public Tile getBurner() {
         return this.causer;
     }
 }

@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 
 /**
  * Called when a crop grows
@@ -29,7 +29,7 @@ public class CropGrowthEvent extends BlockGrowthEvent {
     /**
      * @param block Block which has grown
      */
-    public CropGrowthEvent(Block block) {
+    public CropGrowthEvent(Tile block) {
         super(block);
     }
 }

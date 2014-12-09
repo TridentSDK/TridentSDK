@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 /**
- * Represents blocks that are considered entities, or maybe blocks that used to be "solid" (such as PrimeTNT)
+ * Represents tiles that are considered entities, or maybe blocks that used to be "solid" (such as
+ * {@link net.tridentsdk.entity.block.PrimeTNT})
  */
 package net.tridentsdk.entity.block;

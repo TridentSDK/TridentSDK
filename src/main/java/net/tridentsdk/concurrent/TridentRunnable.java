@@ -16,16 +16,23 @@
  */
 package net.tridentsdk.concurrent;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * A wrapper over {@link java.lang.Runnable} that provides access to the scheduling facilities after scheduled
+ *
+ * @author The TridentSDK Team
+ */
+@ThreadSafe
 public abstract class TridentRunnable implements Runnable {
     private static int currentId = 0;
 
     private final AtomicInteger id = new AtomicInteger(-1);
     private final boolean inAHurry = false;
 
-    private final AtomicReference<Task> task = new AtomicReference<>();
+    private final AtomicReference<ScheduledTask> task = new AtomicReference<>();
 
     public TridentRunnable() {
         id.set(currentId += 1);
@@ -58,7 +65,7 @@ public abstract class TridentRunnable implements Runnable {
     }
 
     /**
-     * Cancels the task and removes from execution. See {@link Task#cancel()}
+     * Cancels the task and removes from execution. See {@link ScheduledTask#cancel()}
      *
      * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
      * will be thrown. This can be called when {@code getTask() != null}.
@@ -106,9 +113,9 @@ public abstract class TridentRunnable implements Runnable {
     /**
      * The scheduled representation of the runnable
      *
-     * @return the {@link Task} object held within the scheduling implementation
+     * @return the {@link ScheduledTask} object held within the scheduling implementation
      */
-    public Task getTask() {
+    public ScheduledTask getTask() {
         return this.task.get();
     }
 
@@ -117,7 +124,7 @@ public abstract class TridentRunnable implements Runnable {
      *
      * @param task the task handed down to delegate off functionality
      */
-    public void markSchedule(Task task) {
+    public void markSchedule(ScheduledTask task) {
         this.task.set(task);
     }
 }

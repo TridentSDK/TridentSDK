@@ -17,7 +17,7 @@
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents an entity that can be equipped
@@ -38,7 +38,7 @@ public interface Equippable extends Entity {
      *
      * @return this entity's equipment
      */
-    ItemStack[] getEquipment();
+    Item[] getEquipment();
 
-    void setEquipment(ItemStack[] stack);
+    void setEquipment(Item[] stack);
 }

@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.entity.Item;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
+import net.tridentsdk.window.inventory.Item;
 
 public class PlayerDropItemEvent extends PlayerEvent implements Cancellable {
     private final Item item;

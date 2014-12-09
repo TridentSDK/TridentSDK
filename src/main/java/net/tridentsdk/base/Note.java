@@ -16,11 +16,14 @@
  */
 package net.tridentsdk.base;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Immutable value representing the pitch of a note played
  *
  * @author The TridentSDK Team
  */
+@Immutable
 public class Note {
     private final short id;
 

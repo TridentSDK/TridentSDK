@@ -20,8 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.event.misc.ClickEvent;
-import net.tridentsdk.event.misc.HoverEvent;
 
 // TODO: JavaDoc
 public final class MessageBuilder {

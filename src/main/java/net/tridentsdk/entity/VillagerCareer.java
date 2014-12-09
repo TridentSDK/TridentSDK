@@ -22,6 +22,11 @@ import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * Occupation of the villager
+ *
+ * @author The TridentSDK Team
+ */
 public enum VillagerCareer {
     /**
      * Fletcher

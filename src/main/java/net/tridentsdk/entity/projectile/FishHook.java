@@ -24,7 +24,7 @@ package net.tridentsdk.entity.projectile;
 public interface FishHook extends Projectile {
     /**
      * The chance that a fish will be caught on the hook
-     * <p/>
+     *
      * <p>Works only in water</p>
      *
      * @return the chance a fish will be caught on the hook

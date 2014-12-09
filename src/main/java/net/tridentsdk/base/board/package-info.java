@@ -14,7 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * Scoreboard API
+ * Management for the scoreboard API, sectioned views of data displayed to the client
  */
 package net.tridentsdk.base.board;

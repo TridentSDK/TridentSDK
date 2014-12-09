@@ -18,7 +18,7 @@ package net.tridentsdk.entity.projectile;
 
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.decorate.Impalable;
-import net.tridentsdk.entity.living.ProjectileSource;
+import net.tridentsdk.entity.living.ProjectileLauncher;
 
 /**
  * Represents a Projectile
@@ -43,12 +43,12 @@ public interface Projectile extends Entity {
      *
      * @param shooter the ProjectileSource of the Projectile
      */
-    void setSource(ProjectileSource shooter);
+    void setLauncher(ProjectileLauncher shooter);
 
     /**
      * The projectile source
      *
      * @return gets the source of the projectile
      */
-    ProjectileSource getProjectileSource();
+    ProjectileLauncher getLauncher();
 }

@@ -17,7 +17,6 @@
 package net.tridentsdk;
 
 public interface Messagable {
-
     /**
      * Send an array of messages to this recipient
      *
@@ -31,5 +30,4 @@ public interface Messagable {
      * @return the last method sent to this messagable
      */
     String getLastMessage();
-
 }

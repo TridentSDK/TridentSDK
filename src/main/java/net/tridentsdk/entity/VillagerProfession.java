@@ -16,6 +16,11 @@
  */
 package net.tridentsdk.entity;
 
+/**
+ * Role of the villager in the village
+ *
+ * @author The TridentSDK Team
+ */
 public enum VillagerProfession {
     /**
      * Farmer

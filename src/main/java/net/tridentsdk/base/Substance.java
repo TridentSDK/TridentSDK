@@ -21,7 +21,7 @@ package net.tridentsdk.base;
  *
  * @author The TridentSDK Team
  */
-public enum Material {
+public enum Substance {
     /**
      * Blocks
      */
@@ -413,7 +413,7 @@ public enum Material {
     private final int maxStack;
     private final int idInt;
 
-    Material(String id, int stack, String data) {
+    Substance(String id, int stack, String data) {
         this.id = id;
         this.maxStack = stack;
         this.data = data;
@@ -421,11 +421,11 @@ public enum Material {
         this.idInt = Integer.parseInt(id);
     }
 
-    Material(String id, int stack) {
+    Substance(String id, int stack) {
         this(id, stack, "");
     }
 
-    Material(String id) {
+    Substance(String id) {
         this(id, 0, "");
     }
 
@@ -435,8 +435,8 @@ public enum Material {
      * @param id String to be matched
      * @return Material which was matched using id
      */
-    public static Material fromString(String id) {
-        for (Material mat : Material.values()) {
+    public static Substance fromString(String id) {
+        for (Substance mat : Substance.values()) {
             if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id))
                 return mat;
         }

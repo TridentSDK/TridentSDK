@@ -26,5 +26,4 @@ import net.tridentsdk.entity.decorate.Saddleable;
  * @author TridentSDK Team
  */
 public interface Pig extends Ageable, Saddleable, Peaceful {
-
 }

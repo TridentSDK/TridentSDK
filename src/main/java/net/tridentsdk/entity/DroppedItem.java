@@ -21,7 +21,7 @@ package net.tridentsdk.entity;
  *
  * @author TridentSDK Team
  */
-public interface Item extends Entity {
+public interface DroppedItem extends Entity {
     /**
      * Represents the age of this Item entity
      *

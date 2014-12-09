@@ -16,11 +16,11 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.Block;
-import net.tridentsdk.base.BlockFace;
+import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.TileOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.block.BlockPlaceEvent;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Called when a player empties a bucket
@@ -28,15 +28,15 @@ import net.tridentsdk.window.inventory.ItemStack;
  * @author The TridentSDK Team
  */
 public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
-    private final ItemStack blockInHand;
+    private final Item blockInHand;
 
-    public PlayerBucketEmptyEvent(Player player, Block block, Block blockClicked,
-                                  BlockFace faceClicked, ItemStack blockInHand) {
+    public PlayerBucketEmptyEvent(Player player, Tile block, Tile blockClicked,
+                                  TileOrientation faceClicked, Item blockInHand) {
         super(player, block, blockClicked, faceClicked);
         this.blockInHand = blockInHand;
     }
 
-    public ItemStack getBlockInHand() {
+    public Item getBlockInHand() {
         return this.blockInHand;
     }
 }

@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -26,10 +26,10 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
-    private final Block bed;
+    private final Tile bed;
     private boolean cancelled;
 
-    public PlayerLeaveSleepEvent(Player player, Block bed) {
+    public PlayerLeaveSleepEvent(Player player, Tile bed) {
         super(player);
         this.bed = bed;
     }
@@ -47,7 +47,7 @@ public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
     /**
      * Gets the bed that the player tried to leave
      */
-    public Block getBed() {
+    public Tile getBed() {
         return this.bed;
     }
 }

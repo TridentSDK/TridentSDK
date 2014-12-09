@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 
 public interface Chunk {
     void generate();
@@ -29,5 +29,5 @@ public interface Chunk {
 
     World getWorld();
 
-    Block getBlockAt(int relX, int y, int relZ);
+    Tile getBlockAt(int relX, int y, int relZ);
 }

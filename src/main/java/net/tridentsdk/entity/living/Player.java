@@ -20,7 +20,7 @@ import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 import java.util.Locale;
 
@@ -30,7 +30,6 @@ import java.util.Locale;
  * @author The TridentSDK Team
  */
 public interface Player extends LivingEntity, Messagable, CommandIssuer {
-
     /**
      * Returns the flying speed of the Player
      *
@@ -59,7 +58,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer {
      *
      * @return ItemStack current ItemStack in the Player's hand
      */
-    ItemStack getItemInHand();
+    Item getHeldItem();
 
     /**
      * Returns the GameMode the Player is in

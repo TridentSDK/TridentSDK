@@ -28,4 +28,11 @@ public interface Arrow extends Projectile {
      * @return whether you can pickup this arrow or not
      */
     boolean canPickup();
+
+    /**
+     * Sets the ability to pickup the projectile
+     *
+     * @param pickup {@code true} if the arrow can be picked up, {@code false} if it should not
+     */
+    void setPickup(boolean pickup);
 }

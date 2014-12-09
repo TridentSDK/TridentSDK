@@ -17,9 +17,9 @@
 package net.tridentsdk.event.entity;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.Location;
+import net.tridentsdk.Coordinates;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.Item;
+import net.tridentsdk.entity.DroppedItem;
 import net.tridentsdk.entity.living.Player;
 
 /**
@@ -30,9 +30,9 @@ import net.tridentsdk.entity.living.Player;
 public class PlayerDropItemEvent extends EntitySpawnEvent {
     private final Player player;
 
-    public PlayerDropItemEvent(Entity item, Location location, Player player) {
+    public PlayerDropItemEvent(Entity item, Coordinates location, Player player) {
         super(item, location);
-        Preconditions.checkArgument(item instanceof Item, "Must drop an item!");
+        Preconditions.checkArgument(item instanceof DroppedItem, "Must drop an item!");
         this.player = player;
     }
 
@@ -40,8 +40,8 @@ public class PlayerDropItemEvent extends EntitySpawnEvent {
         return this.player;
     }
 
-    public Item getItem() {
-        return (Item) super.getEntity();
+    public DroppedItem getItem() {
+        return (DroppedItem) super.getEntity();
     }
 
     public void setItem(Entity item) {

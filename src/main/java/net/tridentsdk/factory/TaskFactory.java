@@ -16,20 +16,20 @@
  */
 package net.tridentsdk.factory;
 
-import net.tridentsdk.concurrent.Task;
+import net.tridentsdk.concurrent.ScheduledTask;
 import net.tridentsdk.concurrent.TridentRunnable;
 import net.tridentsdk.plugin.TridentPlugin;
 
 public interface TaskFactory {
-    public Task asyncRun(TridentPlugin plugin, TridentRunnable runnable);
+    public ScheduledTask asyncRun(TridentPlugin plugin, TridentRunnable runnable);
 
-    public Task syncRun(TridentPlugin plugin, TridentRunnable runnable);
+    public ScheduledTask syncRun(TridentPlugin plugin, TridentRunnable runnable);
 
-    public Task asyncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
+    public ScheduledTask asyncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
 
-    public Task syncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
+    public ScheduledTask syncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
 
-    public Task asyncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
+    public ScheduledTask asyncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
 
-    public Task syncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
+    public ScheduledTask syncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
 }

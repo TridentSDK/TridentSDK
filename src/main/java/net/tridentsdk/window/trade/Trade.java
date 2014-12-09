@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.window.trade;
 
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents a Trade offered by an {@link net.tridentsdk.entity.decorate.Tradeable}
@@ -50,7 +50,7 @@ public interface Trade {
      *
      * @return the itemstack that is given as a result of fulfilling this trade
      */
-    ItemStack offer();
+    Item offer();
 
     /**
      * The itemstacks required to be input in order to fulfilled this trade This accepts both implementations of

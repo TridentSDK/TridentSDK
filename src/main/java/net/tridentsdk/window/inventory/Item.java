@@ -16,25 +16,25 @@
  */
 package net.tridentsdk.window.inventory;
 
-import net.tridentsdk.base.Material;
+import net.tridentsdk.base.Substance;
 
 /**
  * Inventory item, holding all properties of the item
  *
  * @author The TridentSDK Team
  */
-public class ItemStack {
+public class Item {
     private final int id;
-    private final Material mat;
+    private final Substance mat;
 
     private volatile short quantity;
     private volatile short damageValue;
 
-    public ItemStack(Material mat) {
+    public Item(Substance mat) {
         this(mat, (short) 1);
     }
 
-    public ItemStack(Material mat, short quantity) {
+    public Item(Substance mat, short quantity) {
         this.id = Integer.valueOf(mat.getId());
         this.mat = mat;
 
@@ -46,7 +46,7 @@ public class ItemStack {
         return this.id;
     }
 
-    public Material getType() {
+    public Substance getType() {
         return this.mat;
     }
 

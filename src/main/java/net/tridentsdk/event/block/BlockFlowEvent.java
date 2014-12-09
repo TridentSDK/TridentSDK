@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -25,14 +25,14 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class BlockFlowEvent extends BlockEvent implements Cancellable {
-    private final Block to;
+    private final Tile to;
     private boolean cancelled;
 
     /**
      * @param from Block where the liquid is flowing from
      * @param to   Block where the liquid is flowing too
      */
-    public BlockFlowEvent(Block from, Block to) {
+    public BlockFlowEvent(Tile from, Tile to) {
         super(from);
         this.to = to;
     }
@@ -42,7 +42,7 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
      *
      * @return Block where the liquid is flowing too
      */
-    public Block getTo() {
+    public Tile getTo() {
         return this.to;
     }
 
@@ -51,7 +51,7 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
      *
      * @return Block where the liquid is flowing from
      */
-    public Block getFrom() {
+    public Tile getFrom() {
         return super.getBlock();
     }
 

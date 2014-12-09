@@ -15,6 +15,6 @@
  * limitations under the License.
  */
 /**
- * Other entities and general abstractions
+ * Other entities and general abstractions and types
  */
 package net.tridentsdk.entity;

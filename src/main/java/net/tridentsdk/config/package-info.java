@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 /**
- * Configuration wrappers over JSON
+ * Configuration wrappers over JSON/facilities provided by GSON
+ *
+ * <p>Configs can be used and created using the {@link net.tridentsdk.config.JsonConfig}</p>
+ *
+ * <p>Basic functionality for the JSON configuration is in the {@link net.tridentsdk.config.ConfigSection}</p>
  */
 package net.tridentsdk.config;

@@ -45,7 +45,7 @@ public class FastField {
 
     public Field toField() {
         try {
-            return owner.toClass().getDeclaredField(this.field);
+            return owner.asClass().getDeclaredField(this.field);
         } catch (NoSuchFieldException ignored) {
         }
 

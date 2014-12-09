@@ -22,6 +22,11 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 
 import java.lang.reflect.Field;
 
+/**
+ * Accessors to the members of a class, does not actually have a ReflectASM equivalent
+ *
+ * @author The TridentSDK Team
+ */
 public class FastClass {
     private final Class<?> cls;
 
@@ -36,10 +41,22 @@ public class FastClass {
         this.constructorAccess = ConstructorAccess.get(cls);
     }
 
+    /**
+     * Creates a new FastClass from a Java class
+     *
+     * @param cls the class to use
+     * @return the member accessors for the class
+     */
     public static FastClass get(Class<?> cls) {
         return new FastClass(cls);
     }
 
+    /**
+     * Creates a new FastClass from the class object of the object
+     *
+     * @param obj the object's class to use
+     * @return the member accessors for the class
+     */
     public static FastClass get(Object obj) {
         return get(obj.getClass());
     }
@@ -64,6 +81,11 @@ public class FastClass {
         return new FastMethod(object, this.methodAccess, name);
     }
 
+    /**
+     * Get all fields from the class
+     *
+     * @return the fast field representation of field members from the class
+     */
     public FastField[] getFields() {
         Field[] fields = this.cls.getDeclaredFields();
         FastField[] fastFields = new FastField[fields.length];
@@ -84,7 +106,12 @@ public class FastClass {
         return new FastConstructor(this.constructorAccess);
     }
 
-    public Class<?> toClass() {
+    /**
+     * As the vanilla reflection class form
+     *
+     * @return the class that is used to derive all access from
+     */
+    public Class<?> asClass() {
         return this.cls;
     }
 }

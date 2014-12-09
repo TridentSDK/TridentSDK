@@ -17,80 +17,65 @@
 package net.tridentsdk.base;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import net.tridentsdk.Location;
+import com.google.common.collect.*;
+import net.tridentsdk.Coordinates;
+import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.projectile.Projectile;
+import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.Vector;
 
+import javax.annotation.Nullable;
 import java.lang.ref.WeakReference;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * A basic structure in minecraft, a material bearing piece set at a given location
  *
  * @author The TridentSDK Team
  */
-public class Block implements Impalable {
-    private final Location location;
-    protected Material material;
+public class Tile implements Impalable {
+    private final Coordinates location;
+    /**
+     * The type for this block
+     */
+    protected Substance material;
+    /**
+     * The block metadata
+     */
     protected byte data;
     /**
      * Describes projectile logic
      */
-    public final List<WeakReference<Projectile>> hit = Collections.synchronizedList(
-            Lists.<WeakReference<Projectile>>newArrayList());
+    private final Set<WeakReference<Projectile>> projectiles = Sets.newSetFromMap(
+            Factories.collect().<WeakReference<Projectile>, Boolean>createMap());
 
     /**
      * Constructs the wrapper representing the block
      *
      * @param location Location of the Block
      */
-    public Block(Location location) {
+    public Tile(Coordinates location) {
         this.location = location;
 
-        // Note: Avoid recursion by not creating a new instance from World#getBlockAt(Location)
-        Block worldBlock = location.getWorld().getBlockAt(location);
+        // Note: Avoid recursion by not creating a new instance from World#getTileAt(Location)
+        Tile worldBlock = location.getWorld().getTileAt(location);
 
         this.material = worldBlock.material;
     }
 
-    /**
-     * For internal use only
-     */
-    protected Block(Location location, boolean createdByServer) {
+    @InternalUseOnly
+    protected Tile(Coordinates location, boolean createdByServer) {
         this.location = location;
     }
 
-    /**
-     * Returns the Material of the Block
-     *
-     * @return Material of the Block
-     */
-    public Material getType() {
-        return this.material;
-    }
-
-    // TODO: Verify the redundancy
-    public void setType(Material material) {
+    public void setSubstance(Substance material) {
         this.material = material;
     }
 
-    // TODO: Verify the redundancy
-    public Material getMaterial() {
+    public Substance getSubstance() {
         return this.material;
-    }
-
-    /**
-     * Set the Material of this Block
-     *
-     * @param material Material to set this Block to
-     */
-    public void setMaterial(Material material) {
-        this.material = material;
     }
 
     /**
@@ -98,15 +83,25 @@ public class Block implements Impalable {
      *
      * @return Location of the Block
      */
-    public Location getLocation() {
+    public Coordinates getLocation() {
         return this.location;
     }
 
-    public byte getData() {
+    /**
+     * Gets the tile data
+     *
+     * @return the data of the tile
+     */
+    public byte getMeta() {
         return this.data;
     }
 
-    public void setData(byte data) {
+    /**
+     * Sets the tile data
+     *
+     * @param data the data to set the tile
+     */
+    public void setMeta(byte data) {
         this.data = data;
     }
 
@@ -116,8 +111,8 @@ public class Block implements Impalable {
      * @param vector the direction to look for the block adjacent to the current
      * @return the block adjacent to the current
      */
-    public Block getRelative(Vector vector) {
-        return new Block(this.location.getRelative(vector));
+    public Tile relativeTile(Vector vector) {
+        return new Tile(this.location.getRelative(vector));
     }
 
     @Override
@@ -136,7 +131,7 @@ public class Block implements Impalable {
     }
 
     @Override
-    public Block impaledTile() {
+    public Tile impaledTile() {
         if (!this.isImpaledTile())
             return null;
         return this;
@@ -144,28 +139,29 @@ public class Block implements Impalable {
 
     @Override
     public void put(Projectile projectile) {
-        this.hit.add(new WeakReference<>(projectile));
+        this.projectiles.add(new WeakReference<>(projectile));
     }
 
     @Override
     public boolean remove(Projectile projectile) {
-        return this.hit.remove(new WeakReference<>(projectile));
+        return this.projectiles.remove(new WeakReference<>(projectile));
     }
 
     @Override
     public void clear() {
         // TODO remove the projectile entities
-        this.hit.clear();
+        this.projectiles.clear();
     }
 
     @Override
-    public List<Projectile> projectiles() {
-        return new ImmutableList.Builder<Projectile>().addAll(Lists.transform(this.hit, new Function<WeakReference<Projectile>,
-                Projectile>() {
-            @Override
-            public Projectile apply(WeakReference<Projectile> projectileWeakReference) {
-                return projectileWeakReference.get();
-            }
-        })).build();
+    public Collection<Projectile> projectiles() {
+        return new ImmutableSet.Builder<Projectile>().addAll(Iterators.transform(projectiles.iterator(),
+                new Function<WeakReference<Projectile>, Projectile>() {
+                    @Nullable
+                    @Override
+                    public Projectile apply(WeakReference<Projectile> projectileWeakReference) {
+                        return projectileWeakReference.get();
+                    }
+                })).build();
     }
 }

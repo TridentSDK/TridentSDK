@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Block;
-import net.tridentsdk.base.BlockFace;
-import net.tridentsdk.base.Material;
+import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.TileOrientation;
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -29,8 +29,8 @@ import net.tridentsdk.event.Cancellable;
  */
 public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     private final Player player;
-    private final Block blockClicked;
-    private final BlockFace faceClicked;
+    private final Tile blockClicked;
+    private final TileOrientation faceClicked;
 
     private boolean cancelled;
 
@@ -40,7 +40,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * @param blockClicked Block
      * @param faceClicked  BlockFace
      */
-    public BlockPlaceEvent(Player player, Block block, Block blockClicked, BlockFace faceClicked) {
+    public BlockPlaceEvent(Player player, Tile block, Tile blockClicked, TileOrientation faceClicked) {
         super(block);
         this.player = player;
         this.blockClicked = blockClicked;
@@ -52,7 +52,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      *
      * @return BlockFace of the clicked block
      */
-    public BlockFace getFaceClicked() {
+    public TileOrientation getFaceClicked() {
         return this.faceClicked;
     }
 
@@ -61,8 +61,8 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      *
      * @return Material of the placed block
      */
-    public Material getTypePlaced() {
-        return this.getBlock().getMaterial();
+    public Substance getTypePlaced() {
+        return this.getBlock().getSubstance();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      *
      * @return Block that was clicked
      */
-    public Block getBlockClicked() {
+    public Tile getBlockClicked() {
         return this.blockClicked;
     }
 

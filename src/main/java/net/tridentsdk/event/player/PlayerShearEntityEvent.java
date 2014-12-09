@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.entity.Item;
+import net.tridentsdk.entity.DroppedItem;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
@@ -28,10 +28,10 @@ import net.tridentsdk.event.Cancellable;
  */
 public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     private final LivingEntity sheared;
-    private Item drop;
+    private DroppedItem drop;
     private boolean cancelled;
 
-    public PlayerShearEntityEvent(Player player, LivingEntity sheared, Item drop) {
+    public PlayerShearEntityEvent(Player player, LivingEntity sheared, DroppedItem drop) {
         super(player);
         this.sheared = sheared;
         this.drop = drop;
@@ -47,14 +47,14 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     /**
      * Gets the item that shearing this entity will drop
      */
-    public Item getDrop() {
+    public DroppedItem getDrop() {
         return this.drop;
     }
 
     /**
      * Sets the item that shearing this entity will drop
      */
-    public void setDrop(Item drop) {
+    public void setDrop(DroppedItem drop) {
         this.drop = drop;
     }
 

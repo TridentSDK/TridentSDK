@@ -16,11 +16,11 @@
  */
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Block;
-import net.tridentsdk.base.BlockFace;
+import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.TileOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Called whenever a Block is broken
@@ -29,8 +29,8 @@ import net.tridentsdk.window.inventory.ItemStack;
  */
 public class BlockBreakEvent extends BlockEvent implements Cancellable {
     private final Player player;
-    private final BlockFace blockFace;
-    private final ItemStack itemInHand;
+    private final TileOrientation blockFace;
+    private final Item itemInHand;
     private boolean cancelled;
 
     /**
@@ -39,7 +39,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      * @param blockFace  BlockFace
      * @param itemInHand ItemStack
      */
-    public BlockBreakEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
+    public BlockBreakEvent(Player player, Tile block, TileOrientation blockFace, Item itemInHand) {
         super(block);
         this.player = player;
         this.blockFace = blockFace;
@@ -61,7 +61,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return ItemStack in the player's hand
      */
-    public ItemStack getItemInHand() {
+    public Item getItemInHand() {
         return this.itemInHand;
     }
 
@@ -70,7 +70,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return BlockFlace of the clicked block
      */
-    public BlockFace getBlockFace() {
+    public TileOrientation getBlockFace() {
         return this.blockFace;
     }
 

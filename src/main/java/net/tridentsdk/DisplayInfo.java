@@ -24,6 +24,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Information displayed to the client in the server list
+ *
+ * @author The TridentSDK Team
+ */
 public class DisplayInfo {
     /**
      * A string containing the current broadcast MOTD of the server

@@ -17,7 +17,7 @@
 package net.tridentsdk.entity.block;
 
 import net.tridentsdk.entity.Hanging;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents an ItemFrame
@@ -30,12 +30,12 @@ public interface ItemFrame extends Hanging {
      *
      * @return the current ItemStack this ItemFrame has
      */
-    ItemStack getCurrentItem();
+    Item getItem();
 
     /**
      * Get the rotation of this ItemFrame's ItemStack This is the number of times this has been rotated 45 degrees
      *
      * @return the rotation of this ItemFrame's ItemStack
      */
-    byte getItemStackRotation();
+    byte getItemRotation();
 }

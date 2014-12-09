@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.factory;
 
-import net.tridentsdk.Location;
-import net.tridentsdk.base.Block;
-import net.tridentsdk.base.Material;
+import net.tridentsdk.Coordinates;
+import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.meta.nbt.CompoundTag;
 import net.tridentsdk.meta.nbt.CompoundTagBuilder;
@@ -26,7 +26,7 @@ import net.tridentsdk.meta.nbt.NBTBuilder;
 import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.window.inventory.Inventory;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 import net.tridentsdk.window.trade.ItemPair;
 import net.tridentsdk.world.ChunkLocation;
 import net.tridentsdk.world.World;
@@ -50,8 +50,8 @@ public final class TridentFactory {
      *
      * @return Block created instance without location
      */
-    public static Block createBlock() {
-        return new Block(null);
+    public static Tile createBlock() {
+        return new Tile(null);
     }
 
     /**
@@ -60,8 +60,8 @@ public final class TridentFactory {
      * @param location Location of the block
      * @return Block created instance with a location
      */
-    public static Block createBlock(Location location) {
-        return new Block(location);
+    public static Tile createBlock(Coordinates location) {
+        return new Tile(location);
     }
 
     /**
@@ -73,8 +73,8 @@ public final class TridentFactory {
      * @param z     Z co-ordinate of the block
      * @return Block created instance
      */
-    public static Block createBlock(World world, double x, double y, double z) {
-        return new Block(createLocation(world, x, y, z));
+    public static Tile createBlock(World world, double x, double y, double z) {
+        return new Tile(createLocation(world, x, y, z));
     }
 
     /* Location */
@@ -84,8 +84,8 @@ public final class TridentFactory {
      *
      * @return Location created instance with no world
      */
-    public static Location createLocation() {
-        return new Location(null, 0.0, 0.0, 0.0);
+    public static Coordinates createLocation() {
+        return new Coordinates(null, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -94,8 +94,8 @@ public final class TridentFactory {
      * @param world World in which the Location is targeting
      * @return Location with the specified world, but no co-coordinates
      */
-    public static Location createLocation(World world) {
-        return new Location(world, 0.0, 0.0, 0.0);
+    public static Coordinates createLocation(World world) {
+        return new Coordinates(world, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -107,8 +107,8 @@ public final class TridentFactory {
      * @param z     Z co-ordinate
      * @return Location
      */
-    public static Location createLocation(World world, double x, double y, double z) {
-        return new Location(world, x, y, z);
+    public static Coordinates createLocation(World world, double x, double y, double z) {
+        return new Coordinates(world, x, y, z);
     }
 
     /**
@@ -122,8 +122,8 @@ public final class TridentFactory {
      * @param pitch Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
-    public static Location createLocation(World world, double x, double y, double z, float yaw, float pitch) {
-        return new Location(world, x, y, z, yaw, pitch);
+    public static Coordinates createLocation(World world, double x, double y, double z, float yaw, float pitch) {
+        return new Coordinates(world, x, y, z, yaw, pitch);
     }
 
     /**
@@ -134,8 +134,8 @@ public final class TridentFactory {
      * @param pitch    Pitch absolute rotation on the y-plane, in degrees
      * @return Location
      */
-    public static Location createLocation(Location location, float yaw, float pitch) {
-        return new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
+    public static Coordinates createLocation(Coordinates location, float yaw, float pitch) {
+        return new Coordinates(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
     }
 
     /* World */
@@ -211,12 +211,12 @@ public final class TridentFactory {
 
     /* Inventory */
 
-    public static ItemStack createItemStack(Material mat) {
-        return new ItemStack(mat);
+    public static Item createItemStack(Substance mat) {
+        return new Item(mat);
     }
 
-    public static ItemStack createItemStack(Material mat, short quantity) {
-        return new ItemStack(mat, quantity);
+    public static Item createItemStack(Substance mat, short quantity) {
+        return new Item(mat, quantity);
     }
 
     public static Inventory createInventory() {
@@ -229,11 +229,11 @@ public final class TridentFactory {
         return new ItemPair(null, null);
     }
 
-    public static ItemPair createItemPair(ItemStack itemStack) {
+    public static ItemPair createItemPair(Item itemStack) {
         return new ItemPair(itemStack);
     }
 
-    public static ItemPair createItemPair(ItemStack itemStack, ItemStack itemStack0) {
+    public static ItemPair createItemPair(Item itemStack, Item itemStack0) {
         return new ItemPair(itemStack, itemStack0);
     }
 

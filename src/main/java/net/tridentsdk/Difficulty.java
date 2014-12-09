@@ -18,7 +18,7 @@ package net.tridentsdk;
 
 /**
  * Minecraft difficulty for the players
- * <p/>
+ *
  * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Difficulty">Minecraft Wiki</a>.</p>
  *
  * @author The TridentSDK Team

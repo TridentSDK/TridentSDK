@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.entity.Item;
+import net.tridentsdk.entity.DroppedItem;
 import net.tridentsdk.entity.living.Player;
 
 /**
@@ -25,7 +25,7 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class PlayerConsumeEvent extends PlayerHungerEvent {
-    private final Item item;
+    private final DroppedItem item;
     private boolean cancelled;
 
     /**
@@ -34,7 +34,7 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
      * @param item   the item consumed
      */
 
-    public PlayerConsumeEvent(Player player, Item item, double feed) {
+    public PlayerConsumeEvent(Player player, DroppedItem item, double feed) {
         super(player, feed);
         this.setReplenishAmount(feed);
         this.item = item;
@@ -57,7 +57,7 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @return return the item consumed
      */
-    public Item getFood() {
+    public DroppedItem getFood() {
         return this.item;
     }
 

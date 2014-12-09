@@ -21,8 +21,6 @@ import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Type;
 
-// TODO: Javadoc
-
 /**
  * Used for advanced interaction with the Config API for custom serializing/deserializing of Java Objects
  *
@@ -35,11 +33,22 @@ public final class GsonFactory {
     private GsonFactory() {
     }
 
+    /**
+     * Registers the adapter with the given type inside the GSON builder
+     *
+     * @param type the type to use for registration
+     * @param adapter the adapter registered with the type
+     */
     public static void registerTypeAdapter(Type type, Object adapter) {
         builder.registerTypeAdapter(type, adapter);
         gson = builder.create();
     }
 
+    /**
+     * Acquires the {@code static} GSON builder
+     *
+     * @return the GSON builder registered with the factory
+     */
     protected static Gson getGson() {
         return gson;
     }

@@ -29,14 +29,14 @@ public interface Creeper extends Hostile {
      *
      * @return whether or not this creeper is powered
      */
-    boolean isPowered();
+    boolean isElectric();
 
     /**
      * Set whether or not this creeper is powered
      *
      * @param powered whether the creeper should be powered or not
      */
-    void setPowered(boolean powered);
+    void setElectric(boolean powered);
 
     /**
      * Gets this creeper's explosion radius

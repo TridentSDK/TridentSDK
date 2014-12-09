@@ -37,17 +37,7 @@ public enum BoardType {
      *
      * @return {@code byte} value of the BoardType
      */
-    public byte toByte() {
+    public byte asByte() {
         return this.position;
-    }
-
-    /**
-     * Returns the {@code byte} value of the BoardType
-     *
-     * @param boardType BoardType
-     * @return {@code byte} value of the BoardType
-     */
-    public static byte toByte(BoardType boardType) {
-        return boardType.toByte();
     }
 }

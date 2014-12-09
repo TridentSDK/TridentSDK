@@ -16,11 +16,11 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.Block;
-import net.tridentsdk.base.BlockFace;
+import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.TileOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.block.BlockBreakEvent;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Called when a player fills a bucket
@@ -28,7 +28,7 @@ import net.tridentsdk.window.inventory.ItemStack;
  * @author The TridentSDK Team
  */
 public class PlayerBucketFillEvent extends BlockBreakEvent {
-    public PlayerBucketFillEvent(Player player, Block block, BlockFace blockFace, ItemStack itemInHand) {
+    public PlayerBucketFillEvent(Player player, Tile block, TileOrientation blockFace, Item itemInHand) {
         super(player, block, blockFace, itemInHand);
     }
 }

@@ -14,21 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.living;
-
-import net.tridentsdk.entity.EntityProperties;
-import net.tridentsdk.entity.projectile.Projectile;
-
 /**
- * Represents the source of a launched Projectile
- *
- * @author The TridentSDK Team
+ * Primary server access to properties provided by the API
  */
-public interface ProjectileSource {
-    /**
-     * Launch a projectile based on the given EntityProperties
-     *
-     * @return the Projectile that was launched
-     */
-    <T extends Projectile> T launchProjectile(EntityProperties properties);
-}
+package net.tridentsdk;

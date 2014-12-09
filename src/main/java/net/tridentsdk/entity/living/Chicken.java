@@ -30,12 +30,12 @@ public interface Chicken extends Ageable, Peaceful {
      *
      * @return whether or not this Chicken is a 'Chicken Jockey'
      */
-    boolean isChickenJockey();
+    boolean isJockey();
 
     /**
      * Ticks until this Chicken will lay its egg
      *
      * @return the number of ticks until this Chicken will lay an egg
      */
-    int getEggTicks();
+    int nextLayInterval();
 }

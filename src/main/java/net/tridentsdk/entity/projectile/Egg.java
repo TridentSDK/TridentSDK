@@ -22,5 +22,4 @@ package net.tridentsdk.entity.projectile;
  * @author TridentSDK Team
  */
 public interface Egg extends Projectile {
-
 }

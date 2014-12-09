@@ -16,6 +16,16 @@
  */
 package net.tridentsdk.perf;
 
+/**
+ * Acquires the field address using Unsafe
+ *
+ * @author The TridentSDK Team
+ */
 public interface UnsafeReflector {
+    /**
+     * The field address in the class
+     *
+     * @return acquired address of the reflected field using Unsafe
+     */
     long address();
 }

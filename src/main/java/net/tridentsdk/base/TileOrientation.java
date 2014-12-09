@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Location;
+import net.tridentsdk.Coordinates;
 import net.tridentsdk.util.Vector;
 
 /**
@@ -25,7 +25,7 @@ import net.tridentsdk.util.Vector;
  *
  * @author The TridentSDK Team
  */
-public enum BlockFace {
+public enum TileOrientation {
     /**
      * Facing north
      */
@@ -76,11 +76,11 @@ public enum BlockFace {
 
     private final Vector difference;
 
-    BlockFace(Vector difference) {
+    TileOrientation(Vector difference) {
         this.difference = difference;
     }
 
-    BlockFace(BlockFace face1, BlockFace face2) {
+    TileOrientation(TileOrientation face1, TileOrientation face2) {
         this.difference = face1.getDifference().add(face2.getDifference());
     }
 
@@ -99,7 +99,7 @@ public enum BlockFace {
      * @param loc the location to get relative to
      * @return the relative location
      */
-    public Location apply(Location loc) {
+    public Coordinates apply(Coordinates loc) {
         return loc.getRelative(this.difference);
     }
 }

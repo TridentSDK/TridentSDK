@@ -18,9 +18,9 @@ package net.tridentsdk.meta;
 
 /**
  * A color able to be used in the chat text
- * <p/>
- * <p>These should be self-explanatory, if you need more help, take a look at <a href="http://minecraft.gamepedia
- * .com/Formatting_codes">Minecraft Wiki</a>.</p>
+ *
+ * <p>These should be self-explanatory, if you need more help, take a look at <
+ * a href="http://minecraft.gamepedia.com/Formatting_codes">Minecraft Wiki</a>.</p>
  *
  * @author The TridentSDK Team
  */

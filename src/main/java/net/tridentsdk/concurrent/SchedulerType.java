@@ -16,6 +16,11 @@
  */
 package net.tridentsdk.concurrent;
 
+/**
+ * Type of task that will be run by the scheduler, how it will be run, when it will be scheduled
+ *
+ * @author The TridentSDK Team
+ */
 public enum SchedulerType {
     /**
      * Asynchronously runs the task the next tick

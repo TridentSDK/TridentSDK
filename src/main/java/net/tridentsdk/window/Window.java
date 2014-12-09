@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.window;
 
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * TODO
@@ -25,11 +25,11 @@ public interface Window {
 
     int getId();
 
-    ItemStack[] getContents();
+    Item[] getContents();
 
     int getLength();
 
-    void setSlot(int index, ItemStack value);
+    void setSlot(int index, Item value);
 
     String getName();
 }

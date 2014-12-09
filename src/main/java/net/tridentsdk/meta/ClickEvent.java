@@ -14,30 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.event.misc;
+package net.tridentsdk.meta;
 
 // TODO: JavaDoc
-public class HoverEvent {
-    private HoverAction action;
+public class ClickEvent {
+    private ClickAction action;
     private String value;
 
-    public HoverEvent action(HoverAction action) {
+    public ClickEvent action(ClickAction action) {
         this.setAction(action);
 
         return this;
     }
 
-    public HoverEvent value(String value) {
+    public ClickEvent value(String value) {
         this.setValue(value);
 
         return this;
     }
 
-    public HoverAction getAction() {
+    public ClickAction getAction() {
         return action;
     }
 
-    public void setAction(HoverAction action) {
+    public void setAction(ClickAction action) {
         this.action = action;
     }
 
@@ -49,10 +49,11 @@ public class HoverEvent {
         this.value = value;
     }
 
-    public enum HoverAction {
-        SHOW_TEXT,
-        SHOW_ACHEIVEMENT,
-        SHOW_ITEM;
+    public enum ClickAction {
+        OPEN_URL,
+        OPEN_FILE,
+        RUN_COMMAND,
+        SUGGEST_COMMAND;
 
         @Override
         public String toString() {

@@ -18,7 +18,7 @@ package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.window.inventory.ItemStack;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Called when a player's fishing state changes,e.g. throws line, catches a fish, catches an entity, etc.
@@ -28,10 +28,10 @@ import net.tridentsdk.window.inventory.ItemStack;
 public class PlayerFishEvent extends PlayerEvent implements Cancellable {
     private final State state;
     private int exp;
-    private ItemStack item;
+    private Item item;
     private boolean cancelled;
 
-    public PlayerFishEvent(Player player, State state, int exp, ItemStack item) {
+    public PlayerFishEvent(Player player, State state, int exp, Item item) {
         super(player);
         this.state = state;
         this.exp = exp;
@@ -60,11 +60,11 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
         this.exp = exp;
     }
 
-    public ItemStack getItem() {
+    public Item getItem() {
         return this.item;
     }
 
-    public void setItem(ItemStack item) {
+    public void setItem(Item item) {
         this.item = item;
     }
 

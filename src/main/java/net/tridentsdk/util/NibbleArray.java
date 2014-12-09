@@ -21,7 +21,6 @@ import com.google.common.base.Preconditions;
 import java.util.Arrays;
 
 public final class NibbleArray {
-
     private final byte[] data;
 
     public NibbleArray(int size) {

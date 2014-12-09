@@ -17,28 +17,51 @@
 package net.tridentsdk.meta;
 
 import com.google.gson.JsonObject;
-import net.tridentsdk.event.misc.ClickEvent;
-import net.tridentsdk.event.misc.HoverEvent;
 
-// TODO: JavaDoc
+/**
+ * Chat message properties, encoded in the JSON format
+ *
+ * @author The TridentSDK Team
+ */
 public final class Message {
     private final JsonObject message;
 
+    /**
+     * Starts building a new chat message
+     */
     public Message() {
         this.message = new JsonObject();
     }
 
+    /**
+     * The text to display to the messageable
+     *
+     * @param input the text
+     * @return the current message
+     */
     public Message text(String input) {
         this.getMessage().addProperty("text", input);
         return this;
     }
 
+    /**
+     * Adds color to the message
+     *
+     * @param color the color to add
+     * @return the current message
+     */
     public Message color(ChatColor color) {
         this.getMessage().addProperty("color", color.toString());
 
         return this;
     }
 
+    /**
+     * Adds an action when the message is clicked
+     *
+     * @param event the clickevent to use
+     * @return the current message
+     */
     public Message clickEvent(ClickEvent event) {
         JsonObject obj = new JsonObject();
 
@@ -49,6 +72,12 @@ public final class Message {
         return this;
     }
 
+    /**
+     * Adds an action when the message is hovered by the mouse
+     *
+     * @param event the hoverevent to use
+     * @return the current message
+     */
     public Message hoverEvent(HoverEvent event) {
         JsonObject obj = new JsonObject();
 
@@ -59,10 +88,20 @@ public final class Message {
         return this;
     }
 
-    public String toJson() {
+    /**
+     * The underlying JSON formatted string of the message
+     *
+     * @return the JSON text
+     */
+    public String asJson() {
         return MessageBuilder.GSON.toJson(this.getMessage());
     }
 
+    /**
+     * The object representation of the JSON
+     *
+     * @return the message in object form of JSON
+     */
     public JsonObject getMessage() {
         return message;
     }

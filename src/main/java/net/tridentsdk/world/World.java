@@ -18,11 +18,10 @@ package net.tridentsdk.world;
 
 import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
-import net.tridentsdk.Location;
-import net.tridentsdk.base.Block;
+import net.tridentsdk.Coordinates;
+import net.tridentsdk.base.Tile;
 
 public interface World extends Cloneable {
-    
     /**
      * Gets the name of the world
      * 
@@ -63,7 +62,7 @@ public interface World extends Cloneable {
      * 
      * @return The block on the given location
      */
-    Block getBlockAt(Location location);
+    Tile getTileAt(Coordinates location);
     
     /**
      * Gets the ChunkSnapshot
@@ -105,7 +104,7 @@ public interface World extends Cloneable {
      *
      * @return The spawn location of a world
      */
-    Location getSpawnLocation();
+    Coordinates getSpawnLocation();
     
     /**
      * Gets the set boolean for the given gamerule
@@ -126,7 +125,7 @@ public interface World extends Cloneable {
      * 
      * @return The spawn location in a world
      */
-    Location getSpawn();
+    Coordinates getSpawn();
     
     /**
      * Checks if it is raining in a world
@@ -175,7 +174,7 @@ public interface World extends Cloneable {
      * 
      * @return The location where the worldborder is centered
      */
-    Location getBorderCenter();
+    Coordinates getBorderCenter();
     
     /**
      * Gets to what size a border is contracting, 60000000 by default

@@ -27,12 +27,12 @@ public interface PrimeTNT extends FallingBlock {
      *
      * @return the number of ticks until this Primed TNT explodes
      */
-    int getFuseTicks();
+    int getFuse();
 
     /**
      * Sets the number of fuse ticks
      *
      * @param ticks the number of ticks to set
      */
-    void setFuseTicks(int ticks);
+    void setFuse(int ticks);
 }

@@ -18,6 +18,8 @@ package net.tridentsdk.entity;
 
 /**
  * Possible rabbit types, color and friendliness
+ *
+ * @author The TridentSDK Team
  */
 public enum RabbitType {
     BROWN(0),

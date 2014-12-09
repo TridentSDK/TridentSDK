@@ -14,12 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.window.inventory;
-
 /**
- * Represents the various properties of a Firework ItemStack Mock class only to show uses
- *
- * @author TridentSDK Team
+ * This package contains basic elements in Minecraft, such as Tiles, orientation, directions, instruments, and sounds
  */
-public interface FireworkProperties {
-}
+package net.tridentsdk.base;
