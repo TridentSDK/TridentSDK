@@ -205,10 +205,6 @@ public final class TridentFactory {
         return new Vector(x, y, z);
     }
 
-    public static Logger createLogger() {
-        return new TridentLogger();
-    }
-
     /* Inventory */
 
     public static Item createItemStack(Substance mat) {

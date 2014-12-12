@@ -23,6 +23,7 @@ import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
+import org.slf4j.Logger;
 
 import java.net.InetAddress;
 import java.util.Set;
@@ -70,8 +71,8 @@ public final class Trident {
      *
      * @return the logger which is being used
      */
-    public static TridentLogger getLogger() {
-        return logger;
+    public static Logger getLogger() {
+        return server.getLogger();
     }
 
     /**
