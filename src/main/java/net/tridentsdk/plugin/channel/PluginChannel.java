@@ -18,6 +18,7 @@
 package net.tridentsdk.plugin.channel;
 
 import net.tridentsdk.Trident;
+import net.tridentsdk.util.TridentLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public abstract class PluginChannel {
 
     public void process(byte... message) {
         if (!Trident.isTrident()) {
-            throw new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!");
+            TridentLogger.error(new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
         }
 
         Byte[] bytes = new Byte[message.length - 1];

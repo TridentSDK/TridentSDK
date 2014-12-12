@@ -17,6 +17,7 @@
 package net.tridentsdk.meta.nbt;
 
 import com.google.common.base.Charsets;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.DataInput;
 import java.io.IOException;
@@ -35,7 +36,8 @@ public class NBTDecoder {
         try {
             return this.decode(this.input.readByte());
         } catch (IOException e) {
-            throw new NBTException("IO Error decoding the NBT Data", e);
+            TridentLogger.error(new NBTException("IO Error decoding the NBT Data", e));
+            return null;
         }
     }
 
@@ -44,7 +46,7 @@ public class NBTDecoder {
 
         //NBT source must start with a compound tag or is invalid
         if (initType != TagType.COMPOUND) {
-            throw new NBTException("NBT Data must start with a Compound Tag.");
+            TridentLogger.error(new NBTException("NBT Data must start with a Compound Tag."));
         }
 
         //Create the resulting CompoundTag to return
@@ -53,7 +55,8 @@ public class NBTDecoder {
             return this.resolveCompoundTag(this.readString());
         } catch (IOException e) {
             e.printStackTrace();
-            throw new NBTException("IO Error decoding the NBT Data", e);
+            TridentLogger.error(new NBTException("IO Error decoding the NBT Data", e));
+            return null;
         }
     }
 

@@ -17,6 +17,7 @@
 package net.tridentsdk.meta.nbt;
 
 import com.google.common.base.Charsets;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.DataOutput;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class NBTEncoder {
         try {
             this.writeTag(tag);
         } catch (IOException e) {
-            throw new NBTException("IO Error encoding the NBT Data", e);
+            TridentLogger.error(new NBTException("IO Error encoding the NBT Data", e));
         }
     }
 

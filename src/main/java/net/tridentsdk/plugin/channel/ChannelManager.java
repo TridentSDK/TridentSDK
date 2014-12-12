@@ -17,6 +17,8 @@
 
 package net.tridentsdk.plugin.channel;
 
+import net.tridentsdk.util.TridentLogger;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,7 +36,7 @@ public final class ChannelManager {
 
     public void registerChannel(String name, PluginChannel channel) {
         if (this.channels.containsKey(name)) {
-            throw new IllegalArgumentException("Channel " + name + " is already registered!");
+            TridentLogger.error(new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
         }
 
         this.channels.put(name, channel);

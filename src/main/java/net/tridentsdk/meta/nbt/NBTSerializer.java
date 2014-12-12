@@ -19,6 +19,7 @@ package net.tridentsdk.meta.nbt;
 import net.tridentsdk.factory.TridentFactory;
 import net.tridentsdk.perf.FastClass;
 import net.tridentsdk.perf.FastField;
+import net.tridentsdk.util.TridentLogger;
 
 import java.lang.reflect.Field;
 
@@ -29,7 +30,7 @@ public final class NBTSerializer {
 
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
-            throw new IllegalArgumentException("Provided object is not serializable!");
+            TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
         }
 
         FastClass cls = FastClass.get(clzz);
@@ -40,7 +41,7 @@ public final class NBTSerializer {
 
     public static <T> T deserialize(T instance, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(instance.getClass()))) {
-            throw new IllegalArgumentException("Provided object is not serializable!");
+            TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
         }
 
         FastClass cls = FastClass.get(instance.getClass());

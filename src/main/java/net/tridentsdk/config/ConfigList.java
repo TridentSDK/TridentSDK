@@ -18,6 +18,7 @@ package net.tridentsdk.config;
 
 import com.google.gson.JsonArray;
 import net.tridentsdk.docs.AccessNoDoc;
+import net.tridentsdk.util.TridentLogger;
 
 import java.util.AbstractList;
 import java.util.Collection;
@@ -167,7 +168,7 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public void add(int index, V element) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
     }
 
     /* (non-Javadoc)
@@ -175,7 +176,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public boolean addAll(int arg0, Collection<? extends V> arg1) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        return false;
     }
 
     /* (non-Javadoc)
@@ -183,7 +185,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public boolean retainAll(Collection<?> arg0) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        return false;
     }
 
     /* (non-Javadoc)
@@ -191,7 +194,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public List<V> subList(int arg0, int arg1) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        return null;
     }
 
     /* (non-Javadoc)
@@ -199,7 +203,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public V[] toArray() {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        return null;
     }
 
     /* (non-Javadoc)
@@ -207,12 +212,13 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public <T> T[] toArray(T[] arg0) {
-        throw new UnsupportedOperationException("Cannot invoke on Lists from Config");
+        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        return null;
     }
 
     private void checkElementIndex(int index) {
         if (index < 0 && index > size)
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            TridentLogger.error(new IndexOutOfBoundsException("Index: " + index + ", Size: " + size));
     }
 
     private Node<V> getNode(int index) {

@@ -26,6 +26,7 @@ import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.plugin.cmd.CommandHandler;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class TridentPluginHandler {
                     PluginDescription description = pluginClass.getAnnotation(PluginDescription.class);
 
                     if (description == null) {
-                        throw new PluginLoadException("Description annotation does not exist!");
+                        TridentLogger.error(new PluginLoadException("Description annotation does not exist!"));
                     }
 
                     Constructor<? extends TridentPlugin> defaultConstructor =
@@ -96,7 +97,7 @@ public class TridentPluginHandler {
                     plugin.startup(executor);
                 } catch (IOException | ClassNotFoundException | NoSuchMethodException
                         | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
-                    throw new PluginLoadException(ex);
+                    TridentLogger.error(new PluginLoadException(ex));
                 } finally {
                     if (jarFile != null)
                         try {

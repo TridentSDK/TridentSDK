@@ -23,6 +23,7 @@ import net.tridentsdk.concurrent.ConcurrentCache;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Method;
@@ -53,7 +54,7 @@ public class EventHandler {
     @InternalUseOnly
     public EventHandler() {
         if (!Trident.isTrident()) {
-            throw new UnsupportedOperationException("EventManager must be initiated by TridentSDK!");
+            TridentLogger.error(new UnsupportedOperationException("EventManager must be initiated by TridentSDK!"));
         }
     }
 

@@ -17,6 +17,7 @@
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.perf.FastClass;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -41,7 +42,7 @@ public class PluginClassLoader extends URLClassLoader {
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         if (name.startsWith("net.tridentsdk")) {
-            throw new ClassNotFoundException(name);
+            TridentLogger.error(new ClassNotFoundException(name));
         }
         Class<?> result = this.classes.get(name);
 
@@ -61,7 +62,7 @@ public class PluginClassLoader extends URLClassLoader {
         if (result != null) {
             if (TridentPlugin.class.isAssignableFrom(result)) {
                 if (this.pluginClass != null) {
-                    throw new PluginLoadException("JAR has 2 plugin classes!");
+                    TridentLogger.error(new PluginLoadException("JAR has 2 plugin classes!"));
                 }
 
                 this.pluginClass = result.asSubclass(TridentPlugin.class);
@@ -73,7 +74,8 @@ public class PluginClassLoader extends URLClassLoader {
             return result;
         }
 
-        throw new ClassNotFoundException(name);
+        TridentLogger.error(new ClassNotFoundException(name));
+        return null;
     }
 
     public void unloadClasses() {

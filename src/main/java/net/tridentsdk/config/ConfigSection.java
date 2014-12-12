@@ -19,6 +19,7 @@ package net.tridentsdk.config;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.tridentsdk.util.TridentLogger;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -62,7 +63,7 @@ public class ConfigSection {
      */
     public static <V> ConfigSection addToList(Collection<V> list) {
         if (!(list instanceof ConfigSectionList)) {
-            throw new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList");
+            TridentLogger.error(new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList"));
         }
         ConfigSection section = new ConfigSection(((ConfigSectionList) list).getParent(), new JsonObject());
         list.add((V) section);

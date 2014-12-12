@@ -20,6 +20,7 @@ package net.tridentsdk.plugin.cmd;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
+import net.tridentsdk.util.TridentLogger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,8 +78,9 @@ public class CommandHandler {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
         if (description == null) {
-            throw new PluginLoadException("Error in registering commands: Class does not have annotation " +
-                    "\"CommandDescription\"!");
+            TridentLogger.error(new PluginLoadException("Error in registering commands: Class does not have annotation " +
+                    "\"CommandDescription\"!"));
+            return 0;
         }
 
         String name = description.name();
@@ -87,7 +89,7 @@ public class CommandHandler {
         String permission = description.permission();
 
         if (name == null || "".equals(name)) {
-            throw new PluginLoadException("cmd does not declare a valid name!");
+            TridentLogger.error(new PluginLoadException("cmd does not declare a valid name!"));
         }
 
         if (COMMANDS.containsKey(name.toLowerCase())) {

@@ -23,6 +23,7 @@ import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.plugin.annotation.PluginDescription;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,8 +51,8 @@ public class TridentPlugin {
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
         for (TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
             if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
-                throw new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
-                        "Name: " + description.name());
+                TridentLogger.error(new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
+                        "Name: " + description.name()));
             }
         }
 
@@ -126,8 +127,9 @@ public class TridentPlugin {
         }
 
         // Should NEVER happen
-        throw new PluginLoadException(
-                "Plugin not loaded correctly, the executor is null for " + getDescription().name());
+        TridentLogger.error(new PluginLoadException(
+                "Plugin not loaded correctly, the executor is null for " + getDescription().name()));
+        return null;
     }
 
     @Override

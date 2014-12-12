@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.base;
 
+import net.tridentsdk.util.TridentLogger;
+
 import javax.annotation.concurrent.Immutable;
 
 /**
@@ -29,9 +31,9 @@ public class Note {
 
     Note(int id) {
         if (id > 24) {
-            throw new IllegalArgumentException("Note is too high!");
+            TridentLogger.error(new IllegalArgumentException("Note is too high!"));
         } else if (id < 0) {
-            throw new IllegalArgumentException("Note is too low!");
+            TridentLogger.error(new IllegalArgumentException("Note is too low!"));
         }
 
         this.id = (short) id;
@@ -42,7 +44,7 @@ public class Note {
      */
     public Note sharpen() {
         if ((int) this.id + 1 > 24) {
-            throw new IllegalArgumentException("Cannot sharpen this note, it is already the max");
+            TridentLogger.error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
         }
         return new Note((int) this.id + 1);
     }
@@ -51,8 +53,10 @@ public class Note {
      * Returns a note flatter than this
      */
     public Note flatten() {
-        if ((int) this.id - 1 < 0)
-            throw new IllegalArgumentException("Cannot flatten this note, it is already the max");
+        if ((int) this.id - 1 < 0) {
+            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the max"));
+            return null;
+        }
         return new Note((int) this.id - 1);
     }
 
