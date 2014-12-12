@@ -30,23 +30,16 @@ import java.util.Random;
 public final class TridentLogger {
     private static final String[] ERRORS = {
             "Aw, Mazen! Really?",
-            "Uh no, I don't want to eat that",
-            "21 occurred, not acceptable.",
-            "69Overflow",
             "I feel funny",
-            "Be safe while keking, or naw",
+            "9 + 10 does not equal 21",
             "Dang",
-            "PierreC farts, then this happens",
-            "I DIDN'T DO IT!!",
-            "bruh",
+            "Thanks, Obama",
+            "God dammit Tony Abbot, the fax didn't go through",
             "This wasn't supposed to happen. It did anyways.",
             "Bukkit 1.8 not found, contact Dinnerbone",
             "Huston, we have a problem",
             "Oh great, a stacktrace. Can't we write good software for once?",
-            "It's not a bug, it's a feature!",
-            "Vilsol screamed your JVM to death",
-            "Herobrine",
-            "1 + 1 = 3"
+            "Trust me this isn't a bug, it's a feature!"
     };
 
     private TridentLogger() {
@@ -63,6 +56,7 @@ public final class TridentLogger {
         Logger.getRootLogger().addAppender(console);
 
         FileAppender fa = new FileAppender();
+
         fa.setName("FileLogger");
         fa.setFile("trident.log");
         fa.setLayout(new PatternLayout(PATTERN));
