@@ -42,7 +42,10 @@ public final class TridentLogger {
             "PierreC farts, then this happens",
             "I DIDN'T DO IT!!",
             "bruh",
-            "This wasn't supposed to happen. It did anyways."
+            "This wasn't supposed to happen. It did anyways.",
+            "Bukkit 1.8 not found, contact Dinnerbone",
+            "Huston, we have a problem",
+            "Oh great, a stacktrace. Can't we write good software for once?",
     };
 
     private TridentLogger() {
