@@ -20,10 +20,7 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
 import net.tridentsdk.plugin.TridentPluginHandler;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
@@ -46,6 +43,7 @@ public final class TridentLogger {
             "Bukkit 1.8 not found, contact Dinnerbone",
             "Huston, we have a problem",
             "Oh great, a stacktrace. Can't we write good software for once?",
+            "It's not a bug, it's a feature!"
     };
 
     private TridentLogger() {
@@ -60,6 +58,17 @@ public final class TridentLogger {
         console.activateOptions();
 
         Logger.getRootLogger().addAppender(console);
+
+        FileAppender fa = new FileAppender();
+        fa.setName("FileLogger");
+        fa.setFile("trident.log");
+        fa.setLayout(new PatternLayout(PATTERN));
+        fa.setThreshold(Level.DEBUG);
+        fa.setAppend(true);
+        fa.activateOptions();
+
+        //add appender to any Logger (here is root)
+        Logger.getRootLogger().addAppender(fa);
     }
 
     private static Class<?> getCaller() {
