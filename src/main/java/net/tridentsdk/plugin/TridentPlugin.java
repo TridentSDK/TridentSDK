@@ -99,7 +99,7 @@ public class TridentPlugin {
 
             Files.copy(is, file.getAbsoluteFile().toPath());
         } catch (IOException ex) {
-            ex.printStackTrace();
+            TridentLogger.error(ex);
         }
     }
 
@@ -123,7 +123,7 @@ public class TridentPlugin {
         try {
             return executor.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            TridentLogger.error(e);
         }
 
         // Should NEVER happen

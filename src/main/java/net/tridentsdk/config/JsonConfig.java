@@ -73,7 +73,7 @@ public class JsonConfig extends ConfigSection {
                     GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8),
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            TridentLogger.error(ex);
         }
     }
 

@@ -33,10 +33,8 @@ public final class TridentLogger {
             "I feel funny",
             "9 + 10 does not equal 21",
             "Dang",
-            "Thanks, Obama",
-            "God dammit Tony Abbot, the fax didn't go through",
+            "Tony Abbot, the fax didn't go through",
             "This wasn't supposed to happen. It did anyways.",
-            "Bukkit 1.8 not found, contact Dinnerbone",
             "Huston, we have a problem",
             "Oh great, a stacktrace. Can't we write good software for once?",
             "Trust me this isn't a bug, it's a feature!"
@@ -75,7 +73,7 @@ public final class TridentLogger {
         try {
             return Class.forName(element.getClassName());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            TridentLogger.error(e);
         }
 
         return null;

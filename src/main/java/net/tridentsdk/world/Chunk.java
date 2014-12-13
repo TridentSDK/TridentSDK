@@ -29,5 +29,5 @@ public interface Chunk {
 
     World getWorld();
 
-    Tile getBlockAt(int relX, int y, int relZ);
+    Tile getTileAt(int relX, int y, int relZ);
 }

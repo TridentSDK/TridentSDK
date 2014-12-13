@@ -19,6 +19,10 @@ package net.tridentsdk;
 // if these shouldn't exist, or should go somewhere else, just move them
 // this is probably temporary
 
+import net.tridentsdk.util.TridentLogger;
+
+import java.util.concurrent.ThreadFactory;
+
 /**
  * Contains the default values used in server.json
  *
@@ -49,9 +53,40 @@ public final class Defaults {
      * The threshold used for compression
      */
     public static final int COMPRESSION_THRESHHOLD = 256;
-
+    /**
+     * The server port
+     */
     public static final int PORT = 25565;
+    /**
+     * The default address for the server
+     */
     public static final String ADDRESS = "localhost";
+
+    /**
+     * The server's default exception handler
+     */
+    public static final Thread.UncaughtExceptionHandler EXCEPTION_HANDLER = new Thread.UncaughtExceptionHandler() {
+        @Override
+        public void uncaughtException(Thread thread, Throwable throwable) {
+            TridentLogger.error(throwable);
+        }
+    };
+
+    /**
+     * The thread factory which makes a thread that handles exceptions
+     */
+    public static final ThreadFactory ERROR_HANDLED = new ThreadFactory() {
+        @Override
+        public Thread newThread(final Runnable runnable) {
+            return new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Thread.setDefaultUncaughtExceptionHandler(EXCEPTION_HANDLER);
+                    runnable.run();
+                }
+            });
+        }
+    };
 
     private Defaults() {
     }

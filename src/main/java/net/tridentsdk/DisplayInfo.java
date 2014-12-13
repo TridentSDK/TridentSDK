@@ -17,6 +17,7 @@
 package net.tridentsdk;
 
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.util.TridentLogger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -70,7 +71,7 @@ public class DisplayInfo {
             img = ImageIO.read(new File(Factories.configs().serverConfig().getString("image-location",
                     Defaults.MOTD_IMAGE_LOCATION)));
         } catch (IOException ex) {
-            ex.printStackTrace();
+            TridentLogger.error(ex);
         }
         return img;
     }

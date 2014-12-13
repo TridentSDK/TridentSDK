@@ -17,6 +17,7 @@
 package net.tridentsdk.concurrent;
 
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.*;
@@ -57,7 +58,7 @@ public class ConcurrentCache<K, V> {
             } catch (CancellationException e) {
                 cache.remove(k, f);
             } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
+                TridentLogger.error(e);
             }
         }
     }
@@ -100,7 +101,7 @@ public class ConcurrentCache<K, V> {
             try {
                 return future.get();
             } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                TridentLogger.error(e);
             }
         }
     }
@@ -116,7 +117,7 @@ public class ConcurrentCache<K, V> {
             try {
                 entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().get()));
             } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                TridentLogger.error(e);
             }
         return entries;
     }

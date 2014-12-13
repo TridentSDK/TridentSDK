@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.perf;
 
+import net.tridentsdk.util.TridentLogger;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
@@ -37,7 +38,7 @@ public final class Performance {
             field.setAccessible(true);
             return (Unsafe) field.get(null);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            TridentLogger.error(e);
         }
 
         return null;
@@ -54,7 +55,7 @@ public final class Performance {
             field.setAccessible(true);
         } catch (NoSuchFieldException e) {
             System.out.println("Field " + name + " cannot be found in " + c);
-            e.printStackTrace();
+            TridentLogger.error(e);
         }
 
         return field;
@@ -75,7 +76,7 @@ public final class Performance {
                 try {
                     return Class.forName(Thread.currentThread().getStackTrace()[4].getClassName());
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    TridentLogger.error(e);
                     return null;
                 }
             }

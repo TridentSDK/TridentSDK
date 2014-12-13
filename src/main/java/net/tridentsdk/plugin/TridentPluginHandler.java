@@ -103,7 +103,7 @@ public class TridentPluginHandler {
                         try {
                             jarFile.close();
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            TridentLogger.error(e);
                         }
                 }
             }

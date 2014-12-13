@@ -54,7 +54,6 @@ public class NBTDecoder {
         try {
             return this.resolveCompoundTag(this.readString());
         } catch (IOException e) {
-            e.printStackTrace();
             TridentLogger.error(new NBTException("IO Error decoding the NBT Data", e));
             return null;
         }
