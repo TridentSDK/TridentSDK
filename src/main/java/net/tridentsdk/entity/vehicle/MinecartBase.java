@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.entity.vehicle;
 
+import net.tridentsdk.base.TileSnapshot;
 import net.tridentsdk.entity.Entity;
 
 /**
@@ -29,14 +30,14 @@ public interface MinecartBase extends Entity {
      *
      * @return the display tile of this Minecart
      */
-    Object getDisplayTile();    /* TODO: Change return type to valid implementation of BlockState */
+    TileSnapshot getDisplayTile();
 
     /**
      * Set this Minecart's display tile to the specified block state
      *
      * @param blockState the state to set this to
      */
-    void setDisplayTile(Object blockState);    /* TODO: Change param type to valid implementation of BlockState */
+    void setDisplayTile(TileSnapshot blockState);
 
     /**
      * Get the offset for this Minecart's display tile

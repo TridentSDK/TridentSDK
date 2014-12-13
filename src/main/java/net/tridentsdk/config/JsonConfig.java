@@ -21,6 +21,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class JsonConfig extends ConfigSection {
                             .getAsJsonObject() :
                     new JsonObject();
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
-            //TODO: Handle
+            TridentLogger.error(e);
         }
     }
 }

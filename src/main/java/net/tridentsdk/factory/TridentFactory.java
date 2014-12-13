@@ -17,22 +17,17 @@
 package net.tridentsdk.factory;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.Tile;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.entity.Entity;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.meta.nbt.CompoundTag;
 import net.tridentsdk.meta.nbt.CompoundTagBuilder;
 import net.tridentsdk.meta.nbt.NBTBuilder;
-import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.window.inventory.Inventory;
 import net.tridentsdk.window.inventory.Item;
 import net.tridentsdk.window.trade.ItemPair;
 import net.tridentsdk.world.ChunkLocation;
 import net.tridentsdk.world.World;
-import net.tridentsdk.world.WorldLoader;
-
-import java.util.logging.Logger;
 
 /**
  * Factory creation methods for basic API classes
@@ -152,45 +147,6 @@ public final class TridentFactory {
         return new ChunkLocation(chunkLocation);
     }
 
-    // TODO: Not thread safe
-    public static WorldLoader createWorldLoader() {
-        return null;
-        // TODO:
-        /*return new TridentWorldLoader() {
-            private World world;
-
-            @Override
-            public World load(String world) {
-                this.world = super.load(world);
-                return this.world;
-            }
-
-            @Override
-            public boolean chunkExists(World world, ChunkLocation location) {
-                return world.getChunkAt(location, false) != null;
-            }
-
-            @Override
-            public Chunk loadChunk(World world, int x, int z) {
-                return world.getChunkAt(TridentFactory.createChunkLoc(x, z), true);
-            }
-
-            @Override
-            public Chunk loadChunk(World world, ChunkLocation location) {
-                return world.getChunkAt(location, true);
-            }
-
-            @Override
-            public void saveChunk(Chunk chunk) {
-                // TODO
-            }
-        };*/
-    }
-
-    public static World createWorld(String name) {
-        return createWorldLoader().load(name);
-    }
-
     /* Utils */
 
     public static Vector createVector() {
@@ -241,13 +197,6 @@ public final class TridentFactory {
 
     public static CompoundTagBuilder<NBTBuilder> createNbtBuilder(CompoundTag base) {
         return NBTBuilder.fromBase(base);
-    }
-
-    /* Entity */
-
-    public static Entity createEntity(World world, Class<? extends Entity> entity) {
-        // TODO
-        return null;
     }
 
     /* Board not ready */

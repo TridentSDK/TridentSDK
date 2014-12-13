@@ -17,6 +17,7 @@
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.window.Window;
 import net.tridentsdk.window.inventory.Inventory;
 import net.tridentsdk.window.inventory.Item;
 
@@ -26,16 +27,12 @@ import net.tridentsdk.window.inventory.Item;
  * @author TridentSDK Team
  */
 public interface InventoryHolder extends Entity {
-    /*
-     * TODO: Convert the return types into a valid representation of their respective objects
-     */
-
     /**
      * The Inventory that this entity holds
      *
      * @return the Inventory that this entity holds
      */
-    Inventory getInventory();
+    Window getInventory();
 
     /**
      * The contents this slot

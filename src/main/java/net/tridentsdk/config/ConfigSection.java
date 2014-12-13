@@ -52,8 +52,6 @@ public class ConfigSection {
         this.jsonHandle = obj;
     }
 
-    //TODO: Better way?
-
     /**
      * Gets a config section with the elements defined in the specified collection
      *

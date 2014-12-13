@@ -40,7 +40,6 @@ public class IntArrayTag extends NBTTag {
      */
     @Override
     public TagType getType() {
-        // TODO Auto-generated method stub
         return TagType.INT_ARRAY;
     }
 }

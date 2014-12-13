@@ -36,15 +36,6 @@ public enum RabbitType {
 
     KILLER_RABBIT(99);
 
-    private static final RabbitType[] byId = new RabbitType[7];
-
-    static {
-        for (RabbitType type : RabbitType.values()) {
-            byId[type.id] = type;
-            // TODO by ordinal?
-        }
-    }
-
     private final int id;
 
     RabbitType(int id) {
@@ -66,7 +57,7 @@ public enum RabbitType {
      * @param rabbitType RabbitType
      * @return {@code int} value of the RabbitType
      */
-    public static int toInt(RabbitType rabbitType) {
+    public static int asInt(RabbitType rabbitType) {
         return rabbitType.toInt();
     }
 }

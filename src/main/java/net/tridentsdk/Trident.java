@@ -20,10 +20,8 @@ import com.google.common.base.Preconditions;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
-import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
-import org.slf4j.Logger;
 
 import java.net.InetAddress;
 import java.util.Set;
@@ -35,7 +33,6 @@ import java.util.Set;
  */
 public final class Trident {
     private static Server server;
-    private static TridentLogger logger;
 
     private Trident() {
     }
@@ -64,24 +61,6 @@ public final class Trident {
         StackTraceElement element = elements[3];
 
         return element.getClassName().startsWith("net.tridentsdk");
-    }
-
-    /**
-     * Gets the logger which the server is currently using
-     *
-     * @return the logger which is being used
-     */
-    public static Logger getLogger() {
-        return server.getLogger();
-    }
-
-    /**
-     * Sets the output console logger
-     *
-     * @param logger the logger to use
-     */
-    public static void setLogger(TridentLogger logger) {
-        Trident.logger = logger;
     }
 
     public static int getPort() {

@@ -69,7 +69,6 @@ public class ListTag extends NBTTag implements TagContainer {
      */
     @Override
     public TagType getType() {
-        // TODO Auto-generated method stub
         return TagType.LIST;
     }
 }

@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.base.SubstanceColor;
 import net.tridentsdk.entity.decorate.Ageable;
 import net.tridentsdk.entity.decorate.Peaceful;
 
@@ -30,7 +31,7 @@ public interface Sheep extends Ageable, Peaceful {
      *
      * @return the color of this sheep's wool
      */
-    Object getColor();  /* TODO: Decide valid implementation of color for Sheep/Wool */
+    SubstanceColor getColor();
 
     /**
      * Whether or not this sheep can be sheared

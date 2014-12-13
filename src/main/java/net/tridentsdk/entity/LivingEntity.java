@@ -60,7 +60,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
 
     /**
      * Sets the maximum health of the Entity
-     * <p/>
+     *
      * <p>maxHealth cannot be above the current health of the Entity</p>
      * TODO: Rephrase?
      *
@@ -123,8 +123,8 @@ public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
     Player hurtByPlayer();
 
     /**
-     * Checks if the entity has died, or has 0 health. Should only apply to entities that are "live" (TODO
-     * Entity)
+     * Checks if the entity has died, or has 0 health. Should only apply to entities that are {@code instanceof}
+     * {@link net.tridentsdk.entity.LivingEntity}
      *
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */

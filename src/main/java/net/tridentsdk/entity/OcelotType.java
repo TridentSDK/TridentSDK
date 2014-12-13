@@ -42,19 +42,13 @@ public enum OcelotType {
      */
     SIAMESE(3);
 
-    private static final OcelotType[] byId = new OcelotType[4];
-
-    static {
-        for (OcelotType type : OcelotType.values()) {
-            byId[type.id] = type;
-            // TODO by ordinal?
-        }
-    }
-
     private final int id;
 
     OcelotType(int id) {
         this.id = id;
     }
 
+    public int asInt() {
+        return id;
+    }
 }

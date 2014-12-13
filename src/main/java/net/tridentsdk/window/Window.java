@@ -19,17 +19,51 @@ package net.tridentsdk.window;
 import net.tridentsdk.window.inventory.Item;
 
 /**
- * TODO
+ * Represents a container that holds items and can be viewed or modified
+ *
+ * @author The TridentSDK Team
  */
 public interface Window {
-
+    /**
+     * Obtains the window ID assigned by the server
+     *
+     * @return the window ID
+     */
     int getId();
 
-    Item[] getContents();
+    /**
+     * The items that are held by this window
+     *
+     * @return the items in the window
+     */
+    Item[] getItems();
 
+    /**
+     * The amount of slots in this inventory
+     *
+     * @return the slots in the inventory
+     */
     int getLength();
 
+    /**
+     * The amount of items in the inventory
+     *
+     * @return the length of the non-null item array
+     */
+    int getItemLength();
+
+    /**
+     * Sets the item at the <a href="http://wiki.vg/Inventory">slot</a> in the inventory
+     *
+     * @param index the slot to set the item at
+     * @param value the item to be set at the slot
+     */
     void setSlot(int index, Item value);
 
+    /**
+     * Gets the inventory title
+     *
+     * @return the title of the inventory
+     */
     String getName();
 }

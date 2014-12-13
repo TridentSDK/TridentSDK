@@ -103,7 +103,7 @@ public final class MessageBuilder {
 
     public MessageBuilder sendTo(Player... players) {
         for (Player p : players) {
-            // TODO: send message
+            p.sendRaw(toJson());
         }
 
         return this;

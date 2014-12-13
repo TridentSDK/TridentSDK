@@ -22,7 +22,7 @@ public interface Messagable {
      *
      * @param messages String[] messages to be sent
      */
-    void sendMessage(String... messages);
+    void sendRaw(String... messages);
 
     /**
      * Gets the last message sent to this Messagable

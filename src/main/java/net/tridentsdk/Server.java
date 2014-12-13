@@ -22,7 +22,6 @@ import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
-import org.slf4j.Logger;
 
 import java.net.InetAddress;
 import java.util.Set;
@@ -66,13 +65,6 @@ public interface Server {
      * @param runnable The code to reflect
      */
     void addTask(Runnable runnable);
-
-    /**
-     * Gets the logger that Trident uses, not necessarily the same logger your plugin should be using
-     *
-     * @return that represents the Logger Trident is using
-     */
-    Logger getLogger();
 
     /**
      * Gets the current difficulty that the server is set to (Worlds can have their own difficulty)

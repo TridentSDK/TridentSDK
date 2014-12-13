@@ -108,4 +108,11 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer {
      * @param speed float Player's walk speed
      */
     void setWalkSpeed(float speed);
+
+    /**
+     * Sends the player a message
+     *
+     * @param message the message to display to the player
+     */
+    void sendMessage(String message);
 }

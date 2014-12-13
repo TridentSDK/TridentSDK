@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.base.SubstanceColor;
 import net.tridentsdk.entity.decorate.Neutral;
 import net.tridentsdk.entity.decorate.Tameable;
 
@@ -37,5 +38,5 @@ public interface Wolf extends Tameable, Neutral {
      *
      * @return the color of this entity's collar
      */
-    Object getCollarColor();    /* TODO: Decide valid implementation for this along with Sheep and Wool  */
+    SubstanceColor getCollarColor();
 }
