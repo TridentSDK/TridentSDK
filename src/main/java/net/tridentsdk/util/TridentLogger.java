@@ -105,7 +105,7 @@ public final class TridentLogger {
         StackTraceElement main = throwable.getStackTrace()[0];
         getLogger().error("Class:  " + main.getClassName());
         getLogger().error("Method: " + main.getMethodName());
-        getLogger().error("Line:   " + main.getLineNumber());
+        getLogger().error("Line:   " + (main.getLineNumber() > 0 ? main.getLineNumber() : "Native method"));
         getLogger().error("========   Ending Debug Information   =========");
 
         getLogger().error("");
@@ -114,7 +114,7 @@ public final class TridentLogger {
         for (StackTraceElement element : throwable.getStackTrace())
             getLogger().error("    at " + element.getClassName() + "." +
                     element.getMethodName() + "(...) : " +
-                    (element.getLineNumber() > 0 ? element.getLineNumber() : "Native method"));
+                    (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
         getLogger().error("========  Ending Stacktrace  =========");
 
         getLogger().error("");

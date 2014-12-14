@@ -54,7 +54,7 @@ public final class Performance {
             field = c.getDeclaredField(name);
             field.setAccessible(true);
         } catch (NoSuchFieldException e) {
-            System.out.println("Field " + name + " cannot be found in " + c);
+            TridentLogger.log("Field " + name + " cannot be found in " + c);
             TridentLogger.error(e);
         }
 
