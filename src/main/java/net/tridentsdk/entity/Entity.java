@@ -20,7 +20,7 @@ import net.tridentsdk.Coordinates;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.World;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -99,7 +99,7 @@ public interface Entity {
      * @param radius the spherical radius to look for entities around
      * @return the collection of entities within the radius around the entity
      */
-    List<Entity> getNearbyEntities(double radius);
+    Set<Entity> getNearbyEntities(double radius);
 
     /**
      * Gets the display name for the entity, used on inventories and deaths
