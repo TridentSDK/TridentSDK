@@ -25,7 +25,7 @@ public enum InventoryType {
     CHEST("minecraft:chest"),
     CRAFTING_TABLE("minecraft:crafting_table"),
     FURNACE("minecraft:furnace"),
-    DISPENSER("minecraft:despenser"),
+    DISPENSER("minecraft:dispenser"),
     ENCHANTING_TABLE("minecraft:enchanting_table"),
     BREWING_STAND("minecraft:brewing_stand"),
     VILLAGER_TRADE("minecraft:villager"),
