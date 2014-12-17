@@ -20,6 +20,9 @@ import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.Tile;
+import net.tridentsdk.entity.Entity;
+
+import java.util.Set;
 
 public interface World extends Cloneable {
     /**
@@ -189,4 +192,11 @@ public interface World extends Cloneable {
      * @return The time the border has to contract to the contraction target
      */
     int getBorderSizeContractionTime();
+
+    /**
+     * Get the entities currently in this world
+     *
+     * @return the entities in the world
+     */
+    Set<Entity> getEntities();
 }

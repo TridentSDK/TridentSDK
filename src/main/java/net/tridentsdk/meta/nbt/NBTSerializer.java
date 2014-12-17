@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.factory.TridentFactory;
 import net.tridentsdk.perf.FastClass;
 import net.tridentsdk.perf.FastField;
 import net.tridentsdk.util.TridentLogger;
@@ -126,8 +125,7 @@ public final class NBTSerializer {
 
     public static CompoundTag serialize(NBTSerializable serializable, String name) {
         FastClass cls = FastClass.get(serializable.getClass());
-        CompoundTagBuilder<NBTBuilder> builder =
-                TridentFactory.createNbtBuilder(name);
+        CompoundTagBuilder<NBTBuilder> builder = NBTBuilder.newBase(name);
 
         for (FastField field : cls.getFields()) {
             Field f = field.toField();

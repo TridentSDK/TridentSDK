@@ -23,7 +23,7 @@ import net.tridentsdk.entity.EntityType;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.World;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -100,7 +100,7 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public List<Entity> getNearbyEntities(double radius) {
+    public Set<Entity> getNearbyEntities(double radius) {
         return entity.getNearbyEntities(radius);
     }
 

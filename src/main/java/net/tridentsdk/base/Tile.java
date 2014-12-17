@@ -16,94 +16,50 @@
  */
 package net.tridentsdk.base;
 
-import com.google.common.base.Function;
-import com.google.common.collect.*;
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.decorate.Impalable;
-import net.tridentsdk.entity.projectile.Projectile;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.Vector;
-
-import javax.annotation.Nullable;
-import java.lang.ref.WeakReference;
-import java.util.*;
 
 /**
  * A basic structure in minecraft, a material bearing piece set at a given location
  *
  * @author The TridentSDK Team
  */
-public class Tile implements Impalable {
-    private final Coordinates location;
+public interface Tile extends Impalable {
     /**
-     * The type for this block
-     */
-    protected Substance material;
-    /**
-     * The block metadata
-     */
-    protected byte data;
-    /**
-     * Describes projectile logic
-     */
-    private final Set<WeakReference<Projectile>> projectiles = Sets.newSetFromMap(
-            Factories.collect().<WeakReference<Projectile>, Boolean>createMap());
-
-    /**
-     * Constructs the wrapper representing the block
+     * Sets the substance the tile is made of
      *
-     * @param location Location of the Block
+     * @param material the substance the tile should be set to
      */
-    public Tile(Coordinates location) {
-        this.location = location;
+    public void setSubstance(Substance material);
 
-        // Note: Avoid recursion by not creating a new instance from World#getTileAt(Location)
-        Tile worldBlock = location.getWorld().getTileAt(location);
-
-        this.material = worldBlock.material;
-    }
-
-    @InternalUseOnly
-    protected Tile(Coordinates location, boolean createdByServer) {
-        this.location = location;
-    }
-
-    public void setSubstance(Substance material) {
-        this.material = material;
-    }
-
-    public Substance getSubstance() {
-        return this.material;
-    }
+    /**
+     * Gets the substance the tile is made of
+     *
+     * @return the type the tile was set
+     */
+    public Substance getSubstance();
 
     /**
      * Returns the Location of the Block
      *
      * @return Location of the Block
      */
-    public Coordinates getLocation() {
-        return this.location;
-    }
+    Coordinates getLocation();
 
     /**
      * Gets the tile data
      *
      * @return the data of the tile
      */
-    public byte getMeta() {
-        return this.data;
-    }
+    byte getMeta();
 
     /**
      * Sets the tile data
      *
      * @param data the data to set the tile
      */
-    public void setMeta(byte data) {
-        this.data = data;
-    }
+    void setMeta(byte data);
 
     /**
      * Returns a block immediately to the direction specified
@@ -111,57 +67,5 @@ public class Tile implements Impalable {
      * @param vector the direction to look for the block adjacent to the current
      * @return the block adjacent to the current
      */
-    public Tile relativeTile(Vector vector) {
-        return new Tile(this.location.getRelative(vector));
-    }
-
-    @Override
-    public boolean isImpaledEntity() {
-        return false;
-    }
-
-    @Override
-    public boolean isImpaledTile() {
-        return true;
-    }
-
-    @Override
-    public Entity impaledEntity() {
-        return null;
-    }
-
-    @Override
-    public Tile impaledTile() {
-        if (!this.isImpaledTile())
-            return null;
-        return this;
-    }
-
-    @Override
-    public void put(Projectile projectile) {
-        this.projectiles.add(new WeakReference<>(projectile));
-    }
-
-    @Override
-    public boolean remove(Projectile projectile) {
-        return this.projectiles.remove(new WeakReference<>(projectile));
-    }
-
-    @Override
-    public void clear() {
-        // TODO remove the projectile entities
-        this.projectiles.clear();
-    }
-
-    @Override
-    public Collection<Projectile> projectiles() {
-        return new ImmutableSet.Builder<Projectile>().addAll(Iterators.transform(projectiles.iterator(),
-                new Function<WeakReference<Projectile>, Projectile>() {
-                    @Nullable
-                    @Override
-                    public Projectile apply(WeakReference<Projectile> projectileWeakReference) {
-                        return projectileWeakReference.get();
-                    }
-                })).build();
-    }
+    public Tile relativeTile(Vector vector);
 }

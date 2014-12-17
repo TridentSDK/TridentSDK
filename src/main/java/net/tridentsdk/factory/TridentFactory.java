@@ -18,7 +18,6 @@ package net.tridentsdk.factory;
 
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.base.Tile;
 import net.tridentsdk.meta.nbt.CompoundTag;
 import net.tridentsdk.meta.nbt.CompoundTagBuilder;
 import net.tridentsdk.meta.nbt.NBTBuilder;
@@ -36,40 +35,6 @@ import net.tridentsdk.world.World;
  */
 public final class TridentFactory {
     private TridentFactory() {
-    }
-
-    /* Block */
-
-    /**
-     * Creates a Block instance without location
-     *
-     * @return Block created instance without location
-     */
-    public static Tile createBlock() {
-        return new Tile(null);
-    }
-
-    /**
-     * Creates a Block instance with a location
-     *
-     * @param location Location of the block
-     * @return Block created instance with a location
-     */
-    public static Tile createBlock(Coordinates location) {
-        return new Tile(location);
-    }
-
-    /**
-     * Creates a Block instance from specified co-ordinates
-     *
-     * @param world World in which the Block belongs in
-     * @param x     X co-ordinate of the block
-     * @param y     Y co-ordinate of the block
-     * @param z     Z co-ordinate of the block
-     * @return Block created instance
-     */
-    public static Tile createBlock(World world, double x, double y, double z) {
-        return new Tile(createLocation(world, x, y, z));
     }
 
     /* Location */
