@@ -18,8 +18,6 @@ package net.tridentsdk.concurrent;
 
 import net.tridentsdk.plugin.TridentPlugin;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * The internal representation of a scheduled task, implemented inside the scheduler to manage the wrapping for
  * {@link net.tridentsdk.concurrent.TridentRunnable}
@@ -59,13 +57,6 @@ public interface ScheduledTask extends Runnable {
      * @return the runnable that is run at scheduled time
      */
     TridentRunnable getRunnable();
-
-    /**
-     * Whether or not the task has been run by the execution iterators in the scheduler
-     *
-     * @return {@code true} if the task has run already during the tick, {@code false} if it needs to begin
-     */
-    AtomicBoolean getRan();
 
     /**
      * The plugin that scheduled the task, or passed in when scheduled

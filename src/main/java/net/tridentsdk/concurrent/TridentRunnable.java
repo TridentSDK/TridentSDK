@@ -53,13 +53,15 @@ public abstract class TridentRunnable implements Runnable {
     }
 
     /**
-     * Runs after this runnable has finished, asynchronously
+     * Runs after this runnable has finished asynchronously
+     *
+     * <p>This method does not require the code to be thread-safe</p>
      */
     public void runAfterAsync() {
     }
 
     /**
-     * Runs after this runnable has finished, synchronously
+     * Runs after this runnable has been executed synchronously
      */
     public void runAfterSync() {
     }
