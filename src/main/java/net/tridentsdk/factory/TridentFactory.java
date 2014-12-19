@@ -45,7 +45,7 @@ public final class TridentFactory {
      * @return Location created instance with no world
      */
     public static Coordinates createLocation() {
-        return new Coordinates(null, 0.0, 0.0, 0.0);
+        return Coordinates.create(null, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -55,7 +55,7 @@ public final class TridentFactory {
      * @return Location with the specified world, but no co-coordinates
      */
     public static Coordinates createLocation(World world) {
-        return new Coordinates(world, 0.0, 0.0, 0.0);
+        return Coordinates.create(world, 0.0, 0.0, 0.0);
     }
 
     /**
@@ -68,7 +68,7 @@ public final class TridentFactory {
      * @return Location
      */
     public static Coordinates createLocation(World world, double x, double y, double z) {
-        return new Coordinates(world, x, y, z);
+        return Coordinates.create(world, x, y, z);
     }
 
     /**
@@ -83,7 +83,7 @@ public final class TridentFactory {
      * @return Location
      */
     public static Coordinates createLocation(World world, double x, double y, double z, float yaw, float pitch) {
-        return new Coordinates(world, x, y, z, yaw, pitch);
+        return Coordinates.create(world, x, y, z, yaw, pitch);
     }
 
     /**
@@ -95,21 +95,17 @@ public final class TridentFactory {
      * @return Location
      */
     public static Coordinates createLocation(Coordinates location, float yaw, float pitch) {
-        return new Coordinates(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
+        return Coordinates.create(location.getWorld(), location.getX(), location.getY(), location.getZ(), yaw, pitch);
     }
 
     /* World */
 
     public static ChunkLocation createChunkLoc() {
-        return new ChunkLocation(0, 0);
+        return ChunkLocation.create(0, 0);
     }
 
     public static ChunkLocation createChunkLoc(int x, int z) {
-        return new ChunkLocation(x, z);
-    }
-
-    public static ChunkLocation createChunkLoc(ChunkLocation chunkLocation) {
-        return new ChunkLocation(chunkLocation);
+        return ChunkLocation.create(x, z);
     }
 
     /* Utils */

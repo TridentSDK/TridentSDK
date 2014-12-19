@@ -36,17 +36,7 @@ public class Coordinates implements Cloneable {
     private float yaw;
     private float pitch;
 
-    /**
-     * References the point on the world as a location that wraps the coordinates
-     *
-     * @param world the world which the point resides in
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
-     * @param yaw   goes side to side, in degrees
-     * @param pitch goes up and down, in degrees
-     */
-    public Coordinates(World world, double x, double y, double z, float yaw, float pitch) {
+    private Coordinates(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
 
         this.x = x;
@@ -57,6 +47,28 @@ public class Coordinates implements Cloneable {
         this.pitch = pitch;
     }
 
+    private Coordinates(World world, double x, double y, double z) {
+        this(world, x, y, z, 0.0F, 0.0F);
+    }
+
+    private static double square(double d) {
+        return d * d;
+    }
+
+    /**
+     * References the point on the world as a location that wraps the coordinates
+     *
+     * @param world the world which the point resides in
+     * @param x     the x coordinate
+     * @param y     the y coordinate
+     * @param z     the z coordinate
+     * @param yaw   goes side to side, in degrees
+     * @param pitch goes up and down, in degrees
+     */
+    public static Coordinates create(World world, double x, double y, double z, float yaw, float pitch) {
+        return new Coordinates(world, x, y, z, yaw, pitch);
+    }
+
     /**
      * Wraps the point without specific yaw and pitch (set to 0)
      *
@@ -65,12 +77,8 @@ public class Coordinates implements Cloneable {
      * @param y     the y coordinate
      * @param z     the z coordinate
      */
-    public Coordinates(World world, double x, double y, double z) {
-        this(world, x, y, z, 0.0F, 0.0F);
-    }
-
-    private static double square(double d) {
-        return d * d;
+    public static Coordinates create(World world, double x, double y, double z) {
+        return new Coordinates(world, x, y, z);
     }
 
     /**
@@ -202,7 +210,7 @@ public class Coordinates implements Cloneable {
      * @return the relative location
      */
     public Coordinates getRelative(Vector vector) {
-        return new Coordinates(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
+        return create(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
                 vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
     }
 

@@ -68,13 +68,6 @@ public interface World extends Cloneable {
     Tile getTileAt(Coordinates location);
     
     /**
-     * Gets the ChunkSnapshot
-     * 
-     * @return The ChunkSnapshot
-     */
-    ChunkSnapshot getChunkSnapshot();
-    
-    /**
      * Gets the dimension of a world
      * 
      * @return The dimension of a world

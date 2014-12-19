@@ -21,40 +21,27 @@ import java.io.Serializable;
 /**
  * Stores the location of a Chunk
  *
- * @author drew
+ * @author The TridentSDK Team
  */
 public class ChunkLocation implements Serializable, Cloneable {
     private static final long serialVersionUID = 9083698035337137603L;
-    private int x;
-    private int z;
+    private final int x;
+    private final int z;
 
-    public ChunkLocation(int x, int z) {
+    private ChunkLocation(int x, int z) {
         this.x = x;
         this.z = z;
     }
 
-    public ChunkLocation(ChunkLocation coord) {
-        this.x = coord.getX();
-        this.z = coord.getZ();
+    public static ChunkLocation create(int x, int z) {
+        return new ChunkLocation(x, z);
     }
 
     public int getX() {
         return this.x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getZ() {
         return this.z;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
-    }
-
-    public Chunk getChunk() {
-        return null;
     }
 }

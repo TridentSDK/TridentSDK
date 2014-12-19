@@ -16,22 +16,16 @@
  */
 package net.tridentsdk.world;
 
-import java.util.Collections;
-import java.util.Map;
+public interface ChunkSnapshot extends Chunk {
+    /**
+     * Loads the data of the snapshot into the specified chunk
+     *
+     * @param chunk the chunk to reset the data contained in this snapshot to
+     */
+    public void load(Chunk chunk);
 
-public class ChunkSnapshot {
-
-    private final Map<ChunkLocation, Chunk> chunks;
-
-    public ChunkSnapshot(Map<ChunkLocation, Chunk> snapshot) {
-        this.chunks = Collections.unmodifiableMap(snapshot);
-    }
-
-    public Chunk getChunkAt(ChunkLocation location) {
-        return this.chunks.get(location);
-    }
-
-    public Chunk getChunkAt(int x, int z) {
-        return this.getChunkAt(new ChunkLocation(x, z));
-    }
+    /**
+     * Updates the chunk from this snapshot with the data contained in this snapshot
+     */
+    public void load();
 }

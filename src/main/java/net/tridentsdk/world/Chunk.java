@@ -30,4 +30,6 @@ public interface Chunk {
     World getWorld();
 
     Tile getTileAt(int relX, int y, int relZ);
+
+    ChunkSnapshot snapshot();
 }
