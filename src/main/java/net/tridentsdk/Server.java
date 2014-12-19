@@ -60,13 +60,6 @@ public interface Server {
     InetAddress getServerIp();
 
     /**
-     * Asks the server to reflect a task, will be run immediately on an alternate thread
-     *
-     * @param runnable The code to reflect
-     */
-    void addTask(Runnable runnable);
-
-    /**
      * Gets the current difficulty that the server is set to (Worlds can have their own difficulty)
      *
      * @return the difficulty of the server

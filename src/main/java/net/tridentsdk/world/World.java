@@ -101,13 +101,6 @@ public interface World extends Cloneable {
      * @return The type of a world
      */
     LevelType getLevelType();
-
-    /**
-     * Gets the spawn location of a world
-     *
-     * @return The spawn location of a world
-     */
-    Coordinates getSpawnLocation();
     
     /**
      * Gets the set boolean for the given gamerule

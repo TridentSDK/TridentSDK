@@ -62,7 +62,6 @@ public final class TridentLogger {
         fa.setAppend(true);
         fa.activateOptions();
 
-        //add appender to any Logger (here is root)
         Logger.getRootLogger().addAppender(fa);
     }
 

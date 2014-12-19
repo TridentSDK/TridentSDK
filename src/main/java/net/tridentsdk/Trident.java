@@ -79,10 +79,6 @@ public final class Trident {
         return server.getServerIp();
     }
 
-    public static void addTask(Runnable runnable) {
-        server.addTask(runnable);
-    }
-
     public static Difficulty getDifficulty() {
         return server.getDifficulty();
     }
