@@ -14,19 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package api;
+package net.tridentsdk;
 
 import net.tridentsdk.base.Substance;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class SubstanceTest {
-
+	/**
+	 * Coverage of substances
+	 */
 	@Test
-	public void test() {
-		
+	public void doTest() {
 		Assert.assertEquals("0", Substance.AIR.getId());
-		
 	}
-
 }

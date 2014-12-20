@@ -23,5 +23,6 @@ package net.tridentsdk.entity;
  * @author The TridentSDK Team
  */
 public enum EntityType {
+    NOT_IMPL
     // TODO: Make this enum
 }
