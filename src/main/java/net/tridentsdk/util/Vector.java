@@ -374,4 +374,17 @@ public class Vector implements Serializable, Cloneable {
             return null;
         }
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(x != ((Vector) obj).x){
+            return false;
+        }else if(y != ((Vector) obj).y){
+            return false;
+        }else if(z != ((Vector) obj).z){
+            return false;
+        }
+
+        return true;
+    }
 }

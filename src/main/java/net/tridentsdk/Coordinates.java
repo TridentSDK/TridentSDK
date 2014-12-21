@@ -264,4 +264,23 @@ public class Coordinates implements Cloneable {
             return null;
         }
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(x != ((Coordinates) obj).x){
+            return false;
+        }else if(y != ((Coordinates) obj).y){
+            return false;
+        }else if(z != ((Coordinates) obj).z){
+            return false;
+        }else if(world != ((Coordinates) obj).world){
+            return false;
+        }else if(pitch != ((Coordinates) obj).pitch){
+            return false;
+        }else if(yaw != ((Coordinates) obj).yaw){
+            return false;
+        }
+
+        return true;
+    }
 }
