@@ -535,7 +535,36 @@ public enum Substance {
      * @return True if the item is wearable (armor)
      */
     public boolean isWearable() {
-        return !this.isBlock() && this.idInt >= 298 && this.idInt <= 317;
+        if (this.isBlock() && this != PUMPKIN) {
+            return false;
+        }
+
+        switch(this){
+            case PUMPKIN:
+            case LEATHER_HELMET:
+            case LEATHER_CHESTPLATE:
+            case LEATHER_LEGGINGS:
+            case LEATHER_BOOTS:
+            case CHAINMAIL_HELMET:
+            case CHAINMAIL_CHESTPLATE:
+            case CHAINMAIL_LEGGINGS:
+            case CHAINMAIL_BOOTS:
+            case IRON_HELMET:
+            case IRON_CHESTPLATE:
+            case IRON_LEGGINGS:
+            case IRON_BOOTS:
+            case DIAMOND_HELMET:
+            case DIAMOND_CHESTPLATE:
+            case DIAMOND_LEGGINGS:
+            case DIAMOND_BOOTS:
+            case GOLD_HELMET:
+            case GOLD_CHESTPLATE:
+            case GOLD_LEGGINGS:
+            case GOLD_BOOTS:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -549,10 +578,42 @@ public enum Substance {
         }
 
         switch (this) {
+            case AIR:
+            case SAPLING:
             case WATER:
             case STATIONARY_WATER:
             case LAVA:
             case STATIONARY_LAVA:
+            case POWERED_RAIL:
+            case DETECTOR_RAIL:
+            case LONG_GRASS:
+            case DEAD_BUSH:
+            case YELLOW_FLOWER:
+            case RED_ROSE:
+            case TORCH:
+            case FIRE:
+            case REDSTONE_WIRE:
+            case CROPS:
+            case SIGN_POST:
+            case RAILS:
+            case WALL_SIGN:
+            case LEVER:
+            case STONE_PLATE:
+            case WOOD_PLATE:
+            case REDSTONE_TORCH_OFF:
+            case REDSTONE_TORCH_ON:
+            case STONE_BUTTON:
+            case SUGAR_CANE_BLOCK:
+            case PORTAL:
+            case TRIPWIRE_HOOK:
+            case TRIPWIRE:
+            case CARROT:
+            case POTATO:
+            case WOOD_BUTTON:
+            case GOLD_PLATE:
+            case IRON_PLATE:
+            case ACTIVATOR_RAIL:
+            case DOUBLE_PLANT:
                 return false;
             default:
                 return true;
@@ -599,9 +660,12 @@ public enum Substance {
             case SPRUCE_WOOD_STAIRS:
             case BIRCH_WOOD_STAIRS:
             case JUNGLE_WOOD_STAIRS:
+            case HAY_BLOCK:
+            case COAL_BLOCK:
             case TRAPPED_CHEST:
             case DAYLIGHT_DETECTOR:
             case CARPET:
+            case DOUBLE_PLANT:
             case LEAVES_2:
             case LOG_2:
             case ACACIA_STAIRS:
@@ -645,6 +709,7 @@ public enum Substance {
             case WOOD_STAIRS:
             case FENCE:
             case VINE:
+            case FENCE_GATE:
             case WOOD_DOUBLE_STEP:
             case WOOD_STEP:
             case SPRUCE_WOOD_STAIRS:
