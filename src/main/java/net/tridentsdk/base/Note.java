@@ -55,10 +55,12 @@ public class Note {
     public Note flatten() {
         if ((int) this.id - 1 < 0) {
             TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the max"));
-            return null;
         }
         return new Note((int) this.id - 1);
     }
 
-    // TODO: make this more notable & remove the horrible puns
+    public short getNote(){
+        return id;
+    }
+
 }
