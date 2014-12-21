@@ -51,7 +51,7 @@ public enum VillagerCareer {
     /**
      * Librarian
      */
-    LIBRARIAN(VillagerProfession.LIBRARAIAN, 0),
+    LIBRARIAN(VillagerProfession.LIBRARIAN, 0),
 
     /**
      * Cleric
@@ -111,4 +111,11 @@ public enum VillagerCareer {
         this.id = id;
     }
 
+    public VillagerProfession getParent(){
+        return parent;
+    }
+
+    public int getId(){
+        return id;
+    }
 }

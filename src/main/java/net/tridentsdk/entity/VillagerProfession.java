@@ -30,7 +30,7 @@ public enum VillagerProfession {
     /**
      * Librarian
      */
-    LIBRARAIAN(1),
+    LIBRARIAN(1),
 
     /**
      * Priest

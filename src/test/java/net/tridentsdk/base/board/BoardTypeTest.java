@@ -14,49 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity;
+package net.tridentsdk.base.board;
 
-public enum HorseType {
-    /**
-     * Generic Horse
-     */
-    HORSE(0),
+import org.junit.Assert;
+import org.junit.Test;
 
-    /**
-     * Donkey
-     */
-    DONKEY(1),
+public class BoardTypeTest {
 
-    /**
-     * Mule
-     */
-    MULE(2),
-
-    /**
-     * Zombie horse
-     */
-    ZOMBIE(3),
-
-    /**
-     * Skeleton horse
-     */
-    SKELETON(4);
-    private static final HorseType[] byId = new HorseType[5];
-
-    static {
-        for (HorseType type : HorseType.values()) {
-            byId[type.id] = type;
-        }
+    @Test
+    public void testAsByte() throws Exception{
+        Assert.assertEquals(BoardType.LIST.asByte(), 0);
+        Assert.assertEquals(BoardType.SIDEBAR.asByte(), 1);
+        Assert.assertEquals(BoardType.BELOW_NAME.asByte(), 2);
     }
-
-    private final int id;
-
-    HorseType(int id) {
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
-    }
-
 }

@@ -14,49 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity;
+package net.tridentsdk.base.board;
 
-public enum HorseType {
-    /**
-     * Generic Horse
-     */
-    HORSE(0),
+import org.junit.Assert;
+import org.junit.Test;
 
-    /**
-     * Donkey
-     */
-    DONKEY(1),
+public class TagVisibilityTest {
 
-    /**
-     * Mule
-     */
-    MULE(2),
-
-    /**
-     * Zombie horse
-     */
-    ZOMBIE(3),
-
-    /**
-     * Skeleton horse
-     */
-    SKELETON(4);
-    private static final HorseType[] byId = new HorseType[5];
-
-    static {
-        for (HorseType type : HorseType.values()) {
-            byId[type.id] = type;
-        }
-    }
-
-    private final int id;
-
-    HorseType(int id) {
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
+    @Test
+    public void testToString() throws Exception{
+        Assert.assertEquals(TagVisibility.ALWAYS.toString(), "always");
+        Assert.assertEquals(TagVisibility.HIDE_OTHER_TEAMS.toString(), "hideFromOtherTeams");
+        Assert.assertEquals(TagVisibility.HIDE_OWN_TEAM.toString(), "hideFromOwnTeam");
+        Assert.assertEquals(TagVisibility.NEVER.toString(), "never");
     }
 
 }

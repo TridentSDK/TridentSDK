@@ -14,49 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity;
+package net.tridentsdk.event;
 
-public enum HorseType {
-    /**
-     * Generic Horse
-     */
-    HORSE(0),
+import org.junit.Assert;
+import org.junit.Test;
 
-    /**
-     * Donkey
-     */
-    DONKEY(1),
+public class ImportanceTest {
 
-    /**
-     * Mule
-     */
-    MULE(2),
-
-    /**
-     * Zombie horse
-     */
-    ZOMBIE(3),
-
-    /**
-     * Skeleton horse
-     */
-    SKELETON(4);
-    private static final HorseType[] byId = new HorseType[5];
-
-    static {
-        for (HorseType type : HorseType.values()) {
-            byId[type.id] = type;
-        }
-    }
-
-    private final int id;
-
-    HorseType(int id) {
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
+    @Test
+    public void testGetImportance() throws Exception{
+        Assert.assertEquals(Importance.LOWEST.getImportance(), 0);
+        Assert.assertEquals(Importance.LOW.getImportance(), 1);
+        Assert.assertEquals(Importance.MEDIUM.getImportance(), 2);
+        Assert.assertEquals(Importance.HIGH.getImportance(), 3);
+        Assert.assertEquals(Importance.HIGHEST.getImportance(), 4);
     }
 
 }

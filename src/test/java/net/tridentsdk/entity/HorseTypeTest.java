@@ -16,47 +16,17 @@
  */
 package net.tridentsdk.entity;
 
-public enum HorseType {
-    /**
-     * Generic Horse
-     */
-    HORSE(0),
+import org.junit.Assert;
+import org.junit.Test;
 
-    /**
-     * Donkey
-     */
-    DONKEY(1),
+public class HorseTypeTest {
 
-    /**
-     * Mule
-     */
-    MULE(2),
-
-    /**
-     * Zombie horse
-     */
-    ZOMBIE(3),
-
-    /**
-     * Skeleton horse
-     */
-    SKELETON(4);
-    private static final HorseType[] byId = new HorseType[5];
-
-    static {
-        for (HorseType type : HorseType.values()) {
-            byId[type.id] = type;
-        }
+    @Test
+    public void testGetId() throws Exception{
+        Assert.assertEquals(HorseType.HORSE.getId(), 0);
+        Assert.assertEquals(HorseType.DONKEY.getId(), 1);
+        Assert.assertEquals(HorseType.MULE.getId(), 2);
+        Assert.assertEquals(HorseType.ZOMBIE.getId(), 3);
+        Assert.assertEquals(HorseType.SKELETON.getId(), 4);
     }
-
-    private final int id;
-
-    HorseType(int id) {
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
-    }
-
 }
