@@ -16,4 +16,4 @@ env:
     - secure: "M8cFHpjB09qIebLFosrU7udDyiLas9iEQ+Wr74Ao5sqZQ9lOdmqco3bV96W/eblDU3KqMpCXHdgmDhpzgAHZQMEpxDZqu6ifpeNu6uuET4tX5NEj2xudbLf3CUCSc7GSzhxen3Oz1aP9MxNmjS6aXSgddZmmeG/LIGx7g3YQW+Y="
     - secure: "XlEsd+3wdxkYXGGrWQrNEeiwXnaEqQaQ2LhyN2SKuml2PU0LqZk7aH4hJArB4bOPbEtyGndm8OOoXhgfbatpDXsRG+BLRK+soTqew2M4oUBLIQaNBIgKYdXuMFb986GODOlV6ECgeX4EfToL4g4HuOCRmLBV/cFndWhAlgKbJbE="
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn cobertura:cobertura coveralls:report
