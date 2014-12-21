@@ -170,7 +170,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <repoToken>${env.CI_DEPLOY_PASSWORD}</repoToken>
+                    <repoToken>${env.COVERAGE_TOKEN}</repoToken>
                 </configuration>
             </plugin>
             <plugin>
