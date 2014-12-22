@@ -29,7 +29,7 @@ import javax.annotation.concurrent.Immutable;
 public class Note {
     private final short id;
 
-    Note(int id) {
+    public Note(int id) {
         if (id > 24) {
             TridentLogger.error(new IllegalArgumentException("Note is too high!"));
         } else if (id < 0) {
