@@ -24,7 +24,7 @@ package net.tridentsdk.api;
 public class Note {
     private final short id;
 
-    Note(int id) {
+    public Note(int id) {
         if (id > 24) {
             throw new IllegalArgumentException("Note is too high!");
         } else if (id < 0) {
