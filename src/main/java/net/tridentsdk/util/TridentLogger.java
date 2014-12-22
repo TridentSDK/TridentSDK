@@ -28,7 +28,6 @@ import java.util.Random;
 
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
-    private static final Random RANDOM = new Random();
     private static final String[] ERRORS = {
             "Aw, Mazen! Really?",
             "I feel funny",
@@ -96,7 +95,8 @@ public final class TridentLogger {
 
         getLogger().error("");
 
-        int randomNum = RANDOM.nextInt((ERRORS.length - 1) + 1);
+        Random rand = new Random();
+        int randomNum = rand.nextInt((ERRORS.length - 1) + 1) + 0;
 
         getLogger().error(ERRORS[randomNum]);
         getLogger().error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + throwable.getMessage());

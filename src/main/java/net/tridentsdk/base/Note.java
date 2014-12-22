@@ -14,21 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.api;
+package net.tridentsdk.base;
+
+import net.tridentsdk.util.TridentLogger;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Immutable value representing the pitch of a note played
  *
  * @author The TridentSDK Team
  */
+@Immutable
 public class Note {
     private final short id;
 
     public Note(int id) {
         if (id > 24) {
-            throw new IllegalArgumentException("Note is too high!");
+            TridentLogger.error(new IllegalArgumentException("Note is too high!"));
         } else if (id < 0) {
-            throw new IllegalArgumentException("Note is too low!");
+            TridentLogger.error(new IllegalArgumentException("Note is too low!"));
         }
 
         this.id = (short) id;
@@ -39,7 +44,7 @@ public class Note {
      */
     public Note sharpen() {
         if ((int) this.id + 1 > 24) {
-            throw new IllegalArgumentException("Cannot sharpen this note, it is already the max");
+            TridentLogger.error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
         }
         return new Note((int) this.id + 1);
     }
@@ -48,10 +53,14 @@ public class Note {
      * Returns a note flatter than this
      */
     public Note flatten() {
-        if ((int) this.id - 1 < 0)
-            throw new IllegalArgumentException("Cannot flatten this note, it is already the min");
+        if ((int) this.id - 1 < 0) {
+            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the max"));
+        }
         return new Note((int) this.id - 1);
     }
 
-    // TODO: make this more notable & remove the horrible puns
+    public short getNote(){
+        return id;
+    }
+
 }

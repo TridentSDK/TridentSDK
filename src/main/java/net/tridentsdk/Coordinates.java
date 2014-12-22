@@ -14,18 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.api;
+package net.tridentsdk;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.api.util.Vector;
-import net.tridentsdk.api.world.World;
+import net.tridentsdk.base.Tile;
+import net.tridentsdk.util.Vector;
+import net.tridentsdk.world.World;
 
 /**
  * Represents a point on the coordinate grid of the world
  *
  * @author The TridentSDK Team
  */
-public class Location implements Cloneable {
+public class Coordinates implements Cloneable {
     private double x;
     private double y;
     private double z;
@@ -34,6 +35,25 @@ public class Location implements Cloneable {
 
     private float yaw;
     private float pitch;
+
+    private Coordinates(World world, double x, double y, double z, float yaw, float pitch) {
+        this.world = world;
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+
+        this.yaw = yaw;
+        this.pitch = pitch;
+    }
+
+    private Coordinates(World world, double x, double y, double z) {
+        this(world, x, y, z, 0.0F, 0.0F);
+    }
+
+    private static double square(double d) {
+        return d * d;
+    }
 
     /**
      * References the point on the world as a location that wraps the coordinates
@@ -45,15 +65,8 @@ public class Location implements Cloneable {
      * @param yaw   goes side to side, in degrees
      * @param pitch goes up and down, in degrees
      */
-    public Location(World world, double x, double y, double z, float yaw, float pitch) {
-        this.world = world;
-
-        this.x = x;
-        this.y = y;
-        this.z = z;
-
-        this.yaw = yaw;
-        this.pitch = pitch;
+    public static Coordinates create(World world, double x, double y, double z, float yaw, float pitch) {
+        return new Coordinates(world, x, y, z, yaw, pitch);
     }
 
     /**
@@ -64,12 +77,8 @@ public class Location implements Cloneable {
      * @param y     the y coordinate
      * @param z     the z coordinate
      */
-    public Location(World world, double x, double y, double z) {
-        this(world, x, y, z, 0.0F, 0.0F);
-    }
-
-    private static double square(double d) {
-        return d * d;
+    public static Coordinates create(World world, double x, double y, double z) {
+        return new Coordinates(world, x, y, z);
     }
 
     /**
@@ -181,21 +190,37 @@ public class Location implements Cloneable {
     }
 
     /**
-     * Adds a vector to this location, returning this locacion
-     * @param vector the vector to add
-     * @return this
+     * Adds the x, y, and z from the vector to the coordinates of this location
+     *
+     * @param vector the vector containing the relative data
+     * @return the relative location
      */
-    public Location add(Vector vector) {
-        this.setX(this.getX() + vector.getX());
-        this.setY(this.getY() + vector.getY());
-        this.setZ(this.getZ() + vector.getZ());
+    public Coordinates add(Vector vector) {
+        this.setX(vector.getX());
+        this.setY(vector.getY());
+        this.setZ(vector.getZ());
 
         return this;
     }
 
-    public Location getRelative(Vector vector) {
-        return new Location(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
+    /**
+     * Acquires the relative location to this set of coordinates
+     *
+     * @param vector the vector that has the x, y, and z of the location relative to this
+     * @return the relative location
+     */
+    public Coordinates getRelative(Vector vector) {
+        return create(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
                 vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
+    }
+
+    /**
+     * Acquires the tile at this location
+     *
+     * @return the tile occupying the coordinates of this location
+     */
+    public Tile getTile() {
+        return getWorld().getTileAt(this);
     }
 
     /**
@@ -213,7 +238,7 @@ public class Location implements Cloneable {
      * @param location the location to measure distance with
      * @return distance from this location to another
      */
-    public double distance(Location location) {
+    public double distance(Coordinates location) {
         return Math.sqrt(this.distanceSquared(location));
     }
 
@@ -223,19 +248,39 @@ public class Location implements Cloneable {
      * @param location the location to measure distance with
      * @return distance squared from this location to another
      */
-    public double distanceSquared(Location location) {
+    public double distanceSquared(Coordinates location) {
         Preconditions.checkNotNull(location, "Location cannot be null.");
         if (!this.getWorld().equals(location.getWorld())) return 0.0;
         return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
-                square(this.getZ() - location.getZ());
+                square(
+                        this.getZ() - location.getZ());
     }
 
     @Override
-    public Location clone() {
+    public Coordinates clone() {
         try {
-            return (Location) super.clone();
+            return (Coordinates) super.clone();
         } catch (CloneNotSupportedException ignored) {
             return null;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(x != ((Coordinates) obj).x){
+            return false;
+        }else if(y != ((Coordinates) obj).y){
+            return false;
+        }else if(z != ((Coordinates) obj).z){
+            return false;
+        }else if(world != ((Coordinates) obj).world){
+            return false;
+        }else if(pitch != ((Coordinates) obj).pitch){
+            return false;
+        }else if(yaw != ((Coordinates) obj).yaw){
+            return false;
+        }
+
+        return true;
     }
 }
