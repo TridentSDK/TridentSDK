@@ -19,6 +19,7 @@ package net.tridentsdk.meta.nbt;
 import com.google.common.collect.Lists;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +32,7 @@ public class CompoundTag extends NBTTag implements TagContainer {
         super(name);
     }
 
-    public Iterable<NBTTag> listTags() {
+    public List<NBTTag> listTags() {
         return Lists.newArrayList(this.tags.values());
     }
 
