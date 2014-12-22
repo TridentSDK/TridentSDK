@@ -28,6 +28,7 @@ public class InstrumentTest {
         Assert.assertEquals(Instrument.fromByte((byte) 0x2), Instrument.SNARE_DRUM);
         Assert.assertEquals(Instrument.fromByte((byte) 0x3), Instrument.STICKS);
         Assert.assertEquals(Instrument.fromByte((byte) 0x4), Instrument.BASS_GUITAR);
+        Assert.assertEquals(Instrument.fromByte((byte) 0x5), null);
     }
 
     @Test
