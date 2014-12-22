@@ -24,9 +24,6 @@ import java.lang.reflect.Field;
 
 public final class NBTSerializer {
 
-    private NBTSerializer() {
-    }
-
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
             TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
