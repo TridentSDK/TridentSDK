@@ -1,4 +1,4 @@
-TridentSDK [![Build Status](https://travis-ci.org/TridentSDK/TridentSDK.svg?branch=master)](https://travis-ci.org/TridentSDK/TridentSDK) [![Coverage Status](https://coveralls.io/repos/TridentSDK/TridentSDK/badge.png?branch=bleeding-edge)](https://coveralls.io/r/TridentSDK/TridentSDK?branch=bleeding-edge)
+TridentSDK [![Build Status](https://travis-ci.org/TridentSDK/TridentSDK.svg?branch=master)](https://travis-ci.org/TridentSDK/TridentSDK) [![Coverage Status](https://img.shields.io/coveralls/TridentSDK/TridentSDK.svg)](https://coveralls.io/r/TridentSDK/TridentSDK?branch=master)
 =========
 
 TridentSDK is the successor to the Bukkit/Spigot projects. Following the news of the "takeover" of the Bukkit project and the DMCA takedown of Bukkit, and therefore Spigot, we realized that someone needs to step up and create the best of server software for Minecraft after the decline of both projects. The result was TridentSDK, the development kit that is implemented by the server, Trident.
