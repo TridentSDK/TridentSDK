@@ -17,11 +17,11 @@
 package net.tridentsdk.concurrent;
 
 import net.tridentsdk.factory.Factories;
-import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Cache wrapping {@link java.util.concurrent.ConcurrentHashMap}
@@ -32,7 +32,8 @@ import java.util.concurrent.*;
  */
 @ThreadSafe
 public class ConcurrentCache<K, V> {
-    private final ConcurrentMap<K, Future<V>> cache = Factories.collect().createMap();
+    private final Object PLACE_HOLDER = new Object();
+    private final ConcurrentMap<K, Object> cache = Factories.collect().createMap();
 
     /**
      * Retrieves the key in the cache, or adds the return value of the callable provided
@@ -42,25 +43,23 @@ public class ConcurrentCache<K, V> {
      * @return the return value of the callable
      */
     public V retrieve(K k, Callable<V> callable) {
-        while (true) {
-            Future<V> f = cache.get(k);
-            if (f == null) {
-                FutureTask<V> ft = new FutureTask<>(callable);
-                f = cache.putIfAbsent(k, ft);
-
-                if (f == null) {
-                    f = ft;
-                    ft.run();
+        Object value = cache.get(k);
+        if (value == null) {
+            V v = null;
+            value = cache.putIfAbsent(k, PLACE_HOLDER);
+            if (value == null) {
+                try {
+                    v = callable.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }
-            try {
-                return f.get();
-            } catch (CancellationException e) {
-                cache.remove(k, f);
-            } catch (ExecutionException | InterruptedException e) {
-                TridentLogger.error(e);
+
+                cache.replace(k, PLACE_HOLDER, v);
+                value = v;
             }
         }
+
+        return (V) value;
     }
 
     public Set<K> keys() {
@@ -74,13 +73,8 @@ public class ConcurrentCache<K, V> {
      */
     public Collection<V> values() {
         Collection<V> list = new ArrayList<>();
-
-        for (Future<V> v : this.cache.values()) {
-            try {
-                list.add(v.get());
-            } catch (InterruptedException | ExecutionException ignored) {
-            }
-        }
+        for (Object v : this.cache.values())
+            list.add((V) v);
 
         return list;
     }
@@ -92,18 +86,13 @@ public class ConcurrentCache<K, V> {
      * @return the old value assigned to the key, otherwise, {@code null} if not in the cache
      */
     public V remove(K k) {
-        while (true) {
-            Future<V> future = this.cache.get(k);
+        Object val = this.cache.get(k);
 
-            if (future == null) return null;
+        if (val == null)
+            return null;
 
-            this.cache.remove(k);
-            try {
-                return future.get();
-            } catch (InterruptedException | ExecutionException e) {
-                TridentLogger.error(e);
-            }
-        }
+        this.cache.remove(k);
+        return (V) val;
     }
 
     /**
@@ -113,12 +102,8 @@ public class ConcurrentCache<K, V> {
      */
     public Set<Map.Entry<K, V>> entries() {
         Set<Map.Entry<K, V>> entries = new HashSet<>();
-        for (Map.Entry<K, Future<V>> entry : cache.entrySet())
-            try {
-                entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().get()));
-            } catch (InterruptedException | ExecutionException e) {
-                TridentLogger.error(e);
-            }
+        for (Map.Entry<K, Object> entry : cache.entrySet())
+            entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), (V) entry.getValue()));
         return entries;
     }
 }
