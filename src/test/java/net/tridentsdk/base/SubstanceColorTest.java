@@ -44,7 +44,7 @@ public class SubstanceColorTest {
         for (SubstanceColor color : SubstanceColor.values()) {
             byte[] original = color.asBytes(0);
             Assert.assertEquals(original[0], (byte) ((0 << 5 | 0 & 0x1F) & 0xFF));
-            Assert.assertEquals(original[1], (byte) color.value);
+            Assert.assertEquals(original[1], (byte) color.asInt());
         }
     }
 
