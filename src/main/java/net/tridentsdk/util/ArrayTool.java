@@ -20,7 +20,7 @@ import com.google.common.reflect.TypeToken;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Array;
-import java.util.function.Function;
+import com.google.common.base.Function;
 
 /**
  * Tools for modifying elements of an array
