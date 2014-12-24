@@ -347,12 +347,12 @@ public enum Substance {
     CAULDRON_ITEM("380"),
     EYE_OF_ENDER("381"),
     SPECKLED_MELON("382"),
-    MONSTER_EGG("383", 64),
-    EXP_BOTTLE("384", 64),
-    FIREBALL("385", 64),
+    MONSTER_EGG("383"),
+    EXP_BOTTLE("384"),
+    FIREBALL("385"),
     BOOK_AND_QUILL("386", 1),
     WRITTEN_BOOK("387", 16),
-    EMERALD("388", 64),
+    EMERALD("388"),
     ITEM_FRAME("389"),
     FLOWER_POT_ITEM("390"),
     CARROT_ITEM("391"),
@@ -426,7 +426,7 @@ public enum Substance {
     }
 
     Substance(String id) {
-        this(id, 0, "");
+        this(id, 64, "");
     }
 
     /**

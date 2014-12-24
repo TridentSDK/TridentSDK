@@ -17,7 +17,6 @@
 package net.tridentsdk.concurrent;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -27,22 +26,15 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @ThreadSafe
 public abstract class TridentRunnable implements Runnable {
-    private static int currentId = 0;
+    private static volatile int currentId = 0;
 
-    private final AtomicInteger id = new AtomicInteger(-1);
+    private final int id;
     private final boolean inAHurry = false;
 
     private final AtomicReference<ScheduledTask> task = new AtomicReference<>();
 
     public TridentRunnable() {
-        id.set(currentId += 1);
-    }
-
-    /**
-     * Returns if this runnable is in a hurry, usually indicating that the server is shutting down
-     */
-    public boolean isInAHurry() {
-        return this.inAHurry;
+        id = currentId += 1;
     }
 
     /**
@@ -102,14 +94,7 @@ public abstract class TridentRunnable implements Runnable {
      * Used internally to refer to this runnable, probably shouldn't be used by plugins
      */
     public final int getId() {
-        return this.id.get();
-    }
-
-    /**
-     * Should be reimplemented by a runnable if it wants to use in a hurry <p>Reimplement to return true</p>
-     */
-    public boolean usesInAHurry() {
-        return false;
+        return this.id;
     }
 
     /**

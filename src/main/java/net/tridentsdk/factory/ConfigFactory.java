@@ -31,6 +31,11 @@ import java.nio.file.Paths;
  * @author The TridentSDK Team
  */
 public abstract class ConfigFactory {
+    /**
+     * Get the server's configuration
+     *
+     * @return the JSON config for th
+     */
     public abstract JsonConfig serverConfig();
 
     /**

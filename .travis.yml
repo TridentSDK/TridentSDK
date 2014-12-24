@@ -1,5 +1,8 @@
-before_install: "git clone -b travis `git config --get remote.origin.url` target/travis"
+before_install:
+  - "git clone -b travis `git config --get remote.origin.url` target/travis"
+  - chmod 777 "scripts/javadoc.sh"
 script: "mvn clean install deploy --settings target/travis/settings.xml"
+after_script: sh javadoc.sh
 language: java
 notifications:
   email: false
@@ -15,5 +18,6 @@ env:
     - secure: "ewpnnG41+tNBDWHcU69RlQlqItVHQcCso+Dc+gEJdEUSXTHowj18lQR7DpOIsZmnOrg9yP35dXQnoTgnsduvBCZWoUToqoHyiIXBswBmv+s3zwoJ1gBl6l4Wt7uVEW+W8+eCJxxU1NXs43KcCyjx/vL6PHOaDSGBuZYLRdF/3fM="
     - secure: "M8cFHpjB09qIebLFosrU7udDyiLas9iEQ+Wr74Ao5sqZQ9lOdmqco3bV96W/eblDU3KqMpCXHdgmDhpzgAHZQMEpxDZqu6ifpeNu6uuET4tX5NEj2xudbLf3CUCSc7GSzhxen3Oz1aP9MxNmjS6aXSgddZmmeG/LIGx7g3YQW+Y="
     - secure: "XlEsd+3wdxkYXGGrWQrNEeiwXnaEqQaQ2LhyN2SKuml2PU0LqZk7aH4hJArB4bOPbEtyGndm8OOoXhgfbatpDXsRG+BLRK+soTqew2M4oUBLIQaNBIgKYdXuMFb986GODOlV6ECgeX4EfToL4g4HuOCRmLBV/cFndWhAlgKbJbE="
+    - secure: "H8HTOwCBB2Aq02zgC4VfF8rcLjLciGiAfjlEylH6M5hnNuO9E842d+1Pu4K5DhwME3olyF0WFDXrTPkZulQBbYYXhVA7eiqCznACORiRYokYQ8eTsiYTQsHgexK8o1pugrOqNyiQJu0MnHMXQxCyYM8xDHEL5NwKMERqweivOr8="
 after_success:
   - mvn cobertura:cobertura coveralls:report

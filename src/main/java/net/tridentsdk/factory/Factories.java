@@ -19,7 +19,8 @@ package net.tridentsdk.factory;
 import net.tridentsdk.DisplayInfo;
 import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.docs.PossiblyThreadSafe;
+
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Available creational factories for basic objects
@@ -32,8 +33,8 @@ import net.tridentsdk.docs.PossiblyThreadSafe;
  *
  * @author The TridentSDK Team
  */
-@PossiblyThreadSafe
-public class Factories {
+@ThreadSafe
+public final class Factories {
     private static final HeldValueLatch<TaskFactory> taskFactory = new HeldValueLatch<>();
     private static final HeldValueLatch<ThreadFactory> threadFactory = new HeldValueLatch<>();
     private static final HeldValueLatch<ConfigFactory> configFactory = new HeldValueLatch<>();
@@ -60,6 +61,9 @@ public class Factories {
     @InternalUseOnly
     public static void init(CollectFactory factory) {
         collectFactory.countDown(factory);
+    }
+
+    private Factories() {
     }
 
     /**
