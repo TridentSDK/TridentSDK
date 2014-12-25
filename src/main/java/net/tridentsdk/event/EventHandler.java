@@ -24,6 +24,7 @@ import net.tridentsdk.concurrent.ConcurrentCache;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -94,6 +95,9 @@ import java.util.concurrent.PriorityBlockingQueue;
         HashMultimap<Class<? extends Event>, EventReflector> map = HashMultimap.create(11, 11);
         for (int i = 0, n = methods.length; i < n; i++) {
             Method method = methods[i];
+            if(method.isAnnotationPresent(IgnoreRegistration.class)) {
+                continue;
+            }
             Class<?>[] parameterTypes = method.getParameterTypes();
             Class<?> type = parameterTypes[0];
 
