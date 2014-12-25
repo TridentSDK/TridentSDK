@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta;
 
 import net.tridentsdk.meta.ChatColor;
@@ -26,7 +27,7 @@ import org.junit.Test;
 public class MessageTest {
 
     @Test
-    public void testClass() throws Exception{
+    public void testClass() throws Exception {
 
         Message message = new Message();
         message.text("Hello World");
@@ -34,11 +35,13 @@ public class MessageTest {
         message.clickEvent(new ClickEvent().action(ClickEvent.ClickAction.SUGGEST_COMMAND).value("Click"));
         message.hoverEvent(new HoverEvent().action(HoverEvent.HoverAction.SHOW_TEXT).value("Hover"));
 
-        if(message.getMessage() == null){
+        if (message.getMessage() == null) {
             Assert.fail();
         }
 
-        Assert.assertEquals(message.asJson(), "{\"text\":\"Hello World\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"Click\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Hover\"}}");
-
+        Assert.assertEquals(message.asJson(),
+                            "{\"text\":\"Hello World\",\"color\":\"aqua\"," +
+                                    "\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"Click\"}," +
+                                    "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Hover\"}}");
     }
 }

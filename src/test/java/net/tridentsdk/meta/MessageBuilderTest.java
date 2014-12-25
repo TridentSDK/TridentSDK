@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta;
 
 import net.tridentsdk.meta.ChatColor;
@@ -25,7 +26,7 @@ import org.junit.Test;
 public class MessageBuilderTest {
 
     @Test
-    public void testClass() throws Exception{
+    public void testClass() throws Exception {
 
         MessageBuilder message = new MessageBuilder("Hello World");
         message.color(ChatColor.AQUA);
@@ -36,8 +37,9 @@ public class MessageBuilderTest {
         message.then(new Message().text("MESSAGE"));
         message.build();
 
-        Assert.assertEquals(message.toJson(), "{\"text\":\"\",\"extra\":[{\"text\":\"Hello World\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"open_file\",\"value\":\"FILE\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"HOVER\"}},{\"text\":\"THEN\"}]}");
-
+        Assert.assertEquals(message.toJson(),
+                            "{\"text\":\"\",\"extra\":[{\"text\":\"Hello World\",\"color\":\"aqua\"," +
+                                    "\"clickEvent\":{\"action\":\"open_file\",\"value\":\"FILE\"}," +
+                                    "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"HOVER\"}},{\"text\":\"THEN\"}]}");
     }
-
 }

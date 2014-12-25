@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk;
 
 import net.tridentsdk.Difficulty;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class DifficultyTest {
 
     @Test
-    public void testToByte() throws Exception{
+    public void testToByte() throws Exception {
         Assert.assertEquals(Difficulty.PEACEFUL.toByte(), 0);
         Assert.assertEquals(Difficulty.EASY.toByte(), 1);
         Assert.assertEquals(Difficulty.NORMAL.toByte(), 2);
@@ -31,7 +32,7 @@ public class DifficultyTest {
     }
 
     @Test
-    public void testGetDifficulty() throws Exception{
+    public void testGetDifficulty() throws Exception {
         Assert.assertEquals(Difficulty.getDifficulty(0), Difficulty.PEACEFUL);
         Assert.assertEquals(Difficulty.getDifficulty(1), Difficulty.EASY);
         Assert.assertEquals(Difficulty.getDifficulty(2), Difficulty.NORMAL);
@@ -39,5 +40,4 @@ public class DifficultyTest {
 
         Assert.assertEquals(Difficulty.getDifficulty(10), Difficulty.NORMAL);
     }
-
 }

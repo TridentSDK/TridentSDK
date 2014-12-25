@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.perf;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
@@ -40,7 +41,7 @@ public class FastMethod {
      * Invokes the method with parameters
      *
      * @param instance the instance of the class to use, to {@code null for static methods}
-     * @param args the parameter values for the method
+     * @param args     the parameter values for the method
      * @return the return type of the method, or {@code null} for {@code void} methods
      */
     public Object invoke(Object instance, Object... args) {

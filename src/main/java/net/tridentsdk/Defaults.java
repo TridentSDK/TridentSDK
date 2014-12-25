@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk;
 
 // if these shouldn't exist, or should go somewhere else, just move them

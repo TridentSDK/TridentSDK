@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.entity;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.DroppedItem;
+import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
 
 /**

@@ -17,4 +17,5 @@
 /**
  * Non-living entities that can be ridden, mostly minecarts
  */
+
 package net.tridentsdk.entity.vehicle;

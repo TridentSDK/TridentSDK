@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.entity;
 
 import net.tridentsdk.entity.EntityType;
@@ -23,8 +24,7 @@ import org.junit.Test;
 public class EntityTypeTest {
 
     @Test
-    public void testEnum() throws Exception{
+    public void testEnum() throws Exception {
         Assert.assertEquals(EntityType.NOT_IMPL, EntityType.NOT_IMPL);
     }
-
 }

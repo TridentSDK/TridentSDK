@@ -17,4 +17,5 @@
 /**
  * Access to the data set for worlds, entities, items, blocks, and the like using builders and data viewers
  */
+
 package net.tridentsdk.meta.nbt;

@@ -17,4 +17,5 @@
 /**
  * Primary server access to properties provided by the API
  */
+
 package net.tridentsdk;

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk;
 
 /**
@@ -35,15 +36,6 @@ public enum Difficulty {
         this.b = (byte) i;
     }
 
-    /**
-     * Returns the {@code byte} value of the Difficulty
-     *
-     * @return {@code byte} value of the Difficulty
-     */
-    public byte toByte() {
-        return this.b;
-    }
-
     public static Difficulty getDifficulty(int i) {
         for (Difficulty difficulty : values()) {
             if (difficulty.b == i) {
@@ -52,5 +44,14 @@ public enum Difficulty {
         }
 
         return Difficulty.NORMAL;
+    }
+
+    /**
+     * Returns the {@code byte} value of the Difficulty
+     *
+     * @return {@code byte} value of the Difficulty
+     */
+    public byte toByte() {
+        return this.b;
     }
 }

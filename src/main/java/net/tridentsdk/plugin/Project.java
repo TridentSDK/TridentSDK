@@ -14,15 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.factory.Factories;
 
 public class Project extends TridentPlugin {
-    private final JsonConfig config =
-            Factories
-            .configs()
+    private final JsonConfig config = Factories.configs()
             .createConfig(this.getConfigDirectory() + "/configuration.json");
 
     @Override

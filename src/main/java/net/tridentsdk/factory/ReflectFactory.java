@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.factory;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
@@ -52,7 +53,7 @@ public class ReflectFactory {
     /**
      * Acquires a wrapper for faster reflective manipulation
      *
-     * @param o the instance to get the field from
+     * @param o    the instance to get the field from
      * @param name the name of the declared field
      * @return the wrapped field
      */
@@ -62,9 +63,10 @@ public class ReflectFactory {
     }
 
     /**
-     * Acquires a field wrapper in the same fashion as {@link #getMethod(Object, String)}, but for {@code static} fields
+     * Acquires a field wrapper in the same fashion as {@link #getMethod(Object, String)}, but for {@code static}
+     * fields
      *
-     * @param cls the class to acquire the field from
+     * @param cls  the class to acquire the field from
      * @param name the name of the {@code static} field
      * @return the wrapped {@code static} field
      */
@@ -75,7 +77,7 @@ public class ReflectFactory {
     /**
      * Acquires a method wrapper that enables faster reflective invocation
      *
-     * @param o the instance used to invoke the method
+     * @param o    the instance used to invoke the method
      * @param name the method name
      * @return the wrapped method
      */
@@ -86,7 +88,7 @@ public class ReflectFactory {
     /**
      * Acquires a method in the same fashion as {@link #getMethod(Object, String)}, but for {@code static} methods
      *
-     * @param cls the class to get the method from
+     * @param cls  the class to get the method from
      * @param name the name of the method
      * @return the wrapped {@code static} method
      */
@@ -95,9 +97,7 @@ public class ReflectFactory {
     }
 
     /**
-     * Acquires the wrapped DEFAULT constructor of the given class
-     *
-     * <p>Only a no-arg constructor can be wrapped</p>
+     * Acquires the wrapped DEFAULT constructor of the given class <p/> <p>Only a no-arg constructor can be wrapped</p>
      *
      * @param cls the class to get the constructor from
      * @return the wrapped default class constructor

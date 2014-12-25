@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Substance;
@@ -26,7 +27,7 @@ import org.junit.Test;
 public class BlockBreakEventTest {
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM, null);
         Assert.assertEquals(event.isIgnored(), false);
 
@@ -35,17 +36,17 @@ public class BlockBreakEventTest {
     }
 
     @Test
-    public void testGetItemInHand() throws Exception{
-        BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM, new Item(Substance.STICK, (short) 10));
-        if(!event.getItemInHand().isSimilar(new Item(Substance.STICK, (short) 10))){
+    public void testGetItemInHand() throws Exception {
+        BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM,
+                                                    new Item(Substance.STICK, (short) 10));
+        if (!event.getItemInHand().isSimilar(new Item(Substance.STICK, (short) 10))) {
             Assert.fail();
         }
     }
 
     @Test
-    public void testGetBlockFace() throws Exception{
+    public void testGetBlockFace() throws Exception {
         BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM, null);
         Assert.assertEquals(event.getBlockFace(), TileOrientation.BOTTOM);
     }
-
 }

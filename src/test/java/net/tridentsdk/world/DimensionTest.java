@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.world;
 
 import net.tridentsdk.world.Dimension;
@@ -23,18 +24,17 @@ import org.junit.Test;
 public class DimensionTest {
 
     @Test
-    public void testToByte() throws Exception{
+    public void testToByte() throws Exception {
         Assert.assertEquals(Dimension.NETHER.toByte(), (byte) -1);
         Assert.assertEquals(Dimension.OVERWORLD.toByte(), (byte) 0);
         Assert.assertEquals(Dimension.END.toByte(), (byte) 1);
     }
 
     @Test
-    public void testGetDimension() throws Exception{
+    public void testGetDimension() throws Exception {
         Assert.assertEquals(Dimension.getDimension(-1), Dimension.NETHER);
         Assert.assertEquals(Dimension.getDimension(0), Dimension.OVERWORLD);
         Assert.assertEquals(Dimension.getDimension(1), Dimension.END);
         Assert.assertEquals(Dimension.getDimension(5), null);
     }
-
 }

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.concurrent;
 
 import net.tridentsdk.concurrent.SchedulerType;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class SchedulerTypeTest {
 
     @Test
-    public void testEnum() throws Exception{
+    public void testEnum() throws Exception {
         Assert.assertEquals(SchedulerType.ASYNC_RUN, SchedulerType.ASYNC_RUN);
         Assert.assertEquals(SchedulerType.ASYNC_LATER, SchedulerType.ASYNC_LATER);
         Assert.assertEquals(SchedulerType.ASYNC_REPEAT, SchedulerType.ASYNC_REPEAT);
@@ -31,5 +32,4 @@ public class SchedulerTypeTest {
         Assert.assertEquals(SchedulerType.SYNC_LATER, SchedulerType.SYNC_LATER);
         Assert.assertEquals(SchedulerType.SYNC_REPEAT, SchedulerType.SYNC_REPEAT);
     }
-
 }

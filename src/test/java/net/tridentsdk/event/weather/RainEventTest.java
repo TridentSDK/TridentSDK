@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.weather;
 
 import net.tridentsdk.event.weather.RainEvent;
@@ -22,7 +23,7 @@ import org.junit.Test;
 public class RainEventTest {
 
     @Test
-    public void testConstructor() throws Exception{
+    public void testConstructor() throws Exception {
         new RainEvent(null);
     }
 }

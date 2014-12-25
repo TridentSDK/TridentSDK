@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.util;
 
 import net.tridentsdk.util.StringUtil;
@@ -23,14 +24,13 @@ import org.junit.Test;
 public class StringUtilTest {
 
     @Test
-    public void testConcat() throws Exception{
+    public void testConcat() throws Exception {
         Assert.assertEquals(StringUtil.concat("Hello ", "World", "!"), "Hello World!");
     }
 
     @Test
-    public void testIsNumeric() throws Exception{
+    public void testIsNumeric() throws Exception {
         Assert.assertEquals(StringUtil.isNumeric("Hello World!"), false);
         Assert.assertEquals(StringUtil.isNumeric("10"), true);
     }
-
 }

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.concurrent;
 
 import net.tridentsdk.factory.Factories;
@@ -30,8 +31,7 @@ import java.util.concurrent.ConcurrentMap;
  * @param <V> the value type
  * @author The TridentSDK Team
  */
-@ThreadSafe
-public class ConcurrentCache<K, V> {
+@ThreadSafe public class ConcurrentCache<K, V> {
     private final Object PLACE_HOLDER = new Object();
     private final ConcurrentMap<K, Object> cache = Factories.collect().createMap();
 
@@ -73,8 +73,9 @@ public class ConcurrentCache<K, V> {
      */
     public Collection<V> values() {
         Collection<V> list = new ArrayList<>();
-        for (Object v : this.cache.values())
+        for (Object v : this.cache.values()) {
             list.add((V) v);
+        }
 
         return list;
     }
@@ -88,8 +89,7 @@ public class ConcurrentCache<K, V> {
     public V remove(K k) {
         Object val = this.cache.get(k);
 
-        if (val == null)
-            return null;
+        if (val == null) return null;
 
         this.cache.remove(k);
         return (V) val;
@@ -102,8 +102,9 @@ public class ConcurrentCache<K, V> {
      */
     public Set<Map.Entry<K, V>> entries() {
         Set<Map.Entry<K, V>> entries = new HashSet<>();
-        for (Map.Entry<K, Object> entry : cache.entrySet())
+        for (Map.Entry<K, Object> entry : cache.entrySet()) {
             entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), (V) entry.getValue()));
+        }
         return entries;
     }
 }

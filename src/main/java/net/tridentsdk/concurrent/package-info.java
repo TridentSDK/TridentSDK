@@ -17,4 +17,5 @@
 /**
  * Miscellaneous concurrency tools and utilities, especially those that a plugin can use
  */
+
 package net.tridentsdk.concurrent;

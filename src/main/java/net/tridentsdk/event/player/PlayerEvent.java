@@ -14,15 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Event;
 
 /**
- * Called when an event relating to a player occurs
- *
- * <p>This is an umbrella event, do not listen to it</p>
+ * Called when an event relating to a player occurs <p/> <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
  */

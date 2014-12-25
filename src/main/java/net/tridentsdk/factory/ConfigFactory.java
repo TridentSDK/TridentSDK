@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.factory;
 
 import com.google.gson.JsonObject;
@@ -65,7 +66,7 @@ public abstract class ConfigFactory {
      * @return the configuration that was converted
      */
     public JsonConfig createConfig(Path path) {
-       return new JsonConfig(path);
+        return new JsonConfig(path);
     }
 
     /**
@@ -81,15 +82,14 @@ public abstract class ConfigFactory {
      * Creates a new section with a parent and value
      *
      * @param parent the parenting config section. Usually a {@link net.tridentsdk.config.JsonConfig}.
-     * @param obj the value to place under the section. Can be {@code null}.
+     * @param obj    the value to place under the section. Can be {@code null}.
      * @return the new section
      */
     public ConfigSection newSection(ConfigSection parent, JsonObject obj) {
         return new JsonSectionImpl(parent, obj);
     }
 
-    @AccessNoDoc
-    private final class JsonSectionImpl extends ConfigSection {
+    @AccessNoDoc private final class JsonSectionImpl extends ConfigSection {
         public JsonSectionImpl() {
             super();
         }

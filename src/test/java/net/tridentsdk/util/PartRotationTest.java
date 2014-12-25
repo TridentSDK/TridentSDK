@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.util;
 
 import net.tridentsdk.util.PartRotation;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class PartRotationTest {
 
     @Test
-    public void testClass() throws Exception{
+    public void testClass() throws Exception {
         PartRotation partRotation = new PartRotation(10, 20, 30);
 
         Assert.assertEquals(partRotation.getRotX(), 10);
@@ -38,5 +39,4 @@ public class PartRotationTest {
         Assert.assertEquals(partRotation.getRotY(), 50);
         Assert.assertEquals(partRotation.getRotZ(), 60);
     }
-
 }

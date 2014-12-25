@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
 import com.google.common.hash.HashFunction;
@@ -51,8 +52,9 @@ public class TridentPlugin {
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
         for (TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
             if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
-                TridentLogger.error(new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
-                        "Name: " + description.name()));
+                TridentLogger.error(new IllegalStateException(
+                        "Plugin already initialized or plugin with this name already exists! " +
+                                "Name: " + description.name()));
             }
         }
 
@@ -151,10 +153,7 @@ public class TridentPlugin {
         String name = this.getDescription().name();
         String author = this.getDescription().author();
 
-        return HASHER.newHasher()
-                .putUnencodedChars(name)
-                .putUnencodedChars(author)
-                .hash().hashCode();
+        return HASHER.newHasher().putUnencodedChars(name).putUnencodedChars(author).hash().hashCode();
     }
 
     // TODO: override hashvalue as well

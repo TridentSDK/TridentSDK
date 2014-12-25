@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.util;
 
 import net.tridentsdk.Coordinates;
@@ -376,12 +377,12 @@ public class Vector implements Serializable, Cloneable {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(x != ((Vector) obj).x){
+    public boolean equals(Object obj) {
+        if (x != ((Vector) obj).x) {
             return false;
-        }else if(y != ((Vector) obj).y){
+        } else if (y != ((Vector) obj).y) {
             return false;
-        }else if(z != ((Vector) obj).z){
+        } else if (z != ((Vector) obj).z) {
             return false;
         }
 

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.event.block.BedExplodeEvent;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class BedExplodeEventTest {
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         BedExplodeEvent event = new BedExplodeEvent(null, 10);
         Assert.assertEquals(event.isIgnored(), false);
 
@@ -32,12 +33,11 @@ public class BedExplodeEventTest {
     }
 
     @Test
-    public void testGetStrength() throws Exception{
+    public void testGetStrength() throws Exception {
         BedExplodeEvent event = new BedExplodeEvent(null, 10);
         Assert.assertEquals(event.getStrength(), 10, 1);
 
         event.setStrength(20);
         Assert.assertEquals(event.getStrength(), 20, 1);
     }
-
 }

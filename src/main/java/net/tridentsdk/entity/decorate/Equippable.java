@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
@@ -26,15 +27,8 @@ import net.tridentsdk.window.inventory.Item;
  */
 public interface Equippable extends Entity {
     /**
-     * This entity's equipment
-     * <p/>
-     * <p>Layout:
-     * <ul>
-     * <li>Index 0: Helmet</li>
-     * <li>Index 1: Chestplate</li>
-     * <li>Index 2: Leggings</li>
-     * <li>Index 3: Boots</li>
-     * </ul></p>
+     * This entity's equipment <p/> <p>Layout: <ul> <li>Index 0: Helmet</li> <li>Index 1: Chestplate</li> <li>Index 2:
+     * Leggings</li> <li>Index 3: Boots</li> </ul></p>
      *
      * @return this entity's equipment
      */

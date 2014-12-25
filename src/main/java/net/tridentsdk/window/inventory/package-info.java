@@ -17,4 +17,5 @@
 /**
  * Represents Minecraft inventories, items, and their properties
  */
+
 package net.tridentsdk.window.inventory;

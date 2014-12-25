@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.world;
 
 import net.tridentsdk.world.LevelType;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class LevelTypeTest {
 
     @Test
-    public void testToString() throws Exception{
+    public void testToString() throws Exception {
         Assert.assertEquals(LevelType.DEFAULT.toString(), "default");
         Assert.assertEquals(LevelType.FLAT.toString(), "flat");
         Assert.assertEquals(LevelType.LARGE_BIOMES.toString(), "largeBiomes");
@@ -32,7 +33,7 @@ public class LevelTypeTest {
     }
 
     @Test
-    public void testGetLevelType() throws Exception{
+    public void testGetLevelType() throws Exception {
         Assert.assertEquals(LevelType.getLevelType("default"), LevelType.DEFAULT);
         Assert.assertEquals(LevelType.getLevelType("flat"), LevelType.FLAT);
         Assert.assertEquals(LevelType.getLevelType("largeBiomes"), LevelType.LARGE_BIOMES);
@@ -40,5 +41,4 @@ public class LevelTypeTest {
         Assert.assertEquals(LevelType.getLevelType("default_1_1"), LevelType.DEFAULT_1_1);
         Assert.assertEquals(LevelType.getLevelType("invalid"), LevelType.DEFAULT);
     }
-
 }

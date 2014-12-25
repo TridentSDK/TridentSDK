@@ -17,4 +17,5 @@
 /**
  * Utilities used primarily within the API and available to plugins and the implementation
  */
+
 package net.tridentsdk.util;

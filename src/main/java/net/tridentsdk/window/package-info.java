@@ -17,4 +17,5 @@
 /**
  * Inventory and windows such as crafting, enchanting, trading access
  */
+
 package net.tridentsdk.window;

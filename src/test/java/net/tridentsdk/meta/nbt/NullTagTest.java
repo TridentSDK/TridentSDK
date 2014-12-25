@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.NullTag;
@@ -24,9 +25,8 @@ import org.junit.Test;
 public class NullTagTest {
 
     @Test
-    public void testGetType() throws Exception{
+    public void testGetType() throws Exception {
         NullTag tag = new NullTag("tag");
         Assert.assertEquals(tag.getType(), TagType.NULL);
     }
-
 }

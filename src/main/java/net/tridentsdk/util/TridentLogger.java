@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.util;
 
 import net.tridentsdk.Trident;
@@ -28,17 +29,10 @@ import java.util.Random;
 
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
-    private static final String[] ERRORS = {
-            "Aw, Mazen! Really?",
-            "I feel funny",
-            "9 + 10 does not equal 21",
-            "Dang",
-            "Tony Abbot, the fax didn't go through",
-            "This wasn't supposed to happen. It did anyways.",
-            "Huston, we have a problem",
-            "Oh great, a stacktrace. Can't we write good software for once?",
-            "Trust me this isn't a bug, it's a feature!"
-    };
+    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21",
+            "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.",
+            "Huston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " +
+            "this isn't a bug, it's a feature!" };
 
     private TridentLogger() {
     }
@@ -99,7 +93,8 @@ public final class TridentLogger {
         int randomNum = rand.nextInt((ERRORS.length - 1) + 1) + 0;
 
         getLogger().error(ERRORS[randomNum]);
-        getLogger().error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + throwable.getMessage());
+        getLogger().error(
+                "Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + throwable.getMessage());
         getLogger().error("======== Generating Debug Information =========");
         StackTraceElement main = throwable.getStackTrace()[0];
         getLogger().error("Class:  " + main.getClassName());
@@ -110,24 +105,25 @@ public final class TridentLogger {
         getLogger().error("");
 
         getLogger().error("======== Printing Stacktrace =========");
-        for (StackTraceElement element : throwable.getStackTrace())
+        for (StackTraceElement element : throwable.getStackTrace()) {
             getLogger().error("    at " + element.getClassName() + "." +
-                    element.getMethodName() + "(...) : " +
-                    (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
+                                      element.getMethodName() + "(...) : " +
+                                      (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
+        }
         getLogger().error("========  Ending Stacktrace  =========");
 
         getLogger().error("");
 
         getLogger().error("========     Server info    =========");
         getLogger().error("Trident version: " + Trident.getVersion());
-        getLogger().error("Plugins:         " +
-                Arrays.toString(TridentPluginHandler.getPluginExecutorFactory().values().toArray()));
+        getLogger().error("Plugins:         " + Arrays.toString(
+                TridentPluginHandler.getPluginExecutorFactory().values().toArray()));
         getLogger().error("Java:            version " + System.getProperty("java.version") + " distributed by " +
-                System.getProperty("java.vendor"));
+                                  System.getProperty("java.vendor"));
         getLogger().error("OS:              running " +
-                System.getProperty("os.name") + " version " +
-                System.getProperty("os.version") + " " +
-                System.getProperty("os.arch"));
+                                  System.getProperty("os.name") + " version " +
+                                  System.getProperty("os.version") + " " +
+                                  System.getProperty("os.arch"));
         getLogger().error("======== Ending Server info =========");
 
         getLogger().error("");

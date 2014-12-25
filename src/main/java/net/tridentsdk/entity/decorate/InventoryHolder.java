@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.window.Window;
-import net.tridentsdk.window.inventory.Inventory;
 import net.tridentsdk.window.inventory.Item;
 
 /**

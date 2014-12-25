@@ -14,14 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Tile;
 
 /**
- * Called when a crop grows
- *
- * <p>This is an umbrella event, do not listen to it</p>
+ * Called when a crop grows <p/> <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
  */

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
@@ -35,8 +36,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
-@ThreadSafe
-public class EventHandler {
+@ThreadSafe public class EventHandler {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, 0, null, null, null);
     private static final Callable<EventHandler> CREATE_MANAGER = new Callable<EventHandler>() {
         @Override
@@ -45,8 +45,9 @@ public class EventHandler {
         }
     };
 
-    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>>
-            callers = Factories.collect().createMap();
+    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> callers = Factories
+            .collect()
+            .createMap();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = Factories.collect().createCache();
 
     private final ConcurrentCache<TaskExecutor, EventHandler> handles = Factories.collect().createCache();
@@ -74,8 +75,7 @@ public class EventHandler {
 
         for (Class<? extends Event> eventClass : reflectors.keySet()) {
             PriorityBlockingQueue<EventReflector> eventCallers = callers.get(eventClass);
-            if (eventCallers == null)
-                eventCallers = new PriorityBlockingQueue<>(128, COMPARATOR);
+            if (eventCallers == null) eventCallers = new PriorityBlockingQueue<>(128, COMPARATOR);
             eventCallers.addAll(reflectors.get(eventClass));
             callers.put(eventClass, eventCallers);
         }
@@ -105,8 +105,7 @@ public class EventHandler {
             CallerData handler = method.getAnnotation(CallerData.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-            EventReflector registeredListener = new EventReflector(
-                    access, i, listener, eventClass, importance);
+            EventReflector registeredListener = new EventReflector(access, i, listener, eventClass, importance);
             map.put(eventClass, registeredListener);
         }
 
@@ -119,20 +118,22 @@ public class EventHandler {
      * @param event the event to call
      */
     public void call(final Event event) {
-        for (final Map.Entry<TaskExecutor, EventHandler> entry : handles.entries())
+        for (final Map.Entry<TaskExecutor, EventHandler> entry : handles.entries()) {
             entry.getKey().addTask(new Runnable() {
                 @Override
                 public void run() {
                     entry.getValue().doCall(event);
                 }
             });
+        }
     }
 
     private void doCall(Event event) {
         Queue<EventReflector> listeners = callers.get(event.getClass());
         if (listeners == null) return;
-        for (EventReflector listener : listeners)
+        for (EventReflector listener : listeners) {
             listener.reflect(event);
+        }
     }
 
     /**
@@ -141,9 +142,8 @@ public class EventHandler {
      * @param listener the listener to unregister
      */
     public void unregister(Listener listener) {
-        for (Map.Entry<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> entry :
-                this.callers.entrySet()) {
-            for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext();) {
+        for (Map.Entry<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> entry : this.callers.entrySet()) {
+            for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
                 EventReflector it = iterator.next();
                 if (it.getInstance().equals(listener)) {
                     iterator.remove();

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.world;
 
 public enum Dimension {
@@ -28,10 +29,6 @@ public enum Dimension {
         this.b = (byte) i;
     }
 
-    public byte toByte() {
-        return this.b;
-    }
-
     public static Dimension getDimension(int i) {
         for (Dimension dimension : values()) {
             if (dimension.b == i) {
@@ -40,5 +37,9 @@ public enum Dimension {
         }
 
         return null;
+    }
+
+    public byte toByte() {
+        return this.b;
     }
 }

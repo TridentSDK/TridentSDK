@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.concurrent;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -24,8 +25,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author The TridentSDK Team
  */
-@ThreadSafe
-public abstract class TridentRunnable implements Runnable {
+@ThreadSafe public abstract class TridentRunnable implements Runnable {
     private static volatile int currentId = 0;
 
     private final int id;
@@ -45,9 +45,8 @@ public abstract class TridentRunnable implements Runnable {
     }
 
     /**
-     * Runs after this runnable has finished asynchronously
-     *
-     * <p>This method does not require the code to be thread-safe</p>
+     * Runs after this runnable has finished asynchronously <p/> <p>This method does not require the code to be
+     * thread-safe</p>
      */
     public void runAfterAsync() {
     }
@@ -59,20 +58,18 @@ public abstract class TridentRunnable implements Runnable {
     }
 
     /**
-     * Cancels the task and removes from execution. See {@link ScheduledTask#cancel()}
-     *
-     * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
-     * will be thrown. This can be called when {@code getTask() != null}.
+     * Cancels the task and removes from execution. See {@link ScheduledTask#cancel()} <p/> WARNING: This is a delegated
+     * function. DO NOT call this method before it is scheduled. A NullPointerException will be thrown. This can be
+     * called when {@code getTask() != null}.
      */
     public final void cancel() {
         task.get().cancel();
     }
 
     /**
-     * Gets how long between runs this is supposed to wait if it is a repeating task
-     *
-     * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
-     * will be thrown. This can be called when {@code getTask() != null}.
+     * Gets how long between runs this is supposed to wait if it is a repeating task <p/> WARNING: This is a delegated
+     * function. DO NOT call this method before it is scheduled. A NullPointerException will be thrown. This can be
+     * called when {@code getTask() != null}.
      */
     public final long getInterval() {
         return task.get().getInterval();
@@ -81,10 +78,9 @@ public abstract class TridentRunnable implements Runnable {
     /**
      * Sets how long this runnable should wait between executions if this is a repeating task <p>If this task is
      * synchronous to the main thread, the change will be immediate, if it is not, the change may take an iteration to
-     * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p>
-     *
-     * WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
-     * will be thrown. This can be called when {@code getTask() != null}.
+     * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p> <p/> WARNING:
+     * This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException will be
+     * thrown. This can be called when {@code getTask() != null}.
      */
     public final void setInterval(long interval) {
         task.get().setInterval(interval);

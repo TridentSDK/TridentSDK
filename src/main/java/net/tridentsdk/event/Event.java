@@ -14,19 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event;
 
 import net.tridentsdk.docs.InheritThreadSafe;
 
 /**
- * Represents an event that could be listened by the plugin listeners
- *
- * <p>All events are thread safe, their visibility is required as the plugin threads that </p>
+ * Represents an event that could be listened by the plugin listeners <p/> <p>All events are thread safe, their
+ * visibility is required as the plugin threads that </p>
  *
  * @author The TridentSDK Team
  */
-@InheritThreadSafe
-public abstract class Event {
+@InheritThreadSafe public abstract class Event {
     private final boolean isAsync;
 
     public Event() {

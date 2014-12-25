@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk;
 
 /**
- * Minecraft game modes
- *
- * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Gameplay#Game_modes">Wiki</a></p>
+ * Minecraft game modes <p/> <p>If you need more help, take a look at <a href="http://minecraft.gamepedia
+ * .com/Gameplay#Game_modes">Wiki</a></p>
  */
 public enum GameMode {
     SURVIVAL(0),
@@ -32,15 +32,6 @@ public enum GameMode {
 
     GameMode(int i) {
         this.b = (byte) i;
-    }
-
-    /**
-     * Returns the {@code byte} value of the GameMode
-     *
-     * @return {@code byte} value of the GameMode
-     */
-    public byte toByte() {
-        return this.b;
     }
 
     /**
@@ -61,5 +52,14 @@ public enum GameMode {
         }
 
         return null;
+    }
+
+    /**
+     * Returns the {@code byte} value of the GameMode
+     *
+     * @return {@code byte} value of the GameMode
+     */
+    public byte toByte() {
+        return this.b;
     }
 }

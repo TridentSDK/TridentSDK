@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.base;
 
 /**
@@ -437,8 +438,7 @@ public enum Substance {
      */
     public static Substance fromString(String id) {
         for (Substance mat : Substance.values()) {
-            if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id))
-                return mat;
+            if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id)) return mat;
         }
 
         return null;
@@ -539,7 +539,7 @@ public enum Substance {
             return false;
         }
 
-        switch(this){
+        switch (this) {
             case PUMPKIN:
             case LEATHER_HELMET:
             case LEATHER_CHESTPLATE:

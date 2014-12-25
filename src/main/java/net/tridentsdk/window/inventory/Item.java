@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.window.inventory;
 
 import net.tridentsdk.base.Substance;
@@ -54,26 +55,26 @@ public class Item {
         return this.quantity;
     }
 
-    public short getDamageValue() {
-        return this.damageValue;
-    }
-
     public void setQuantity(short quantity) {
         this.quantity = quantity;
+    }
+
+    public short getDamageValue() {
+        return this.damageValue;
     }
 
     public void setDamageValue(short damageValue) {
         this.damageValue = damageValue;
     }
 
-    public boolean isSimilar(Item i){
-        if(id != i.id){
+    public boolean isSimilar(Item i) {
+        if (id != i.id) {
             return false;
-        }else if(mat != i.mat){
+        } else if (mat != i.mat) {
             return false;
-        }else if(quantity != i.quantity){
+        } else if (quantity != i.quantity) {
             return false;
-        }else if(damageValue != i.damageValue){
+        } else if (damageValue != i.damageValue) {
             return false;
         }
 

@@ -18,4 +18,5 @@
 /**
  * Management for the scoreboard API, sectioned views of data displayed to the client
  */
+
 package net.tridentsdk.base.board;

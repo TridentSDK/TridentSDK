@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity;
 
 import net.tridentsdk.Coordinates;
@@ -59,9 +60,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
     double getMaxHealth();
 
     /**
-     * Sets the maximum health of the Entity
-     *
-     * <p>maxHealth cannot be above the current health of the Entity</p>
+     * Sets the maximum health of the Entity <p/> <p>maxHealth cannot be above the current health of the Entity</p>
      * TODO: Rephrase?
      *
      * @param maxHealth maximum health of the Entity
@@ -105,26 +104,23 @@ public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
     boolean canPickupItems();
 
     /**
-     * Returns the last EntityDamageEvent which inflicted this Entity
-     * <p/>
-     * <p>The event may be cancelled.</p>
+     * Returns the last EntityDamageEvent which inflicted this Entity <p/> <p>The event may be cancelled.</p>
      *
      * @return EntityDamageEvent the last Entity to inflict this Entity
      */
     EntityDamageEvent getLastDamageCause();
 
     /**
-     * Returns the player who dealt damage to this Entity since its last full heal
-     * <p>Used for death messages</p>
+     * Returns the player who dealt damage to this Entity since its last full heal <p>Used for death messages</p>
      *
-     * @return Player the player who dealt damage to this entity since last full heal
-     * Returns null if no player has damaged the Entity
+     * @return Player the player who dealt damage to this entity since last full heal Returns null if no player has
+     * damaged the Entity
      */
     Player hurtByPlayer();
 
     /**
-     * Checks if the entity has died, or has 0 health. Should only apply to entities that are {@code instanceof}
-     * {@link net.tridentsdk.entity.LivingEntity}
+     * Checks if the entity has died, or has 0 health. Should only apply to entities that are {@code instanceof} {@link
+     * net.tridentsdk.entity.LivingEntity}
      *
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */

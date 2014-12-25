@@ -17,4 +17,5 @@
 /**
  * Entity classes that represent various world mobs, hostile and passive, including the Player class
  */
+
 package net.tridentsdk.entity.living;

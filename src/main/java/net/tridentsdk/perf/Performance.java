@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.perf;
 
 import net.tridentsdk.util.TridentLogger;
@@ -30,7 +31,8 @@ import java.lang.reflect.Modifier;
 public final class Performance {
     private static final Unsafe UNSAFE = initUnsafe();
 
-    private Performance() {}
+    private Performance() {
+    }
 
     private static Unsafe initUnsafe() {
         try {
@@ -67,8 +69,7 @@ public final class Performance {
 
             @Override
             public long address() {
-                if (Modifier.isStatic(local.getModifiers()))
-                    return UNSAFE.staticFieldOffset(local);
+                if (Modifier.isStatic(local.getModifiers())) return UNSAFE.staticFieldOffset(local);
                 return UNSAFE.objectFieldOffset(local);
             }
 

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.window;
 
 import net.tridentsdk.window.inventory.Item;
@@ -32,5 +33,6 @@ public interface Window {
     void setSlot(int index, Item value);
 
     String getName();
+
     public Item[] getItems();
 }

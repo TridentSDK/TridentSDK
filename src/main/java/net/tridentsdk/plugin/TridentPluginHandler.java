@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.Trident;
@@ -43,6 +44,10 @@ public class TridentPluginHandler {
     private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads().executor(2);
     private final List<TridentPlugin> plugins = new ArrayList<>();
 
+    public static ExecutorFactory<TridentPlugin> getPluginExecutorFactory() {
+        return PLUGIN_EXECUTOR_FACTORY;
+    }
+
     @InternalUseOnly
     public void load(final File pluginFile) {
         final TaskExecutor executor = PLUGIN_EXECUTOR_FACTORY.scaledThread();
@@ -71,8 +76,8 @@ public class TridentPluginHandler {
                         TridentLogger.error(new PluginLoadException("Description annotation does not exist!"));
                     }
 
-                    Constructor<? extends TridentPlugin> defaultConstructor =
-                            pluginClass.getConstructor(File.class, PluginDescription.class);
+                    Constructor<? extends TridentPlugin> defaultConstructor = pluginClass.getConstructor(File.class,
+                                                                                                         PluginDescription.class);
                     final TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
 
                     plugins.add(plugin);
@@ -81,10 +86,11 @@ public class TridentPluginHandler {
                     plugin.onLoad();
 
                     for (Class<?> cls : plugin.classLoader.classes.values()) {
-                        if (Listener.class.isAssignableFrom(cls) &&
-                                !cls.isAnnotationPresent(IgnoreRegistration.class)) {
-                            Trident.getServer().getEventManager().registerListener(executor,
-                                    (Listener) cls.newInstance());
+                        if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(
+                                IgnoreRegistration.class)) {
+                            Trident.getServer()
+                                    .getEventManager()
+                                    .registerListener(executor, (Listener) cls.newInstance());
                         }
 
                         if (Command.class.isAssignableFrom(cls)) {
@@ -99,12 +105,11 @@ public class TridentPluginHandler {
                         | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
                     TridentLogger.error(new PluginLoadException(ex));
                 } finally {
-                    if (jarFile != null)
-                        try {
-                            jarFile.close();
-                        } catch (IOException e) {
-                            TridentLogger.error(e);
-                        }
+                    if (jarFile != null) try {
+                        jarFile.close();
+                    } catch (IOException e) {
+                        TridentLogger.error(e);
+                    }
                 }
             }
         });
@@ -119,9 +124,5 @@ public class TridentPluginHandler {
 
     public Iterable<TridentPlugin> getPlugins() {
         return Collections.unmodifiableList(this.plugins);
-    }
-
-    public static ExecutorFactory<TridentPlugin> getPluginExecutorFactory() {
-        return PLUGIN_EXECUTOR_FACTORY;
     }
 }

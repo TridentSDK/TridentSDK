@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.event.block.BlockIgniteEvent;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class BlockIgniteEventTest {
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         BlockIgniteEvent event = new BlockIgniteEvent(null, BlockIgniteEvent.Cause.FIRE_SPREAD);
         Assert.assertEquals(event.isIgnored(), false);
 
@@ -32,9 +33,8 @@ public class BlockIgniteEventTest {
     }
 
     @Test
-    public void testGetCause() throws Exception{
+    public void testGetCause() throws Exception {
         BlockIgniteEvent event = new BlockIgniteEvent(null, BlockIgniteEvent.Cause.FIRE_SPREAD);
         Assert.assertEquals(event.getCause(), BlockIgniteEvent.Cause.FIRE_SPREAD);
     }
-
 }

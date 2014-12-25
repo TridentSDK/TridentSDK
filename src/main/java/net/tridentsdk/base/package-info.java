@@ -17,4 +17,5 @@
 /**
  * This package contains basic elements in Minecraft, such as Tiles, orientation, directions, instruments, and sounds
  */
+
 package net.tridentsdk.base;

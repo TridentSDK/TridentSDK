@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.base.TileOrientation;
@@ -24,18 +25,17 @@ import org.junit.Test;
 public class BlockPlaceEventTest {
 
     @Test
-    public void testGetFaceClicked() throws Exception{
+    public void testGetFaceClicked() throws Exception {
         BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, TileOrientation.BOTTOM);
         Assert.assertEquals(event.getFaceClicked(), TileOrientation.BOTTOM);
     }
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, TileOrientation.BOTTOM);
         Assert.assertEquals(event.isIgnored(), false);
 
         event.cancel(true);
         Assert.assertEquals(event.isIgnored(), true);
     }
-
 }

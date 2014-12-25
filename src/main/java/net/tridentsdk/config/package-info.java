@@ -21,4 +21,5 @@
  *
  * <p>Basic functionality for the JSON configuration is in the {@link net.tridentsdk.config.ConfigSection}</p>
  */
+
 package net.tridentsdk.config;

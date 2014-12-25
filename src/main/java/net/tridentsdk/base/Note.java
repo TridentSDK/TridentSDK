@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.base;
 
 import net.tridentsdk.util.TridentLogger;
@@ -25,8 +26,7 @@ import javax.annotation.concurrent.Immutable;
  *
  * @author The TridentSDK Team
  */
-@Immutable
-public class Note {
+@Immutable public class Note {
     private final short id;
 
     public Note(int id) {
@@ -59,8 +59,7 @@ public class Note {
         return new Note((int) this.id - 1);
     }
 
-    public short getNote(){
+    public short getNote() {
         return id;
     }
-
 }

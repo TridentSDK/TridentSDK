@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.*;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class TagTypeTest {
 
     @Test
-    public void testFromId() throws Exception{
+    public void testFromId() throws Exception {
         Assert.assertEquals(TagType.fromId((byte) -1), TagType.NULL);
         Assert.assertEquals(TagType.fromId((byte) 0), TagType.END);
         Assert.assertEquals(TagType.fromId((byte) 1), TagType.BYTE);
@@ -41,7 +42,7 @@ public class TagTypeTest {
     }
 
     @Test
-    public void testGetImplementation() throws Exception{
+    public void testGetImplementation() throws Exception {
         Assert.assertEquals(TagType.NULL.getImplementation(), NullTag.class);
         Assert.assertEquals(TagType.END.getImplementation(), null);
         Assert.assertEquals(TagType.BYTE.getImplementation(), ByteTag.class);
@@ -58,7 +59,7 @@ public class TagTypeTest {
     }
 
     @Test
-    public void testGetId() throws Exception{
+    public void testGetId() throws Exception {
         Assert.assertEquals(TagType.NULL.getId(), -1);
         Assert.assertEquals(TagType.END.getId(), 0);
         Assert.assertEquals(TagType.BYTE.getId(), 1);
@@ -73,5 +74,4 @@ public class TagTypeTest {
         Assert.assertEquals(TagType.COMPOUND.getId(), 10);
         Assert.assertEquals(TagType.INT_ARRAY.getId(), 11);
     }
-
 }

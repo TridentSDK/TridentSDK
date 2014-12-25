@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.factory;
 
 import net.tridentsdk.DisplayInfo;
@@ -23,18 +24,14 @@ import net.tridentsdk.docs.InternalUseOnly;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Available creational factories for basic objects
- *
- * <p>If the factories are accessed before initialization, the caller thread will block</p>
- *
- * <p>This is managed by using a {@link net.tridentsdk.concurrent.HeldValueLatch}, instead of a single latch. If a
- * class needs to be initialized that uses another factory, it will never occur because the thread is setting a value
- * after the previous initialization is blocked because it was not fully initialized.</p>
+ * Available creational factories for basic objects <p/> <p>If the factories are accessed before initialization, the
+ * caller thread will block</p> <p/> <p>This is managed by using a {@link net.tridentsdk.concurrent.HeldValueLatch},
+ * instead of a single latch. If a class needs to be initialized that uses another factory, it will never occur because
+ * the thread is setting a value after the previous initialization is blocked because it was not fully initialized.</p>
  *
  * @author The TridentSDK Team
  */
-@ThreadSafe
-public final class Factories {
+@ThreadSafe public final class Factories {
     private static final HeldValueLatch<TaskFactory> taskFactory = new HeldValueLatch<>();
     private static final HeldValueLatch<ThreadFactory> threadFactory = new HeldValueLatch<>();
     private static final HeldValueLatch<ConfigFactory> configFactory = new HeldValueLatch<>();
@@ -42,6 +39,9 @@ public final class Factories {
 
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
     private static final DisplayInfo INFO = new DisplayInfo();
+
+    private Factories() {
+    }
 
     @InternalUseOnly
     public static void init(TaskFactory factory) {
@@ -61,9 +61,6 @@ public final class Factories {
     @InternalUseOnly
     public static void init(CollectFactory factory) {
         collectFactory.countDown(factory);
-    }
-
-    private Factories() {
     }
 
     /**

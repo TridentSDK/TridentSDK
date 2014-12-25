@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta;
 
 import net.tridentsdk.meta.ChatColor;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class ChatColorTest {
 
     @Test
-    public void testToString() throws Exception{
+    public void testToString() throws Exception {
         Assert.assertEquals(ChatColor.BLACK.toString(), "black");
         Assert.assertEquals(ChatColor.DARK_BLUE.toString(), "dark_blue");
         Assert.assertEquals(ChatColor.DARK_GREEN.toString(), "dark_green");
@@ -46,5 +47,4 @@ public class ChatColorTest {
         Assert.assertEquals(ChatColor.ITALIC.toString(), "italic");
         Assert.assertEquals(ChatColor.RESET.toString(), "reset");
     }
-
 }

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.entity;
 
 import net.tridentsdk.entity.VillagerProfession;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class VillagerProfessionTest {
 
     @Test
-    public void testToInt() throws Exception{
+    public void testToInt() throws Exception {
         Assert.assertEquals(VillagerProfession.FARMER.toInt(), 0);
         Assert.assertEquals(VillagerProfession.LIBRARIAN.toInt(), 1);
         Assert.assertEquals(VillagerProfession.PRIEST.toInt(), 2);
@@ -32,12 +33,11 @@ public class VillagerProfessionTest {
     }
 
     @Test
-    public void testToInt1() throws Exception{
+    public void testToInt1() throws Exception {
         Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.FARMER), 0);
         Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.LIBRARIAN), 1);
         Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.PRIEST), 2);
         Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.BLACKSMITH), 3);
         Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.BUTCHER), 4);
     }
-
 }

@@ -17,4 +17,5 @@
 /**
  * Documentation annotations
  */
+
 package net.tridentsdk.docs;

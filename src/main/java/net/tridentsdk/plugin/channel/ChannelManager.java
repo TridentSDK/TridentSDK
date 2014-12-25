@@ -36,7 +36,8 @@ public final class ChannelManager {
 
     public void registerChannel(String name, PluginChannel channel) {
         if (this.channels.containsKey(name)) {
-            TridentLogger.error(new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
+            TridentLogger.error(
+                    new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
         }
 
         this.channels.put(name, channel);

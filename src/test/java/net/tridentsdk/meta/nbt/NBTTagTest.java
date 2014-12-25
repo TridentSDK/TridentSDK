@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.StringTag;
@@ -23,24 +24,23 @@ import org.junit.Test;
 public class NBTTagTest {
 
     @Test
-    public void testAsType() throws Exception{
+    public void testAsType() throws Exception {
         StringTag tag = new StringTag("tag");
         tag.asType(StringTag.class);
     }
 
     @Test
-    public void testGetName() throws Exception{
+    public void testGetName() throws Exception {
         StringTag tag = new StringTag("tag");
         Assert.assertEquals(tag.getName(), "tag");
     }
 
     @Test
-    public void testHasName() throws Exception{
+    public void testHasName() throws Exception {
         StringTag tag = new StringTag("tag");
         Assert.assertEquals(tag.hasName(), true);
 
         tag = new StringTag(null);
         Assert.assertEquals(tag.hasName(), false);
     }
-
 }

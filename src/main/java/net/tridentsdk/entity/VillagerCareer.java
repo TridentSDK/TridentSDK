@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity;
 
 import com.google.common.collect.Lists;
@@ -111,11 +112,11 @@ public enum VillagerCareer {
         this.id = id;
     }
 
-    public VillagerProfession getParent(){
+    public VillagerProfession getParent() {
         return parent;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 }

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event;
 
 import java.lang.annotation.ElementType;
@@ -21,8 +22,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface CallerData {
+@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUNTIME) public @interface CallerData {
     Importance importance() default Importance.MEDIUM;
 }

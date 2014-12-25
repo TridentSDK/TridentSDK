@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
@@ -27,8 +28,8 @@ public class EventReflector implements Comparator<EventReflector> {
     private final Class<? extends Event> eventClass;
     private final Importance importance;
 
-    EventReflector(MethodAccess handle, int index, Object instance,
-                   Class<? extends Event> eventClass, Importance importance) {
+    EventReflector(MethodAccess handle, int index, Object instance, Class<? extends Event> eventClass, Importance
+            importance) {
         this.handle = handle;
         this.index = index;
         this.instance = instance;

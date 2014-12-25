@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.perf.FastClass;
@@ -31,7 +32,7 @@ public class PluginClassLoader extends URLClassLoader {
     private Class<? extends TridentPlugin> pluginClass;
 
     public PluginClassLoader(File pluginFile) throws MalformedURLException {
-        super(new URL[]{pluginFile.toURI().toURL()});
+        super(new URL[] { pluginFile.toURI().toURL() });
     }
 
     @Override

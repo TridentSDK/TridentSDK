@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.util;
 
 import net.tridentsdk.util.Vector;
@@ -23,124 +24,124 @@ import org.junit.Test;
 public class VectorTest {
 
     @Test
-    public void testAdd() throws Exception{
+    public void testAdd() throws Exception {
         Vector vector = new Vector();
         vector.add(new Vector(10, 10, 10));
         Assert.assertEquals(vector, new Vector(10, 10, 10));
     }
 
     @Test
-    public void testAdd1() throws Exception{
+    public void testAdd1() throws Exception {
         Vector vector = new Vector();
         vector.add(10d, 10d, 10d);
         Assert.assertEquals(vector, new Vector(10, 10, 10));
     }
 
     @Test
-    public void testAdd2() throws Exception{
+    public void testAdd2() throws Exception {
         Vector vector = new Vector();
         vector.add(10, 10, 10);
         Assert.assertEquals(vector, new Vector(10, 10, 10));
     }
 
     @Test
-    public void testSubtract() throws Exception{
+    public void testSubtract() throws Exception {
         Vector vector = new Vector();
         vector.subtract(new Vector(10, 10, 10));
         Assert.assertEquals(vector, new Vector(-10, -10, -10));
     }
 
     @Test
-    public void testSubtract1() throws Exception{
+    public void testSubtract1() throws Exception {
         Vector vector = new Vector();
         vector.subtract(10d, 10d, 10d);
         Assert.assertEquals(vector, new Vector(-10, -10, -10));
     }
 
     @Test
-    public void testSubtract2() throws Exception{
+    public void testSubtract2() throws Exception {
         Vector vector = new Vector();
         vector.subtract(10, 10, 10);
         Assert.assertEquals(vector, new Vector(-10, -10, -10));
     }
 
     @Test
-    public void testMultiply() throws Exception{
+    public void testMultiply() throws Exception {
         Vector vector = new Vector(5, 5, 5);
         vector.multiply(new Vector(10, 10, 10));
         Assert.assertEquals(vector, new Vector(50, 50, 50));
     }
 
     @Test
-    public void testMultiply1() throws Exception{
+    public void testMultiply1() throws Exception {
         Vector vector = new Vector(5, 5, 5);
         vector.multiply(10d, 10d, 10d);
         Assert.assertEquals(vector, new Vector(50, 50, 50));
     }
 
     @Test
-    public void testMultiply2() throws Exception{
+    public void testMultiply2() throws Exception {
         Vector vector = new Vector(5, 5, 5);
         vector.multiply(10, 10, 10);
         Assert.assertEquals(vector, new Vector(50, 50, 50));
     }
 
     @Test
-    public void testMultiply3() throws Exception{
+    public void testMultiply3() throws Exception {
         Vector vector = new Vector(5, 5, 5);
         vector.multiply(10d);
         Assert.assertEquals(vector, new Vector(50, 50, 50));
     }
 
     @Test
-    public void testDivide() throws Exception{
+    public void testDivide() throws Exception {
         Vector vector = new Vector(10, 10, 10);
         vector.divide(new Vector(5, 5, 5));
         Assert.assertEquals(vector, new Vector(2, 2, 2));
     }
 
     @Test
-    public void testDivide1() throws Exception{
+    public void testDivide1() throws Exception {
         Vector vector = new Vector(10, 10, 10);
         vector.divide(5d, 5d, 5d);
         Assert.assertEquals(vector, new Vector(2, 2, 2));
     }
 
     @Test
-    public void testDivide2() throws Exception{
+    public void testDivide2() throws Exception {
         Vector vector = new Vector(10, 10, 10);
         vector.divide(5, 5, 5);
         Assert.assertEquals(vector, new Vector(2, 2, 2));
     }
 
     @Test
-    public void testDivide3() throws Exception{
+    public void testDivide3() throws Exception {
         Vector vector = new Vector(10, 10, 10);
         vector.divide(5d);
         Assert.assertEquals(vector, new Vector(2, 2, 2));
     }
 
     @Test
-    public void testCrossProduct() throws Exception{
+    public void testCrossProduct() throws Exception {
         Vector vector = new Vector(5, 10, 15);
         vector.crossProduct(new Vector(20, 25, 30));
         Assert.assertEquals(vector, new Vector(-75, 265, -75));
     }
 
     @Test
-    public void testMagnitudeSquared() throws Exception{
+    public void testMagnitudeSquared() throws Exception {
         Vector vector = new Vector(10, 10, 10);
         Assert.assertEquals(vector.magnitudeSquared(), 300, 1);
     }
 
     @Test
-    public void testMagnitude() throws Exception{
+    public void testMagnitude() throws Exception {
         Vector vector = new Vector(24, 24, 24);
         Assert.assertEquals(vector.magnitude(), 41.569, 1);
     }
 
     @Test
-    public void testNormalize() throws Exception{
+    public void testNormalize() throws Exception {
         Vector vector = new Vector(0, 5, 10);
         vector = vector.normalize();
 
@@ -150,18 +151,17 @@ public class VectorTest {
     }
 
     @Test
-    public void testDotProduct() throws Exception{
+    public void testDotProduct() throws Exception {
         Vector vector = new Vector(5, 10, 15);
         Assert.assertEquals(vector.dotProduct(new Vector(20, 25, 30)), 800, 1);
     }
 
     @Test
-    public void testEquals() throws Exception{
+    public void testEquals() throws Exception {
         Vector vector = new Vector(10, 10, 10);
         Assert.assertEquals(vector.equals(new Vector(10, 10, 10)), true);
         Assert.assertEquals(vector.equals(new Vector(0, 10, 10)), false);
         Assert.assertEquals(vector.equals(new Vector(10, 0, 10)), false);
         Assert.assertEquals(vector.equals(new Vector(10, 10, 0)), false);
     }
-
 }

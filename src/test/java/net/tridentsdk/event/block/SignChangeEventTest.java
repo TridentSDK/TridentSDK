@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.event.block.SignChangeEvent;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class SignChangeEventTest {
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         SignChangeEvent event = new SignChangeEvent(null, null, null);
         Assert.assertEquals(event.isIgnored(), false);
 
@@ -32,7 +33,7 @@ public class SignChangeEventTest {
     }
 
     @Test
-    public void testSetContents() throws Exception{
+    public void testSetContents() throws Exception {
         SignChangeEvent event = new SignChangeEvent(null, null, "Line 1", "Line 2", "Line 3", "Line 4");
 
         Assert.assertEquals(event.getContents()[0], "Line 1");
@@ -49,7 +50,7 @@ public class SignChangeEventTest {
     }
 
     @Test
-    public void testSetLine() throws Exception{
+    public void testSetLine() throws Exception {
         SignChangeEvent event = new SignChangeEvent(null, null, "Line 1", "Line 2", "Line 3", "Line 4");
 
         Assert.assertEquals(event.getContents()[0], "Line 1");
@@ -67,5 +68,4 @@ public class SignChangeEventTest {
         Assert.assertEquals(event.getContents()[2], "New Line 3");
         Assert.assertEquals(event.getContents()[3], "New Line 4");
     }
-
 }

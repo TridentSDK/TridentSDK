@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.meta;
 
 import com.google.gson.Gson;
@@ -44,25 +45,19 @@ public final class MessageBuilder {
     }
 
     public MessageBuilder link(String url) {
-        this.buildingObject.clickEvent(new ClickEvent()
-                .action(ClickEvent.ClickAction.OPEN_URL)
-                .value(url));
+        this.buildingObject.clickEvent(new ClickEvent().action(ClickEvent.ClickAction.OPEN_URL).value(url));
 
         return this;
     }
 
     public MessageBuilder file(String file) {
-        this.buildingObject.clickEvent(new ClickEvent()
-                .action(ClickEvent.ClickAction.OPEN_FILE)
-                .value(file));
+        this.buildingObject.clickEvent(new ClickEvent().action(ClickEvent.ClickAction.OPEN_FILE).value(file));
 
         return this;
     }
 
     public MessageBuilder hover(String message) {
-        this.buildingObject.hoverEvent(new HoverEvent()
-                .action(HoverEvent.HoverAction.SHOW_TEXT)
-                .value(message));
+        this.buildingObject.hoverEvent(new HoverEvent().action(HoverEvent.HoverAction.SHOW_TEXT).value(message));
 
         return this;
     }

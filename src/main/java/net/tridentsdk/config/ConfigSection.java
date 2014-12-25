@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.config;
 
 import com.google.gson.JsonArray;
@@ -61,7 +62,8 @@ public class ConfigSection {
      */
     public static <V> ConfigSection addToList(Collection<V> list) {
         if (!(list instanceof ConfigSectionList)) {
-            TridentLogger.error(new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList"));
+            TridentLogger.error(
+                    new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList"));
         }
         ConfigSection section = new ConfigSection(((ConfigSectionList) list).getParent(), new JsonObject());
         list.add((V) section);
@@ -81,9 +83,7 @@ public class ConfigSection {
     }
 
     /**
-     * Gets an integer from the config with the given tag
-     * <p/>
-     * <p>Gives {@code 0} if the value could not be found</p>
+     * Gets an integer from the config with the given tag <p/> <p>Gives {@code 0} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
      * @return the integer at the tag
@@ -114,9 +114,7 @@ public class ConfigSection {
     }
 
     /**
-     * Gets a double from the config with the given tag
-     * <p/>
-     * <p>Gives {@code 0.0D} if the value could not be found</p>
+     * Gets a double from the config with the given tag <p/> <p>Gives {@code 0.0D} if the value could not be found</p>
      *
      * @param tag the tag to find the value from
      * @return the double at the tag
@@ -147,9 +145,7 @@ public class ConfigSection {
     }
 
     /**
-     * Gets an float from the config with the given tag
-     * <p/>
-     * <p>Gives {@code 0.0F if the value could not be found}</p>
+     * Gets an float from the config with the given tag <p/> <p>Gives {@code 0.0F if the value could not be found}</p>
      *
      * @param tag the tag to find the value from
      * @return the float at the tag
@@ -180,9 +176,8 @@ public class ConfigSection {
     }
 
     /**
-     * Gets a character from the config with the given tag
-     * <p/>
-     * <p>Gives {@code \u0000} if the value could not be found</p>
+     * Gets a character from the config with the given tag <p/> <p>Gives {@code \u0000} if the value could not be
+     * found</p>
      *
      * @param tag the tag to find the value from
      * @return the character at the tag
@@ -213,9 +208,8 @@ public class ConfigSection {
     }
 
     /**
-     * Gets a boolean from the config with the given tag
-     * <p/>
-     * <p>Gives {@code false} if the value could not be found</p>
+     * Gets a boolean from the config with the given tag <p/> <p>Gives {@code false} if the value could not be
+     * found</p>
      *
      * @param tag the tag to find the value from
      * @return the boolean at the tag
@@ -246,9 +240,8 @@ public class ConfigSection {
     }
 
     /**
-     * Gets a character from the config with the given tag
-     * <p/>
-     * <p>Gives {@code (byte) 0} if the value could not be found</p>
+     * Gets a character from the config with the given tag <p/> <p>Gives {@code (byte) 0} if the value could not be
+     * found</p>
      *
      * @param tag the tag to find the value from
      * @return the character at the tag
@@ -343,9 +336,7 @@ public class ConfigSection {
     }
 
     /**
-     * Gets the BigInteger at the tag
-     * <p/>
-     * <p>Defaults to {@code null} if not found</p>
+     * Gets the BigInteger at the tag <p/> <p>Defaults to {@code null} if not found</p>
      *
      * @param tag the tag to find the value from
      * @return the BigInteger at the tag
@@ -376,9 +367,7 @@ public class ConfigSection {
     }
 
     /**
-     * Gets a BigDecimal at the specified tag
-     * <p/>
-     * <p>Defaults to {@code null} if the tag is not found</p>
+     * Gets a BigDecimal at the specified tag <p/> <p>Defaults to {@code null} if the tag is not found</p>
      *
      * @param tag the tag to find the value from
      * @return the value of the tag

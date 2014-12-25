@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity;
 
 public enum HorseType {
@@ -55,7 +56,7 @@ public enum HorseType {
         this.id = id;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 

@@ -14,35 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.concurrent;
 
 import net.tridentsdk.plugin.TridentPlugin;
 
 /**
- * The internal representation of a scheduled task, implemented inside the scheduler to manage the wrapping for
- * {@link net.tridentsdk.concurrent.TridentRunnable}
+ * The internal representation of a scheduled task, implemented inside the scheduler to manage the wrapping for {@link
+ * net.tridentsdk.concurrent.TridentRunnable}
  *
  * @author The TridentSDk Team
  */
 public interface ScheduledTask extends Runnable {
-    /**
-     * Interval is the ticks left of a specific action for repeating and delayed tasks
-     *
-     * <p>For delayed tasks, the interval is the amount of ticks delay, and for repeating, interval is the amount
-     * of ticks between each repeat of the task.</p>
-     *
-     * <p>Setting the interval will reset the ticks already accumulated by the task</p>
-     *
-     * @param interval the interval to set the task to
-     */
-    void setInterval(long interval);
-
     /**
      * Gets the interval set or created by the task
      *
      * @return the interval, as defined in {@link ScheduledTask#setInterval(long)}
      */
     long getInterval();
+
+    /**
+     * Interval is the ticks left of a specific action for repeating and delayed tasks <p/> <p>For delayed tasks, the
+     * interval is the amount of ticks delay, and for repeating, interval is the amount of ticks between each repeat of
+     * the task.</p> <p/> <p>Setting the interval will reset the ticks already accumulated by the task</p>
+     *
+     * @param interval the interval to set the task to
+     */
+    void setInterval(long interval);
 
     /**
      * The task scheduling type

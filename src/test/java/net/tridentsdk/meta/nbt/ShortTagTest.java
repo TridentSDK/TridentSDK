@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.ShortTag;
@@ -24,7 +25,7 @@ import org.junit.Test;
 public class ShortTagTest {
 
     @Test
-    public void testSetValue() throws Exception{
+    public void testSetValue() throws Exception {
         ShortTag tag = new ShortTag("tag");
         Assert.assertEquals(tag.getValue(), 0);
 
@@ -33,9 +34,8 @@ public class ShortTagTest {
     }
 
     @Test
-    public void testGetType() throws Exception{
+    public void testGetType() throws Exception {
         ShortTag tag = new ShortTag("tag");
         Assert.assertEquals(tag.getType(), TagType.SHORT);
     }
-
 }

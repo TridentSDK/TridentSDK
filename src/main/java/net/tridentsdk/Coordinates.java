@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk;
 
 import com.google.common.base.Preconditions;
@@ -211,7 +212,7 @@ public class Coordinates implements Cloneable {
      */
     public Coordinates getRelative(Vector vector) {
         return create(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
+                      vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
     }
 
     /**
@@ -252,8 +253,7 @@ public class Coordinates implements Cloneable {
         Preconditions.checkNotNull(location, "Location cannot be null.");
         if (!this.getWorld().equals(location.getWorld())) return 0.0;
         return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
-                square(
-                        this.getZ() - location.getZ());
+                square(this.getZ() - location.getZ());
     }
 
     @Override
@@ -266,18 +266,19 @@ public class Coordinates implements Cloneable {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(x != ((Coordinates) obj).x){
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Coordinates)) return false;
+        if (x != ((Coordinates) obj).x) {
             return false;
-        }else if(y != ((Coordinates) obj).y){
+        } else if (y != ((Coordinates) obj).y) {
             return false;
-        }else if(z != ((Coordinates) obj).z){
+        } else if (z != ((Coordinates) obj).z) {
             return false;
-        }else if(world != ((Coordinates) obj).world){
+        } else if (world != ((Coordinates) obj).world) {
             return false;
-        }else if(pitch != ((Coordinates) obj).pitch){
+        } else if (pitch != ((Coordinates) obj).pitch) {
             return false;
-        }else if(yaw != ((Coordinates) obj).yaw){
+        } else if (yaw != ((Coordinates) obj).yaw) {
             return false;
         }
 

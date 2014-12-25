@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.config;
 
 import com.google.gson.Gson;
@@ -36,7 +37,7 @@ public final class GsonFactory {
     /**
      * Registers the adapter with the given type inside the GSON builder
      *
-     * @param type the type to use for registration
+     * @param type    the type to use for registration
      * @param adapter the adapter registered with the type
      */
     public static void registerTypeAdapter(Type type, Object adapter) {

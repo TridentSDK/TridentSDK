@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base;
 
 import net.tridentsdk.base.SubstanceColor;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class SubstanceColorTest {
 
     @Test
-    public void testAsInt() throws Exception{
+    public void testAsInt() throws Exception {
         Assert.assertEquals(SubstanceColor.WHITE.asInt(), 0);
         Assert.assertEquals(SubstanceColor.ORANGE.asInt(), 1);
         Assert.assertEquals(SubstanceColor.MAGENTA.asInt(), 2);
@@ -47,5 +48,4 @@ public class SubstanceColorTest {
             Assert.assertEquals(original[1], (byte) color.asInt());
         }
     }
-
 }

@@ -19,4 +19,5 @@
  * {@link net.tridentsdk.factory.Factories} to get the collections, configurations, executions, tasks, reflection,
  * and thread factories.
  */
+
 package net.tridentsdk.factory;

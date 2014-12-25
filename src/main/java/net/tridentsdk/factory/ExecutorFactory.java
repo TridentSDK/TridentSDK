@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.factory;
 
 import net.tridentsdk.concurrent.TaskExecutor;
@@ -24,8 +25,8 @@ import java.util.List;
 /**
  * A task executor that has multiple specified threads
  *
- * @author The TridentSDK Team
  * @param <E> the task assignment type
+ * @author The TridentSDK Team
  */
 public interface ExecutorFactory<E> {
     /**
@@ -36,9 +37,8 @@ public interface ExecutorFactory<E> {
     TaskExecutor scaledThread();
 
     /**
-     * Assigns the scaled thread to the assignment
-     *
-     * <p>If already assigned, the executor is returned for the fast-path</p>
+     * Assigns the scaled thread to the assignment <p/> <p>If already assigned, the executor is returned for the
+     * fast-path</p>
      *
      * @param assignment the assignment that uses the executor
      * @return the executor assigned
@@ -46,11 +46,10 @@ public interface ExecutorFactory<E> {
     TaskExecutor assign(E assignment);
 
     /**
-     * Adds a scaled thread to the assignment Map, useful if the assignment is created with the thread
+     * Adds a scaled thread to the assignment Map, useful if the assignment is created with the thread <p/> <p>Cannot
+     * replace existing entries. Acquired threads using {@link #assign(Object)} cannot be set.</p>
      *
-     * <p>Cannot replace existing entries. Acquired threads using {@link #assign(Object)} cannot be set.</p>
-     *
-     * @param executor the executor assigned
+     * @param executor   the executor assigned
      * @param assignment the element that is associated with the executor
      */
     void set(TaskExecutor executor, E assignment);
@@ -79,5 +78,5 @@ public interface ExecutorFactory<E> {
     /**
      * Shuts down the thread processes
      */
-   void shutdown();
+    void shutdown();
 }

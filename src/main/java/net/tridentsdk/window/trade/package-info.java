@@ -17,4 +17,5 @@
 /**
  * Trading API
  */
+
 package net.tridentsdk.window.trade;

@@ -14,11 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
 import net.tridentsdk.base.Instrument;
 import net.tridentsdk.base.Note;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 

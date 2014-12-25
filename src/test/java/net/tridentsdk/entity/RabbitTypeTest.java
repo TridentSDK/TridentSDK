@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.entity;
 
 import net.tridentsdk.entity.RabbitType;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class RabbitTypeTest {
 
     @Test
-    public void testToInt() throws Exception{
+    public void testToInt() throws Exception {
         Assert.assertEquals(RabbitType.BROWN.toInt(), 0);
         Assert.assertEquals(RabbitType.WHITE.toInt(), 1);
         Assert.assertEquals(RabbitType.BLACK.toInt(), 2);
@@ -34,7 +35,7 @@ public class RabbitTypeTest {
     }
 
     @Test
-    public void testAsInt() throws Exception{
+    public void testAsInt() throws Exception {
         Assert.assertEquals(RabbitType.asInt(RabbitType.BROWN), 0);
         Assert.assertEquals(RabbitType.asInt(RabbitType.WHITE), 1);
         Assert.assertEquals(RabbitType.asInt(RabbitType.BLACK), 2);
@@ -43,5 +44,4 @@ public class RabbitTypeTest {
         Assert.assertEquals(RabbitType.asInt(RabbitType.SALT_AND_PEPPER), 5);
         Assert.assertEquals(RabbitType.asInt(RabbitType.KILLER_RABBIT), 99);
     }
-
 }

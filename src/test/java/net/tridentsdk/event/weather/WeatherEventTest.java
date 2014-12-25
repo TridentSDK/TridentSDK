@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.weather;
 
 import net.tridentsdk.event.weather.WeatherEvent;
@@ -23,13 +24,13 @@ import org.junit.Test;
 public class WeatherEventTest {
 
     @Test
-    public void testGetWorld() throws Exception{
+    public void testGetWorld() throws Exception {
         WeatherEvent event = new WeatherEvent(null);
         Assert.assertEquals(event.getWorld(), null);
     }
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         WeatherEvent event = new WeatherEvent(null);
         Assert.assertEquals(event.isIgnored(), false);
 
@@ -38,9 +39,8 @@ public class WeatherEventTest {
     }
 
     @Test
-    public void testCancel() throws Exception{
+    public void testCancel() throws Exception {
         new WeatherEvent(null).cancel(true);
         new WeatherEvent(null).cancel(false);
     }
-
 }

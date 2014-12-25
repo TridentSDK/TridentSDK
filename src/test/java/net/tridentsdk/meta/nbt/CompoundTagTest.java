@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.*;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class CompoundTagTest {
 
     @Test
-    public void testListTags() throws Exception{
+    public void testListTags() throws Exception {
         CompoundTag tag = new CompoundTag("tag");
 
         Assert.assertEquals(tag.listTags().size(), 0);
@@ -43,14 +44,14 @@ public class CompoundTagTest {
         Assert.assertEquals(tag.containsTag("StringTag"), true);
         Assert.assertEquals(tag.containsTag("NoTag"), false);
 
-        if(!(tag.getTag("NoTag") instanceof NullTag)){
+        if (!(tag.getTag("NoTag") instanceof NullTag)) {
             Assert.fail();
         }
 
         Assert.assertEquals(tag.getTag("StringTag"), stringTag);
         Assert.assertEquals(tag.getTag("IntTag"), intTag);
 
-        if(!(tag.getTagAs("NoTag") instanceof NullTag)){
+        if (!(tag.getTagAs("NoTag") instanceof NullTag)) {
             Assert.fail();
         }
 
@@ -68,9 +69,8 @@ public class CompoundTagTest {
     }
 
     @Test
-    public void testGetType() throws Exception{
+    public void testGetType() throws Exception {
         CompoundTag tag = new CompoundTag("tag");
         Assert.assertEquals(tag.getType(), TagType.COMPOUND);
     }
-
 }

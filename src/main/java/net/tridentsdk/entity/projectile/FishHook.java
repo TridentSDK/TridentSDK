@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.projectile;
 
 /**
@@ -23,9 +24,7 @@ package net.tridentsdk.entity.projectile;
  */
 public interface FishHook extends Projectile {
     /**
-     * The chance that a fish will be caught on the hook
-     *
-     * <p>Works only in water</p>
+     * The chance that a fish will be caught on the hook <p/> <p>Works only in water</p>
      *
      * @return the chance a fish will be caught on the hook
      */

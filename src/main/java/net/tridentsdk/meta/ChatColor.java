@@ -14,13 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.meta;
 
 /**
- * A color able to be used in the chat text
- *
- * <p>These should be self-explanatory, if you need more help, take a look at <
- * a href="http://minecraft.gamepedia.com/Formatting_codes">Minecraft Wiki</a>.</p>
+ * A color able to be used in the chat text <p/> <p>These should be self-explanatory, if you need more help, take a look
+ * at < a href="http://minecraft.gamepedia.com/Formatting_codes">Minecraft Wiki</a>.</p>
  *
  * @author The TridentSDK Team
  */

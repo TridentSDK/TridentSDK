@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.base;
 
 import net.tridentsdk.Coordinates;
@@ -23,14 +24,12 @@ import javax.annotation.concurrent.Immutable;
 import java.util.Collection;
 
 /**
- * Represents an instance or "snapshot" of a tile when viewed by the construction method
- *
- * <p>Snapshot using the {@link #of(Tile)} method</p>
+ * Represents an instance or "snapshot" of a tile when viewed by the construction method <p/> <p>Snapshot using the
+ * {@link #of(Tile)} method</p>
  *
  * @author The TridentSDK Team
  */
-@Immutable
-public final class TileSnapshot {
+@Immutable public final class TileSnapshot {
     private final Coordinates location;
     private final Substance material;
     private final byte data;
@@ -54,16 +53,16 @@ public final class TileSnapshot {
     }
 
     /**
-     * Places the data stored in the snapshot into the original block
-     *
-     * <p>Does not clear data from this snapshot</p>
+     * Places the data stored in the snapshot into the original block <p/> <p>Does not clear data from this
+     * snapshot</p>
      */
     public void load() {
         Tile tile = location.getWorld().getTileAt(location);
         tile.setSubstance(material);
         tile.setMeta(data);
         tile.clear();
-        for (Projectile projectile : projectiles)
+        for (Projectile projectile : projectiles) {
             tile.put(projectile);
+        }
     }
 }

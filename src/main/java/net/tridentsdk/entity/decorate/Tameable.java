@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.decorate;
 
 import java.util.UUID;
@@ -34,8 +35,8 @@ public interface Tameable extends Ageable {
     /**
      * The UUID of this entity's owner
      *
-     * @return the UUID of the {@link net.tridentsdk.entity.living.Player}Player that owns this entity, {@code null}
-     * if untamed
+     * @return the UUID of the {@link net.tridentsdk.entity.living.Player}Player that owns this entity, {@code null} if
+     * untamed
      */
     UUID getOwner();
 

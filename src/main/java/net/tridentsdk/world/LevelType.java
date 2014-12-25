@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.world;
 
 public enum LevelType {
@@ -30,11 +31,6 @@ public enum LevelType {
         this.s = s;
     }
 
-    @Override
-    public String toString() {
-        return this.s;
-    }
-
     public static LevelType getLevelType(String s) {
         for (LevelType level : values()) {
             if (level.s.equalsIgnoreCase(s)) {
@@ -43,5 +39,10 @@ public enum LevelType {
         }
 
         return LevelType.DEFAULT;
+    }
+
+    @Override
+    public String toString() {
+        return this.s;
     }
 }

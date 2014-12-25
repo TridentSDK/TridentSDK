@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.plugin.cmd;
 
+package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.PluginLoadException;
@@ -48,11 +48,9 @@ public class CommandHandler {
             String args = message.substring(label.length());
 
             if (issuer instanceof Player) {
-                cmdData.getCommand().handlePlayer(
-                        (Player) issuer, args, contents[0]);
+                cmdData.getCommand().handlePlayer((Player) issuer, args, contents[0]);
             } else if (issuer instanceof ConsoleSender) {
-                cmdData.getCommand().handleConsole(
-                        (ConsoleSender) issuer, args, contents[0]);
+                cmdData.getCommand().handleConsole((ConsoleSender) issuer, args, contents[0]);
             }
             cmdData.getCommand().handle(issuer, args, contents[0]);
         }
@@ -62,11 +60,9 @@ public class CommandHandler {
                 CommandData command = entry.getValue();
                 String args = message.substring(label.length());
                 if (issuer instanceof Player) {
-                    command.getCommand().handlePlayer(
-                            (Player) issuer, args, contents[0]);
+                    command.getCommand().handlePlayer((Player) issuer, args, contents[0]);
                 } else if (issuer instanceof ConsoleSender) {
-                    command.getCommand().handleConsole(
-                            (ConsoleSender) issuer, args, contents[0]);
+                    command.getCommand().handleConsole((ConsoleSender) issuer, args, contents[0]);
                 }
                 command.getCommand().handle(issuer, args, contents[0]);
             }
@@ -78,8 +74,8 @@ public class CommandHandler {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
         if (description == null) {
-            TridentLogger.error(new PluginLoadException("Error in registering commands: Class does not have annotation " +
-                    "\"CommandDescription\"!"));
+            TridentLogger.error(new PluginLoadException(
+                    "Error in registering commands: Class does not have annotation " + "\"CommandDescription\"!"));
             return 0;
         }
 
@@ -96,7 +92,8 @@ public class CommandHandler {
             if (COMMANDS.get(name.toLowerCase()).getPriority() > priority) {
                 // put the new, more important cmd in place and notify the old cmd that it has been overriden
                 COMMANDS.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
-                        .getCommand().notifyOverriden();
+                        .getCommand()
+                        .notifyOverriden();
             } else {
                 // don't register this cmd and notify it has been overriden
                 command.notifyOverriden();

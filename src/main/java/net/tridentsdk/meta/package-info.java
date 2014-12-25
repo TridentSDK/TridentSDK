@@ -17,4 +17,5 @@
 /**
  * Minecraft metadata builders and access to the underlying properties of NBT and chat
  */
+
 package net.tridentsdk.meta;

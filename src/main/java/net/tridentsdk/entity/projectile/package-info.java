@@ -17,4 +17,5 @@
 /**
  * Entities that can be thrown (such as potions) or can be launched (arrows, fireballs, snowballs, etc.)
  */
+
 package net.tridentsdk.entity.projectile;

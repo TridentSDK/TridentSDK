@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.entity;
 
 import net.tridentsdk.entity.OcelotType;
@@ -23,11 +24,10 @@ import org.junit.Test;
 public class OcelotTypeTest {
 
     @Test
-    public void testAsInt() throws Exception{
+    public void testAsInt() throws Exception {
         Assert.assertEquals(OcelotType.WILD.asInt(), 0);
         Assert.assertEquals(OcelotType.TUXEDO.asInt(), 1);
         Assert.assertEquals(OcelotType.TABBY.asInt(), 2);
         Assert.assertEquals(OcelotType.SIAMESE.asInt(), 3);
     }
-
 }

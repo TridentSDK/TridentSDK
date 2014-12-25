@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.docs;
 
 import java.lang.annotation.Documented;
@@ -22,14 +23,10 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Target;
 
 /**
- * Marks that the class is thread safe. Similar to {@link javax.annotation.concurrent.ThreadSafe}.
- *
- * <p>Also marks that inheriting classes are also thread safe.</p>
+ * Marks that the class is thread safe. Similar to {@link javax.annotation.concurrent.ThreadSafe}. <p/> <p>Also marks
+ * that inheriting classes are also thread safe.</p>
  *
  * @author The TridentSDK Team
  */
-@Documented
-@Target(ElementType.TYPE)
-@Inherited
-public @interface InheritThreadSafe {
+@Documented @Target(ElementType.TYPE) @Inherited public @interface InheritThreadSafe {
 }

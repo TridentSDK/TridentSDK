@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.weather;
 
 import net.tridentsdk.Coordinates;
@@ -24,9 +25,8 @@ import org.junit.Test;
 public class LightningStrikeEventTest {
 
     @Test
-    public void testGetLocation() throws Exception{
+    public void testGetLocation() throws Exception {
         LightningStrikeEvent event = new LightningStrikeEvent(null, Coordinates.create(null, 0, 0, 0));
         Assert.assertEquals(event.getLocation(), Coordinates.create(null, 0, 0, 0));
     }
-
 }

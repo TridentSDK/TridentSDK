@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base.board;
 
 import net.tridentsdk.base.board.BoardType;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class BoardTypeTest {
 
     @Test
-    public void testAsByte() throws Exception{
+    public void testAsByte() throws Exception {
         Assert.assertEquals(BoardType.LIST.asByte(), 0);
         Assert.assertEquals(BoardType.SIDEBAR.asByte(), 1);
         Assert.assertEquals(BoardType.BELOW_NAME.asByte(), 2);

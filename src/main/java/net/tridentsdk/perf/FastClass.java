@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.perf;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
@@ -64,7 +65,7 @@ public class FastClass {
     /**
      * Get a field from the class
      *
-     * @param name     Name of the field
+     * @param name Name of the field
      * @return FastField instance
      */
     public FastField getField(String name) {
@@ -74,10 +75,10 @@ public class FastClass {
     /**
      * Get a method from the class
      *
-     * @param name     Name of the method
+     * @param name Name of the method
      * @return FastMethod instance
      */
-    public FastMethod getMethod(Object object,  String name) {
+    public FastMethod getMethod(Object object, String name) {
         return new FastMethod(object, this.methodAccess, name);
     }
 

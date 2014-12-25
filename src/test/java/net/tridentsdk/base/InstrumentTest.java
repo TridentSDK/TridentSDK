@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base;
 
 import net.tridentsdk.base.Instrument;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class InstrumentTest {
 
     @Test
-    public void testFromByte() throws Exception{
+    public void testFromByte() throws Exception {
         Assert.assertEquals(Instrument.fromByte((byte) 0x0), Instrument.PIANO);
         Assert.assertEquals(Instrument.fromByte((byte) 0x1), Instrument.BASS_DRUM);
         Assert.assertEquals(Instrument.fromByte((byte) 0x2), Instrument.SNARE_DRUM);
@@ -33,7 +34,7 @@ public class InstrumentTest {
     }
 
     @Test
-    public void testToByte() throws Exception{
+    public void testToByte() throws Exception {
         Assert.assertEquals(Instrument.PIANO.toByte(), (byte) 0x0);
         Assert.assertEquals(Instrument.BASS_DRUM.toByte(), (byte) 0x1);
         Assert.assertEquals(Instrument.SNARE_DRUM.toByte(), (byte) 0x2);
@@ -42,12 +43,11 @@ public class InstrumentTest {
     }
 
     @Test
-    public void testToByte1() throws Exception{
+    public void testToByte1() throws Exception {
         Assert.assertEquals(Instrument.toByte(Instrument.PIANO), (byte) 0x0);
         Assert.assertEquals(Instrument.toByte(Instrument.BASS_DRUM), (byte) 0x1);
         Assert.assertEquals(Instrument.toByte(Instrument.SNARE_DRUM), (byte) 0x2);
         Assert.assertEquals(Instrument.toByte(Instrument.STICKS), (byte) 0x3);
         Assert.assertEquals(Instrument.toByte(Instrument.BASS_GUITAR), (byte) 0x4);
     }
-
 }

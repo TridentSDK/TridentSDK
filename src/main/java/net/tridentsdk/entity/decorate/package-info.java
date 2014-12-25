@@ -17,4 +17,5 @@
 /**
  * Entity functionality that can be attached or "decorated" over the instance given using the implementation decorators
  */
+
 package net.tridentsdk.entity.decorate;

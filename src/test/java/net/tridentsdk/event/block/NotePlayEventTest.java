@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Instrument;
@@ -25,7 +26,7 @@ import org.junit.Test;
 public class NotePlayEventTest {
 
     @Test
-    public void testSetNote() throws Exception{
+    public void testSetNote() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
         Assert.assertEquals(event.getNote().getNote(), 10);
 
@@ -34,7 +35,7 @@ public class NotePlayEventTest {
     }
 
     @Test
-    public void testSetInstrument() throws Exception{
+    public void testSetInstrument() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
         Assert.assertEquals(event.getInstrument(), Instrument.BASS_GUITAR);
 
@@ -43,12 +44,11 @@ public class NotePlayEventTest {
     }
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
         Assert.assertEquals(event.isIgnored(), false);
 
         event.cancel(true);
         Assert.assertEquals(event.isIgnored(), true);
     }
-
 }

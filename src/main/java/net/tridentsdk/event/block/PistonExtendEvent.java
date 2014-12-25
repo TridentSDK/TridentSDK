@@ -14,11 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.block;
 
 import com.google.common.collect.ImmutableList;
-import net.tridentsdk.base.Tile;
 import net.tridentsdk.base.Orientation;
+import net.tridentsdk.base.Tile;
 
 import java.util.List;
 

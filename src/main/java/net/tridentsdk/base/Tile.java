@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.base;
 
 import net.tridentsdk.Coordinates;
@@ -27,18 +28,18 @@ import net.tridentsdk.util.Vector;
  */
 public interface Tile extends Impalable {
     /**
-     * Sets the substance the tile is made of
-     *
-     * @param material the substance the tile should be set to
-     */
-    public void setSubstance(Substance material);
-
-    /**
      * Gets the substance the tile is made of
      *
      * @return the type the tile was set
      */
     public Substance getSubstance();
+
+    /**
+     * Sets the substance the tile is made of
+     *
+     * @param material the substance the tile should be set to
+     */
+    public void setSubstance(Substance material);
 
     /**
      * Returns the Location of the Block

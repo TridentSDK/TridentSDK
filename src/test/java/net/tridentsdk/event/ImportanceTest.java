@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event;
 
 import net.tridentsdk.event.Importance;
@@ -23,12 +24,11 @@ import org.junit.Test;
 public class ImportanceTest {
 
     @Test
-    public void testGetImportance() throws Exception{
+    public void testGetImportance() throws Exception {
         Assert.assertEquals(Importance.LOWEST.getImportance(), 0);
         Assert.assertEquals(Importance.LOW.getImportance(), 1);
         Assert.assertEquals(Importance.MEDIUM.getImportance(), 2);
         Assert.assertEquals(Importance.HIGH.getImportance(), 3);
         Assert.assertEquals(Importance.HIGHEST.getImportance(), 4);
     }
-
 }

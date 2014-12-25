@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk;
 
 import net.tridentsdk.factory.Factories;
@@ -68,8 +69,8 @@ public class DisplayInfo {
     public BufferedImage getMotdPictureImage() {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File(Factories.configs().serverConfig().getString("image-location",
-                    Defaults.MOTD_IMAGE_LOCATION)));
+            img = ImageIO.read(new File(
+                    Factories.configs().serverConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION)));
         } catch (IOException ex) {
             TridentLogger.error(ex);
         }

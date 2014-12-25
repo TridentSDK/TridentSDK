@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk;
 
 import net.tridentsdk.GameMode;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class GameModeTest {
 
     @Test
-    public void testToByte() throws Exception{
+    public void testToByte() throws Exception {
         Assert.assertEquals(GameMode.SURVIVAL.toByte(), 0);
         Assert.assertEquals(GameMode.CREATIVE.toByte(), 1);
         Assert.assertEquals(GameMode.ADVENTURE.toByte(), 2);
@@ -32,7 +33,7 @@ public class GameModeTest {
     }
 
     @Test
-    public void testToByte1() throws Exception{
+    public void testToByte1() throws Exception {
         Assert.assertEquals(GameMode.toByte(GameMode.SURVIVAL), 0);
         Assert.assertEquals(GameMode.toByte(GameMode.CREATIVE), 1);
         Assert.assertEquals(GameMode.toByte(GameMode.ADVENTURE), 2);
@@ -41,7 +42,7 @@ public class GameModeTest {
     }
 
     @Test
-    public void testGetGameMode() throws Exception{
+    public void testGetGameMode() throws Exception {
         Assert.assertEquals(GameMode.getGameMode(0), GameMode.SURVIVAL);
         Assert.assertEquals(GameMode.getGameMode(1), GameMode.CREATIVE);
         Assert.assertEquals(GameMode.getGameMode(2), GameMode.ADVENTURE);
@@ -49,5 +50,4 @@ public class GameModeTest {
         Assert.assertEquals(GameMode.getGameMode(8), GameMode.HARDCORE);
         Assert.assertEquals(GameMode.getGameMode(10), null);
     }
-
 }

@@ -14,15 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Tile;
 import net.tridentsdk.event.Event;
 
 /**
- * Represents any event that involves a block modification
- *
- * <p>This is an umbrella event, do not listen to it</p>
+ * Represents any event that involves a block modification <p/> <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
  */

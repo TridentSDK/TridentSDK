@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.IntArrayTag;
@@ -24,7 +25,7 @@ import org.junit.Test;
 public class IntArrayTagTest {
 
     @Test
-    public void testSetValue() throws Exception{
+    public void testSetValue() throws Exception {
         IntArrayTag tag = new IntArrayTag("tag");
         Assert.assertEquals(tag.getValue(), null);
 
@@ -38,9 +39,8 @@ public class IntArrayTagTest {
     }
 
     @Test
-    public void testGetType() throws Exception{
+    public void testGetType() throws Exception {
         IntArrayTag tag = new IntArrayTag("tag");
         Assert.assertEquals(tag.getType(), TagType.INT_ARRAY);
     }
-
 }

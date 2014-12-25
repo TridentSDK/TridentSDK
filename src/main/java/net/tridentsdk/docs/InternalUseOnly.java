@@ -14,15 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.docs;
 
 import java.lang.annotation.Documented;
 
 /**
- * Marks a member of the API or implementation that is designed to be used internally only.
- *
- * <p>The behavior of callers on those members marked by this annotation is unspecified and left undocumented.</p>
+ * Marks a member of the API or implementation that is designed to be used internally only. <p/> <p>The behavior of
+ * callers on those members marked by this annotation is unspecified and left undocumented.</p>
  */
-@Documented
-public @interface InternalUseOnly {
+@Documented public @interface InternalUseOnly {
 }

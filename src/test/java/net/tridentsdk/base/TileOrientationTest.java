@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base;
 
 import net.tridentsdk.Coordinates;
@@ -25,7 +26,7 @@ import org.junit.Test;
 public class TileOrientationTest {
 
     @Test
-    public void testGetDifference() throws Exception{
+    public void testGetDifference() throws Exception {
         Assert.assertEquals(TileOrientation.NORTH.getDifference(), new Vector(0, 0, -1));
         Assert.assertEquals(TileOrientation.SOUTH.getDifference(), new Vector(0, 0, 1));
         Assert.assertEquals(TileOrientation.EAST.getDifference(), new Vector(1, 0, 0));
@@ -40,17 +41,28 @@ public class TileOrientationTest {
     }
 
     @Test
-    public void testApply() throws Exception{
-        Assert.assertEquals(TileOrientation.NORTH.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 0, 0, -1));
-        Assert.assertEquals(TileOrientation.SOUTH.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 0, 0, 1));
-        Assert.assertEquals(TileOrientation.EAST.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 1, 0, 0));
-        Assert.assertEquals(TileOrientation.WEST.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, -1, 0, 0));
-        Assert.assertEquals(TileOrientation.NORTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 1, 0, -1));
-        Assert.assertEquals(TileOrientation.NORTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, -1, 0, -1));
-        Assert.assertEquals(TileOrientation.SOUTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 1, 0, 1));
-        Assert.assertEquals(TileOrientation.SOUTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, -1, 0, 1));
-        Assert.assertEquals(TileOrientation.TOP.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 0, 1, 0));
-        Assert.assertEquals(TileOrientation.BOTTOM.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 0, -1, 0));
-        Assert.assertEquals(TileOrientation.SELF.apply(Coordinates.create(null, 0d, 0d, 0d)), Coordinates.create(null, 0, 0, 0));
+    public void testApply() throws Exception {
+        Assert.assertEquals(TileOrientation.NORTH.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 0, 0, -1));
+        Assert.assertEquals(TileOrientation.SOUTH.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 0, 0, 1));
+        Assert.assertEquals(TileOrientation.EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 1, 0, 0));
+        Assert.assertEquals(TileOrientation.WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, -1, 0, 0));
+        Assert.assertEquals(TileOrientation.NORTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 1, 0, -1));
+        Assert.assertEquals(TileOrientation.NORTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, -1, 0, -1));
+        Assert.assertEquals(TileOrientation.SOUTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 1, 0, 1));
+        Assert.assertEquals(TileOrientation.SOUTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, -1, 0, 1));
+        Assert.assertEquals(TileOrientation.TOP.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 0, 1, 0));
+        Assert.assertEquals(TileOrientation.BOTTOM.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 0, -1, 0));
+        Assert.assertEquals(TileOrientation.SELF.apply(Coordinates.create(null, 0d, 0d, 0d)),
+                            Coordinates.create(null, 0, 0, 0));
     }
 }

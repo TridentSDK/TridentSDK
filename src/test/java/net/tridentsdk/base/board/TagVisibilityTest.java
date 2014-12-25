@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base.board;
 
 import net.tridentsdk.base.board.TagVisibility;
@@ -23,11 +24,10 @@ import org.junit.Test;
 public class TagVisibilityTest {
 
     @Test
-    public void testToString() throws Exception{
+    public void testToString() throws Exception {
         Assert.assertEquals(TagVisibility.ALWAYS.toString(), "always");
         Assert.assertEquals(TagVisibility.HIDE_OTHER_TEAMS.toString(), "hideFromOtherTeams");
         Assert.assertEquals(TagVisibility.HIDE_OWN_TEAM.toString(), "hideFromOwnTeam");
         Assert.assertEquals(TagVisibility.NEVER.toString(), "never");
     }
-
 }

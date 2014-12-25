@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.IntTag;
@@ -25,7 +26,7 @@ import org.junit.Test;
 public class ListTagTest {
 
     @Test
-    public void testListTags() throws Exception{
+    public void testListTags() throws Exception {
         ListTag tag = new ListTag("tag", TagType.INT);
 
         Assert.assertEquals(tag.listTags().size(), 0);
@@ -56,19 +57,17 @@ public class ListTagTest {
         tag.clearTags();
 
         Assert.assertEquals(tag.listTags().size(), 0);
-
     }
 
     @Test
-    public void testGetInnerType() throws Exception{
+    public void testGetInnerType() throws Exception {
         ListTag tag = new ListTag("tag", TagType.INT);
         Assert.assertEquals(tag.getInnerType(), TagType.INT);
     }
 
     @Test
-    public void testGetType() throws Exception{
+    public void testGetType() throws Exception {
         ListTag tag = new ListTag("tag", TagType.INT);
         Assert.assertEquals(tag.getType(), TagType.LIST);
     }
-
 }

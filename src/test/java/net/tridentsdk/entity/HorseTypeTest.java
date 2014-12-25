@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.entity;
 
 import net.tridentsdk.entity.HorseType;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class HorseTypeTest {
 
     @Test
-    public void testGetId() throws Exception{
+    public void testGetId() throws Exception {
         Assert.assertEquals(HorseType.HORSE.getId(), 0);
         Assert.assertEquals(HorseType.DONKEY.getId(), 1);
         Assert.assertEquals(HorseType.MULE.getId(), 2);

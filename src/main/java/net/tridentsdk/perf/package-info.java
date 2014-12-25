@@ -17,4 +17,5 @@
 /**
  * Performance enhancing classes, or just utilities that allow for fast facilities for use in the API
  */
+
 package net.tridentsdk.perf;

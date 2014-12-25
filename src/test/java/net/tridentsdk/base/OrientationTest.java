@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base;
 
 import net.tridentsdk.base.Orientation;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class OrientationTest {
 
     @Test
-    public void testEnum() throws Exception{
+    public void testEnum() throws Exception {
         Assert.assertEquals(Orientation.NORTH, Orientation.NORTH);
         Assert.assertEquals(Orientation.SOUTH, Orientation.SOUTH);
         Assert.assertEquals(Orientation.EAST, Orientation.EAST);

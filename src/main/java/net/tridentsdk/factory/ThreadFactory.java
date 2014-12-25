@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.factory;
 
 import net.tridentsdk.concurrent.TaskExecutor;
@@ -24,13 +25,11 @@ import net.tridentsdk.world.World;
 import java.util.Collection;
 
 /**
- * Creates threads and managers for those threads
- *
- * <p>These methods are primarily only supposed to be used by the server only. Because they are not volatile, they are
- * not marked with {@link net.tridentsdk.docs.InternalUseOnly}. However, you must be careful - data will not be
- * wiped unless you remove it yourself, which holds true until the server exits and shutsdown. Even calling the method
- * without using the returned {@link net.tridentsdk.concurrent.TaskExecutor} will place an additional assignment inside
- * the backing executor.</p>
+ * Creates threads and managers for those threads <p/> <p>These methods are primarily only supposed to be used by the
+ * server only. Because they are not volatile, they are not marked with {@link net.tridentsdk.docs.InternalUseOnly}.
+ * However, you must be careful - data will not be wiped unless you remove it yourself, which holds true until the
+ * server exits and shutsdown. Even calling the method without using the returned {@link
+ * net.tridentsdk.concurrent.TaskExecutor} will place an additional assignment inside the backing executor.</p>
  *
  * @author The TridentSDK Team
  */
@@ -84,7 +83,7 @@ public interface ThreadFactory {
      * A new concurren task executor reimplemented in the server
      *
      * @param threads the threads available in the pool
-     * @param <T> the assignment type for each thread
+     * @param <T>     the assignment type for each thread
      * @return the execution factory
      */
     <T> ExecutorFactory<T> executor(int threads);

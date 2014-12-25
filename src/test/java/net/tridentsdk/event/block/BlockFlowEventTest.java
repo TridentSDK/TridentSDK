@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.event.block.BlockFlowEvent;
@@ -23,12 +24,11 @@ import org.junit.Test;
 public class BlockFlowEventTest {
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         BlockFlowEvent event = new BlockFlowEvent(null, null);
         Assert.assertEquals(event.isIgnored(), false);
 
         event.cancel(true);
         Assert.assertEquals(event.isIgnored(), true);
     }
-
 }

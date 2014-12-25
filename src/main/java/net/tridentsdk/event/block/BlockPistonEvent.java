@@ -14,17 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
-import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.Orientation;
+import net.tridentsdk.base.Substance;
+import net.tridentsdk.base.Tile;
 import net.tridentsdk.event.Cancellable;
 
 /**
- * Called whenever a piston extends or retracts
- *
- * <p>This is an umbrella event, do not listen to it</p>
+ * Called whenever a piston extends or retracts <p/> <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
  */
@@ -71,9 +70,8 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
     }
 
     /**
-     * Gets the block that is being moved by this piston, if any
-     * <p/>
-     * <p>If this is a piston extend event, this will return the first block in the series of blocks being pushed.</p>
+     * Gets the block that is being moved by this piston, if any <p/> <p>If this is a piston extend event, this will
+     * return the first block in the series of blocks being pushed.</p>
      *
      * @return the block being moved, may be null if air, or retracting from a block without this piston being sticky
      */

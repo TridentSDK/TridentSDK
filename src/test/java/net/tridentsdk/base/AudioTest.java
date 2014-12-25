@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.base;
 
 import net.tridentsdk.base.Audio;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class AudioTest {
 
     @Test
-    public void testToString() throws Exception{
+    public void testToString() throws Exception {
         Assert.assertEquals(Audio.AMBIENT_CAVE.toString(), "ambient.cave.cave");
         Assert.assertEquals(Audio.AMBIENT_RAIN.toString(), "ambient.weather.rain");
         Assert.assertEquals(Audio.AMBIENT_THUNDER.toString(), "ambient.weather.thunder");
@@ -270,5 +271,4 @@ public class AudioTest {
         Assert.assertEquals(Audio.MUSIC_GAME_END_CREDITS.toString(), "music.game. end.credits");
         Assert.assertEquals(Audio.MUSIC_GAME_NETHER.toString(), "music.game.nether");
     }
-
 }

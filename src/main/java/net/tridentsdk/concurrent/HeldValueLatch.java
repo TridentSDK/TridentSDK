@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.concurrent;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -25,18 +26,14 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @param <V> the value type of the latch
  */
-@ThreadSafe
-public class HeldValueLatch<V> {
+@ThreadSafe public class HeldValueLatch<V> {
     private final CountDownLatch latch = new CountDownLatch(1);
     private final AtomicReference<V> value = new AtomicReference<>();
 
     /**
-     * Sets the value in the latch
-     *
-     * <p>The effects of setting this only once is unspecified</p>
-     *
-     * <p>This is unsynchronized because all actions prior to counting down <em>happens-before</em> another thread
-     * awaits the value</p>
+     * Sets the value in the latch <p/> <p>The effects of setting this only once is unspecified</p> <p/> <p>This is
+     * unsynchronized because all actions prior to counting down <em>happens-before</em> another thread awaits the
+     * value</p>
      *
      * @param value the value to set to the latch
      */

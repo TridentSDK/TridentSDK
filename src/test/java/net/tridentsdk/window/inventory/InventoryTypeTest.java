@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.window.inventory;
 
 import net.tridentsdk.window.inventory.InventoryType;
@@ -23,7 +24,7 @@ import org.junit.Test;
 public class InventoryTypeTest {
 
     @Test
-    public void testToString() throws Exception{
+    public void testToString() throws Exception {
         Assert.assertEquals(InventoryType.CHEST.toString(), "minecraft:chest");
         Assert.assertEquals(InventoryType.CRAFTING_TABLE.toString(), "minecraft:crafting_table");
         Assert.assertEquals(InventoryType.FURNACE.toString(), "minecraft:furnace");
@@ -37,5 +38,4 @@ public class InventoryTypeTest {
         Assert.assertEquals(InventoryType.DROPPER.toString(), "minecraft:dropper");
         Assert.assertEquals(InventoryType.HORSE.toString(), "minecraft:horse");
     }
-
 }

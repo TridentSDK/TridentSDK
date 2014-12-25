@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.event.block;
 
 import net.tridentsdk.event.block.BlockRedstoneEvent;
@@ -23,24 +24,23 @@ import org.junit.Test;
 public class BlockRedstoneEventTest {
 
     @Test
-    public void testGetCause() throws Exception{
+    public void testGetCause() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
         Assert.assertEquals(event.getCause(), BlockRedstoneEvent.Cause.BUTTON);
     }
 
     @Test
-    public void testGetStrength() throws Exception{
+    public void testGetStrength() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
         Assert.assertEquals(event.getStrength(), 10);
     }
 
     @Test
-    public void testIsIgnored() throws Exception{
+    public void testIsIgnored() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
         Assert.assertEquals(event.isIgnored(), false);
 
         event.cancel(true);
         Assert.assertEquals(event.isIgnored(), true);
     }
-
 }

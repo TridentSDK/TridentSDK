@@ -17,4 +17,5 @@
 /**
  * Other entities and general abstractions and types
  */
+
 package net.tridentsdk.entity;

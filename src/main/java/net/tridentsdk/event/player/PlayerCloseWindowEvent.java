@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.event.player;
 
 import net.tridentsdk.event.Cancellable;
@@ -31,7 +32,7 @@ public class PlayerCloseWindowEvent extends Event implements Cancellable {
 
     public PlayerCloseWindowEvent(Window window) {
         this.window = window;
-        this.cancelled= false;
+        this.cancelled = false;
     }
 
     public Window getWindow() {

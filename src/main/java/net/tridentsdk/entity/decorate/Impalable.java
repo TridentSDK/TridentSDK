@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.base.Tile;
@@ -43,18 +44,16 @@ public interface Impalable {
     boolean isImpaledTile();
 
     /**
-     * Gets the entity that was impaled by the projectile
-     * <p/>
-     * <p>Returns {@code null} if {@code isImpaledEntity == false}</p>
+     * Gets the entity that was impaled by the projectile <p/> <p>Returns {@code null} if {@code isImpaledEntity ==
+     * false}</p>
      *
      * @return the entity impaled by the projectile
      */
     Entity impaledEntity();
 
     /**
-     * Gets the block (tile) that was impaled by the projectile
-     * <p/>
-     * <p>Returns {@code null} if {@code isImpaledTile == false}</p>
+     * Gets the block (tile) that was impaled by the projectile <p/> <p>Returns {@code null} if {@code isImpaledTile ==
+     * false}</p>
      *
      * @return the impaled block (tile)
      */
@@ -71,8 +70,8 @@ public interface Impalable {
      * Removes the projectile from the impalable
      *
      * @param projectile the projectile to remove from the impalable
-     * @return {@code true} if the projectile was removed, {@code false} if the projectile isn't in the impalable,
-     * or it doesn't exist
+     * @return {@code true} if the projectile was removed, {@code false} if the projectile isn't in the impalable, or it
+     * doesn't exist
      */
     boolean remove(Projectile projectile);
 
@@ -82,14 +81,9 @@ public interface Impalable {
     void clear();
 
     /**
-     * Gets the projectiles that impaled the object
-     * <p/>
-     * <p>The list is ordered by first is oldest available arrow, and the last projectile is the newest projectile
-     * impaling the tile/entity.</p>
-     * <p/>
-     * <p>Returns {@code null} if the current impalable was never hit by a projectile, or
-     * {@code impaledEntity == null && impaledTile == null}</p>
-     * <p/>
+     * Gets the projectiles that impaled the object <p/> <p>The list is ordered by first is oldest available arrow, and
+     * the last projectile is the newest projectile impaling the tile/entity.</p> <p/> <p>Returns {@code null} if the
+     * current impalable was never hit by a projectile, or {@code impaledEntity == null && impaledTile == null}</p> <p/>
      * <p>This is a immutable collection</p>
      *
      * @return the last projectile that impaled the object

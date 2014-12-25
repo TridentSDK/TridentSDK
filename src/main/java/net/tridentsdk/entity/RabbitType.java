@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity;
 
 /**
@@ -45,19 +46,19 @@ public enum RabbitType {
     /**
      * Returns the {@code int} value of the RabbitType
      *
-     * @return {@code int} value of the RabbitType
-     */
-    public int toInt() {
-        return this.id;
-    }
-
-    /**
-     * Returns the {@code int} value of the RabbitType
-     *
      * @param rabbitType RabbitType
      * @return {@code int} value of the RabbitType
      */
     public static int asInt(RabbitType rabbitType) {
         return rabbitType.toInt();
+    }
+
+    /**
+     * Returns the {@code int} value of the RabbitType
+     *
+     * @return {@code int} value of the RabbitType
+     */
+    public int toInt() {
+        return this.id;
     }
 }

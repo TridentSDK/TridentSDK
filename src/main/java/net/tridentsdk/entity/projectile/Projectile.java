@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.projectile;
 
 import net.tridentsdk.entity.Entity;
@@ -39,16 +40,16 @@ public interface Projectile extends Entity {
     Impalable getImpaled();
 
     /**
-     * Returns the shooter of the Projectile
-     *
-     * @param shooter the ProjectileSource of the Projectile
-     */
-    void setLauncher(ProjectileLauncher shooter);
-
-    /**
      * The projectile source
      *
      * @return gets the source of the projectile
      */
     ProjectileLauncher getLauncher();
+
+    /**
+     * Returns the shooter of the Projectile
+     *
+     * @param shooter the ProjectileSource of the Projectile
+     */
+    void setLauncher(ProjectileLauncher shooter);
 }

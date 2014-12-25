@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.window.inventory;
 
 import net.tridentsdk.window.Window;
@@ -24,6 +25,5 @@ import net.tridentsdk.window.Window;
  * @author The TridentSDK Team
  */
 public interface Inventory extends Window {
-
 
 }

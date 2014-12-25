@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.util;
 
 import com.google.common.base.Preconditions;
@@ -70,7 +71,8 @@ public final class NibbleArray {
     }
 
     public void setRaw(byte[] source) {
-        Preconditions.checkArgument(data.length == source.length, "Byte array length must be the same as current size!");
+        Preconditions.checkArgument(data.length == source.length,
+                                    "Byte array length must be the same as current size!");
         System.arraycopy(source, 0, data, 0, source.length);
     }
 }

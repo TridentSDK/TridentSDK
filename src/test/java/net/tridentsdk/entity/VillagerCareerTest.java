@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package java.net.tridentsdk.entity;
 
 import net.tridentsdk.entity.VillagerCareer;
@@ -24,7 +25,7 @@ import org.junit.Test;
 public class VillagerCareerTest {
 
     @Test
-    public void testGetParent() throws Exception{
+    public void testGetParent() throws Exception {
         Assert.assertEquals(VillagerCareer.FLETCHER.getParent(), VillagerProfession.FARMER);
         Assert.assertEquals(VillagerCareer.FARMER.getParent(), VillagerProfession.FARMER);
         Assert.assertEquals(VillagerCareer.FISHERMAN.getParent(), VillagerProfession.FARMER);
@@ -39,7 +40,7 @@ public class VillagerCareerTest {
     }
 
     @Test
-    public void testGetId() throws Exception{
+    public void testGetId() throws Exception {
         Assert.assertEquals(VillagerCareer.FLETCHER.getId(), 0);
         Assert.assertEquals(VillagerCareer.FARMER.getId(), 1);
         Assert.assertEquals(VillagerCareer.FISHERMAN.getId(), 2);
@@ -52,5 +53,4 @@ public class VillagerCareerTest {
         Assert.assertEquals(VillagerCareer.BUTCHER.getId(), 0);
         Assert.assertEquals(VillagerCareer.LEATHERWORKER.getId(), 1);
     }
-
 }

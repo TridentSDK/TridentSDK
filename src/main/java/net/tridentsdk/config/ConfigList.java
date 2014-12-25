@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.config;
 
 import com.google.gson.JsonArray;
@@ -31,12 +32,9 @@ import java.util.List;
  */
 public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V> {
     private static final long serialVersionUID = -7535821700183585211L;
-
-    JsonArray jsonHandle;
-
     private final Node<V> head;
     private final Node<V> footer;
-
+    JsonArray jsonHandle;
     private int size = 0;
 
     /**
@@ -56,7 +54,7 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      * Creates a new linked list by transferring elements from an existing collection
      *
      * @param handle the array handler for the new list
-     * @param c the initializing elements
+     * @param c      the initializing elements
      */
     protected ConfigList(JsonArray handle, Collection<V> c) {
         this(handle);
@@ -237,8 +235,7 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return node;
     }
 
-    @AccessNoDoc
-    private static class Node<V> {
+    @AccessNoDoc private static class Node<V> {
         V value;
         Node<V> next;
         Node<V> prev;
