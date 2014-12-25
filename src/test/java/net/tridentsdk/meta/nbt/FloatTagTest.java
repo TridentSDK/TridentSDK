@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.meta.nbt;
+package net.tridentsdk.meta.nbt;
 
 import net.tridentsdk.meta.nbt.FloatTag;
 import net.tridentsdk.meta.nbt.TagType;

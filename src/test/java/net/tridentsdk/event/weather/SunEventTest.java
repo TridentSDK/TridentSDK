@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.event.weather;
+package net.tridentsdk.event.weather;
 
 import net.tridentsdk.event.weather.SunEvent;
 import org.junit.Test;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.entity;
+package net.tridentsdk.entity;
 
 import net.tridentsdk.entity.VillagerCareer;
 import net.tridentsdk.entity.VillagerProfession;

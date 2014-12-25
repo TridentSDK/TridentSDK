@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk;
+package net.tridentsdk;
 
-import net.tridentsdk.GameMode;
 import org.junit.Assert;
 import org.junit.Test;
 

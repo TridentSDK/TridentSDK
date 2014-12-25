@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.event.block;
+package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Instrument;
 import net.tridentsdk.base.Note;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base.impl;
+package net.tridentsdk.base.impl;
 
 import com.google.common.collect.Sets;
 import net.tridentsdk.Coordinates;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.event;
+package net.tridentsdk.event;
 
 import net.tridentsdk.event.Importance;
 import org.junit.Assert;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.world;
+package net.tridentsdk.world;
 
 import net.tridentsdk.world.Dimension;
 import org.junit.Assert;

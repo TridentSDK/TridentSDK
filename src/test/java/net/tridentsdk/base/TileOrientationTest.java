@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base;
+package net.tridentsdk.base;
 
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.TileOrientation;

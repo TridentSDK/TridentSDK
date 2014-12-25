@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.meta;
+package net.tridentsdk.meta;
 
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.meta.Message;

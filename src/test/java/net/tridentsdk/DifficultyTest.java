@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk;
+package net.tridentsdk;
 
 import net.tridentsdk.Difficulty;
 import org.junit.Assert;

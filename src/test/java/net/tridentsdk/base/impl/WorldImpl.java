@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base.impl;
+package net.tridentsdk.base.impl;
 
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.Difficulty;

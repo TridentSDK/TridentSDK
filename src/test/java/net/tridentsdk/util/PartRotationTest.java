@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.util;
+package net.tridentsdk.util;
 
 import net.tridentsdk.util.PartRotation;
 import org.junit.Assert;

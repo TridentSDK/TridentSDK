@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.entity;
+package net.tridentsdk.entity;
 
 import net.tridentsdk.entity.RabbitType;
 import org.junit.Assert;

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.window.inventory;
+package net.tridentsdk.window.inventory;
 
 import net.tridentsdk.window.inventory.InventoryType;
 import org.junit.Assert;

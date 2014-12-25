@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base;
+package net.tridentsdk.base;
 
 import net.tridentsdk.base.Substance;
 import org.junit.Assert;

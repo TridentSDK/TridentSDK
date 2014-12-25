@@ -15,19 +15,16 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base;
+package net.tridentsdk.base;
 
 import com.google.common.collect.Sets;
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.Substance;
-import net.tridentsdk.base.Tile;
-import net.tridentsdk.base.TileSnapshot;
 import net.tridentsdk.entity.projectile.Projectile;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.net.tridentsdk.base.impl.WorldImpl;
+import net.tridentsdk.base.impl.WorldImpl;
 import java.util.Set;
 
 public class TileSnapshotTest {

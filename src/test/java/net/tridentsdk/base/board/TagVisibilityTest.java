@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base.board;
+package net.tridentsdk.base.board;
 
 import net.tridentsdk.base.board.TagVisibility;
 import org.junit.Assert;

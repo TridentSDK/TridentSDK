@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package java.net.tridentsdk.base;
+package net.tridentsdk.base;
 
 import net.tridentsdk.base.SubstanceColor;
 import org.junit.Assert;
