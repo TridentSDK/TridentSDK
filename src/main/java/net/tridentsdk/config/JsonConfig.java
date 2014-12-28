@@ -24,6 +24,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +36,7 @@ import java.nio.file.StandardOpenOption;
  *
  * @author The TridentSDK Team
  */
+@NotThreadSafe
 public class JsonConfig extends ConfigSection {
     private final Path path;
 

@@ -81,7 +81,7 @@ public enum TileOrientation {
     }
 
     TileOrientation(TileOrientation face1, TileOrientation face2) {
-        this.difference = face1.getDifference().add(face2.getDifference());
+        this.difference = face1.difference().add(face2.difference());
     }
 
     /**
@@ -89,7 +89,7 @@ public enum TileOrientation {
      *
      * @return the cloned vector pointing to the specified face
      */
-    public Vector getDifference() {
+    public Vector difference() {
         return this.difference.clone();
     }
 
@@ -100,6 +100,6 @@ public enum TileOrientation {
      * @return the relative location
      */
     public Coordinates apply(Coordinates loc) {
-        return loc.getRelative(this.difference);
+        return loc.relative(this.difference);
     }
 }

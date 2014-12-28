@@ -36,7 +36,7 @@ public enum Difficulty {
         this.b = (byte) i;
     }
 
-    public static Difficulty getDifficulty(int i) {
+    public static Difficulty difficultyOf(int i) {
         for (Difficulty difficulty : values()) {
             if (difficulty.b == i) {
                 return difficulty;

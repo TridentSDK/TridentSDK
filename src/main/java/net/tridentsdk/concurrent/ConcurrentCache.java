@@ -17,6 +17,7 @@
 
 package net.tridentsdk.concurrent;
 
+import com.google.common.collect.Lists;
 import net.tridentsdk.factory.Factories;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -62,24 +63,6 @@ import java.util.concurrent.ConcurrentMap;
         return (V) value;
     }
 
-    public Set<K> keys() {
-        return this.cache.keySet();
-    }
-
-    /**
-     * The values of the cache
-     *
-     * @return the cache values
-     */
-    public Collection<V> values() {
-        Collection<V> list = new ArrayList<>();
-        for (Object v : this.cache.values()) {
-            list.add((V) v);
-        }
-
-        return list;
-    }
-
     /**
      * Removes the entry assigned to the specified key
      *
@@ -93,6 +76,24 @@ import java.util.concurrent.ConcurrentMap;
 
         this.cache.remove(k);
         return (V) val;
+    }
+
+    public Set<K> keys() {
+        return this.cache.keySet();
+    }
+
+    /**
+     * The values of the cache
+     *
+     * @return the cache values
+     */
+    public Collection<V> values() {
+        Collection<V> list = Lists.newArrayList();
+        for (Object v : this.cache.values()) {
+            list.add((V) v);
+        }
+
+        return list;
     }
 
     /**

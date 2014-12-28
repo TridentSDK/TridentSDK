@@ -18,38 +18,47 @@
 package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import net.tridentsdk.docs.AccessNoDoc;
+import net.tridentsdk.plugin.TridentPlugin;
 
 import java.util.Comparator;
 
-public class EventReflector implements Comparator<EventReflector> {
+@AccessNoDoc
+class EventReflector implements Comparator<EventReflector> {
     private final MethodAccess handle;
+    private final TridentPlugin plugin;
     private final int index;
-    private final Object instance;
+    private final Listener instance;
     private final Class<? extends Event> eventClass;
     private final Importance importance;
 
-    EventReflector(MethodAccess handle, int index, Object instance, Class<? extends Event> eventClass, Importance
-            importance) {
+    EventReflector(MethodAccess handle, TridentPlugin plugin, int index, Listener instance,
+                   Class<? extends Event> eventClass, Importance importance) {
         this.handle = handle;
+        this.plugin = plugin;
         this.index = index;
         this.instance = instance;
         this.eventClass = eventClass;
         this.importance = importance;
     }
 
-    public MethodAccess getMethod() {
+    public MethodAccess method() {
         return this.handle;
     }
 
-    public int getIndex() {
+    public TridentPlugin plugin() {
+        return plugin;
+    }
+
+    public int index() {
         return index;
     }
 
-    public Class<? extends Event> getEventClass() {
+    public Class<? extends Event> eventClass() {
         return this.eventClass;
     }
 
-    public Importance getImportance() {
+    public Importance importance() {
         return this.importance;
     }
 
@@ -57,7 +66,7 @@ public class EventReflector implements Comparator<EventReflector> {
         this.handle.invoke(this.instance, this.index, event);
     }
 
-    public Object getInstance() {
+    public Listener instance() {
         return this.instance;
     }
 

@@ -22,15 +22,15 @@ import net.tridentsdk.base.Tile;
 public interface Chunk {
     void generate();
 
-    ChunkLocation getLocation();
+    ChunkLocation location();
 
     int getX();
 
     int getZ();
 
-    World getWorld();
+    World world();
 
-    Tile getTileAt(int relX, int y, int relZ);
+    Tile tileAt(int relX, int y, int relZ);
 
     ChunkSnapshot snapshot();
 }

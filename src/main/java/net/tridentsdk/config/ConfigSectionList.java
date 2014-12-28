@@ -19,6 +19,7 @@ package net.tridentsdk.config;
 
 import com.google.gson.JsonArray;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Collection;
 
 /**
@@ -26,6 +27,7 @@ import java.util.Collection;
  *
  * @author The TridentSDK Team
  */
+@NotThreadSafe
 public class ConfigSectionList<V> extends ConfigList<V> {
     private static final long serialVersionUID = -5809487198383216782L;
     private final ConfigSection parent;

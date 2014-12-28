@@ -23,6 +23,7 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.config.JsonConfig;
+import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.util.TridentLogger;
 
@@ -65,6 +66,23 @@ public class TridentPlugin {
         this.classLoader = loader;
     }
 
+    public static TridentPlugin getInstance() {
+        Class<?> caller = Trident.getCaller(3);
+        ClassLoader loader = caller.getClassLoader();
+        for (TridentPlugin plugin : TridentPluginHandler.getPluginExecutorFactory().values())
+            if (plugin.getClass().getClassLoader().equals(loader))
+                return plugin;
+        return null;
+    }
+
+    public static TridentPlugin getInstance(Class<? extends TridentPlugin> c) {
+        ClassLoader loader = c.getClassLoader();
+        for (TridentPlugin plugin : TridentPluginHandler.getPluginExecutorFactory().values())
+            if (plugin.getClass().getClassLoader().equals(loader))
+                return plugin;
+        return null;
+    }
+
     public void onEnable() {
         // Method intentionally left blank
     }
@@ -80,6 +98,10 @@ public class TridentPlugin {
     final void startup(TaskExecutor executor) {
         // TODO
         this.executor.countDown(executor);
+    }
+
+    public Listener instanceOf(Class<? extends Listener> c) {
+        return Trident.getEventHandler().listenersFor(this).get(c);
     }
 
     public void saveDefaultConfig() {
@@ -155,6 +177,4 @@ public class TridentPlugin {
 
         return HASHER.newHasher().putUnencodedChars(name).putUnencodedChars(author).hash().hashCode();
     }
-
-    // TODO: override hashvalue as well
 }

@@ -31,21 +31,21 @@ public interface World extends Cloneable {
      *
      * @return the name of the world
      */
-    String getName();
+    String name();
 
     /**
      * Gets the chunk on the given location, and generates the chunk if it does not exist.
      *
      * @return The chunk on the given location
      */
-    Chunk getChunkAt(ChunkLocation loc, boolean generateIfNotFound);
+    Chunk chunkAt(ChunkLocation loc, boolean generateIfNotFound);
 
     /**
      * Gets the chunk on the given x and z , and generates the chunk if it does not exist
      *
      * @return The chunk on the given location
      */
-    Chunk getChunkAt(int x, int z, boolean generateIfNotFound);
+    Chunk chunkAt(int x, int z, boolean generateIfNotFound);
 
     /**
      * Generates the chunk on the given location
@@ -66,56 +66,56 @@ public interface World extends Cloneable {
      *
      * @return The block on the given location
      */
-    Tile getTileAt(Coordinates location);
+    Tile tileAt(Coordinates location);
 
     /**
      * Gets the dimension of a world
      *
      * @return The dimension of a world
      */
-    Dimension getDimension();
+    Dimension dimension();
 
     /**
      * Gets the difficulty set in a world
      *
      * @return The difficulty set in a world
      */
-    Difficulty getDifficulty();
+    Difficulty difficulty();
 
     /**
      * Gets the default gamemode in a given chunk
      *
      * @return The default gamemode in a given chunk
      */
-    GameMode getDefaultGamemode();
+    GameMode defaultGamemode();
 
     /**
      * Gets the type of a world
      *
      * @return The type of a world
      */
-    LevelType getLevelType();
+    LevelType levelType();
 
     /**
      * Gets the set boolean for the given gamerule
      *
      * @return The set boolean for the given gamerule
      */
-    boolean getGamerule(String rule);
+    boolean gameRule(String rule);
 
     /**
      * Gets the time in a world
      *
      * @return The time in a world
      */
-    long getTime();
+    long time();
 
     /**
      * Gets the spawn location of a world
      *
      * @return The spawn location in a world
      */
-    Coordinates getSpawn();
+    Coordinates spawnLocation();
 
     /**
      * Checks if it is raining in a world
@@ -129,7 +129,7 @@ public interface World extends Cloneable {
      *
      * @return The number of ticks before raining is toggled
      */
-    int getRainTime();
+    int rainTime();
 
     /**
      * Checks if it is thundering in a world
@@ -143,7 +143,7 @@ public interface World extends Cloneable {
      *
      * @return The number of ticks before thundering is toggled
      */
-    int getThunderTime();
+    int thunderTime();
 
     /**
      * Checks if structures are generated in a world (Stronghold, villages, dungeons)
@@ -157,33 +157,33 @@ public interface World extends Cloneable {
      *
      * @return The size of the worldborder
      */
-    int getBorderSize();
+    int borderSize();
 
     /**
      * Gets the location where the worldborder is centered
      *
      * @return The location where the worldborder is centered
      */
-    Coordinates getBorderCenter();
+    Coordinates borderCenter();
 
     /**
      * Gets to what size a border is contracting, 60000000 by default
      *
      * @return To what size a border is contracting, 60000000 by default
      */
-    int getBorderSizeContraction();
+    int borderSizeContraction();
 
     /**
      * Gets the time the border has to contract to the contraction target
      *
      * @return The time the border has to contract to the contraction target
      */
-    int getBorderSizeContractionTime();
+    int borderSizeContractionTime();
 
     /**
      * Get the entities currently in this world
      *
      * @return the entities in the world
      */
-    Set<Entity> getEntities();
+    Set<Entity> entities();
 }

@@ -28,19 +28,19 @@ import java.util.Set;
 
 public class WorldImpl implements World {
     @Override
-    public String getName() {
+    public String name() {
         return getClass().getSimpleName();
     }
 
     @Override
-    public Chunk getChunkAt(final ChunkLocation loc, boolean generateIfNotFound) {
+    public Chunk chunkAt(final ChunkLocation loc, boolean generateIfNotFound) {
         return new Chunk() {
             @Override
             public void generate() {
             }
 
             @Override
-            public ChunkLocation getLocation() {
+            public ChunkLocation location() {
                 return loc;
             }
 
@@ -55,12 +55,12 @@ public class WorldImpl implements World {
             }
 
             @Override
-            public World getWorld() {
+            public World world() {
                 return WorldImpl.this;
             }
 
             @Override
-            public Tile getTileAt(int relX, int y, int relZ) {
+            public Tile tileAt(int relX, int y, int relZ) {
                 return null;
             }
 
@@ -72,57 +72,57 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public Chunk getChunkAt(int x, int z, boolean generateIfNotFound) {
-        return getChunkAt(ChunkLocation.create(x, z), generateIfNotFound);
+    public Chunk chunkAt(int x, int z, boolean generateIfNotFound) {
+        return chunkAt(ChunkLocation.create(x, z), generateIfNotFound);
     }
 
     @Override
     public Chunk generateChunk(int x, int z) {
-        return getChunkAt(x, z, true);
+        return chunkAt(x, z, true);
     }
 
     @Override
     public Chunk generateChunk(ChunkLocation location) {
-        return getChunkAt(location, true);
+        return chunkAt(location, true);
     }
 
     @Override
-    public Tile getTileAt(Coordinates location) {
+    public Tile tileAt(Coordinates location) {
         return new TileImpl();
     }
 
     @Override
-    public Dimension getDimension() {
+    public Dimension dimension() {
         return null;
     }
 
     @Override
-    public Difficulty getDifficulty() {
+    public Difficulty difficulty() {
         return null;
     }
 
     @Override
-    public GameMode getDefaultGamemode() {
+    public GameMode defaultGamemode() {
         return null;
     }
 
     @Override
-    public LevelType getLevelType() {
+    public LevelType levelType() {
         return null;
     }
 
     @Override
-    public boolean getGamerule(String rule) {
+    public boolean gameRule(String rule) {
         return false;
     }
 
     @Override
-    public long getTime() {
+    public long time() {
         return 0;
     }
 
     @Override
-    public Coordinates getSpawn() {
+    public Coordinates spawnLocation() {
         return null;
     }
 
@@ -132,7 +132,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public int getRainTime() {
+    public int rainTime() {
         return 0;
     }
 
@@ -142,7 +142,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public int getThunderTime() {
+    public int thunderTime() {
         return 0;
     }
 
@@ -152,27 +152,27 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public int getBorderSize() {
+    public int borderSize() {
         return 0;
     }
 
     @Override
-    public Coordinates getBorderCenter() {
+    public Coordinates borderCenter() {
         return null;
     }
 
     @Override
-    public int getBorderSizeContraction() {
+    public int borderSizeContraction() {
         return 0;
     }
 
     @Override
-    public int getBorderSizeContractionTime() {
+    public int borderSizeContractionTime() {
         return 0;
     }
 
     @Override
-    public Set<Entity> getEntities() {
+    public Set<Entity> entities() {
         return null;
     }
 }

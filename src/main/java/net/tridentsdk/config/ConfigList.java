@@ -21,6 +21,7 @@ import com.google.gson.JsonArray;
 import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
@@ -30,10 +31,11 @@ import java.util.List;
  *
  * @author The TridentSDK Team
  */
+@NotThreadSafe
 public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V> {
     private static final long serialVersionUID = -7535821700183585211L;
-    private final Node<V> head;
-    private final Node<V> footer;
+    private final Node<V> head = new Node<>(null, null, null);
+    private final Node<V> footer = new Node<>(null, null, head);
     JsonArray jsonHandle;
     private int size = 0;
 
@@ -44,9 +46,6 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     protected ConfigList(JsonArray handle) {
         this.jsonHandle = handle;
-        head = new Node<>(null, null, null);
-        footer = new Node<>(null, null, head);
-
         head.next = footer;
     }
 

@@ -49,7 +49,7 @@ import java.util.Collection;
      * @return the snapshot of the tile
      */
     public static TileSnapshot of(Tile tile) {
-        return new TileSnapshot(tile.getLocation(), tile.getSubstance(), tile.getMeta(), tile.projectiles());
+        return new TileSnapshot(tile.location(), tile.substance(), tile.meta(), tile.projectiles());
     }
 
     /**
@@ -57,7 +57,7 @@ import java.util.Collection;
      * snapshot</p>
      */
     public void load() {
-        Tile tile = location.getWorld().getTileAt(location);
+        Tile tile = location.world().tileAt(location);
         tile.setSubstance(material);
         tile.setMeta(data);
         tile.clear();

@@ -32,7 +32,7 @@ public class TileImpl implements Tile {
     private byte meta;
 
     @Override
-    public Substance getSubstance() {
+    public Substance substance() {
         return substance;
     }
 
@@ -42,12 +42,12 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public Coordinates getLocation() {
+    public Coordinates location() {
         return Coordinates.create(new WorldImpl(), 0, 0, 0);
     }
 
     @Override
-    public byte getMeta() {
+    public byte meta() {
         return meta;
     }
 

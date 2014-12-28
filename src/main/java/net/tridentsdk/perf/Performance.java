@@ -17,6 +17,7 @@
 
 package net.tridentsdk.perf;
 
+import net.tridentsdk.Trident;
 import net.tridentsdk.util.TridentLogger;
 import sun.misc.Unsafe;
 
@@ -65,21 +66,24 @@ public final class Performance {
 
     public static UnsafeReflector wrap(final String field) {
         return new UnsafeReflector() {
-            private final Field local = findField(getCaller(), field);
+            private final Field local = findField(Trident.getCaller(4), field);
 
             @Override
             public long address() {
                 if (Modifier.isStatic(local.getModifiers())) return UNSAFE.staticFieldOffset(local);
                 return UNSAFE.objectFieldOffset(local);
             }
+        };
+    }
 
-            private Class<?> getCaller() {
-                try {
-                    return Class.forName(Thread.currentThread().getStackTrace()[4].getClassName());
-                } catch (ClassNotFoundException e) {
-                    TridentLogger.error(e);
-                    return null;
-                }
+    public static UnsafeReflector wrap(final Class<?> c, final String field) {
+        return new UnsafeReflector() {
+            private final Field local = findField(c, field);
+
+            @Override
+            public long address() {
+                if (Modifier.isStatic(local.getModifiers())) return UNSAFE.staticFieldOffset(local);
+                return UNSAFE.objectFieldOffset(local);
             }
         };
     }

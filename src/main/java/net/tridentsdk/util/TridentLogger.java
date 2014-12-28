@@ -59,21 +59,8 @@ public final class TridentLogger {
         Logger.getRootLogger().addAppender(fa);
     }
 
-    private static Class<?> getCaller() {
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        StackTraceElement element = elements[4];
-
-        try {
-            return Class.forName(element.getClassName());
-        } catch (ClassNotFoundException e) {
-            TridentLogger.error(e);
-        }
-
-        return null;
-    }
-
     public static org.slf4j.Logger getLogger() {
-        return LoggerFactory.getLogger(getCaller());
+        return LoggerFactory.getLogger(Trident.getCaller(4));
     }
 
     public static void log(String item) {

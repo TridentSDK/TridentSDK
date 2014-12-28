@@ -34,9 +34,12 @@ public interface ScheduledTask extends Runnable {
     long getInterval();
 
     /**
-     * Interval is the ticks left of a specific action for repeating and delayed tasks <p/> <p>For delayed tasks, the
-     * interval is the amount of ticks delay, and for repeating, interval is the amount of ticks between each repeat of
-     * the task.</p> <p/> <p>Setting the interval will reset the ticks already accumulated by the task</p>
+     * Interval is the ticks left of a specific action for repeating and delayed tasks
+     *
+     * <p>For delayed tasks, the interval is the amount of ticks delay, and for repeating, interval is the amount of
+     * ticks between each repeat of the task.</p>
+     *
+     * <p>Setting the interval will become effective the next tick</p>
      *
      * @param interval the interval to set the task to
      */

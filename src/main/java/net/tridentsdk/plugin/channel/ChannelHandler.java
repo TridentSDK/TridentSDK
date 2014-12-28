@@ -22,15 +22,15 @@ import net.tridentsdk.util.TridentLogger;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public final class ChannelManager {
-    private static final ChannelManager INSTANCE = new ChannelManager();
+public final class ChannelHandler {
+    private static final ChannelHandler INSTANCE = new ChannelHandler();
 
     private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
 
-    private ChannelManager() {
+    private ChannelHandler() {
     }
 
-    public static ChannelManager getInstance() {
+    public static ChannelHandler getInstance() {
         return INSTANCE;
     }
 

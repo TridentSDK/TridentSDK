@@ -87,7 +87,7 @@ public interface Server {
      *
      * @return the EventManager instance
      */
-    EventHandler getEventManager();
+    EventHandler getEventHandler();
 
     /**
      * Send a plugin message
@@ -116,7 +116,7 @@ public interface Server {
      *
      * @return the server config
      */
-    JsonConfig getConfig();
+    JsonConfig config();
 
     Player getPlayer(UUID id);
 }

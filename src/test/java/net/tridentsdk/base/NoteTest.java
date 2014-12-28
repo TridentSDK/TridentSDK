@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.base.Note;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -46,7 +45,7 @@ public class NoteTest {
             n = n.sharpen();
         }
 
-        Assert.assertEquals(n.getNote(), 24);
+        Assert.assertEquals(n.id(), 24);
 
         try {
             n.sharpen();
@@ -63,7 +62,7 @@ public class NoteTest {
             n = n.flatten();
         }
 
-        Assert.assertEquals(n.getNote(), 0);
+        Assert.assertEquals(n.id(), 0);
 
         try {
             n.flatten();

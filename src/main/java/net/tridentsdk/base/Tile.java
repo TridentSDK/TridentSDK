@@ -32,7 +32,7 @@ public interface Tile extends Impalable {
      *
      * @return the type the tile was set
      */
-    public Substance getSubstance();
+    public Substance substance();
 
     /**
      * Sets the substance the tile is made of
@@ -46,14 +46,14 @@ public interface Tile extends Impalable {
      *
      * @return Location of the Block
      */
-    Coordinates getLocation();
+    Coordinates location();
 
     /**
      * Gets the tile data
      *
      * @return the data of the tile
      */
-    byte getMeta();
+    byte meta();
 
     /**
      * Sets the tile data

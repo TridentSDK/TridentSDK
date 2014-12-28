@@ -19,14 +19,13 @@ package net.tridentsdk.meta.nbt;
 
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author The TridentSDK Team
  */
 public class ListTag extends NBTTag implements TagContainer {
-    final List<NBTTag> tags = new ArrayList<>();
+    final List<NBTTag> tags = Lists.newArrayList();
     final TagType innerType;
 
     public ListTag(String name, TagType innerType) {

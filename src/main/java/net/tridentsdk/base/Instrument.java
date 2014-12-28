@@ -74,21 +74,11 @@ public enum Instrument {
     }
 
     /**
-     * Returns the {@code byte} value of an Instrument
-     *
-     * @param instrument Instrument
-     * @return Byte value of the instrument
-     */
-    public static byte toByte(Instrument instrument) {
-        return instrument.id;
-    }
-
-    /**
      * Returns the {@code byte} value of the Instrument
      *
      * @return Byte value of the Instrument
      */
-    public byte toByte() {
+    public byte asByte() {
         return this.id;
     }
 }

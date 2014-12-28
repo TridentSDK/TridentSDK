@@ -17,7 +17,6 @@
 
 package net.tridentsdk.factory;
 
-import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.world.World;
@@ -35,14 +34,6 @@ import java.util.Collection;
  */
 public interface ThreadFactory {
     /**
-     * Creates a new TaskExecutor using the entity thread pool
-     *
-     * @param entity the entity to assign
-     * @return the task executor created
-     */
-    TaskExecutor entityThread(Entity entity);
-
-    /**
      * Get all of the thread entity wrappers
      *
      * @return the values of the entity cache
@@ -50,27 +41,11 @@ public interface ThreadFactory {
     Collection<Entity> entities();
 
     /**
-     * Creates a new TaskExecutor using the player thread pool
-     *
-     * @param player the player to assign
-     * @return the task executor created
-     */
-    TaskExecutor playerThread(Player player);
-
-    /**
      * Gets all of the thread player wrappers
      *
      * @return the values of the concurrent cache
      */
     Collection<Player> players();
-
-    /**
-     * Creates a new TaskExecutor using the world thread pool
-     *
-     * @param world the world to assign
-     * @return the created task executor
-     */
-    TaskExecutor worldThread(World world);
 
     /**
      * Get all of the wrapped world threads

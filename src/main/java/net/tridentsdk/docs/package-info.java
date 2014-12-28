@@ -16,6 +16,8 @@
  */
 /**
  * Documentation annotations
+ *
+ * <p>These do not have functional effects on annotated elements.</p>
  */
 
 package net.tridentsdk.docs;

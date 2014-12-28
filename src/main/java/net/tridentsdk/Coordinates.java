@@ -19,6 +19,7 @@ package net.tridentsdk;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Tile;
+import net.tridentsdk.docs.PossiblyThreadSafe;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.World;
 
@@ -27,15 +28,16 @@ import net.tridentsdk.world.World;
  *
  * @author The TridentSDK Team
  */
+@PossiblyThreadSafe
 public class Coordinates implements Cloneable {
-    private double x;
-    private double y;
-    private double z;
+    private volatile double x;
+    private volatile double y;
+    private volatile double z;
 
-    private World world;
+    private volatile World world;
 
-    private float yaw;
-    private float pitch;
+    private volatile float yaw;
+    private volatile float pitch;
 
     private Coordinates(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
@@ -141,7 +143,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the world where the location is
      */
-    public World getWorld() {
+    public World world() {
         return this.world;
     }
 
@@ -159,7 +161,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the yaw of this location
      */
-    public float getYaw() {
+    public float yaw() {
         return this.yaw;
     }
 
@@ -177,7 +179,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the pitch value of this location
      */
-    public float getPitch() {
+    public float pitch() {
         return this.pitch;
     }
 
@@ -210,9 +212,9 @@ public class Coordinates implements Cloneable {
      * @param vector the vector that has the x, y, and z of the location relative to this
      * @return the relative location
      */
-    public Coordinates getRelative(Vector vector) {
-        return create(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                      vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
+    public Coordinates relative(Vector vector) {
+        return new Coordinates(this.world(), vector.getX() + this.getX(), vector.getY() + this.getY(),
+                      vector.getZ() + this.getZ(), this.yaw(), this.pitch());
     }
 
     /**
@@ -220,8 +222,8 @@ public class Coordinates implements Cloneable {
      *
      * @return the tile occupying the coordinates of this location
      */
-    public Tile getTile() {
-        return getWorld().getTileAt(this);
+    public Tile tile() {
+        return world().tileAt(this);
     }
 
     /**
@@ -229,7 +231,7 @@ public class Coordinates implements Cloneable {
      *
      * @return New Vector containing this Location's coordinates
      */
-    public Vector toVector() {
+    public Vector asVector() {
         return new Vector(this.getX(), this.getY(), this.getZ());
     }
 
@@ -251,7 +253,7 @@ public class Coordinates implements Cloneable {
      */
     public double distanceSquared(Coordinates location) {
         Preconditions.checkNotNull(location, "Location cannot be null.");
-        if (!this.getWorld().equals(location.getWorld())) return 0.0;
+        if (!this.world().equals(location.world())) return 0.0;
         return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
                 square(this.getZ() - location.getZ());
     }

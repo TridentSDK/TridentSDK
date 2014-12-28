@@ -22,6 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -32,6 +33,7 @@ import java.util.List;
  *
  * @author The TridentSDK Team
  */
+@NotThreadSafe
 public class ConfigSection {
     ConfigSection parent;
     JsonObject jsonHandle;

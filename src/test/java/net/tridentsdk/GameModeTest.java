@@ -42,11 +42,11 @@ public class GameModeTest {
 
     @Test
     public void testGetGameMode() throws Exception {
-        Assert.assertEquals(GameMode.getGameMode(0), GameMode.SURVIVAL);
-        Assert.assertEquals(GameMode.getGameMode(1), GameMode.CREATIVE);
-        Assert.assertEquals(GameMode.getGameMode(2), GameMode.ADVENTURE);
-        Assert.assertEquals(GameMode.getGameMode(3), GameMode.SPECTATE);
-        Assert.assertEquals(GameMode.getGameMode(8), GameMode.HARDCORE);
-        Assert.assertEquals(GameMode.getGameMode(10), null);
+        Assert.assertEquals(GameMode.gamemodeOf(0), GameMode.SURVIVAL);
+        Assert.assertEquals(GameMode.gamemodeOf(1), GameMode.CREATIVE);
+        Assert.assertEquals(GameMode.gamemodeOf(2), GameMode.ADVENTURE);
+        Assert.assertEquals(GameMode.gamemodeOf(3), GameMode.SPECTATE);
+        Assert.assertEquals(GameMode.gamemodeOf(8), GameMode.HARDCORE);
+        Assert.assertEquals(GameMode.gamemodeOf(10), null);
     }
 }

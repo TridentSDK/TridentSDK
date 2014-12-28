@@ -18,7 +18,6 @@
 package net.tridentsdk.base;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.TileOrientation;
 import net.tridentsdk.util.Vector;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,17 +26,17 @@ public class TileOrientationTest {
 
     @Test
     public void testGetDifference() throws Exception {
-        Assert.assertEquals(TileOrientation.NORTH.getDifference(), new Vector(0, 0, -1));
-        Assert.assertEquals(TileOrientation.SOUTH.getDifference(), new Vector(0, 0, 1));
-        Assert.assertEquals(TileOrientation.EAST.getDifference(), new Vector(1, 0, 0));
-        Assert.assertEquals(TileOrientation.WEST.getDifference(), new Vector(-1, 0, 0));
-        Assert.assertEquals(TileOrientation.NORTH_EAST.getDifference(), new Vector(1, 0, -1));
-        Assert.assertEquals(TileOrientation.NORTH_WEST.getDifference(), new Vector(-1, 0, -1));
-        Assert.assertEquals(TileOrientation.SOUTH_EAST.getDifference(), new Vector(1, 0, 1));
-        Assert.assertEquals(TileOrientation.SOUTH_WEST.getDifference(), new Vector(-1, 0, 1));
-        Assert.assertEquals(TileOrientation.TOP.getDifference(), new Vector(0, 1, 0));
-        Assert.assertEquals(TileOrientation.BOTTOM.getDifference(), new Vector(0, -1, 0));
-        Assert.assertEquals(TileOrientation.SELF.getDifference(), new Vector(0, 0, 0));
+        Assert.assertEquals(TileOrientation.NORTH.difference(), new Vector(0, 0, -1));
+        Assert.assertEquals(TileOrientation.SOUTH.difference(), new Vector(0, 0, 1));
+        Assert.assertEquals(TileOrientation.EAST.difference(), new Vector(1, 0, 0));
+        Assert.assertEquals(TileOrientation.WEST.difference(), new Vector(-1, 0, 0));
+        Assert.assertEquals(TileOrientation.NORTH_EAST.difference(), new Vector(1, 0, -1));
+        Assert.assertEquals(TileOrientation.NORTH_WEST.difference(), new Vector(-1, 0, -1));
+        Assert.assertEquals(TileOrientation.SOUTH_EAST.difference(), new Vector(1, 0, 1));
+        Assert.assertEquals(TileOrientation.SOUTH_WEST.difference(), new Vector(-1, 0, 1));
+        Assert.assertEquals(TileOrientation.TOP.difference(), new Vector(0, 1, 0));
+        Assert.assertEquals(TileOrientation.BOTTOM.difference(), new Vector(0, -1, 0));
+        Assert.assertEquals(TileOrientation.SELF.difference(), new Vector(0, 0, 0));
     }
 
     @Test

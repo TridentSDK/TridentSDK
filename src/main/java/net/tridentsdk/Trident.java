@@ -19,6 +19,7 @@ package net.tridentsdk;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.JsonConfig;
+import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.window.Window;
@@ -34,6 +35,13 @@ import java.util.Set;
  */
 public final class Trident {
     private static Server server;
+    private static final ExposedSecurity SECURITY = new ExposedSecurity();
+    private static class ExposedSecurity extends SecurityManager {
+        @Override
+        protected Class[] getClassContext() {
+            return super.getClassContext();
+        }
+    }
 
     private Trident() {
     }
@@ -58,10 +66,12 @@ public final class Trident {
     }
 
     public static boolean isTrident() {
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        StackTraceElement element = elements[3];
+        return getCaller(3).getClassLoader().equals(Trident.class.getClassLoader());
+    }
 
-        return element.getClassName().startsWith("net.tridentsdk");
+    @InternalUseOnly
+    public static Class<?> getCaller(int index) {
+        return SECURITY.getClassContext()[index];
     }
 
     public static int getPort() {
@@ -92,8 +102,8 @@ public final class Trident {
         return server.getWindow(id);
     }
 
-    public static EventHandler getEventManager() {
-        return server.getEventManager();
+    public static EventHandler getEventHandler() {
+        return server.getEventHandler();
     }
 
     public static void sendPluginMessage(String channel, byte... data) {
@@ -105,6 +115,6 @@ public final class Trident {
     }
 
     public static JsonConfig getConfig() {
-        return server.getConfig();
+        return server.config();
     }
 }

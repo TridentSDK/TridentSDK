@@ -41,46 +41,55 @@ import java.util.concurrent.atomic.AtomicReference;
      * Guaranteed to be run before this Runnable on the main thread, even if this runnable is going to be run
      * asynchronously, useful for collecting resources to work on.
      */
-    public void prerunSync() {
+    public void beforeRun() {
     }
 
     /**
-     * Runs after this runnable has finished asynchronously <p/> <p>This method does not require the code to be
-     * thread-safe</p>
+     * Runs after this runnable has finished asynchronously <p/>
+     *
+     * <p>This method does not require the code to be thread-safe</p>
      */
-    public void runAfterAsync() {
+    public void afterAsyncRun() {
     }
 
     /**
      * Runs after this runnable has been executed synchronously
      */
-    public void runAfterSync() {
+    public void afterSyncRun() {
     }
 
     /**
-     * Cancels the task and removes from execution. See {@link ScheduledTask#cancel()} <p/> WARNING: This is a delegated
+     * Cancels the task and removes from execution. See {@link ScheduledTask#cancel()}
+     *
+     * <p>WARNING: This is a delegated
      * function. DO NOT call this method before it is scheduled. A NullPointerException will be thrown. This can be
-     * called when {@code getTask() != null}.
+     * called when {@code task() != null}.</p>
      */
     public final void cancel() {
         task.get().cancel();
     }
 
     /**
-     * Gets how long between runs this is supposed to wait if it is a repeating task <p/> WARNING: This is a delegated
+     * Gets how long between runs this is supposed to wait if it is a repeating task
+     *
+     * <p>WARNING: This is a delegated
      * function. DO NOT call this method before it is scheduled. A NullPointerException will be thrown. This can be
-     * called when {@code getTask() != null}.
+     * called when {@code task() != null}.</p>
      */
-    public final long getInterval() {
+    public final long interval() {
         return task.get().getInterval();
     }
 
     /**
-     * Sets how long this runnable should wait between executions if this is a repeating task <p>If this task is
+     * Sets how long this runnable should wait between executions if this is a repeating task
+     *
+     * <p>If this task is
      * synchronous to the main thread, the change will be immediate, if it is not, the change may take an iteration to
-     * take effect, however {@link TridentRunnable#getInterval()} will reflect the changes immediately</p> <p/> WARNING:
-     * This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException will be
-     * thrown. This can be called when {@code getTask() != null}.
+     * take effect, however {@link TridentRunnable#interval()} will reflect the changes immediately</p>
+     *
+     * <p>WARNING: This is a delegated
+     * function. DO NOT call this method before it is scheduled. A NullPointerException will be thrown. This can be
+     * called when {@code task() != null}.</p>
      */
     public final void setInterval(long interval) {
         task.get().setInterval(interval);
@@ -89,7 +98,7 @@ import java.util.concurrent.atomic.AtomicReference;
     /**
      * Used internally to refer to this runnable, probably shouldn't be used by plugins
      */
-    public final int getId() {
+    public final int id() {
         return this.id;
     }
 
@@ -98,7 +107,7 @@ import java.util.concurrent.atomic.AtomicReference;
      *
      * @return the {@link ScheduledTask} object held within the scheduling implementation
      */
-    public ScheduledTask getTask() {
+    public ScheduledTask task() {
         return this.task.get();
     }
 

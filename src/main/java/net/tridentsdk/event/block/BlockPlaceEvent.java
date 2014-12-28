@@ -63,7 +63,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * @return Material of the placed block
      */
     public Substance getTypePlaced() {
-        return this.getBlock().getSubstance();
+        return this.getBlock().substance();
     }
 
     @Override

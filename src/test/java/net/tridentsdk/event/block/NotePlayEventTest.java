@@ -19,7 +19,6 @@ package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Instrument;
 import net.tridentsdk.base.Note;
-import net.tridentsdk.event.block.NotePlayEvent;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,10 +27,10 @@ public class NotePlayEventTest {
     @Test
     public void testSetNote() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
-        Assert.assertEquals(event.getNote().getNote(), 10);
+        Assert.assertEquals(event.getNote().id(), 10);
 
         event.setNote(new Note(5));
-        Assert.assertEquals(event.getNote().getNote(), 5);
+        Assert.assertEquals(event.getNote().id(), 5);
     }
 
     @Test

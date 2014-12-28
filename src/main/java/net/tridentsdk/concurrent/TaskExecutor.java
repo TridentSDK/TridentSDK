@@ -27,8 +27,10 @@ public interface TaskExecutor {
      * Adds the task to the queue
      *
      * @param task the task to add
+     * @return {@code true} if the task was added successfully. Return of {@code false} is handled internally, this is
+     *         provided for visibility purposes only
      */
-    void addTask(Runnable task);
+    boolean addTask(Runnable task);
 
     /**
      * Closes the thread and stops execution of new / remaining tasks

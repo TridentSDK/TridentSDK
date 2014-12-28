@@ -17,14 +17,14 @@
 
 package net.tridentsdk.plugin.channel;
 
+import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
 import net.tridentsdk.util.TridentLogger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PluginChannel {
-    private final List<Byte[]> history = new ArrayList<>();
+    private final List<Byte[]> history = Lists.newArrayList();
 
     public void process(byte... message) {
         if (!Trident.isTrident()) {

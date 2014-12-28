@@ -33,8 +33,8 @@ public class TileSnapshotTest {
     private Substance substance = Substance.ACACIA_STAIRS;
 
     {
-        Mockito.when(tile.getLocation()).thenReturn(Coordinates.create(new WorldImpl(), 0, 0, 0));
-        Mockito.when(tile.getSubstance()).thenReturn(substance);
+        Mockito.when(tile.location()).thenReturn(Coordinates.create(new WorldImpl(), 0, 0, 0));
+        Mockito.when(tile.substance()).thenReturn(substance);
         Mockito.when(tile.projectiles()).thenReturn(projectiles);
     }
 
@@ -51,8 +51,8 @@ public class TileSnapshotTest {
             tile.put(Mockito.mock(Projectile.class));
         }
         TileSnapshot.of(tile).load();
-        Assert.assertEquals(tile.getSubstance(), Substance.ACACIA_STAIRS);
-        Assert.assertEquals(tile.getMeta(), 0);
+        Assert.assertEquals(tile.substance(), Substance.ACACIA_STAIRS);
+        Assert.assertEquals(tile.meta(), 0);
         Assert.assertEquals(tile.projectiles().size(), 1);
     }
 }

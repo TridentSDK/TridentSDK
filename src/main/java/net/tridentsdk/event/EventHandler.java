@@ -19,11 +19,13 @@ package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.ConcurrentCache;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.util.TridentLogger;
 
@@ -37,9 +39,14 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.PriorityBlockingQueue;
 
+/**
+ * The server's event handler, should only be created once, and only once by the server only
+ *
+ * @author The TridentSDK Team
+ */
 @ThreadSafe public class EventHandler {
-    private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, 0, null, null, null);
-    private static final Callable<EventHandler> CREATE_MANAGER = new Callable<EventHandler>() {
+    private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, null, 0, null, null, null);
+    private static final Callable<EventHandler> CREATE_HANDLER = new Callable<EventHandler>() {
         @Override
         public EventHandler call() throws Exception {
             return new EventHandler();
@@ -66,13 +73,13 @@ import java.util.concurrent.PriorityBlockingQueue;
      * @param listener the listener instance to use to register
      */
     @InternalUseOnly
-    public void registerListener(TaskExecutor executor, Listener listener) {
-        handles.retrieve(executor, CREATE_MANAGER).doRegister(listener);
+    public void registerListener(TridentPlugin plugin, TaskExecutor executor, Listener listener) {
+        handles.retrieve(executor, CREATE_HANDLER).doRegister(plugin, listener);
     }
 
-    private void doRegister(Listener listener) {
+    private void doRegister(TridentPlugin plugin, Listener listener) {
         final Class<?> c = listener.getClass();
-        HashMultimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(listener, c);
+        HashMultimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(plugin, listener, c);
 
         for (Class<? extends Event> eventClass : reflectors.keySet()) {
             PriorityBlockingQueue<EventReflector> eventCallers = callers.get(eventClass);
@@ -82,7 +89,8 @@ import java.util.concurrent.PriorityBlockingQueue;
         }
     }
 
-    private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(Listener listener, final Class<?> c) {
+    private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin,
+                                                                                Listener listener, final Class<?> c) {
         MethodAccess access = accessors.retrieve(c, new Callable<MethodAccess>() {
             @Override
             public MethodAccess call() throws Exception {
@@ -106,10 +114,10 @@ import java.util.concurrent.PriorityBlockingQueue;
             }
 
             Class<? extends Event> eventClass = type.asSubclass(Event.class);
-            CallerData handler = method.getAnnotation(CallerData.class);
+            ListenerData handler = method.getAnnotation(ListenerData.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-            EventReflector registeredListener = new EventReflector(access, i, listener, eventClass, importance);
+            EventReflector registeredListener = new EventReflector(access, plugin, i, listener, eventClass, importance);
             map.put(eventClass, registeredListener);
         }
 
@@ -149,12 +157,33 @@ import java.util.concurrent.PriorityBlockingQueue;
         for (Map.Entry<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> entry : this.callers.entrySet()) {
             for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
                 EventReflector it = iterator.next();
-                if (it.getInstance().equals(listener)) {
+                if (it.instance().equals(listener)) {
                     iterator.remove();
                     callers.put(entry.getKey(), entry.getValue());
                     break;
                 }
             }
         }
+    }
+
+    /**
+     * Acquires a list of the listeners registered to the plugin provided
+     *
+     * @param plugin the plugin to find the listeners for
+     * @return the listeners for that plugin
+     */
+    public Map<Class<? extends Listener>, Listener> listenersFor(TridentPlugin plugin) {
+        Map<Class<? extends Listener>, Listener> listeners = Maps.newHashMap();
+        for (EventHandler handler : handles.values()) {
+            for (PriorityBlockingQueue<EventReflector> reflectors : handler.callers.values()) {
+                for (EventReflector reflector : reflectors) {
+                    if (reflector.plugin().equals(plugin)) {
+                        listeners.put(reflector.instance().getClass(), reflector.instance());
+                    }
+                }
+            }
+        }
+
+        return listeners;
     }
 }

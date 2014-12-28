@@ -17,9 +17,6 @@
 
 package net.tridentsdk.concurrent;
 
-import net.tridentsdk.concurrent.ScheduledTask;
-import net.tridentsdk.concurrent.SchedulerType;
-import net.tridentsdk.concurrent.TridentRunnable;
 import net.tridentsdk.plugin.TridentPlugin;
 import org.junit.Assert;
 import org.junit.Test;
@@ -33,10 +30,10 @@ public class TridentRunnableTest {
 
     @Test
     public void lifecycle() {
-        runnable.prerunSync();
+        runnable.beforeRun();
         runnable.run();
-        runnable.runAfterAsync();
-        runnable.runAfterSync();
+        runnable.afterAsyncRun();
+        runnable.afterSyncRun();
         Assert.assertEquals(runnable, runnable);
     }
 
@@ -81,9 +78,9 @@ public class TridentRunnableTest {
             }
         });
         runnable.setInterval(21);
-        Assert.assertEquals(runnable.getInterval(), 21);
-        Assert.assertEquals(runnable.getId(), 1);
-        Assert.assertEquals(runnable.getTask(), task);
+        Assert.assertEquals(runnable.interval(), 21);
+        Assert.assertEquals(runnable.id(), 1);
+        Assert.assertEquals(runnable.task(), task);
         runnable.cancel(); // Just for the heck of it
     }
 }

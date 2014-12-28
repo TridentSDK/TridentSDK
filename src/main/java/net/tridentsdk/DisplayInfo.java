@@ -37,7 +37,7 @@ public class DisplayInfo {
      *
      * @return a string containing the MOTD of the server, may be empty, never null
      */
-    public String getMotd() {
+    public String motd() {
         return Factories.configs().serverConfig().getString("motd", Defaults.MOTD);
     }
 
@@ -54,9 +54,9 @@ public class DisplayInfo {
      * Returns the {@link java.io.File} that represents the picture displayed next to the server listing on clients
      *
      * @return the file that represents the picture sent to clients when they ping the server
-     * @see #getMotdPictureImage() for the representing the image sent to clients
+     * @see #motdPictureImage() for the representing the image sent to clients
      */
-    public File getMotdPicture() {
+    public File motdPicture() {
         return null;
     }
 
@@ -64,9 +64,9 @@ public class DisplayInfo {
      * Gets the {@link java.awt.image.BufferedImage} that represents the Motd picture sent to clients
      *
      * @return the image sent to clients
-     * @see #getMotdPicture() for the file itself
+     * @see #motdPicture() for the file itself
      */
-    public BufferedImage getMotdPictureImage() {
+    public BufferedImage motdPictureImage() {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(
@@ -77,7 +77,7 @@ public class DisplayInfo {
         return img;
     }
 
-    public File getMotdImage() {
+    public File motdImage() {
         return new File(Factories.configs().serverConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
     }
 
@@ -97,7 +97,7 @@ public class DisplayInfo {
      *
      * @return the maximum number of players the server will allow
      */
-    public int getMaxPlayers() {
+    public int maxPlayers() {
         return Factories.configs().serverConfig().getInt("max-players", Defaults.MAX_PLAYERS);
     }
 
@@ -106,7 +106,7 @@ public class DisplayInfo {
      *
      * @return a number representing the number of players on the server
      */
-    public int getCurrentPlayerCount() {
+    public int playerCount() {
         return Factories.threads().players().size();
     }
 }

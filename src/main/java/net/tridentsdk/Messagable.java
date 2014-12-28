@@ -30,5 +30,5 @@ public interface Messagable {
      *
      * @return the last method sent to this messagable
      */
-    String getLastMessage();
+    String lastMessage();
 }

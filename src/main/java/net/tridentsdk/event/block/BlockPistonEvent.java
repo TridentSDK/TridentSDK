@@ -80,7 +80,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
     }
 
     public boolean isSticky() {
-        return this.getBlock().getSubstance() == Substance.PISTON_STICKY_BASE;
+        return this.getBlock().substance() == Substance.PISTON_STICKY_BASE;
     }
 
     @Override

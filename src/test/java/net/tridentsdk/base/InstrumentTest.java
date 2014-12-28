@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.base.Instrument;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -35,19 +34,10 @@ public class InstrumentTest {
 
     @Test
     public void testToByte() throws Exception {
-        Assert.assertEquals(Instrument.PIANO.toByte(), (byte) 0x0);
-        Assert.assertEquals(Instrument.BASS_DRUM.toByte(), (byte) 0x1);
-        Assert.assertEquals(Instrument.SNARE_DRUM.toByte(), (byte) 0x2);
-        Assert.assertEquals(Instrument.STICKS.toByte(), (byte) 0x3);
-        Assert.assertEquals(Instrument.BASS_GUITAR.toByte(), (byte) 0x4);
-    }
-
-    @Test
-    public void testToByte1() throws Exception {
-        Assert.assertEquals(Instrument.toByte(Instrument.PIANO), (byte) 0x0);
-        Assert.assertEquals(Instrument.toByte(Instrument.BASS_DRUM), (byte) 0x1);
-        Assert.assertEquals(Instrument.toByte(Instrument.SNARE_DRUM), (byte) 0x2);
-        Assert.assertEquals(Instrument.toByte(Instrument.STICKS), (byte) 0x3);
-        Assert.assertEquals(Instrument.toByte(Instrument.BASS_GUITAR), (byte) 0x4);
+        Assert.assertEquals(Instrument.PIANO.asByte(), (byte) 0x0);
+        Assert.assertEquals(Instrument.BASS_DRUM.asByte(), (byte) 0x1);
+        Assert.assertEquals(Instrument.SNARE_DRUM.asByte(), (byte) 0x2);
+        Assert.assertEquals(Instrument.STICKS.asByte(), (byte) 0x3);
+        Assert.assertEquals(Instrument.BASS_GUITAR.asByte(), (byte) 0x4);
     }
 }

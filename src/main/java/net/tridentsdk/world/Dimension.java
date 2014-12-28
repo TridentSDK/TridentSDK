@@ -18,7 +18,6 @@
 package net.tridentsdk.world;
 
 public enum Dimension {
-
     NETHER(-1),
     OVERWORLD(0),
     END(1);

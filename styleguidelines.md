@@ -63,4 +63,4 @@ We follow a loose [Oracle Code Conventions](http://www.oracle.com/technetwork/ja
 - Static qualifiers are not needed if used inside the class
 - Do not use parentheses if not necessary
 - If exceptions are ignored, explain why
-- Use ```TridentLogger.error(Exception``` when handling exceptions
+- Use ```TridentLogger.error(Exception)``` when handling exceptions

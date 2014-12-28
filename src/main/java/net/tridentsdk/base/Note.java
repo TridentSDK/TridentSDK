@@ -26,7 +26,8 @@ import javax.annotation.concurrent.Immutable;
  *
  * @author The TridentSDK Team
  */
-@Immutable public class Note {
+@Immutable 
+public class Note {
     private final short id;
 
     public Note(int id) {
@@ -59,7 +60,7 @@ import javax.annotation.concurrent.Immutable;
         return new Note((int) this.id - 1);
     }
 
-    public short getNote() {
+    public short id() {
         return id;
     }
 }

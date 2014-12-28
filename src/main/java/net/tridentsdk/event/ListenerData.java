@@ -15,17 +15,13 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.plugin;
+package net.tridentsdk.event;
 
-import net.tridentsdk.config.JsonConfig;
-import net.tridentsdk.factory.Factories;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class Project extends TridentPlugin {
-    private final JsonConfig config = Factories.configs()
-            .createConfig(this.getConfigDirectory() + "/configuration.json");
-
-    @Override
-    public void onEnable() {
-        config.reload();
-    }
+@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUNTIME) public @interface ListenerData {
+    Importance importance() default Importance.MEDIUM;
 }

@@ -19,37 +19,23 @@ package net.tridentsdk.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.tridentsdk.docs.AccessNoDoc;
 
 import java.lang.reflect.Type;
 
-/**
- * Used for advanced interaction with the Config API for custom serializing/deserializing of Java Objects
- *
- * @author The TridentSDK Team
- */
-public final class GsonFactory {
+@AccessNoDoc
+final class GsonFactory {
     private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
     private static Gson gson = builder.create();
 
     private GsonFactory() {
     }
 
-    /**
-     * Registers the adapter with the given type inside the GSON builder
-     *
-     * @param type    the type to use for registration
-     * @param adapter the adapter registered with the type
-     */
     public static void registerTypeAdapter(Type type, Object adapter) {
         builder.registerTypeAdapter(type, adapter);
         gson = builder.create();
     }
 
-    /**
-     * Acquires the {@code static} GSON builder
-     *
-     * @return the GSON builder registered with the factory
-     */
     protected static Gson getGson() {
         return gson;
     }

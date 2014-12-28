@@ -21,6 +21,7 @@ import net.tridentsdk.concurrent.TaskExecutor;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * A task executor that has multiple specified threads
@@ -28,7 +29,7 @@ import java.util.List;
  * @param <E> the task assignment type
  * @author The TridentSDK Team
  */
-public interface ExecutorFactory<E> {
+public interface ExecutorFactory<E> extends Executor {
     /**
      * The thread with the least amount of tasks assigned to it
      *
