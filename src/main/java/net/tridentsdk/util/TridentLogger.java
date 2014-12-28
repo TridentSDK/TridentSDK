@@ -92,9 +92,16 @@ public final class TridentLogger {
         Random rand = new Random();
         int randomNum = rand.nextInt((ERRORS.length - 1) + 1) + 0;
 
+        String errorMessage = throwable.getMessage();
+
+        if(errorMessage == null || errorMessage.equals("null")){
+            errorMessage = "NullPointerException";
+        }
+
         getLogger().error(ERRORS[randomNum]);
-        getLogger().error(
-                "Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + throwable.getMessage());
+        getLogger().error("");
+        getLogger().error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
+        getLogger().error("");
         getLogger().error("======== Generating Debug Information =========");
         StackTraceElement main = throwable.getStackTrace()[0];
         getLogger().error("Class:  " + main.getClassName());
