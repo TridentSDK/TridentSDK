@@ -18,8 +18,8 @@
 package net.tridentsdk.meta.nbt;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +27,7 @@ import java.util.Map;
  * @author The TridentSDK Team
  */
 public class CompoundTag extends NBTTag implements TagContainer {
-    final Map<String, NBTTag> tags = new HashMap<>(); //Hashmap for quick lookup with names
+    final Map<String, NBTTag> tags = Maps.newHashMap(); //Hashmap for quick lookup with names
 
     public CompoundTag(String name) {
         super(name);

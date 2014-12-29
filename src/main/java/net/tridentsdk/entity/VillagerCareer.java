@@ -17,12 +17,6 @@
 
 package net.tridentsdk.entity;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import java.util.Collection;
-import java.util.Map;
-
 /**
  * Occupation of the villager
  *
@@ -83,26 +77,6 @@ public enum VillagerCareer {
      * Leatherworker
      */
     LEATHERWORKER(VillagerProfession.BUTCHER, 1);
-    private static final Map<VillagerProfession, Collection<VillagerCareer>> byProfession = Maps.newHashMap();
-
-    static {
-        Collection<VillagerCareer> parentColl = Lists.newArrayList();
-        VillagerProfession current = null;
-        for (VillagerCareer carrer : VillagerCareer.values()) {
-            if (current == null) {
-                current = carrer.parent;
-                parentColl.add(carrer);
-                continue;
-            }
-            if (current == carrer.parent) {
-                parentColl.add(carrer);
-            } else {
-                byProfession.put(current, parentColl);
-                parentColl = Lists.newArrayList();
-                current = carrer.parent;
-            }
-        }
-    }
 
     private final VillagerProfession parent;
     private final int id;

@@ -44,6 +44,6 @@ public abstract class CollectFactory {
      * @return a ConcurrentMap backed cache for storing values
      */
     public <K, V> ConcurrentCache<K, V> createCache() {
-        return new ConcurrentCache<>();
+        return ConcurrentCache.create();
     }
 }

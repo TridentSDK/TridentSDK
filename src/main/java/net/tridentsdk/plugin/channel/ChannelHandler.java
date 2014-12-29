@@ -17,15 +17,15 @@
 
 package net.tridentsdk.plugin.channel;
 
+import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class ChannelHandler {
     private static final ChannelHandler INSTANCE = new ChannelHandler();
 
-    private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
+    private final Map<String, PluginChannel> channels = Factories.collect().createMap();
 
     private ChannelHandler() {
     }

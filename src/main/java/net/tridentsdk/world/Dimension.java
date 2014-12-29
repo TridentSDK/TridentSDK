@@ -38,7 +38,7 @@ public enum Dimension {
         return null;
     }
 
-    public byte toByte() {
+    public byte asByte() {
         return this.b;
     }
 }

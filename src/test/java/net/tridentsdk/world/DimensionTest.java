@@ -17,7 +17,6 @@
 
 package net.tridentsdk.world;
 
-import net.tridentsdk.world.Dimension;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,9 +24,9 @@ public class DimensionTest {
 
     @Test
     public void testToByte() throws Exception {
-        Assert.assertEquals(Dimension.NETHER.toByte(), (byte) -1);
-        Assert.assertEquals(Dimension.OVERWORLD.toByte(), (byte) 0);
-        Assert.assertEquals(Dimension.END.toByte(), (byte) 1);
+        Assert.assertEquals(Dimension.NETHER.asByte(), (byte) -1);
+        Assert.assertEquals(Dimension.OVERWORLD.asByte(), (byte) 0);
+        Assert.assertEquals(Dimension.END.asByte(), (byte) 1);
     }
 
     @Test

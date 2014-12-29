@@ -17,17 +17,17 @@
 
 package net.tridentsdk.plugin.cmd;
 
+import com.google.common.collect.Maps;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler {
     // TODO: Make this a dictionary tree for fast lookup
-    private static final HashMap<String, CommandData> COMMANDS = new HashMap<>();
+    private static final Map<String, CommandData> COMMANDS = Maps.newHashMap();
 
     /**
      * Handles the message sent from the player, without the preceding "/"

@@ -49,7 +49,7 @@ import java.util.concurrent.PriorityBlockingQueue;
     private static final Callable<EventHandler> CREATE_HANDLER = new Callable<EventHandler>() {
         @Override
         public EventHandler call() throws Exception {
-            return new EventHandler();
+            return create();
         }
     };
 
@@ -60,11 +60,20 @@ import java.util.concurrent.PriorityBlockingQueue;
 
     private final ConcurrentCache<TaskExecutor, EventHandler> handles = Factories.collect().createCache();
 
-    @InternalUseOnly
-    public EventHandler() {
+    private EventHandler() {
         if (!Trident.isTrident()) {
             TridentLogger.error(new UnsupportedOperationException("EventManager must be initiated by TridentSDK!"));
         }
+    }
+
+    /**
+     * Creates a new event handler, should only be used internally
+     *
+     * @return the new event handler
+     */
+    @InternalUseOnly
+    public static EventHandler create() {
+        return new EventHandler();
     }
 
     /**

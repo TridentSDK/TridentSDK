@@ -304,7 +304,7 @@ public class Vector implements Serializable, Cloneable {
     /**
      * Returns a new location in this world, with the coordinates the x, y, and z values
      */
-    public Coordinates toLocation(World world) {
+    public Coordinates asLocation(World world) {
         return Coordinates.create(world, this.x, this.y, this.z);
     }
 

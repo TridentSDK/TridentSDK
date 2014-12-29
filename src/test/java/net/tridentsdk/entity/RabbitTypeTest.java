@@ -17,7 +17,6 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.entity.RabbitType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,13 +24,13 @@ public class RabbitTypeTest {
 
     @Test
     public void testToInt() throws Exception {
-        Assert.assertEquals(RabbitType.BROWN.toInt(), 0);
-        Assert.assertEquals(RabbitType.WHITE.toInt(), 1);
-        Assert.assertEquals(RabbitType.BLACK.toInt(), 2);
-        Assert.assertEquals(RabbitType.WHITE_AND_BLACK.toInt(), 3);
-        Assert.assertEquals(RabbitType.GOLD.toInt(), 4);
-        Assert.assertEquals(RabbitType.SALT_AND_PEPPER.toInt(), 5);
-        Assert.assertEquals(RabbitType.KILLER_RABBIT.toInt(), 99);
+        Assert.assertEquals(RabbitType.BROWN.asInt(), 0);
+        Assert.assertEquals(RabbitType.WHITE.asInt(), 1);
+        Assert.assertEquals(RabbitType.BLACK.asInt(), 2);
+        Assert.assertEquals(RabbitType.WHITE_AND_BLACK.asInt(), 3);
+        Assert.assertEquals(RabbitType.GOLD.asInt(), 4);
+        Assert.assertEquals(RabbitType.SALT_AND_PEPPER.asInt(), 5);
+        Assert.assertEquals(RabbitType.KILLER_RABBIT.asInt(), 99);
     }
 
     @Test

@@ -30,6 +30,19 @@ import java.util.concurrent.atomic.AtomicReference;
     private final CountDownLatch latch = new CountDownLatch(1);
     private final AtomicReference<V> value = new AtomicReference<>();
 
+    private HeldValueLatch() {
+    }
+
+    /**
+     * Creates a new latch that can hold a value
+     *
+     * @param <V> the type of the value
+     * @return a new value latch
+     */
+    public static <V> HeldValueLatch<V> create() {
+        return new HeldValueLatch<>();
+    }
+
     /**
      * Sets the value in the latch <p/> <p>The effects of setting this only once is unspecified</p> <p/> <p>This is
      * unsynchronized because all actions prior to counting down <em>happens-before</em> another thread awaits the

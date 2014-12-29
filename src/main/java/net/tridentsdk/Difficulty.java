@@ -51,7 +51,7 @@ public enum Difficulty {
      *
      * @return {@code byte} value of the Difficulty
      */
-    public byte toByte() {
+    public byte asByte() {
         return this.b;
     }
 }

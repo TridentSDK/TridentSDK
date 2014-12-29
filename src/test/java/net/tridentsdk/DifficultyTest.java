@@ -24,10 +24,10 @@ public class DifficultyTest {
 
     @Test
     public void testToByte() throws Exception {
-        Assert.assertEquals(Difficulty.PEACEFUL.toByte(), 0);
-        Assert.assertEquals(Difficulty.EASY.toByte(), 1);
-        Assert.assertEquals(Difficulty.NORMAL.toByte(), 2);
-        Assert.assertEquals(Difficulty.HARD.toByte(), 3);
+        Assert.assertEquals(Difficulty.PEACEFUL.asByte(), 0);
+        Assert.assertEquals(Difficulty.EASY.asByte(), 1);
+        Assert.assertEquals(Difficulty.NORMAL.asByte(), 2);
+        Assert.assertEquals(Difficulty.HARD.asByte(), 3);
     }
 
     @Test

@@ -35,12 +35,12 @@ import java.nio.file.Files;
 public class TridentPlugin {
     private static final HashFunction HASHER = Hashing.murmur3_32();
 
-    final PluginClassLoader classLoader;
+    PluginClassLoader classLoader;
     private final File pluginFile;
     private final File configDirectory;
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
-    private final HeldValueLatch<TaskExecutor> executor = new HeldValueLatch<>();
+    private final HeldValueLatch<TaskExecutor> executor = HeldValueLatch.create();
 
     protected TridentPlugin() {
         this.pluginFile = null;
@@ -69,7 +69,7 @@ public class TridentPlugin {
     public static TridentPlugin getInstance() {
         Class<?> caller = Trident.getCaller(3);
         ClassLoader loader = caller.getClassLoader();
-        for (TridentPlugin plugin : TridentPluginHandler.getPluginExecutorFactory().values())
+        for (TridentPlugin plugin : Trident.getPluginHandler().getPlugins())
             if (plugin.getClass().getClassLoader().equals(loader))
                 return plugin;
         return null;
@@ -77,7 +77,7 @@ public class TridentPlugin {
 
     public static TridentPlugin getInstance(Class<? extends TridentPlugin> c) {
         ClassLoader loader = c.getClassLoader();
-        for (TridentPlugin plugin : TridentPluginHandler.getPluginExecutorFactory().values())
+        for (TridentPlugin plugin : Trident.getPluginHandler().getPlugins())
             if (plugin.getClass().getClassLoader().equals(loader))
                 return plugin;
         return null;

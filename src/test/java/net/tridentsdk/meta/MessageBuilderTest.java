@@ -17,9 +17,6 @@
 
 package net.tridentsdk.meta;
 
-import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.meta.Message;
-import net.tridentsdk.meta.MessageBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,7 +34,7 @@ public class MessageBuilderTest {
         message.then(new Message().text("MESSAGE"));
         message.build();
 
-        Assert.assertEquals(message.toJson(),
+        Assert.assertEquals(message.asJson(),
                             "{\"text\":\"\",\"extra\":[{\"text\":\"Hello World\",\"color\":\"aqua\"," +
                                     "\"clickEvent\":{\"action\":\"open_file\",\"value\":\"FILE\"}," +
                                     "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"HOVER\"}},{\"text\":\"THEN\"}]}");

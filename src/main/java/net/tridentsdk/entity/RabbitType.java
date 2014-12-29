@@ -50,7 +50,7 @@ public enum RabbitType {
      * @return {@code int} value of the RabbitType
      */
     public static int asInt(RabbitType rabbitType) {
-        return rabbitType.toInt();
+        return rabbitType.asInt();
     }
 
     /**
@@ -58,7 +58,7 @@ public enum RabbitType {
      *
      * @return {@code int} value of the RabbitType
      */
-    public int toInt() {
+    public int asInt() {
         return this.id;
     }
 }

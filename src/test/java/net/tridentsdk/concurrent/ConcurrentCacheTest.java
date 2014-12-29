@@ -17,7 +17,6 @@
 
 package net.tridentsdk.concurrent;
 
-import net.tridentsdk.concurrent.ConcurrentCache;
 import net.tridentsdk.factory.CollectFactory;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
@@ -43,7 +42,7 @@ public class ConcurrentCacheTest {
 
     private final Object key = new Object();
     private final Object value = new Object();
-    private final ConcurrentCache<Object, Object> cache = new ConcurrentCache<>();
+    private final ConcurrentCache<Object, Object> cache = ConcurrentCache.create();
 
     @Test(expected = NullPointerException.class)
     public void exception() {

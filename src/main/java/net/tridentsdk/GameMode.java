@@ -40,8 +40,8 @@ public enum GameMode {
      * @param gameMode GameMode
      * @return {@code byte} value of the GameMode
      */
-    public static byte toByte(GameMode gameMode) {
-        return gameMode.toByte();
+    public static byte asByte(GameMode gameMode) {
+        return gameMode.asByte();
     }
 
     public static GameMode gamemodeOf(int i) {
@@ -59,7 +59,7 @@ public enum GameMode {
      *
      * @return {@code byte} value of the GameMode
      */
-    public byte toByte() {
+    public byte asByte() {
         return this.b;
     }
 }

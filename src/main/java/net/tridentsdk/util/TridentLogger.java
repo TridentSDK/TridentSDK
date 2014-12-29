@@ -17,14 +17,13 @@
 
 package net.tridentsdk.util;
 
+import com.google.common.collect.Iterators;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
-import net.tridentsdk.plugin.TridentPluginHandler;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
 import java.util.Random;
 
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
@@ -110,8 +109,7 @@ public final class TridentLogger {
 
         getLogger().error("========     Server info    =========");
         getLogger().error("Trident version: " + Trident.getVersion());
-        getLogger().error("Plugins:         " + Arrays.toString(
-                TridentPluginHandler.getPluginExecutorFactory().values().toArray()));
+        getLogger().error("Plugins:         " + Iterators.toString(Trident.getPluginHandler().getPlugins().iterator()));
         getLogger().error("Java:            version " + System.getProperty("java.version") + " distributed by " +
                                   System.getProperty("java.vendor"));
         getLogger().error("OS:              running " +

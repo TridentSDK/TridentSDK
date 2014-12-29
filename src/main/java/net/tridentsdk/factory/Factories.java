@@ -32,10 +32,10 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author The TridentSDK Team
  */
 @ThreadSafe public final class Factories {
-    private static final HeldValueLatch<TaskFactory> taskFactory = new HeldValueLatch<>();
-    private static final HeldValueLatch<ThreadFactory> threadFactory = new HeldValueLatch<>();
-    private static final HeldValueLatch<ConfigFactory> configFactory = new HeldValueLatch<>();
-    private static final HeldValueLatch<CollectFactory> collectFactory = new HeldValueLatch<>();
+    private static final HeldValueLatch<TaskFactory> taskFactory = HeldValueLatch.create();
+    private static final HeldValueLatch<ThreadFactory> threadFactory = HeldValueLatch.create();
+    private static final HeldValueLatch<ConfigFactory> configFactory = HeldValueLatch.create();
+    private static final HeldValueLatch<CollectFactory> collectFactory = HeldValueLatch.create();
 
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
     private static final DisplayInfo INFO = new DisplayInfo();

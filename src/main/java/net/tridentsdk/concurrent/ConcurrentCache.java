@@ -18,6 +18,7 @@
 package net.tridentsdk.concurrent;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import net.tridentsdk.factory.Factories;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -35,6 +36,20 @@ import java.util.concurrent.ConcurrentMap;
 @ThreadSafe public class ConcurrentCache<K, V> {
     private final Object PLACE_HOLDER = new Object();
     private final ConcurrentMap<K, Object> cache = Factories.collect().createMap();
+
+    private ConcurrentCache() {
+    }
+
+    /**
+     * Creates a new cache
+     *
+     * @param <K> the key type
+     * @param <V> the value type
+     * @return a new cache
+     */
+    public static <K, V> ConcurrentCache<K, V> create() {
+        return new ConcurrentCache<>();
+    }
 
     /**
      * Retrieves the key in the cache, or adds the return value of the callable provided
@@ -102,7 +117,7 @@ import java.util.concurrent.ConcurrentMap;
      * @return the underlying map
      */
     public Set<Map.Entry<K, V>> entries() {
-        Set<Map.Entry<K, V>> entries = new HashSet<>();
+        Set<Map.Entry<K, V>> entries = Sets.newHashSet();
         for (Map.Entry<K, Object> entry : cache.entrySet()) {
             entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), (V) entry.getValue()));
         }

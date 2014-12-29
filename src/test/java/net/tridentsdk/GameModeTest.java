@@ -24,20 +24,20 @@ public class GameModeTest {
 
     @Test
     public void testToByte() throws Exception {
-        Assert.assertEquals(GameMode.SURVIVAL.toByte(), 0);
-        Assert.assertEquals(GameMode.CREATIVE.toByte(), 1);
-        Assert.assertEquals(GameMode.ADVENTURE.toByte(), 2);
-        Assert.assertEquals(GameMode.SPECTATE.toByte(), 3);
-        Assert.assertEquals(GameMode.HARDCORE.toByte(), 8);
+        Assert.assertEquals(GameMode.SURVIVAL.asByte(), 0);
+        Assert.assertEquals(GameMode.CREATIVE.asByte(), 1);
+        Assert.assertEquals(GameMode.ADVENTURE.asByte(), 2);
+        Assert.assertEquals(GameMode.SPECTATE.asByte(), 3);
+        Assert.assertEquals(GameMode.HARDCORE.asByte(), 8);
     }
 
     @Test
     public void testToByte1() throws Exception {
-        Assert.assertEquals(GameMode.toByte(GameMode.SURVIVAL), 0);
-        Assert.assertEquals(GameMode.toByte(GameMode.CREATIVE), 1);
-        Assert.assertEquals(GameMode.toByte(GameMode.ADVENTURE), 2);
-        Assert.assertEquals(GameMode.toByte(GameMode.SPECTATE), 3);
-        Assert.assertEquals(GameMode.toByte(GameMode.HARDCORE), 8);
+        Assert.assertEquals(GameMode.asByte(GameMode.SURVIVAL), 0);
+        Assert.assertEquals(GameMode.asByte(GameMode.CREATIVE), 1);
+        Assert.assertEquals(GameMode.asByte(GameMode.ADVENTURE), 2);
+        Assert.assertEquals(GameMode.asByte(GameMode.SPECTATE), 3);
+        Assert.assertEquals(GameMode.asByte(GameMode.HARDCORE), 8);
     }
 
     @Test

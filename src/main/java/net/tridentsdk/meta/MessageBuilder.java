@@ -92,13 +92,13 @@ public final class MessageBuilder {
         return GSON.toJson(this.obj);
     }
 
-    public String toJson() {
+    public String asJson() {
         return this.toString();
     }
 
     public MessageBuilder sendTo(Player... players) {
         for (Player p : players) {
-            p.sendRaw(toJson());
+            p.sendRaw(asJson());
         }
 
         return this;

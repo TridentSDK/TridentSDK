@@ -44,10 +44,6 @@ public class TridentPluginHandler {
     private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads().executor(2);
     private final List<TridentPlugin> plugins = Lists.newArrayList();
 
-    public static ExecutorFactory<TridentPlugin> getPluginExecutorFactory() {
-        return PLUGIN_EXECUTOR_FACTORY;
-    }
-
     @InternalUseOnly
     public void load(final File pluginFile) {
         final TaskExecutor executor = PLUGIN_EXECUTOR_FACTORY.scaledThread();
@@ -124,6 +120,7 @@ public class TridentPluginHandler {
 
         this.plugins.remove(plugin);
         plugin.classLoader.unloadClasses();
+        plugin.classLoader = null;
     }
 
     public Iterable<TridentPlugin> getPlugins() {

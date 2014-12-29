@@ -24,7 +24,7 @@ import net.tridentsdk.util.TridentLogger;
 import java.util.List;
 
 public abstract class PluginChannel {
-    private final List<Byte[]> history = Lists.newArrayList();
+    private final List<byte[]> history = Lists.newArrayList();
 
     public void process(byte... message) {
         if (!Trident.isTrident()) {
@@ -32,7 +32,7 @@ public abstract class PluginChannel {
                     new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
         }
 
-        Byte[] bytes = new Byte[message.length - 1];
+        byte[] bytes = new byte[message.length - 1];
 
         for (int i = 0; i < message.length; i++) {
             bytes[i] = message[i];
@@ -44,7 +44,7 @@ public abstract class PluginChannel {
 
     public abstract void onMessage(byte... message);
 
-    public List<Byte[]> getHistory() {
+    public List<byte[]> getHistory() {
         return this.history;
     }
 }

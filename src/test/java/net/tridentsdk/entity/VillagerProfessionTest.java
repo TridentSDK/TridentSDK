@@ -17,7 +17,6 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.entity.VillagerProfession;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,19 +24,11 @@ public class VillagerProfessionTest {
 
     @Test
     public void testToInt() throws Exception {
-        Assert.assertEquals(VillagerProfession.FARMER.toInt(), 0);
-        Assert.assertEquals(VillagerProfession.LIBRARIAN.toInt(), 1);
-        Assert.assertEquals(VillagerProfession.PRIEST.toInt(), 2);
-        Assert.assertEquals(VillagerProfession.BLACKSMITH.toInt(), 3);
-        Assert.assertEquals(VillagerProfession.BUTCHER.toInt(), 4);
+        Assert.assertEquals(VillagerProfession.FARMER.asInt(), 0);
+        Assert.assertEquals(VillagerProfession.LIBRARIAN.asInt(), 1);
+        Assert.assertEquals(VillagerProfession.PRIEST.asInt(), 2);
+        Assert.assertEquals(VillagerProfession.BLACKSMITH.asInt(), 3);
+        Assert.assertEquals(VillagerProfession.BUTCHER.asInt(), 4);
     }
 
-    @Test
-    public void testToInt1() throws Exception {
-        Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.FARMER), 0);
-        Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.LIBRARIAN), 1);
-        Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.PRIEST), 2);
-        Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.BLACKSMITH), 3);
-        Assert.assertEquals(VillagerProfession.toInt(VillagerProfession.BUTCHER), 4);
-    }
 }

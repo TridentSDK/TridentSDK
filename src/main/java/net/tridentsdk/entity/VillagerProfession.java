@@ -64,19 +64,9 @@ public enum VillagerProfession {
     /**
      * Returns the {@code int} value of the VillagerProfession
      *
-     * @param villagerProfession VillagerProfession
      * @return {@code int} value of the VillagerProfession
      */
-    public static int toInt(VillagerProfession villagerProfession) {
-        return villagerProfession.toInt();
-    }
-
-    /**
-     * Returns the {@code int} value of the VillagerProfession
-     *
-     * @return {@code int} value of the VillagerProfession
-     */
-    public int toInt() {
+    public int asInt() {
         return this.id;
     }
 }

@@ -17,18 +17,20 @@
 
 package net.tridentsdk.plugin;
 
+import io.netty.util.internal.chmv8.ConcurrentHashMapV8;
 import net.tridentsdk.perf.FastClass;
 import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class PluginClassLoader extends URLClassLoader {
-    final Map<String, Class<?>> classes = new ConcurrentHashMap<>();
+    final Map<String, Class<?>> classes = new ConcurrentHashMapV8<>();
     private Class<? extends TridentPlugin> pluginClass;
 
     public PluginClassLoader(File pluginFile) throws MalformedURLException {
@@ -80,9 +82,20 @@ public class PluginClassLoader extends URLClassLoader {
     }
 
     public void unloadClasses() {
+        pluginClass = null;
         for (Class<?> cls : this.classes.values()) {
-            // TODO: unload class
+            for (Field field : cls.getDeclaredFields()) {
+                if (field.getType().getClassLoader().equals(this) && Modifier.isStatic(field.getModifiers())) {
+                    field.setAccessible(true);
+                    try {
+                        field.set(null, null);
+                    } catch (IllegalAccessException e) {
+                        TridentLogger.error(e);
+                    }
+                } // TODO instance held fields
+            }
         }
+        classes.clear();
     }
 
     public Class<? extends TridentPlugin> getPluginClass() {
