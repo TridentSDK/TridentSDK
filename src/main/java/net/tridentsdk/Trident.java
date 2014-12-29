@@ -75,7 +75,7 @@ public final class Trident {
     }
 
     public static int getPort() {
-        return server.getPort();
+        return server.port();
     }
 
     public static void shutdown() {
@@ -83,27 +83,23 @@ public final class Trident {
     }
 
     public static Set<World> getWorlds() {
-        return server.getWorlds();
+        return server.worlds();
     }
 
     public static InetAddress getServerIp() {
-        return server.getServerIp();
-    }
-
-    public static Difficulty getDifficulty() {
-        return server.getDifficulty();
+        return server.serverIp();
     }
 
     public static String getVersion() {
-        return server.getVersion();
+        return server.version();
     }
 
     public static Window getWindow(int id) {
-        return server.getWindow(id);
+        return server.windowBy(id);
     }
 
     public static EventHandler getEventHandler() {
-        return server.getEventHandler();
+        return server.eventHandler();
     }
 
     public static void sendPluginMessage(String channel, byte... data) {

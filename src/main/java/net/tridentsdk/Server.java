@@ -25,7 +25,7 @@ import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 
 import java.net.InetAddress;
-import java.util.Set;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -39,7 +39,7 @@ public interface Server {
      *
      * @return the port the server runs on
      */
-    int getPort();
+    int port();
 
     /**
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
@@ -49,30 +49,23 @@ public interface Server {
     /**
      * Get all the worlds loaded on the server
      *
-     * @return a {@link java.util.List} of all the worlds
+     * @return a Map of all the worlds, where the String is the world name
      */
-    Set<World> getWorlds();
+    Map<String, World> worlds();
 
     /**
      * Gets the Internet Address of this server
      *
      * @return the address of this server
      */
-    InetAddress getServerIp();
-
-    /**
-     * Gets the current difficulty that the server is set to (Worlds can have their own difficulty)
-     *
-     * @return the difficulty of the server
-     */
-    Difficulty getDifficulty();
+    InetAddress serverIp();
 
     /**
      * Gets the version of Trident that the server is currently running
      *
      * @return a String representing the current version of the Trident server that the server is running
      */
-    String getVersion();
+    String version();
 
     /**
      * Gets an inventory window
@@ -80,14 +73,14 @@ public interface Server {
      * @param id the ID of the window to be searched
      * @return the window with the ID
      */
-    Window getWindow(int id);
+    Window windowBy(int id);
 
     /**
      * Get the event manager
      *
      * @return the EventManager instance
      */
-    EventHandler getEventHandler();
+    EventHandler eventHandler();
 
     /**
      * Send a plugin message
@@ -117,6 +110,7 @@ public interface Server {
      * @return the server config
      */
     JsonConfig config();
+
 
     Player getPlayer(UUID id);
 }

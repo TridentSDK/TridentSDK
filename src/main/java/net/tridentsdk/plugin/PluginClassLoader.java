@@ -17,7 +17,7 @@
 
 package net.tridentsdk.plugin;
 
-import io.netty.util.internal.chmv8.ConcurrentHashMapV8;
+import net.tridentsdk.factory.Factories;
 import net.tridentsdk.perf.FastClass;
 import net.tridentsdk.util.TridentLogger;
 
@@ -30,7 +30,7 @@ import java.net.URLClassLoader;
 import java.util.Map;
 
 public class PluginClassLoader extends URLClassLoader {
-    final Map<String, Class<?>> classes = new ConcurrentHashMapV8<>();
+    final Map<String, Class<?>> classes = Factories.collect().createMap();
     private Class<? extends TridentPlugin> pluginClass;
 
     public PluginClassLoader(File pluginFile) throws MalformedURLException {
