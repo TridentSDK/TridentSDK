@@ -26,7 +26,7 @@ import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 
 import java.net.InetAddress;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Utility accessor to the {@link Server}
@@ -82,7 +82,7 @@ public final class Trident {
         server.shutdown();
     }
 
-    public static Set<World> getWorlds() {
+    public static Map<String, World> getWorlds() {
         return server.worlds();
     }
 

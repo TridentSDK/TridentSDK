@@ -111,6 +111,11 @@ public interface Server {
      */
     JsonConfig config();
 
-
+    /**
+     * Get the player by UUID
+     *
+     * @param id the UUID to find the player with
+     * @return the player who has the specified UUID
+     */
     Player getPlayer(UUID id);
 }
