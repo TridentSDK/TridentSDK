@@ -38,7 +38,7 @@ public class DisplayInfo {
      * @return a string containing the MOTD of the server, may be empty, never null
      */
     public String motd() {
-        return Factories.configs().serverConfig().getString("motd", Defaults.MOTD);
+        return Trident.getConfig().getString("motd", Defaults.MOTD);
     }
 
     /**
@@ -47,7 +47,7 @@ public class DisplayInfo {
      * @param motd the string to set. Supports color codes.
      */
     public void setMotd(String motd) {
-        Factories.configs().serverConfig().setString("motd", motd);
+        Trident.getConfig().setString("motd", motd);
     }
 
     /**
@@ -70,7 +70,7 @@ public class DisplayInfo {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(
-                    Factories.configs().serverConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION)));
+                    Trident.getConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION)));
         } catch (IOException ex) {
             TridentLogger.error(ex);
         }
@@ -78,7 +78,7 @@ public class DisplayInfo {
     }
 
     public File motdImage() {
-        return new File(Factories.configs().serverConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
+        return new File(Trident.getConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
     }
 
     /**
@@ -98,7 +98,7 @@ public class DisplayInfo {
      * @return the maximum number of players the server will allow
      */
     public int maxPlayers() {
-        return Factories.configs().serverConfig().getInt("max-players", Defaults.MAX_PLAYERS);
+        return Trident.getConfig().getInt("max-players", Defaults.MAX_PLAYERS);
     }
 
     /**

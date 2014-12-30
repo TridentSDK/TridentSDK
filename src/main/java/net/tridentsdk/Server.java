@@ -23,6 +23,7 @@ import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
+import org.slf4j.Logger;
 
 import java.net.InetAddress;
 import java.util.Map;
@@ -103,6 +104,13 @@ public interface Server {
      * @return the display information manager
      */
     DisplayInfo getInfo();
+
+    /**
+     * Gets the server's console logger for the this class
+     *
+     * @return the server's logger
+     */
+    Logger getLogger();
 
     /**
      * The server configuration file
