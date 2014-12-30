@@ -55,7 +55,7 @@ public class Note {
      */
     public Note flatten() {
         if ((int) this.id - 1 < 0) {
-            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the max"));
+            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the min"));
         }
         return new Note((int) this.id - 1);
     }

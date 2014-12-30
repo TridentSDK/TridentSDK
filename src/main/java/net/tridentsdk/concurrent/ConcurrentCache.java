@@ -123,4 +123,11 @@ import java.util.concurrent.ConcurrentMap;
         }
         return entries;
     }
+
+    /**
+     * Clears the mappings from this cache
+     */
+    public void clear() {
+        cache.clear();
+    }
 }
