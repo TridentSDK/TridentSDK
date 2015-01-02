@@ -26,7 +26,7 @@ import net.tridentsdk.util.Vector;
  *
  * @author The TridentSDK Team
  */
-public interface Tile extends Impalable {
+public interface Tile {
     /**
      * Gets the substance the tile is made of
      *
@@ -69,4 +69,11 @@ public interface Tile extends Impalable {
      * @return the block adjacent to the current
      */
     public Tile relativeTile(Vector vector);
+
+    /**
+     * Allows access to the impaling logic for this tile
+     *
+     * @return the impalable accesor
+     */
+    Impalable asImpalable();
 }

@@ -21,6 +21,7 @@ import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.world.World;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 
 /**
@@ -32,6 +33,7 @@ import java.util.Collection;
  *
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public interface ThreadFactory {
     /**
      * Get all of the thread entity wrappers

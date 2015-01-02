@@ -25,6 +25,7 @@ import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.net.InetAddress;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ import java.util.Map;
  *
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public final class Trident {
     private static Server server;
     private static final ExposedSecurity SECURITY = new ExposedSecurity();
@@ -56,7 +58,9 @@ public final class Trident {
     }
 
     /**
-     * Do not call <p/> <p>Will throw an exception if you are not calling from a trusted source</p>
+     * Do not call <
+     *
+     * <p>Will throw an exception if you are not calling from a trusted source</p>
      *
      * @param s the server to set
      */

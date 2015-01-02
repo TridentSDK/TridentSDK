@@ -24,11 +24,14 @@ import net.tridentsdk.perf.FastConstructor;
 import net.tridentsdk.perf.FastField;
 import net.tridentsdk.perf.FastMethod;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Provides reflection accessors to the ReflectASM library wrappers
  *
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public class ReflectFactory {
     /**
      * Acquires a class wrapper. Note this method is extremely slow.

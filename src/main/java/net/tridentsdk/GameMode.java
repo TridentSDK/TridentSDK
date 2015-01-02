@@ -18,8 +18,9 @@
 package net.tridentsdk;
 
 /**
- * Minecraft game modes <p/> <p>If you need more help, take a look at <a href="http://minecraft.gamepedia
- * .com/Gameplay#Game_modes">Wiki</a></p>
+ * Minecraft game modes
+ *
+ * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Gameplay#Game_modes">Wiki</a></p>
  */
 public enum GameMode {
     SURVIVAL(0),

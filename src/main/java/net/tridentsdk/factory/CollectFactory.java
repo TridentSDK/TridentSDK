@@ -19,6 +19,7 @@ package net.tridentsdk.factory;
 
 import net.tridentsdk.concurrent.ConcurrentCache;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -26,7 +27,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author The TridentSDK Team
  */
-public abstract class CollectFactory {
+@ThreadSafe public abstract class CollectFactory {
     /**
      * Creates a netty ConcurrentHashMapV8 to provide the fastest platform map
      *

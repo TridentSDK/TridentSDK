@@ -22,6 +22,7 @@ import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.docs.AccessNoDoc;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,14 +32,8 @@ import java.nio.file.Paths;
  *
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public abstract class ConfigFactory {
-    /**
-     * Get the server's configuration
-     *
-     * @return the JSON config for th
-     */
-    public abstract JsonConfig serverConfig();
-
     /**
      * Creates a new configuration from a path specified by a string
      *

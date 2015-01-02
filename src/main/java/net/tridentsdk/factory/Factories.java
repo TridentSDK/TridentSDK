@@ -31,7 +31,8 @@ import javax.annotation.concurrent.ThreadSafe;
  *
  * @author The TridentSDK Team
  */
-@ThreadSafe public final class Factories {
+@ThreadSafe
+public final class Factories {
     private static final HeldValueLatch<TaskFactory> taskFactory = HeldValueLatch.create();
     private static final HeldValueLatch<ThreadFactory> threadFactory = HeldValueLatch.create();
     private static final HeldValueLatch<ConfigFactory> configFactory = HeldValueLatch.create();

@@ -21,6 +21,9 @@ import net.tridentsdk.concurrent.ScheduledTask;
 import net.tridentsdk.concurrent.TridentRunnable;
 import net.tridentsdk.plugin.TridentPlugin;
 
+import javax.annotation.concurrent.ThreadSafe;
+
+@ThreadSafe
 public interface TaskFactory {
     public ScheduledTask asyncRun(TridentPlugin plugin, TridentRunnable runnable);
 

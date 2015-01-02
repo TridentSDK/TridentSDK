@@ -22,6 +22,7 @@ package net.tridentsdk;
 
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -29,6 +30,7 @@ import java.util.concurrent.ThreadFactory;
  *
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public final class Defaults {
     /**
      * Maximum allowed players on the server

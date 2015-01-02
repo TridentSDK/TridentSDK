@@ -22,13 +22,16 @@ import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.Tile;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.projectile.Projectile;
 import net.tridentsdk.util.Vector;
+import org.mockito.Mockito;
 
 import java.util.Collection;
 
 public class TileImpl implements Tile {
     private Substance substance = Substance.ACACIA_STAIRS;
+    private Impalable impalable = Mockito.mock(Impalable.class);
     private byte meta;
 
     @Override
@@ -62,40 +65,7 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public boolean isImpaledEntity() {
-        return false;
-    }
-
-    @Override
-    public boolean isImpaledTile() {
-        return false;
-    }
-
-    @Override
-    public Entity impaledEntity() {
-        return null;
-    }
-
-    @Override
-    public Tile impaledTile() {
-        return null;
-    }
-
-    @Override
-    public void put(Projectile projectile) {
-    }
-
-    @Override
-    public boolean remove(Projectile projectile) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-    }
-
-    @Override
-    public Collection<Projectile> projectiles() {
-        return Sets.newHashSet();
+    public Impalable asImpalable() {
+        return impalable;
     }
 }

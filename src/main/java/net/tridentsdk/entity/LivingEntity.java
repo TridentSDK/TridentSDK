@@ -23,7 +23,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.event.entity.EntityDamageEvent;
 
-public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
+public interface LivingEntity extends Entity, ProjectileLauncher {
     /**
      * Makes the specified entity invisible to the current entity
      *
@@ -125,4 +125,11 @@ public interface LivingEntity extends Entity, ProjectileLauncher, Impalable {
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */
     boolean isDead();
+
+    /**
+     * Allows access to the impaling logic for this entity
+     *
+     * @return the impalable accessor
+     */
+    Impalable asImpalable();
 }

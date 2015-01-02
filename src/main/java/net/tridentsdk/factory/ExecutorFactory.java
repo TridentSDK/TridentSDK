@@ -19,6 +19,7 @@ package net.tridentsdk.factory;
 
 import net.tridentsdk.concurrent.TaskExecutor;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -29,6 +30,7 @@ import java.util.concurrent.Executor;
  * @param <E> the task assignment type
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public interface ExecutorFactory<E> extends Executor {
     /**
      * The thread with the least amount of tasks assigned to it

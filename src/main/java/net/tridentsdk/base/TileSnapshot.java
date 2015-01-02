@@ -49,7 +49,7 @@ import java.util.Collection;
      * @return the snapshot of the tile
      */
     public static TileSnapshot of(Tile tile) {
-        return new TileSnapshot(tile.location(), tile.substance(), tile.meta(), tile.projectiles());
+        return new TileSnapshot(tile.location(), tile.substance(), tile.meta(), tile.asImpalable().projectiles());
     }
 
     /**
@@ -60,9 +60,9 @@ import java.util.Collection;
         Tile tile = location.world().tileAt(location);
         tile.setSubstance(material);
         tile.setMeta(data);
-        tile.clear();
+        tile.asImpalable().clear();
         for (Projectile projectile : projectiles) {
-            tile.put(projectile);
+            tile.asImpalable().put(projectile);
         }
     }
 }

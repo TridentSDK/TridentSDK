@@ -102,43 +102,8 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public boolean isImpaledEntity() {
-        return entity.isImpaledEntity();
-    }
-
-    @Override
-    public boolean isImpaledTile() {
-        return entity.isImpaledTile();
-    }
-
-    @Override
-    public Entity impaledEntity() {
-        return entity.impaledEntity();
-    }
-
-    @Override
-    public Tile impaledTile() {
-        return entity.impaledTile();
-    }
-
-    @Override
-    public void put(Projectile projectile) {
-        entity.put(projectile);
-    }
-
-    @Override
-    public boolean remove(Projectile projectile) {
-        return entity.remove(projectile);
-    }
-
-    @Override
-    public void clear() {
-        entity.clear();
-    }
-
-    @Override
-    public Collection<Projectile> projectiles() {
-        return entity.projectiles();
+    public Impalable asImpalable() {
+        return entity.asImpalable();
     }
 
     @Override
