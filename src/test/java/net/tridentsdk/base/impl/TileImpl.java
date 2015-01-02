@@ -17,17 +17,12 @@
 
 package net.tridentsdk.base.impl;
 
-import com.google.common.collect.Sets;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.Tile;
-import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.decorate.Impalable;
-import net.tridentsdk.entity.projectile.Projectile;
 import net.tridentsdk.util.Vector;
 import org.mockito.Mockito;
-
-import java.util.Collection;
 
 public class TileImpl implements Tile {
     private Substance substance = Substance.ACACIA_STAIRS;

@@ -20,6 +20,7 @@ package net.tridentsdk.concurrent;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.*;
@@ -34,8 +35,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author The TridentSDK Team
  */
 @ThreadSafe public class ConcurrentCache<K, V> {
-    private final Object PLACE_HOLDER = new Object();
-    private final ConcurrentMap<K, Object> cache = Factories.collect().createMap();
+    private final ConcurrentMap<K, HeldValueLatch<V>> cache = Factories.collect().createMap();
 
     private ConcurrentCache() {
     }
@@ -59,23 +59,27 @@ import java.util.concurrent.ConcurrentMap;
      * @return the return value of the callable
      */
     public V retrieve(K k, Callable<V> callable) {
-        Object value = cache.get(k);
-        if (value == null) {
-            V v = null;
-            value = cache.putIfAbsent(k, PLACE_HOLDER);
+        while (true) {
+            HeldValueLatch<V> value = cache.get(k);
             if (value == null) {
-                try {
-                    v = callable.call();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                HeldValueLatch<V> latch = HeldValueLatch.create();
+                value = cache.putIfAbsent(k, latch);
+                if (value == null) {
+                    value = latch;
+                    try {
+                        value.countDown(callable.call());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
 
-                cache.replace(k, PLACE_HOLDER, v);
-                value = v;
+            try {
+                return value.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-
-        return (V) value;
     }
 
     /**
@@ -85,12 +89,17 @@ import java.util.concurrent.ConcurrentMap;
      * @return the old value assigned to the key, otherwise, {@code null} if not in the cache
      */
     public V remove(K k) {
-        Object val = this.cache.get(k);
+        HeldValueLatch<V> val = this.cache.get(k);
 
         if (val == null) return null;
 
         this.cache.remove(k);
-        return (V) val;
+        try {
+            return val.await();
+        } catch (InterruptedException e) {
+            TridentLogger.error(e);
+            return null;
+        }
     }
 
     public Set<K> keys() {
@@ -104,8 +113,12 @@ import java.util.concurrent.ConcurrentMap;
      */
     public Collection<V> values() {
         Collection<V> list = Lists.newArrayList();
-        for (Object v : this.cache.values()) {
-            list.add((V) v);
+        for (HeldValueLatch<V> v : this.cache.values()) {
+            try {
+                list.add(v.await());
+            } catch (InterruptedException e) {
+                TridentLogger.error(e);
+            }
         }
 
         return list;
@@ -118,8 +131,12 @@ import java.util.concurrent.ConcurrentMap;
      */
     public Set<Map.Entry<K, V>> entries() {
         Set<Map.Entry<K, V>> entries = Sets.newHashSet();
-        for (Map.Entry<K, Object> entry : cache.entrySet()) {
-            entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), (V) entry.getValue()));
+        for (Map.Entry<K, HeldValueLatch<V>> entry : cache.entrySet()) {
+            try {
+                entries.add(new AbstractMap.SimpleEntry<>(entry.getKey(), entry.getValue().await()));
+            } catch (InterruptedException e) {
+                TridentLogger.error(e);
+            }
         }
         return entries;
     }

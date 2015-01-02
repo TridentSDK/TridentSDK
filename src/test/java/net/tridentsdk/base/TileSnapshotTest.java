@@ -19,12 +19,10 @@ package net.tridentsdk.base;
 
 import com.google.common.collect.Sets;
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.impl.TileImpl;
 import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.projectile.Projectile;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import net.tridentsdk.base.impl.WorldImpl;

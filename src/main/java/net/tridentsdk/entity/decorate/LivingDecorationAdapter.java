@@ -18,15 +18,12 @@
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.Tile;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.EntityProperties;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.projectile.Projectile;
 import net.tridentsdk.event.entity.EntityDamageEvent;
-
-import java.util.Collection;
 
 public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> implements LivingEntity {
     private final LivingEntity entity;
