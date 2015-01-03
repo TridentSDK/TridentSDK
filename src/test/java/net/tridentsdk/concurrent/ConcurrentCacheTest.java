@@ -44,14 +44,20 @@ public class ConcurrentCacheTest {
     private final Object value = new Object();
     private final ConcurrentCache<Object, Object> cache = ConcurrentCache.create();
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void exception() {
         cache.retrieve(key, new Callable<Object>() {
             @Override
             public Object call() throws Exception {
-                throw new Exception();
+                return null;
             }
         });
+        Assert.assertNull(cache.retrieve(key, new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                return null;
+            }
+        }));
     }
 
     @Test
