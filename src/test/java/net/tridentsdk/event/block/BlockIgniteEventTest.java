@@ -17,7 +17,6 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.event.block.BlockIgniteEvent;
 import org.junit.Assert;
 import org.junit.Test;
 

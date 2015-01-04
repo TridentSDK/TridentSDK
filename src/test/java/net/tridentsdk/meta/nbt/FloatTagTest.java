@@ -17,8 +17,6 @@
 
 package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.meta.nbt.FloatTag;
-import net.tridentsdk.meta.nbt.TagType;
 import org.junit.Assert;
 import org.junit.Test;
 

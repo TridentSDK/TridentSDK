@@ -20,6 +20,8 @@ package net.tridentsdk.factory;
 import net.tridentsdk.concurrent.ConcurrentCache;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.Collections;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -46,5 +48,9 @@ import java.util.concurrent.ConcurrentMap;
      */
     public <K, V> ConcurrentCache<K, V> createCache() {
         return ConcurrentCache.create();
+    }
+
+    public <E> Set<E> createSet() {
+        return Collections.newSetFromMap(this.<E, Boolean>createMap());
     }
 }

@@ -17,7 +17,6 @@
 
 package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.meta.nbt.*;
 import org.junit.Assert;
 import org.junit.Test;
 

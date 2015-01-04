@@ -17,7 +17,6 @@
 
 package net.tridentsdk.concurrent;
 
-import net.tridentsdk.concurrent.SchedulerType;
 import org.junit.Assert;
 import org.junit.Test;
 

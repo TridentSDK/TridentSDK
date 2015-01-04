@@ -19,7 +19,6 @@ package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.TileOrientation;
-import net.tridentsdk.event.block.BlockBreakEvent;
 import net.tridentsdk.window.inventory.Item;
 import org.junit.Assert;
 import org.junit.Test;

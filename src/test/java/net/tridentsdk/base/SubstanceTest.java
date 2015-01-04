@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.base.Substance;
 import org.junit.Assert;
 import org.junit.Test;
 

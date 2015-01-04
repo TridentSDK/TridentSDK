@@ -17,10 +17,6 @@
 
 package net.tridentsdk.meta;
 
-import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.meta.ClickEvent;
-import net.tridentsdk.meta.HoverEvent;
-import net.tridentsdk.meta.Message;
 import org.junit.Assert;
 import org.junit.Test;
 

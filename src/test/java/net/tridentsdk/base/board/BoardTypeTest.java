@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base.board;
 
-import net.tridentsdk.base.board.BoardType;
 import org.junit.Assert;
 import org.junit.Test;
 

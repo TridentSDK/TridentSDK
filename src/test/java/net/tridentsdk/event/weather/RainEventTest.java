@@ -17,7 +17,6 @@
 
 package net.tridentsdk.event.weather;
 
-import net.tridentsdk.event.weather.RainEvent;
 import org.junit.Test;
 
 public class RainEventTest {

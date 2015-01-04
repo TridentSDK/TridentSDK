@@ -160,13 +160,13 @@ import java.util.concurrent.PriorityBlockingQueue;
     /**
      * Removes the listener from the caller queue, preventing it from being invoked
      *
-     * @param listener the listener to unregister
+     * @param cls the listener class to unregister
      */
-    public void unregister(Listener listener) {
+    public void unregister(Class<? extends Listener> cls) {
         for (Map.Entry<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> entry : this.callers.entrySet()) {
             for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
                 EventReflector it = iterator.next();
-                if (it.instance().equals(listener)) {
+                if (it.instance().getClass().equals(cls)) {
                     iterator.remove();
                     callers.put(entry.getKey(), entry.getValue());
                     break;

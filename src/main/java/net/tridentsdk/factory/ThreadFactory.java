@@ -60,8 +60,9 @@ public interface ThreadFactory {
      * A new concurren task executor reimplemented in the server
      *
      * @param threads the threads available in the pool
+     * @param name the names appended to the end of the thread name
      * @param <T>     the assignment type for each thread
      * @return the execution factory
      */
-    <T> ExecutorFactory<T> executor(int threads);
+    <T> ExecutorFactory<T> executor(int threads, String name);
 }

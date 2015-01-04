@@ -41,7 +41,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TridentPluginHandler {
-    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads().executor(2);
+    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY =
+            Factories.threads().executor(2, "Plugins");
     private final List<TridentPlugin> plugins = Lists.newArrayList();
 
     @InternalUseOnly
@@ -118,7 +119,9 @@ public class TridentPluginHandler {
     public void disable(TridentPlugin plugin) {
         plugin.onDisable();
 
+        PLUGIN_EXECUTOR_FACTORY.removeAssignment(plugin);
         this.plugins.remove(plugin);
+
         plugin.classLoader.unloadClasses();
         plugin.classLoader = null;
     }

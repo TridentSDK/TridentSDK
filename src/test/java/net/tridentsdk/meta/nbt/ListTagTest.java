@@ -17,9 +17,6 @@
 
 package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.meta.nbt.IntTag;
-import net.tridentsdk.meta.nbt.ListTag;
-import net.tridentsdk.meta.nbt.TagType;
 import org.junit.Assert;
 import org.junit.Test;
 

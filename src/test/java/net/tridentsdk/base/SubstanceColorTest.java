@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.base.SubstanceColor;
 import org.junit.Assert;
 import org.junit.Test;
 

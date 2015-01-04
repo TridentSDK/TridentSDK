@@ -17,8 +17,6 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.entity.VillagerCareer;
-import net.tridentsdk.entity.VillagerProfession;
 import org.junit.Assert;
 import org.junit.Test;
 

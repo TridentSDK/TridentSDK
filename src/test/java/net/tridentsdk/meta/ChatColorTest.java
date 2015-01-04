@@ -17,7 +17,6 @@
 
 package net.tridentsdk.meta;
 
-import net.tridentsdk.meta.ChatColor;
 import org.junit.Assert;
 import org.junit.Test;
 

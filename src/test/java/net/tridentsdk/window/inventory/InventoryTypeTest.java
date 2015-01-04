@@ -17,7 +17,6 @@
 
 package net.tridentsdk.window.inventory;
 
-import net.tridentsdk.window.inventory.InventoryType;
 import org.junit.Assert;
 import org.junit.Test;
 

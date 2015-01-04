@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base.board;
 
-import net.tridentsdk.base.board.TagVisibility;
 import org.junit.Assert;
 import org.junit.Test;
 

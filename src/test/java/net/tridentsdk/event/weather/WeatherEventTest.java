@@ -17,7 +17,6 @@
 
 package net.tridentsdk.event.weather;
 
-import net.tridentsdk.event.weather.WeatherEvent;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -18,7 +18,6 @@
 package net.tridentsdk.event.weather;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.event.weather.LightningStrikeEvent;
 import org.junit.Assert;
 import org.junit.Test;
 

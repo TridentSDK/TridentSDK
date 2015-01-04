@@ -121,5 +121,6 @@ public final class TridentLogger {
         getLogger().error("");
 
         getLogger().error("========      END ERROR     =========");
+        getLogger().error("");
     }
 }

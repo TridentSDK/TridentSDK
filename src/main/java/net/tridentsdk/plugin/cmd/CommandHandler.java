@@ -17,8 +17,8 @@
 
 package net.tridentsdk.plugin.cmd;
 
-import com.google.common.collect.Maps;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class CommandHandler {
     // TODO: Make this a dictionary tree for fast lookup
-    private static final Map<String, CommandData> COMMANDS = Maps.newHashMap();
+    private static final Map<String, CommandData> COMMANDS = Factories.collect().createMap();
 
     /**
      * Handles the message sent from the player, without the preceding "/"
@@ -70,7 +70,6 @@ public class CommandHandler {
     }
 
     public static int addCommand(Command command) throws PluginLoadException {
-
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
         if (description == null) {
@@ -86,21 +85,29 @@ public class CommandHandler {
 
         if (name == null || "".equals(name)) {
             TridentLogger.error(new PluginLoadException("cmd does not declare a valid name!"));
+            return 0;
         }
 
         if (COMMANDS.containsKey(name.toLowerCase())) {
             if (COMMANDS.get(name.toLowerCase()).getPriority() > priority) {
-                // put the new, more important cmd in place and notify the old cmd that it has been overriden
+                // put the new, more important cmd in place and notify the old cmd that it has been overridden
                 COMMANDS.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command))
                         .getCommand()
                         .notifyOverriden();
             } else {
-                // don't register this cmd and notify it has been overriden
+                // don't register this cmd and notify it has been overridden
                 command.notifyOverriden();
             }
         }
         // TODO: return something meaningful
         return 0;
+    }
+
+    public static void removeCommand(Class<? extends Command> cls) {
+        for (Map.Entry<String, CommandData> e : COMMANDS.entrySet()) {
+            if (e.getValue().getCommand().getClass().equals(cls))
+                COMMANDS.remove(e.getKey());
+        }
     }
 
     private static class CommandData {

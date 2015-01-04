@@ -17,7 +17,6 @@
 
 package net.tridentsdk.event;
 
-import net.tridentsdk.event.Importance;
 import org.junit.Assert;
 import org.junit.Test;
 

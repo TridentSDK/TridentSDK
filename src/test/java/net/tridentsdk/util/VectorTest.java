@@ -17,7 +17,6 @@
 
 package net.tridentsdk.util;
 
-import net.tridentsdk.util.Vector;
 import org.junit.Assert;
 import org.junit.Test;
 

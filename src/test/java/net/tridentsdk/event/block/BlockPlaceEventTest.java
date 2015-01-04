@@ -18,7 +18,6 @@
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.TileOrientation;
-import net.tridentsdk.event.block.BlockPlaceEvent;
 import org.junit.Assert;
 import org.junit.Test;
 

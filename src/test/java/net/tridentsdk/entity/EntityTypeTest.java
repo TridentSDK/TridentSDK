@@ -17,7 +17,6 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.entity.EntityType;
 import org.junit.Assert;
 import org.junit.Test;
 
