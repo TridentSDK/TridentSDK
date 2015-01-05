@@ -25,6 +25,7 @@ import com.google.gson.JsonSyntaxException;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,7 +37,7 @@ import java.nio.file.StandardOpenOption;
  *
  * @author The TridentSDK Team
  */
-@NotThreadSafe
+@ThreadSafe
 public class JsonConfig extends ConfigSection {
     private final Path path;
 
@@ -71,9 +72,14 @@ public class JsonConfig extends ConfigSection {
 
     @Override
     public void save() {
+        JsonObject object;
+        synchronized (handleLock) {
+            object = jsonHandle;
+        }
+
         try {
-            Files.write(this.path, GsonFactory.getGson().toJson(this.jsonHandle).getBytes(Charsets.UTF_8),
-                        StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(this.path, GsonFactory.getGson().toJson(object).getBytes(Charsets.UTF_8),
+                    StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
             TridentLogger.error(ex);
         }
@@ -93,11 +99,16 @@ public class JsonConfig extends ConfigSection {
      * Reloads the configuration
      */
     public void reload() {
+        JsonObject object = null;
         try {
-            this.jsonHandle = Files.isReadable(this.path) ? new JsonParser().parse(
+            object = Files.isReadable(this.path) ? new JsonParser().parse(
                     Files.newBufferedReader(this.path, Charsets.UTF_8)).getAsJsonObject() : new JsonObject();
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
             TridentLogger.error(e);
+        }
+
+        synchronized (handleLock) {
+            jsonHandle = object;
         }
     }
 }

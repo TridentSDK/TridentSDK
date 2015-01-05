@@ -20,17 +20,22 @@ package net.tridentsdk.config;
 import com.google.gson.JsonArray;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Section of the config dedicated to storing values from a collection
  *
  * @author The TridentSDK Team
  */
-@NotThreadSafe
+@ThreadSafe
 public class ConfigSectionList<V> extends ConfigList<V> {
     private static final long serialVersionUID = -5809487198383216782L;
     private final ConfigSection parent;
+
+    private final Lock lock = new ReentrantLock();
 
     /**
      * Creates a new section list in the config
@@ -48,7 +53,12 @@ public class ConfigSectionList<V> extends ConfigList<V> {
         boolean changed = super.add(element);
 
         if (changed) {
-            this.jsonHandle.add(((ConfigSection) element).asJsonObject());
+            lock.lock();
+            try {
+                this.jsonHandle.add(((ConfigSection) element).asJsonObject());
+            } finally {
+                lock.unlock();
+            }
         }
 
         return changed;
@@ -59,8 +69,13 @@ public class ConfigSectionList<V> extends ConfigList<V> {
         boolean changed = super.addAll(coll);
 
         if (changed) {
-            for (V element : coll) {
-                this.add(element);
+            lock.lock();
+            try {
+                for (V element : coll) {
+                    this.jsonHandle.add(((ConfigSection) element).asJsonObject());
+                }
+            } finally {
+                lock.unlock();
             }
         }
 
@@ -72,14 +87,24 @@ public class ConfigSectionList<V> extends ConfigList<V> {
      */
     @Override
     public V set(int index, V element) {
-        this.jsonHandle.set(index, ((ConfigSection) element).asJsonObject());
-        return super.set(index, element);
+        lock.lock();
+        try {
+            this.jsonHandle.set(index, ((ConfigSection) element).asJsonObject());
+            return super.set(index, element);
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
     public V remove(int index) {
-        this.jsonHandle.remove(index);
-        return super.remove(index);
+        lock.lock();
+        try {
+            this.jsonHandle.remove(index);
+            return super.remove(index);
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -87,7 +112,12 @@ public class ConfigSectionList<V> extends ConfigList<V> {
         boolean success = super.remove(element);
 
         if (success) {
-            this.jsonHandle.remove(((ConfigSection) element).asJsonObject());
+            lock.lock();
+            try {
+                this.jsonHandle.remove(((ConfigSection) element).asJsonObject());
+            } finally {
+                lock.unlock();
+            }
         }
 
         return success;
@@ -102,7 +132,12 @@ public class ConfigSectionList<V> extends ConfigList<V> {
 
         if (changed) {
             for (Object o : coll) {
-                this.remove(o);
+                lock.lock();
+                try {
+                    this.jsonHandle.remove(((ConfigSection) o).asJsonObject());
+                } finally {
+                    lock.unlock();
+                }
             }
         }
 
@@ -110,24 +145,17 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     }
 
     /* (non-Javadoc)
-     * @see java.util.ArrayList#removeRange(int, int)
-     */
-    @Override
-    protected void removeRange(int start, int end) {
-        super.removeRange(start, end);
-
-        for (int i = start; i < end; i++) {
-            this.jsonHandle.remove(i);
-        }
-    }
-
-    /* (non-Javadoc)
      * @see java.util.ArrayList#clear()
      */
     @Override
     public void clear() {
-        super.clear();
-        this.jsonHandle = new JsonArray();
+        lock.lock();
+        try {
+            super.clear();
+            this.jsonHandle = new JsonArray();
+        } finally {
+            lock.unlock();
+        }
     }
 
     protected ConfigSection getParent() {

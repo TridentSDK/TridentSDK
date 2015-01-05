@@ -22,7 +22,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -33,10 +35,13 @@ import java.util.List;
  *
  * @author The TridentSDK Team
  */
-@NotThreadSafe
+@ThreadSafe
 public class ConfigSection {
-    ConfigSection parent;
-    JsonObject jsonHandle;
+    private final Object parentLock = new Object();
+    @GuardedBy("parentLock") ConfigSection parent;
+
+    final Object handleLock = new Object();
+    @GuardedBy("handleLock") JsonObject jsonHandle;
 
     /**
      * Instantiated by subclasses only
@@ -66,6 +71,7 @@ public class ConfigSection {
         if (!(list instanceof ConfigSectionList)) {
             TridentLogger.error(
                     new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList"));
+            return null;
         }
         ConfigSection section = new ConfigSection(((ConfigSectionList) list).getParent(), new JsonObject());
         list.add((V) section);
@@ -81,7 +87,9 @@ public class ConfigSection {
      * @return the integer at the tag
      */
     public int getInt(String tag, int def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsInt() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsInt() : def;
+        }
     }
 
     /**
@@ -91,7 +99,9 @@ public class ConfigSection {
      * @return the integer at the tag
      */
     public int getInt(String tag) {
-        return this.getInt(tag, 0);
+        synchronized (handleLock) {
+            return this.getInt(tag, 0);
+        }
     }
 
     /**
@@ -101,7 +111,9 @@ public class ConfigSection {
      * @param in  the integer value to set the tag
      */
     public void setInt(String tag, int in) {
-        this.jsonHandle.addProperty(tag, in);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, in);
+        }
     }
 
     /**
@@ -112,7 +124,9 @@ public class ConfigSection {
      * @return the double at the tag
      */
     public double getDouble(String tag, double def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsDouble() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsDouble() : def;
+        }
     }
 
     /**
@@ -122,7 +136,9 @@ public class ConfigSection {
      * @return the double at the tag
      */
     public double getDouble(String tag) {
-        return this.getDouble(tag, 0.0D);
+        synchronized (handleLock) {
+            return this.getDouble(tag, 0.0D);
+        }
     }
 
     /**
@@ -132,7 +148,9 @@ public class ConfigSection {
      * @param d   the double to set to the tag
      */
     public void setDouble(String tag, double d) {
-        this.jsonHandle.addProperty(tag, d);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, d);
+        }
     }
 
     /**
@@ -143,7 +161,9 @@ public class ConfigSection {
      * @return the float at the tag
      */
     public float getFloat(String tag, float def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsFloat() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsFloat() : def;
+        }
     }
 
     /**
@@ -153,7 +173,9 @@ public class ConfigSection {
      * @return the float at the tag
      */
     public float getFloat(String tag) {
-        return this.getFloat(tag, 0.0F);
+        synchronized (handleLock) {
+            return this.getFloat(tag, 0.0F);
+        }
     }
 
     /**
@@ -163,7 +185,9 @@ public class ConfigSection {
      * @param f   the float to set the tag to
      */
     public void setFloat(String tag, float f) {
-        this.jsonHandle.addProperty(tag, f);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, f);
+        }
     }
 
     /**
@@ -174,7 +198,9 @@ public class ConfigSection {
      * @return the character at the tag
      */
     public char getChar(String tag, char def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsCharacter() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsCharacter() : def;
+        }
     }
 
     /**
@@ -185,7 +211,9 @@ public class ConfigSection {
      * @return the character at the tag
      */
     public char getChar(String tag) {
-        return this.getChar(tag, '\u0000');
+        synchronized (handleLock) {
+            return this.getChar(tag, '\u0000');
+        }
     }
 
     /**
@@ -195,7 +223,9 @@ public class ConfigSection {
      * @param c   the character to set the tag to
      */
     public void setChar(String tag, char c) {
-        this.jsonHandle.addProperty(tag, c);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, c);
+        }
     }
 
     /**
@@ -206,7 +236,9 @@ public class ConfigSection {
      * @return the boolean at the tag
      */
     public boolean getBoolean(String tag, boolean def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsBoolean() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsBoolean() : def;
+        }
     }
 
     /**
@@ -217,7 +249,9 @@ public class ConfigSection {
      * @return the boolean at the tag
      */
     public boolean getBoolean(String tag) {
-        return this.getBoolean(tag, false);
+        synchronized (handleLock) {
+            return this.getBoolean(tag, false);
+        }
     }
 
     /**
@@ -227,7 +261,9 @@ public class ConfigSection {
      * @param b   the boolean to set to at the tag
      */
     public void setBoolean(String tag, boolean b) {
-        this.jsonHandle.addProperty(tag, b);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, b);
+        }
     }
 
     /**
@@ -238,7 +274,9 @@ public class ConfigSection {
      * @return the byte at the tag
      */
     public byte getByte(String tag, byte def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsByte() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsByte() : def;
+        }
     }
 
     /**
@@ -249,7 +287,9 @@ public class ConfigSection {
      * @return the character at the tag
      */
     public byte getByte(String tag) {
-        return this.getByte(tag, (byte) 0);
+        synchronized (handleLock) {
+            return this.getByte(tag, (byte) 0);
+        }
     }
 
     /**
@@ -259,7 +299,9 @@ public class ConfigSection {
      * @param b   the byte to set to at the tag
      */
     public void setByte(String tag, byte b) {
-        this.jsonHandle.addProperty(tag, b);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, b);
+        }
     }
 
     /**
@@ -269,11 +311,15 @@ public class ConfigSection {
      * @param def the default value to
      */
     public String getString(String tag, String def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsString() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsString() : def;
+        }
     }
 
     public String getString(String tag) {
-        return this.getString(tag, null);
+        synchronized (handleLock) {
+            return this.getString(tag, null);
+        }
     }
 
     /**
@@ -283,7 +329,9 @@ public class ConfigSection {
      * @param s   the string to set at the tag
      */
     public void setString(String tag, String s) {
-        this.jsonHandle.addProperty(tag, s);
+        synchronized (handleLock) {
+            this.jsonHandle.addProperty(tag, s);
+        }
     }
 
     /**
@@ -295,7 +343,10 @@ public class ConfigSection {
      * @return the list from the section
      */
     public <V> List<V> getList(String tag, Class<V> type) {
-        JsonArray array = this.jsonHandle.get(tag).getAsJsonArray();
+        JsonArray array = null;
+        synchronized (handleLock) {
+            this.jsonHandle.get(tag).getAsJsonArray();
+        }
 
         //Handle ConfigSection seperately as it is special
         if (type.equals(ConfigSection.class)) {
@@ -322,7 +373,10 @@ public class ConfigSection {
      * @return the list added to the section
      */
     public <V> List<V> addList(String tag, Class<V> type) {
-        this.jsonHandle.add(tag, new JsonArray());
+        synchronized (handleLock) {
+            this.jsonHandle.add(tag, new JsonArray());
+        }
+
         return this.getList(tag, type);
     }
 
@@ -334,7 +388,9 @@ public class ConfigSection {
      * @return the BigInteger value at the tag
      */
     public BigInteger getBigInteger(String tag, BigInteger def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsBigInteger() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsBigInteger() : def;
+        }
     }
 
     /**
@@ -344,7 +400,9 @@ public class ConfigSection {
      * @return the BigInteger at the tag
      */
     public BigInteger getBigInteger(String tag) {
-        return this.getBigInteger(tag, null);
+        synchronized (handleLock) {
+            return this.getBigInteger(tag, null);
+        }
     }
 
     /**
@@ -354,7 +412,9 @@ public class ConfigSection {
      * @param bi the BigInteger ot set the tag to
      */
     public void setBigInteger(String s, BigInteger bi) {
-        this.setString(s, bi.toString());
+        synchronized (handleLock) {
+            this.setString(s, bi.toString());
+        }
     }
 
     /**
@@ -365,7 +425,9 @@ public class ConfigSection {
      * @return the value at the tag
      */
     public BigDecimal getBigDecimal(String tag, BigDecimal def) {
-        return this.contains(tag) ? this.jsonHandle.get(tag).getAsBigDecimal() : def;
+        synchronized (handleLock) {
+            return this.contains(tag) ? this.jsonHandle.get(tag).getAsBigDecimal() : def;
+        }
     }
 
     /**
@@ -375,7 +437,9 @@ public class ConfigSection {
      * @return the value of the tag
      */
     public BigDecimal getBigDecimal(String tag) {
-        return this.getBigDecimal(tag, null);
+        synchronized (handleLock) {
+            return this.getBigDecimal(tag, null);
+        }
     }
 
     /**
@@ -385,7 +449,9 @@ public class ConfigSection {
      * @param bd  the BigDecimal to set the tag to
      */
     public void setBigDecimal(String tag, BigDecimal bd) {
-        this.setString(tag, bd.toPlainString());
+        synchronized (handleLock) {
+            this.setString(tag, bd.toPlainString());
+        }
     }
 
     /**
@@ -397,7 +463,9 @@ public class ConfigSection {
      * @return the value
      */
     public <V> V getObject(String tag, Class<V> clazz) {
-        return this.contains(tag) ? GsonFactory.getGson().fromJson(this.jsonHandle.get(tag), clazz) : null;
+        synchronized (handleLock) {
+            return this.contains(tag) ? GsonFactory.getGson().fromJson(this.jsonHandle.get(tag), clazz) : null;
+        }
     }
 
     /**
@@ -407,7 +475,9 @@ public class ConfigSection {
      * @param object the value to set the tag to
      */
     public void setObject(String tag, Object object) {
-        this.jsonHandle.add(tag, GsonFactory.getGson().toJsonTree(object));
+        synchronized (handleLock) {
+            this.jsonHandle.add(tag, GsonFactory.getGson().toJsonTree(object));
+        }
     }
 
     /**
@@ -416,7 +486,9 @@ public class ConfigSection {
      * @param tag the tag to remove
      */
     public void remove(String tag) {
-        this.jsonHandle.remove(tag);
+        synchronized (handleLock) {
+            this.jsonHandle.remove(tag);
+        }
     }
 
     /**
@@ -426,7 +498,9 @@ public class ConfigSection {
      * @return {@code true} if the tag is in the section, {@code false} if not
      */
     public boolean contains(String tag) {
-        return this.jsonHandle.has(tag);
+        synchronized (handleLock) {
+            return this.jsonHandle.has(tag);
+        }
     }
 
     /**
@@ -435,7 +509,9 @@ public class ConfigSection {
      * @return the JSON version of the section
      */
     public JsonObject asJsonObject() {
-        return this.jsonHandle;
+        synchronized (handleLock) {
+            return this.jsonHandle;
+        }
     }
 
     /**
@@ -444,7 +520,9 @@ public class ConfigSection {
      * @return the parent root section
      */
     public JsonConfig getRootSection() {
-        return this.parent.getRootSection();
+        synchronized (parentLock) {
+            return this.parent.getRootSection();
+        }
     }
 
     /**
@@ -453,7 +531,9 @@ public class ConfigSection {
      * @return the parent of the section
      */
     public ConfigSection getParentSection() {
-        return this.parent;
+        synchronized (parentLock) {
+            return this.parent;
+        }
     }
 
     /**
@@ -475,6 +555,8 @@ public class ConfigSection {
      * Saves the parent data
      */
     public void save() {
-        this.parent.save();
+        synchronized (parentLock) {
+            this.parent.save();
+        }
     }
 }

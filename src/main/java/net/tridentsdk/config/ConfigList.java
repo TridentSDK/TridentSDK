@@ -21,23 +21,32 @@ import com.google.gson.JsonArray;
 import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;
-import java.util.AbstractList;
-import java.util.Collection;
-import java.util.List;
+import javax.annotation.concurrent.ThreadSafe;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * A LinkedList [implementation] that also makes changes to the underlying JsonArray object
  *
  * @author The TridentSDK Team
  */
-@NotThreadSafe
-public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<V> {
+@ThreadSafe
+public class ConfigList<V> implements List<V>{
     private static final long serialVersionUID = -7535821700183585211L;
-    private final Node<V> head = new Node<>(null, null, null);
-    private final Node<V> footer = new Node<>(null, null, head);
-    JsonArray jsonHandle;
-    private int size = 0;
+
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final Lock read = lock.readLock();
+    private final Lock write = lock.writeLock();
+
+    @GuardedBy("lock") private final Node<V> head = new Node<>(null, null, null);
+    @GuardedBy("lock") private final Node<V> tail = head;
+    @GuardedBy("write") JsonArray jsonHandle;
+    @GuardedBy("lock") private int size = 0;
 
     /**
      * Creates a new linked list for the JSON config serializable
@@ -46,7 +55,7 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     protected ConfigList(JsonArray handle) {
         this.jsonHandle = handle;
-        head.next = footer;
+        head.next = tail;
     }
 
     /**
@@ -60,33 +69,101 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         addAll(c);
     }
 
+    private void lockFully() {
+        write.unlock();
+        read.lock();
+    }
+
+    private void unlockFully() {
+        read.unlock();
+        write.unlock();
+    }
+
+
+    private void checkElementIndex(int index) {
+        int size = this.size;
+
+        if (index < 0 && index > size)
+            TridentLogger.error(new IndexOutOfBoundsException("Index: " + index + ", Size: " + size));
+    }
+
+    private Node<V> getNode(int index) {
+        int idx = 0;
+        Node<V> node = head;
+        while ((node = node.next) != null) {
+            if (idx == index)
+                return node;
+            idx++;
+        }
+
+        return null;
+    }
+
     @Override
     public V get(int index) {
-        checkElementIndex(index);
-        return getNode(index + 1).value;
+        read.lock();
+        try {
+            checkElementIndex(index);
+            return getNode(index).value;
+        } finally {
+            read.unlock();
+        }
     }
 
     @Override
     public int size() {
-        return size;
+        read.lock();
+        try {
+            return size;
+        } finally {
+            read.unlock();
+        }
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size() != 0;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return indexOf(o) != -1;
+    }
+
+    @Override
+    public Iterator<V> iterator() {
+        return new ConfigIterator(0);
     }
 
     @Override
     public boolean add(V element) {
-        Node<V> prev = (size == 0) ? head : getNode(size - 1);
+        write.lock();
+        try {
+            tail.next = new Node<>(element, null, tail);
+            size += 1;
 
-        prev.next = new Node<>(element, footer, prev);
-        size += 1;
-        modCount += 1;
+            this.jsonHandle.add(GsonFactory.getGson().toJsonTree(element));
+        } finally {
+            write.unlock();
+        }
 
-        this.jsonHandle.add(GsonFactory.getGson().toJsonTree(element));
         return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends V> coll) {
-        for (V element : coll) {
-            this.add(element);
+        // Locked the entire loop instead of for each individual element
+
+        write.lock();
+        try {
+            for (V element : coll) {
+                tail.next = new Node<>(element, null, tail);
+                size += 1;
+
+                this.jsonHandle.add(GsonFactory.getGson().toJsonTree(element));
+            }
+        } finally {
+            write.unlock();
         }
 
         return true;
@@ -97,35 +174,147 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public V set(int index, V element) {
-        checkElementIndex(index);
-        this.jsonHandle.set(index, GsonFactory.getGson().toJsonTree(element));
+        V oldValue;
+        Node<V> node;
 
-        Node<V> node = getNode(index);
-        final V oldValue = node.value;
+        read.lock();
+        try {
+            checkElementIndex(index);
+            node = getNode(index);
+            oldValue = node.value;
+        } finally {
+            read.unlock();
+        }
 
-        node.value = element;
+        write.lock();
+        try {
+            this.jsonHandle.set(index, GsonFactory.getGson().toJsonTree(element));
+            node.value = element;
+        } finally {
+            write.unlock();
+        }
 
         return oldValue;
     }
 
     @Override
     public V remove(int index) {
-        checkElementIndex(index);
-        this.jsonHandle.remove(index);
+        write.lock();
+        try {
+            checkElementIndex(index);
 
-        Node<V> previous = getNode(index - 1);
-        final V value = previous.next.value;
-        previous.next = previous.next.next;
+            this.jsonHandle.remove(index);
 
-        size -= 1;
-        modCount -= 1;
+            V value = tail.value;
+            tail.value = null;
+            tail.prev.next = null;
 
-        return value;
+            size -= 1;
+
+            return value;
+        } finally {
+            write.unlock();
+        }
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        read.lock();
+        try {
+            int idx = 0;
+            Node<V> node = head;
+            while ((node = node.next) != null) {
+                if (node.value == o)
+                    return idx;
+                idx++;
+            }
+        } finally {
+            read.unlock();
+        }
+
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        read.lock();
+        try {
+            int idx = size - 1;
+            Node<V> node = tail;
+            while ((node = node.prev) != null) {
+                if (node.value == o)
+                    return idx;
+                idx--;
+            }
+        } finally {
+            read.unlock();
+        }
+
+        return -1;
+    }
+
+    @Override
+    public ListIterator<V> listIterator() {
+        return new ConfigIterator(0);
+    }
+
+    @Override
+    public ListIterator<V> listIterator(int index) {
+        return null;
     }
 
     @Override
     public boolean remove(Object element) {
-        remove(indexOf(element));
+        Node<V> tail = null;
+        int index = -1;
+
+        read.lock();
+        try {
+            int idx = 0;
+            Node<V> node = head;
+            while ((node = node.next) != null) {
+                if (node.value == element) {
+                    tail = node;
+                    index = idx;
+
+                    break;
+                }
+                idx++;
+            }
+        } finally {
+            read.unlock();
+        }
+
+        if (index == -1)
+            return false;
+
+        write.lock();
+        try {
+            this.jsonHandle.remove(index);
+
+            tail.value = null;
+            tail.prev.next = null;
+
+            size -= 1;
+
+            return true;
+        } finally {
+            write.unlock();
+        }
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        read.lock();
+        try {
+            for (Object o : c) {
+                if (indexOf(o) == -1)
+                    return false;
+            }
+        } finally {
+            read.unlock();
+        }
+
         return true;
     }
 
@@ -134,21 +323,41 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public boolean removeAll(Collection<?> coll) {
-        for (Object o : coll) {
-            this.remove(o);
+        lockFully();
+        try {
+            for (Object o : coll) {
+                Node<V> tail = null;
+                int index = -1;
+
+                int idx = 0;
+                Node<V> node = head;
+                while ((node = node.next) != null) {
+                    if (node.value == o) {
+                        tail = node;
+                        index = idx;
+
+                        break;
+                    }
+                    idx++;
+                }
+
+                if (index == -1)
+                    continue;
+
+                this.jsonHandle.remove(index);
+
+                tail.value = null;
+                tail.prev.next = null;
+
+                size -= 1;
+
+                return true;
+            }
+        } finally {
+            unlockFully();
         }
 
-        return true;
-    }
-
-    /* (non-Javadoc)
-     * @see java.util.List#removeRange(int, int)
-     */
-    @Override
-    protected void removeRange(int start, int end) {
-        for (int i = start; i < end; i++) {
-            remove(i);
-        }
+        return false;
     }
 
     /* (non-Javadoc)
@@ -156,20 +365,32 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
      */
     @Override
     public void clear() {
-        removeAll(new ConfigList<>(jsonHandle, this));
-        this.jsonHandle = new JsonArray();
+        write.lock();
+        try {
+            Node<V> node = head;
+            while ((node = node.next) != null) {
+                node.value = null;
+                node.prev.next = null;
+
+                size -= 1;
+            }
+
+            this.jsonHandle = new JsonArray();
+        } finally {
+            write.unlock();
+        }
     }
 
-    /* (non-Javadoc)
-     * @see java.util.List#add(int, java.lang.Object)
+    /**
+     * Not implemented
      */
     @Override
     public void add(int index, V element) {
         TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
     }
 
-    /* (non-Javadoc)
-     * @see java.util.List#addAll(int, java.util.Collection)
+    /**
+     * Not implemented
      */
     @Override
     public boolean addAll(int arg0, Collection<? extends V> arg1) {
@@ -177,8 +398,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.List#retainAll(java.util.Collection)
+    /**
+     * Not implemented
      */
     @Override
     public boolean retainAll(Collection<?> arg0) {
@@ -186,8 +407,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.List#subList(int, int)
+    /**
+     * Not implemented
      */
     @Override
     public List<V> subList(int arg0, int arg1) {
@@ -195,8 +416,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.List#toArray()
+    /**
+     * Not implemented
      */
     @Override
     public V[] toArray() {
@@ -204,8 +425,8 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see java.util.List#toArray(java.lang.Object[])
+    /**
+     * Not implemented
      */
     @Override
     public <T> T[] toArray(T[] arg0) {
@@ -213,35 +434,75 @@ public class ConfigList<V> extends AbstractList<V> implements List<V>, Iterable<
         return null;
     }
 
-    private void checkElementIndex(int index) {
-        if (index < 0 && index > size)
-            TridentLogger.error(new IndexOutOfBoundsException("Index: " + index + ", Size: " + size));
-    }
-
-    private Node<V> getNode(int index) {
-        Node<V> node = head;
-
-        if (index > (size >> 2)) {
-            for (int i = 0; i < index && node.next != footer; i += 1) {
-                node = node.next;
-            }
-        } else {
-            for (int i = (size - 1); i < index && node.prev != head; i -= 1) {
-                node = node.prev;
-            }
-        }
-
-        return node;
-    }
-
-    @AccessNoDoc private static class Node<V> {
-        V value;
-        Node<V> next;
-        Node<V> prev;
+    @AccessNoDoc
+    private class Node<V> {
+        @GuardedBy("lock") V value;
+        @GuardedBy("lock") Node<V> next;
+        @GuardedBy("lock") Node<V> prev;
 
         private Node(V value, Node<V> next, Node<V> prev) {
             this.value = value;
             this.next = next;
+            this.prev = prev;
+        }
+    }
+
+    @AccessNoDoc
+    private class ConfigIterator implements ListIterator<V> {
+        private final AtomicInteger current = new AtomicInteger();
+
+        public ConfigIterator(int index) {
+            current.set(index);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return (current.get() + 1) <= size();
+        }
+
+        @Override
+        public V next() {
+            return get(current.incrementAndGet());
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return current.get() > 0;
+        }
+
+        @Override
+        public V previous() {
+            read.lock();
+            try {
+                return getNode(current.get()).prev.value;
+            } finally {
+                read.unlock();
+            }
+        }
+
+        @Override
+        public int nextIndex() {
+            return current.get() + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return current.get() - 1;
+        }
+
+        @Override
+        public void remove() {
+            ConfigList.this.remove(current.get());
+        }
+
+        @Override
+        public void set(V v) {
+            ConfigList.this.set(current.get(), v);
+        }
+
+        @Override
+        public void add(V v) {
+            ConfigList.this.add(v);
         }
     }
 }

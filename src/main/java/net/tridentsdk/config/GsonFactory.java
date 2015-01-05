@@ -21,19 +21,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.tridentsdk.docs.AccessNoDoc;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Type;
 
 @AccessNoDoc
+@ThreadSafe
 final class GsonFactory {
     private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
-    private static Gson gson = builder.create();
+    private static final Gson gson = builder.create();
 
     private GsonFactory() {
-    }
-
-    public static void registerTypeAdapter(Type type, Object adapter) {
-        builder.registerTypeAdapter(type, adapter);
-        gson = builder.create();
     }
 
     protected static Gson getGson() {
