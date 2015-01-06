@@ -38,10 +38,10 @@ public final class StringUtil {
     }
 
     public static boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-        } catch (NumberFormatException ex) {
-            return false;
+        for (char c : str.toCharArray()) {
+            if (c < '0' || c > '9') {
+                return false;
+            }
         }
 
         return true;
