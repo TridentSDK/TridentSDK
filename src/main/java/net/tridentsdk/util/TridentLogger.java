@@ -81,7 +81,7 @@ public final class TridentLogger {
         String errorMessage = throwable.getMessage();
 
         if(errorMessage == null || errorMessage.equals("null")){
-            errorMessage = "NullPointerException";
+            errorMessage = throwable.getClass().getSimpleName();
         }
 
         getLogger().error(ERRORS[randomNum]);
