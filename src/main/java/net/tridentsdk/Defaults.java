@@ -64,6 +64,10 @@ public final class Defaults {
      * The default address for the server
      */
     public static final String ADDRESS = "localhost";
+    /**
+     * The default view distance of the server
+     */
+    public static final int VIEW_DISTANCE = 15;
 
     /**
      * The server's default exception handler
