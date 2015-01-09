@@ -18,7 +18,6 @@
 package net.tridentsdk.base;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.util.Vector;
 
 /**
@@ -69,11 +68,4 @@ public interface Tile {
      * @return the block adjacent to the current
      */
     public Tile relativeTile(Vector vector);
-
-    /**
-     * Allows access to the impaling logic for this tile
-     *
-     * @return the impalable accesor
-     */
-    Impalable asImpalable();
 }

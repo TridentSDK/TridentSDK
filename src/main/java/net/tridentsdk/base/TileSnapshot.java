@@ -33,13 +33,11 @@ import java.util.Collection;
     private final Coordinates location;
     private final Substance material;
     private final byte data;
-    private final Collection<Projectile> projectiles;
 
-    private TileSnapshot(Coordinates location, Substance material, byte data, Collection<Projectile> projectiles) {
+    private TileSnapshot(Coordinates location, Substance material, byte data) {
         this.location = location;
         this.material = material;
         this.data = data;
-        this.projectiles = projectiles;
     }
 
     /**
@@ -49,7 +47,7 @@ import java.util.Collection;
      * @return the snapshot of the tile
      */
     public static TileSnapshot of(Tile tile) {
-        return new TileSnapshot(tile.location(), tile.substance(), tile.meta(), tile.asImpalable().projectiles());
+        return new TileSnapshot(tile.location(), tile.substance(), tile.meta());
     }
 
     /**
@@ -60,9 +58,5 @@ import java.util.Collection;
         Tile tile = location.world().tileAt(location);
         tile.setSubstance(material);
         tile.setMeta(data);
-        tile.asImpalable().clear();
-        for (Projectile projectile : projectiles) {
-            tile.asImpalable().put(projectile);
-        }
     }
 }

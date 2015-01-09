@@ -18,7 +18,6 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.event.entity.EntityDamageEvent;
@@ -125,11 +124,4 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */
     boolean isDead();
-
-    /**
-     * Allows access to the impaling logic for this entity
-     *
-     * @return the impalable accessor
-     */
-    Impalable asImpalable();
 }

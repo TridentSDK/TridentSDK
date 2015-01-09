@@ -76,7 +76,7 @@ public final class TridentLogger {
         getLogger().error("");
 
         Random rand = new Random();
-        int randomNum = rand.nextInt((ERRORS.length - 1) + 1) + 0;
+        int randomNum = rand.nextInt((ERRORS.length - 1) + 1);
 
         String errorMessage = throwable.getMessage();
 

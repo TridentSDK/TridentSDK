@@ -17,6 +17,8 @@
 
 package net.tridentsdk.base;
 
+import java.util.regex.Pattern;
+
 /**
  * Enumeration of possible materials in minecraft
  *
@@ -409,15 +411,18 @@ public enum Substance {
     RECORD_11("2266", 1),
     RECORD_12("2267", 1);
 
+    private final Pattern PATTERN = Pattern.compile("_");
     private final String id;
     private final String data;
     private final int maxStack;
     private final int idInt;
+    private final String replaced;
 
     Substance(String id, int stack, String data) {
         this.id = id;
         this.maxStack = stack;
         this.data = data;
+        this.replaced = PATTERN.matcher(id).replaceAll(" ");
 
         this.idInt = Integer.parseInt(id);
     }
@@ -438,7 +443,8 @@ public enum Substance {
      */
     public static Substance fromString(String id) {
         for (Substance mat : Substance.values()) {
-            if (mat.getId().replaceAll("_", " ").equalsIgnoreCase(id)) return mat;
+            if (mat.replaced.equalsIgnoreCase(id))
+                return mat;
         }
 
         return null;

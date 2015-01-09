@@ -20,13 +20,10 @@ package net.tridentsdk.base.impl;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.Tile;
-import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.util.Vector;
-import org.mockito.Mockito;
 
 public class TileImpl implements Tile {
     private Substance substance = Substance.ACACIA_STAIRS;
-    private Impalable impalable = Mockito.mock(Impalable.class);
     private byte meta;
 
     @Override
@@ -57,10 +54,5 @@ public class TileImpl implements Tile {
     @Override
     public Tile relativeTile(Vector vector) {
         return new TileImpl();
-    }
-
-    @Override
-    public Impalable asImpalable() {
-        return impalable;
     }
 }

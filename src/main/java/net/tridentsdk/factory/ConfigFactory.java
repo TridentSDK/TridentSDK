@@ -33,7 +33,7 @@ import java.nio.file.Paths;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public abstract class ConfigFactory {
+public class ConfigFactory {
     /**
      * Creates a new configuration from a path specified by a string
      *

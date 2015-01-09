@@ -99,11 +99,6 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public Impalable asImpalable() {
-        return entity.asImpalable();
-    }
-
-    @Override
     public <T extends Projectile> T launchProjectile(EntityProperties properties) {
         return entity.launchProjectile(properties);
     }

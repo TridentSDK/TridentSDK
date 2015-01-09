@@ -35,9 +35,9 @@ import javax.annotation.concurrent.ThreadSafe;
 public final class Factories {
     private static final HeldValueLatch<TaskFactory> taskFactory = HeldValueLatch.create();
     private static final HeldValueLatch<ThreadFactory> threadFactory = HeldValueLatch.create();
-    private static final HeldValueLatch<ConfigFactory> configFactory = HeldValueLatch.create();
     private static final HeldValueLatch<CollectFactory> collectFactory = HeldValueLatch.create();
 
+    private static final ConfigFactory configFactory = new ConfigFactory();
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
     private static final DisplayInfo INFO = new DisplayInfo();
 
@@ -52,11 +52,6 @@ public final class Factories {
     @InternalUseOnly
     public static void init(ThreadFactory factory) {
         threadFactory.countDown(factory);
-    }
-
-    @InternalUseOnly
-    public static void init(ConfigFactory factory) {
-        configFactory.countDown(factory);
     }
 
     @InternalUseOnly
@@ -133,12 +128,6 @@ public final class Factories {
      * @return the configuration factory
      */
     public static ConfigFactory configs() {
-        try {
-            return configFactory.await();
-        } catch (InterruptedException e) {
-            // Release up the stack
-            Thread.currentThread().interrupt();
-            return null;
-        }
+        return configFactory;
     }
 }

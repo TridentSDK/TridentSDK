@@ -18,7 +18,6 @@
 package net.tridentsdk.entity.projectile;
 
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.decorate.Impalable;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 
 /**
@@ -31,13 +30,6 @@ public interface Projectile extends Entity {
      * Performs hit action
      */
     void doHit();
-
-    /**
-     * Returns the block/entity that was impaled by the projectile
-     *
-     * @return the impaled object by the projectile
-     */
-    Impalable getImpaled();
 
     /**
      * The projectile source
