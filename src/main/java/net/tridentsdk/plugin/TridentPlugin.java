@@ -51,7 +51,7 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for (TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
+        for (TridentPlugin plugin : Trident.getServer().pluginHandler().getPlugins()) {
             if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
                 TridentLogger.error(new IllegalStateException(
                         "Plugin already initialized or plugin with this name already exists! " +
@@ -69,7 +69,7 @@ public class TridentPlugin {
     public static TridentPlugin getInstance() {
         Class<?> caller = Trident.getCaller(3);
         ClassLoader loader = caller.getClassLoader();
-        for (TridentPlugin plugin : Trident.getPluginHandler().getPlugins())
+        for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
             if (plugin.getClass().getClassLoader().equals(loader))
                 return plugin;
         return null;
@@ -77,7 +77,7 @@ public class TridentPlugin {
 
     public static TridentPlugin getInstance(Class<? extends TridentPlugin> c) {
         ClassLoader loader = c.getClassLoader();
-        for (TridentPlugin plugin : Trident.getPluginHandler().getPlugins())
+        for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
             if (plugin.getClass().getClassLoader().equals(loader))
                 return plugin;
         return null;
@@ -101,7 +101,7 @@ public class TridentPlugin {
     }
 
     public Listener instanceOf(Class<? extends Listener> c) {
-        return Trident.getEventHandler().listenersFor(this).get(c);
+        return Trident.eventHandler().listenersFor(this).get(c);
     }
 
     public void saveDefaultConfig() {

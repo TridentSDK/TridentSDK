@@ -22,6 +22,7 @@ import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
+import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 
@@ -58,7 +59,7 @@ public final class Trident {
     }
 
     /**
-     * Do not call <
+     * Do not call
      *
      * <p>Will throw an exception if you are not calling from a trusted source</p>
      *
@@ -78,7 +79,7 @@ public final class Trident {
         return SECURITY.getClassContext()[index];
     }
 
-    public static int getPort() {
+    public static int port() {
         return server.port();
     }
 
@@ -86,35 +87,39 @@ public final class Trident {
         server.shutdown();
     }
 
-    public static Map<String, World> getWorlds() {
+    public static Map<String, World> worlds() {
         return server.worlds();
     }
 
-    public static InetAddress getServerIp() {
+    public static InetAddress serverIp() {
         return server.serverIp();
     }
 
-    public static String getVersion() {
+    public static String version() {
         return server.version();
     }
 
-    public static Window getWindow(int id) {
+    public static Window windowBy(int id) {
         return server.windowBy(id);
-    }
-
-    public static EventHandler getEventHandler() {
-        return server.eventHandler();
     }
 
     public static void sendPluginMessage(String channel, byte... data) {
         server.sendPluginMessage(channel, data);
     }
 
-    public static TridentPluginHandler getPluginHandler() {
-        return server.getPluginHandler();
+    public static EventHandler eventHandler() {
+        return server.eventHandler();
     }
 
-    public static JsonConfig getConfig() {
+    public static TridentPluginHandler pluginHandler() {
+        return server.pluginHandler();
+    }
+
+    public static CommandHandler commandHandler() {
+        return server.commandHandler();
+    }
+
+    public static JsonConfig config() {
         return server.config();
     }
 }

@@ -21,6 +21,8 @@ import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
+import net.tridentsdk.plugin.cmd.CommandHandler;
+import net.tridentsdk.plugin.cmd.TridentConsole;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 import org.slf4j.Logger;
@@ -34,7 +36,7 @@ import java.util.UUID;
  *
  * @author The TridentSDK Team
  */
-public interface Server {
+public interface Server extends TridentConsole {
     /**
      * Gets the port the server currently runs on
      *
@@ -77,13 +79,6 @@ public interface Server {
     Window windowBy(int id);
 
     /**
-     * Get the event manager
-     *
-     * @return the EventManager instance
-     */
-    EventHandler eventHandler();
-
-    /**
      * Send a plugin message
      *
      * @param channel name of the channel
@@ -92,11 +87,25 @@ public interface Server {
     void sendPluginMessage(String channel, byte... data);
 
     /**
+     * Get the event manager
+     *
+     * @return the EventManager instance
+     */
+    EventHandler eventHandler();
+
+    /**
      * Get the Trident Plugin Handler
      *
      * @return the TridentPluginHandler instance
      */
-    TridentPluginHandler getPluginHandler();
+    TridentPluginHandler pluginHandler();
+
+    /**
+     * Get the Trident command handler to distribute commands or register them
+     *
+     * @return the instance of command handler
+     */
+    CommandHandler commandHandler();
 
     /**
      * Gets the server's display information on the server list
@@ -110,7 +119,7 @@ public interface Server {
      *
      * @return the server's logger
      */
-    Logger getLogger();
+    Logger logger();
 
     /**
      * The server configuration file
@@ -125,5 +134,5 @@ public interface Server {
      * @param id the UUID to find the player with
      * @return the player who has the specified UUID
      */
-    Player getPlayer(UUID id);
+    Player playerBy(UUID id);
 }

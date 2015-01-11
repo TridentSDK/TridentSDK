@@ -39,7 +39,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias     the alias for the command
      */
-    public void handleConsole(ConsoleSender sender, String arguments, String alias) {
+    public void handleConsole(TridentConsole sender, String arguments, String alias) {
         // Method intentionally left blank
     }
 

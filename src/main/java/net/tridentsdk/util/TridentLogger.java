@@ -21,6 +21,7 @@ import com.google.common.collect.Iterators;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
+import net.tridentsdk.plugin.cmd.TridentConsole;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
@@ -63,11 +64,19 @@ public final class TridentLogger {
     }
 
     public static void log(String item) {
-        getLogger().info(item);
+        getLogger().info(item + TridentConsole.RESET);
     }
 
     public static void error(String message) {
-        getLogger().error(message);
+        getLogger().error(TridentConsole.RED + message + TridentConsole.RESET);
+    }
+
+    public static void warn(String item) {
+        getLogger().warn(TridentConsole.YELLOW + item + TridentConsole.RESET);
+    }
+
+    public static void success(String item) {
+        log(TridentConsole.GREEN + item);
     }
 
     public static void error(Throwable throwable) {
@@ -108,8 +117,8 @@ public final class TridentLogger {
         getLogger().error("");
 
         getLogger().error("========     Server info    =========");
-        getLogger().error("Trident version: " + Trident.getVersion());
-        getLogger().error("Plugins:         " + Iterators.toString(Trident.getPluginHandler().getPlugins().iterator()));
+        getLogger().error("Trident version: " + Trident.version());
+        getLogger().error("Plugins:         " + Iterators.toString(Trident.pluginHandler().getPlugins().iterator()));
         getLogger().error("Java:            version " + System.getProperty("java.version") + " distributed by " +
                                   System.getProperty("java.vendor"));
         getLogger().error("OS:              running " +

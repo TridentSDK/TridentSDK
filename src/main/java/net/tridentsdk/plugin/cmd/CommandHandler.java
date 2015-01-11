@@ -30,46 +30,47 @@ public class CommandHandler {
     private static final Map<String, CommandData> COMMANDS = Factories.collect().createMap();
 
     /**
-     * Handles the message sent from the player, without the preceding "/"
+     * Handles the message sent, without the preceding "/"
      *
      * @param message the command executed
      */
-    public static void handleCommand(String message, CommandIssuer issuer) {
+    public void handleCommand(String message, CommandIssuer issuer) {
         if (message.isEmpty()) {
             return;
         }
 
         String[] contents = message.split(" ");
-
         String label = contents[0].toLowerCase();
-
         CommandData cmdData = COMMANDS.get(label);
+
         if (cmdData != null) {
             String args = message.substring(label.length());
 
             if (issuer instanceof Player) {
                 cmdData.getCommand().handlePlayer((Player) issuer, args, contents[0]);
-            } else if (issuer instanceof ConsoleSender) {
-                cmdData.getCommand().handleConsole((ConsoleSender) issuer, args, contents[0]);
+            } else if (issuer instanceof TridentConsole) {
+                cmdData.getCommand().handleConsole((TridentConsole) issuer, args, contents[0]);
             }
             cmdData.getCommand().handle(issuer, args, contents[0]);
-        }
 
-        for (Map.Entry<String, CommandData> entry : COMMANDS.entrySet()) {
-            if (entry.getValue().hasAlias(label)) {
-                CommandData command = entry.getValue();
-                String args = message.substring(label.length());
-                if (issuer instanceof Player) {
-                    command.getCommand().handlePlayer((Player) issuer, args, contents[0]);
-                } else if (issuer instanceof ConsoleSender) {
-                    command.getCommand().handleConsole((ConsoleSender) issuer, args, contents[0]);
+            for (Map.Entry<String, CommandData> entry : COMMANDS.entrySet()) {
+                if (entry.getValue().hasAlias(label)) {
+                    CommandData command = entry.getValue();
+                    if (issuer instanceof Player) {
+                        command.getCommand().handlePlayer((Player) issuer, args, contents[0]);
+                    } else if (issuer instanceof TridentConsole) {
+                        command.getCommand().handleConsole((TridentConsole) issuer, args, contents[0]);
+                    }
+                    command.getCommand().handle(issuer, args, contents[0]);
                 }
-                command.getCommand().handle(issuer, args, contents[0]);
             }
+        } else {
+            // Command not found
+            issuer.sendRaw("Command not found");
         }
     }
 
-    public static int addCommand(Command command) throws PluginLoadException {
+    public int addCommand(Command command) throws PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
         if (description == null) {
@@ -98,12 +99,15 @@ public class CommandHandler {
                 // don't register this cmd and notify it has been overridden
                 command.notifyOverriden();
             }
+        } else {
+            COMMANDS.put(name, new CommandData(name, priority, aliases, permission, command));
         }
+
         // TODO: return something meaningful
         return 0;
     }
 
-    public static void removeCommand(Class<? extends Command> cls) {
+    public void removeCommand(Class<? extends Command> cls) {
         for (Map.Entry<String, CommandData> e : COMMANDS.entrySet()) {
             if (e.getValue().getCommand().getClass().equals(cls))
                 COMMANDS.remove(e.getKey());

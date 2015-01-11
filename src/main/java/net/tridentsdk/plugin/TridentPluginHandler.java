@@ -112,7 +112,7 @@ public class TridentPluginHandler {
         }
 
         if (Command.class.isAssignableFrom(cls)) {
-            CommandHandler.addCommand((Command) (instance == null ? cls.newInstance() : instance));
+            Trident.commandHandler().addCommand((Command) (instance == null ? cls.newInstance() : instance));
         }
     }
 

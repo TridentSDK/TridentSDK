@@ -17,7 +17,9 @@
 
 package net.tridentsdk.plugin.cmd;
 
-public interface CommandIssuer {
+import net.tridentsdk.Messagable;
+
+public interface CommandIssuer extends Messagable {
     /**
      * Issues a command from this sender, forcing them to run it
      */

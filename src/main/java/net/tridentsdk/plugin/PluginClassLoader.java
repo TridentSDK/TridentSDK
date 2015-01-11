@@ -89,11 +89,11 @@ public class PluginClassLoader extends URLClassLoader {
         pluginClass = null;
         for (Class<?> cls : this.classes.values()) {
             if (Listener.class.isAssignableFrom(cls)) {
-                Trident.getEventHandler().unregister(cls.asSubclass(Listener.class));
+                Trident.eventHandler().unregister(cls.asSubclass(Listener.class));
             }
 
             if (Command.class.isAssignableFrom(cls)) {
-                CommandHandler.removeCommand(cls.asSubclass(Command.class));
+                Trident.commandHandler().removeCommand(cls.asSubclass(Command.class));
             }
 
             for (Field field : cls.getDeclaredFields()) {
