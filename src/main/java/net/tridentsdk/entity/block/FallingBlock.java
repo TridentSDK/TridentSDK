@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.block;
 
-import net.tridentsdk.base.TileSnapshot;
+import net.tridentsdk.base.BlockSnapshot;
 import net.tridentsdk.entity.Entity;
 
 /**
@@ -31,7 +31,7 @@ public interface FallingBlock extends Entity {
      *
      * @return the BlockState of this falling block
      */
-    TileSnapshot getSnapshot();
+    BlockSnapshot getSnapshot();
 
     /**
      * Whether or not this FallingBlock should drop when it breaks

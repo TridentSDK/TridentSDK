@@ -20,7 +20,7 @@ package net.tridentsdk.world;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.Entity;
 
 import java.util.Set;
@@ -66,7 +66,7 @@ public interface World extends Cloneable {
      *
      * @return The block on the given location
      */
-    Tile tileAt(Coordinates location);
+    Block tileAt(Coordinates location);
 
     /**
      * Gets the dimension of a world
@@ -157,7 +157,7 @@ public interface World extends Cloneable {
      *
      * @return The size of the worldborder
      */
-    int borderSize();
+    double borderSize();
 
     /**
      * Gets the location where the worldborder is centered

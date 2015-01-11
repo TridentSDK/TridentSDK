@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.base.TileSnapshot;
+import net.tridentsdk.base.BlockSnapshot;
 import net.tridentsdk.entity.decorate.Neutral;
 
 /**
@@ -31,7 +31,7 @@ public interface Enderman extends Neutral {
      *
      * @return the block that this entity is carrying
      */
-    TileSnapshot getCarryingBlock();
+    BlockSnapshot getCarryingBlock();
 
     /**
      * Gets the number of endermites spawned by this enderman. Affects spawn chance of other endermites

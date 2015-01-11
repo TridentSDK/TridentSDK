@@ -18,7 +18,7 @@
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.base.TileOrientation;
+import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.window.inventory.Item;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class BlockBreakEventTest {
 
     @Test
     public void testIsIgnored() throws Exception {
-        BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM, null);
+        BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM, null);
         Assert.assertEquals(event.isIgnored(), false);
 
         event.cancel(true);
@@ -36,7 +36,7 @@ public class BlockBreakEventTest {
 
     @Test
     public void testGetItemInHand() throws Exception {
-        BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM,
+        BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM,
                                                     new Item(Substance.STICK, (short) 10));
         if (!event.getItemInHand().isSimilar(new Item(Substance.STICK, (short) 10))) {
             Assert.fail();
@@ -45,7 +45,7 @@ public class BlockBreakEventTest {
 
     @Test
     public void testGetBlockFace() throws Exception {
-        BlockBreakEvent event = new BlockBreakEvent(null, null, TileOrientation.BOTTOM, null);
-        Assert.assertEquals(event.getBlockFace(), TileOrientation.BOTTOM);
+        BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM, null);
+        Assert.assertEquals(event.getBlockFace(), BlockOrientation.BOTTOM);
     }
 }

@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -29,7 +29,7 @@ import net.tridentsdk.event.Cancellable;
 public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     private boolean cancelled;
 
-    private Tile block;
+    private Block block;
 
     /**
      * TODO add action detection and blockface(?)
@@ -37,7 +37,7 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
      * @param player the player associated with the event
      * @param block  the block that was interacted with (null if none)
      */
-    public PlayerInteractEvent(Player player, Tile block) {
+    public PlayerInteractEvent(Player player, Block block) {
         super(player);
         this.setBlock(block);
     }
@@ -45,14 +45,14 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     /**
      * @return return the interacted block (null means no block was interacted with)
      */
-    public Tile getBlock() {
+    public Block getBlock() {
         return this.block;
     }
 
     /**
      * @param block the block that was interacted with
      */
-    public void setBlock(Tile block) {
+    public void setBlock(Block block) {
         this.block = block;
     }
 

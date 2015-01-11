@@ -53,6 +53,6 @@ public enum SubstanceColor {
     // TODO I suck at this
     public byte[] asBytes(int index) {
         // Don't simplify this
-        return new byte[] { (byte) ((0 << 5 | index & 0x1F) & 0xFF), (byte) value };
+        return new byte[] { (byte) ((index & 0x1F) & 0xFF), (byte) value };
     }
 }

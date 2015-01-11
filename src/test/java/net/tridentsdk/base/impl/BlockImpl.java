@@ -19,10 +19,10 @@ package net.tridentsdk.base.impl;
 
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.util.Vector;
 
-public class TileImpl implements Tile {
+public class BlockImpl implements Block {
     private Substance substance = Substance.ACACIA_STAIRS;
     private byte meta;
 
@@ -52,7 +52,7 @@ public class TileImpl implements Tile {
     }
 
     @Override
-    public Tile relativeTile(Vector vector) {
-        return new TileImpl();
+    public Block relativeTile(Vector vector) {
+        return new BlockImpl();
     }
 }

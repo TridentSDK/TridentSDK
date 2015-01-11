@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Event;
 
 /**
@@ -26,12 +26,12 @@ import net.tridentsdk.event.Event;
  * @author The TridentSDK Team
  */
 public abstract class BlockEvent extends Event {
-    private final Tile block;
+    private final Block block;
 
     /**
      * @param block the block associated with the event
      */
-    public BlockEvent(Tile block) {
+    public BlockEvent(Block block) {
         this(block, false);
     }
 
@@ -39,7 +39,7 @@ public abstract class BlockEvent extends Event {
      * @param block the block associated with the event
      * @param async if this event is asynchronous
      */
-    public BlockEvent(Tile block, boolean async) {
+    public BlockEvent(Block block, boolean async) {
         super(async);
         this.block = block;
     }
@@ -47,7 +47,7 @@ public abstract class BlockEvent extends Event {
     /**
      * @return return the block associated with the event
      */
-    public Tile getBlock() {
+    public Block getBlock() {
         return this.block;
     }
 }

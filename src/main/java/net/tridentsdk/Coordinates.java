@@ -18,7 +18,7 @@
 package net.tridentsdk;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.docs.PossiblyThreadSafe;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.World;
@@ -222,7 +222,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the tile occupying the coordinates of this location
      */
-    public Tile tile() {
+    public Block tile() {
         return world().tileAt(this);
     }
 

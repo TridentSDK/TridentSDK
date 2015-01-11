@@ -22,7 +22,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.plugin.cmd.CommandHandler;
-import net.tridentsdk.plugin.cmd.TridentConsole;
+import net.tridentsdk.plugin.cmd.Console;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 import org.slf4j.Logger;
@@ -36,13 +36,15 @@ import java.util.UUID;
  *
  * @author The TridentSDK Team
  */
-public interface Server extends TridentConsole {
+public interface Server {
     /**
      * Gets the port the server currently runs on
      *
      * @return the port the server runs on
      */
     int port();
+
+    Console console();
 
     /**
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
@@ -73,7 +75,7 @@ public interface Server extends TridentConsole {
     /**
      * Gets an inventory window
      *
-     * @param id the ID of the window to be searched
+     * @param id the ID of the window to be searche
      * @return the window with the ID
      */
     Window windowBy(int id);

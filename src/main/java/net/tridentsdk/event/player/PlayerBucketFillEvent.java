@@ -17,8 +17,8 @@
 
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.Tile;
-import net.tridentsdk.base.TileOrientation;
+import net.tridentsdk.base.Block;
+import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.block.BlockBreakEvent;
 import net.tridentsdk.window.inventory.Item;
@@ -29,7 +29,7 @@ import net.tridentsdk.window.inventory.Item;
  * @author The TridentSDK Team
  */
 public class PlayerBucketFillEvent extends BlockBreakEvent {
-    public PlayerBucketFillEvent(Player player, Tile block, TileOrientation blockFace, Item itemInHand) {
+    public PlayerBucketFillEvent(Player player, Block block, BlockOrientation blockFace, Item itemInHand) {
         super(player, block, blockFace, itemInHand);
     }
 }

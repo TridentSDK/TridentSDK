@@ -19,7 +19,7 @@ package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Instrument;
 import net.tridentsdk.base.Note;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -42,7 +42,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      * @param note       Note representing the sound being played
      * @param instrument Instrument of the Note
      */
-    public NotePlayEvent(Tile block, List<Player> players, Note note, Instrument instrument) {
+    public NotePlayEvent(Block block, List<Player> players, Note note, Instrument instrument) {
         super(block);
         this.players = players;
         this.note = note;

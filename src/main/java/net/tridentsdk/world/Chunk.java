@@ -17,7 +17,7 @@
 
 package net.tridentsdk.world;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 
 public interface Chunk {
     void generate();
@@ -30,7 +30,7 @@ public interface Chunk {
 
     World world();
 
-    Tile tileAt(int relX, int y, int relZ);
+    Block tileAt(int relX, int y, int relZ);
 
     ChunkSnapshot snapshot();
 }

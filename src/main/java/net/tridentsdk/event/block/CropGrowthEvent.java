@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 
 /**
  * Called when a crop grows <p/> <p>This is an umbrella event, do not listen to it</p>
@@ -28,7 +28,7 @@ public class CropGrowthEvent extends BlockGrowthEvent {
     /**
      * @param block Block which has grown
      */
-    public CropGrowthEvent(Tile block) {
+    public CropGrowthEvent(Block block) {
         super(block);
     }
 }

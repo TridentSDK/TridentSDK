@@ -18,7 +18,7 @@
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Orientation;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 
 /**
  * Called when a piston retracts
@@ -26,7 +26,7 @@ import net.tridentsdk.base.Tile;
  * @author The TridentSDK Team
  */
 public class PistonRetractEvent extends BlockPistonEvent {
-    public PistonRetractEvent(Tile block, Orientation direction, Tile influenced) {
+    public PistonRetractEvent(Block block, Orientation direction, Block influenced) {
         super(block, direction, true, influenced);
     }
 }

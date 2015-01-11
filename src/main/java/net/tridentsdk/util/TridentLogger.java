@@ -21,7 +21,7 @@ import com.google.common.collect.Iterators;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
-import net.tridentsdk.plugin.cmd.TridentConsole;
+import net.tridentsdk.plugin.cmd.Console;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
@@ -64,19 +64,19 @@ public final class TridentLogger {
     }
 
     public static void log(String item) {
-        getLogger().info(item + TridentConsole.RESET);
+        getLogger().info(item + Console.RESET);
     }
 
     public static void error(String message) {
-        getLogger().error(TridentConsole.RED + message + TridentConsole.RESET);
+        getLogger().error(Console.RED + message + Console.RESET);
     }
 
     public static void warn(String item) {
-        getLogger().warn(TridentConsole.YELLOW + item + TridentConsole.RESET);
+        getLogger().warn(Console.YELLOW + item + Console.RESET);
     }
 
     public static void success(String item) {
-        log(TridentConsole.GREEN + item);
+        log(Console.GREEN + item);
     }
 
     public static void error(Throwable throwable) {

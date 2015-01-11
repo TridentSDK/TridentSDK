@@ -27,28 +27,28 @@ import org.mockito.Mockito;
 
 import java.util.Set;
 
-public class TileSnapshotTest {
-    private final Tile tile = Mockito.mock(Tile.class);
+public class BlockSnapshotTest {
+    private final Block block = Mockito.mock(Block.class);
     private final Set<Projectile> projectiles = Sets.newHashSet(Mockito.mock(Projectile.class));
     private Substance substance = Substance.ACACIA_STAIRS;
 
     {
-        Mockito.when(tile.location()).thenReturn(Coordinates.create(new WorldImpl(), 0, 0, 0));
-        Mockito.when(tile.substance()).thenReturn(substance);
+        Mockito.when(block.location()).thenReturn(Coordinates.create(new WorldImpl(), 0, 0, 0));
+        Mockito.when(block.substance()).thenReturn(substance);
     }
 
     @Test
     public void create() {
-        Assert.assertNotNull(TileSnapshot.of(tile));
+        Assert.assertNotNull(BlockSnapshot.of(block));
     }
 
     @Test
     public void load() {
-        tile.setSubstance(Substance.BLAZE_ROD);
-        tile.setMeta((byte) 0x5F);
-        TileSnapshot.of(tile).load();
+        block.setSubstance(Substance.BLAZE_ROD);
+        block.setMeta((byte) 0x5F);
+        BlockSnapshot.of(block).load();
 
-        Assert.assertEquals(tile.substance(), Substance.ACACIA_STAIRS);
-        Assert.assertEquals(tile.meta(), 0);
+        Assert.assertEquals(block.substance(), Substance.ACACIA_STAIRS);
+        Assert.assertEquals(block.meta(), 0);
     }
 }

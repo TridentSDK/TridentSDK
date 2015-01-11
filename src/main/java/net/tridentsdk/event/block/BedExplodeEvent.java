@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -33,7 +33,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
      * @param block    Block associated with this event
      * @param strength Strength of the explosion
      */
-    public BedExplodeEvent(Tile block, float strength) {
+    public BedExplodeEvent(Block block, float strength) {
         super(block);
         this.strength = strength;
     }

@@ -17,24 +17,24 @@
 
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.TileOrientation;
+import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
 public class PlayerDigEvent extends PlayerEvent implements Cancellable {
-    private final TileOrientation face;
+    private final BlockOrientation face;
     private final short status;
 
     private boolean cancelled;
 
-    public PlayerDigEvent(Player player, TileOrientation face, short status) {
+    public PlayerDigEvent(Player player, BlockOrientation face, short status) {
         super(player);
 
         this.face = face;
         this.status = status;
     }
 
-    public TileOrientation getFace() {
+    public BlockOrientation getFace() {
         return this.face;
     }
 

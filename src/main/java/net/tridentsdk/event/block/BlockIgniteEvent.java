@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -33,7 +33,7 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
      * @param block Block associated with this event
      * @param cause Cause of this event
      */
-    public BlockIgniteEvent(Tile block, Cause cause) {
+    public BlockIgniteEvent(Block block, Cause cause) {
         super(block);
         this.cause = cause;
     }

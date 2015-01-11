@@ -20,7 +20,7 @@ package net.tridentsdk.base.impl;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.world.*;
 
@@ -60,7 +60,7 @@ public class WorldImpl implements World {
             }
 
             @Override
-            public Tile tileAt(int relX, int y, int relZ) {
+            public Block tileAt(int relX, int y, int relZ) {
                 return null;
             }
 
@@ -87,8 +87,8 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public Tile tileAt(Coordinates location) {
-        return new TileImpl();
+    public Block tileAt(Coordinates location) {
+        return new BlockImpl();
     }
 
     @Override
@@ -152,7 +152,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public int borderSize() {
+    public double borderSize() {
         return 0;
     }
 

@@ -25,7 +25,7 @@ import net.tridentsdk.util.Vector;
  *
  * @author The TridentSDK Team
  */
-public enum TileOrientation {
+public enum BlockOrientation {
     /**
      * Facing north
      */
@@ -76,11 +76,11 @@ public enum TileOrientation {
 
     private final Vector difference;
 
-    TileOrientation(Vector difference) {
+    BlockOrientation(Vector difference) {
         this.difference = difference;
     }
 
-    TileOrientation(TileOrientation face1, TileOrientation face2) {
+    BlockOrientation(BlockOrientation face1, BlockOrientation face2) {
         this.difference = face1.difference().add(face2.difference());
     }
 

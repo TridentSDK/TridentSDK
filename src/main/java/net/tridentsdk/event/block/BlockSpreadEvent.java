@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 
 /**
  * Called when a block spreads, like grass or mycelium
@@ -25,13 +25,13 @@ import net.tridentsdk.base.Tile;
  * @author The TridentSDK Team
  */
 public class BlockSpreadEvent extends BlockGrowthEvent {
-    private final Tile blockFrom;
+    private final Block blockFrom;
 
     /**
      * @param to   Block representing the location of the spread
      * @param from Block which represents the origin
      */
-    public BlockSpreadEvent(Tile to, Tile from) {
+    public BlockSpreadEvent(Block to, Block from) {
         super(to);
         this.blockFrom = from;
     }
@@ -41,7 +41,7 @@ public class BlockSpreadEvent extends BlockGrowthEvent {
      *
      * @return Block representing the origin of the spread
      */
-    public Tile getFrom() {
+    public Block getFrom() {
         return this.blockFrom;
     }
 }

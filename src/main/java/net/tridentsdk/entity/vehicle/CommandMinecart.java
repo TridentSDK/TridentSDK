@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.vehicle;
 
-import net.tridentsdk.base.TileSnapshot;
+import net.tridentsdk.base.BlockSnapshot;
 
 /**
  * Represents a Command Block Minecart
@@ -31,5 +31,5 @@ public interface CommandMinecart extends MinecartBase {
      *
      * @return the state of this Minecart's command block
      */
-    TileSnapshot getCommandBlockState();
+    BlockSnapshot getCommandBlockState();
 }

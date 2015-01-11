@@ -18,7 +18,7 @@
 package net.tridentsdk.event.block;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.docs.Volatile;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
@@ -36,7 +36,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
     private String[] contents;
     private boolean cancelled;
 
-    public SignChangeEvent(Tile block, Player editor, String... contents) {
+    public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
         this.editor = editor;
         this.contents = contents;

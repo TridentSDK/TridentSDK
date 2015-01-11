@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 
 /**
  * Represents a hanging entity
@@ -30,5 +30,5 @@ public interface Hanging extends Entity {
      *
      * @return the Block this entity was placed on
      */
-    Tile getHangingBlock();
+    Block getHangingBlock();
 }

@@ -48,8 +48,8 @@ public class CommandHandler {
 
             if (issuer instanceof Player) {
                 cmdData.getCommand().handlePlayer((Player) issuer, args, contents[0]);
-            } else if (issuer instanceof TridentConsole) {
-                cmdData.getCommand().handleConsole((TridentConsole) issuer, args, contents[0]);
+            } else if (issuer instanceof Console) {
+                cmdData.getCommand().handleConsole((Console) issuer, args, contents[0]);
             }
             cmdData.getCommand().handle(issuer, args, contents[0]);
 
@@ -58,8 +58,8 @@ public class CommandHandler {
                     CommandData command = entry.getValue();
                     if (issuer instanceof Player) {
                         command.getCommand().handlePlayer((Player) issuer, args, contents[0]);
-                    } else if (issuer instanceof TridentConsole) {
-                        command.getCommand().handleConsole((TridentConsole) issuer, args, contents[0]);
+                    } else if (issuer instanceof Console) {
+                        command.getCommand().handleConsole((Console) issuer, args, contents[0]);
                     }
                     command.getCommand().handle(issuer, args, contents[0]);
                 }

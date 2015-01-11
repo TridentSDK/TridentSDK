@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -27,7 +27,7 @@ import net.tridentsdk.event.Cancellable;
  */
 public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
     private final int strength;
-    private final Tile causer;
+    private final Block causer;
     private final Cause cause;
     private boolean cancelled;
 
@@ -37,7 +37,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
      * @param causer   Block which caused the redstone update
      * @param cause    Cause for the redstone update
      */
-    public BlockRedstoneEvent(Tile block, int strength, Tile causer, Cause cause) {
+    public BlockRedstoneEvent(Block block, int strength, Block causer, Cause cause) {
         super(block);
         this.strength = strength;
         this.causer = causer;
@@ -49,7 +49,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
      *
      * @return Block which caused the redstone updaye
      */
-    public Tile getCauser() {
+    public Block getCauser() {
         return this.causer;
     }
 

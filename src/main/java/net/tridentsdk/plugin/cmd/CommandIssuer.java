@@ -30,5 +30,5 @@ public interface CommandIssuer extends Messagable {
      *
      * @return the last command executed by commandissuer
      */
-    String getLastCommand();
+    String lastCommand();
 }

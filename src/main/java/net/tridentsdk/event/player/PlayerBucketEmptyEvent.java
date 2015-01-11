@@ -17,8 +17,8 @@
 
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.base.Tile;
-import net.tridentsdk.base.TileOrientation;
+import net.tridentsdk.base.Block;
+import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.block.BlockPlaceEvent;
 import net.tridentsdk.window.inventory.Item;
@@ -31,7 +31,7 @@ import net.tridentsdk.window.inventory.Item;
 public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
     private final Item blockInHand;
 
-    public PlayerBucketEmptyEvent(Player player, Tile block, Tile blockClicked, TileOrientation faceClicked, Item
+    public PlayerBucketEmptyEvent(Player player, Block block, Block blockClicked, BlockOrientation faceClicked, Item
             blockInHand) {
         super(player, block, blockClicked, faceClicked);
         this.blockInHand = blockInHand;

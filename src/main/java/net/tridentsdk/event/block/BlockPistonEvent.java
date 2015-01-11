@@ -19,7 +19,7 @@ package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Orientation;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.base.Tile;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -30,10 +30,10 @@ import net.tridentsdk.event.Cancellable;
 public abstract class BlockPistonEvent extends BlockEvent implements Cancellable {
     private final Orientation direction;
     private final boolean retract;
-    private final Tile influenced;
+    private final Block influenced;
     private boolean cancelled;
 
-    public BlockPistonEvent(Tile block, Orientation direction, boolean retract, Tile influenced) {
+    public BlockPistonEvent(Block block, Orientation direction, boolean retract, Block influenced) {
         super(block);
         this.direction = direction;
         this.retract = retract;
@@ -75,7 +75,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      *
      * @return the block being moved, may be null if air, or retracting from a block without this piston being sticky
      */
-    public Tile getInfluencedBlock() {
+    public Block getInfluencedBlock() {
         return this.influenced;
     }
 
