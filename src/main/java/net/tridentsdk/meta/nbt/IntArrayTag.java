@@ -37,7 +37,7 @@ public class IntArrayTag extends NBTTag {
     }
 
     /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#getType()
+     * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
     public TagType getType() {

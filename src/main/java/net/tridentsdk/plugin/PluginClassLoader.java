@@ -22,7 +22,6 @@ import net.tridentsdk.event.Listener;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.perf.FastClass;
 import net.tridentsdk.plugin.cmd.Command;
-import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;

@@ -214,7 +214,7 @@ public class Coordinates implements Cloneable {
      */
     public Coordinates relative(Vector vector) {
         return new Coordinates(this.world(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                      vector.getZ() + this.getZ(), this.yaw(), this.pitch());
+                vector.getZ() + this.getZ(), this.yaw(), this.pitch());
     }
 
     /**
@@ -253,7 +253,8 @@ public class Coordinates implements Cloneable {
      */
     public double distanceSquared(Coordinates location) {
         Preconditions.checkNotNull(location, "Location cannot be null.");
-        if (!this.world().equals(location.world())) return 0.0;
+        if (!this.world().equals(location.world()))
+            return 0.0;
         return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
                 square(this.getZ() - location.getZ());
     }
@@ -269,7 +270,8 @@ public class Coordinates implements Cloneable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Coordinates)) return false;
+        if (!(obj instanceof Coordinates))
+            return false;
         if (x != ((Coordinates) obj).x) {
             return false;
         } else if (y != ((Coordinates) obj).y) {

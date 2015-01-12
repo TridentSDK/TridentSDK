@@ -17,39 +17,62 @@
 
 package net.tridentsdk.meta;
 
-// TODO: JavaDoc
+/**
+ * This event occurs when a player clicks on a chat item
+ *
+ * @author The TridentSDK Team
+ */
 public class ClickEvent {
     private ClickAction action;
     private String value;
 
+    /**
+     * Sets the action that occurs when the player clicks the chat message
+     *
+     * @param action the action that occurs when the player clicks the chat
+     * @return the instance of the event
+     */
     public ClickEvent action(ClickAction action) {
-        this.setAction(action);
+        this.action = action;
 
         return this;
     }
 
+    /**
+     * Sets the value of the action when the player clicks the chat message
+     *
+     * @param value the value of the action that occurs when the player clicks the chat
+     * @return the instance of the event
+     */
     public ClickEvent value(String value) {
-        this.setValue(value);
+        this.value = value;
 
         return this;
     }
 
-    public ClickAction getAction() {
+    /**
+     * Obtains the action that occurs when the chat is clicked
+     *
+     * @return the action that occurs when the chat is clicked
+     */
+    public ClickAction action() {
         return action;
     }
 
-    public void setAction(ClickAction action) {
-        this.action = action;
-    }
-
-    public String getValue() {
+    /**
+     * Obtains the value of the action that occurs when the chat is clicked
+     *
+     * @return the value of the action that occurs when the chat is clicked
+     */
+    public String value() {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
+    /**
+     * An action that occurs when the player clicks on the chat message
+     *
+     * @author The TridentSDK Team
+     */
     public enum ClickAction {
         OPEN_URL,
         OPEN_FILE,

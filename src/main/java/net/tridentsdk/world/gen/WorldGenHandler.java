@@ -15,18 +15,30 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.docs;
+package net.tridentsdk.world.gen;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Target;
+import net.tridentsdk.world.ChunkLocation;
+import net.tridentsdk.world.World;
 
 /**
- * Marks that the class is thread safe. Similar to {@link javax.annotation.concurrent.ThreadSafe}. <p/> <p>Also marks
- * that inheriting classes are also thread safe.</p>
+ * Handles world generation
  *
  * @author The TridentSDK Team
  */
-@Documented @Target(ElementType.TYPE) @Inherited public @interface InheritThreadSafe {
+public class WorldGenHandler {
+    private final AbstractGenerator generator;
+
+    private WorldGenHandler(AbstractGenerator generator) {
+        this.generator = generator;
+    }
+
+    public static WorldGenHandler create(AbstractGenerator generator) {
+        return new WorldGenHandler(generator);
+    }
+
+    public void apply(World world, ChunkLocation corner1, ChunkLocation corner2) {
+        for (ChunkTile tile : generator.doGen(corner1, corner2)) {
+            tile.apply(world);
+        }
+    }
 }

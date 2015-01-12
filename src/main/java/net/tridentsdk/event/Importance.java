@@ -17,11 +17,12 @@
 
 package net.tridentsdk.event;
 
+/*
+ * Levels of priority an event is given, where the events fire from LOWEST to HIGHEST
+ *
+ * @author The TridentSDK Team
+ */
 public enum Importance {
-    /*
-     * Levels of priority an event is given, where the events fire from LOWEST to HIGHEST
-     */
-
     LOWEST(0), LOW(1), MEDIUM(2), HIGH(3), HIGHEST(4);
 
     private final int importance;
@@ -31,10 +32,9 @@ public enum Importance {
     }
 
     /**
-     * @return return the importance level
+     * @return the importance level
      */
-
-    public int getImportance() {
+    public int importance() {
         return this.importance;
     }
 }

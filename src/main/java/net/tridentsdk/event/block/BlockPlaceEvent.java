@@ -17,9 +17,9 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.BlockOrientation;
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -63,7 +63,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * @return Material of the placed block
      */
     public Substance getTypePlaced() {
-        return this.getBlock().substance();
+        return this.block().substance();
     }
 
     @Override

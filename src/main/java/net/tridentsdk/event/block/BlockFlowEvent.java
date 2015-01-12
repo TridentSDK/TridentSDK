@@ -53,7 +53,7 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
      * @return Block where the liquid is flowing from
      */
     public Block getFrom() {
-        return super.getBlock();
+        return super.block();
     }
 
     @Override

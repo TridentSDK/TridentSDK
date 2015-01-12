@@ -26,7 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @param <V> the value type of the latch
  */
-@ThreadSafe public class HeldValueLatch<V> {
+@ThreadSafe
+public class HeldValueLatch<V> {
     private final CountDownLatch latch = new CountDownLatch(1);
     private final AtomicReference<V> value = new AtomicReference<>();
 

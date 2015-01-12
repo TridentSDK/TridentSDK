@@ -15,33 +15,18 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.projectile;
+package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.living.ProjectileLauncher;
+import net.tridentsdk.Messagable;
 
-/**
- * Represents a Projectile
- *
- * @author TridentSDK Team
- */
-public interface Projectile extends Entity {
-    /**
-     * Performs hit action
-     */
-    void doHit();
-
-    /**
-     * The projectile source
-     *
-     * @return gets the source of the projectile
-     */
-    ProjectileLauncher getLauncher();
-
-    /**
-     * Returns the shooter of the Projectile
-     *
-     * @param shooter the ProjectileSource of the Projectile
-     */
-    void setLauncher(ProjectileLauncher shooter);
+public interface ServerConsole extends Messagable, CommandIssuer {
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
 }

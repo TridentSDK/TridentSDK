@@ -18,8 +18,8 @@
 package net.tridentsdk.base.impl;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.Substance;
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.util.Vector;
 
 public class BlockImpl implements Block {
@@ -52,7 +52,7 @@ public class BlockImpl implements Block {
     }
 
     @Override
-    public Block relativeTile(Vector vector) {
+    public Block relativeBlock(Vector vector) {
         return new BlockImpl();
     }
 }

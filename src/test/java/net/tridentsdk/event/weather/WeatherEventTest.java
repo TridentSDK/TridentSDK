@@ -25,7 +25,7 @@ public class WeatherEventTest {
     @Test
     public void testGetWorld() throws Exception {
         WeatherEvent event = new WeatherEvent(null);
-        Assert.assertEquals(event.getWorld(), null);
+        Assert.assertEquals(event.world(), null);
     }
 
     @Test

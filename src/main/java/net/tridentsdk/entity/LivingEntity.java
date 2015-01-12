@@ -42,7 +42,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return double health of the Entity
      */
-    double getHealth();
+    double health();
 
     /**
      * Sets the health of the Entity
@@ -56,11 +56,12 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return double maximum health of the Entity
      */
-    double getMaxHealth();
+    double maxHealth();
 
     /**
-     * Sets the maximum health of the Entity <p/> <p>maxHealth cannot be above the current health of the Entity</p>
-     * TODO: Rephrase?
+     * Sets the maximum health of the Entity
+     *
+     * <p>maxHealth cannot be above the current health of the Entity</p>
      *
      * @param maxHealth maximum health of the Entity
      */
@@ -71,7 +72,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return long remaining amount of air in ticks
      */
-    long getRemainingAir();
+    long remainingAir();
 
     /**
      * Sets the amount of remaining air for the LivingAir
@@ -86,28 +87,28 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * @return String the display name for the Entity
      */
     @Override
-    String getDisplayName();
+    String displayName();
 
     /**
      * Returns the location of the Entity's eye
      *
      * @return Location the location of the Entity's eye
      */
-    Coordinates getEyeLocation();
+    Coordinates headLocation();
 
     /**
      * Returns if the Entity can pickup items
      *
      * @return true if the Entity can pickup items
      */
-    boolean canPickupItems();
+    boolean canCollectItems();
 
     /**
      * Returns the last EntityDamageEvent which inflicted this Entity <p/> <p>The event may be cancelled.</p>
      *
      * @return EntityDamageEvent the last Entity to inflict this Entity
      */
-    EntityDamageEvent getLastDamageCause();
+    EntityDamageEvent lastDamageEvent();
 
     /**
      * Returns the player who dealt damage to this Entity since its last full heal <p>Used for death messages</p>
@@ -115,7 +116,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * @return Player the player who dealt damage to this entity since last full heal Returns null if no player has
      * damaged the Entity
      */
-    Player hurtByPlayer();
+    Player lastPlayerDamager();
 
     /**
      * Checks if the entity has died, or has 0 health. Should only apply to entities that are {@code instanceof} {@link

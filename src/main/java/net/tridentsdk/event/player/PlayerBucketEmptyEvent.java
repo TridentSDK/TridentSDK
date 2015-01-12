@@ -31,8 +31,8 @@ import net.tridentsdk.window.inventory.Item;
 public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
     private final Item blockInHand;
 
-    public PlayerBucketEmptyEvent(Player player, Block block, Block blockClicked, BlockOrientation faceClicked, Item
-            blockInHand) {
+    public PlayerBucketEmptyEvent(Player player, Block block, Block blockClicked, BlockOrientation faceClicked,
+            Item blockInHand) {
         super(player, block, blockClicked, faceClicked);
         this.blockInHand = blockInHand;
     }

@@ -33,7 +33,7 @@ class EventReflector implements Comparator<EventReflector> {
     private final Importance importance;
 
     EventReflector(MethodAccess handle, TridentPlugin plugin, int index, Listener instance,
-                   Class<? extends Event> eventClass, Importance importance) {
+            Class<? extends Event> eventClass, Importance importance) {
         this.handle = handle;
         this.plugin = plugin;
         this.index = index;

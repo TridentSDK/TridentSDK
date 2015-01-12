@@ -20,7 +20,7 @@ package net.tridentsdk.base;
 import com.google.common.collect.Sets;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.base.impl.WorldImpl;
-import net.tridentsdk.entity.projectile.Projectile;
+import net.tridentsdk.entity.Projectile;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

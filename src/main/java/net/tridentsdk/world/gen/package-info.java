@@ -14,31 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package net.tridentsdk.event.player;
-
-import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.event.Event;
-
 /**
- * Called when an event relating to a player occurs <p/> <p>This is an umbrella event, do not listen to it</p>
- *
- * @author The TridentSDK Team
+ * World generation API, used to set block locations for the chunk
  */
-public class PlayerEvent extends Event {
-    private final Player player;
 
-    /**
-     * @param player the player associated with the event
-     */
-    public PlayerEvent(Player player) {
-        this.player = player;
-    }
-
-    /**
-     * @return return the player associated with the event
-     */
-    public final Player player() {
-        return this.player;
-    }
-}
+package net.tridentsdk.world.gen;

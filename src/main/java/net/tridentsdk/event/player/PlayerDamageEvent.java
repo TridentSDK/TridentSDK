@@ -36,6 +36,6 @@ public class PlayerDamageEvent extends EntityDamageEvent {
     }
 
     public Player getPlayer() {
-        return (Player) super.getEntity();
+        return (Player) super.entity();
     }
 }

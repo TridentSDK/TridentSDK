@@ -72,7 +72,7 @@ public final class NibbleArray {
 
     public void setRaw(byte[] source) {
         Preconditions.checkArgument(data.length == source.length,
-                                    "Byte array length must be the same as current size!");
+                "Byte array length must be the same as current size!");
         System.arraycopy(source, 0, data, 0, source.length);
     }
 }

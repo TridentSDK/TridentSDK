@@ -17,9 +17,9 @@
 
 package net.tridentsdk.event.block;
 
+import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Orientation;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -80,7 +80,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
     }
 
     public boolean isSticky() {
-        return this.getBlock().substance() == Substance.PISTON_STICKY_BASE;
+        return this.block().substance() == Substance.PISTON_STICKY_BASE;
     }
 
     @Override

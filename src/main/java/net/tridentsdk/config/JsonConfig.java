@@ -24,7 +24,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import net.tridentsdk.util.TridentLogger;
 
-import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
 import java.io.IOException;
@@ -78,7 +77,7 @@ public class JsonConfig extends ConfigSection {
         }
 
         try {
-            Files.write(this.path, GsonFactory.getGson().toJson(object).getBytes(Charsets.UTF_8),
+            Files.write(this.path, GsonFactory.gson().toJson(object).getBytes(Charsets.UTF_8),
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
             TridentLogger.error(ex);

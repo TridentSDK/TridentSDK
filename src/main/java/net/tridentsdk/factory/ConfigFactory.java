@@ -84,7 +84,8 @@ public class ConfigFactory {
         return new JsonSectionImpl(parent, obj);
     }
 
-    @AccessNoDoc private final class JsonSectionImpl extends ConfigSection {
+    @AccessNoDoc
+    private final class JsonSectionImpl extends ConfigSection {
         public JsonSectionImpl() {
             super();
         }

@@ -69,8 +69,7 @@ public class DisplayInfo {
     public BufferedImage motdPictureImage() {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File(
-                    Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION)));
+            img = ImageIO.read(new File(Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION)));
         } catch (IOException ex) {
             TridentLogger.error(ex);
         }

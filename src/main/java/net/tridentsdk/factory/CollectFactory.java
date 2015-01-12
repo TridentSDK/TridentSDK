@@ -29,7 +29,8 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author The TridentSDK Team
  */
-@ThreadSafe public abstract class CollectFactory {
+@ThreadSafe
+public abstract class CollectFactory {
     /**
      * Creates a netty ConcurrentHashMapV8 to provide the fastest platform map
      *

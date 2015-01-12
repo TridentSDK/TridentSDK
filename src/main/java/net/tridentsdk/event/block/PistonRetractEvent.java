@@ -17,8 +17,8 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.Orientation;
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Orientation;
 
 /**
  * Called when a piston retracts

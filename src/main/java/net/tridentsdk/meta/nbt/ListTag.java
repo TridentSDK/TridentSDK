@@ -65,7 +65,7 @@ public class ListTag extends NBTTag implements TagContainer {
     }
 
     /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#getType()
+     * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
     public TagType getType() {

@@ -22,9 +22,11 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.plugin.cmd.CommandHandler;
-import net.tridentsdk.plugin.cmd.Console;
+import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
+import net.tridentsdk.world.WorldLoader;
+import net.tridentsdk.world.gen.AbstractGenerator;
 import org.slf4j.Logger;
 
 import java.net.InetAddress;
@@ -44,7 +46,12 @@ public interface Server {
      */
     int port();
 
-    Console console();
+    /**
+     * The server's console
+     *
+     * @return the server console
+     */
+    ServerConsole console();
 
     /**
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
@@ -57,6 +64,14 @@ public interface Server {
      * @return a Map of all the worlds, where the String is the world name
      */
     Map<String, World> worlds();
+
+    /**
+     * Creates a new world loader, which can use its own generator
+     *
+     * @param generator the generator to use
+     * @return the new world loader
+     */
+    WorldLoader newWorldLoader(AbstractGenerator generator);
 
     /**
      * Gets the Internet Address of this server
@@ -114,7 +129,7 @@ public interface Server {
      *
      * @return the display information manager
      */
-    DisplayInfo getInfo();
+    DisplayInfo info();
 
     /**
      * Gets the server's console logger for the this class

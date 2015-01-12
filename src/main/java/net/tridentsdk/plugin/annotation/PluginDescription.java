@@ -22,7 +22,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME) @Target(ElementType.TYPE) public @interface PluginDescription {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface PluginDescription {
     // TODO: Provide documentation on what this priority actually is
     int priority() default 1;
 

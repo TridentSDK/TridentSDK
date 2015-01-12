@@ -17,29 +17,12 @@
 
 package net.tridentsdk.event;
 
-import net.tridentsdk.docs.InheritThreadSafe;
-
 /**
- * Represents an event that could be listened by the plugin listeners <p/> <p>All events are thread safe, their
- * visibility is required as the plugin threads that </p>
+ * Represents an event that could be listened by the plugin listeners
+ *
+ * <p>All events are thread safe, their visibility is required as the plugin threads that </p>
  *
  * @author The TridentSDK Team
  */
-@InheritThreadSafe public abstract class Event {
-    private final boolean isAsync;
-
-    public Event() {
-        this(false);
-    }
-
-    public Event(boolean async) {
-        this.isAsync = async;
-    }
-
-    /**
-     * @return return true if Event is asynchronous
-     */
-    public boolean isAsync() {
-        return this.isAsync;
-    }
+public abstract class Event {
 }

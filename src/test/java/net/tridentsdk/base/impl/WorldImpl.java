@@ -107,6 +107,11 @@ public class WorldImpl implements World {
     }
 
     @Override
+    public WorldLoader loader() {
+        return null;
+    }
+
+    @Override
     public LevelType levelType() {
         return null;
     }

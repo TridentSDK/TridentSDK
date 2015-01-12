@@ -31,7 +31,7 @@ public final class NBTSerializer {
         }
 
         FastClass cls = FastClass.get(clzz);
-        T instance = cls.getConstructor().newInstance();
+        T instance = cls.constructor().newInstance();
 
         return deserialize(instance, tag);
     }
@@ -43,7 +43,7 @@ public final class NBTSerializer {
 
         FastClass cls = FastClass.get(instance.getClass());
 
-        for (FastField field : cls.getFields()) {
+        for (FastField field : cls.fields()) {
             Field f = field.toField();
 
             if (!f.isAnnotationPresent(NBTField.class)) {
@@ -125,7 +125,7 @@ public final class NBTSerializer {
         FastClass cls = FastClass.get(serializable.getClass());
         CompoundTagBuilder<NBTBuilder> builder = NBTBuilder.newBase(name);
 
-        for (FastField field : cls.getFields()) {
+        for (FastField field : cls.fields()) {
             Field f = field.toField();
 
             if (!f.isAnnotationPresent(NBTField.class)) {

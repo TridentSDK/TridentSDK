@@ -22,7 +22,7 @@ import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.EntityProperties;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.entity.projectile.Projectile;
+import net.tridentsdk.entity.Projectile;
 import net.tridentsdk.event.entity.EntityDamageEvent;
 
 public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> implements LivingEntity {
@@ -44,8 +44,8 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public double getHealth() {
-        return entity.getHealth();
+    public double health() {
+        return entity.health();
     }
 
     @Override
@@ -54,8 +54,8 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public double getMaxHealth() {
-        return entity.getMaxHealth();
+    public double maxHealth() {
+        return entity.maxHealth();
     }
 
     @Override
@@ -64,8 +64,8 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public long getRemainingAir() {
-        return entity.getRemainingAir();
+    public long remainingAir() {
+        return entity.remainingAir();
     }
 
     @Override
@@ -74,23 +74,23 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public Coordinates getEyeLocation() {
-        return entity.getEyeLocation();
+    public Coordinates headLocation() {
+        return entity.headLocation();
     }
 
     @Override
-    public boolean canPickupItems() {
-        return entity.canPickupItems();
+    public boolean canCollectItems() {
+        return entity.canCollectItems();
     }
 
     @Override
-    public EntityDamageEvent getLastDamageCause() {
-        return entity.getLastDamageCause();
+    public EntityDamageEvent lastDamageEvent() {
+        return entity.lastDamageEvent();
     }
 
     @Override
-    public Player hurtByPlayer() {
-        return entity.hurtByPlayer();
+    public Player lastPlayerDamager() {
+        return entity.lastPlayerDamager();
     }
 
     @Override

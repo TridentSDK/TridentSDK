@@ -22,9 +22,11 @@ import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.GuardedBy;
-import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -36,17 +38,20 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public class ConfigList<V> implements List<V>{
+public class ConfigList<V> implements List<V> {
     private static final long serialVersionUID = -7535821700183585211L;
 
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    protected final Lock write = lock.writeLock();
     private final Lock read = lock.readLock();
-    private final Lock write = lock.writeLock();
-
-    @GuardedBy("lock") private final Node<V> head = new Node<>(null, null, null);
-    @GuardedBy("lock") private final Node<V> tail = head;
-    @GuardedBy("write") JsonArray jsonHandle;
-    @GuardedBy("lock") private int size = 0;
+    @GuardedBy("lock")
+    private final Node<V> head = new Node<>(null, null, null);
+    @GuardedBy("lock")
+    private final Node<V> tail = head;
+    @GuardedBy("write")
+    JsonArray jsonHandle;
+    @GuardedBy("lock")
+    private int size = 0;
 
     /**
      * Creates a new linked list for the JSON config serializable
@@ -78,7 +83,6 @@ public class ConfigList<V> implements List<V>{
         read.unlock();
         write.unlock();
     }
-
 
     private void checkElementIndex(int index) {
         int size = this.size;
@@ -142,7 +146,7 @@ public class ConfigList<V> implements List<V>{
             tail.next = new Node<>(element, null, tail);
             size += 1;
 
-            this.jsonHandle.add(GsonFactory.getGson().toJsonTree(element));
+            this.jsonHandle.add(GsonFactory.gson().toJsonTree(element));
         } finally {
             write.unlock();
         }
@@ -160,7 +164,7 @@ public class ConfigList<V> implements List<V>{
                 tail.next = new Node<>(element, null, tail);
                 size += 1;
 
-                this.jsonHandle.add(GsonFactory.getGson().toJsonTree(element));
+                this.jsonHandle.add(GsonFactory.gson().toJsonTree(element));
             }
         } finally {
             write.unlock();
@@ -188,7 +192,7 @@ public class ConfigList<V> implements List<V>{
 
         write.lock();
         try {
-            this.jsonHandle.set(index, GsonFactory.getGson().toJsonTree(element));
+            this.jsonHandle.set(index, GsonFactory.gson().toJsonTree(element));
             node.value = element;
         } finally {
             write.unlock();
@@ -436,9 +440,12 @@ public class ConfigList<V> implements List<V>{
 
     @AccessNoDoc
     private class Node<V> {
-        @GuardedBy("lock") V value;
-        @GuardedBy("lock") Node<V> next;
-        @GuardedBy("lock") Node<V> prev;
+        @GuardedBy("lock")
+        V value;
+        @GuardedBy("lock")
+        Node<V> next;
+        @GuardedBy("lock")
+        Node<V> prev;
 
         private Node(V value, Node<V> next, Node<V> prev) {
             this.value = value;

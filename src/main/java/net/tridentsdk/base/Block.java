@@ -67,5 +67,5 @@ public interface Block {
      * @param vector the direction to look for the block adjacent to the current
      * @return the block adjacent to the current
      */
-    public Block relativeTile(Vector vector);
+    public Block relativeBlock(Vector vector);
 }

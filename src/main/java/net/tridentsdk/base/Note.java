@@ -26,7 +26,7 @@ import javax.annotation.concurrent.Immutable;
  *
  * @author The TridentSDK Team
  */
-@Immutable 
+@Immutable
 public class Note {
     private final short id;
 

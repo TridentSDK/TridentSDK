@@ -21,31 +21,66 @@ import com.google.common.collect.Iterators;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
-import net.tridentsdk.plugin.cmd.Console;
+import net.tridentsdk.plugin.cmd.ServerConsole;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
-    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21",
-            "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.",
-            "Huston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " +
-            "this isn't a bug, it's a feature!" };
+    private static final String[] ERRORS = {
+            "Aw, Mazen! Really?",
+            "I feel funny",
+            "9 + 10 does not equal 21",
+            "Dang",
+            "Tony Abbot, the fax didn't go through",
+            "This wasn't supposed to happen. It did anyways.",
+            "Huston, we have a problem",
+            "Oh great, a stacktrace. Can't we write good software for once?",
+            "Trust me " + "this isn't a bug, it's a feature!" };
 
     private TridentLogger() {
     }
 
     @InternalUseOnly
     public static void init() {
-        ConsoleAppender console = new ConsoleAppender(); //create appender
         String PATTERN = "%d{dd MMM HH:mm} [%p] %m%n";
+
+        ConsoleAppender console = new ConsoleAppender(); //create appender
         console.setLayout(new PatternLayout(PATTERN));
         console.setThreshold(Level.INFO);
         console.activateOptions();
 
         Logger.getRootLogger().addAppender(console);
+
+        // We will copy the current log to the logs directory to prevent the file
+        // from destroying the text editor if it needs to be opened after a week
+        // of continuous errors
+        Path logs = Trident.fileContainer().resolve("logs");
+        Path path = Trident.fileContainer().resolve("trident.log");
+        try {
+            if (Files.exists(path)) {
+                if (!Files.exists(logs))
+                    Files.createDirectory(logs);
+
+                File[] list = logs.toFile().listFiles();
+                if (list.length == 0)
+                    copyLog(path, logs, 0);
+                else copyLog(path, logs, list.length);
+
+                Files.delete(path);
+            }
+        } catch (IOException e) {
+            // Well we can't really do anything about it :/
+            e.printStackTrace();
+        }
 
         FileAppender fa = new FileAppender();
 
@@ -59,77 +94,84 @@ public final class TridentLogger {
         Logger.getRootLogger().addAppender(fa);
     }
 
-    public static org.slf4j.Logger getLogger() {
-        return LoggerFactory.getLogger(Trident.getCaller(4));
+    private static void copyLog(Path original, Path directory, int index) throws IOException {
+        Path newPath = directory.resolve("old." + index + ".log");
+        Files.copy(original, newPath);
+    }
+
+    public static org.slf4j.Logger logger() {
+        return LoggerFactory.getLogger(Trident.findCaller(4));
     }
 
     public static void log(String item) {
-        getLogger().info(item + Console.RESET);
+        logger().info(item + ServerConsole.RESET);
     }
 
     public static void error(String message) {
-        getLogger().error(Console.RED + message + Console.RESET);
+        logger().error(ServerConsole.RED + message + ServerConsole.RESET);
     }
 
     public static void warn(String item) {
-        getLogger().warn(Console.YELLOW + item + Console.RESET);
+        logger().warn(ServerConsole.YELLOW + item + ServerConsole.RESET);
     }
 
     public static void success(String item) {
-        log(Console.GREEN + item);
+        log(ServerConsole.GREEN + item);
     }
 
     public static void error(Throwable throwable) {
-        getLogger().error("========  BEGIN ERROR =========");
+        org.slf4j.Logger logger = logger();
 
-        getLogger().error("");
+        logger.error("========  BEGIN ERROR =========");
+
+        logger.error("");
 
         Random rand = new Random();
         int randomNum = rand.nextInt((ERRORS.length - 1) + 1);
 
         String errorMessage = throwable.getMessage();
 
-        if(errorMessage == null || errorMessage.equals("null")){
+        if (errorMessage == null || errorMessage.equals("null")) {
             errorMessage = throwable.getClass().getSimpleName();
         }
 
-        getLogger().error(ERRORS[randomNum]);
-        getLogger().error("");
-        getLogger().error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
-        getLogger().error("");
-        getLogger().error("======== Generating Debug Information =========");
+        logger.error(ERRORS[randomNum]);
+        logger.error("");
+        logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
+        logger.error("");
+        logger.error("======== Generating Debug Information =========");
         StackTraceElement main = throwable.getStackTrace()[0];
-        getLogger().error("Class:  " + main.getClassName());
-        getLogger().error("Method: " + main.getMethodName());
-        getLogger().error("Line:   " + (main.getLineNumber() > 0 ? main.getLineNumber() : "Native method"));
-        getLogger().error("========   Ending Debug Information   =========");
+        logger.error("Class:  " + main.getClassName());
+        logger.error("Method: " + main.getMethodName());
+        logger.error("Line:   " + (main.getLineNumber() > 0 ? main.getLineNumber() : "Native method"));
+        logger.error("========   Ending Debug Information   =========");
 
-        getLogger().error("");
+        logger.error("");
 
-        getLogger().error("======== Printing Stacktrace =========");
+        logger.error("======== Printing Stacktrace =========");
         for (StackTraceElement element : throwable.getStackTrace()) {
-            getLogger().error("    at " + element.getClassName() + "." +
-                                      element.getMethodName() + "(...) : " +
-                                      (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
+            logger.error("    at " + element.getClassName() + "." +
+                    element.getMethodName() + "(...) : " +
+                    (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
         }
-        getLogger().error("========  Ending Stacktrace  =========");
+        logger.error("========  Ending Stacktrace  =========");
 
-        getLogger().error("");
+        logger.error("");
 
-        getLogger().error("========     Server info    =========");
-        getLogger().error("Trident version: " + Trident.version());
-        getLogger().error("Plugins:         " + Iterators.toString(Trident.pluginHandler().getPlugins().iterator()));
-        getLogger().error("Java:            version " + System.getProperty("java.version") + " distributed by " +
-                                  System.getProperty("java.vendor"));
-        getLogger().error("OS:              running " +
-                                  System.getProperty("os.name") + " version " +
-                                  System.getProperty("os.version") + " " +
-                                  System.getProperty("os.arch"));
-        getLogger().error("======== Ending Server info =========");
+        logger.error("========     Server info    =========");
+        logger.error("Trident version: " + Trident.version());
+        logger.error("Plugins:         " + Iterators.toString(Trident.pluginHandler().getPlugins().iterator()));
+        logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +
+                System.getProperty("java.vendor"));
+        logger.error("OS:              running " +
+                System.getProperty("os.name") + " version " +
+                System.getProperty("os.version") + " " +
+                System.getProperty("os.arch"));
+        logger.error("======== Ending Server info =========");
 
-        getLogger().error("");
+        logger.error("");
 
-        getLogger().error("========      END ERROR     =========");
-        getLogger().error("");
+        logger.error("========      END ERROR     =========");
+        logger.error("");
     }
 }

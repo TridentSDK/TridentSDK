@@ -25,8 +25,10 @@ import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.annotation.PluginDescription;
+import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,13 +36,12 @@ import java.nio.file.Files;
 
 public class TridentPlugin {
     private static final HashFunction HASHER = Hashing.murmur3_32();
-
-    PluginClassLoader classLoader;
     private final File pluginFile;
     private final File configDirectory;
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
     private final HeldValueLatch<TaskExecutor> executor = HeldValueLatch.create();
+    PluginClassLoader classLoader;
 
     protected TridentPlugin() {
         this.pluginFile = null;
@@ -51,7 +52,7 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for (TridentPlugin plugin : Trident.getServer().pluginHandler().getPlugins()) {
+        for (TridentPlugin plugin : Trident.pluginHandler().getPlugins()) {
             if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
                 TridentLogger.error(new IllegalStateException(
                         "Plugin already initialized or plugin with this name already exists! " +
@@ -66,8 +67,17 @@ public class TridentPlugin {
         this.classLoader = loader;
     }
 
-    public static TridentPlugin getInstance() {
-        Class<?> caller = Trident.getCaller(3);
+    /**
+     * Obtains the instance of the plugin which the caller class is in
+     *
+     * <p>Returns {@code null} if the plugin has not been loaded yet, or if the class is not a plugin loaded on the
+     * server.</p>
+     *
+     * @return the instance of the plugin
+     */
+    @Nullable
+    public static TridentPlugin instance() {
+        Class<?> caller = Trident.findCaller(3);
         ClassLoader loader = caller.getClassLoader();
         for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
             if (plugin.getClass().getClassLoader().equals(loader))
@@ -75,6 +85,16 @@ public class TridentPlugin {
         return null;
     }
 
+    /**
+     * Obtains the instance of the plugin which has the specified main class
+     *
+     * <p>Returns {@code null} if the plugin has not been loaded yet, or if the class is not a plugin loaded on the
+     * server.</p>
+     *
+     * @param c the main class of the plugin to obtain the instance of
+     * @return the instance of the plugin with the specified main class
+     */
+    @Nullable
     public static TridentPlugin getInstance(Class<? extends TridentPlugin> c) {
         ClassLoader loader = c.getClassLoader();
         for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
@@ -83,14 +103,23 @@ public class TridentPlugin {
         return null;
     }
 
-    public void onEnable() {
-        // Method intentionally left blank
-    }
-
+    /**
+     * Called by the handler to indicate the plugin has been constructed
+     */
     public void onLoad() {
         // Method intentionally left blank
     }
 
+    /**
+     * Called by the handler to indicate the enabling of this plugin
+     */
+    public void onEnable() {
+        // Method intentionally left blank
+    }
+
+    /**
+     * Called by the handler to indicate the disabling of this plugin
+     */
     public void onDisable() {
         // Method intentionally left blank
     }
@@ -100,14 +129,41 @@ public class TridentPlugin {
         this.executor.countDown(executor);
     }
 
-    public Listener instanceOf(Class<? extends Listener> c) {
+    /**
+     * Obtains the listener instance with the class specified
+     *
+     * @param c the class to find the listener instance by
+     * @return the listener instance registered to the server
+     */
+    public Listener listenerBy(Class<? extends Listener> c) {
         return Trident.eventHandler().listenersFor(this).get(c);
     }
 
+    /**
+     * Obtains the command instance with the class specified
+     *
+     * @param c the class to find the command instance by
+     * @return the command instance registered to the server
+     */
+    public Command commandBy(Class<? extends Command> c) {
+        return Trident.commandHandler().commandsFor(this).get(c);
+    }
+
+    /**
+     * Saves the configuration inside the jar to the plugin directory
+     *
+     * <p>If the configuration is already saved, this does not overwrite it.</p>
+     */
     public void saveDefaultConfig() {
         this.saveResource("config.json", false);
     }
 
+    /**
+     * Saves a resource inside the jar to the plugin directory
+     *
+     * @param name the filename of the directory
+     * @param replace whether or not replace the old resource, if it exists
+     */
     public void saveResource(String name, boolean replace) {
         try {
             InputStream is = this.getClass().getResourceAsStream('/' + name);
@@ -127,23 +183,51 @@ public class TridentPlugin {
         }
     }
 
-    public final File getFile() {
+    /**
+     * Obtains the file which this plugin was loaded from
+     *
+     * @return the file which the plugin is loaded from
+     */
+    public final File pluginFile() {
         return this.pluginFile;
     }
 
-    public JsonConfig getDefaultConfig() {
+    /**
+     * The default configuration for this plugin, which may or may not exist physically
+     *
+     * @return the default configuration given to this plugin
+     */
+    public JsonConfig defaultConfig() {
         return this.defaultConfig;
     }
 
-    public File getConfigDirectory() {
+    /**
+     * The plugin directory
+     *
+     * @return the plugin directory where resources like the default config are saved
+     */
+    public File configDirectory() {
         return this.configDirectory;
     }
 
+    /**
+     * Obtains the annotation given by this plugin
+     *
+     * @return the plugin descriptor for this plugin
+     */
     public final PluginDescription getDescription() {
         return this.description;
     }
 
-    public TaskExecutor getExecutor() {
+    /**
+     * Obtains the executor for this plugin
+     *
+     * <p>If threads are manipulated, this executor MUST be used to ensure that the data read is consistent with the
+     * plugin.</p>
+     *
+     * @return the executor which loaded this plugin
+     */
+    public TaskExecutor executor() {
         try {
             return executor.await();
         } catch (InterruptedException e) {

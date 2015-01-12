@@ -35,6 +35,6 @@ public class PlayerDeathEvent extends EntityDeathEvent {
     }
 
     public Player getPlayer() {
-        return (Player) super.getEntity();
+        return (Player) super.entity();
     }
 }

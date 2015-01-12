@@ -23,7 +23,6 @@ import com.google.gson.JsonObject;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.GuardedBy;
-import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -37,11 +36,12 @@ import java.util.List;
  */
 @ThreadSafe
 public class ConfigSection {
-    private final Object parentLock = new Object();
-    @GuardedBy("parentLock") ConfigSection parent;
-
     final Object handleLock = new Object();
-    @GuardedBy("handleLock") JsonObject jsonHandle;
+    private final Object parentLock = new Object();
+    @GuardedBy("parentLock")
+    ConfigSection parent;
+    @GuardedBy("handleLock")
+    JsonObject jsonHandle;
 
     /**
      * Instantiated by subclasses only
@@ -358,7 +358,7 @@ public class ConfigSection {
         } else {
             List<V> result = new ConfigList<>(array);
             for (JsonElement element : array) {
-                result.add(GsonFactory.getGson().fromJson(element, type));
+                result.add(GsonFactory.gson().fromJson(element, type));
             }
             return result;
         }
@@ -464,7 +464,7 @@ public class ConfigSection {
      */
     public <V> V getObject(String tag, Class<V> clazz) {
         synchronized (handleLock) {
-            return this.contains(tag) ? GsonFactory.getGson().fromJson(this.jsonHandle.get(tag), clazz) : null;
+            return this.contains(tag) ? GsonFactory.gson().fromJson(this.jsonHandle.get(tag), clazz) : null;
         }
     }
 
@@ -476,7 +476,7 @@ public class ConfigSection {
      */
     public void setObject(String tag, Object object) {
         synchronized (handleLock) {
-            this.jsonHandle.add(tag, GsonFactory.getGson().toJsonTree(object));
+            this.jsonHandle.add(tag, GsonFactory.gson().toJsonTree(object));
         }
     }
 

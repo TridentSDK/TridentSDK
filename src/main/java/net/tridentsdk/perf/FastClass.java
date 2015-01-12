@@ -68,7 +68,7 @@ public class FastClass {
      * @param name Name of the field
      * @return FastField instance
      */
-    public FastField getField(String name) {
+    public FastField fieldBy(String name) {
         return new FastField(this, this.fieldAccess, name);
     }
 
@@ -78,7 +78,7 @@ public class FastClass {
      * @param name Name of the method
      * @return FastMethod instance
      */
-    public FastMethod getMethod(Object object, String name) {
+    public FastMethod methodBy(Object object, String name) {
         return new FastMethod(object, this.methodAccess, name);
     }
 
@@ -87,7 +87,7 @@ public class FastClass {
      *
      * @return the fast field representation of field members from the class
      */
-    public FastField[] getFields() {
+    public FastField[] fields() {
         Field[] fields = this.cls.getDeclaredFields();
         FastField[] fastFields = new FastField[fields.length];
 
@@ -103,7 +103,7 @@ public class FastClass {
      *
      * @return the default FastConstructor
      */
-    public FastConstructor getConstructor() {
+    public FastConstructor constructor() {
         return new FastConstructor(this.constructorAccess);
     }
 

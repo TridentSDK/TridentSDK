@@ -27,7 +27,6 @@ import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
-import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
@@ -41,8 +40,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class TridentPluginHandler {
-    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY =
-            Factories.threads().executor(2, "Plugins");
+    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads()
+            .executor(2, "Plugins");
     private final List<TridentPlugin> plugins = Lists.newArrayList();
 
     @InternalUseOnly
@@ -61,7 +60,8 @@ public class TridentPluginHandler {
                     while (entries.hasMoreElements()) {
                         JarEntry entry = entries.nextElement();
 
-                        if (!entry.getName().endsWith(".class")) continue;
+                        if (!entry.getName().endsWith(".class"))
+                            continue;
                         loader.loadClass(entry.getName().replace('/', '.'));
                     }
 
@@ -92,27 +92,26 @@ public class TridentPluginHandler {
                         | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
                     TridentLogger.error(new PluginLoadException(ex));
                 } finally {
-                    if (jarFile != null) try {
-                        jarFile.close();
-                    } catch (IOException e) {
-                        TridentLogger.error(e);
-                    }
+                    if (jarFile != null)
+                        try {
+                            jarFile.close();
+                        } catch (IOException e) {
+                            TridentLogger.error(e);
+                        }
                 }
             }
         });
     }
 
-    private void register(TridentPlugin plugin, Class<?> cls, TaskExecutor executor)
-            throws InstantiationException, IllegalAccessException {
+    private void register(TridentPlugin plugin, Class<?> cls, TaskExecutor executor) throws InstantiationException,
+            IllegalAccessException {
         Object instance = null;
-        if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(
-                IgnoreRegistration.class)) {
-            Trident.getServer().eventHandler().registerListener(plugin, executor,
-                                                                   (Listener) (instance = cls.newInstance()));
+        if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
+            Trident.eventHandler().registerListener(plugin, executor, (Listener) (instance = cls.newInstance()));
         }
 
         if (Command.class.isAssignableFrom(cls)) {
-            Trident.commandHandler().addCommand((Command) (instance == null ? cls.newInstance() : instance));
+            Trident.commandHandler().addCommand(plugin, (Command) (instance == null ? cls.newInstance() : instance));
         }
     }
 

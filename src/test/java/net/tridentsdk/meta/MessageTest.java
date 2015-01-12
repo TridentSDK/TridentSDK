@@ -35,9 +35,8 @@ public class MessageTest {
             Assert.fail();
         }
 
-        Assert.assertEquals(message.asJson(),
-                            "{\"text\":\"Hello World\",\"color\":\"aqua\"," +
-                                    "\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"Click\"}," +
-                                    "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Hover\"}}");
+        Assert.assertEquals(message.asJson(), "{\"text\":\"Hello World\",\"color\":\"aqua\"," +
+                        "\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"Click\"}," +
+                        "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Hover\"}}");
     }
 }

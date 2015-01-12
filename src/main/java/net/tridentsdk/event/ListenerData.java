@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUNTIME) public @interface ListenerData {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ListenerData {
     Importance importance() default Importance.MEDIUM;
 }

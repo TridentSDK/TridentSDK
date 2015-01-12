@@ -19,11 +19,9 @@ package net.tridentsdk.config;
 
 import com.google.gson.JsonArray;
 
-import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Section of the config dedicated to storing values from a collection
@@ -32,10 +30,9 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @ThreadSafe
 public class ConfigSectionList<V> extends ConfigList<V> {
-    private static final long serialVersionUID = -5809487198383216782L;
     private final ConfigSection parent;
 
-    private final Lock lock = new ReentrantLock();
+    private final Lock lock = this.write;
 
     /**
      * Creates a new section list in the config

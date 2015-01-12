@@ -30,5 +30,4 @@ public class VillagerProfessionTest {
         Assert.assertEquals(VillagerProfession.BLACKSMITH.asInt(), 3);
         Assert.assertEquals(VillagerProfession.BUTCHER.asInt(), 4);
     }
-
 }

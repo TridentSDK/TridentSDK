@@ -44,7 +44,8 @@ import java.util.concurrent.PriorityBlockingQueue;
  *
  * @author The TridentSDK Team
  */
-@ThreadSafe public class EventHandler {
+@ThreadSafe
+public class EventHandler {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, null, 0, null, null, null);
     private static final Callable<EventHandler> CREATE_HANDLER = new Callable<EventHandler>() {
         @Override
@@ -53,9 +54,8 @@ import java.util.concurrent.PriorityBlockingQueue;
         }
     };
 
-    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> callers = Factories
-            .collect()
-            .createMap();
+    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> callers =
+            Factories.collect().createMap();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = Factories.collect().createCache();
 
     private final ConcurrentCache<TaskExecutor, EventHandler> handles = Factories.collect().createCache();
@@ -92,14 +92,15 @@ import java.util.concurrent.PriorityBlockingQueue;
 
         for (Class<? extends Event> eventClass : reflectors.keySet()) {
             PriorityBlockingQueue<EventReflector> eventCallers = callers.get(eventClass);
-            if (eventCallers == null) eventCallers = new PriorityBlockingQueue<>(128, COMPARATOR);
+            if (eventCallers == null)
+                eventCallers = new PriorityBlockingQueue<>(128, COMPARATOR);
             eventCallers.addAll(reflectors.get(eventClass));
             callers.put(eventClass, eventCallers);
         }
     }
 
-    private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin,
-                                                                                Listener listener, final Class<?> c) {
+    private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin, Listener listener,
+            final Class<?> c) {
         MethodAccess access = accessors.retrieve(c, new Callable<MethodAccess>() {
             @Override
             public MethodAccess call() throws Exception {
@@ -112,7 +113,7 @@ import java.util.concurrent.PriorityBlockingQueue;
         HashMultimap<Class<? extends Event>, EventReflector> map = HashMultimap.create(11, 11);
         for (int i = 0, n = methods.length; i < n; i++) {
             Method method = methods[i];
-            if(method.isAnnotationPresent(IgnoreRegistration.class)) {
+            if (method.isAnnotationPresent(IgnoreRegistration.class)) {
                 continue;
             }
             Class<?>[] parameterTypes = method.getParameterTypes();
@@ -138,7 +139,7 @@ import java.util.concurrent.PriorityBlockingQueue;
      *
      * @param event the event to call
      */
-    public void call(final Event event) {
+    public void fire(final Event event) {
         for (final Map.Entry<TaskExecutor, EventHandler> entry : handles.entries()) {
             entry.getKey().addTask(new Runnable() {
                 @Override
@@ -151,7 +152,8 @@ import java.util.concurrent.PriorityBlockingQueue;
 
     private void doCall(Event event) {
         Queue<EventReflector> listeners = callers.get(event.getClass());
-        if (listeners == null) return;
+        if (listeners == null)
+            return;
         for (EventReflector listener : listeners) {
             listener.reflect(event);
         }

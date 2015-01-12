@@ -17,42 +17,65 @@
 
 package net.tridentsdk.meta;
 
-// TODO: JavaDoc
+/**
+ * This even occurs when the player hovers the mouse over the chat message
+ *
+ * @author The TridentSDK Team
+ */
 public class HoverEvent {
     private HoverAction action;
     private String value;
 
+    /**
+     * Sets the action associated with the player hovers over the chat
+     *
+     * @param action the action to occur
+     * @return the instance of the event
+     */
     public HoverEvent action(HoverAction action) {
-        this.setAction(action);
+        this.action = action;
 
         return this;
     }
 
+    /**
+     * Sets the value associated with the player hovers over the chat
+     *
+     * @param value the action to occur
+     * @return the instance of the event
+     */
     public HoverEvent value(String value) {
-        this.setValue(value);
+        this.value = value;
 
         return this;
     }
 
-    public HoverAction getAction() {
+    /**
+     * Gets the action that occurs when the player hovers over the chat
+     *
+     * @return the action that occurs when the chat is hovered
+     */
+    public HoverAction action() {
         return action;
     }
 
-    public void setAction(HoverAction action) {
-        this.action = action;
-    }
-
-    public String getValue() {
+    /**
+     * Gets the value of the event player hovers over the chat
+     *
+     * @return the value of the event that occurs when the chat is hovered
+     */
+    public String value() {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
+    /**
+     * An action that occurs when the player hovers over the chat message
+     *
+     * @author The TridentSDK Team
+     */
     public enum HoverAction {
         SHOW_TEXT,
-        SHOW_ACHEIVEMENT,
+        SHOW_ACHIEVEMENT,
         SHOW_ITEM;
 
         @Override

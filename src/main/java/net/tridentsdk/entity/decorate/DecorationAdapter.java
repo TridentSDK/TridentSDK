@@ -71,18 +71,18 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public World getWorld() {
-        return entity.getWorld();
+    public World world() {
+        return entity.world();
     }
 
     @Override
-    public Coordinates getLocation() {
-        return entity.getLocation();
+    public Coordinates location() {
+        return entity.location();
     }
 
     @Override
-    public Vector getVelocity() {
-        return entity.getVelocity();
+    public Vector velocity() {
+        return entity.velocity();
     }
 
     @Override
@@ -91,23 +91,18 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public void tick() {
-        entity.tick();
+    public boolean onGround() {
+        return entity.onGround();
     }
 
     @Override
-    public boolean isOnGround() {
-        return entity.isOnGround();
+    public Set<Entity> withinRange(double radius) {
+        return entity.withinRange(radius);
     }
 
     @Override
-    public Set<Entity> getNearbyEntities(double radius) {
-        return entity.getNearbyEntities(radius);
-    }
-
-    @Override
-    public String getDisplayName() {
-        return entity.getDisplayName();
+    public String displayName() {
+        return entity.displayName();
     }
 
     @Override
@@ -126,13 +121,13 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public int getId() {
-        return entity.getId();
+    public int entityId() {
+        return entity.entityId();
     }
 
     @Override
-    public UUID getUniqueId() {
-        return entity.getUniqueId();
+    public UUID uniqueId() {
+        return entity.uniqueId();
     }
 
     @Override
@@ -141,8 +136,8 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public Entity getPassenger() {
-        return entity.getPassenger();
+    public Entity passenger() {
+        return entity.passenger();
     }
 
     @Override
@@ -156,8 +151,8 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public EntityType getType() {
-        return entity.getType();
+    public EntityType type() {
+        return entity.type();
     }
 
     @Override

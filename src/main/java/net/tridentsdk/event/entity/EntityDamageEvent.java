@@ -59,8 +59,8 @@ public class EntityDamageEvent extends EntityEvent {
     }
 
     @Override
-    public LivingEntity getEntity() {
-        return (LivingEntity) super.getEntity();
+    public LivingEntity entity() {
+        return (LivingEntity) super.entity();
     }
 
     @Override

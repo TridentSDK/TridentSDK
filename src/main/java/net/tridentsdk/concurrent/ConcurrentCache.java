@@ -37,7 +37,8 @@ import java.util.concurrent.ConcurrentMap;
  * @param <V> the value type
  * @author The TridentSDK Team
  */
-@ThreadSafe public class ConcurrentCache<K, V> {
+@ThreadSafe
+public class ConcurrentCache<K, V> {
     private final ConcurrentMap<K, HeldValueLatch<V>> cache = Factories.collect().createMap();
 
     private ConcurrentCache() {
@@ -94,7 +95,8 @@ import java.util.concurrent.ConcurrentMap;
     public V remove(K k) {
         HeldValueLatch<V> val = this.cache.get(k);
 
-        if (val == null) return null;
+        if (val == null)
+            return null;
 
         this.cache.remove(k);
         try {

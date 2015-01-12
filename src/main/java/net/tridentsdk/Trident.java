@@ -23,28 +23,28 @@ import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.plugin.cmd.CommandHandler;
+import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
+import net.tridentsdk.world.WorldLoader;
+import net.tridentsdk.world.gen.AbstractGenerator;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.io.File;
 import java.net.InetAddress;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 /**
- * Utility accessor to the {@link Server}
+ * Utility static accessor to the {@link Server}
  *
  * @author The TridentSDK Team
  */
 @ThreadSafe
 public final class Trident {
-    private static Server server;
     private static final ExposedSecurity SECURITY = new ExposedSecurity();
-    private static class ExposedSecurity extends SecurityManager {
-        @Override
-        protected Class[] getClassContext() {
-            return super.getClassContext();
-        }
-    }
+    private static Server server;
 
     private Trident() {
     }
@@ -54,7 +54,7 @@ public final class Trident {
      *
      * @return the server that is running
      */
-    public static Server getServer() {
+    public static Server instance() {
         return server;
     }
 
@@ -71,12 +71,21 @@ public final class Trident {
     }
 
     public static boolean isTrident() {
-        return getCaller(3).getClassLoader().equals(Trident.class.getClassLoader());
+        return findCaller(3).getClassLoader().equals(Trident.class.getClassLoader());
     }
 
     @InternalUseOnly
-    public static Class<?> getCaller(int index) {
+    public static Class<?> findCaller(int index) {
         return SECURITY.getClassContext()[index];
+    }
+
+    /**
+     * Returns the server's working directory, with the file spearator appended
+     *
+     * @return the server working directory
+     */
+    public static Path fileContainer() {
+        return Paths.get(System.getProperty("user.dir") + File.separator);
     }
 
     public static int port() {
@@ -89,6 +98,10 @@ public final class Trident {
 
     public static Map<String, World> worlds() {
         return server.worlds();
+    }
+
+    public static WorldLoader newWorldLoader(AbstractGenerator generator) {
+        return server.newWorldLoader(generator);
     }
 
     public static InetAddress serverIp() {
@@ -107,6 +120,10 @@ public final class Trident {
         server.sendPluginMessage(channel, data);
     }
 
+    public static ServerConsole console() {
+        return server.console();
+    }
+
     public static EventHandler eventHandler() {
         return server.eventHandler();
     }
@@ -121,5 +138,12 @@ public final class Trident {
 
     public static JsonConfig config() {
         return server.config();
+    }
+
+    private static class ExposedSecurity extends SecurityManager {
+        @Override
+        protected Class[] getClassContext() {
+            return super.getClassContext();
+        }
     }
 }

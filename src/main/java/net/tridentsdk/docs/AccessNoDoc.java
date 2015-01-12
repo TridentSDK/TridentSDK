@@ -24,12 +24,18 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation is for the use of documentation. This means that the access-level is not broad enough so that extra
- * documentation is needed. This should be annotated on classes that are less than {@code protected}, and not documented
- * <p/> <p>This annotation is inherited because only the classes that are subtypes of the non-documented classes have to
- * be within the same package (under protected) OR private (under protected), so they are also not documented.</p> <p/>
+ * documentation is needed. This should be annotated on classes that are less than {@code protected}, and not
+ * documented
+ *
+ * <p>This annotation is inherited because only the classes that are subtypes of the non-documented classes have
+ * to be within the same package (under protected) OR private (under protected), so they are also not documented.</p>
+ *
  * <p>This annotation doesn't do anything</p>
  *
  * @author The TridentSDK Team
  */
-@Documented @Target(ElementType.TYPE) @Inherited public @interface AccessNoDoc {
+@Documented
+@Target(ElementType.TYPE)
+@Inherited
+public @interface AccessNoDoc {
 }

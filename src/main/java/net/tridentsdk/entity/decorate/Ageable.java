@@ -40,7 +40,8 @@ public interface Ageable extends LivingEntity {
     void setAge(int ticks);
 
     /**
-     * Whether or not this entity can breed or not, where the ability to breed represents whether or not this entity can
+     * Whether or not this entity can breed or not, where the ability to breed represents whether or not this entity
+     * can
      * become "in love"
      *
      * @return whether or not this entity can be bred

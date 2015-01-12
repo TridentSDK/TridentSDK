@@ -17,9 +17,9 @@
 
 package net.tridentsdk.event.block;
 
+import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Instrument;
 import net.tridentsdk.base.Note;
-import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 

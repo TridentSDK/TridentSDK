@@ -22,16 +22,10 @@ import net.tridentsdk.event.Cancellable;
 import net.tridentsdk.event.Event;
 
 public class EntityEvent extends Event implements Cancellable {
-    private Entity entity;
-
-    private boolean cancelled;
+    private volatile Entity entity;
+    private volatile boolean cancelled;
 
     public EntityEvent(Entity entity) {
-        this(entity, false);
-    }
-
-    public EntityEvent(Entity entity, boolean async) {
-        super(async);
         this.setEntity(entity);
     }
 
@@ -39,7 +33,7 @@ public class EntityEvent extends Event implements Cancellable {
      * @return return entity associated with this event
      */
 
-    public Entity getEntity() {
+    public Entity entity() {
         return this.entity;
     }
 

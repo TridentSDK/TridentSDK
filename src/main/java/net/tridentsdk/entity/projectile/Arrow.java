@@ -17,6 +17,8 @@
 
 package net.tridentsdk.entity.projectile;
 
+import net.tridentsdk.entity.Projectile;
+
 /**
  * Represents an Arrow
  *

@@ -19,6 +19,11 @@ package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.Messagable;
 
+/**
+ * A server entity which can execute commands, which can be players or the console
+ *
+ * @author The TridentSDK Team
+ */
 public interface CommandIssuer extends Messagable {
     /**
      * Issues a command from this sender, forcing them to run it

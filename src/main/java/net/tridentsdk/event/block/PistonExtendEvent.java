@@ -18,8 +18,8 @@
 package net.tridentsdk.event.block;
 
 import com.google.common.collect.ImmutableList;
-import net.tridentsdk.base.Orientation;
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Orientation;
 
 import java.util.List;
 

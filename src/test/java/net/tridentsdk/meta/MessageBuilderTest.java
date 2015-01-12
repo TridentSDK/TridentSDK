@@ -35,8 +35,8 @@ public class MessageBuilderTest {
         message.build();
 
         Assert.assertEquals(message.asJson(),
-                            "{\"text\":\"\",\"extra\":[{\"text\":\"Hello World\",\"color\":\"aqua\"," +
-                                    "\"clickEvent\":{\"action\":\"open_file\",\"value\":\"FILE\"}," +
-                                    "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"HOVER\"}},{\"text\":\"THEN\"}]}");
+                "{\"text\":\"\",\"extra\":[{\"text\":\"Hello World\",\"color\":\"aqua\"," +
+                        "\"clickEvent\":{\"action\":\"open_file\",\"value\":\"FILE\"}," +
+                        "\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"HOVER\"}},{\"text\":\"THEN\"}]}");
     }
 }

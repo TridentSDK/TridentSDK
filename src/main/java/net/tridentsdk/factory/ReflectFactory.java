@@ -62,7 +62,7 @@ public class ReflectFactory {
      */
     public FastField getField(Object o, String name) {
         FastClass fastClass = FastClass.get(o.getClass());
-        return fastClass.getField(name);
+        return fastClass.fieldBy(name);
     }
 
     /**
@@ -74,7 +74,7 @@ public class ReflectFactory {
      * @return the wrapped {@code static} field
      */
     public FastField getField(Class<?> cls, String name) {
-        return FastClass.get(cls).getField(name);
+        return FastClass.get(cls).fieldBy(name);
     }
 
     /**

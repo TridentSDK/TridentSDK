@@ -42,7 +42,7 @@ public class PlayerDropItemEvent extends EntitySpawnEvent {
     }
 
     public DroppedItem getItem() {
-        return (DroppedItem) super.getEntity();
+        return (DroppedItem) super.entity();
     }
 
     public void setItem(Entity item) {

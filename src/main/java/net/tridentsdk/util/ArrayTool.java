@@ -24,12 +24,14 @@ import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Array;
 
 /**
- * Tools for modifying elements of an array <p/> <p>Expect this to be very slow, uses LOAD of reflection to simplify
- * array tasks at the cost of performance</p>
+ * Tools for modifying elements of an array
+ *
+ * <p>Expect this to be very slow, uses LOAD of reflection to simplify array tasks at the cost of performance</p>
  *
  * @param <T> the type held by the array to be converted
  */
-@ThreadSafe public class ArrayTool<T> {
+@ThreadSafe
+public class ArrayTool<T> {
     private final T[] array;
     private final TypeToken<T> typeToken = new TypeToken<T>() {
     };

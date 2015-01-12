@@ -42,26 +42,26 @@ public class BlockOrientationTest {
     @Test
     public void testApply() throws Exception {
         Assert.assertEquals(BlockOrientation.NORTH.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 0, 0, -1));
+                Coordinates.create(null, 0, 0, -1));
         Assert.assertEquals(BlockOrientation.SOUTH.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 0, 0, 1));
+                Coordinates.create(null, 0, 0, 1));
         Assert.assertEquals(BlockOrientation.EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 1, 0, 0));
+                Coordinates.create(null, 1, 0, 0));
         Assert.assertEquals(BlockOrientation.WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, -1, 0, 0));
+                Coordinates.create(null, -1, 0, 0));
         Assert.assertEquals(BlockOrientation.NORTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 1, 0, -1));
+                Coordinates.create(null, 1, 0, -1));
         Assert.assertEquals(BlockOrientation.NORTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, -1, 0, -1));
+                Coordinates.create(null, -1, 0, -1));
         Assert.assertEquals(BlockOrientation.SOUTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 1, 0, 1));
+                Coordinates.create(null, 1, 0, 1));
         Assert.assertEquals(BlockOrientation.SOUTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, -1, 0, 1));
+                Coordinates.create(null, -1, 0, 1));
         Assert.assertEquals(BlockOrientation.TOP.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 0, 1, 0));
+                Coordinates.create(null, 0, 1, 0));
         Assert.assertEquals(BlockOrientation.BOTTOM.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 0, -1, 0));
+                Coordinates.create(null, 0, -1, 0));
         Assert.assertEquals(BlockOrientation.SELF.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                            Coordinates.create(null, 0, 0, 0));
+                Coordinates.create(null, 0, 0, 0));
     }
 }

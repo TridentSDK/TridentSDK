@@ -90,6 +90,13 @@ public interface World extends Cloneable {
     GameMode defaultGamemode();
 
     /**
+     * Obtains the loading handler which created this object, passed in from the constructor
+     *
+     * @return the world loader for this world
+     */
+    WorldLoader loader();
+
+    /**
      * Gets the type of a world
      *
      * @return The type of a world

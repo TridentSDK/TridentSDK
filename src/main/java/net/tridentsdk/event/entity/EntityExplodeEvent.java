@@ -20,7 +20,8 @@ package net.tridentsdk.event.entity;
 import net.tridentsdk.entity.Entity;
 
 /**
- * Called when an explosion is about to happen, caused by an entity (the only other explosion in the game is from a bed,
+ * Called when an explosion is about to happen, caused by an entity (the only other explosion in the game is from a
+ * bed,
  * of all things)
  *
  * @author The TridentSDK Team

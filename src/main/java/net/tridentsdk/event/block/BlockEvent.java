@@ -32,22 +32,13 @@ public abstract class BlockEvent extends Event {
      * @param block the block associated with the event
      */
     public BlockEvent(Block block) {
-        this(block, false);
-    }
-
-    /**
-     * @param block the block associated with the event
-     * @param async if this event is asynchronous
-     */
-    public BlockEvent(Block block, boolean async) {
-        super(async);
         this.block = block;
     }
 
     /**
      * @return return the block associated with the event
      */
-    public Block getBlock() {
+    public Block block() {
         return this.block;
     }
 }

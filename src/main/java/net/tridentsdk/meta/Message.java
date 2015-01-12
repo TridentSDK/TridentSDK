@@ -66,8 +66,8 @@ public final class Message {
     public Message clickEvent(ClickEvent event) {
         JsonObject obj = new JsonObject();
 
-        obj.addProperty("action", event.getAction().toString());
-        obj.addProperty("value", event.getValue());
+        obj.addProperty("action", event.action().toString());
+        obj.addProperty("value", event.value());
 
         this.getMessage().add("clickEvent", obj);
         return this;
@@ -82,8 +82,8 @@ public final class Message {
     public Message hoverEvent(HoverEvent event) {
         JsonObject obj = new JsonObject();
 
-        obj.addProperty("action", event.getAction().toString());
-        obj.addProperty("value", event.getValue());
+        obj.addProperty("action", event.action().toString());
+        obj.addProperty("value", event.value());
 
         this.getMessage().add("hoverEvent", obj);
         return this;

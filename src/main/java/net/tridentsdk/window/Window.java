@@ -20,19 +20,44 @@ package net.tridentsdk.window;
 import net.tridentsdk.window.inventory.Item;
 
 /**
- * TODO
+ * Represents an inventory or window that is opened to players
+ *
+ * @author The TridentSDK Team
  */
 public interface Window {
+    /**
+     * Obtains the ID of the window
+     *
+     * @return the window ID of this window
+     */
+    int windowId();
 
-    int getId();
+    /**
+     * The available slots (not the slots taken up) in this window
+     *
+     * @return the window slots available
+     */
+    int length();
 
-    Item[] getContents();
-
-    int getLength();
-
+    /**
+     * Sets the item at the slot. If the index is outside the bound, the effects are unspecified.
+     *
+     * @param index the index which to set the item at
+     * @param value the item to set at the index
+     */
     void setSlot(int index, Item value);
 
-    String getName();
+    /**
+     * The title of the inventory
+     *
+     * @return the name displayed at the top of the window
+     */
+    String name();
 
-    public Item[] getItems();
+    /**
+     * Obtains the contents of the inventory represented by this window
+     *
+     * @return the items in the window
+     */
+    public Item[] items();
 }

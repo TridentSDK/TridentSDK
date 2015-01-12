@@ -17,6 +17,8 @@
 
 package net.tridentsdk.world;
 
+import net.tridentsdk.world.gen.AbstractGenerator;
+
 public interface WorldLoader {
     World load(String world);
 
@@ -33,4 +35,6 @@ public interface WorldLoader {
     Chunk loadChunk(World world, ChunkLocation location);
 
     void saveChunk(Chunk chunk);
+
+    AbstractGenerator generator();
 }

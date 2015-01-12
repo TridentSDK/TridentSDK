@@ -22,7 +22,6 @@ import com.google.gson.GsonBuilder;
 import net.tridentsdk.docs.AccessNoDoc;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.lang.reflect.Type;
 
 @AccessNoDoc
 @ThreadSafe
@@ -33,7 +32,7 @@ final class GsonFactory {
     private GsonFactory() {
     }
 
-    protected static Gson getGson() {
+    protected static Gson gson() {
         return gson;
     }
 }
