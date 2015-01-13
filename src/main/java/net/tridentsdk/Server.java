@@ -68,10 +68,12 @@ public interface Server {
     /**
      * Creates a new world loader, which can use its own generator
      *
-     * @param generator the generator to use
+     * <p>The provided class must have a no-arg constructor.</p>
+     *
+     * @param generator the generator to use, a class to defensively protect the signature
      * @return the new world loader
      */
-    WorldLoader newWorldLoader(AbstractGenerator generator);
+    WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator);
 
     /**
      * Gets the Internet Address of this server

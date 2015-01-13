@@ -71,9 +71,7 @@ public final class TridentLogger {
                     Files.createDirectory(logs);
 
                 File[] list = logs.toFile().listFiles();
-                if (list.length == 0)
-                    copyLog(path, logs, 0);
-                else copyLog(path, logs, list.length);
+                copyLog(path, logs, list.length);
 
                 Files.delete(path);
             }

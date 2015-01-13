@@ -100,7 +100,7 @@ public final class Trident {
         return server.worlds();
     }
 
-    public static WorldLoader newWorldLoader(AbstractGenerator generator) {
+    public static WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator) {
         return server.newWorldLoader(generator);
     }
 
