@@ -539,6 +539,8 @@ public class ConfigSection {
     /**
      * Gets a sub section which has the current section as a parent
      *
+     * <p>A new section is created if it does not exist</p>
+     *
      * @param tag the tag to get the section from
      * @return the section with the given tag under this section
      */

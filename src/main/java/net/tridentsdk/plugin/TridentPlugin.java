@@ -62,7 +62,7 @@ public class TridentPlugin {
 
         this.pluginFile = pluginFile;
         this.description = description;
-        this.configDirectory = new File("plugins/" + description.name() + '/');
+        this.configDirectory = new File("plugins" + File.separator + description.name() + File.separator);
         this.defaultConfig = new JsonConfig(new File(this.configDirectory, "config.json"));
         this.classLoader = loader;
     }
@@ -135,8 +135,8 @@ public class TridentPlugin {
      * @param c the class to find the listener instance by
      * @return the listener instance registered to the server
      */
-    public Listener listenerBy(Class<? extends Listener> c) {
-        return Trident.eventHandler().listenersFor(this).get(c);
+    public <T extends Listener> T listenerBy(Class<T> c) {
+        return (T) Trident.eventHandler().listenersFor(this).get(c);
     }
 
     /**
@@ -145,8 +145,8 @@ public class TridentPlugin {
      * @param c the class to find the command instance by
      * @return the command instance registered to the server
      */
-    public Command commandBy(Class<? extends Command> c) {
-        return Trident.commandHandler().commandsFor(this).get(c);
+    public <T extends Command> T commandBy(Class<T> c) {
+        return (T) Trident.commandHandler().commandsFor(this).get(c);
     }
 
     /**
@@ -203,6 +203,8 @@ public class TridentPlugin {
 
     /**
      * The plugin directory
+     *
+     * <p>The returned file includes the trailing file separator</p>
      *
      * @return the plugin directory where resources like the default config are saved
      */
