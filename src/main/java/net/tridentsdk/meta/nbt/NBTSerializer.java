@@ -74,7 +74,13 @@ public final class NBTSerializer {
                     break;
 
                 case COMPOUND:
-                    field.set(instance, value);
+                    if(NBTSerializable.class.isAssignableFrom(field.toField().getType())) {
+                        field.set(instance, deserialize(field.toField().getType(),
+                                value.asType(CompoundTag.class)));
+                    } else {
+                        field.set(instance, value);
+                    }
+
                     break;
 
                 case DOUBLE:
