@@ -12,7 +12,7 @@ public interface AiHandler {
      * @param type
      * @return
      */
-    AiModule getDefaultAiFor(EntityType type);
+    AiModule defaultAIFor(EntityType type);
 
     /**
      * Sets the AI for this entity type, used to provide a separate AiModule for Entities
@@ -29,5 +29,5 @@ public interface AiHandler {
      * Returns the server's implementation of the AI for a given entity type
      * @param type
      */
-    AiModule getNativeAiFor(EntityType type);
+    AiModule nativeAIFor(EntityType type);
 }
