@@ -9,17 +9,20 @@ public interface AiHandler {
 
     /**
      * Returns the AI Module that is the default for a certain type of entity
+     *
      * @param type
-     * @return
      */
     AiModule defaultAIFor(EntityType type);
 
     /**
-     * Sets the AI for this entity type, used to provide a separate AiModule for Entities
+     * Sets the AI for this entity type, used to provide a separate AiModule for
+     * Entities
      *
      * <p>Entities of this type in the world will immediately start using this
-     * {@link net.tridentsdk.entity.living.ai.AiModule}, even if they were created before this was set.</p>
-     * @param type the type of entity to replace the AI for
+     * {@link net.tridentsdk.entity.living.ai.AiModule}, even if they were
+     * created before this was set.</p>
+     *
+     * @param type   the type of entity to replace the AI for
      * @param module the new AiModule to use
      */
     void setDefaultAiFor(EntityType type, AiModule module);
@@ -27,7 +30,8 @@ public interface AiHandler {
 
     /**
      * Returns the server's implementation of the AI for a given entity type
-     * @param type
+     *
+     * @param type the type of entity to request the AI for
      */
     AiModule nativeAIFor(EntityType type);
 }
