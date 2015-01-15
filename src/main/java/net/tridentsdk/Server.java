@@ -19,6 +19,7 @@ package net.tridentsdk;
 
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.ai.AiHandler;
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.TridentPluginHandler;
 import net.tridentsdk.plugin.cmd.CommandHandler;
@@ -154,4 +155,10 @@ public interface Server {
      * @return the player who has the specified UUID
      */
     Player playerBy(UUID id);
+
+    /**
+     * Returns the AI handler for the server, determines what AI entities use
+     * @return
+     */
+    AiHandler aiHandler();
 }

@@ -20,6 +20,9 @@ package net.tridentsdk.entity;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
+import net.tridentsdk.entity.living.ai.AiHandler;
+import net.tridentsdk.entity.living.ai.AiModule;
+import net.tridentsdk.entity.living.ai.Path;
 import net.tridentsdk.event.entity.EntityDamageEvent;
 
 public interface LivingEntity extends Entity, ProjectileLauncher {
@@ -125,4 +128,31 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * @return {@code true} if the entity is dead, {@code false} if it is alive
      */
     boolean isDead();
+
+    /**
+     * Gets the AI Module for this class, which will be the default if there is no special AI that has been defined for
+     * this entity
+     * @return the AI module that controls this entity
+     */
+    AiModule aiModule();
+
+    /**
+     * Overides defaults and previous AI Modules for this entity, assigning a new module to it
+     */
+    void setAiModule(AiModule module);
+
+    /**
+     * For internal use only, do not call this method.
+     */
+    void performAiUpdate();
+
+    /**
+     * Gets the path that this entity is currently following
+     */
+    Path path();
+
+    /**
+     * Sets a path for this entity to follow, should only be used in an AiHandler
+     */
+    void setPath(Path path);
 }
