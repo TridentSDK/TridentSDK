@@ -18,15 +18,23 @@
 package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.Coordinates;
+import net.tridentsdk.Trident;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.EntityProperties;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.Projectile;
+import net.tridentsdk.entity.living.ai.AiModule;
+import net.tridentsdk.entity.living.ai.Path;
 import net.tridentsdk.event.entity.EntityDamageEvent;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> implements LivingEntity {
     private final LivingEntity entity;
+    private final AtomicInteger restTicks = new AtomicInteger(0);
+    private volatile AiModule ai;
+    private volatile Path path;
 
     protected LivingDecorationAdapter(LivingEntity entity) {
         super(entity);
@@ -106,5 +114,39 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     @Override
     protected LivingEntity original() {
         return entity;
+    }
+
+
+    @Override
+    public void setAiModule(AiModule module) {
+        this.ai = module;
+    }
+
+    @Override
+    public AiModule aiModule() {
+        if (ai == null) {
+            return Trident.instance().aiHandler().getDefaultAiFor(type());
+        } else {
+            return ai;
+        }
+    }
+
+    @Override
+    public void performAiUpdate() {
+        if (this.restTicks.get() == 0) {
+            this.restTicks.set(this.aiModule().think(this));
+        } else {
+            this.restTicks.getAndDecrement();
+            // TODO: follow path
+        }
+    }
+
+    @Override
+    public Path path() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
     }
 }
