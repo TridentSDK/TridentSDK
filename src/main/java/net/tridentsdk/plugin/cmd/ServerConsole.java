@@ -20,13 +20,13 @@ package net.tridentsdk.plugin.cmd;
 import net.tridentsdk.Messagable;
 
 public interface ServerConsole extends Messagable, CommandIssuer {
-    public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PURPLE = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
+    public static final String RESET = PlatformColor.getColor("reset");
+    public static final String BLACK = PlatformColor.getColor("black");
+    public static final String RED = PlatformColor.getColor("red");
+    public static final String GREEN = PlatformColor.getColor("green");
+    public static final String YELLOW = PlatformColor.getColor("yellow");
+    public static final String BLUE = PlatformColor.getColor("blue");
+    public static final String PURPLE = PlatformColor.getColor("purple");
+    public static final String CYAN = PlatformColor.getColor("cyan");
+    public static final String WHITE = PlatformColor.getColor("white");
 }

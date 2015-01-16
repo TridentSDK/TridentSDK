@@ -19,6 +19,7 @@ package net.tridentsdk.plugin;
 
 import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
+import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.Listener;
@@ -47,6 +48,7 @@ public class TridentPluginHandler {
     @InternalUseOnly
     public void load(final File pluginFile) {
         final TaskExecutor executor = PLUGIN_EXECUTOR_FACTORY.scaledThread();
+
         executor.addTask(new Runnable() {
             @Override
             public void run() {
@@ -111,7 +113,8 @@ public class TridentPluginHandler {
         }
 
         if (Command.class.isAssignableFrom(cls)) {
-            Trident.commandHandler().addCommand(plugin, (Command) (instance == null ? cls.newInstance() : instance));
+            Trident.commandHandler().addCommand(plugin, executor, (Command)
+                    (instance == null ? cls.newInstance() : instance));
         }
     }
 

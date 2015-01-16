@@ -20,6 +20,7 @@ package net.tridentsdk;
 // if these shouldn't exist, or should go somewhere else, just move them
 // this is probably temporary
 
+import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -92,6 +93,26 @@ public final class Defaults {
                     runnable.run();
                 }
             });
+        }
+    };
+
+    /**
+     * Executes tasks on the same thread that inserts it
+     */
+    public static final TaskExecutor DIRECT_EXECUTOR = new TaskExecutor() {
+        @Override
+        public boolean addTask(Runnable task) {
+            task.run();
+            return true;
+        }
+
+        @Override
+        public void interrupt() {
+        }
+
+        @Override
+        public Thread asThread() {
+            return Thread.currentThread();
         }
     };
 

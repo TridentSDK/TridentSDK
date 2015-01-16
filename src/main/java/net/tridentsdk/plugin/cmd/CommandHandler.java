@@ -18,7 +18,9 @@
 package net.tridentsdk.plugin.cmd;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import net.tridentsdk.Trident;
+import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.PluginLoadException;
@@ -26,7 +28,11 @@ import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.Nonnull;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CommandHandler {
     // TODO: Make this a dictionary tree for fast lookup
@@ -42,35 +48,26 @@ public class CommandHandler {
      *
      * @param message the command executed
      */
-    public void handleCommand(String message, CommandIssuer issuer) {
+    public void handleCommand(final String message, final CommandIssuer issuer) {
         if (message.isEmpty()) {
             return;
         }
 
-        String[] contents = message.split(" ");
-        String label = contents[0].toLowerCase();
-        CommandData cmdData = COMMANDS.get(label);
+        final String[] contents = message.split(" ");
+        final String label = contents[0].toLowerCase();
+        final String args = message.substring(label.length());
+        final Map<TaskExecutor, Set<CommandData>> cmdData = findCommand(label);
 
-        if (cmdData != null) {
-            String args = message.substring(label.length());
-
-            if (issuer instanceof Player) {
-                cmdData.getCommand().handlePlayer((Player) issuer, args, contents[0]);
-            } else if (issuer instanceof ServerConsole) {
-                cmdData.getCommand().handleConsole((ServerConsole) issuer, args, contents[0]);
-            }
-            cmdData.getCommand().handle(issuer, args, contents[0]);
-
-            for (Map.Entry<String, CommandData> entry : COMMANDS.entrySet()) {
-                if (entry.getValue().hasAlias(label)) {
-                    CommandData command = entry.getValue();
-                    if (issuer instanceof Player) {
-                        command.getCommand().handlePlayer((Player) issuer, args, contents[0]);
-                    } else if (issuer instanceof ServerConsole) {
-                        command.getCommand().handleConsole((ServerConsole) issuer, args, contents[0]);
+        if (cmdData.size() != 0) {
+            for (final Map.Entry<TaskExecutor, Set<CommandData>> entry : cmdData.entrySet()) {
+                entry.getKey().addTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (CommandData data : entry.getValue()) {
+                            handleCommand(data.command(), issuer, args, contents);
+                        }
                     }
-                    command.getCommand().handle(issuer, args, contents[0]);
-                }
+                });
             }
         } else {
             // Command not found
@@ -78,7 +75,38 @@ public class CommandHandler {
         }
     }
 
-    public int addCommand(TridentPlugin plugin, Command command) throws PluginLoadException {
+    private Map<TaskExecutor, Set<CommandData>> findCommand(String label) {
+        Map<TaskExecutor, Set<CommandData>> dataMap = Maps.newHashMap();
+        CommandData data = COMMANDS.get(label);
+
+        if (data != null) {
+            dataMap.put(data.executor(), Sets.newHashSet(data));
+        }
+
+        for (CommandData d : COMMANDS.values()) {
+            if (d.hasAlias(label)) {
+                Set<CommandData> set = dataMap.get(d.executor());
+                if (set == null)
+                    set = Sets.newHashSet(d);
+                else set.add(d);
+                dataMap.put(d.executor(), set);
+            }
+        }
+
+        return dataMap;
+    }
+
+    private void handleCommand(Command cmd, CommandIssuer issuer, String args, String[] contents) {
+        if (issuer instanceof Player)
+            cmd.handlePlayer((Player) issuer, args, contents[0]);
+        else if (issuer instanceof ServerConsole)
+            cmd.handleConsole((ServerConsole) issuer, args, contents[0]);
+
+        cmd.handle(issuer, args, contents[0]);
+    }
+
+    public int addCommand(TridentPlugin plugin, @Nonnull TaskExecutor executor, Command command)
+            throws PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
         if (description == null) {
@@ -97,18 +125,20 @@ public class CommandHandler {
             return 0;
         }
 
-        if (COMMANDS.containsKey(name.toLowerCase())) {
-            if (COMMANDS.get(name.toLowerCase()).getPriority() > priority) {
+        String lowerCase = name.toLowerCase();
+        CommandData data = COMMANDS.get(lowerCase);
+        CommandData newData = new CommandData(name, priority, aliases, permission, command, plugin, executor);
+
+        if (data != null) {
+            if (COMMANDS.get(lowerCase).priority() > priority) {
                 // put the new, more important cmd in place and notify the old cmd that it has been overridden
-                COMMANDS.put(name.toLowerCase(), new CommandData(name, priority, aliases, permission, command, plugin))
-                        .getCommand()
-                        .notifyOverriden();
+                COMMANDS.put(lowerCase, newData).command().notifyOverriden();
             } else {
                 // don't register this cmd and notify it has been overridden
                 command.notifyOverriden();
             }
         } else {
-            COMMANDS.put(name, new CommandData(name, priority, aliases, permission, command, plugin));
+            COMMANDS.put(name, newData);
         }
 
         // TODO: return something meaningful
@@ -117,7 +147,7 @@ public class CommandHandler {
 
     public void removeCommand(Class<? extends Command> cls) {
         for (Map.Entry<String, CommandData> e : COMMANDS.entrySet()) {
-            if (e.getValue().getCommand().getClass().equals(cls))
+            if (e.getValue().command().getClass().equals(cls))
                 COMMANDS.remove(e.getKey());
         }
     }
@@ -137,18 +167,20 @@ public class CommandHandler {
         private final String name;
         private final Command encapsulated;
         private final TridentPlugin plugin;
+        private final TaskExecutor executor;
 
         public CommandData(String name, int priority, String[] aliases, String permission, Command command,
-                TridentPlugin plugin) {
+                TridentPlugin plugin, TaskExecutor executor) {
             this.priority = priority;
             this.name = name;
             this.aliases = aliases;
             this.permission = permission;
             this.encapsulated = command;
             this.plugin = plugin;
+            this.executor = executor;
         }
 
-        public Command getCommand() {
+        public Command command() {
             return this.encapsulated;
         }
 
@@ -161,12 +193,16 @@ public class CommandHandler {
             return false;
         }
 
-        public int getPriority() {
+        public int priority() {
             return this.priority;
         }
 
         public TridentPlugin plugin() {
             return plugin;
+        }
+
+        public TaskExecutor executor() {
+            return executor;
         }
     }
 }

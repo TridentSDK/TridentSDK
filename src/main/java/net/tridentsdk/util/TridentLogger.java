@@ -119,6 +119,7 @@ public final class TridentLogger {
 
     public static void error(Throwable throwable) {
         org.slf4j.Logger logger = logger();
+        StackTraceElement[] stackTrace = throwable.getStackTrace();
 
         logger.error("========  BEGIN ERROR =========");
 
@@ -138,7 +139,7 @@ public final class TridentLogger {
         logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
         logger.error("");
         logger.error("======== Generating Debug Information =========");
-        StackTraceElement main = throwable.getStackTrace()[0];
+        StackTraceElement main = stackTrace[0];
         logger.error("Class:  " + main.getClassName());
         logger.error("Method: " + main.getMethodName());
         logger.error("Line:   " + (main.getLineNumber() > 0 ? main.getLineNumber() : "Native method"));
@@ -147,7 +148,7 @@ public final class TridentLogger {
         logger.error("");
 
         logger.error("======== Printing Stacktrace =========");
-        for (StackTraceElement element : throwable.getStackTrace()) {
+        for (StackTraceElement element : stackTrace) {
             logger.error("    at " + element.getClassName() + "." +
                     element.getMethodName() + "(...) : " +
                     (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
@@ -169,7 +170,6 @@ public final class TridentLogger {
 
         logger.error("");
 
-        logger.error("========      END ERROR     =========");
-        logger.error("");
+        logger.error("========  END ERROR  =========");
     }
 }
