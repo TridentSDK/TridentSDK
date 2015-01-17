@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.plugin;
 
-public class PluginLoadException extends RuntimeException {
+public final class PluginLoadException extends RuntimeException {
     private static final long serialVersionUID = 644578736382376769L;
 
     public PluginLoadException(Exception ex) {

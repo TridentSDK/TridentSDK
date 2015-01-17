@@ -24,7 +24,7 @@ import net.tridentsdk.plugin.annotation.CommandDescription;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandHandler {
+public final class CommandHandler {
     // TODO: Make this a dictionary tree for fast lookup
     private static final HashMap<String, CommandData> COMMANDS = new HashMap<>();
 

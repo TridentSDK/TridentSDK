@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
-public class TridentPlugin {
+public abstract class TridentPlugin {
     private static final HashFunction HASHER = Hashing.murmur3_32();
 
     final PluginClassLoader classLoader;
@@ -79,11 +79,11 @@ public class TridentPlugin {
         this.executor.countDown(executor);
     }
 
-    public void saveDefaultConfig() {
+    public final void saveDefaultConfig() {
         this.saveResource("config.json", false);
     }
 
-    public void saveResource(String name, boolean replace) {
+    public final void saveResource(String name, boolean replace) {
         try {
             InputStream is = this.getClass().getResourceAsStream('/' + name);
             File file = new File(this.configDirectory, name);
@@ -106,11 +106,11 @@ public class TridentPlugin {
         return this.pluginFile;
     }
 
-    public JsonConfig getDefaultConfig() {
+    public final JsonConfig getDefaultConfig() {
         return this.defaultConfig;
     }
 
-    public File getConfigDirectory() {
+    public final File getConfigDirectory() {
         return this.configDirectory;
     }
 
@@ -118,7 +118,7 @@ public class TridentPlugin {
         return this.description;
     }
 
-    public TaskExecutor getExecutor() {
+    public final TaskExecutor getExecutor() {
         try {
             return executor.await();
         } catch (InterruptedException e) {
