@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class TridentPluginHandler {
+public final class TridentPluginHandler {
     private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads().executor(2);
     private final List<TridentPlugin> plugins = new ArrayList<>();
 

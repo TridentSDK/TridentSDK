@@ -25,7 +25,7 @@ import java.net.URLClassLoader;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class PluginClassLoader extends URLClassLoader {
+public final class PluginClassLoader extends URLClassLoader {
     final Map<String, Class<?>> classes = new ConcurrentHashMap<>();
     private Class<? extends TridentPlugin> pluginClass;
 
