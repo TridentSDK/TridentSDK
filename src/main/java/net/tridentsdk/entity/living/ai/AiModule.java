@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.living.ai;
 
 import net.tridentsdk.entity.LivingEntity;
@@ -32,7 +33,8 @@ import net.tridentsdk.entity.LivingEntity;
 public interface AiModule {
     /**
      * Called each time an entity is given a chance to think
-     * @param entity  the handle that allows this handler to interact with the entity
+     *
+     * @param entity the handle that allows this handler to interact with the entity
      * @return an integer representing the number of ticks that this entity may not have to think for
      * i.e. if a path was submitted, this entity may not have to think for a few ticks
      */

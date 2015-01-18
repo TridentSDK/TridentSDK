@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin.cmd;
 
 public final class PlatformColor {
-    private static final String EMPTY = "";
+    public static final String EMPTY = "";
     private static final String ESC = String.valueOf((char) 0x1B);
 
     private PlatformColor() {

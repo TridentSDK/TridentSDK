@@ -28,7 +28,7 @@ public interface TaskExecutor {
      *
      * @param task the task to add
      * @return {@code true} if the task was added successfully. Return of {@code false} is handled internally, this is
-     *         provided for visibility purposes only
+     * provided for visibility purposes only
      */
     boolean addTask(Runnable task);
 

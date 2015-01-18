@@ -43,7 +43,8 @@ public class BattleListener implements Listener {
             Game game = this.manager.findGame(player);
 
             // The player is not playing BattleDome
-            if (game == null) return;
+            if (game == null)
+                return;
 
             if (game.state() == Game.GameState.FIGHT) {
                 Game.Team team = game.teamOf(player);
@@ -79,21 +80,24 @@ public class BattleListener implements Listener {
             Game game = this.manager.findGame(player);
 
             // The player is not playing BattleDome
-            if (game == null) return;
+            if (game == null)
+                return;
 
             if (game.state() == Game.GameState.IN_GAME) {
                 Game.Team team = game.teamOf(player);
                 Coordinates location = event.block().location();
 
                 boolean done;
-                if (team == Game.Team.PURPLE) done = game.setGreenObby(location);
-                else done = game.setPurpleObby(location);
+                if (team == Game.Team.PURPLE)
+                    done = game.setGreenObby(location);
+                else
+                    done = game.setPurpleObby(location);
 
                 if (done)
                     player.sendMessage(CommandHandler.PLAYER_PREFIX + "Set the obsidian at the placed location.");
                 else {
-                    player.sendMessage(CommandHandler.PLAYER_ERROR +
-                            "Obsidian already set, removing the one you placed.");
+                    player.sendMessage(
+                            CommandHandler.PLAYER_ERROR + "Obsidian already set, removing the one you placed.");
                     event.cancel(true);
                 }
             }

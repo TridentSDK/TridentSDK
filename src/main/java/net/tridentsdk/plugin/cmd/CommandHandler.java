@@ -29,8 +29,6 @@ import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.Nonnull;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,7 +56,7 @@ public class CommandHandler {
         final String args = message.substring(label.length());
         final Map<TaskExecutor, Set<CommandData>> cmdData = findCommand(label);
 
-        if (cmdData.size() != 0) {
+        if (!cmdData.isEmpty()) {
             for (final Map.Entry<TaskExecutor, Set<CommandData>> entry : cmdData.entrySet()) {
                 entry.getKey().addTask(new Runnable() {
                     @Override
@@ -88,7 +86,8 @@ public class CommandHandler {
                 Set<CommandData> set = dataMap.get(d.executor());
                 if (set == null)
                     set = Sets.newHashSet(d);
-                else set.add(d);
+                else
+                    set.add(d);
                 dataMap.put(d.executor(), set);
             }
         }
@@ -105,8 +104,8 @@ public class CommandHandler {
         cmd.handle(issuer, args, contents[0]);
     }
 
-    public int addCommand(TridentPlugin plugin, @Nonnull TaskExecutor executor, Command command)
-            throws PluginLoadException {
+    public int addCommand(TridentPlugin plugin, @Nonnull TaskExecutor executor, Command command) throws
+            PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
         if (description == null) {

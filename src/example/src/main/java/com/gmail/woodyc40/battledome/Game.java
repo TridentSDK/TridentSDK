@@ -16,20 +16,18 @@ import java.util.Map;
  * @author Pierre C
  */
 public class Game {
+    public final BattleTimer runnable = new BattleTimer(this);
     private final int id;
     private final Map<Player, Team> players;
-
     private GameState state;
-
     private Coordinates spawn;
     private Coordinates purpleTeam;
     private Coordinates greenTeam;
-
     private Coordinates purpleObby;
     private Coordinates greenObby;
+    private Team alternator = Team.PURPLE;
 
-    public final BattleTimer runnable = new BattleTimer(this);
-
+    /////////////////////////////////////////////// GENERAL METHODS //////////////////////////////////////////////
 
     private Game(int id, Map<Player, Team> players) {
         this.id = id;
@@ -37,8 +35,6 @@ public class Game {
 
         Factories.tasks().syncRepeat(TridentPlugin.instance(), runnable, 0L, 20L);
     }
-
-    /////////////////////////////////////////////// GENERAL METHODS //////////////////////////////////////////////
 
     public static Game newGame(int id) {
         return new Game(id, Maps.<Player, Team>newHashMap());
@@ -64,13 +60,13 @@ public class Game {
         this.state = state;
     }
 
+    /////////////////////////////////////// JOIN/LEAVE /////////////////////////////////////////
+
     public void sendAll(String message) {
         for (Player player : players.keySet()) {
             player.sendMessage(CommandHandler.PLAYER_PREFIX + message);
         }
     }
-
-    /////////////////////////////////////// JOIN/LEAVE /////////////////////////////////////////
 
     public Team teamOf(Player player) {
         return players.get(player);
@@ -80,13 +76,12 @@ public class Game {
         this.players.put(player, nextTeam());
     }
 
+    /////////////////////////////////////////// TEAMS //////////////////////////////////////////////
+
     public void remove(Player player) {
         this.players.remove(player);
     }
 
-    /////////////////////////////////////////// TEAMS //////////////////////////////////////////////
-
-    private Team alternator = Team.PURPLE;
     private Team nextTeam() {
         Team team = alternator;
         alternator = team == Team.GREEN ? Team.PURPLE : Team.GREEN;
@@ -96,7 +91,8 @@ public class Game {
     public void teleport(Player player, Team team) {
         if (team == Game.Team.PURPLE)
             player.teleport(purpleTeam);
-        else player.teleport(greenTeam);
+        else
+            player.teleport(greenTeam);
     }
 
     public void handleDeath(Player player) {
@@ -105,12 +101,16 @@ public class Game {
         int purple = 0;
 
         for (Team teams : players.values()) {
-            if (teams == Team.GREEN) green++;
-            else purple++;
+            if (teams == Team.GREEN)
+                green++;
+            else
+                purple++;
         }
 
-        if (team == Team.GREEN) green--;
-        else purple--;
+        if (team == Team.GREEN)
+            green--;
+        else
+            purple--;
 
         if (green == 0)
             win(Team.PURPLE);

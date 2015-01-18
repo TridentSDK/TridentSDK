@@ -20,17 +20,16 @@ public class GameManager {
     // TODO plugin storage config way to verbose
     // TODO find values in a config/section
 
-    private static final String STORED_COUNT = "counter";
     public static final String SNAP_SHOTS = "snapshots";
-
-    private static int counter = 0;
+    private static final String STORED_COUNT = "counter";
     private static final Map<Integer, Game> GAMES = Maps.newHashMap();
     private static final Map<Player, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
-
     private static final JsonConfig storage = Factories.configs().
             createConfig(TridentPlugin.instance().configDirectory() + "games.json");
+    private static int counter = 0;
 
-    private GameManager() {}
+    private GameManager() {
+    }
 
     public static GameManager newHandler() {
         return new GameManager();

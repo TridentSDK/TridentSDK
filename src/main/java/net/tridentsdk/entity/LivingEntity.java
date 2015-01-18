@@ -20,7 +20,6 @@ package net.tridentsdk.entity;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
-import net.tridentsdk.entity.living.ai.AiHandler;
 import net.tridentsdk.entity.living.ai.AiModule;
 import net.tridentsdk.entity.living.ai.Path;
 import net.tridentsdk.event.entity.EntityDamageEvent;
@@ -132,6 +131,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     /**
      * Gets the AI Module for this class, which will be the default if there is no special AI that has been defined for
      * this entity
+     *
      * @return the AI module that controls this entity
      */
     AiModule aiModule();

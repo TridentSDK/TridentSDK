@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.entity.living.ai;
 
 import net.tridentsdk.entity.EntityType;
@@ -25,8 +26,6 @@ public interface AiHandler {
 
     /**
      * Returns the AI Module that is the default for a certain type of entity
-     *
-     * @param type
      */
     AiModule defaultAIFor(EntityType type);
 
@@ -42,7 +41,6 @@ public interface AiHandler {
      * @param module the new AiModule to use
      */
     void setDefaultAiFor(EntityType type, AiModule module);
-
 
     /**
      * Returns the server's implementation of the AI for a given entity type

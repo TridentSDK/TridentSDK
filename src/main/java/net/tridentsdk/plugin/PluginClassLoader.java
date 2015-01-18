@@ -20,7 +20,6 @@ package net.tridentsdk.plugin;
 import net.tridentsdk.Trident;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.factory.Factories;
-import net.tridentsdk.perf.FastClass;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.util.TridentLogger;
 
@@ -33,24 +32,33 @@ import java.net.URLClassLoader;
 import java.util.Map;
 
 public class PluginClassLoader extends URLClassLoader {
-    final Map<String, Class<?>> classes = Factories.collect().createMap();
-    private Class<? extends TridentPlugin> pluginClass;
+    private static final Map<String, Class<?>> globallyLoaded = Factories.collect().createMap();
+    final Map<String, Class<?>> locallyLoaded = Factories.collect().createMap();
 
     public PluginClassLoader(File pluginFile) throws MalformedURLException {
         super(new URL[] { pluginFile.toURI().toURL() });
     }
 
+    public void link(Class<?> c) {
+        super.resolveClass(c);
+    }
+
+    public Class<?> defineClass(String name, byte[] source) {
+        return super.defineClass(name, source, 0, source.length);
+    }
+
     @Override
-    public Class<?> loadClass(String name) throws ClassNotFoundException {
-        return this.loadClass(name, true);
+    public Class<?> loadClass(String name) {
+        try {
+            return this.loadClass(name, true);
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-        if (name.startsWith("net.tridentsdk")) {
-            TridentLogger.error(new ClassNotFoundException(name));
-        }
-        Class<?> result = this.classes.get(name);
+        Class<?> result = globallyLoaded.get(name);
 
         if (result == null) {
             result = super.loadClass(name, resolve);
@@ -66,17 +74,7 @@ public class PluginClassLoader extends URLClassLoader {
         }
 
         if (result != null) {
-            if (TridentPlugin.class.isAssignableFrom(result)) {
-                if (this.pluginClass != null) {
-                    TridentLogger.error(new PluginLoadException("JAR has 2 plugin classes!"));
-                }
-
-                this.pluginClass = result.asSubclass(TridentPlugin.class);
-            }
-
-            this.classes.put(result.getName(), result);
-            FastClass.get(result);
-
+            putClass(result);
             return result;
         }
 
@@ -84,9 +82,13 @@ public class PluginClassLoader extends URLClassLoader {
         return null;
     }
 
+    void putClass(Class<?> cls) {
+        globallyLoaded.put(cls.getName(), cls);
+        locallyLoaded.put(cls.getName(), cls);
+    }
+
     public void unloadClasses() {
-        pluginClass = null;
-        for (Class<?> cls : this.classes.values()) {
+        for (Class<?> cls : locallyLoaded.values()) {
             if (Listener.class.isAssignableFrom(cls)) {
                 Trident.eventHandler().unregister(cls.asSubclass(Listener.class));
             }
@@ -96,7 +98,9 @@ public class PluginClassLoader extends URLClassLoader {
             }
 
             for (Field field : cls.getDeclaredFields()) {
-                if (field.getType().getClassLoader().equals(this) && Modifier.isStatic(field.getModifiers())) {
+                // Simply remove all the object references
+                // primitive types are OK
+                if (field.getType().isAssignableFrom(Object.class) && Modifier.isStatic(field.getModifiers())) {
                     field.setAccessible(true);
                     try {
                         field.set(null, null);
@@ -105,11 +109,9 @@ public class PluginClassLoader extends URLClassLoader {
                     }
                 } // TODO instance held fields
             }
-        }
-        classes.clear();
-    }
 
-    public Class<? extends TridentPlugin> getPluginClass() {
-        return this.pluginClass;
+            globallyLoaded.remove(cls.getName());
+        }
+        locallyLoaded.clear();
     }
 }

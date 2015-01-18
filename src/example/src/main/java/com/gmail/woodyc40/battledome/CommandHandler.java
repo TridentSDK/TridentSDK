@@ -17,10 +17,9 @@ public class CommandHandler extends Command {
     // TODO integrate ChatColor and ServerConsole colors
     // TODO inventory (blaze rod)
 
-    public static final String PLAYER_PREFIX = ChatColor.GREEN + "[Battle" + ChatColor.DARK_PURPLE + "Dome]"
-            + ChatColor.AQUA;
-    private static final String PLAYER_WARN = PLAYER_PREFIX + ChatColor.GOLD;
+    public static final String PLAYER_PREFIX = ChatColor.GREEN + "[Battle" + ChatColor.DARK_PURPLE + "Dome]" + ChatColor.AQUA;
     public static final String PLAYER_ERROR = PLAYER_PREFIX + ChatColor.RED;
+    private static final String PLAYER_WARN = PLAYER_PREFIX + ChatColor.GOLD;
     private static final String CONSOLE_ERROR = ServerConsole.RED + "[BattleDome|Error]";
 
     // Initialized after the plugin object is created
@@ -149,7 +148,8 @@ public class CommandHandler extends Command {
         Game removedFrom = this.manager.removePlayer(player);
         if (removedFrom == null) {
             player.sendMessage(PLAYER_ERROR + "You can't be leave if you aren't playing");
-        } else player.sendMessage(PLAYER_PREFIX + "Left game " + removedFrom.id());
+        } else
+            player.sendMessage(PLAYER_PREFIX + "Left game " + removedFrom.id());
     }
 
     private void handleStart(Player player, int gameId) {

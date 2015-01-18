@@ -22,8 +22,8 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.EntityProperties;
 import net.tridentsdk.entity.LivingEntity;
-import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.Projectile;
+import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ai.AiModule;
 import net.tridentsdk.entity.living.ai.Path;
 import net.tridentsdk.event.entity.EntityDamageEvent;
@@ -115,7 +115,6 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     protected LivingEntity original() {
         return entity;
     }
-
 
     @Override
     public void setAiModule(AiModule module) {

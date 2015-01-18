@@ -17,34 +17,27 @@
 
 package net.tridentsdk.util;
 
-import com.google.common.collect.Iterators;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
+import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Random;
 
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
-    private static final String[] ERRORS = {
-            "Aw, Mazen! Really?",
-            "I feel funny",
-            "9 + 10 does not equal 21",
-            "Dang",
-            "Tony Abbot, the fax didn't go through",
-            "This wasn't supposed to happen. It did anyways.",
-            "Huston, we have a problem",
-            "Oh great, a stacktrace. Can't we write good software for once?",
-            "Trust me " + "this isn't a bug, it's a feature!" };
+    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Huston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " + "this isn't a bug, it's a feature!" };
 
     private TridentLogger() {
     }
@@ -159,7 +152,14 @@ public final class TridentLogger {
 
         logger.error("========     Server info    =========");
         logger.error("Trident version: " + Trident.version());
-        logger.error("Plugins:         " + Iterators.toString(Trident.pluginHandler().getPlugins().iterator()));
+        logger.error("Plugins:         " + Arrays.toString(
+                Lists.transform(Trident.pluginHandler().getPlugins(), new Function<TridentPlugin, String>() {
+                            @Nullable
+                            @Override
+                            public String apply(TridentPlugin plugin) {
+                                return plugin.getDescription().name();
+                            }
+                        }).toArray()));
         logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +
                 System.getProperty("java.vendor"));
         logger.error("OS:              running " +

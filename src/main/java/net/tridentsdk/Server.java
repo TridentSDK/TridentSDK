@@ -158,7 +158,6 @@ public interface Server {
 
     /**
      * Returns the AI handler for the server, determines what AI entities use
-     * @return
      */
     AiHandler aiHandler();
 }

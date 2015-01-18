@@ -117,13 +117,18 @@ public class BattleTimer extends TridentRunnable {
                     int purple = 0;
 
                     for (Game.Team teams : game.players().values()) {
-                        if (teams == Game.Team.GREEN) green++;
-                        else purple++;
+                        if (teams == Game.Team.GREEN)
+                            green++;
+                        else
+                            purple++;
                     }
 
-                    if (green < purple) game.win(Game.Team.PURPLE);
-                    else if (purple < green) game.win(Game.Team.GREEN);
-                    else game.sendAll("Match tied");
+                    if (green < purple)
+                        game.win(Game.Team.PURPLE);
+                    else if (purple < green)
+                        game.win(Game.Team.GREEN);
+                    else
+                        game.sendAll("Match tied");
                 }
                 break;
             case END:

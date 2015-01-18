@@ -44,19 +44,15 @@ public class TridentPlugin {
     PluginClassLoader classLoader;
 
     protected TridentPlugin() {
-        this.pluginFile = null;
-        this.description = null;
-        this.defaultConfig = null;
-        this.configDirectory = null;
-        this.classLoader = null;
+        // Prevent stack continuation
+        throw new IllegalStateException("Cannot be directly instantiated");
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
         for (TridentPlugin plugin : Trident.pluginHandler().getPlugins()) {
             if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
                 TridentLogger.error(new IllegalStateException(
-                        "Plugin already initialized or plugin with this name already exists! " +
-                                "Name: " + description.name()));
+                        "Plugin already initialized or plugin named" + description.name() + " exists already"));
             }
         }
 
@@ -80,7 +76,7 @@ public class TridentPlugin {
         Class<?> caller = Trident.findCaller(3);
         ClassLoader loader = caller.getClassLoader();
         for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
-            if (plugin.getClass().getClassLoader().equals(loader))
+            if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
     }
@@ -95,10 +91,10 @@ public class TridentPlugin {
      * @return the instance of the plugin with the specified main class
      */
     @Nullable
-    public static TridentPlugin getInstance(Class<? extends TridentPlugin> c) {
+    public static TridentPlugin instance(Class<? extends TridentPlugin> c) {
         ClassLoader loader = c.getClassLoader();
         for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
-            if (plugin.getClass().getClassLoader().equals(loader))
+            if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
     }
@@ -161,7 +157,7 @@ public class TridentPlugin {
     /**
      * Saves a resource inside the jar to the plugin directory
      *
-     * @param name the filename of the directory
+     * @param name    the filename of the directory
      * @param replace whether or not replace the old resource, if it exists
      */
     public void saveResource(String name, boolean replace) {
