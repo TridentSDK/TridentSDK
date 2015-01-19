@@ -26,7 +26,7 @@ import net.tridentsdk.event.player.PlayerEvent;
  */
 public class PlayerToggleSprintEvent extends PlayerEvent implements Cancellable {
     private final boolean toggle;
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     public PlayerToggleSprintEvent(Player player, boolean toggle) {
         super(player);

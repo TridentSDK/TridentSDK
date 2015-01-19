@@ -29,6 +29,8 @@ import net.tridentsdk.entity.LivingEntity;
  * <p>The module may also provide a path and return a number other than 0 to indicate how many ticks the
  * AI can rest and the path will be followed by the entity. By not setting a path and returning a value other
  * than 0, the entity can effectively be made to "sleep," where it will not move at all.</p>
+ *
+ * @author The TridentSDK Team
  */
 public interface AiModule {
     /**

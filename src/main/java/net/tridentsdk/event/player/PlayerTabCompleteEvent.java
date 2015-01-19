@@ -25,7 +25,6 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class PlayerTabCompleteEvent extends PlayerEvent {
-
     private final String message;
     private final String[] suggestions;
 

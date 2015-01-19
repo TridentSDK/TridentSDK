@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event;
 
-/*
+/**
  * Levels of priority an event is given, where the events fire from LOWEST to HIGHEST
  *
  * @author The TridentSDK Team

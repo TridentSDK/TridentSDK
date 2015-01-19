@@ -17,6 +17,11 @@
 
 package net.tridentsdk.entity;
 
+/**
+ * Types of horses which differ in appearence
+ *
+ * @author The TridentSDK Team
+ */
 public enum HorseType {
     /**
      * Generic Horse

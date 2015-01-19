@@ -23,6 +23,8 @@ import net.tridentsdk.docs.Volatile;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
+import javax.annotation.concurrent.GuardedBy;
+
 /**
  * Called when a player edits a sign, or when the sign is first created
  *
@@ -33,8 +35,9 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
     @Volatile(policy = "No individual element modify",
             reason = "Not thread safe",
             fix = "Write/Read the entire field ONLY")
+    @GuardedBy("this")
     private String[] contents;
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
@@ -58,7 +61,9 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      * @return String[] contents of the Sign
      */
     public String[] getContents() {
-        return contents;
+        synchronized (this) {
+            return contents;
+        }
     }
 
     /**
@@ -67,7 +72,9 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      * @param contents String[] contents of the Sign
      */
     public void setContents(String... contents) {
-        this.contents = contents;
+        synchronized (this) {
+            this.contents = contents;
+        }
     }
 
     /**

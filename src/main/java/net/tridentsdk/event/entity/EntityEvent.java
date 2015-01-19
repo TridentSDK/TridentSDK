@@ -21,6 +21,11 @@ import net.tridentsdk.entity.Entity;
 import net.tridentsdk.event.Cancellable;
 import net.tridentsdk.event.Event;
 
+/**
+ * An event abstraction which relates to entities. Do not listen to this event, only subclasses.
+ *
+ * @author The TridentSDK Team
+ */
 public class EntityEvent extends Event implements Cancellable {
     private volatile Entity entity;
     private volatile boolean cancelled;

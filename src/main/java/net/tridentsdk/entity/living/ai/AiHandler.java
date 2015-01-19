@@ -21,13 +21,14 @@ import net.tridentsdk.entity.EntityType;
 
 /**
  * Handles the assigning of AIs to Entities on the server.
+ *
+ * @author The TridentSDK Team
  */
 public interface AiHandler {
-
     /**
      * Returns the AI Module that is the default for a certain type of entity
      */
-    AiModule defaultAIFor(EntityType type);
+    AiModule defaultAiFor(EntityType type);
 
     /**
      * Sets the AI for this entity type, used to provide a separate AiModule for

@@ -17,6 +17,11 @@
 
 package net.tridentsdk;
 
+/**
+ * Implemented to represent an object which messages can be sent to
+ *
+ * @author The TridentSDK Team
+ */
 public interface Messagable {
     /**
      * Send an array of messages to this recipient

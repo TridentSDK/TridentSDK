@@ -21,6 +21,11 @@ import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
+/**
+ * Occurs when a player damages a block and causes it to begin breaking
+ *
+ * @author The TridentSDK Team
+ */
 public class PlayerDigEvent extends PlayerEvent implements Cancellable {
     private final BlockOrientation face;
     private final short status;

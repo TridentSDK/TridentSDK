@@ -54,15 +54,15 @@ public class EventHandler {
         }
     };
 
-    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> callers = Factories.collect()
-            .createMap();
+    private final ConcurrentMap<Class<? extends Event>, PriorityBlockingQueue<EventReflector>> callers =
+            Factories.collect().createMap();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = Factories.collect().createCache();
 
     private final ConcurrentCache<TaskExecutor, EventHandler> handles = Factories.collect().createCache();
 
     private EventHandler() {
         if (!Trident.isTrident()) {
-            TridentLogger.error(new UnsupportedOperationException("EventManager must be initiated by TridentSDK!"));
+            TridentLogger.error(new IllegalAccessException("EventManager must be initiated by TridentSDK!"));
         }
     }
 

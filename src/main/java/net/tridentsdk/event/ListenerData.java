@@ -17,13 +17,21 @@
 
 package net.tridentsdk.event;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * An annotation to mark the priority of a listener method
+ *
+ * @author The TridentSDK Team
+ */
+@Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ListenerData {
+    /**
+     * The event priority
+     *
+     * @return the event priority
+     */
     Importance importance() default Importance.MEDIUM;
 }

@@ -17,6 +17,11 @@
 
 package net.tridentsdk.entity;
 
+/**
+ * A charge that explodes with various specified colors and properties
+ *
+ * @author The TridentSDK Team
+ */
 public interface Firework extends Entity {
     /**
      * Get the number of ticks that this Firework will explode at

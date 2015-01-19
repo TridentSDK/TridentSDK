@@ -42,10 +42,23 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+/**
+ * Handles server plugins, loading and unloading, class management, and lifecycle management for plugins
+ *
+ * @author The TridentSDK Team
+ */
 public class TridentPluginHandler {
     private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads()
             .executor(2, "Plugins");
     private final List<TridentPlugin> plugins = Lists.newArrayList();
+
+    /**
+     * Do not instantiate this without being Trident
+     */
+    public TridentPluginHandler() {
+        if (!Trident.isTrident())
+            TridentLogger.error(new IllegalAccessException("Can only be instantiated by Trident"));
+    }
 
     @InternalUseOnly
     public void load(final File pluginFile) {
@@ -195,6 +208,11 @@ public class TridentPluginHandler {
         return null;
     }
 
+    /**
+     * Disables the plugin unloading the classes and removing the subprocess
+     *
+     * @param plugin the plugin to disable
+     */
     public void disable(final TridentPlugin plugin) {
         plugin.executor().addTask(new Runnable() {
             @Override
@@ -213,6 +231,12 @@ public class TridentPluginHandler {
         });
     }
 
+    /**
+     * Obtains a list of plugins that are currently <strong>loaded</strong>
+     * (not the plugins that are inside the plugin directory)
+     *
+     * @return the collection of plugins that are loaded
+     */
     public List<TridentPlugin> getPlugins() {
         return Collections.unmodifiableList(this.plugins);
     }

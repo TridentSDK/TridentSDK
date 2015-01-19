@@ -29,7 +29,7 @@ import net.tridentsdk.event.Cancellable;
 public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     private final Coordinates fromLoc;
     private final Coordinates toLoc;
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     public PlayerMoveEvent(Player player, Coordinates from, Coordinates to) {
         super(player);

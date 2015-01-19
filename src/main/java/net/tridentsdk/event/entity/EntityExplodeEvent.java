@@ -27,7 +27,7 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityExplodeEvent extends EntityEvent {
-    private float strength;
+    private volatile float strength;
 
     public EntityExplodeEvent(Entity entity, float strength) {
 

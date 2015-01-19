@@ -26,8 +26,8 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class BedExplodeEvent extends BlockEvent implements Cancellable {
-    private float strength;
-    private boolean cancelled;
+    private volatile float strength;
+    private volatile boolean cancelled;
 
     /**
      * @param block    Block associated with this event

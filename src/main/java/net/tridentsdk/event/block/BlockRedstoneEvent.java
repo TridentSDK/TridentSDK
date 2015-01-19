@@ -29,7 +29,7 @@ public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
     private final int strength;
     private final Block causer;
     private final Cause cause;
-    private boolean cancelled;
+    private volatile  boolean cancelled;
 
     /**
      * @param block    Block which redstone state was updated

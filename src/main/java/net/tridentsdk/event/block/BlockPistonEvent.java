@@ -31,7 +31,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
     private final Orientation direction;
     private final boolean retract;
     private final Block influenced;
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     public BlockPistonEvent(Block block, Orientation direction, boolean retract, Block influenced) {
         super(block);

@@ -27,9 +27,8 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellable {
-    private GameMode gameMode;
-
-    private boolean cancelled;
+    private volatile GameMode gameMode;
+    private volatile boolean cancelled;
 
     public PlayerGameModeChangeEvent(Player player, GameMode gameMode) {
         super(player);

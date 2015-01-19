@@ -18,12 +18,18 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.Coordinates;
+import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.entity.living.ai.AiModule;
 import net.tridentsdk.entity.living.ai.Path;
 import net.tridentsdk.event.entity.EntityDamageEvent;
 
+/**
+ * An entity that is alive, which can be damaged and move with AI
+ *
+ * @author The TridentSDK Team
+ */
 public interface LivingEntity extends Entity, ProjectileLauncher {
     /**
      * Makes the specified entity invisible to the current entity
@@ -140,11 +146,6 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * Overides defaults and previous AI Modules for this entity, assigning a new module to it
      */
     void setAiModule(AiModule module);
-
-    /**
-     * For internal use only, do not call this method.
-     */
-    void performAiUpdate();
 
     /**
      * Gets the path that this entity is currently following

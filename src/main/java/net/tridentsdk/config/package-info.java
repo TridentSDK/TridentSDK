@@ -19,10 +19,10 @@
  *
  * <p>Configs can be used and created using the {@link net.tridentsdk.config.JsonConfig}</p>
  *
- * <p>Basic functionality for the JSON configuration is in the {@link net.tridentsdk.config.ConfigSection}</p>
+ * <p>The Factories API also contains access methods to JSON configurations, which can be accessed using
+ * {@link net.tridentsdk.factory.Factories#configs()}</p>
  *
- * <p>This package does not contain thread safe classes. Primarily, this is for usage within a single plugin. Use extra
- * caution to have the right executor when using configurations of other plugins.</p>
+ * <p>Basic functionality for the JSON configuration is in the {@link net.tridentsdk.config.ConfigSection}</p>
  */
 
 package net.tridentsdk.config;

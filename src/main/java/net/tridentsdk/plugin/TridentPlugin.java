@@ -34,6 +34,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
+/**
+ * Must be extended by a non-inner class to represent a plugin's <em>main class</em>
+ *
+ * @author The TridentSDK Team
+ */
 public class TridentPlugin {
     private static final HashFunction HASHER = Hashing.murmur3_32();
     private final File pluginFile;
@@ -43,6 +48,9 @@ public class TridentPlugin {
     private final HeldValueLatch<TaskExecutor> executor = HeldValueLatch.create();
     PluginClassLoader classLoader;
 
+    /**
+     * It's not a good idea to use this constructor
+     */
     protected TridentPlugin() {
         // Prevent stack continuation
         throw new IllegalStateException("Cannot be directly instantiated");

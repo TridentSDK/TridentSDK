@@ -28,8 +28,8 @@ public abstract class PluginChannel {
 
     public void process(byte... message) {
         if (!Trident.isTrident()) {
-            TridentLogger.error(
-                    new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
+            TridentLogger.error(new IllegalAccessException("Only TridentSDK is allowed to execute this method!"));
+            return;
         }
 
         byte[] bytes = new byte[message.length - 1];

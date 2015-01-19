@@ -27,7 +27,7 @@ import net.tridentsdk.entity.living.Player;
  */
 public class PlayerConsumeEvent extends PlayerHungerEvent {
     private final DroppedItem item;
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     /**
      * @param player the player associated with this event

@@ -28,9 +28,9 @@ import net.tridentsdk.window.inventory.Item;
  */
 public class PlayerFishEvent extends PlayerEvent implements Cancellable {
     private final State state;
-    private int exp;
-    private Item item;
-    private boolean cancelled;
+    private volatile int exp;
+    private volatile Item item;
+    private volatile boolean cancelled;
 
     public PlayerFishEvent(Player player, State state, int exp, Item item) {
         super(player);
@@ -69,11 +69,31 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
         this.item = item;
     }
 
+    /**
+     * The state of a fishing hook when deployed
+     *
+     * @author The TridentSDK Team
+     */
     public enum State {
+        /**
+         * When the hook is in the water
+         */
         FISHING,
+        /**
+         * Undefined
+         */
         FAILED_ATTEMPT,
+        /**
+         * A fish is caught on the hook
+         */
         CAUGHT_FISH,
+        /**
+         * The hook attaches to an entity
+         */
         CAUGHT_ENTITY,
+        /**
+         * The hook attaches to the ground
+         */
         IN_GROUND
     }
 }

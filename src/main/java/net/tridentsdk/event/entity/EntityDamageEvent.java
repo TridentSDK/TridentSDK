@@ -20,10 +20,15 @@ package net.tridentsdk.event.entity;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.LivingEntity;
 
+/**
+ * This event occurs when an entity is damaged, should only apply to living entities specifically
+ *
+ * @author The TridentSDK Team
+ */
 public class EntityDamageEvent extends EntityEvent {
     private final Cause cause;
-    private boolean cancelled;
-    private double damage;
+    private volatile boolean cancelled;
+    private volatile double damage;
 
     /**
      * @param entity the entity associated with this event
@@ -73,6 +78,11 @@ public class EntityDamageEvent extends EntityEvent {
         this.cancelled = cancelled;
     }
 
+    /**
+     * The cause of a damage event
+     *
+     * @author The TridentSDK Team
+     */
     public enum Cause {
         STARVATION,
         FIRE,

@@ -23,9 +23,14 @@ import net.tridentsdk.base.Orientation;
 
 import java.util.List;
 
+/**
+ * This event occurs when a piston becomes extended
+ *
+ * @author The TridentSDK Team
+ */
 public class PistonExtendEvent extends BlockPistonEvent {
     private final ImmutableList<Block> blocksInfluenced;
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     public PistonExtendEvent(Block block, Orientation direction, List<Block> influenced) {
         super(block, direction, false, influenced.get(0));
@@ -46,7 +51,7 @@ public class PistonExtendEvent extends BlockPistonEvent {
     /**
      * Returns an ImmutableList of the blocks that are being pushed by this piston, may be empty
      */
-    public List<Block> getBlocksInfluenced() {
+    public List<Block> blocksInfluenced() {
         return this.blocksInfluenced;
     }
 }

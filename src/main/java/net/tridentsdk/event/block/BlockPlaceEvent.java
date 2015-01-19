@@ -33,7 +33,7 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     private final Block blockClicked;
     private final BlockOrientation faceClicked;
 
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     /**
      * @param player       Player who placed this block

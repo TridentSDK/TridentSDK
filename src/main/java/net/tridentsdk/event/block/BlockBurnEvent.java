@@ -26,7 +26,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class BlockBurnEvent extends BlockEvent implements Cancellable {
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     /**
      * The block being burnt in this event

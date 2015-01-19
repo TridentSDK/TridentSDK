@@ -124,7 +124,7 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     @Override
     public AiModule aiModule() {
         if (ai == null) {
-            return Trident.instance().aiHandler().defaultAIFor(type());
+            return Trident.instance().aiHandler().defaultAiFor(type());
         } else {
             return ai;
         }

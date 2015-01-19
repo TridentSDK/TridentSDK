@@ -31,19 +31,24 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
 
+/**
+ * The classloader for plugins
+ *
+ * @author The TridentSDK Team
+ */
 public class PluginClassLoader extends URLClassLoader {
     private static final Map<String, Class<?>> globallyLoaded = Factories.collect().createMap();
     final Map<String, Class<?>> locallyLoaded = Factories.collect().createMap();
 
-    public PluginClassLoader(File pluginFile) throws MalformedURLException {
+    PluginClassLoader(File pluginFile) throws MalformedURLException {
         super(new URL[] { pluginFile.toURI().toURL() });
     }
 
-    public void link(Class<?> c) {
+    void link(Class<?> c) {
         super.resolveClass(c);
     }
 
-    public Class<?> defineClass(String name, byte[] source) {
+    Class<?> defineClass(String name, byte[] source) {
         return super.defineClass(name, source, 0, source.length);
     }
 
@@ -87,7 +92,7 @@ public class PluginClassLoader extends URLClassLoader {
         locallyLoaded.put(cls.getName(), cls);
     }
 
-    public void unloadClasses() {
+    void unloadClasses() {
         for (Class<?> cls : locallyLoaded.values()) {
             if (Listener.class.isAssignableFrom(cls)) {
                 Trident.eventHandler().unregister(cls.asSubclass(Listener.class));

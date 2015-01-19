@@ -19,6 +19,8 @@ package net.tridentsdk.entity.living.ai;
 
 /**
  * A path that entities may follow
+ *
+ * @author The TridentSDK Team
  */
 public class Path {
     // TODO
