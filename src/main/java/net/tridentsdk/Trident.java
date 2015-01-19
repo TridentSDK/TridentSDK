@@ -44,7 +44,7 @@ import java.util.Map;
 @ThreadSafe
 public final class Trident {
     private static final ExposedSecurity SECURITY = new ExposedSecurity();
-    private static Server server;
+    private static volatile Server server;
 
     private Trident() {
     }

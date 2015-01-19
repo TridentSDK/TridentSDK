@@ -19,14 +19,21 @@ package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.Messagable;
 
+/**
+ * Represents a console which runs the server, can be sent messages and execute commands
+ *
+ * <p>Includes hardcoded ANSI escapes for console colors</p>
+ *
+ * @author The TridentSDK Team
+ */
 public interface ServerConsole extends Messagable, CommandIssuer {
-    public static final String RESET = PlatformColor.getColor("reset");
-    public static final String BLACK = PlatformColor.getColor("black");
-    public static final String RED = PlatformColor.getColor("red");
-    public static final String GREEN = PlatformColor.getColor("green");
-    public static final String YELLOW = PlatformColor.getColor("yellow");
-    public static final String BLUE = PlatformColor.getColor("blue");
-    public static final String PURPLE = PlatformColor.getColor("purple");
-    public static final String CYAN = PlatformColor.getColor("cyan");
-    public static final String WHITE = PlatformColor.getColor("white");
+    public static final String RESET = PlatformColor.forColor("reset");
+    public static final String BLACK = PlatformColor.forColor("black");
+    public static final String RED = PlatformColor.forColor("red");
+    public static final String GREEN = PlatformColor.forColor("green");
+    public static final String YELLOW = PlatformColor.forColor("yellow");
+    public static final String BLUE = PlatformColor.forColor("blue");
+    public static final String PURPLE = PlatformColor.forColor("purple");
+    public static final String CYAN = PlatformColor.forColor("cyan");
+    public static final String WHITE = PlatformColor.forColor("white");
 }

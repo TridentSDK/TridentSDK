@@ -20,6 +20,7 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
+import net.tridentsdk.entity.decorate.InventoryHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.window.inventory.Item;
 
@@ -30,7 +31,7 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder {
     /**
      * Returns the flying speed of the Player
      *

@@ -17,14 +17,46 @@
 
 package net.tridentsdk.plugin.cmd;
 
+/**
+ * ANSI codes for coloring the console
+ *
+ * <p>Don't use this class if you need console colors. Use {@link net.tridentsdk.plugin.cmd.ServerConsole}</p>
+ *
+ * @author The TridentSDK Team
+ */
 public final class PlatformColor {
+    /**
+     * An empty string
+     */
     public static final String EMPTY = "";
     private static final String ESC = String.valueOf((char) 0x1B);
 
     private PlatformColor() {
     }
 
-    public static String getColor(String color) {
+    /**
+     * Obtains the colors needed by name
+     *
+     * <p>This is <strong>not</strong> case-sensitive</p>
+     *
+     * <p>The list of colors which can be retrieved:
+     * <ul>
+     *     <li>reset</li>
+     *     <li>black</li>
+     *     <li>red</li>
+     *     <li>green</li>
+     *     <li>yellow</li>
+     *     <li>purple</li>
+     *     <li>cyan</li>
+     *     <li>white</li>
+     *     <li>cursoreol2 - ANSI escape which moves the insertion cursor 2 spaces to the right</li>
+     * </ul></p>
+     *
+     * @param color the name of the color to retrieve the escape for
+     * @return the proper escape code or {@link net.tridentsdk.plugin.cmd.PlatformColor#EMPTY} if it does not exist, or
+     *         if the platform is windows, which does not support color codes or ANSI escapes
+     */
+    public static String forColor(String color) {
         if (isWindows())
             return EMPTY;
 

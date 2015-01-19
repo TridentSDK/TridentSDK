@@ -48,6 +48,14 @@ public interface Window {
     void setSlot(int index, Item value);
 
     /**
+     * Places an item into the player's inventory, where there is room, or drops onto the ground if the inventory is
+     * full
+     *
+     * @param item the item to place
+     */
+    void putItem(Item item);
+
+    /**
      * The title of the inventory
      *
      * @return the name displayed at the top of the window

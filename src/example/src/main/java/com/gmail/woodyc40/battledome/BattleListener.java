@@ -94,7 +94,7 @@ public class BattleListener implements Listener {
                     done = game.setPurpleObby(location);
 
                 if (done)
-                    player.sendMessage(CommandHandler.PLAYER_PREFIX + "Set the obsidian at the placed location.");
+                    player.sendMessage(CommandHandler.PREFIX + "Set the obsidian at the placed location.");
                 else {
                     player.sendMessage(
                             CommandHandler.PLAYER_ERROR + "Obsidian already set, removing the one you placed.");
@@ -117,18 +117,18 @@ public class BattleListener implements Listener {
                 case SPAWN:
                     session.setSpawn(coordinates);
                     session.setStage(SetupStage.PURPLE_SPAWN);
-                    player.sendMessage(CommandHandler.PLAYER_PREFIX + "Click the purple spawn now");
+                    player.sendMessage(CommandHandler.PREFIX + "Click the purple spawn now");
                     break;
                 case PURPLE_SPAWN:
                     session.setPurpleTeam(coordinates);
                     session.setStage(SetupStage.GREEN_SPAWN);
-                    player.sendMessage(CommandHandler.PLAYER_PREFIX + "Click the green spawn now");
+                    player.sendMessage(CommandHandler.PREFIX + "Click the green spawn now");
                     break;
                 case GREEN_SPAWN:
                     session.setGreenTeam(coordinates);
                     game.setup(session.spawn(), session.purpleTeam(), session.greenTeam());
                     sessions.remove(player);
-                    player.sendMessage(CommandHandler.PLAYER_PREFIX + "Completed setup for " + game.id());
+                    player.sendMessage(CommandHandler.PREFIX + "Completed setup for " + game.id());
             }
         }
     }

@@ -19,6 +19,13 @@ package net.tridentsdk.plugin.annotation;
 
 import java.lang.annotation.*;
 
+/**
+ * Describes a plugin properties and information
+ *
+ * <p>The information provided to each field has no semantic properties</p>
+ *
+ * @author The TridentSDK Team
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -26,15 +33,33 @@ public @interface PluginDescription {
     // TODO: Provide documentation on what this priority actually is
     int priority() default 1;
 
+    /**
+     * The plugin name, which will always be loaded even if it has the same name as another
+     */
     String name();
 
+    /**
+     * The plugin version
+     */
     String version() default "1.0";
 
+    /**
+     * Purpose of the plugin
+     */
     String description() default "Plugin made for TridentSDK";
 
+    /**
+     * The person who wrote the plugin
+     */
     String author() default "";
 
+    /**
+     * The people that wrote the plugin
+     */
     String[] authors() default { };
 
+    /**
+     * The plugin(s) which is depended on by the described plugin
+     */
     String[] dependencies() default { };
 }

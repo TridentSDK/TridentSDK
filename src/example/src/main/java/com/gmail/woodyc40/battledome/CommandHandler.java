@@ -1,11 +1,13 @@
 package com.gmail.woodyc40.battledome;
 
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.plugin.cmd.ServerConsole;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Handles commands for BattleDome
@@ -14,13 +16,9 @@ import net.tridentsdk.plugin.cmd.ServerConsole;
  */
 @CommandDescription(name = "bd", permission = "bd.all", aliases = "battledome")
 public class CommandHandler extends Command {
-    // TODO integrate ChatColor and ServerConsole colors
-    // TODO inventory (blaze rod)
-
-    public static final String PLAYER_PREFIX = ChatColor.GREEN + "[Battle" + ChatColor.DARK_PURPLE + "Dome]" + ChatColor.AQUA;
-    public static final String PLAYER_ERROR = PLAYER_PREFIX + ChatColor.RED;
-    private static final String PLAYER_WARN = PLAYER_PREFIX + ChatColor.GOLD;
-    private static final String CONSOLE_ERROR = ServerConsole.RED + "[BattleDome|Error]";
+    public static final String PREFIX = ChatColor.GREEN + "[Battle" + ChatColor.DARK_PURPLE + "Dome]" + ChatColor.AQUA;
+    public static final String ERROR = PREFIX + ChatColor.RED;
+    private static final String WARN = PREFIX + ChatColor.GOLD;
 
     // Initialized after the plugin object is created
     // therefore, this is completely safe
@@ -30,7 +28,7 @@ public class CommandHandler extends Command {
     public void handlePlayer(Player player, String arguments, String alias) {
         String[] args = arguments.split(" ");
         if (args.length == 0) {
-            player.sendMessage(PLAYER_WARN + "That is not enough arguments");
+            player.sendMessage(WARN + "That is not enough arguments");
             this.sendHelp(player);
             return;
         }
@@ -41,7 +39,7 @@ public class CommandHandler extends Command {
                 break;
             case "join":
                 if (args.length < 2) {
-                    player.sendMessage(PLAYER_ERROR + "Insufficient arguments");
+                    player.sendMessage(ERROR + "Insufficient arguments");
                     sendHelp(player);
                     return;
                 }
@@ -55,7 +53,7 @@ public class CommandHandler extends Command {
                 break;
             case "remove":
                 if (args.length < 2) {
-                    player.sendMessage(PLAYER_ERROR + "Insufficient arguments");
+                    player.sendMessage(ERROR + "Insufficient arguments");
                     sendHelp(player);
                     return;
                 }
@@ -66,7 +64,7 @@ public class CommandHandler extends Command {
                 break;
             case "start":
                 if (args.length < 2) {
-                    player.sendMessage(PLAYER_ERROR + "Insufficient arguments");
+                    player.sendMessage(ERROR + "Insufficient arguments");
                     sendHelp(player);
                     return;
                 }
@@ -76,14 +74,14 @@ public class CommandHandler extends Command {
                 this.handleStart(player, id0);
                 break;
             default:
-                player.sendMessage(PLAYER_ERROR + "That command doesn't exist");
+                player.sendMessage(ERROR + "That command doesn't exist");
                 this.sendHelp(player);
         }
     }
 
     @Override
     public void handleConsole(ServerConsole sender, String arguments, String alias) {
-        sender.sendRaw(CONSOLE_ERROR + "You cannot execute BattleDome commands via the console");
+        sender.sendRaw(ERROR + "You cannot execute BattleDome commands via the console");
     }
 
     private void sendHelp(Player player) {
@@ -101,18 +99,18 @@ public class CommandHandler extends Command {
         try {
             gameId = Integer.parseInt(string);
         } catch (NumberFormatException e) {
-            player.sendMessage(PLAYER_ERROR + "That's not a valid game ID");
+            player.sendMessage(ERROR + "That's not a valid game ID");
             return -1;
         }
 
         // Seriously, don't even waste our time on this
         if (gameId == -1 || gameId < 0) {
-            player.sendMessage(PLAYER_ERROR + "That's not a valid game ID");
+            player.sendMessage(ERROR + "That's not a valid game ID");
             return -1;
         }
 
         if (!this.manager.containsGame(gameId)) {
-            player.sendMessage(PLAYER_ERROR + "That game does not exist");
+            player.sendMessage(ERROR + "That game does not exist");
             return -1;
         }
 
@@ -124,18 +122,19 @@ public class CommandHandler extends Command {
         Game game = this.manager.createGame();
 
         listener.putSession(player, game);
-        player.sendMessage(PLAYER_PREFIX + "Beginning setup of game " + game.id());
-        player.sendMessage(CommandHandler.PLAYER_PREFIX + "Click the lobby spawn with the blaze rod");
+        player.getInventory().putItem(new Item(Substance.BLAZE_ROD));
+        player.sendMessage(PREFIX + "Beginning setup of game " + game.id());
+        player.sendMessage(CommandHandler.PREFIX + "Click the lobby spawn with the blaze rod");
     }
 
     private void handleRemove(Player player, int gameId) {
         this.manager.removeGame(gameId);
-        player.sendMessage(PLAYER_PREFIX + "Removed the game successfully");
+        player.sendMessage(PREFIX + "Removed the game successfully");
     }
 
     private void handleJoin(Player player, int gameId) {
         if (this.manager.isPlaying(player)) {
-            player.sendMessage(PLAYER_ERROR + "You cannot join two games");
+            player.sendMessage(ERROR + "You cannot join two games");
             return;
         }
 
@@ -147,9 +146,9 @@ public class CommandHandler extends Command {
     private void handleLeave(Player player) {
         Game removedFrom = this.manager.removePlayer(player);
         if (removedFrom == null) {
-            player.sendMessage(PLAYER_ERROR + "You can't be leave if you aren't playing");
+            player.sendMessage(ERROR + "You can't be leave if you aren't playing");
         } else
-            player.sendMessage(PLAYER_PREFIX + "Left game " + removedFrom.id());
+            player.sendMessage(PREFIX + "Left game " + removedFrom.id());
     }
 
     private void handleStart(Player player, int gameId) {

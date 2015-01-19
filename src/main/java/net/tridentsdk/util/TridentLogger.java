@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
+import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import org.apache.log4j.*;
@@ -34,7 +35,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.locks.LockSupport;
+import java.util.regex.Pattern;
 
+/**
+ * Logger for Trident, automatically obtains the correct logger for the class
+ *
+ * @author The TridentSDK Team
+ */
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
     private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Huston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " + "this isn't a bug, it's a feature!" };
@@ -90,26 +99,94 @@ public final class TridentLogger {
         Files.copy(original, newPath);
     }
 
+    /**
+     * Obtains the logger for the class that calls this method
+     *
+     * @return the logger for that class
+     */
     public static org.slf4j.Logger logger() {
         return LoggerFactory.getLogger(Trident.findCaller(4));
     }
 
+    /**
+     * Logs a message to the class logger
+     *
+     * @param item the item to log
+     */
     public static void log(String item) {
-        logger().info(item + ServerConsole.RESET);
+        logger().info(parse(item) + ServerConsole.RESET);
     }
 
+    /**
+     * Logs an error message to the class logger with a red escape
+     *
+     * @param message the message to log
+     */
     public static void error(String message) {
-        logger().error(ServerConsole.RED + message + ServerConsole.RESET);
+        logger().error(ServerConsole.RED + parse(message) + ServerConsole.RESET);
     }
 
+    /**
+     * Warns the console with a yellow escape
+     *
+     * @param item the item to log
+     */
     public static void warn(String item) {
-        logger().warn(ServerConsole.YELLOW + item + ServerConsole.RESET);
+        logger().warn(ServerConsole.YELLOW + parse(item) + ServerConsole.RESET);
     }
 
+    /**
+     * Logs to the logger with a green escape
+     *
+     * @param item the item to log
+     */
     public static void success(String item) {
         log(ServerConsole.GREEN + item);
     }
 
+    private static String parse(String item) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < item.length(); i++) {
+            char c = item.charAt(i);
+            if (c == '§') {
+                // Find the character after that
+                char esc = item.charAt(i + 1);
+                ChatColor color = ChatColor.forColor(esc);
+
+                // Not a real color, continue on
+                if (color == null) {
+                    builder.append(c);
+                } else {
+                    String s = ChatColor.consoleFormat(color);
+
+                    // Not a console color, append it anyways
+                    if ("".equals(s)) {
+                        builder.append(c);
+                    } else {
+                        // Append the console format instead of the chat color
+                        builder.append(s);
+
+                        // Skip the next character, don't even append it
+                        i++;
+                    }
+                }
+            } else {
+                // No color escape, append normally
+                builder.append(c);
+            }
+        }
+
+        return builder.toString();
+    }
+
+    /**
+     * Formats a throwable to be logged to the console
+     *
+     * <p>By default this is not needed as the threads which runs almost all operations by default have a set
+     * uncaught exception handler</p>
+     *
+     * @param throwable the error to log
+     */
     public static void error(Throwable throwable) {
         org.slf4j.Logger logger = logger();
         StackTraceElement[] stackTrace = throwable.getStackTrace();
@@ -154,12 +231,12 @@ public final class TridentLogger {
         logger.error("Trident version: " + Trident.version());
         logger.error("Plugins:         " + Arrays.toString(
                 Lists.transform(Trident.pluginHandler().getPlugins(), new Function<TridentPlugin, String>() {
-                            @Nullable
-                            @Override
-                            public String apply(TridentPlugin plugin) {
-                                return plugin.getDescription().name();
-                            }
-                        }).toArray()));
+                    @Nullable
+                    @Override
+                    public String apply(TridentPlugin plugin) {
+                        return plugin.getDescription().name();
+                    }
+                }).toArray()));
         logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +
                 System.getProperty("java.vendor"));
         logger.error("OS:              running " +

@@ -33,12 +33,4 @@ public interface InventoryHolder extends Entity {
      * @return the Inventory that this entity holds
      */
     Window getInventory();
-
-    /**
-     * The contents this slot
-     *
-     * @param slot the target slot
-     * @return the contents of the specified slot
-     */
-    Item getContent(int slot);
 }

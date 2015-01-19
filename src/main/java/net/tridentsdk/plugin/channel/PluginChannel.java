@@ -17,15 +17,23 @@
 
 package net.tridentsdk.plugin.channel;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
+import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.List;
 
+/**
+ * A channel which listens for data received by the opened pipeline
+ *
+ * @author The TridentSDK Team
+ */
 public abstract class PluginChannel {
     private final List<byte[]> history = Lists.newArrayList();
 
+    @InternalUseOnly
     public void process(byte... message) {
         if (!Trident.isTrident()) {
             TridentLogger.error(new IllegalAccessException("Only TridentSDK is allowed to execute this method!"));
@@ -33,18 +41,25 @@ public abstract class PluginChannel {
         }
 
         byte[] bytes = new byte[message.length - 1];
-
-        for (int i = 0; i < message.length; i++) {
-            bytes[i] = message[i];
-        }
+        System.arraycopy(message, 0, bytes, 0, message.length);
 
         this.history.add(bytes);
         this.onMessage(message);
     }
 
+    /**
+     * Overridden to perform a specified action upon reception of byte encoded messages
+     *
+     * @param message the message which was sent to this channel
+     */
     public abstract void onMessage(byte... message);
 
+    /**
+     * Obtains the history of messages received by this channel
+     *
+     * @return an immutable list of bytes sent by this channel
+     */
     public List<byte[]> getHistory() {
-        return this.history;
+        return ImmutableList.copyOf(this.history);
     }
 }

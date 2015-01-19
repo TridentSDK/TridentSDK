@@ -17,8 +17,12 @@
 
 package net.tridentsdk.util;
 
+/**
+ * String utilities
+ *
+ * @author The TridentSDK Team
+ */
 public final class StringUtil {
-
     private StringUtil() {
     }
 
@@ -38,6 +42,12 @@ public final class StringUtil {
         return builder.toString();
     }
 
+    /**
+     * Checks if a string is a number
+     *
+     * @param str the string to check
+     * @return {@code true} is number parsable
+     */
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);

@@ -22,6 +22,11 @@ import net.tridentsdk.util.TridentLogger;
 
 import java.util.Map;
 
+/**
+ * Manages data channels for sending information over the pipeline
+ *
+ * @author The TridentSDK Team
+ */
 public final class ChannelHandler {
     private static final ChannelHandler INSTANCE = new ChannelHandler();
 
@@ -30,24 +35,45 @@ public final class ChannelHandler {
     private ChannelHandler() {
     }
 
+    /**
+     * Obtains the static instance of the channel handler
+     *
+     * @return the channel handler instance
+     */
     public static ChannelHandler getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Registers a channel in the listings
+     *
+     * @param name the name of the channel
+     * @param channel the channel to register
+     */
     public void register(String name, PluginChannel channel) {
         if (this.channels.containsKey(name)) {
-            TridentLogger.error(
-                    new UnsupportedOperationException("Only TridentSDK is allowed to execute this method!"));
+            TridentLogger.error(new UnsupportedOperationException("Cannot register 2 channels of the same name"));
         }
 
         this.channels.put(name, channel);
     }
 
+    /**
+     * Removes a channel if it exists in the listings
+     *
+     * @param name the name of the channel to remove
+     */
     public void unregister(String name) {
         this.channels.remove(name);
     }
 
-    public PluginChannel getPluginChannel(String name) {
+    /**
+     * Find a channel by its name
+     *
+     * @param name the name to find the channel by
+     * @return the channel having the specified name
+     */
+    public PluginChannel forChannel(String name) {
         return this.channels.get(name);
     }
 }

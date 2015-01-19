@@ -64,7 +64,7 @@ public class Game {
 
     public void sendAll(String message) {
         for (Player player : players.keySet()) {
-            player.sendMessage(CommandHandler.PLAYER_PREFIX + message);
+            player.sendMessage(CommandHandler.PREFIX + message);
         }
     }
 
@@ -120,7 +120,7 @@ public class Game {
 
     public void win(Team team) {
         for (Player player : players.keySet())
-            player.sendMessage(CommandHandler.PLAYER_PREFIX + "Team " + team.toString() + " has won the game");
+            player.sendMessage(CommandHandler.PREFIX + "Team " + team.toString() + " has won the game");
 
         Factories.tasks().syncLater(TridentPlugin.instance(), new TridentRunnable() {
             @Override

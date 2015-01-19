@@ -130,7 +130,6 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
         }
     }
 
-    @Override
     public void performAiUpdate() {
         if (this.restTicks.get() == 0) {
             this.restTicks.set(this.aiModule().think(this));

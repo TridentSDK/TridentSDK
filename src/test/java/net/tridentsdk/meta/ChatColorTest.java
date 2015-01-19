@@ -41,7 +41,7 @@ public class ChatColorTest {
         Assert.assertEquals(ChatColor.WHITE.toString(), "white");
         Assert.assertEquals(ChatColor.OBFUSCATED.toString(), "obfuscated");
         Assert.assertEquals(ChatColor.BOLD.toString(), "bold");
-        Assert.assertEquals(ChatColor.STRIKETHROUGH.toString(), "strikethrough");
+        Assert.assertEquals(ChatColor.STRIKE_THROUGH.toString(), "strikethrough");
         Assert.assertEquals(ChatColor.UNDERLINE.toString(), "underline");
         Assert.assertEquals(ChatColor.ITALIC.toString(), "italic");
         Assert.assertEquals(ChatColor.RESET.toString(), "reset");
