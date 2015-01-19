@@ -38,8 +38,7 @@ public final class Factories {
     private static final HeldValueLatch<CollectFactory> collectFactory = HeldValueLatch.create();
 
     private static final ConfigFactory configFactory = new ConfigFactory();
-    private static final ReflectFactory reflectionFactory = new ReflectFactory();
-    private static final DisplayInfo INFO = new DisplayInfo();
+    private static final ReflectFactory reflectionFactory = new ReflectFactory();    
 
     private Factories() {
     }
@@ -111,15 +110,6 @@ public final class Factories {
             Thread.currentThread().interrupt();
             return null;
         }
-    }
-
-    /**
-     * Public server information displayed to the client
-     *
-     * @return the server information modifiers and getters
-     */
-    public static DisplayInfo serverInfo() {
-        return INFO;
     }
 
     /**
