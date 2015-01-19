@@ -22,8 +22,9 @@ import net.tridentsdk.Coordinates;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents an instance or "snapshot" of a tile when viewed by the construction method <p/> <p>Snapshot using the
- * {@link #of(Block)} method</p>
+ * Represents an instance or "snapshot" of a tile when viewed by the construction method
+ *
+ * <p>Snapshot using the {@link #of(Block)} method</p>
  *
  * @author The TridentSDK Team
  */
@@ -50,8 +51,9 @@ public final class BlockSnapshot {
     }
 
     /**
-     * Places the data stored in the snapshot into the original block <p/> <p>Does not clear data from this
-     * snapshot</p>
+     * Places the data stored in the snapshot into the original block
+     *
+     * <p>Does not clear data from this snapshot</p>
      */
     public void load() {
         Block block = location.world().tileAt(location);

@@ -112,14 +112,18 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     boolean canCollectItems();
 
     /**
-     * Returns the last EntityDamageEvent which inflicted this Entity <p/> <p>The event may be cancelled.</p>
+     * Returns the last EntityDamageEvent which inflicted this Entity
+     *
+     * <p>The event may be cancelled.</p>
      *
      * @return EntityDamageEvent the last Entity to inflict this Entity
      */
     EntityDamageEvent lastDamageEvent();
 
     /**
-     * Returns the player who dealt damage to this Entity since its last full heal <p>Used for death messages</p>
+     * Returns the player who dealt damage to this Entity since its last full heal
+     *
+     * <p>Used for death messages</p>
      *
      * @return Player the player who dealt damage to this entity since last full heal Returns null if no player has
      * damaged the Entity

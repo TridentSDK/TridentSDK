@@ -22,7 +22,9 @@ import net.tridentsdk.event.Event;
 import net.tridentsdk.world.World;
 
 /**
- * Called when an event relating to the world occurs <p/> <p>This is an umbrella event, do not listen to it</p>
+ * Called when an event relating to the world occurs
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
  */

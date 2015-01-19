@@ -40,8 +40,9 @@ public interface ExecutorFactory<E> extends Executor {
     TaskExecutor scaledThread();
 
     /**
-     * Assigns the scaled thread to the assignment <p/> <p>If already assigned, the executor is returned for the
-     * fast-path</p>
+     * Assigns the scaled thread to the assignment
+     *
+     * <p>If already assigned, the executor is returned for the fast-path</p>
      *
      * @param assignment the assignment that uses the executor
      * @return the executor assigned
@@ -49,8 +50,9 @@ public interface ExecutorFactory<E> extends Executor {
     TaskExecutor assign(E assignment);
 
     /**
-     * Adds a scaled thread to the assignment Map, useful if the assignment is created with the thread <p/> <p>Cannot
-     * replace existing entries. Acquired threads using {@link #assign(Object)} cannot be set.</p>
+     * Adds a scaled thread to the assignment Map, useful if the assignment is created with the thread
+     *
+     * <p>Cannot replace existing entries. Acquired threads using {@link #assign(Object)} cannot be set.</p>
      *
      * @param executor   the executor assigned
      * @param assignment the element that is associated with the executor

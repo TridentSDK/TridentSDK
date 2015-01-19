@@ -21,7 +21,9 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.event.Event;
 
 /**
- * Represents any event that involves a block modification <p/> <p>This is an umbrella event, do not listen to it</p>
+ * Represents any event that involves a block modification
+ *
+ * <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
  */

@@ -45,9 +45,12 @@ public class HeldValueLatch<V> {
     }
 
     /**
-     * Sets the value in the latch <p/> <p>The effects of setting this only once is unspecified</p> <p/> <p>This is
-     * unsynchronized because all actions prior to counting down <em>happens-before</em> another thread awaits the
-     * value</p>
+     * Sets the value in the latch
+     *
+     * <p>The effects of setting this only once is unspecified</p>
+     *
+     * <p>This is unsynchronized because all actions prior to counting down <em>happens-before</em> another thread
+     * awaits the value</p>
      *
      * @param value the value to set to the latch
      */

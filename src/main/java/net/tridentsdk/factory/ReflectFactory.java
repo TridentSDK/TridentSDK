@@ -100,7 +100,9 @@ public class ReflectFactory {
     }
 
     /**
-     * Acquires the wrapped DEFAULT constructor of the given class <p/> <p>Only a no-arg constructor can be wrapped</p>
+     * Acquires the wrapped DEFAULT constructor of the given class
+     *
+     * <p>Only a no-arg constructor can be wrapped</p>
      *
      * @param cls the class to get the constructor from
      * @return the wrapped default class constructor

@@ -273,8 +273,7 @@ public class Vector implements Serializable, Cloneable {
     }
 
     /**
-     * Gets the magnitude for this vector <p/> Note that this is an expensive operation, and if possible, you should
-     * use
+     * Gets the magnitude for this vector  Note that this is an expensive operation, and if possible, you should use
      * magnitudeSquared() instead
      *
      * @return The magnitude of this vector
