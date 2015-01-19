@@ -23,26 +23,26 @@ import org.junit.Test;
 public class ChatColorTest {
     @Test
     public void testToString() throws Exception {
-        Assert.assertEquals(ChatColor.BLACK.name(), "black");
-        Assert.assertEquals(ChatColor.DARK_BLUE.name(), "dark_blue");
-        Assert.assertEquals(ChatColor.DARK_GREEN.name(), "dark_green");
-        Assert.assertEquals(ChatColor.DARK_AQUA.name(), "dark_aqua");
-        Assert.assertEquals(ChatColor.DARK_RED.name(), "dark_red");
-        Assert.assertEquals(ChatColor.DARK_PURPLE.name(), "dark_purple");
-        Assert.assertEquals(ChatColor.GOLD.name(), "gold");
-        Assert.assertEquals(ChatColor.GRAY.name(), "gray");
-        Assert.assertEquals(ChatColor.DARK_GRAY.name(), "dark_gray");
-        Assert.assertEquals(ChatColor.BLUE.name(), "blue");
-        Assert.assertEquals(ChatColor.GREEN.name(), "green");
-        Assert.assertEquals(ChatColor.AQUA.name(), "aqua");
-        Assert.assertEquals(ChatColor.RED.name(), "red");
-        Assert.assertEquals(ChatColor.LIGHT_PURPLE.name(), "light_purple");
-        Assert.assertEquals(ChatColor.WHITE.name(), "white");
-        Assert.assertEquals(ChatColor.OBFUSCATED.name(), "obfuscated");
-        Assert.assertEquals(ChatColor.BOLD.name(), "bold");
-        Assert.assertEquals(ChatColor.STRIKE_THROUGH.name(), "strikethrough");
-        Assert.assertEquals(ChatColor.UNDERLINE.name(), "underline");
-        Assert.assertEquals(ChatColor.ITALIC.name(), "italic");
-        Assert.assertEquals(ChatColor.RESET.name(), "reset");
+        Assert.assertEquals(ChatColor.BLACK.name().toLowerCase(), "black");
+        Assert.assertEquals(ChatColor.DARK_BLUE.name().toLowerCase(), "dark_blue");
+        Assert.assertEquals(ChatColor.DARK_GREEN.name().toLowerCase(), "dark_green");
+        Assert.assertEquals(ChatColor.DARK_AQUA.name().toLowerCase(), "dark_aqua");
+        Assert.assertEquals(ChatColor.DARK_RED.name().toLowerCase(), "dark_red");
+        Assert.assertEquals(ChatColor.DARK_PURPLE.name().toLowerCase(), "dark_purple");
+        Assert.assertEquals(ChatColor.GOLD.name().toLowerCase(), "gold");
+        Assert.assertEquals(ChatColor.GRAY.name().toLowerCase(), "gray");
+        Assert.assertEquals(ChatColor.DARK_GRAY.name().toLowerCase(), "dark_gray");
+        Assert.assertEquals(ChatColor.BLUE.name().toLowerCase(), "blue");
+        Assert.assertEquals(ChatColor.GREEN.name().toLowerCase(), "green");
+        Assert.assertEquals(ChatColor.AQUA.name().toLowerCase(), "aqua");
+        Assert.assertEquals(ChatColor.RED.name().toLowerCase(), "red");
+        Assert.assertEquals(ChatColor.LIGHT_PURPLE.name().toLowerCase(), "light_purple");
+        Assert.assertEquals(ChatColor.WHITE.name().toLowerCase(), "white");
+        Assert.assertEquals(ChatColor.OBFUSCATED.name().toLowerCase(), "obfuscated");
+        Assert.assertEquals(ChatColor.BOLD.name().toLowerCase(), "bold");
+        Assert.assertEquals(ChatColor.STRIKE_THROUGH.name().toLowerCase(), "strike_through");
+        Assert.assertEquals(ChatColor.UNDERLINE.name().toLowerCase(), "underline");
+        Assert.assertEquals(ChatColor.ITALIC.name().toLowerCase(), "italic");
+        Assert.assertEquals(ChatColor.RESET.name().toLowerCase(), "reset");
     }
 }
