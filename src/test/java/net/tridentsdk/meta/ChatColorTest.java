@@ -40,7 +40,7 @@ public class ChatColorTest {
         Assert.assertEquals(ChatColor.WHITE.name().toLowerCase(), "white");
         Assert.assertEquals(ChatColor.OBFUSCATED.name().toLowerCase(), "obfuscated");
         Assert.assertEquals(ChatColor.BOLD.name().toLowerCase(), "bold");
-        Assert.assertEquals(ChatColor.STRIKE_THROUGH.name().toLowerCase(), "strike_through");
+        Assert.assertEquals(ChatColor.STRIKETHROUGH.name().toLowerCase(), "strikethrough");
         Assert.assertEquals(ChatColor.UNDERLINE.name().toLowerCase(), "underline");
         Assert.assertEquals(ChatColor.ITALIC.name().toLowerCase(), "italic");
         Assert.assertEquals(ChatColor.RESET.name().toLowerCase(), "reset");

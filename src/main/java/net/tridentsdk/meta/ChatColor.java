@@ -137,7 +137,7 @@ public enum ChatColor {
             return "§l";
         }
     },
-    STRIKE_THROUGH {
+    STRIKETHROUGH {
         @Override
         public String toString() {
             return "§m";

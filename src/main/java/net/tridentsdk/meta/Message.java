@@ -52,7 +52,7 @@ public final class Message {
      * @return the current message
      */
     public Message color(ChatColor color) {
-        this.getMessage().addProperty("color", color.toString());
+        this.getMessage().addProperty("color", color.name().toLowerCase());
 
         return this;
     }
