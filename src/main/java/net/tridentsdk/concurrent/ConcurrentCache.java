@@ -87,6 +87,27 @@ public class ConcurrentCache<K, V> {
     }
 
     /**
+     * Retrieves the value associated with the key without removing or placing anything if the operation fails or
+     * succeeds
+     *
+     * @param k the key to retrieve the value with
+     * @return the value associated with the key, or {@code null} if none
+     */
+    public V retrieve(K k) {
+        try {
+            HeldValueLatch<V> latch = cache.get(k);
+            if (latch == null)
+                return null;
+            return latch.await();
+        } catch (InterruptedException e) {
+            TridentLogger.error(e);
+        }
+
+        // Should never ever reach here
+        return null;
+    }
+
+    /**
      * Removes the entry assigned to the specified key
      *
      * @param k the key to remove the entry for

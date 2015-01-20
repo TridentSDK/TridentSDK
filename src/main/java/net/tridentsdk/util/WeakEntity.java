@@ -1,10 +1,23 @@
 package net.tridentsdk.util;
 
+import net.tridentsdk.Coordinates;
+import net.tridentsdk.Trident;
+import net.tridentsdk.concurrent.ConcurrentCache;
+import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.EntityProperties;
+import net.tridentsdk.entity.EntityType;
+import net.tridentsdk.factory.CollectFactory;
+import net.tridentsdk.factory.Factories;
+import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;
-
-// TODO reference management
+import java.lang.ref.WeakReference;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * A reference to an entity
@@ -27,13 +40,13 @@ import javax.annotation.concurrent.ThreadSafe;
  * cost of performance to reduce bugs which are often difficult to find.</p>
  *
  * <p>This is the equivalent of {@link com.google.common.base.Optional} but for entities specifically, much like an
- * optional which stores a {@link java.lang.ref.WeakReference} of the specified property. While this class does include
- * the usage of a WeakReference, other methods to safeguard the reference is also implemented, such as removal
+ * optional which stores a {@link java.lang.ref.WeakReference} of the specified property. While this class does not use
+ * WeakReference to manage the references, other methods to safeguard the reference is also implemented, such as removal
  * listeners.</p>
  *
- * <p></p>
+ * <p>Here are examples on the usage of this class.</p>
  *
- * <p>Here are examples on the usage of this class:
+ * <p>WeakEntity can and should be used when storing entities, such as players inside a collection or reference.</p>
  * <pre><code>
  *     private final Map&lt;WeakEntity&lt;Player&gt;, Integer&gt; score = Maps.newHashMap();
  *
@@ -51,7 +64,10 @@ import javax.annotation.concurrent.ThreadSafe;
  *             continue;
  *         weakEntity.obtain().hide(weakEntity);
  *     }
+ * </code></pre>
  *
+ * <p>WeakEntity acts like an optional which can be used to eliminate the need to check for {@code null}.</p>
+ * <pre><code>
  *     // Finding the player
  *     // Don't do this in production-stage code, it doesn't work the way the name implies!
  *     public WeakEntity&lt;Bat&gt; findClosest(Player player, int range) {
@@ -69,33 +85,39 @@ import javax.annotation.concurrent.ThreadSafe;
  *
  *     // Find a Bat closest to the player, or spawn a new one, and accelerate it upwards (just because)
  *     findClosest(player, 69).or(EntityBuilder.create().build(TridentBat.class)).setVelocity(new Vector(0, 10, 0));
+ * </code></pre>
  *
+ * <p>Finally, WeakEntity can be used to find and prevent bugs which would otherwise cause NullPointerExceptions.</p>
+ * <pre><code>
  *     // Using it to find bugs
  *     // Oh, leave it here for a while until I implement a different method, then I'll come back to it
  *     WeakEntity&lt;Player&gt; weakEntity = WeakEntity.of(null);
  *     ...
  *     // I was smart and used obtain() instead of entity()
  *     weakEntity.obtain().hide();
- *     ...
- *     ===== BEGIN ERROR =====
- *     ...
+ *
+ *     // Code errors
+ *
  *     // Go back to the line you found in the stacktrace
- *     weakEntity.obtain() // Ohhhhhhh! I forgot to change it to a method that I made!
- *     ...
- *     // Final code:
+ *     // Looks like it was on the line that tried to obtain the entity
+ *     // from a WeakEntity
+ *     // We remember that we implemented a find player method later on
+ *
+ *     // Final code
  *     WeakEntity&lt;Player&gt; weakEntity = WeakEntity.of(getPlayer());
- *     // Now we are good!
- * </code></pre></p>
+ * </code></pre>
  *
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public class WeakEntity<T extends Entity> {
-    private static final WeakEntity<?> NULL_ENTITY = WeakEntity.of(null);
-    private volatile T referencedEntity;
+public final class WeakEntity<T extends Entity> {
+    private static final WeakEntity<?> NULL_ENTITY = WeakEntity.orEmpty(null);
+    private static final RefQueue REFERENCE_QUEUE = RefQueue.newQueue();
+
+    private final WeakReference<T> referencedEntity;
 
     private WeakEntity(T referencedEntity) {
-        this.referencedEntity = referencedEntity;
+        this.referencedEntity = new WeakReference<>(referencedEntity);
     }
 
     /**
@@ -126,7 +148,7 @@ public class WeakEntity<T extends Entity> {
      * @return a WeakEntity which holds the entity until it becomes {@code null}
      */
     public static <T extends Entity> WeakEntity<T> of(T referencedEntity) {
-        return new WeakEntity<>(referencedEntity);
+        return REFERENCE_QUEUE.put(referencedEntity);
     }
 
     /**
@@ -148,7 +170,22 @@ public class WeakEntity<T extends Entity> {
     public static <T extends Entity> WeakEntity<T> orEmpty(T referencedEntity) {
         if (referencedEntity == null)
             return empty();
-        return new WeakEntity<>(referencedEntity);
+        return of(referencedEntity);
+    }
+
+    /**
+     * Removes the references of the entity from any WeakEntity instances which are non-null
+     *
+     * <p>This method was meant to be used only for the implementation. The calling of this method by a non-Trident
+     * class has no effect.</p>
+     *
+     * @param entity the entity to dereference and clear from WeakEntity
+     */
+    @InternalUseOnly
+    public static void clearReferencesTo(Entity entity) throws IllegalAccessException {
+        if (!Trident.isTrident())
+            throw new IllegalAccessException("WeakEntities may only be cleared by a Trident class");
+        REFERENCE_QUEUE.clearReference(entity);
     }
 
     /**
@@ -158,7 +195,7 @@ public class WeakEntity<T extends Entity> {
      *         instance of this object should also become {@code null}
      */
     public boolean isNull() {
-        return referencedEntity == null;
+        return referencedEntity.get() == null;
     }
 
     /**
@@ -172,7 +209,7 @@ public class WeakEntity<T extends Entity> {
      * @return the entity if non-{@code null}, or the fallback if it is
      */
     public T or(T fallback) {
-        T ref = this.referencedEntity;
+        T ref = this.referencedEntity.get();
         return ref == null ? fallback : ref;
     }
 
@@ -182,7 +219,7 @@ public class WeakEntity<T extends Entity> {
      * @return the entity which this reference points to, or {@code null} if the entity no longer exists on the server
      */
     public T entity() {
-        return this.referencedEntity;
+        return this.referencedEntity.get();
     }
 
     /**
@@ -195,9 +232,69 @@ public class WeakEntity<T extends Entity> {
      * @return the referenced entity, can <strong>never</strong> be {@code null}
      */
     public T obtain() {
-        T ref = this.referencedEntity;
+        T ref = this.referencedEntity.get();
         if (ref == null)
             throw new IllegalStateException("Obtained entity is null");
         return ref;
+    }
+
+    /**
+     * This removes the reference to the entity in this particular instance of WeakEntity
+     *
+     * <p>If the referenced entity is {@code null} already, no changes will take effect. The call of this method also
+     * has <em>happens-before</em> consistency to any subsequent inspection calls to this WeakEntity.</p>
+     */
+    public void clear() {
+        this.referencedEntity.clear();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof WeakEntity))
+            return false;
+        WeakEntity entity = (WeakEntity) obj;
+        return entity.entity().equals(this.entity());
+    }
+
+    @Override
+    public int hashCode() {
+        T ref = referencedEntity.get();
+        if (ref == null)
+            return 0;
+        return ref.hashCode();
+    }
+
+    private static class RefQueue {
+        private final ConcurrentCache<Entity, Set<WeakEntity<?>>> references = Factories.collect().createCache();
+
+        private RefQueue() {
+        }
+
+        public static RefQueue newQueue() {
+            return new RefQueue();
+        }
+
+        public <T extends Entity> WeakEntity<T> put(T weakEntity) {
+            Set<WeakEntity<?>> set = references.retrieve(weakEntity, new Callable<Set<WeakEntity<?>>>() {
+                @Override
+                public Set<WeakEntity<?>> call() throws Exception {
+                    return Factories.collect().createSet();
+                }
+            });
+
+            WeakEntity<T> entity = new WeakEntity<>(weakEntity);
+
+            // If we lose atomicity here, the Set will be collected and ignored
+            set.add(entity);
+            return entity;
+        }
+
+        public void clearReference(Entity entity) {
+            Set<WeakEntity<?>> entities = references.retrieve(entity);
+            if (entities == null) return;
+            for (WeakEntity<?> e : entities) {
+                e.clear();
+            }
+        }
     }
 }

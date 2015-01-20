@@ -6,6 +6,7 @@ import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.util.WeakEntity;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -16,14 +17,14 @@ import java.util.Map;
  * @author Pierre C
  */
 public class GameManager {
-    // TODO weak players
+    // TODO figure out how to match references?
     // TODO plugin storage config way to verbose
     // TODO find values in a config/section
 
     public static final String SNAP_SHOTS = "snapshots";
     private static final String STORED_COUNT = "counter";
     private static final Map<Integer, Game> GAMES = Maps.newHashMap();
-    private static final Map<Player, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
+    private static final Map<WeakEntity<Player>, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
     private static final JsonConfig storage = Factories.configs().
             createConfig(TridentPlugin.instance(BattleDome.class).configDirectory() + "games.json");
     private static int counter = 0;
@@ -112,7 +113,7 @@ public class GameManager {
     ////////////////////////////////////////////////// JOIN/LEAVE MECH /////////////////////////////////////////////////
 
     public void sendPlayer(Player player, Game game) {
-        SNAPSHOTS.put(player, PlayerSnapshot.take(player, game.id()));
+        SNAPSHOTS.put(WeakEntity.orEmpty(player), PlayerSnapshot.take(player, game.id()));
         game.join(player);
     }
 
