@@ -18,7 +18,6 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.entity.living.ai.AiModule;

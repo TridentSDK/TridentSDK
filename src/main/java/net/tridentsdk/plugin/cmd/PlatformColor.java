@@ -41,20 +41,20 @@ public final class PlatformColor {
      *
      * <p>The list of colors which can be retrieved:
      * <ul>
-     *     <li>reset</li>
-     *     <li>black</li>
-     *     <li>red</li>
-     *     <li>green</li>
-     *     <li>yellow</li>
-     *     <li>purple</li>
-     *     <li>cyan</li>
-     *     <li>white</li>
-     *     <li>cursoreol2 - ANSI escape which moves the insertion cursor 2 spaces to the right</li>
+     * <li>reset</li>
+     * <li>black</li>
+     * <li>red</li>
+     * <li>green</li>
+     * <li>yellow</li>
+     * <li>purple</li>
+     * <li>cyan</li>
+     * <li>white</li>
+     * <li>cursoreol2 - ANSI escape which moves the insertion cursor 2 spaces to the right</li>
      * </ul></p>
      *
      * @param color the name of the color to retrieve the escape for
      * @return the proper escape code or {@link net.tridentsdk.plugin.cmd.PlatformColor#EMPTY} if it does not exist, or
-     *         if the platform is windows, which does not support color codes or ANSI escapes
+     * if the platform is windows, which does not support color codes or ANSI escapes
      */
     public static String forColor(String color) {
         if (isWindows())

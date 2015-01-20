@@ -47,7 +47,7 @@ public final class ChannelHandler {
     /**
      * Registers a channel in the listings
      *
-     * @param name the name of the channel
+     * @param name    the name of the channel
      * @param channel the channel to register
      */
     public void register(String name, PluginChannel channel) {

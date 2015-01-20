@@ -22,6 +22,7 @@ import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.EntityType;
 
 import java.util.Set;
 

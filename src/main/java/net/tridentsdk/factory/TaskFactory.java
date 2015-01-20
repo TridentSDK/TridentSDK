@@ -40,7 +40,7 @@ public interface TaskFactory {
     /**
      * Asynchronously run a task after the next tick
      *
-     * @param plugin the plugin which the task is registered to
+     * @param plugin   the plugin which the task is registered to
      * @param runnable the runnable to perform the task
      * @return the task which was wrapped by the scheduler
      */
@@ -49,7 +49,7 @@ public interface TaskFactory {
     /**
      * Synchronously run a task after the next tick
      *
-     * @param plugin the plugin which the task is registered to
+     * @param plugin   the plugin which the task is registered to
      * @param runnable the runnable to perform the task
      * @return the task which was wrapped by the scheduler
      */
@@ -58,9 +58,9 @@ public interface TaskFactory {
     /**
      * Asynchronously run a task after a specified time has passed
      *
-     * @param plugin the plugin which the task is registered to
+     * @param plugin   the plugin which the task is registered to
      * @param runnable the runnable to perform the task
-     * @param delay the amount of ticks to wait until the task is executed
+     * @param delay    the amount of ticks to wait until the task is executed
      * @return the task which was wrapped by the scheduler
      */
     public ScheduledTask asyncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
@@ -68,9 +68,9 @@ public interface TaskFactory {
     /**
      * Asynchronously run a task after a specified time has passed
      *
-     * @param plugin the plugin which the task is registered to
+     * @param plugin   the plugin which the task is registered to
      * @param runnable the runnable to perform the task
-     * @param delay the amount of ticks to wait until the task is executed
+     * @param delay    the amount of ticks to wait until the task is executed
      * @return the task which was wrapped by the scheduler
      */
     public ScheduledTask syncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
@@ -78,9 +78,9 @@ public interface TaskFactory {
     /**
      * Asynchronously run a task repeatedly
      *
-     * @param plugin the plugin which the task is registered to
-     * @param runnable the runnable to perform the task
-     * @param delay the amount of ticks to wait until the task is executed
+     * @param plugin          the plugin which the task is registered to
+     * @param runnable        the runnable to perform the task
+     * @param delay           the amount of ticks to wait until the task is executed
      * @param initialInterval the amount of time between each execution which occurs repeatedly until cancelled
      * @return the task which was wrapped by the scheduler
      */
@@ -89,9 +89,9 @@ public interface TaskFactory {
     /**
      * Synchronously run a task repeatedly
      *
-     * @param plugin the plugin which the task is registered to
-     * @param runnable the runnable to perform the task
-     * @param delay the amount of ticks to wait until the task is executed
+     * @param plugin          the plugin which the task is registered to
+     * @param runnable        the runnable to perform the task
+     * @param delay           the amount of ticks to wait until the task is executed
      * @param initialInterval the amount of time between each execution which occurs repeatedly until cancelled
      * @return the task which was wrapped by the scheduler
      */

@@ -35,9 +35,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.LockSupport;
-import java.util.regex.Pattern;
 
 /**
  * Logger for Trident, automatically obtains the correct logger for the class
@@ -194,17 +191,13 @@ public final class TridentLogger {
         logger.error("========  BEGIN ERROR =========");
 
         logger.error("");
-
-        Random rand = new Random();
-        int randomNum = rand.nextInt((ERRORS.length - 1) + 1);
-
         String errorMessage = throwable.getMessage();
 
         if (errorMessage == null || errorMessage.equals("null")) {
             errorMessage = throwable.getClass().getSimpleName();
         }
 
-        logger.error(ERRORS[randomNum]);
+        logger.error(ERRORS[(int) FastRandom.random()]);
         logger.error("");
         logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
         logger.error("");

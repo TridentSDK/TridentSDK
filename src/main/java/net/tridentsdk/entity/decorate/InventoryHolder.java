@@ -19,7 +19,6 @@ package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.window.Window;
-import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents an Entity that holds an Inventory

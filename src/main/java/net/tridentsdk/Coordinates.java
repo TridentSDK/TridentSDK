@@ -17,6 +17,7 @@
 
 package net.tridentsdk;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.docs.PossiblyThreadSafe;
@@ -272,6 +273,8 @@ public class Coordinates implements Cloneable {
     public boolean equals(Object obj) {
         if (!(obj instanceof Coordinates))
             return false;
+        if (obj.hashCode() != this.hashCode())
+            return false;
         if (x != ((Coordinates) obj).x) {
             return false;
         } else if (y != ((Coordinates) obj).y) {
@@ -287,5 +290,10 @@ public class Coordinates implements Cloneable {
         }
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(world, x, y, z, pitch, yaw);
     }
 }

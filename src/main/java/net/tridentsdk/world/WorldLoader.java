@@ -60,8 +60,8 @@ public interface WorldLoader {
      * Checks the existence of a chunk in a world, based on the world directory
      *
      * @param world the world which to check the existence of a chunk
-     * @param x the X coordinate of the chunk
-     * @param z the Z coordinate of the chunk
+     * @param x     the X coordinate of the chunk
+     * @param z     the Z coordinate of the chunk
      * @return {@code true} if the chunk is not present within the world directory
      */
     boolean chunkExists(World world, int x, int z);
@@ -69,7 +69,7 @@ public interface WorldLoader {
     /**
      * Checks the existence of a chunk in a world, based on the world directory
      *
-     * @param world the world which to check the existence of a chunk
+     * @param world    the world which to check the existence of a chunk
      * @param location the location which the chunk should be checked for existence
      * @return {@code true} if the chunk is not present within the world directory
      */
@@ -79,8 +79,8 @@ public interface WorldLoader {
      * Loads the chunk into the world
      *
      * @param world the world which to load the chunk
-     * @param x the X of the chunk
-     * @param z the Z of the chunk
+     * @param x     the X of the chunk
+     * @param z     the Z of the chunk
      * @return the chunk which was loaded
      */
     Chunk loadChunk(World world, int x, int z);
@@ -88,7 +88,7 @@ public interface WorldLoader {
     /**
      * Loads the chunk into the world
      *
-     * @param world the world which to load the chunk
+     * @param world    the world which to load the chunk
      * @param location the location of the chunk to load
      * @return the chunk which was loaded
      */

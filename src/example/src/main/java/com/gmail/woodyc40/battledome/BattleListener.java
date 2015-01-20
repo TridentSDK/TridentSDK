@@ -106,7 +106,7 @@ public class BattleListener implements Listener {
 
     public void interactBlock(PlayerInteractEvent event) {
         Player player = event.player();
-        if (player.getHeldItem().getType() != Substance.BLAZE_ROD)
+        if (player.heldItem().getType() != Substance.BLAZE_ROD)
             return;
 
         SetupSession session = sessions.get(player);

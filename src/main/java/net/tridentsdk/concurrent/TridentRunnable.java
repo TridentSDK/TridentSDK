@@ -30,8 +30,6 @@ public abstract class TridentRunnable implements Runnable {
     private static volatile int currentId = 0;
 
     private final int id;
-    private final boolean inAHurry = false;
-
     private final AtomicReference<ScheduledTask> task = new AtomicReference<>();
 
     public TridentRunnable() {

@@ -85,7 +85,7 @@ public class ConfigFactory {
     }
 
     @AccessNoDoc
-    private final class JsonSectionImpl extends ConfigSection {
+    private static final class JsonSectionImpl extends ConfigSection {
         public JsonSectionImpl() {
             super();
         }

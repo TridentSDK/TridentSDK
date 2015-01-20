@@ -186,16 +186,16 @@ public enum ChatColor {
      *
      * <p>Supported colors:
      * <ul>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#BLACK}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#DARK_PURPLE} -
-     *     {@link net.tridentsdk.plugin.cmd.ServerConsole#PURPLE}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#BLUE}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#GREEN}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#AQUA} - {@link net.tridentsdk.plugin.cmd.ServerConsole#CYAN}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#RED}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#YELLOW}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#WHITE}</li>
-     *     <li>{@link net.tridentsdk.meta.ChatColor#RESET}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#BLACK}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#DARK_PURPLE} -
+     * {@link net.tridentsdk.plugin.cmd.ServerConsole#PURPLE}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#BLUE}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#GREEN}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#AQUA} - {@link net.tridentsdk.plugin.cmd.ServerConsole#CYAN}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#RED}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#YELLOW}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#WHITE}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#RESET}</li>
      * </ul></p>
      *
      * @param color the color to parse

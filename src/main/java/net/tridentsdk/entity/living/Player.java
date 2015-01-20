@@ -37,7 +37,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      *
      * @return float flying speed of the Player
      */
-    float getFlyingSpeed();
+    float flyingSpeed();
 
     /**
      * Set the flying speed of the Player
@@ -53,28 +53,28 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      *
      * @return Locale the Player's Locale settings
      */
-    Locale getLocale();
+    Locale locale();
 
     /**
      * Returns the ItemStack in the Player's hand
      *
      * @return ItemStack current ItemStack in the Player's hand
      */
-    Item getHeldItem();
+    Item heldItem();
 
     /**
      * Returns the GameMode the Player is in
      *
      * @return GameMode current GameMode of the Player
      */
-    GameMode getGameMode();
+    GameMode gameMode();
 
     /**
      * Returns the move speed of the player
      *
      * @return float the Player's current move speed
      */
-    float getMoveSpeed();
+    float moveSpeed();
 
     /**
      * Sets the Player's move speed
@@ -88,7 +88,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      *
      * @return float the Player's current sneak speed
      */
-    float getSneakSpeed();
+    float sneakSpeed();
 
     /**
      * Sets the Player's sneak speed
@@ -102,7 +102,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      *
      * @return float the Player's current walk speed
      */
-    float getWalkSpeed();
+    float walkSpeed();
 
     /**
      * Sets the Player's walk speed

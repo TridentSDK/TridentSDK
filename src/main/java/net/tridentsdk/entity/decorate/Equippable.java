@@ -31,10 +31,10 @@ public interface Equippable extends Entity {
      *
      * <p>Layout:
      * <ul>
-     *     <li>Index 0: Helmet</li>
-     *     <li>Index 1: Chestplate</li>
-     *     <li>Index 2: Leggings</li>
-     *     <li>Index 3: Boots</li>
+     * <li>Index 0: Helmet</li>
+     * <li>Index 1: Chestplate</li>
+     * <li>Index 2: Leggings</li>
+     * <li>Index 3: Boots</li>
      * </ul></p>
      *
      * @return this entity's equipment

@@ -17,6 +17,7 @@
 
 package net.tridentsdk.util;
 
+import com.google.common.base.Objects;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.world.World;
 
@@ -378,6 +379,10 @@ public class Vector implements Serializable, Cloneable {
 
     @Override
     public boolean equals(Object obj) {
+        if (!(obj instanceof Vector))
+            return false;
+        if (obj.hashCode() != this.hashCode())
+            return false;
         if (x != ((Vector) obj).x) {
             return false;
         } else if (y != ((Vector) obj).y) {
@@ -387,5 +392,10 @@ public class Vector implements Serializable, Cloneable {
         }
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(x, y, z);
     }
 }

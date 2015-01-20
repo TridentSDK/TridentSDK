@@ -23,7 +23,6 @@ package net.tridentsdk.meta.nbt;
 public class CompoundTagBuilder<B> {
     private final CompoundTag current;
     private final B parentBuilder;
-    private TagContainer parent;
 
     protected CompoundTagBuilder(CompoundTag tag, B parentBuilder) {
         this.parentBuilder = parentBuilder;
@@ -31,7 +30,6 @@ public class CompoundTagBuilder<B> {
     }
 
     public CompoundTagBuilder(String name, TagContainer parent, B parentBuilder) {
-        this.parent = parent;
         this.parentBuilder = parentBuilder;
         this.current = new CompoundTag(name);
         parent.addTag(this.current);

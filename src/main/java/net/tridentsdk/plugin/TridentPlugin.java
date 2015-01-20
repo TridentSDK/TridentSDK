@@ -28,6 +28,7 @@ import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
@@ -221,6 +222,7 @@ public class TridentPlugin {
      *
      * @return the plugin descriptor for this plugin
      */
+    @Nonnull
     public final PluginDescription getDescription() {
         return this.description;
     }

@@ -50,7 +50,7 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellabl
     }
 
     public GameMode getCurrentGameMode() {
-        return this.player().getGameMode();
+        return this.player().gameMode();
     }
 
     public void setNewGamemode(GameMode gameMode) {

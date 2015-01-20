@@ -17,6 +17,7 @@
 
 package net.tridentsdk.world;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 
 /**
@@ -44,5 +45,16 @@ public class ChunkLocation implements Serializable, Cloneable {
 
     public int getZ() {
         return this.z;
+    }
+
+    @Override @Nullable
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -439,15 +439,15 @@ public class ConfigList<V> implements List<V> {
     }
 
     @AccessNoDoc
-    private class Node<V> {
+    private class Node<E> {
         @GuardedBy("lock")
-        V value;
+        E value;
         @GuardedBy("lock")
-        Node<V> next;
+        Node<E> next;
         @GuardedBy("lock")
-        Node<V> prev;
+        Node<E> prev;
 
-        private Node(V value, Node<V> next, Node<V> prev) {
+        private Node(E value, Node<E> next, Node<E> prev) {
             this.value = value;
             this.next = next;
             this.prev = prev;
