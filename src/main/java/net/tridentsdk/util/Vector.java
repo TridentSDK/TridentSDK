@@ -21,6 +21,7 @@ import com.google.common.base.Objects;
 import net.tridentsdk.Coordinates;
 import net.tridentsdk.world.World;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.io.Serializable;
 
 /**
@@ -28,6 +29,7 @@ import java.io.Serializable;
  *
  * @author The TridentSDK Team
  */
+@NotThreadSafe
 public class Vector implements Serializable, Cloneable {
     private static final long serialVersionUID = -7634050835106851288L;
 
