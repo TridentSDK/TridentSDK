@@ -20,6 +20,9 @@ package net.tridentsdk.util;
  * @author The TridentSDK Team
  */
 public class FastRandom {
+    private FastRandom() {
+    }
+    
     /**
      * Finds a random number
      *
