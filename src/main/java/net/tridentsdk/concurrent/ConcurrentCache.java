@@ -173,4 +173,13 @@ public class ConcurrentCache<K, V> {
     public void clear() {
         cache.clear();
     }
+
+    /**
+     * Finds if the cache is emtpy, containing no elements
+     *
+     * @return {@code true} if the cache is empty
+     */
+    public boolean isEmpty() {
+        return cache.isEmpty();
+    }
 }
