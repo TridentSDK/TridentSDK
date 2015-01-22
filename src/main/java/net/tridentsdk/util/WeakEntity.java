@@ -19,17 +19,16 @@ package net.tridentsdk.util;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.decorate.DecorationAdapter;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -42,7 +41,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * method to use is {@link #orEmpty(net.tridentsdk.entity.Entity)}. This prevents the creation of unnecessary instances
  * of WeakEntity where the value is always going to {@code null}. Because this method always returns the same instance
  * of a {@code null} holding WeakEntity, registration does not need to be executed, where registration means to place
- * the reference into a queue which will be cleared once the entity has been removed. in this context, and alien method
+ * the reference into a queue which will be cleared once the entity has been removed. In this context, and alien method
  * is: <em>"A method you call for which you have no control over the code, and further don’t even know what the code
  * does, other than the method signature</em> [...] <em>it could refer to calls to third party libraries</em>."</p>
  *
@@ -130,6 +129,13 @@ import java.util.concurrent.locks.ReentrantLock;
  *         .setVelocity(new Vector(0, 10, 0));
  * </code></pre>
  *
+ * <p>WeakEntity does not need to be instantiated to find in a collection.</p>
+ * <pre><code>
+ *     Map<WeakEntity<Entity>, Object> map = Maps.newHashMap();
+ *     ...
+ *     Object o = map.get(WeakEntity.finderOf(entity));
+ * </code></pre>
+ *
  * <p>Finally, WeakEntity can be used to find and prevent bugs which would otherwise cause NullPointerExceptions.</p>
  * <pre><code>
  *     // Using it to find bugs
@@ -166,6 +172,7 @@ public final class WeakEntity<T extends Entity> {
     }
 
     private final SafeReference<T> referencedEntity;
+    private volatile Object finder;
 
     private WeakEntity(SafeReference<T> referencedEntity) {
         this.referencedEntity = referencedEntity;
@@ -199,7 +206,9 @@ public final class WeakEntity<T extends Entity> {
      * @return a WeakEntity which holds the entity until it becomes {@code null}
      */
     public static <T extends Entity> WeakEntity<T> of(T referencedEntity) {
-        return REFERENCE_QUEUE.put(referencedEntity);
+        WeakEntity<T> weakEntity = new WeakEntity<>(new SafeReference<>(referencedEntity));
+        REFERENCE_QUEUE.put(weakEntity);
+        return weakEntity;
     }
 
     /**
@@ -231,6 +240,7 @@ public final class WeakEntity<T extends Entity> {
      * class has no effect.</p>
      *
      * @param entity the entity to dereference and clear from WeakEntity
+     * @throws IllegalAccessException when the caller is not Trident
      */
     @InternalUseOnly
     public static void clearReferencesTo(Entity entity) throws IllegalAccessException {
@@ -240,15 +250,34 @@ public final class WeakEntity<T extends Entity> {
     }
 
     /**
+     * Provides an object which possesses the matching properties for a WeakEntity
+     *
+     * <p>This is needed when obtaining a WeakEntity from a collection. The returned object overrides equals and
+     * hashCode, as well as toString to mimic the actual referenced entity. If the reference is {@code null}, then no
+     * new object is created and the method returns a cached version of the object. Because the WeakEntity's original
+     * implementation also delegates the same identifying functions to the reference, this is the preferred way to find
+     * a WeakEntity from a collection or to match with a stored version.</p>
+     *
+     * <p>This method current does not work.</p>
+     *
+     * @param entity the entity to get the finder for
+     * @return an object that possesses the properties of the entity so that they match up with an WeakEntity containing
+     * the same entity
+     */
+    public static Object finderOf(Entity entity) {
+        if (entity == null)
+            return Node.NULL;
+        return REFERENCE_QUEUE.finderOf(entity);
+    }
+
+    /**
      * Forces the reference handler thread to run the {@code null} or garbage reference collection cycle and reclaim
      * memory lost by those references
      *
      * <p>This runs the mark sweeping strategy employed by the reference handler. Previous references are swept from
-     * the
-     * session and the thread continues to mark the {@code null} references. They are placed into a collection until
-     * the
-     * sweeping completes. When this step does complete, the collection is checked, then the references are purged from
-     * the reference queue.</p>
+     * the session and the thread continues to mark the {@code null} references. They are placed into a collection until
+     * the sweeping completes. When this step does complete, the collection is checked, then the references are purged
+     * from the reference queue.</p>
      *
      * <p>Unlike Java's default GC implementation, this method is strongly bound. This always succeeds in running the
      * collection cycle.</p>
@@ -317,17 +346,24 @@ public final class WeakEntity<T extends Entity> {
         this.referencedEntity.clear();
     }
 
+    /**
+     * Instance method of {@link #finderOf(net.tridentsdk.entity.Entity)}. See that method for the documentation and
+     * implementation.
+     *
+     * <p>This method still internally polls the reference queue for the entity's cached finder.</p>
+     */
+    public Object finder() {
+        return finder;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof WeakEntity))
-            return false;
-        WeakEntity entity = (WeakEntity) obj;
-        return (isNull() && entity.isNull()) || this.entity().equals(entity.entity());
+        return obj == finder() || isNull() && obj == null || referencedEntity.get().equals(obj);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(referencedEntity);
+        return isNull() ? 0 : referencedEntity.get().hashCode();
     }
 
     @Override
@@ -359,7 +395,7 @@ public final class WeakEntity<T extends Entity> {
     // Stores references and collects/cleans up null references
     private static class RefQueue implements Runnable {
         @GuardedBy("lock")
-        private final Map<Entity, Node> references = Maps.newHashMap();
+        private final Map<Object, Node> references = Maps.newHashMap();
 
         // Locking mechanisms
         private final Lock lock = new ReentrantLock();
@@ -375,17 +411,15 @@ public final class WeakEntity<T extends Entity> {
             return new RefQueue();
         }
 
-        public WeakEntity put(Entity entity) {
-            WeakEntity weakEntity = new WeakEntity<>(new SafeReference<>(entity));
+        public void put(WeakEntity<?> weakEntity) {
+            Node node = Node.newNode(weakEntity, references.get(weakEntity.or(null)));
 
             lock.lock();
             try {
-                references.put(entity, Node.newNode(weakEntity, references.get(entity)));
+                references.put(node.finder(), node);
             } finally {
                 lock.unlock();
             }
-
-            return weakEntity;
         }
 
         // Clears references to the entity, forcing the sweep to run
@@ -407,6 +441,20 @@ public final class WeakEntity<T extends Entity> {
                 e.clear();
         }
 
+        public Object finderOf(Entity entity) {
+            Node node;
+            lock.lock();
+            try {
+                node = references.get(entity);
+            } finally {
+                lock.unlock();
+            }
+
+            if (node == null)
+                return Node.NULL;
+            return node.finder();
+        }
+
         public void beginSweep() {
             lock.lock();
             try {
@@ -420,7 +468,7 @@ public final class WeakEntity<T extends Entity> {
         public void run() {
             while (true) {
                 // Step 1: find nodes
-                Set<Map.Entry<Entity, Node>> entries;
+                Set<Map.Entry<Object, Node>> entries;
 
                 lock.lock();
                 try {
@@ -429,8 +477,13 @@ public final class WeakEntity<T extends Entity> {
                     lock.unlock();
                 }
 
+                // Try to make the collector run
+                // This might help stored references be checked
+                // In case the GC doesn't run, who cares anyways
+                System.gc();
+
                 // Step 2: mark
-                for (Map.Entry<Entity, Node> entry : entries) {
+                for (Map.Entry<Object, Node> entry : entries) {
                     Set<WeakEntity> weakRefs = entry.getValue().references();
 
                     for (WeakEntity ref : weakRefs) {
@@ -441,25 +494,17 @@ public final class WeakEntity<T extends Entity> {
                 }
 
                 try {
-                    // This entire method doesn't use finally blocks
-                    // We clean up later just in case
-
                     lock.lockInterruptibly();
                     while (marked.isEmpty())
                         hasNodes.await();
-                    lock.unlock();
 
                     // Step 3: sweep
-                    for (Map.Entry<Entity, Node> entry : entries) {
+                    for (Map.Entry<Object, Node> entry : entries) {
                         Set<WeakEntity> refs = entry.getValue().references();
                         refs.removeAll(marked);
 
                         if (refs.isEmpty()) {
-                            lock.lock();
-                            // This happens very rarely, it is OK to waste time
-                            // to acquire the lock again
                             references.remove(entry.getKey());
-                            lock.unlock();
                         }
                     }
 
@@ -476,11 +521,36 @@ public final class WeakEntity<T extends Entity> {
 
     // A set of references assigned to a particular entity
     private static class Node implements Iterable<WeakEntity> {
+        private static final Entity NULL = new DecorationAdapter<Entity>(null) {
+            @Override
+            public int hashCode() {
+                return 0;
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return obj == null;
+            }
+        };
+
         @GuardedBy("lock")
         private final Set<WeakEntity> weakEntities;
+        private final Object finder;
         private final Object lock = new Object();
 
-        private Node(WeakEntity entity, Node node) {
+        private Node(final WeakEntity entity, Node node) {
+            entity.finder = this.finder = new Object() {
+                @Override
+                public int hashCode() {
+                    return entity.hashCode();
+                }
+
+                @Override
+                public boolean equals(Object obj) {
+                    return entity.finder() == this;
+                }
+            };
+
             Set<WeakEntity> original;
             if (node == null)
                 original = Sets.newHashSet();
@@ -526,6 +596,11 @@ public final class WeakEntity<T extends Entity> {
             synchronized (lock) {
                 return weakEntities.iterator();
             }
+        }
+
+        // Used to reference the entity without actually using it
+        public Object finder() {
+            return this.finder;
         }
     }
 }
