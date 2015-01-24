@@ -275,9 +275,8 @@ public final class WeakEntity<T extends Entity> {
      *
      * <p>This runs the mark sweeping strategy employed by the reference handler. Previous references are swept from
      * the session and the thread continues to mark the {@code null} references. They are placed into a collection
-     * until
-     * the sweeping completes. When this step does complete, the collection is checked, then the references are purged
-     * from the reference queue.</p>
+     * until the sweeping completes. When this step does complete, the collection is checked, then the references are
+     * purged from the reference queue.</p>
      *
      * <p>Unlike Java's default GC implementation, this method is strongly bound. This always succeeds in running the
      * collection cycle.</p>
@@ -351,21 +350,32 @@ public final class WeakEntity<T extends Entity> {
      * implementation.
      *
      * <p>This method still internally polls the reference queue for the entity's cached finder.</p>
+     *
+     * @return an Object which can be used to find WeakEntities in a collection
      */
     public Object finder() {
         return finder;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         return obj == null ? isNull() : obj.equals(referencedEntity.get());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return isNull() ? 0 : referencedEntity.get().hashCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return getClass().getName() + "{referencedEntity = " + referencedEntity.get() + "}@" + hashCode();
