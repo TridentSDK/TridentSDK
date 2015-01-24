@@ -47,7 +47,8 @@ public class ChunkLocation implements Serializable, Cloneable {
         return this.z;
     }
 
-    @Override @Nullable
+    @Override
+    @Nullable
     public Object clone() {
         try {
             return super.clone();

@@ -361,14 +361,16 @@ public class ConfigSection {
         if (type.equals(ConfigSection.class)) {
             List<V> result = new ConfigSectionList<>(this, array);
             for (JsonElement element : array) {
-                if (element == null) continue;
+                if (element == null)
+                    continue;
                 result.add((V) new ConfigSection(this, element.getAsJsonObject()));
             }
             return result;
         } else {
             List<V> result = new ConfigList<>(array);
             for (JsonElement element : array) {
-                if (element == null) continue;
+                if (element == null)
+                    continue;
                 result.add(GsonFactory.gson().fromJson(element, type));
             }
             return result;
