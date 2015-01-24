@@ -7,6 +7,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.util.WeakEntity;
 
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 public class Game {
     public final BattleTimer runnable = new BattleTimer(this);
     private final int id;
-    private final Map<Player, Team> players;
+    private final Map<WeakEntity<Player>, Team> players;
     private GameState state;
     private Coordinates spawn;
     private Coordinates purpleTeam;
@@ -29,7 +30,7 @@ public class Game {
 
     /////////////////////////////////////////////// GENERAL METHODS //////////////////////////////////////////////
 
-    private Game(int id, Map<Player, Team> players) {
+    private Game(int id, Map<WeakEntity<Player>, Team> players) {
         this.id = id;
         this.players = players;
 
@@ -37,7 +38,7 @@ public class Game {
     }
 
     public static Game newGame(int id) {
-        return new Game(id, Maps.<Player, Team>newHashMap());
+        return new Game(id, Maps.<WeakEntity<Player>, Team>newHashMap());
     }
 
     public static Game newGame(int id, Game deserial) {
@@ -48,7 +49,7 @@ public class Game {
         return id;
     }
 
-    public Map<Player, Team> players() {
+    public Map<WeakEntity<Player>, Team> players() {
         return players;
     }
 
@@ -63,23 +64,25 @@ public class Game {
     /////////////////////////////////////// JOIN/LEAVE /////////////////////////////////////////
 
     public void sendAll(String message) {
-        for (Player player : players.keySet()) {
-            player.sendMessage(CommandHandler.PREFIX + message);
+        for (WeakEntity<Player> player : players.keySet()) {
+            if (player.isNull())
+                continue;
+            player.obtain().sendMessage(CommandHandler.PREFIX + message);
         }
     }
 
     public Team teamOf(Player player) {
-        return players.get(player);
+        return players.get(WeakEntity.finderOf(player));
     }
 
     public void join(Player player) {
-        this.players.put(player, nextTeam());
+        this.players.put(WeakEntity.of(player), nextTeam());
     }
 
     /////////////////////////////////////////// TEAMS //////////////////////////////////////////////
 
     public void remove(Player player) {
-        this.players.remove(player);
+        this.players.remove(WeakEntity.finderOf(player));
     }
 
     private Team nextTeam() {
@@ -119,14 +122,19 @@ public class Game {
     }
 
     public void win(Team team) {
-        for (Player player : players.keySet())
-            player.sendMessage(CommandHandler.PREFIX + "Team " + team.toString() + " has won the game");
+        for (WeakEntity<Player> player : players.keySet()) {
+            if (player.isNull()) {
+                WeakEntity.runMarkSweep();
+                continue;
+            }
+            player.obtain().sendMessage(CommandHandler.PREFIX + "Team " + team.toString() + " has won the game");
+        }
 
         Factories.tasks().syncLater(TridentPlugin.instance(), new TridentRunnable() {
             @Override
             public void run() {
-                for (Player player : players.keySet()) {
-                    GameManager.newHandler().removePlayer(player);
+                for (WeakEntity<Player> player : players.keySet()) {
+                    GameManager.newHandler().removePlayer(player.entity());
                 }
             }
         }, 200L);

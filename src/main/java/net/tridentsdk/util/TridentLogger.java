@@ -196,7 +196,7 @@ public final class TridentLogger {
             errorMessage = throwable.getClass().getSimpleName();
         }
 
-        logger.error(ERRORS[(int) FastRandom.random()]);
+        logger.error(ERRORS[(int) FastRandom.random(ERRORS.length - 1)]);
         logger.error("");
         logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
         logger.error("");

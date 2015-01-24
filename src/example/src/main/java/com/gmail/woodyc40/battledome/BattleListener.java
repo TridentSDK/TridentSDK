@@ -37,7 +37,7 @@ public class BattleListener implements Listener {
         Player player = event.getPlayer();
 
         if (substance == Substance.GLASS) {
-            player.sendMessage(CommandHandler.PLAYER_ERROR + "You cannot break glass");
+            player.sendMessage(CommandHandler.ERROR + "You cannot break glass");
             event.cancel(true);
         } else if (substance == Substance.OBSIDIAN) {
             Game game = this.manager.findGame(player);
@@ -52,14 +52,14 @@ public class BattleListener implements Listener {
 
                 if (team == Game.Team.PURPLE) {
                     if (coordinates.equals(game.purpleObby())) {
-                        player.sendMessage(CommandHandler.PLAYER_ERROR + "You cannot break your own obsidian");
+                        player.sendMessage(CommandHandler.ERROR + "You cannot break your own obsidian");
                         event.cancel(true);
                     } else {
                         game.win(Game.Team.PURPLE);
                     }
                 } else {
                     if (coordinates.equals(game.greenObby())) {
-                        player.sendMessage(CommandHandler.PLAYER_ERROR + "You cannot break your own obsidian");
+                        player.sendMessage(CommandHandler.ERROR + "You cannot break your own obsidian");
                         event.cancel(true);
                     } else {
                         game.win(Game.Team.GREEN);
@@ -74,7 +74,7 @@ public class BattleListener implements Listener {
         Substance sub = event.block().substance();
 
         if (sub == Substance.GLASS) {
-            player.sendMessage(CommandHandler.PLAYER_ERROR + "You cannot place glass");
+            player.sendMessage(CommandHandler.ERROR + "You cannot place glass");
             event.cancel(true);
         } else if (sub == Substance.OBSIDIAN) {
             Game game = this.manager.findGame(player);
@@ -97,7 +97,7 @@ public class BattleListener implements Listener {
                     player.sendMessage(CommandHandler.PREFIX + "Set the obsidian at the placed location.");
                 else {
                     player.sendMessage(
-                            CommandHandler.PLAYER_ERROR + "Obsidian already set, removing the one you placed.");
+                            CommandHandler.ERROR + "Obsidian already set, removing the one you placed.");
                     event.cancel(true);
                 }
             }

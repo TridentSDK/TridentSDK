@@ -17,7 +17,6 @@ import java.util.Map;
  * @author Pierre C
  */
 public class GameManager {
-    // TODO figure out how to match references?
     // TODO plugin storage config way to verbose
     // TODO find values in a config/section
 
@@ -118,7 +117,7 @@ public class GameManager {
     }
 
     public Game removePlayer(Player player) {
-        PlayerSnapshot snapshot = SNAPSHOTS.remove(player);
+        PlayerSnapshot snapshot = SNAPSHOTS.remove(WeakEntity.finderOf(player));
         if (snapshot == null)
             return null;
 
@@ -135,13 +134,13 @@ public class GameManager {
 
     @Nullable
     public Game findGame(Player player) {
-        PlayerSnapshot snapshot = SNAPSHOTS.get(player);
+        PlayerSnapshot snapshot = SNAPSHOTS.get(WeakEntity.finderOf(player));
         if (snapshot == null)
             return null;
         return GAMES.get(snapshot.gameId());
     }
 
     public boolean isPlaying(Player player) {
-        return SNAPSHOTS.containsKey(player);
+        return SNAPSHOTS.containsKey(WeakEntity.finderOf(player));
     }
 }

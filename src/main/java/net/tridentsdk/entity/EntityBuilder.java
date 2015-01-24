@@ -34,7 +34,7 @@ import java.util.UUID;
 public abstract class EntityBuilder {
     public abstract EntityBuilder uuid(UUID uuid);
 
-    public abstract EntityBuilder spawnLocation(Coordinates spawn);
+    public abstract EntityBuilder spawn(Coordinates spawn);
 
     public abstract EntityBuilder executor(ExecutorFactory<? extends Entity> executor);
 
@@ -42,7 +42,7 @@ public abstract class EntityBuilder {
 
     public abstract EntityBuilder passenger(Entity passenger);
 
-    public abstract EntityBuilder displayName(String displayName);
+    public abstract EntityBuilder name(String displayName);
 
     public abstract EntityBuilder silent(boolean silent);
 

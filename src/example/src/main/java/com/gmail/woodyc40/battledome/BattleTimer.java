@@ -4,6 +4,7 @@ import net.tridentsdk.concurrent.TridentRunnable;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.util.WeakEntity;
 
 import java.util.Map;
 
@@ -58,8 +59,8 @@ public class BattleTimer extends TridentRunnable {
                     limit = 0;
                     warned = false;
 
-                    for (Map.Entry<Player, Game.Team> entry : game.players().entrySet()) {
-                        game.teleport(entry.getKey(), entry.getValue());
+                    for (Map.Entry<WeakEntity<Player>, Game.Team> entry : game.players().entrySet()) {
+                        game.teleport(entry.getKey().entity(), entry.getValue());
                     }
                 }
                 break;
@@ -135,8 +136,8 @@ public class BattleTimer extends TridentRunnable {
                 Factories.tasks().syncLater(TridentPlugin.instance(), new TridentRunnable() {
                     @Override
                     public void run() {
-                        for (Player player : game.players().keySet()) {
-                            GameManager.newHandler().removePlayer(player);
+                        for (WeakEntity<Player> player : game.players().keySet()) {
+                            GameManager.newHandler().removePlayer(player.entity());
                         }
                     }
                 }, 200L);
