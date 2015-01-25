@@ -419,15 +419,15 @@ public enum Substance {
     private final String id;
     private final String data;
     private final int maxStack;
-    private final byte idInt;
+    private final int idInt;
     private final String replaced;
 
-    private static final Map<Byte, Substance> ids;
+    private static final Map<Integer, Substance> ids;
 
     static {
-        HashMap<Byte, Substance> builder = new HashMap<>();
+        HashMap<Integer, Substance> builder = new HashMap<>();
         for (Substance substance: EnumSet.allOf(Substance.class)) {
-            builder.put((byte) substance.idInt, substance);
+            builder.put(substance.idInt, substance);
         }
         ids = Collections.unmodifiableMap(builder);
     }
@@ -438,7 +438,7 @@ public enum Substance {
         this.data = data;
         this.replaced = PATTERN.matcher(id).replaceAll(" ");
 
-        this.idInt = Byte.parseByte(id);
+        this.idInt = Integer.parseInt(id);
     }
 
     Substance(String id, int stack) {
@@ -490,7 +490,7 @@ public enum Substance {
      * Returns the Id of this substance
      * @return the id of this substance
      */
-    public byte getId() {
+    public int getId() {
         return idInt;
     }
 
