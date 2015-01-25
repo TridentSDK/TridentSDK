@@ -3091,10 +3091,10 @@ public class SubstanceTest {
     @Test
     public void fromString() {
         for (Substance s : values()) {
-            Assert.assertEquals(s, Substance.fromString(s.getId()));
+            Assert.assertEquals(s, Substance.fromStringId(s.getId()));
         }
 
-        Assert.assertNull(Substance.fromString("21212121"));
+        Assert.assertNull(Substance.fromStringId("21212121"));
     }
 
     @Test

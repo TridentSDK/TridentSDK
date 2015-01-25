@@ -17,6 +17,10 @@
 
 package net.tridentsdk.base;
 
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -415,8 +419,18 @@ public enum Substance {
     private final String id;
     private final String data;
     private final int maxStack;
-    private final int idInt;
+    private final byte idInt;
     private final String replaced;
+
+    private static final Map<Byte, Substance> ids;
+
+    static {
+        HashMap<Byte, Substance> builder = new HashMap<>();
+        for (Substance substance: EnumSet.allOf(Substance.class)) {
+            builder.put((byte) substance.idInt, substance);
+        }
+        ids = Collections.unmodifiableMap(builder);
+    }
 
     Substance(String id, int stack, String data) {
         this.id = id;
@@ -424,7 +438,7 @@ public enum Substance {
         this.data = data;
         this.replaced = PATTERN.matcher(id).replaceAll(" ");
 
-        this.idInt = Integer.parseInt(id);
+        this.idInt = Byte.parseByte(id);
     }
 
     Substance(String id, int stack) {
@@ -441,7 +455,7 @@ public enum Substance {
      * @param id String to be matched
      * @return Material which was matched using id
      */
-    public static Substance fromString(String id) {
+    public static Substance fromStringId(String id) {
         for (Substance mat : Substance.values()) {
             if (mat.replaced.equalsIgnoreCase(id))
                 return mat;
@@ -451,12 +465,33 @@ public enum Substance {
     }
 
     /**
+     * Returns the substance that associated with a given id
+     *
+     * <p>Should be the favored method for getting a substance</p>
+     * <p>E.g. fromId(1) will return Substance.STONE</p>
+     *
+     * @param id
+     * @return
+     */
+    public static Substance fromId (byte id) {
+        return ids.get(id);
+    }
+
+    /**
      * Gets the block ID of the Material
      *
      * @return ID of the Material
      */
-    public String getId() {
+    public String getIdString() {
         return this.id;
+    }
+
+    /**
+     * Returns the Id of this substance
+     * @return the id of this substance
+     */
+    public byte getId() {
+        return idInt;
     }
 
     /**
