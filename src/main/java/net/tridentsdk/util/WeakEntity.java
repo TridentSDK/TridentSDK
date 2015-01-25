@@ -577,7 +577,7 @@ public final class WeakEntity<T extends Entity> {
             h = (h >> 16 ^ h) * 0x33L;
             h = h >> 16 ^ h;
 
-            return (int) (h % (long) entries.length);
+            return (int) (h & ((long) entries.length - 1));
         }
 
         private RefEntry loop(Object key, RefEntry head) {
