@@ -32,5 +32,5 @@ public interface Tradeable {
      *
      * @return the trades offered by this entity
      */
-    Collection<Trade> getTrades();
+    Collection<Trade> trades();
 }

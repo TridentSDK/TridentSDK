@@ -35,36 +35,36 @@ public class SignChangeEventTest {
     public void testSetContents() throws Exception {
         SignChangeEvent event = new SignChangeEvent(null, null, "Line 1", "Line 2", "Line 3", "Line 4");
 
-        Assert.assertEquals(event.getContents()[0], "Line 1");
-        Assert.assertEquals(event.getContents()[1], "Line 2");
-        Assert.assertEquals(event.getContents()[2], "Line 3");
-        Assert.assertEquals(event.getContents()[3], "Line 4");
+        Assert.assertEquals(event.contents()[0], "Line 1");
+        Assert.assertEquals(event.contents()[1], "Line 2");
+        Assert.assertEquals(event.contents()[2], "Line 3");
+        Assert.assertEquals(event.contents()[3], "Line 4");
 
         event.setContents("New Line 1", "New Line 2", "New Line 3", "New Line 4");
 
-        Assert.assertEquals(event.getContents()[0], "New Line 1");
-        Assert.assertEquals(event.getContents()[1], "New Line 2");
-        Assert.assertEquals(event.getContents()[2], "New Line 3");
-        Assert.assertEquals(event.getContents()[3], "New Line 4");
+        Assert.assertEquals(event.contents()[0], "New Line 1");
+        Assert.assertEquals(event.contents()[1], "New Line 2");
+        Assert.assertEquals(event.contents()[2], "New Line 3");
+        Assert.assertEquals(event.contents()[3], "New Line 4");
     }
 
     @Test
     public void testSetLine() throws Exception {
         SignChangeEvent event = new SignChangeEvent(null, null, "Line 1", "Line 2", "Line 3", "Line 4");
 
-        Assert.assertEquals(event.getContents()[0], "Line 1");
-        Assert.assertEquals(event.getContents()[1], "Line 2");
-        Assert.assertEquals(event.getContents()[2], "Line 3");
-        Assert.assertEquals(event.getContents()[3], "Line 4");
+        Assert.assertEquals(event.contents()[0], "Line 1");
+        Assert.assertEquals(event.contents()[1], "Line 2");
+        Assert.assertEquals(event.contents()[2], "Line 3");
+        Assert.assertEquals(event.contents()[3], "Line 4");
 
         Assert.assertEquals(event.setLine(0, "New Line 1"), "Line 1");
         Assert.assertEquals(event.setLine(1, "New Line 2"), "Line 2");
         Assert.assertEquals(event.setLine(2, "New Line 3"), "Line 3");
         Assert.assertEquals(event.setLine(3, "New Line 4"), "Line 4");
 
-        Assert.assertEquals(event.getContents()[0], "New Line 1");
-        Assert.assertEquals(event.getContents()[1], "New Line 2");
-        Assert.assertEquals(event.getContents()[2], "New Line 3");
-        Assert.assertEquals(event.getContents()[3], "New Line 4");
+        Assert.assertEquals(event.contents()[0], "New Line 1");
+        Assert.assertEquals(event.contents()[1], "New Line 2");
+        Assert.assertEquals(event.contents()[2], "New Line 3");
+        Assert.assertEquals(event.contents()[3], "New Line 4");
     }
 }

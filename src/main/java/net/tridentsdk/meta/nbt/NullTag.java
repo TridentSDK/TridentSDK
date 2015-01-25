@@ -32,7 +32,7 @@ public class NullTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.NULL;
     }
 }

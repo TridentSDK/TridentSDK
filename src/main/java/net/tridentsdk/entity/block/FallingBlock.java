@@ -31,7 +31,7 @@ public interface FallingBlock extends Entity {
      *
      * @return the BlockState of this falling block
      */
-    BlockSnapshot getSnapshot();
+    BlockSnapshot blockSnapshot();
 
     /**
      * Whether or not this FallingBlock should drop when it breaks

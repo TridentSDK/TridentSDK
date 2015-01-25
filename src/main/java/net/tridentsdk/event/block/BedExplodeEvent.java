@@ -53,7 +53,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
      *
      * @return Float strength of explosion
      */
-    public float getStrength() {
+    public float strength() {
         return this.strength;
     }
 

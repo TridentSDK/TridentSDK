@@ -32,7 +32,7 @@ public class EntityBeginExplosionCountdownEvent extends EntityEvent {
         this.length = length;
     }
 
-    public int getLength() {
+    public int length() {
         return this.length;
     }
 

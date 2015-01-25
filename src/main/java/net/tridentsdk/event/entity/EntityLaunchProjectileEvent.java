@@ -37,7 +37,7 @@ public class EntityLaunchProjectileEvent extends EntityEvent {
         this.target = target;
     }
 
-    public Projectile getProjectile() {
+    public Projectile projectile() {
         return this.projectile;
     }
 

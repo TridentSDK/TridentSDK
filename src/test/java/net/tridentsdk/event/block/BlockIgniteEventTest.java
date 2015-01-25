@@ -34,6 +34,6 @@ public class BlockIgniteEventTest {
     @Test
     public void testGetCause() throws Exception {
         BlockIgniteEvent event = new BlockIgniteEvent(null, BlockIgniteEvent.Cause.FIRE_SPREAD);
-        Assert.assertEquals(event.getCause(), BlockIgniteEvent.Cause.FIRE_SPREAD);
+        Assert.assertEquals(event.cause(), BlockIgniteEvent.Cause.FIRE_SPREAD);
     }
 }

@@ -31,7 +31,7 @@ public class NBTTagTest {
     @Test
     public void testGetName() throws Exception {
         StringTag tag = new StringTag("tag");
-        Assert.assertEquals(tag.getName(), "tag");
+        Assert.assertEquals(tag.name(), "tag");
     }
 
     @Test

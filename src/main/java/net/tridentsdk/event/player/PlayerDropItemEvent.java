@@ -38,7 +38,7 @@ public class PlayerDropItemEvent extends PlayerEvent implements Cancellable {
     /**
      * @return return the dropped item
      */
-    public Item getItem() {
+    public Item item() {
         return this.item;
     }
 

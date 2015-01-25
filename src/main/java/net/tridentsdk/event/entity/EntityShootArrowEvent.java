@@ -31,7 +31,7 @@ public class EntityShootArrowEvent extends EntityLaunchProjectileEvent {
         super(entity, projectile, target);
     }
 
-    public Arrow getArrow() {
-        return (Arrow) super.getProjectile();
+    public Arrow arrow() {
+        return (Arrow) super.projectile();
     }
 }

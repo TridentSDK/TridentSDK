@@ -27,7 +27,7 @@ public class FloatTag extends NBTTag {
         super(name);
     }
 
-    public float getValue() {
+    public float value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class FloatTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.FLOAT;
     }
 }

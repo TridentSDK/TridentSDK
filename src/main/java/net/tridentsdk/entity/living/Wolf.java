@@ -39,5 +39,5 @@ public interface Wolf extends Tameable, Neutral {
      *
      * @return the color of this entity's collar
      */
-    SubstanceColor getCollarColor();
+    SubstanceColor collarColor();
 }

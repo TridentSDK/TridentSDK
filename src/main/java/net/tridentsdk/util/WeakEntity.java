@@ -152,7 +152,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *     // We remember that we implemented a find player method later on
  *
  *     // Final code
- *     WeakEntity&lt;Player&gt; weakEntity = WeakEntity.of(getPlayer());
+ *     WeakEntity&lt;Player&gt; weakEntity = WeakEntity.of(player());
  * </code></pre>
  *
  * @author The TridentSDK Team

@@ -32,7 +32,7 @@ public class EntityDamageEntityEvent extends EntityDamageEvent {
         this.damager = damager;
     }
 
-    public Entity getDamager() {
+    public Entity damager() {
         return this.damager;
     }
 }

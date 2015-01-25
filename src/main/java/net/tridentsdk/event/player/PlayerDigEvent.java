@@ -39,11 +39,11 @@ public class PlayerDigEvent extends PlayerEvent implements Cancellable {
         this.status = status;
     }
 
-    public BlockOrientation getFace() {
+    public BlockOrientation face() {
         return this.face;
     }
 
-    public short getStatus() {
+    public short status() {
         return this.status;
     }
 

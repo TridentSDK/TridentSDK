@@ -51,7 +51,7 @@ public class CompoundTag extends NBTTag implements TagContainer {
 
     @Override
     public void addTag(NBTTag tag) {
-        this.tags.put(tag.getName(), tag);
+        this.tags.put(tag.name(), tag);
     }
 
     public void removeTag(String name) {
@@ -66,7 +66,7 @@ public class CompoundTag extends NBTTag implements TagContainer {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.COMPOUND;
     }
 }

@@ -28,7 +28,7 @@ public interface ExperienceOrb extends Entity {
      *
      * @return the age of this Experience Orb entity
      */
-    int getAge();
+    int age();
 
     /**
      * Sets the age of this Experience Orb entity
@@ -42,7 +42,7 @@ public interface ExperienceOrb extends Entity {
      *
      * @return the health of this Experience Orb entity
      */
-    short getHealth();
+    short health();
 
     /**
      * Sets the health for this Experience Orb entity

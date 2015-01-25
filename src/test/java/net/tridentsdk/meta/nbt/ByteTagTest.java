@@ -25,15 +25,15 @@ public class ByteTagTest {
     @Test
     public void testSetValue() throws Exception {
         ByteTag tag = new ByteTag("tag");
-        Assert.assertEquals(tag.getValue(), 0);
+        Assert.assertEquals(tag.value(), 0);
 
         tag.setValue((byte) 5);
-        Assert.assertEquals(tag.getValue(), 5);
+        Assert.assertEquals(tag.value(), 5);
     }
 
     @Test
     public void testGetType() throws Exception {
         ByteTag tag = new ByteTag("tag");
-        Assert.assertEquals(tag.getType(), TagType.BYTE);
+        Assert.assertEquals(tag.type(), TagType.BYTE);
     }
 }

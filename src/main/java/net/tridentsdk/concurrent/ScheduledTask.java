@@ -31,7 +31,7 @@ public interface ScheduledTask extends Runnable {
      *
      * @return the interval, as defined in {@link ScheduledTask#setInterval(long)}
      */
-    long getInterval();
+    long interval();
 
     /**
      * Interval is the ticks left of a specific action for repeating and delayed tasks
@@ -50,21 +50,21 @@ public interface ScheduledTask extends Runnable {
      *
      * @return the type the task is scheduled according to
      */
-    SchedulerType getType();
+    SchedulerType type();
 
     /**
      * The execution runnable, invoked when the task is scheduled to occur
      *
      * @return the runnable that is run at scheduled time
      */
-    TridentRunnable getRunnable();
+    TridentRunnable runnable();
 
     /**
      * The plugin that scheduled the task, or passed in when scheduled
      *
      * @return the scheduling plugin
      */
-    TridentPlugin getPlugin();
+    TridentPlugin owner();
 
     /**
      * Cancels the task, only needed for repeating tasks. Scheduled later and run tasks are auto cancelled.

@@ -27,7 +27,7 @@ public class StringTag extends NBTTag {
         super(name);
     }
 
-    public String getValue() {
+    public String value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class StringTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.STRING;
     }
 }

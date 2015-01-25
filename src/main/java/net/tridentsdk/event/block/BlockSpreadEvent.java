@@ -41,7 +41,7 @@ public class BlockSpreadEvent extends BlockGrowthEvent {
      *
      * @return Block representing the origin of the spread
      */
-    public Block getFrom() {
+    public Block from() {
         return this.blockFrom;
     }
 }

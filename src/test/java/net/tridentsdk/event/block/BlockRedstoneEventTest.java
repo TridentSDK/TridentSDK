@@ -25,13 +25,13 @@ public class BlockRedstoneEventTest {
     @Test
     public void testGetCause() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
-        Assert.assertEquals(event.getCause(), BlockRedstoneEvent.Cause.BUTTON);
+        Assert.assertEquals(event.cause(), BlockRedstoneEvent.Cause.BUTTON);
     }
 
     @Test
     public void testGetStrength() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
-        Assert.assertEquals(event.getStrength(), 10);
+        Assert.assertEquals(event.strength(), 10);
     }
 
     @Test

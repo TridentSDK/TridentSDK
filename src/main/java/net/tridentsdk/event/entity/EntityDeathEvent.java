@@ -34,7 +34,7 @@ public class EntityDeathEvent extends EntityEvent {
         super(entity);
     }
 
-    public EntityDamageEvent getDeathCause() {
+    public EntityDamageEvent deathCause() {
         return this.entity().lastDamageEvent();
     }
 

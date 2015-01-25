@@ -30,5 +30,5 @@ public interface Ghast extends Hostile {
      *
      * @return this Ghast's fireball explosion radius
      */
-    float getFireballRadius();
+    float fireballRadius();
 }

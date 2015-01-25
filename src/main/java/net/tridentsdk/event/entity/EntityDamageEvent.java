@@ -41,7 +41,7 @@ public class EntityDamageEvent extends EntityEvent {
         this.cause = cause;
     }
 
-    public Cause getCause() {
+    public Cause cause() {
         return this.cause;
     }
 
@@ -49,7 +49,7 @@ public class EntityDamageEvent extends EntityEvent {
      * @return return the amount of damage dealt
      */
 
-    public double getDamage() {
+    public double damage() {
         return this.damage;
     }
 

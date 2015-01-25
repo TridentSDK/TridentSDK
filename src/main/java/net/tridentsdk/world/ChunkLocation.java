@@ -39,11 +39,11 @@ public class ChunkLocation implements Serializable, Cloneable {
         return new ChunkLocation(x, z);
     }
 
-    public int getX() {
+    public int x() {
         return this.x;
     }
 
-    public int getZ() {
+    public int z() {
         return this.z;
     }
 

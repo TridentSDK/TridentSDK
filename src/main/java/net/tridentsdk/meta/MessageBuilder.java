@@ -103,7 +103,7 @@ public final class MessageBuilder {
      * @return the instance of this message builder
      */
     public MessageBuilder then(String message) {
-        this.extra.add(this.buildingObject.getMessage());
+        this.extra.add(this.buildingObject.message());
         this.buildingObject = new Message().text(message);
 
         return this;
@@ -116,7 +116,7 @@ public final class MessageBuilder {
      * @return the instance of this message builder
      */
     public MessageBuilder then(Message message) {
-        this.extra.add(this.buildingObject.getMessage());
+        this.extra.add(this.buildingObject.message());
         this.buildingObject = message;
 
         return this;

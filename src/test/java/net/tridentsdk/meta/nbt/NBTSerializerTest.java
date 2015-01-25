@@ -47,8 +47,8 @@ public class NBTSerializerTest {
         Assert.assertEquals(deserialized.getTestDouble(), 35.5, 1);
         Assert.assertEquals(new String(deserialized.getTestByteArray()), "byteArray");
         Assert.assertEquals(deserialized.getTestString(), "Hello World!");
-        Assert.assertEquals(deserialized.getTestList().getTag(0).getName(), "listIntTag");
-        Assert.assertEquals(deserialized.getTestCompound().getTag("compoundIntTag").getType(), TagType.INT);
+        Assert.assertEquals(deserialized.getTestList().getTag(0).name(), "listIntTag");
+        Assert.assertEquals(deserialized.getTestCompound().getTag("compoundIntTag").type(), TagType.INT);
 
         Assert.assertEquals(deserialized.getTestIntArray()[0], 1);
         Assert.assertEquals(deserialized.getTestIntArray()[1], 2);

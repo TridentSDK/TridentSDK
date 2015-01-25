@@ -30,5 +30,5 @@ public interface Hanging extends Entity {
      *
      * @return the Block this entity was placed on
      */
-    Block getHangingBlock();
+    Block hangingBlock();
 }

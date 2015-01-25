@@ -32,6 +32,6 @@ public class PlayerShootBowEvent extends PlayerLaunchProjectileEvent {
     }
 
     public Arrow getArrow() {
-        return (Arrow) this.getProjectile();
+        return (Arrow) this.projectile();
     }
 }

@@ -60,17 +60,17 @@ public final class NBTSerializer {
                 value = tag.getTag(tagName);
             }
 
-            if (value.getType() != type) {
+            if (value.type() != type) {
                 continue;
             }
 
-            switch (value.getType()) {
+            switch (value.type()) {
                 case BYTE:
-                    field.set(instance, value.asType(ByteTag.class).getValue());
+                    field.set(instance, value.asType(ByteTag.class).value());
                     break;
 
                 case BYTE_ARRAY:
-                    field.set(instance, value.asType(ByteArrayTag.class).getValue());
+                    field.set(instance, value.asType(ByteArrayTag.class).value());
                     break;
 
                 case COMPOUND:
@@ -83,27 +83,27 @@ public final class NBTSerializer {
                     break;
 
                 case DOUBLE:
-                    field.set(instance, value.asType(DoubleTag.class).getValue());
+                    field.set(instance, value.asType(DoubleTag.class).value());
                     break;
 
                 case FLOAT:
-                    field.set(instance, value.asType(FloatTag.class).getValue());
+                    field.set(instance, value.asType(FloatTag.class).value());
                     break;
 
                 case INT:
-                    field.set(instance, value.asType(IntTag.class).getValue());
+                    field.set(instance, value.asType(IntTag.class).value());
                     break;
 
                 case INT_ARRAY:
-                    field.set(instance, value.asType(IntArrayTag.class).getValue());
+                    field.set(instance, value.asType(IntArrayTag.class).value());
                     break;
 
                 case LONG:
-                    field.set(instance, value.asType(LongTag.class).getValue());
+                    field.set(instance, value.asType(LongTag.class).value());
                     break;
 
                 case SHORT:
-                    field.set(instance, value.asType(ShortTag.class).getValue());
+                    field.set(instance, value.asType(ShortTag.class).value());
                     break;
 
                 case LIST:
@@ -111,7 +111,7 @@ public final class NBTSerializer {
                     break;
 
                 case STRING:
-                    field.set(instance, value.asType(StringTag.class).getValue());
+                    field.set(instance, value.asType(StringTag.class).value());
                     break;
 
                 case NULL:

@@ -155,7 +155,7 @@ public class ConfigSectionList<V> extends ConfigList<V> {
         }
     }
 
-    protected ConfigSection getParent() {
+    protected ConfigSection parent() {
         return this.parent;
     }
 }

@@ -31,5 +31,5 @@ public interface InventoryHolder extends Entity {
      *
      * @return the Inventory that this entity holds
      */
-    Window getInventory();
+    Window inventory();
 }

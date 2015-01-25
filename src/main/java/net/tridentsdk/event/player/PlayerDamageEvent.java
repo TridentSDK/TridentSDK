@@ -35,7 +35,7 @@ public class PlayerDamageEvent extends EntityDamageEvent {
         super(player, damage, cause);
     }
 
-    public Player getPlayer() {
+    public Player player() {
         return (Player) super.entity();
     }
 }

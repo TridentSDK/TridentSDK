@@ -27,7 +27,7 @@ public class IntArrayTag extends NBTTag {
         super(name);
     }
 
-    public int[] getValue() {
+    public int[] value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class IntArrayTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.INT_ARRAY;
     }
 }

@@ -64,11 +64,11 @@ public enum TagType {
         return NULL;
     }
 
-    public Class<? extends NBTTag> getImplementation() {
+    public Class<? extends NBTTag> implementation() {
         return this.implClass;
     }
 
-    public int getId() {
+    public int id() {
         return this.id;
     }
 }

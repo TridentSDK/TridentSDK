@@ -60,7 +60,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      *
      * @return String[] contents of the Sign
      */
-    public String[] getContents() {
+    public String[] contents() {
         synchronized (this) {
             return contents;
         }
@@ -83,7 +83,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      * @param i line of the Sign
      * @return String text of the specified line
      */
-    public String getLine(int i) {
+    public String line(int i) {
         Preconditions.checkArgument(i >= 0, "Sign line is below 0");
         Preconditions.checkNotNull(i <= 3, "Sign line is above 3");
         synchronized (this) {
@@ -114,7 +114,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      *
      * @return Player editor of the sign, null if no player
      */
-    public Player getEditor() {
+    public Player editor() {
         return this.editor;
     }
 }

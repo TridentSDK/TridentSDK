@@ -26,7 +26,7 @@ public class BlockPlaceEventTest {
     @Test
     public void testGetFaceClicked() throws Exception {
         BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockOrientation.BOTTOM);
-        Assert.assertEquals(event.getFaceClicked(), BlockOrientation.BOTTOM);
+        Assert.assertEquals(event.faceClicked(), BlockOrientation.BOTTOM);
     }
 
     @Test

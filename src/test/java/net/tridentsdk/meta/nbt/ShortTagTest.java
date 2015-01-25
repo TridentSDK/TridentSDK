@@ -25,15 +25,15 @@ public class ShortTagTest {
     @Test
     public void testSetValue() throws Exception {
         ShortTag tag = new ShortTag("tag");
-        Assert.assertEquals(tag.getValue(), 0);
+        Assert.assertEquals(tag.value(), 0);
 
         tag.setValue((short) 10);
-        Assert.assertEquals(tag.getValue(), 10);
+        Assert.assertEquals(tag.value(), 10);
     }
 
     @Test
     public void testGetType() throws Exception {
         ShortTag tag = new ShortTag("tag");
-        Assert.assertEquals(tag.getType(), TagType.SHORT);
+        Assert.assertEquals(tag.type(), TagType.SHORT);
     }
 }

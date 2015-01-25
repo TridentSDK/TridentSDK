@@ -35,11 +35,11 @@ public class PlayerTabCompleteEvent extends PlayerEvent {
         this.suggestions = new String[] { };
     }
 
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 
-    public String[] getSuggestions() {
+    public String[] suggestions() {
         return this.suggestions;
     }
 

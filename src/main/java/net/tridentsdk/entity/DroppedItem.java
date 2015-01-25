@@ -28,7 +28,7 @@ public interface DroppedItem extends Entity {
      *
      * @return the age of this Item entity
      */
-    int getAge();
+    int age();
 
     /**
      * Sets the age of this Item entity
@@ -42,7 +42,7 @@ public interface DroppedItem extends Entity {
      *
      * @return the health of this Item entity
      */
-    short getHealth();
+    short health();
 
     /**
      * Sets the health for this Item entity
@@ -54,7 +54,7 @@ public interface DroppedItem extends Entity {
     /**
      * Represents the owner of this Item entity
      */
-    String getOwner();
+    String owner();
 
     /**
      * Sets the owner of this Item entity. Nobody else can pickup this Item until 10 seconds are left in its life if
@@ -69,7 +69,7 @@ public interface DroppedItem extends Entity {
      *
      * @return the name of the Player that dropped this
      */
-    String getDropper();
+    String dropper();
 
     /**
      * Sets the Player who dropped this Item

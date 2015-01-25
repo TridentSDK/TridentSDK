@@ -222,11 +222,11 @@ public final class TridentLogger {
         logger.error("========     Server info    =========");
         logger.error("Trident version: " + Trident.version());
         logger.error("Plugins:         " + Arrays.toString(
-                Lists.transform(Trident.pluginHandler().getPlugins(), new Function<TridentPlugin, String>() {
+                Lists.transform(Trident.pluginHandler().plugins(), new Function<TridentPlugin, String>() {
                     @Nullable
                     @Override
                     public String apply(TridentPlugin plugin) {
-                        return plugin.getDescription().name();
+                        return plugin.description().name();
                     }
                 }).toArray()));
         logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +

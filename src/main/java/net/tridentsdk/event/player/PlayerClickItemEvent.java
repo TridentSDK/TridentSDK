@@ -40,15 +40,15 @@ public class PlayerClickItemEvent extends Event implements Cancellable {
         this.cancelled = false;
     }
 
-    public Window getWindow() {
+    public Window window() {
         return this.window;
     }
 
-    public short getClickedSlot() {
+    public short clickedSlot() {
         return this.clickedSlot;
     }
 
-    public int getActionId() {
+    public int actionId() {
         return this.actionId;
     }
 

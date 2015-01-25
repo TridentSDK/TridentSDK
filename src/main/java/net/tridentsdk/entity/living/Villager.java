@@ -34,7 +34,7 @@ public interface Villager extends Ageable, Tradeable, Peaceful {
      *
      * @return the profession of this villager
      */
-    VillagerProfession getProfession();
+    VillagerProfession profession();
 
     /**
      * Sets the profession of this villager. If the current career does not have the profession as its parent, the
@@ -47,7 +47,7 @@ public interface Villager extends Ageable, Tradeable, Peaceful {
      *
      * @return the career of this villager
      */
-    VillagerCareer getCareer();
+    VillagerCareer career();
 
     /**
      * Sets the career of this villager. If the profession does not match the specified career's parent profession, the
@@ -62,5 +62,5 @@ public interface Villager extends Ageable, Tradeable, Peaceful {
      *
      * @return the current level of this villager's career
      */
-    int getCareerLevel();
+    int careerLevel();
 }

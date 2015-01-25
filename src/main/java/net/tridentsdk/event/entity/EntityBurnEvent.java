@@ -36,7 +36,7 @@ public abstract class EntityBurnEvent extends EntityEvent {
     /**
      * Gets how long this entity will be on fire for, in ticks
      */
-    public int getFireTicks() {
+    public int fireTicks() {
         return this.fireTicks;
     }
 

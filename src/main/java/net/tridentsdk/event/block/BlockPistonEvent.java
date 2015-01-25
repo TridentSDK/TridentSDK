@@ -49,7 +49,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      *
      * @return Orientation
      */
-    public Orientation getDirection() {
+    public Orientation direction() {
         return this.direction;
     }
 
@@ -78,7 +78,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      *
      * @return the block being moved, may be null if air, or retracting from a block without this piston being sticky
      */
-    public Block getInfluencedBlock() {
+    public Block influencedBlock() {
         return this.influenced;
     }
 

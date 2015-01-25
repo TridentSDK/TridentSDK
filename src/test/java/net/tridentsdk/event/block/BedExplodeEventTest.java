@@ -34,9 +34,9 @@ public class BedExplodeEventTest {
     @Test
     public void testGetStrength() throws Exception {
         BedExplodeEvent event = new BedExplodeEvent(null, 10);
-        Assert.assertEquals(event.getStrength(), 10, 1);
+        Assert.assertEquals(event.strength(), 10, 1);
 
         event.setStrength(20);
-        Assert.assertEquals(event.getStrength(), 20, 1);
+        Assert.assertEquals(event.strength(), 20, 1);
     }
 }

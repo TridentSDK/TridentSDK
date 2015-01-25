@@ -25,15 +25,15 @@ public class FloatTagTest {
     @Test
     public void testSetValue() throws Exception {
         FloatTag tag = new FloatTag("tag");
-        Assert.assertEquals(tag.getValue(), 0, 1);
+        Assert.assertEquals(tag.value(), 0, 1);
 
         tag.setValue(10);
-        Assert.assertEquals(tag.getValue(), 10, 1);
+        Assert.assertEquals(tag.value(), 10, 1);
     }
 
     @Test
     public void testGetType() throws Exception {
         FloatTag tag = new FloatTag("tag");
-        Assert.assertEquals(tag.getType(), TagType.FLOAT);
+        Assert.assertEquals(tag.type(), TagType.FLOAT);
     }
 }

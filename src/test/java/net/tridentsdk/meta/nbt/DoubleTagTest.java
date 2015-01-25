@@ -25,15 +25,15 @@ public class DoubleTagTest {
     @Test
     public void testSetValue() throws Exception {
         DoubleTag tag = new DoubleTag("tag");
-        Assert.assertEquals(tag.getValue(), 0, 1);
+        Assert.assertEquals(tag.value(), 0, 1);
 
         tag.setValue(10d);
-        Assert.assertEquals(tag.getValue(), 10, 1);
+        Assert.assertEquals(tag.value(), 10, 1);
     }
 
     @Test
     public void testGetType() throws Exception {
         DoubleTag tag = new DoubleTag("tag");
-        Assert.assertEquals(tag.getType(), TagType.DOUBLE);
+        Assert.assertEquals(tag.type(), TagType.DOUBLE);
     }
 }

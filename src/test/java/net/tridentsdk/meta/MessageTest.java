@@ -31,7 +31,7 @@ public class MessageTest {
         message.clickEvent(new ClickEvent().action(ClickEvent.ClickAction.SUGGEST_COMMAND).value("Click"));
         message.hoverEvent(new HoverEvent().action(HoverEvent.HoverAction.SHOW_TEXT).value("Hover"));
 
-        if (message.getMessage() == null) {
+        if (message.message() == null) {
             Assert.fail();
         }
 

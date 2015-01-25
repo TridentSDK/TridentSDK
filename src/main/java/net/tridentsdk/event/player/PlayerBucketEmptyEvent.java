@@ -37,7 +37,7 @@ public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
         this.blockInHand = blockInHand;
     }
 
-    public Item getBlockInHand() {
+    public Item blockInHand() {
         return this.blockInHand;
     }
 }

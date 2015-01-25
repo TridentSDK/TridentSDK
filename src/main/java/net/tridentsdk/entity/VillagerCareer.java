@@ -86,11 +86,11 @@ public enum VillagerCareer {
         this.id = id;
     }
 
-    public VillagerProfession getParent() {
+    public VillagerProfession parent() {
         return parent;
     }
 
-    public int getId() {
+    public int id() {
         return id;
     }
 }

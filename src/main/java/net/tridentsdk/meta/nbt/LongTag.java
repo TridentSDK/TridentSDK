@@ -27,7 +27,7 @@ public class LongTag extends NBTTag {
         super(name);
     }
 
-    public long getValue() {
+    public long value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class LongTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.LONG;
     }
 }

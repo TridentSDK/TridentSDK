@@ -24,9 +24,9 @@ public interface Chunk {
 
     ChunkLocation location();
 
-    int getX();
+    int x();
 
-    int getZ();
+    int z();
 
     World world();
 

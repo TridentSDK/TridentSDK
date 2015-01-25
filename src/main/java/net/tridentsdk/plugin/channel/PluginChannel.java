@@ -59,7 +59,7 @@ public abstract class PluginChannel {
      *
      * @return an immutable list of bytes sent by this channel
      */
-    public List<byte[]> getHistory() {
+    public List<byte[]> history() {
         return ImmutableList.copyOf(this.history);
     }
 }

@@ -39,7 +39,7 @@ public class ReflectFactory {
      * @param cls the default class to wrap
      * @return the wrapped class
      */
-    public FastClass getClass(Class<?> cls) {
+    public FastClass fastClass(Class<?> cls) {
         return FastClass.get(cls);
     }
 
@@ -49,7 +49,7 @@ public class ReflectFactory {
      * @param o the instance representing the class you need
      * @return the wrapped class
      */
-    public FastClass getClass(Object o) {
+    public FastClass fastClass(Object o) {
         return FastClass.get(o);
     }
 
@@ -60,20 +60,20 @@ public class ReflectFactory {
      * @param name the name of the declared field
      * @return the wrapped field
      */
-    public FastField getField(Object o, String name) {
+    public FastField field(Object o, String name) {
         FastClass fastClass = FastClass.get(o.getClass());
         return fastClass.fieldBy(name);
     }
 
     /**
-     * Acquires a field wrapper in the same fashion as {@link #getMethod(Object, String)}, but for {@code static}
+     * Acquires a field wrapper in the same fashion as {@link #method(Object, String)}, but for {@code static}
      * fields
      *
      * @param cls  the class to acquire the field from
      * @param name the name of the {@code static} field
      * @return the wrapped {@code static} field
      */
-    public FastField getField(Class<?> cls, String name) {
+    public FastField field(Class<?> cls, String name) {
         return FastClass.get(cls).fieldBy(name);
     }
 
@@ -84,18 +84,18 @@ public class ReflectFactory {
      * @param name the method name
      * @return the wrapped method
      */
-    public FastMethod getMethod(Object o, String name) {
+    public FastMethod method(Object o, String name) {
         return new FastMethod(o, MethodAccess.get(o.getClass()), name);
     }
 
     /**
-     * Acquires a method in the same fashion as {@link #getMethod(Object, String)}, but for {@code static} methods
+     * Acquires a method in the same fashion as {@link #method(Object, String)}, but for {@code static} methods
      *
      * @param cls  the class to get the method from
      * @param name the name of the method
      * @return the wrapped {@code static} method
      */
-    public FastMethod getMethod(Class<?> cls, String name) {
+    public FastMethod method(Class<?> cls, String name) {
         return new FastMethod(null, MethodAccess.get(cls), name);
     }
 
@@ -107,7 +107,7 @@ public class ReflectFactory {
      * @param cls the class to get the constructor from
      * @return the wrapped default class constructor
      */
-    public FastConstructor getConstruct(Class<?> cls) {
+    public FastConstructor constructor(Class<?> cls) {
         return new FastConstructor(ConstructorAccess.get(cls));
     }
 }

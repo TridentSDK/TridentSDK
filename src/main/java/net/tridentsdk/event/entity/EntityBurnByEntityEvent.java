@@ -35,7 +35,7 @@ public class EntityBurnByEntityEvent extends EntityBurnEvent {
     /**
      * Gets the entity that set this entity on fire
      */
-    public Entity getBurner() {
+    public Entity burner() {
         return this.causer;
     }
 }

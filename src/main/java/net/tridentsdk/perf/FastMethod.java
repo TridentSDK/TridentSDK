@@ -63,7 +63,7 @@ public class FastMethod {
      *
      * @return the instance for method invocation
      */
-    public Object getInstance() {
+    public Object instance() {
         return instance;
     }
 }

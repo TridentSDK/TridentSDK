@@ -35,7 +35,7 @@ public class EntityExplodeEvent extends EntityEvent {
         this.strength = strength;
     }
 
-    public float getStrength() {
+    public float strength() {
         return this.strength;
     }
 

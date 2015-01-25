@@ -43,8 +43,7 @@ public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancella
         this.cancelled = cancelled;
     }
 
-    public Entity getProjectile() {
-
+    public Entity projectile() {
         return this.projectile;
     }
 }

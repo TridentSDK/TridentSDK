@@ -77,7 +77,7 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector add(Vector vector) {
-        return this.add(vector.getX(), vector.getY(), vector.getZ());
+        return this.add(vector.x(), vector.y(), vector.z());
     }
 
     /**
@@ -89,9 +89,9 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector add(double x, double y, double z) {
-        this.setX(this.getX() + x);
-        this.setY(this.getY() + y);
-        this.setZ(this.getZ() + z);
+        this.setX(this.x() + x);
+        this.setY(this.y() + y);
+        this.setZ(this.z() + z);
 
         return this;
     }
@@ -121,7 +121,7 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector subtract(Vector vector) {
-        return this.subtract(vector.getX(), vector.getY(), vector.getZ());
+        return this.subtract(vector.x(), vector.y(), vector.z());
     }
 
     /**
@@ -133,9 +133,9 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector subtract(double x, double y, double z) {
-        this.setX(this.getX() - x);
-        this.setY(this.getY() - y);
-        this.setZ(this.getZ() - z);
+        this.setX(this.x() - x);
+        this.setY(this.y() - y);
+        this.setZ(this.z() - z);
 
         return this;
     }
@@ -159,7 +159,7 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector multiply(Vector vec) {
-        return this.multiply(vec.getX(), vec.getY(), vec.getZ());
+        return this.multiply(vec.x(), vec.y(), vec.z());
     }
 
     /**
@@ -181,9 +181,9 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector multiply(double x, double y, double z) {
-        this.setX(this.getX() * x);
-        this.setY(this.getY() * y);
-        this.setZ(this.getZ() * z);
+        this.setX(this.x() * x);
+        this.setY(this.y() * y);
+        this.setZ(this.z() * z);
 
         return this;
     }
@@ -207,7 +207,7 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector divide(Vector vec) {
-        return this.divide(vec.getX(), vec.getY(), vec.getZ());
+        return this.divide(vec.x(), vec.y(), vec.z());
     }
 
     /**
@@ -229,9 +229,9 @@ public class Vector implements Serializable, Cloneable {
      * @return the current vector with updated coordinates
      */
     public Vector divide(double x, double y, double z) {
-        this.setX(this.getX() / x);
-        this.setY(this.getY() / y);
-        this.setZ(this.getZ() / z);
+        this.setX(this.x() / x);
+        this.setY(this.y() / y);
+        this.setZ(this.z() / z);
 
         return this;
     }
@@ -259,9 +259,9 @@ public class Vector implements Serializable, Cloneable {
         double y = this.y;
         double z = this.z;
 
-        this.setX(y * vector.getZ() - vector.getY() * z);
-        this.setY(z * vector.getX() - vector.getZ() - x);
-        this.setZ(x * vector.getY() - vector.getX() * y);
+        this.setX(y * vector.z() - vector.y() * z);
+        this.setY(z * vector.x() - vector.z() - x);
+        this.setZ(x * vector.y() - vector.x() * y);
 
         return this;
     }
@@ -316,7 +316,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @return the vector x value
      */
-    public double getX() {
+    public double x() {
         return this.x;
     }
 
@@ -334,7 +334,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @return the vector y value
      */
-    public double getY() {
+    public double y() {
         return this.y;
     }
 
@@ -352,7 +352,7 @@ public class Vector implements Serializable, Cloneable {
      *
      * @return the vector z value
      */
-    public double getZ() {
+    public double z() {
         return this.z;
     }
 

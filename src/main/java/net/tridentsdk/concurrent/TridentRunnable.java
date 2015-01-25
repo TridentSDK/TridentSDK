@@ -74,7 +74,7 @@ public abstract class TridentRunnable implements Runnable {
      * will be thrown. This can be called when {@code task() != null}.</p>
      */
     public final long interval() {
-        return task.get().getInterval();
+        return task.get().interval();
     }
 
     /**

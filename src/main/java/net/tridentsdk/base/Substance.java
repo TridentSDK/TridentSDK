@@ -482,7 +482,7 @@ public enum Substance {
      *
      * @return ID of the Material
      */
-    public String getIdString() {
+    public String idString() {
         return this.id;
     }
 
@@ -490,7 +490,7 @@ public enum Substance {
      * Returns the Id of this substance
      * @return the id of this substance
      */
-    public int getId() {
+    public int id() {
         return idInt;
     }
 
@@ -499,7 +499,7 @@ public enum Substance {
      *
      * @return Data of this Material
      */
-    public String getData() {
+    public String data() {
         return this.data;
     }
 
@@ -517,7 +517,7 @@ public enum Substance {
      *
      * @return The maximum size of a stack for this Material
      */
-    public int getMaxStackSize() {
+    public int maxStackSize() {
         return this.maxStack;
     }
 

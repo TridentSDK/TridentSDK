@@ -122,7 +122,7 @@ public class CommandHandler extends Command {
         Game game = this.manager.createGame();
 
         listener.putSession(player, game);
-        player.getInventory().putItem(new Item(Substance.BLAZE_ROD));
+        player.inventory().putItem(new Item(Substance.BLAZE_ROD));
         player.sendMessage(PREFIX + "Beginning setup of game " + game.id());
         player.sendMessage(CommandHandler.PREFIX + "Click the lobby spawn with the blaze rod");
     }

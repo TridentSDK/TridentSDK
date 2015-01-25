@@ -40,7 +40,7 @@ public final class ChannelHandler {
      *
      * @return the channel handler instance
      */
-    public static ChannelHandler getInstance() {
+    public static ChannelHandler instance() {
         return INSTANCE;
     }
 

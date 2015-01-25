@@ -37,11 +37,11 @@ public class PlayerDropItemEvent extends EntitySpawnEvent {
         this.player = player;
     }
 
-    public Player getPlayer() {
+    public Player player() {
         return this.player;
     }
 
-    public DroppedItem getItem() {
+    public DroppedItem item() {
         return (DroppedItem) super.entity();
     }
 

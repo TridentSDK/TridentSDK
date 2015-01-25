@@ -34,7 +34,7 @@ public class BattleListener implements Listener {
 
     public void breakBlock(BlockBreakEvent event) {
         Substance substance = event.block().substance();
-        Player player = event.getPlayer();
+        Player player = event.player();
 
         if (substance == Substance.GLASS) {
             player.sendMessage(CommandHandler.ERROR + "You cannot break glass");
@@ -70,7 +70,7 @@ public class BattleListener implements Listener {
     }
 
     public void putBlock(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
+        Player player = event.player();
         Substance sub = event.block().substance();
 
         if (sub == Substance.GLASS) {
@@ -106,12 +106,12 @@ public class BattleListener implements Listener {
 
     public void interactBlock(PlayerInteractEvent event) {
         Player player = event.player();
-        if (player.heldItem().getType() != Substance.BLAZE_ROD)
+        if (player.heldItem().type() != Substance.BLAZE_ROD)
             return;
 
         SetupSession session = sessions.get(player);
         if (session != null) {
-            Coordinates coordinates = event.getBlock().location();
+            Coordinates coordinates = event.block().location();
             Game game = session.game();
             switch (session.stage()) {
                 case SPAWN:
@@ -134,7 +134,7 @@ public class BattleListener implements Listener {
     }
 
     public void die(PlayerDeathEvent event) {
-        Player player = event.getPlayer();
+        Player player = event.player();
         Game game = manager.findGame(player);
         if (game != null) {
             game.handleDeath(player);
@@ -143,7 +143,7 @@ public class BattleListener implements Listener {
     }
 
     public void damage(PlayerDamageEvent event) {
-        Game game = manager.findGame(event.getPlayer());
+        Game game = manager.findGame(event.player());
         if (game != null) {
             if (game.state() == Game.GameState.STARTING)
                 event.cancel(true);

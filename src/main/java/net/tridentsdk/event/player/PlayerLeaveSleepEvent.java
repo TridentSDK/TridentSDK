@@ -48,7 +48,7 @@ public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
     /**
      * Gets the bed that the player tried to leave
      */
-    public Block getBed() {
+    public Block bed() {
         return this.bed;
     }
 }

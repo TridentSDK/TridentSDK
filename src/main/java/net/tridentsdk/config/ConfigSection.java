@@ -73,7 +73,7 @@ public class ConfigSection {
                     new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList"));
             return null;
         }
-        ConfigSection section = new ConfigSection(((ConfigSectionList) list).getParent(), new JsonObject());
+        ConfigSection section = new ConfigSection(((ConfigSectionList) list).parent(), new JsonObject());
         list.add((V) section);
 
         return section;
@@ -536,9 +536,9 @@ public class ConfigSection {
      *
      * @return the parent root section
      */
-    public JsonConfig getRootSection() {
+    public JsonConfig rootSection() {
         synchronized (parentLock) {
-            return this.parent.getRootSection();
+            return this.parent.rootSection();
         }
     }
 
@@ -547,7 +547,7 @@ public class ConfigSection {
      *
      * @return the parent of the section
      */
-    public ConfigSection getParentSection() {
+    public ConfigSection parentSection() {
         synchronized (parentLock) {
             return this.parent;
         }

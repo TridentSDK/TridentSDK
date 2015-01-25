@@ -45,13 +45,13 @@ public class WorldImpl implements World {
             }
 
             @Override
-            public int getX() {
-                return loc.getX();
+            public int x() {
+                return loc.x();
             }
 
             @Override
-            public int getZ() {
-                return loc.getZ();
+            public int z() {
+                return loc.z();
             }
 
             @Override

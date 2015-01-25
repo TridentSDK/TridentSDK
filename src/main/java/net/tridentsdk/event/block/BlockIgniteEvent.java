@@ -53,7 +53,7 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
      *
      * @return Cause of this event
      */
-    public Cause getCause() {
+    public Cause cause() {
         return this.cause;
     }
 

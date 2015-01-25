@@ -45,7 +45,7 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     /**
      * @return return the interacted block (null means no block was interacted with)
      */
-    public Block getBlock() {
+    public Block block() {
         return this.block;
     }
 

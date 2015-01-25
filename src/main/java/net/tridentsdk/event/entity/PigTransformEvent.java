@@ -33,7 +33,7 @@ public class PigTransformEvent extends EntityEvent {
         this.cause = cause;
     }
 
-    public LightningStrikeEvent getCause() {
+    public LightningStrikeEvent cause() {
         return this.cause;
     }
 }

@@ -30,5 +30,5 @@ public interface Painting extends Hanging {
      *
      * @return the name of this Painting's motive
      */
-    String getMotive();
+    String motive();
 }

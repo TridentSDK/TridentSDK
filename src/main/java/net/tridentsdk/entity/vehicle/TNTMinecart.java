@@ -29,7 +29,7 @@ public interface TNTMinecart extends MinecartBase {
      *
      * @return this TNT Minecart's fuse time
      */
-    int getFuseTime();
+    int fuseTime();
 
     /**
      * Sets the fuse time for this TNT Minecart

@@ -43,7 +43,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
      * @return returns the previous player location
      */
 
-    public Coordinates getFromLocation() {
+    public Coordinates fromLocation() {
         return this.fromLoc;
     }
 
@@ -52,8 +52,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
      *
      * @return returns the next player location
      */
-
-    public Coordinates getToLocation() {
+    public Coordinates toLocation() {
         return this.toLoc;
     }
 

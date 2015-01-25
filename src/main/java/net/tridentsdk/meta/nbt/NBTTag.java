@@ -35,11 +35,11 @@ public abstract class NBTTag {
         return (T) this;
     }
 
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
-    public abstract TagType getType();
+    public abstract TagType type();
 
     public boolean hasName() {
         return this.hasName;

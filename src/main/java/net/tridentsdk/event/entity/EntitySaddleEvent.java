@@ -37,7 +37,7 @@ public class EntitySaddleEvent extends EntityEvent {
     /**
      * Gets the player that saddled this pig
      */
-    public Player getPlayer() {
+    public Player player() {
         return this.player;
     }
 

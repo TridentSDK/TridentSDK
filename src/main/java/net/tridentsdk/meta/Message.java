@@ -41,7 +41,7 @@ public final class Message {
      * @return the current message
      */
     public Message text(String input) {
-        this.getMessage().addProperty("text", input);
+        this.message().addProperty("text", input);
         return this;
     }
 
@@ -52,7 +52,7 @@ public final class Message {
      * @return the current message
      */
     public Message color(ChatColor color) {
-        this.getMessage().addProperty("color", color.name().toLowerCase());
+        this.message().addProperty("color", color.name().toLowerCase());
 
         return this;
     }
@@ -69,7 +69,7 @@ public final class Message {
         obj.addProperty("action", event.action().toString());
         obj.addProperty("value", event.value());
 
-        this.getMessage().add("clickEvent", obj);
+        this.message().add("clickEvent", obj);
         return this;
     }
 
@@ -85,7 +85,7 @@ public final class Message {
         obj.addProperty("action", event.action().toString());
         obj.addProperty("value", event.value());
 
-        this.getMessage().add("hoverEvent", obj);
+        this.message().add("hoverEvent", obj);
         return this;
     }
 
@@ -95,7 +95,7 @@ public final class Message {
      * @return the JSON text
      */
     public String asJson() {
-        return MessageBuilder.GSON.toJson(this.getMessage());
+        return MessageBuilder.GSON.toJson(this.message());
     }
 
     /**
@@ -103,7 +103,7 @@ public final class Message {
      *
      * @return the message in object form of JSON
      */
-    public JsonObject getMessage() {
+    public JsonObject message() {
         return message;
     }
 }

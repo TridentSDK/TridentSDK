@@ -36,22 +36,22 @@ public class Item {
     }
 
     public Item(Substance mat, short quantity) {
-        this.id = mat.getId();
+        this.id = mat.id();
         this.mat = mat;
 
         this.quantity = quantity;
         this.damageValue = (short) 100; // psudeo-value
     }
 
-    public int getId() {
+    public int id() {
         return this.id;
     }
 
-    public Substance getType() {
+    public Substance type() {
         return this.mat;
     }
 
-    public short getQuantity() {
+    public short quantity() {
         return this.quantity;
     }
 
@@ -59,7 +59,7 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public short getDamageValue() {
+    public short damageValue() {
         return this.damageValue;
     }
 

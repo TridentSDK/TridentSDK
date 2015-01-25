@@ -44,7 +44,7 @@ public class TridentRunnableTest {
             long interval;
 
             @Override
-            public long getInterval() {
+            public long interval() {
                 return interval;
             }
 
@@ -54,17 +54,17 @@ public class TridentRunnableTest {
             }
 
             @Override
-            public SchedulerType getType() {
+            public SchedulerType type() {
                 return SchedulerType.ASYNC_LATER;
             }
 
             @Override
-            public TridentRunnable getRunnable() {
+            public TridentRunnable runnable() {
                 return runnable;
             }
 
             @Override
-            public TridentPlugin getPlugin() {
+            public TridentPlugin owner() {
                 return null;
             }
 

@@ -90,7 +90,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the x value of this location
      */
-    public double getX() {
+    public double x() {
         return this.x;
     }
 
@@ -108,7 +108,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the y value of this location
      */
-    public double getY() {
+    public double y() {
         return this.y;
     }
 
@@ -126,7 +126,7 @@ public class Coordinates implements Cloneable {
      *
      * @return the z value of this location
      */
-    public double getZ() {
+    public double z() {
         return this.z;
     }
 
@@ -200,9 +200,9 @@ public class Coordinates implements Cloneable {
      * @return the relative location
      */
     public Coordinates add(Vector vector) {
-        this.setX(vector.getX());
-        this.setY(vector.getY());
-        this.setZ(vector.getZ());
+        this.setX(vector.x());
+        this.setY(vector.y());
+        this.setZ(vector.z());
 
         return this;
     }
@@ -214,8 +214,8 @@ public class Coordinates implements Cloneable {
      * @return the relative location
      */
     public Coordinates relative(Vector vector) {
-        return new Coordinates(this.world(), vector.getX() + this.getX(), vector.getY() + this.getY(),
-                vector.getZ() + this.getZ(), this.yaw(), this.pitch());
+        return new Coordinates(this.world(), vector.x() + this.x(), vector.y() + this.y(),
+                vector.z() + this.z(), this.yaw(), this.pitch());
     }
 
     /**
@@ -233,7 +233,7 @@ public class Coordinates implements Cloneable {
      * @return New Vector containing this Location's coordinates
      */
     public Vector asVector() {
-        return new Vector(this.getX(), this.getY(), this.getZ());
+        return new Vector(this.x(), this.y(), this.z());
     }
 
     /**
@@ -256,8 +256,8 @@ public class Coordinates implements Cloneable {
         Preconditions.checkNotNull(location, "Location cannot be null.");
         if (!this.world().equals(location.world()))
             return 0.0;
-        return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
-                square(this.getZ() - location.getZ());
+        return square(this.x() - location.x()) + square(this.y() - location.y()) +
+                square(this.z() - location.z());
     }
 
     @Override

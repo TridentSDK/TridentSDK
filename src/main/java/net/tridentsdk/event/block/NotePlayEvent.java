@@ -54,7 +54,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      *
      * @return Note representing the sound that is being played
      */
-    public Note getNote() {
+    public Note note() {
         return this.note;
     }
 
@@ -72,7 +72,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      *
      * @return Instrument being used to play the Note
      */
-    public Instrument getInstrument() {
+    public Instrument instrument() {
         return this.instrument;
     }
 
@@ -90,7 +90,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      *
      * @return List of Players who can hear the Note
      */
-    public List<Player> getPlayers() {
+    public List<Player> players() {
         return this.players;
     }
 

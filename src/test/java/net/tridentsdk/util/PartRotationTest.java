@@ -26,16 +26,16 @@ public class PartRotationTest {
     public void testClass() throws Exception {
         PartRotation partRotation = new PartRotation(10, 20, 30);
 
-        Assert.assertEquals(partRotation.getRotX(), 10);
-        Assert.assertEquals(partRotation.getRotY(), 20);
-        Assert.assertEquals(partRotation.getRotZ(), 30);
+        Assert.assertEquals(partRotation.rotX(), 10);
+        Assert.assertEquals(partRotation.rotY(), 20);
+        Assert.assertEquals(partRotation.rotZ(), 30);
 
         partRotation.setRotX(40);
         partRotation.setRotY(50);
         partRotation.setRotZ(60);
 
-        Assert.assertEquals(partRotation.getRotX(), 40);
-        Assert.assertEquals(partRotation.getRotY(), 50);
-        Assert.assertEquals(partRotation.getRotZ(), 60);
+        Assert.assertEquals(partRotation.rotX(), 40);
+        Assert.assertEquals(partRotation.rotY(), 50);
+        Assert.assertEquals(partRotation.rotZ(), 60);
     }
 }

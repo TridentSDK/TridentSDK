@@ -32,7 +32,7 @@ public class EntityTameEvent extends EntityEvent {
         this.tamer = tamer;
     }
 
-    public Player getTamer() {
+    public Player tamer() {
         return this.tamer;
     }
 

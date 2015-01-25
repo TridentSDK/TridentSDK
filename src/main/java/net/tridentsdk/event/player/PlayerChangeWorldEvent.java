@@ -35,11 +35,11 @@ public class PlayerChangeWorldEvent extends PlayerEvent {
         this.from = from;
     }
 
-    public World getTo() {
+    public World to() {
         return this.to;
     }
 
-    public World getFrom() {
+    public World from() {
         return this.from;
     }
 }

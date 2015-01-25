@@ -58,8 +58,8 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for (TridentPlugin plugin : Trident.pluginHandler().getPlugins()) {
-            if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
+        for (TridentPlugin plugin : Trident.pluginHandler().plugins()) {
+            if (plugin.description().name().equalsIgnoreCase(description.name())) {
                 TridentLogger.error(new IllegalStateException(
                         "Plugin already initialized or plugin named" + description.name() + " exists already"));
             }
@@ -84,7 +84,7 @@ public class TridentPlugin {
     public static TridentPlugin instance() {
         Class<?> caller = Trident.findCaller(3);
         ClassLoader loader = caller.getClassLoader();
-        for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
+        for (TridentPlugin plugin : Trident.pluginHandler().plugins())
             if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
@@ -102,7 +102,7 @@ public class TridentPlugin {
     @Nullable
     public static TridentPlugin instance(Class<? extends TridentPlugin> c) {
         ClassLoader loader = c.getClassLoader();
-        for (TridentPlugin plugin : Trident.pluginHandler().getPlugins())
+        for (TridentPlugin plugin : Trident.pluginHandler().plugins())
             if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
@@ -223,7 +223,7 @@ public class TridentPlugin {
      * @return the plugin descriptor for this plugin
      */
     @Nonnull
-    public final PluginDescription getDescription() {
+    public final PluginDescription description() {
         return this.description;
     }
 
@@ -244,7 +244,7 @@ public class TridentPlugin {
 
         // Should NEVER happen
         TridentLogger.error(new PluginLoadException(
-                "Plugin not loaded correctly, the executor is null for " + getDescription().name()));
+                "Plugin not loaded correctly, the executor is null for " + description().name()));
         return null;
     }
 
@@ -252,8 +252,8 @@ public class TridentPlugin {
     public boolean equals(Object other) {
         if (other instanceof TridentPlugin) {
             TridentPlugin otherPlugin = (TridentPlugin) other;
-            if (otherPlugin.getDescription().name().equals(this.getDescription().name())) {
-                if (otherPlugin.getDescription().author().equals(this.getDescription().author())) {
+            if (otherPlugin.description().name().equals(this.description().name())) {
+                if (otherPlugin.description().author().equals(this.description().author())) {
                     return true;
                 }
             }
@@ -264,8 +264,8 @@ public class TridentPlugin {
     @Override
     public int hashCode() {
         // Find constants
-        String name = this.getDescription().name();
-        String author = this.getDescription().author();
+        String name = this.description().name();
+        String author = this.description().author();
 
         return HASHER.newHasher().putUnencodedChars(name).putUnencodedChars(author).hash().hashCode();
     }

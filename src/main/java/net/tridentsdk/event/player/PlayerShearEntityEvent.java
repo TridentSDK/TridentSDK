@@ -41,14 +41,14 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     /**
      * Gets the entity that was sheared
      */
-    public LivingEntity getSheared() {
+    public LivingEntity sheared() {
         return this.sheared;
     }
 
     /**
      * Gets the item that shearing this entity will drop
      */
-    public DroppedItem getDrop() {
+    public DroppedItem drop() {
         return this.drop;
     }
 

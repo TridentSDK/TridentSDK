@@ -35,7 +35,7 @@ public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable 
     /**
      * Returns the state the player is attempting to toggle into, true for flying, false for not
      */
-    public boolean getToggleState() {
+    public boolean toggleState() {
         return this.toggleState;
     }
 

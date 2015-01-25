@@ -44,7 +44,7 @@ public interface Creeper extends Hostile {
      *
      * @return this creeper's explosion radius
      */
-    float getExplosionRadius();
+    float explosionRadius();
 
     /**
      * Sets this creeper's explosion radius

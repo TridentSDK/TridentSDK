@@ -44,7 +44,7 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
      * @return return the message sent
      */
 
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 

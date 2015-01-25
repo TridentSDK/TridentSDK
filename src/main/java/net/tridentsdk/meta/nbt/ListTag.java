@@ -51,7 +51,7 @@ public class ListTag extends NBTTag implements TagContainer {
 
     @Override
     public void addTag(NBTTag tag) {
-        if (tag.getType() == this.innerType) {
+        if (tag.type() == this.innerType) {
             this.tags.add(tag);
         }
     }
@@ -68,7 +68,7 @@ public class ListTag extends NBTTag implements TagContainer {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.LIST;
     }
 }

@@ -208,7 +208,7 @@ public class TridentPluginHandler {
      *
      * @return the collection of plugins that are loaded
      */
-    public List<TridentPlugin> getPlugins() {
+    public List<TridentPlugin> plugins() {
         return Collections.unmodifiableList(this.plugins);
     }
 }

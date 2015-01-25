@@ -32,7 +32,7 @@ public interface Sheep extends Ageable, Peaceful {
      *
      * @return the color of this sheep's wool
      */
-    SubstanceColor getColor();
+    SubstanceColor color();
 
     /**
      * Whether or not this sheep can be sheared

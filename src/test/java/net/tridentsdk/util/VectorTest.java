@@ -144,9 +144,9 @@ public class VectorTest {
         Vector vector = new Vector(0, 5, 10);
         vector = vector.normalize();
 
-        Assert.assertEquals(vector.getX(), 0, 0.1);
-        Assert.assertEquals(vector.getY(), 0.44, 0.1);
-        Assert.assertEquals(vector.getZ(), 0.87, 0.1);
+        Assert.assertEquals(vector.x(), 0, 0.1);
+        Assert.assertEquals(vector.y(), 0.44, 0.1);
+        Assert.assertEquals(vector.z(), 0.87, 0.1);
     }
 
     @Test

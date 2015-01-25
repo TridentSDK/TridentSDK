@@ -32,7 +32,7 @@ public class ListTagTest {
         tag.addTag(intTag1);
 
         Assert.assertEquals(tag.listTags().size(), 1);
-        Assert.assertEquals(tag.listTags().get(0).getName(), "IntTag1");
+        Assert.assertEquals(tag.listTags().get(0).name(), "IntTag1");
 
         IntTag intTag2 = new IntTag("IntTag2");
         tag.addTag(intTag2);
@@ -49,7 +49,7 @@ public class ListTagTest {
         tag.removeTag(intTag1);
 
         Assert.assertEquals(tag.listTags().size(), 1);
-        Assert.assertEquals(tag.listTags().get(0).getName(), "IntTag2");
+        Assert.assertEquals(tag.listTags().get(0).name(), "IntTag2");
 
         tag.clearTags();
 
@@ -65,6 +65,6 @@ public class ListTagTest {
     @Test
     public void testGetType() throws Exception {
         ListTag tag = new ListTag("tag", TagType.INT);
-        Assert.assertEquals(tag.getType(), TagType.LIST);
+        Assert.assertEquals(tag.type(), TagType.LIST);
     }
 }

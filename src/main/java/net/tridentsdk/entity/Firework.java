@@ -28,12 +28,12 @@ public interface Firework extends Entity {
      *
      * @return the number of ticks that this will explode at
      */
-    int getTimeLived();
+    int timeLived();
 
     /**
      * Returns the properties of the Firework launched
      *
      * @return the properties of the firework launched
      */
-    FireworkProperties getProperties();
+    FireworkProperties properties();
 }

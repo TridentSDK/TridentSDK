@@ -42,35 +42,35 @@ public class TagTypeTest {
 
     @Test
     public void testGetImplementation() throws Exception {
-        Assert.assertEquals(TagType.NULL.getImplementation(), NullTag.class);
-        Assert.assertEquals(TagType.END.getImplementation(), null);
-        Assert.assertEquals(TagType.BYTE.getImplementation(), ByteTag.class);
-        Assert.assertEquals(TagType.SHORT.getImplementation(), ShortTag.class);
-        Assert.assertEquals(TagType.INT.getImplementation(), IntTag.class);
-        Assert.assertEquals(TagType.LONG.getImplementation(), LongTag.class);
-        Assert.assertEquals(TagType.FLOAT.getImplementation(), FloatTag.class);
-        Assert.assertEquals(TagType.DOUBLE.getImplementation(), DoubleTag.class);
-        Assert.assertEquals(TagType.BYTE_ARRAY.getImplementation(), ByteArrayTag.class);
-        Assert.assertEquals(TagType.STRING.getImplementation(), StringTag.class);
-        Assert.assertEquals(TagType.LIST.getImplementation(), ListTag.class);
-        Assert.assertEquals(TagType.COMPOUND.getImplementation(), CompoundTag.class);
-        Assert.assertEquals(TagType.INT_ARRAY.getImplementation(), IntArrayTag.class);
+        Assert.assertEquals(TagType.NULL.implementation(), NullTag.class);
+        Assert.assertEquals(TagType.END.implementation(), null);
+        Assert.assertEquals(TagType.BYTE.implementation(), ByteTag.class);
+        Assert.assertEquals(TagType.SHORT.implementation(), ShortTag.class);
+        Assert.assertEquals(TagType.INT.implementation(), IntTag.class);
+        Assert.assertEquals(TagType.LONG.implementation(), LongTag.class);
+        Assert.assertEquals(TagType.FLOAT.implementation(), FloatTag.class);
+        Assert.assertEquals(TagType.DOUBLE.implementation(), DoubleTag.class);
+        Assert.assertEquals(TagType.BYTE_ARRAY.implementation(), ByteArrayTag.class);
+        Assert.assertEquals(TagType.STRING.implementation(), StringTag.class);
+        Assert.assertEquals(TagType.LIST.implementation(), ListTag.class);
+        Assert.assertEquals(TagType.COMPOUND.implementation(), CompoundTag.class);
+        Assert.assertEquals(TagType.INT_ARRAY.implementation(), IntArrayTag.class);
     }
 
     @Test
     public void testGetId() throws Exception {
-        Assert.assertEquals(TagType.NULL.getId(), -1);
-        Assert.assertEquals(TagType.END.getId(), 0);
-        Assert.assertEquals(TagType.BYTE.getId(), 1);
-        Assert.assertEquals(TagType.SHORT.getId(), 2);
-        Assert.assertEquals(TagType.INT.getId(), 3);
-        Assert.assertEquals(TagType.LONG.getId(), 4);
-        Assert.assertEquals(TagType.FLOAT.getId(), 5);
-        Assert.assertEquals(TagType.DOUBLE.getId(), 6);
-        Assert.assertEquals(TagType.BYTE_ARRAY.getId(), 7);
-        Assert.assertEquals(TagType.STRING.getId(), 8);
-        Assert.assertEquals(TagType.LIST.getId(), 9);
-        Assert.assertEquals(TagType.COMPOUND.getId(), 10);
-        Assert.assertEquals(TagType.INT_ARRAY.getId(), 11);
+        Assert.assertEquals(TagType.NULL.id(), -1);
+        Assert.assertEquals(TagType.END.id(), 0);
+        Assert.assertEquals(TagType.BYTE.id(), 1);
+        Assert.assertEquals(TagType.SHORT.id(), 2);
+        Assert.assertEquals(TagType.INT.id(), 3);
+        Assert.assertEquals(TagType.LONG.id(), 4);
+        Assert.assertEquals(TagType.FLOAT.id(), 5);
+        Assert.assertEquals(TagType.DOUBLE.id(), 6);
+        Assert.assertEquals(TagType.BYTE_ARRAY.id(), 7);
+        Assert.assertEquals(TagType.STRING.id(), 8);
+        Assert.assertEquals(TagType.LIST.id(), 9);
+        Assert.assertEquals(TagType.COMPOUND.id(), 10);
+        Assert.assertEquals(TagType.INT_ARRAY.id(), 11);
     }
 }

@@ -91,7 +91,7 @@ public class ConfigList<V> implements List<V> {
             TridentLogger.error(new IndexOutOfBoundsException("Index: " + index + ", Size: " + size));
     }
 
-    private Node<V> getNode(int index) {
+    private Node<V> nodeAt(int index) {
         int idx = 0;
         Node<V> node = head;
         while ((node = node.next) != null) {
@@ -108,7 +108,7 @@ public class ConfigList<V> implements List<V> {
         read.lock();
         try {
             checkElementIndex(index);
-            return getNode(index).value;
+            return nodeAt(index).value;
         } finally {
             read.unlock();
         }
@@ -184,7 +184,7 @@ public class ConfigList<V> implements List<V> {
         read.lock();
         try {
             checkElementIndex(index);
-            node = getNode(index);
+            node = nodeAt(index);
             oldValue = node.value;
         } finally {
             read.unlock();
@@ -481,7 +481,7 @@ public class ConfigList<V> implements List<V> {
         public V previous() {
             read.lock();
             try {
-                return getNode(current.get()).prev.value;
+                return nodeAt(current.get()).prev.value;
             } finally {
                 read.unlock();
             }

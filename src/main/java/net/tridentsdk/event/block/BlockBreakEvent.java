@@ -62,7 +62,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return ItemStack in the player's hand
      */
-    public Item getItemInHand() {
+    public Item itemInHand() {
         return this.itemInHand;
     }
 
@@ -71,7 +71,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return BlockFlace of the clicked block
      */
-    public BlockOrientation getBlockFace() {
+    public BlockOrientation blockFace() {
         return this.blockFace;
     }
 
@@ -80,7 +80,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return Player assoctaed with this event
      */
-    public Player getPlayer() {
+    public Player player() {
         return this.player;
     }
 }

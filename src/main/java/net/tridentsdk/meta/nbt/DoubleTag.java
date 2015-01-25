@@ -27,7 +27,7 @@ public class DoubleTag extends NBTTag {
         super(name);
     }
 
-    public double getValue() {
+    public double value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class DoubleTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.DOUBLE;
     }
 }

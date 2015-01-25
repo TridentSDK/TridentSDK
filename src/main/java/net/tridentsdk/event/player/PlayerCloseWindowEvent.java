@@ -35,7 +35,7 @@ public class PlayerCloseWindowEvent extends Event implements Cancellable {
         this.cancelled = false;
     }
 
-    public Window getWindow() {
+    public Window window() {
         return this.window;
     }
 

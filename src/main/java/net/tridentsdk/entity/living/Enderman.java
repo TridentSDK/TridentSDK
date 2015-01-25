@@ -31,12 +31,12 @@ public interface Enderman extends Neutral {
      *
      * @return the block that this entity is carrying
      */
-    BlockSnapshot getCarryingBlock();
+    BlockSnapshot carryingBlock();
 
     /**
      * Gets the number of endermites spawned by this enderman. Affects spawn chance of other endermites
      *
      * @return the number of endermites spawned by this enderman
      */
-    int getEndermiteCount();
+    int endermiteCount();
 }

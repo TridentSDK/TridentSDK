@@ -49,11 +49,11 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
         this.cancelled = cancelled;
     }
 
-    public State getState() {
+    public State state() {
         return this.state;
     }
 
-    public int getExp() {
+    public int experience() {
         return this.exp;
     }
 
@@ -61,7 +61,7 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
         this.exp = exp;
     }
 
-    public Item getItem() {
+    public Item item() {
         return this.item;
     }
 

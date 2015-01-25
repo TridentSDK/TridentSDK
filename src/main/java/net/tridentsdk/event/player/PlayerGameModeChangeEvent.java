@@ -45,11 +45,11 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellabl
         this.cancelled = cancelled;
     }
 
-    public GameMode getNewGameMode() {
+    public GameMode newGameMode() {
         return this.gameMode;
     }
 
-    public GameMode getCurrentGameMode() {
+    public GameMode currentGameMode() {
         return this.player().gameMode();
     }
 

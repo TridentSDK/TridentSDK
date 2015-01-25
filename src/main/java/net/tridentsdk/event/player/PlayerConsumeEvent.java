@@ -44,8 +44,8 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @return return the amount of hunger replenished
      */
-    public double getReplenishAmount() {
-        return super.getFeed();
+    public double replenishAmount() {
+        return super.feed();
     }
 
     /**
@@ -58,7 +58,7 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @return return the item consumed
      */
-    public DroppedItem getFood() {
+    public DroppedItem food() {
         return this.item;
     }
 

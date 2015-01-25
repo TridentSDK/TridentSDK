@@ -32,7 +32,7 @@ public class CompoundTagTest {
         tag.addTag(stringTag);
 
         Assert.assertEquals(tag.listTags().size(), 1);
-        Assert.assertEquals(tag.listTags().get(0).getName(), "StringTag");
+        Assert.assertEquals(tag.listTags().get(0).name(), "StringTag");
 
         IntTag intTag = new IntTag("IntTag");
         tag.addTag(intTag);
@@ -60,7 +60,7 @@ public class CompoundTagTest {
         tag.removeTag("StringTag");
 
         Assert.assertEquals(tag.listTags().size(), 1);
-        Assert.assertEquals(tag.listTags().get(0).getName(), "IntTag");
+        Assert.assertEquals(tag.listTags().get(0).name(), "IntTag");
 
         tag.clearTags();
 
@@ -70,6 +70,6 @@ public class CompoundTagTest {
     @Test
     public void testGetType() throws Exception {
         CompoundTag tag = new CompoundTag("tag");
-        Assert.assertEquals(tag.getType(), TagType.COMPOUND);
+        Assert.assertEquals(tag.type(), TagType.COMPOUND);
     }
 }

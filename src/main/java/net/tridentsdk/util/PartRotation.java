@@ -43,7 +43,7 @@ public class PartRotation {
      *
      * @return Integer rotation on the X plane
      */
-    public int getRotX() {
+    public int rotX() {
         return this.rotX;
     }
 
@@ -61,7 +61,7 @@ public class PartRotation {
      *
      * @return Integer rotation on the Y plane
      */
-    public int getRotY() {
+    public int rotY() {
         return this.rotY;
     }
 
@@ -79,7 +79,7 @@ public class PartRotation {
      *
      * @return Integer rotation on the Z plane
      */
-    public int getRotZ() {
+    public int rotZ() {
         return this.rotZ;
     }
 

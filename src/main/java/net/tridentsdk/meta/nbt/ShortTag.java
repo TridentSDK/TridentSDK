@@ -27,7 +27,7 @@ public class ShortTag extends NBTTag {
         super(name);
     }
 
-    public short getValue() {
+    public short value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class ShortTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.SHORT;
     }
 }

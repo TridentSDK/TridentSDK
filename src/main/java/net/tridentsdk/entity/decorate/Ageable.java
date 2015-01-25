@@ -30,7 +30,7 @@ public interface Ageable extends LivingEntity {
      *
      * @return the age of this entity
      */
-    int getAge();
+    int age();
 
     /**
      * Set the current age of this entity, in ticks

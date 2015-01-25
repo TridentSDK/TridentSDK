@@ -27,7 +27,7 @@ public class ByteTag extends NBTTag {
         super(name);
     }
 
-    public byte getValue() {
+    public byte value() {
         return this.value;
     }
 
@@ -40,7 +40,7 @@ public class ByteTag extends NBTTag {
      * @see net.tridentsdk.meta.nbt.NBTTag#type()
      */
     @Override
-    public TagType getType() {
+    public TagType type() {
         return TagType.BYTE;
     }
 }
