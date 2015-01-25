@@ -18,7 +18,6 @@
 package net.tridentsdk.plugin;
 
 import com.google.common.collect.Lists;
-import com.google.common.io.ByteStreams;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
@@ -32,7 +31,6 @@ import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -86,7 +84,7 @@ public class TridentPluginHandler {
                         String name = entry.getName().replace(".class", "").replace('/', '.');
                         Class<?> loadedClass = loader.loadClass(name);
 
-                        loader.addClass(loadedClass);
+                        loader.putClass(loadedClass);
 
                         if(TridentPlugin.class.isAssignableFrom(loadedClass)) {
                             if(pluginClass != null)

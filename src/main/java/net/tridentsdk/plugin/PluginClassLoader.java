@@ -55,10 +55,6 @@ public class PluginClassLoader extends URLClassLoader {
         locallyLoaded.put(cls.getName(), cls);
     }
 
-    void addClass(Class<?> cls) {
-        locallyLoaded.put(cls.getName(), cls);
-    }
-
     void unloadClasses() {
         for (Class<?> cls : locallyLoaded.values()) {
             if (Listener.class.isAssignableFrom(cls)) {
