@@ -37,11 +37,10 @@ import java.util.Map;
  * @author The TridentSDK Team
  */
 public class PluginClassLoader extends URLClassLoader {
-    private static final Map<String, Class<?>> globallyLoaded = Factories.collect().createMap();
     final Map<String, Class<?>> locallyLoaded = Factories.collect().createMap();
 
-    PluginClassLoader(File pluginFile) throws MalformedURLException {
-        super(new URL[] { pluginFile.toURI().toURL() });
+    PluginClassLoader(File pluginFile, ClassLoader loader) throws MalformedURLException {
+        super(new URL[] { pluginFile.toURI().toURL() }, loader);
     }
 
     void link(Class<?> c) {
@@ -52,43 +51,11 @@ public class PluginClassLoader extends URLClassLoader {
         return super.defineClass(name, source, 0, source.length);
     }
 
-    @Override
-    public Class<?> loadClass(String name) {
-        try {
-            return this.loadClass(name, true);
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
-    }
-
-    @Override
-    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-        Class<?> result = globallyLoaded.get(name);
-
-        if (result == null) {
-            result = super.loadClass(name, resolve);
-
-            if (result == null) {
-                if (resolve) {
-                    try {
-                        result = Class.forName(name);
-                    } catch (ClassNotFoundException ignored) {
-                    }
-                }
-            }
-        }
-
-        if (result != null) {
-            putClass(result);
-            return result;
-        }
-
-        TridentLogger.error(new ClassNotFoundException(name));
-        return null;
-    }
-
     void putClass(Class<?> cls) {
-        globallyLoaded.put(cls.getName(), cls);
+        locallyLoaded.put(cls.getName(), cls);
+    }
+
+    void addClass(Class<?> cls) {
         locallyLoaded.put(cls.getName(), cls);
     }
 
@@ -114,8 +81,6 @@ public class PluginClassLoader extends URLClassLoader {
                     }
                 } // TODO instance held fields
             }
-
-            globallyLoaded.remove(cls.getName());
         }
         locallyLoaded.clear();
     }

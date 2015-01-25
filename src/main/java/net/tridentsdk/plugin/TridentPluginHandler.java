@@ -72,22 +72,35 @@ public class TridentPluginHandler {
                 try {
                     // load all classes
                     jarFile = new JarFile(pluginFile);
-                    PluginClassLoader loader = new PluginClassLoader(pluginFile);
+                    PluginClassLoader loader = new PluginClassLoader(pluginFile, getClass().getClassLoader());
                     Class<? extends TridentPlugin> pluginClass = null;
 
                     Enumeration<JarEntry> entries = jarFile.entries();
                     while (entries.hasMoreElements()) {
-                        if (pluginClass == null)
-                            pluginClass = loadEntry(entries.nextElement(), jarFile, loader, false);
-                        else
-                            loadEntry(entries.nextElement(), jarFile, loader, true);
+                        JarEntry entry = entries.nextElement();
+
+                        if(entry.isDirectory() || !entry.getName().endsWith(".class")) {
+                            continue;
+                        }
+
+                        String name = entry.getName().replace(".class", "").replace('/', '.');
+                        Class<?> loadedClass = loader.loadClass(name);
+
+                        loader.addClass(loadedClass);
+
+                        if(TridentPlugin.class.isAssignableFrom(loadedClass)) {
+                            if(pluginClass != null)
+                                TridentLogger.error(new PluginLoadException("Plugin has more than one main class!"));
+
+                            pluginClass = loadedClass.asSubclass(TridentPlugin.class);
+                        }
                     }
 
                     // start initiating the plugin class and registering commands and listeners
                     if (pluginClass == null) {
                         TridentLogger.error(new PluginLoadException("Plugin does not have a main class"));
                         loader.unloadClasses();
-                        loader = null;
+                        loader = null; // help gc
                         return;
                     }
 
@@ -96,7 +109,7 @@ public class TridentPluginHandler {
                     if (description == null) {
                         TridentLogger.error(new PluginLoadException("PluginDescription annotation does not exist!"));
                         loader.unloadClasses();
-                        loader = null;
+                        loader = null; // help gc
                         return;
                     }
 
@@ -121,7 +134,7 @@ public class TridentPluginHandler {
                     plugin.onEnable();
                     TridentLogger.success("Loaded " + description.name() + " version " + description.version());
                 } catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException
-                        | InstantiationException ex) { // UNLOAD PLYGIN
+                        | InstantiationException | ClassNotFoundException ex) { // UNLOAD PLYGIN
                     TridentLogger.error(new PluginLoadException(ex));
                     if (plugin != null)
                         disable(plugin);
@@ -166,46 +179,6 @@ public class TridentPluginHandler {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-    }
-
-    private Class<? extends TridentPlugin> loadEntry(JarEntry entry, JarFile jarFile, PluginClassLoader loader,
-            boolean set) throws IOException {
-        InputStream stream = jarFile.getInputStream(entry);
-        String name = entry.getName().replace('/', '.');
-
-        if (!name.endsWith(".class"))
-            return null;
-
-        if (name.startsWith("net.tridentsdk"))
-            return null;
-
-        // Inner classes must be deferred, they have to be loaded after
-        // the enclosing class is loaded
-        if (name.contains("$"))
-            return null;
-
-        Class<?> c = loader.loadClass(name);
-        if (c == null)
-            c = loader.defineClass(name.replace(".class", ""), ByteStreams.toByteArray(stream));
-
-        if (c == null) {
-            TridentLogger.error(new Error("Class definition cannot be loaded, could not define class"));
-            return null;
-        }
-
-        loader.putClass(c);
-        loader.link(c);
-
-        if (c.getSuperclass() == TridentPlugin.class) {
-            if (set) {
-                TridentLogger.error(new PluginLoadException("Plugin has more than one main class"));
-                return null;
-            }
-
-            return c.asSubclass(TridentPlugin.class);
-        }
-
-        return null;
     }
 
     /**
