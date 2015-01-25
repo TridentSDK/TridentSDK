@@ -36,7 +36,7 @@ public class Item {
     }
 
     public Item(Substance mat, short quantity) {
-        this.id = Integer.parseInt(mat.getId());
+        this.id = mat.getId();
         this.mat = mat;
 
         this.quantity = quantity;
