@@ -89,8 +89,11 @@ public final class Defaults {
             return new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Thread.setDefaultUncaughtExceptionHandler(EXCEPTION_HANDLER);
-                    runnable.run();
+                    try {
+                        runnable.run();
+                    } catch (Exception e) {
+                        TridentLogger.error(e);
+                    }
                 }
             });
         }

@@ -48,9 +48,15 @@ public abstract class AbstractGenerator {
     public abstract ChunkTile atCoordinate(int x, int y, int z);
 
     public List<ChunkTile> doGen(ChunkLocation corner1, ChunkLocation corner2) {
+        int minX = Math.min(corner1.x(), corner2.x()) << 4;
+        int maxX = Math.max(corner1.x(), corner2.x()) << 4 + 16;
+        int minZ = Math.min(corner1.z(), corner2.z()) << 4;
+        int maxZ = Math.max(corner1.z(), corner2.z()) << 4 + 16;
+
         List<ChunkTile> gen = Lists.newArrayList();
-        for (int x = corner1.x(); x < corner2.z(); x++) {
-            for (int z = corner1.z(); z < corner2.z(); z++) {
+
+        for (int x = minX; x < maxX; x++) {
+            for (int z = minZ; z < maxZ; z++) {
                 int height = height(x, z);
 
                 gen.add(atCoordinate(x, height, z));
