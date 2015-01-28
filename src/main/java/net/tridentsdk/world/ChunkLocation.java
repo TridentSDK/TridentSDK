@@ -48,6 +48,12 @@ public class ChunkLocation implements Serializable, Cloneable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof ChunkLocation) &&
+                ((ChunkLocation) obj).x == x && ((ChunkLocation) obj).z == z;
+    }
+
+    @Override
     @Nullable
     public Object clone() {
         try {
