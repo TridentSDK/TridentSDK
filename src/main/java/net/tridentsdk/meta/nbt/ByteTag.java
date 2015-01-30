@@ -35,6 +35,10 @@ public class ByteTag extends NBTTag {
         this.value = value;
         return this;
     }
+    public ByteTag setValue(boolean value) {
+        this.value = value ? (byte) 0x01 : (byte) 0x00;
+        return this;
+    }
 
     /* (non-Javadoc)
      * @see net.tridentsdk.meta.nbt.NBTTag#type()

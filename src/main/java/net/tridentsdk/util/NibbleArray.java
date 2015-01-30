@@ -75,4 +75,15 @@ public final class NibbleArray {
                 "Byte array length must be the same as current size!");
         System.arraycopy(source, 0, data, 0, source.length);
     }
+
+
+    public static byte get (byte[] source, int index) {
+        byte b = source[index / 2];
+
+        if ((index & 1) == 0) {
+            return (byte) (b & 0x0f);
+        }
+
+        return (byte) ((b & 0xf0) >> 4);
+    }
 }

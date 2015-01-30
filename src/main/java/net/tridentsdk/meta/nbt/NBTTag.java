@@ -26,9 +26,14 @@ public abstract class NBTTag {
 
     public NBTTag(String name) {
         if (name != null) {
+            if(name.equals("")) {
+                // a blank name is a null name
+                return;
+            }
             this.name = name;
             this.hasName = true;
         }
+
     }
 
     public <T extends NBTTag> T asType(Class<T> type) {
