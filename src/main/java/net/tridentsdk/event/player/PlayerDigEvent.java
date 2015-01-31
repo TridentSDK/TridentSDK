@@ -30,7 +30,7 @@ public class PlayerDigEvent extends PlayerEvent implements Cancellable {
     private final BlockOrientation face;
     private final short status;
 
-    private boolean cancelled;
+    private volatile boolean cancelled;
 
     public PlayerDigEvent(Player player, BlockOrientation face, short status) {
         super(player);

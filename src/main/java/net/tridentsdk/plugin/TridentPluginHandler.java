@@ -154,15 +154,14 @@ public class TridentPluginHandler {
 
         Object instance = null;
         Constructor<?> c = null;
-        Class<?> superclass = cls.getSuperclass();
 
         try {
-            if (superclass == Listener.class && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
+            if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
                 c = cls.getConstructor();
                 Trident.eventHandler().registerListener(plugin, executor, (Listener) (instance = c.newInstance()));
             }
 
-            if (superclass == Command.class) {
+            if (Command.class.isAssignableFrom(cls)) {
                 if (c == null)
                     c = cls.getConstructor();
                 Trident.commandHandler()

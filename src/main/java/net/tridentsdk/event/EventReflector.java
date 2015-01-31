@@ -19,8 +19,10 @@ package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 import net.tridentsdk.docs.AccessNoDoc;
+import net.tridentsdk.event.player.PlayerMoveEvent;
 import net.tridentsdk.plugin.TridentPlugin;
 
+import java.lang.reflect.Method;
 import java.util.Comparator;
 
 @AccessNoDoc
@@ -63,6 +65,16 @@ class EventReflector implements Comparator<EventReflector> {
     }
 
     public void reflect(Event event) {
+        if (event instanceof PlayerMoveEvent) {
+            try {
+                Method method = this.instance.getClass().getMethod("move", PlayerMoveEvent.class);
+                method.invoke(this.instance, event);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
         this.handle.invoke(this.instance, this.index, event);
     }
 
