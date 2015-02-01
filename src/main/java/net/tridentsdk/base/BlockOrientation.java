@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 
 /**
@@ -99,7 +99,7 @@ public enum BlockOrientation {
      * @param loc the location to get relative to
      * @return the relative location
      */
-    public Coordinates apply(Coordinates loc) {
+    public Position apply(Position loc) {
         return loc.relative(this.difference);
     }
 }

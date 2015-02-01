@@ -18,7 +18,7 @@
 package net.tridentsdk.util;
 
 import com.google.common.base.Objects;
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -307,8 +307,8 @@ public class Vector implements Serializable, Cloneable {
     /**
      * Returns a new location in this world, with the coordinates the x, y, and z values
      */
-    public Coordinates asLocation(World world) {
-        return Coordinates.create(world, this.x, this.y, this.z);
+    public Position asLocation(World world) {
+        return Position.create(world, this.x, this.y, this.z);
     }
 
     /**

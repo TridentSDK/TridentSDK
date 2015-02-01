@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world.change;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.base.Substance;
 
 /**
@@ -83,7 +83,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Coordinates coords, int id)
+    public void setBlock(Position coords, int id)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -95,7 +95,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Coordinates coords, int id, byte data)
+    public void setBlock(Position coords, int id, byte data)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -106,7 +106,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Coordinates coords, Substance substance)
+    public void setBlock(Position coords, Substance substance)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -118,7 +118,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Coordinates coords, Substance substance, byte data)
+    public void setBlock(Position coords, Substance substance, byte data)
             throws IllegalArgumentException, IllegalStateException;
 
     /**

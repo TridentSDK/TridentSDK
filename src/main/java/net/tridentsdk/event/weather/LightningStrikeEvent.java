@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.weather;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.world.World;
 
 /**
@@ -26,14 +26,14 @@ import net.tridentsdk.world.World;
  * @author The TridentSDK Team
  */
 public class LightningStrikeEvent extends WeatherEvent {
-    private final Coordinates location;
+    private final Position location;
 
-    public LightningStrikeEvent(World world, Coordinates location) {
+    public LightningStrikeEvent(World world, Position location) {
         super(world);
         this.location = location;
     }
 
-    public Coordinates location() {
+    public Position location() {
         return this.location;
     }
 }

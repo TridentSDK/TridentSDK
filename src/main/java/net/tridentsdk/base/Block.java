@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 
 /**
@@ -45,7 +45,7 @@ public interface Block {
      *
      * @return Location of the Block
      */
-    Coordinates location();
+    Position location();
 
     /**
      * Gets the tile data

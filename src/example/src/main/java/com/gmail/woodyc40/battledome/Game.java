@@ -1,7 +1,7 @@
 package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.concurrent.TridentRunnable;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
@@ -21,11 +21,11 @@ public class Game {
     private final int id;
     private final Map<WeakEntity<Player>, Team> players;
     private GameState state;
-    private Coordinates spawn;
-    private Coordinates purpleTeam;
-    private Coordinates greenTeam;
-    private Coordinates purpleObby;
-    private Coordinates greenObby;
+    private Position spawn;
+    private Position purpleTeam;
+    private Position greenTeam;
+    private Position purpleObby;
+    private Position greenObby;
     private Team alternator = Team.PURPLE;
 
     /////////////////////////////////////////////// GENERAL METHODS //////////////////////////////////////////////
@@ -142,31 +142,31 @@ public class Game {
 
     ///////////////////////////////////////// SETUP //////////////////////////////////////////////////
 
-    public void setup(Coordinates spawn, Coordinates purpleTeam, Coordinates greenTeam) {
+    public void setup(Position spawn, Position purpleTeam, Position greenTeam) {
         this.spawn = spawn;
         this.purpleTeam = purpleTeam;
         this.greenTeam = greenTeam;
     }
 
-    public boolean setPurpleObby(Coordinates coordinates) {
+    public boolean setPurpleObby(Position position) {
         if (purpleObby != null)
             return false;
-        this.purpleObby = coordinates;
+        this.purpleObby = position;
         return true;
     }
 
-    public boolean setGreenObby(Coordinates coordinates) {
+    public boolean setGreenObby(Position position) {
         if (greenObby != null)
             return false;
-        this.greenObby = coordinates;
+        this.greenObby = position;
         return true;
     }
 
-    public Coordinates purpleObby() {
+    public Position purpleObby() {
         return this.purpleObby;
     }
 
-    public Coordinates greenObby() {
+    public Position greenObby() {
         return this.greenObby;
     }
 

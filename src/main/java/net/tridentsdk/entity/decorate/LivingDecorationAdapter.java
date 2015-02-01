@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.decorate;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.EntityProperties;
@@ -82,7 +82,7 @@ public class LivingDecorationAdapter extends DecorationAdapter<LivingEntity> imp
     }
 
     @Override
-    public Coordinates headLocation() {
+    public Position headLocation() {
         return entity.headLocation();
     }
 

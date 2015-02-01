@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,27 +41,27 @@ public class BlockOrientationTest {
 
     @Test
     public void testApply() throws Exception {
-        Assert.assertEquals(BlockOrientation.NORTH.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 0, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 0, 0, 1));
-        Assert.assertEquals(BlockOrientation.EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 1, 0, 0));
-        Assert.assertEquals(BlockOrientation.WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, -1, 0, 0));
-        Assert.assertEquals(BlockOrientation.NORTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 1, 0, -1));
-        Assert.assertEquals(BlockOrientation.NORTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, -1, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH_EAST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 1, 0, 1));
-        Assert.assertEquals(BlockOrientation.SOUTH_WEST.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, -1, 0, 1));
-        Assert.assertEquals(BlockOrientation.TOP.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 0, 1, 0));
-        Assert.assertEquals(BlockOrientation.BOTTOM.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 0, -1, 0));
-        Assert.assertEquals(BlockOrientation.SELF.apply(Coordinates.create(null, 0d, 0d, 0d)),
-                Coordinates.create(null, 0, 0, 0));
+        Assert.assertEquals(BlockOrientation.NORTH.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 0, 0, -1));
+        Assert.assertEquals(BlockOrientation.SOUTH.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 0, 0, 1));
+        Assert.assertEquals(BlockOrientation.EAST.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 1, 0, 0));
+        Assert.assertEquals(BlockOrientation.WEST.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, -1, 0, 0));
+        Assert.assertEquals(BlockOrientation.NORTH_EAST.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 1, 0, -1));
+        Assert.assertEquals(BlockOrientation.NORTH_WEST.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, -1, 0, -1));
+        Assert.assertEquals(BlockOrientation.SOUTH_EAST.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 1, 0, 1));
+        Assert.assertEquals(BlockOrientation.SOUTH_WEST.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, -1, 0, 1));
+        Assert.assertEquals(BlockOrientation.TOP.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 0, 1, 0));
+        Assert.assertEquals(BlockOrientation.BOTTOM.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 0, -1, 0));
+        Assert.assertEquals(BlockOrientation.SELF.apply(Position.create(null, 0d, 0d, 0d)),
+                Position.create(null, 0, 0, 0));
     }
 }

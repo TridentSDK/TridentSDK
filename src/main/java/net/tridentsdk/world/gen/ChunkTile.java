@@ -17,7 +17,9 @@
 
 package net.tridentsdk.world.gen;
 
-import net.tridentsdk.Coordinates;
+import javafx.geometry.Pos;
+import net.tridentsdk.Position;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.world.Chunk;
@@ -60,8 +62,8 @@ public class ChunkTile {
         return new ChunkTile(x, y, z, substance, data);
     }
 
-    public Coordinates coordinates() {
-        return Coordinates.create(null, x, y, z);
+    public Position coordinates() {
+        return Position.create(null, x, y, z);
     }
 
     public Substance substance() {
@@ -77,6 +79,7 @@ public class ChunkTile {
      *
      * @param world the world to set the block to
      */
+    
     public void apply(Chunk chunk) {
         Factories.gen().putBlock(this, chunk);
     }

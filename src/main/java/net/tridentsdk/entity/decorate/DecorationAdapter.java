@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.decorate;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.EntityProperties;
 import net.tridentsdk.entity.EntityType;
@@ -66,7 +66,7 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public void teleport(Coordinates location) {
+    public void teleport(Position location) {
         entity.teleport(location);
     }
 
@@ -76,7 +76,7 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public Coordinates location() {
+    public Position location() {
         return entity.location();
     }
 

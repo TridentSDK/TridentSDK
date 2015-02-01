@@ -30,7 +30,7 @@ import net.tridentsdk.world.World;
  * @author The TridentSDK Team
  */
 @PossiblyThreadSafe
-public class Coordinates implements Cloneable {
+public class Position implements Cloneable {
     private volatile double x;
     private volatile double y;
     private volatile double z;
@@ -40,7 +40,7 @@ public class Coordinates implements Cloneable {
     private volatile float yaw;
     private volatile float pitch;
 
-    private Coordinates(World world, double x, double y, double z, float yaw, float pitch) {
+    private Position(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
 
         this.x = x;
@@ -51,7 +51,7 @@ public class Coordinates implements Cloneable {
         this.pitch = pitch;
     }
 
-    private Coordinates(World world, double x, double y, double z) {
+    private Position(World world, double x, double y, double z) {
         this(world, x, y, z, 0.0F, 0.0F);
     }
 
@@ -69,8 +69,8 @@ public class Coordinates implements Cloneable {
      * @param yaw   goes side to side, in degrees
      * @param pitch goes up and down, in degrees
      */
-    public static Coordinates create(World world, double x, double y, double z, float yaw, float pitch) {
-        return new Coordinates(world, x, y, z, yaw, pitch);
+    public static Position create(World world, double x, double y, double z, float yaw, float pitch) {
+        return new Position(world, x, y, z, yaw, pitch);
     }
 
     /**
@@ -81,8 +81,8 @@ public class Coordinates implements Cloneable {
      * @param y     the y coordinate
      * @param z     the z coordinate
      */
-    public static Coordinates create(World world, double x, double y, double z) {
-        return new Coordinates(world, x, y, z);
+    public static Position create(World world, double x, double y, double z) {
+        return new Position(world, x, y, z);
     }
 
     /**
@@ -199,7 +199,7 @@ public class Coordinates implements Cloneable {
      * @param vector the vector containing the relative data
      * @return the relative location
      */
-    public Coordinates add(Vector vector) {
+    public Position add(Vector vector) {
         this.setX(vector.x());
         this.setY(vector.y());
         this.setZ(vector.z());
@@ -213,8 +213,8 @@ public class Coordinates implements Cloneable {
      * @param vector the vector that has the x, y, and z of the location relative to this
      * @return the relative location
      */
-    public Coordinates relative(Vector vector) {
-        return new Coordinates(this.world(), vector.x() + this.x(), vector.y() + this.y(),
+    public Position relative(Vector vector) {
+        return new Position(this.world(), vector.x() + this.x(), vector.y() + this.y(),
                 vector.z() + this.z(), this.yaw(), this.pitch());
     }
 
@@ -242,7 +242,7 @@ public class Coordinates implements Cloneable {
      * @param location the location to measure distance with
      * @return distance from this location to another
      */
-    public double distance(Coordinates location) {
+    public double distance(Position location) {
         return Math.sqrt(this.distanceSquared(location));
     }
 
@@ -252,7 +252,7 @@ public class Coordinates implements Cloneable {
      * @param location the location to measure distance with
      * @return distance squared from this location to another
      */
-    public double distanceSquared(Coordinates location) {
+    public double distanceSquared(Position location) {
         Preconditions.checkNotNull(location, "Location cannot be null.");
         if (!this.world().equals(location.world()))
             return 0.0;
@@ -261,9 +261,9 @@ public class Coordinates implements Cloneable {
     }
 
     @Override
-    public Coordinates clone() {
+    public Position clone() {
         try {
-            return (Coordinates) super.clone();
+            return (Position) super.clone();
         } catch (CloneNotSupportedException ignored) {
             return null;
         }
@@ -271,21 +271,21 @@ public class Coordinates implements Cloneable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Coordinates))
+        if (!(obj instanceof Position))
             return false;
         if (obj.hashCode() != this.hashCode())
             return false;
-        if (x != ((Coordinates) obj).x) {
+        if (x != ((Position) obj).x) {
             return false;
-        } else if (y != ((Coordinates) obj).y) {
+        } else if (y != ((Position) obj).y) {
             return false;
-        } else if (z != ((Coordinates) obj).z) {
+        } else if (z != ((Position) obj).z) {
             return false;
-        } else if (world != ((Coordinates) obj).world) {
+        } else if (world != ((Position) obj).world) {
             return false;
-        } else if (pitch != ((Coordinates) obj).pitch) {
+        } else if (pitch != ((Position) obj).pitch) {
             return false;
-        } else if (yaw != ((Coordinates) obj).yaw) {
+        } else if (yaw != ((Position) obj).yaw) {
             return false;
         }
 

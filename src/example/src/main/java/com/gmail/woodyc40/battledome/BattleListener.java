@@ -1,7 +1,7 @@
 package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Listener;
@@ -45,17 +45,17 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.FIGHT) {
                 Game.Team team = game.teamOf(player);
-                Coordinates coordinates = event.block().location();
+                Position position = event.block().location();
 
                 if (team == Game.Team.PURPLE) {
-                    if (coordinates.equals(game.purpleObby())) {
+                    if (position.equals(game.purpleObby())) {
                         player.sendMessage(CommandHandler.ERROR + "You cannot break your own obsidian");
                         event.cancel(true);
                     } else {
                         game.win(Game.Team.PURPLE);
                     }
                 } else {
-                    if (coordinates.equals(game.greenObby())) {
+                    if (position.equals(game.greenObby())) {
                         player.sendMessage(CommandHandler.ERROR + "You cannot break your own obsidian");
                         event.cancel(true);
                     } else {
@@ -82,7 +82,7 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.IN_GAME) {
                 Game.Team team = game.teamOf(player);
-                Coordinates location = event.block().location();
+                Position location = event.block().location();
 
                 boolean done;
                 if (team == Game.Team.PURPLE)
@@ -108,21 +108,21 @@ public class BattleListener implements Listener {
 
         SetupSession session = sessions.get(player);
         if (session != null) {
-            Coordinates coordinates = event.block().location();
+            Position position = event.block().location();
             Game game = session.game();
             switch (session.stage()) {
                 case SPAWN:
-                    session.setSpawn(coordinates);
+                    session.setSpawn(position);
                     session.setStage(SetupStage.PURPLE_SPAWN);
                     player.sendMessage(CommandHandler.PREFIX + "Click the purple spawn now");
                     break;
                 case PURPLE_SPAWN:
-                    session.setPurpleTeam(coordinates);
+                    session.setPurpleTeam(position);
                     session.setStage(SetupStage.GREEN_SPAWN);
                     player.sendMessage(CommandHandler.PREFIX + "Click the green spawn now");
                     break;
                 case GREEN_SPAWN:
-                    session.setGreenTeam(coordinates);
+                    session.setGreenTeam(position);
                     game.setup(session.spawn(), session.purpleTeam(), session.greenTeam());
                     sessions.remove(player);
                     player.sendMessage(CommandHandler.PREFIX + "Completed setup for " + game.id());
@@ -167,9 +167,9 @@ public class BattleListener implements Listener {
         private final Game game;
         private SetupStage stage;
 
-        private Coordinates spawn;
-        private Coordinates purpleTeam;
-        private Coordinates greenTeam;
+        private Position spawn;
+        private Position purpleTeam;
+        private Position greenTeam;
 
         public SetupSession(Player player, Game game) {
             this.player = player;
@@ -189,27 +189,27 @@ public class BattleListener implements Listener {
             return stage;
         }
 
-        public Coordinates spawn() {
+        public Position spawn() {
             return spawn;
         }
 
-        public Coordinates purpleTeam() {
+        public Position purpleTeam() {
             return purpleTeam;
         }
 
-        public Coordinates greenTeam() {
+        public Position greenTeam() {
             return greenTeam;
         }
 
-        public void setSpawn(Coordinates spawn) {
+        public void setSpawn(Position spawn) {
             this.spawn = spawn;
         }
 
-        public void setPurpleTeam(Coordinates purpleTeam) {
+        public void setPurpleTeam(Position purpleTeam) {
             this.purpleTeam = purpleTeam;
         }
 
-        public void setGreenTeam(Coordinates greenTeam) {
+        public void setGreenTeam(Position greenTeam) {
             this.greenTeam = greenTeam;
         }
 

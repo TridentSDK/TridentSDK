@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.weather;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class LightningStrikeEventTest {
 
     @Test
     public void testGetLocation() throws Exception {
-        LightningStrikeEvent event = new LightningStrikeEvent(null, Coordinates.create(null, 0, 0, 0));
-        Assert.assertEquals(event.location(), Coordinates.create(null, 0, 0, 0));
+        LightningStrikeEvent event = new LightningStrikeEvent(null, Position.create(null, 0, 0, 0));
+        Assert.assertEquals(event.location(), Position.create(null, 0, 0, 0));
     }
 }

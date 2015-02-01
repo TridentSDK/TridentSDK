@@ -18,7 +18,7 @@
 package net.tridentsdk.event.entity;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.entity.DroppedItem;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
@@ -31,7 +31,7 @@ import net.tridentsdk.entity.living.Player;
 public class PlayerDropItemEvent extends EntitySpawnEvent {
     private final Player player;
 
-    public PlayerDropItemEvent(Entity item, Coordinates location, Player player) {
+    public PlayerDropItemEvent(Entity item, Position location, Player player) {
         super(item, location);
         Preconditions.checkArgument(item instanceof DroppedItem, "Must drop an item!");
         this.player = player;

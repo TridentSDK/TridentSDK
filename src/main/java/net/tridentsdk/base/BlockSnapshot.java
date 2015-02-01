@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -30,11 +30,11 @@ import javax.annotation.concurrent.Immutable;
  */
 @Immutable
 public final class BlockSnapshot {
-    private final Coordinates location;
+    private final Position location;
     private final Substance material;
     private final byte data;
 
-    private BlockSnapshot(Coordinates location, Substance material, byte data) {
+    private BlockSnapshot(Position location, Substance material, byte data) {
         this.location = location;
         this.material = material;
         this.data = data;

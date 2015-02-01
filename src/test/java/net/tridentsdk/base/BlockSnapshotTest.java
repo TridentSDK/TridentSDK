@@ -18,7 +18,7 @@
 package net.tridentsdk.base;
 
 import com.google.common.collect.Sets;
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.base.impl.WorldImpl;
 import net.tridentsdk.entity.Projectile;
 import org.junit.Assert;
@@ -33,7 +33,7 @@ public class BlockSnapshotTest {
     private Substance substance = Substance.ACACIA_STAIRS;
 
     {
-        Mockito.when(block.location()).thenReturn(Coordinates.create(new WorldImpl(), 0, 0, 0));
+        Mockito.when(block.location()).thenReturn(Position.create(new WorldImpl(), 0, 0, 0));
         Mockito.when(block.substance()).thenReturn(substance);
     }
 

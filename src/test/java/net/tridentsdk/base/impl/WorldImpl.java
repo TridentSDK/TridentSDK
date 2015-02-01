@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base.impl;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.base.Block;
@@ -87,7 +87,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public Block tileAt(Coordinates location) {
+    public Block tileAt(Position location) {
         return new BlockImpl();
     }
 
@@ -127,7 +127,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public Coordinates spawnLocation() {
+    public Position spawnLocation() {
         return null;
     }
 
@@ -162,7 +162,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public Coordinates borderCenter() {
+    public Position borderCenter() {
         return null;
     }
 

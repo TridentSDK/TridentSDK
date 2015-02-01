@@ -17,7 +17,7 @@
 
 package net.tridentsdk.base.impl;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.util.Vector;
@@ -37,8 +37,8 @@ public class BlockImpl implements Block {
     }
 
     @Override
-    public Coordinates location() {
-        return Coordinates.create(new WorldImpl(), 0, 0, 0);
+    public Position location() {
+        return Position.create(new WorldImpl(), 0, 0, 0);
     }
 
     @Override

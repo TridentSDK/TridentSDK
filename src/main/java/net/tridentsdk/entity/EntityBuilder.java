@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.factory.ExecutorFactory;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -34,7 +34,7 @@ import java.util.UUID;
 public abstract class EntityBuilder {
     public abstract EntityBuilder uuid(UUID uuid);
 
-    public abstract EntityBuilder spawn(Coordinates spawn);
+    public abstract EntityBuilder spawn(Position spawn);
 
     public abstract EntityBuilder executor(ExecutorFactory<? extends Entity> executor);
 

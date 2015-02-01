@@ -1,6 +1,6 @@
 package com.gmail.woodyc40.battledome;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.entity.living.Player;
 
 import java.util.UUID;
@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public class PlayerSnapshot {
     private final int gameId;
-    private final Coordinates home;
+    private final Position home;
     private final UUID uuid;
 
     private PlayerSnapshot(Player player, int gameId) {

@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.entity.living.ai.AiModule;
@@ -101,7 +101,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return Location the location of the Entity's eye
      */
-    Coordinates headLocation();
+    Position headLocation();
 
     /**
      * Returns if the Entity can pickup items

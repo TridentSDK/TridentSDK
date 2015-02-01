@@ -17,7 +17,7 @@
 
 package net.tridentsdk.world;
 
-import net.tridentsdk.Coordinates;
+import net.tridentsdk.Position;
 import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.base.Block;
@@ -66,7 +66,7 @@ public interface World extends Cloneable {
      *
      * @return The block on the given location
      */
-    Block tileAt(Coordinates location);
+    Block tileAt(Position location);
 
     /**
      * Gets the dimension of a world
@@ -122,7 +122,7 @@ public interface World extends Cloneable {
      *
      * @return The spawn location in a world
      */
-    Coordinates spawnLocation();
+    Position spawnLocation();
 
     /**
      * Checks if it is raining in a world
@@ -171,7 +171,7 @@ public interface World extends Cloneable {
      *
      * @return The location where the worldborder is centered
      */
-    Coordinates borderCenter();
+    Position borderCenter();
 
     /**
      * Gets to what size a border is contracting, 60000000 by default
