@@ -33,6 +33,10 @@ public final class NibbleArray {
         this.data = data;
     }
 
+    public byte[] array() {
+        return data;
+    }
+
     public int length() {
         return data.length * 2;
     }

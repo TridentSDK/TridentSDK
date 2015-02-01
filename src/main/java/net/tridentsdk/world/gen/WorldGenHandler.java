@@ -17,6 +17,7 @@
 
 package net.tridentsdk.world.gen;
 
+import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.ChunkLocation;
 import net.tridentsdk.world.World;
 
@@ -38,7 +39,13 @@ public class WorldGenHandler {
 
     public void apply(World world, ChunkLocation corner1, ChunkLocation corner2) {
         for (ChunkTile tile : generator.doGen(corner1, corner2)) {
-            tile.apply(world);
+            tile.apply(world.chunkAt((int) tile.coordinates().x() / 16, (int) tile.coordinates().z() / 12, false));
+        }
+    }
+
+    public void apply(Chunk chunk) {
+        for (ChunkTile tile : generator.doGen(chunk.location(), chunk.location())) {
+            tile.apply(chunk);
         }
     }
 }

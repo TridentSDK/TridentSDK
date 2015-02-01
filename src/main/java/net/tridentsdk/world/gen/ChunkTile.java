@@ -18,8 +18,9 @@
 package net.tridentsdk.world.gen;
 
 import net.tridentsdk.Coordinates;
-import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
+import net.tridentsdk.factory.Factories;
+import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
 
 /**
@@ -59,15 +60,24 @@ public class ChunkTile {
         return new ChunkTile(x, y, z, substance, data);
     }
 
+    public Coordinates coordinates() {
+        return Coordinates.create(null, x, y, z);
+    }
+
+    public Substance substance() {
+        return substance;
+    }
+
+    public byte meta() {
+        return data;
+    }
+
     /**
      * Sets the block at the location in the specified world the pending tile
      *
      * @param world the world to set the block to
      */
-    public void apply(World world) {
-        // Executes after chunk is created by handler
-        Block block = world.tileAt(Coordinates.create(world, x, y, z));
-        block.setSubstance(substance);
-        block.setMeta(data);
+    public void apply(Chunk chunk) {
+        Factories.gen().putBlock(this, chunk);
     }
 }
