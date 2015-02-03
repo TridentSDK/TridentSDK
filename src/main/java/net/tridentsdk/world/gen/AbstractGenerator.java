@@ -60,7 +60,7 @@ public abstract class AbstractGenerator {
                 int height = height(x, z);
 
                 gen.add(atCoordinate(x, height, z));
-                for (int i = height; i > 0; i--) {
+                for (int i = height; i >= 0; i--) {
                     gen.add(atCoordinate(x, i, z));
                 }
             }

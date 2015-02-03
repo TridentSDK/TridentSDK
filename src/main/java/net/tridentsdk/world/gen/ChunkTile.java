@@ -17,13 +17,10 @@
 
 package net.tridentsdk.world.gen;
 
-import javafx.geometry.Pos;
 import net.tridentsdk.Position;
-import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.world.Chunk;
-import net.tridentsdk.world.World;
 
 /**
  * Represents a tile that is awaiting pending status to be set in a generated world

@@ -474,7 +474,7 @@ public enum Substance {
      * @return
      */
     public static Substance fromId (byte id) {
-        return ids.get(id);
+        return ids.get((int) id);
     }
 
     /**

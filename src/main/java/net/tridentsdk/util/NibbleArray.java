@@ -55,7 +55,7 @@ public final class NibbleArray {
         return (byte) ((b & 0xf0) >> 4);
     }
 
-    public void set(int index, byte value) {
+    public static void set(byte[] data, int index, byte value) {
         value &= 0xf;
 
         int half = index / 2;
