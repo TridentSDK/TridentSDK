@@ -14,75 +14,70 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
-import net.tridentsdk.api.reflect.FastClass;
+import net.tridentsdk.Trident;
+import net.tridentsdk.event.Listener;
+import net.tridentsdk.factory.Factories;
+import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * The classloader for plugins
+ *
+ * @author The TridentSDK Team
+ */
 public class PluginClassLoader extends URLClassLoader {
-    final Map<String, Class<?>> classes = new ConcurrentHashMap<>();
-    private Class<? extends TridentPlugin> pluginClass;
+    final Map<String, Class<?>> locallyLoaded = Factories.collect().createMap();
 
-    public PluginClassLoader(File pluginFile) throws MalformedURLException {
-        super(new URL[]{pluginFile.toURI().toURL()});
+    PluginClassLoader(File pluginFile, ClassLoader loader) throws MalformedURLException {
+        super(new URL[] { pluginFile.toURI().toURL() }, loader);
     }
 
-    @Override
-    public Class<?> loadClass(String name) throws ClassNotFoundException {
-        return this.loadClass(name, true);
+    void link(Class<?> c) {
+        super.resolveClass(c);
     }
 
-    @Override
-    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-        if (name.startsWith("net.tridentsdk")) {
-            throw new ClassNotFoundException(name);
-        }
-        Class<?> result = this.classes.get(name);
+    Class<?> defineClass(String name, byte[] source) {
+        return super.defineClass(name, source, 0, source.length);
+    }
 
-        if (result == null) {
-            result = super.loadClass(name, resolve);
+    void putClass(Class<?> cls) {
+        locallyLoaded.put(cls.getName(), cls);
+    }
 
-            if (result == null) {
-                if (resolve) {
+    void unloadClasses() {
+        for (Class<?> cls : locallyLoaded.values()) {
+            if (Listener.class.isAssignableFrom(cls)) {
+                Trident.eventHandler().unregister(cls.asSubclass(Listener.class));
+            }
+
+            if (Command.class.isAssignableFrom(cls)) {
+                Trident.commandHandler().removeCommand(cls.asSubclass(Command.class));
+            }
+
+            for (Field field : cls.getDeclaredFields()) {
+                // Simply remove all the object references
+                // primitive types are OK
+                if (field.getType().isAssignableFrom(Object.class) && Modifier.isStatic(field.getModifiers())) {
+                    field.setAccessible(true);
                     try {
-                        result = Class.forName(name);
-                    } catch (ClassNotFoundException ignored) {
+                        field.set(null, null);
+                    } catch (IllegalAccessException e) {
+                        TridentLogger.error(e);
                     }
-                }
+                } // TODO instance held fields
             }
         }
-
-        if (result != null) {
-            if (TridentPlugin.class.isAssignableFrom(result)) {
-                if (this.pluginClass != null) {
-                    throw new PluginLoadException("JAR has 2 plugin classes!");
-                }
-
-                this.pluginClass = result.asSubclass(TridentPlugin.class);
-            }
-
-            this.classes.put(result.getName(), result);
-            FastClass.get(result);
-
-            return result;
-        }
-
-        throw new ClassNotFoundException(name);
-    }
-
-    public void unloadClasses() {
-        for (Class<?> cls : this.classes.values()) {
-            // TODO: unload class
-        }
-    }
-
-    public Class<? extends TridentPlugin> getPluginClass() {
-        return this.pluginClass;
+        locallyLoaded.clear();
     }
 }

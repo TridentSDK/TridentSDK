@@ -14,9 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin.cmd;
 
-public interface CommandIssuer {
+import net.tridentsdk.Messagable;
+
+/**
+ * A server entity which can execute commands, which can be players or the console
+ *
+ * @author The TridentSDK Team
+ */
+public interface CommandIssuer extends Messagable {
     /**
      * Issues a command from this sender, forcing them to run it
      */
@@ -27,6 +35,5 @@ public interface CommandIssuer {
      *
      * @return the last command executed by commandissuer
      */
-    String getLastCommand();
-
+    String lastCommand();
 }

@@ -14,113 +14,200 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
-import net.tridentsdk.api.Trident;
-import net.tridentsdk.api.docs.InternalUseOnly;
-import net.tridentsdk.api.event.Listener;
-import net.tridentsdk.api.factory.ExecutorFactory;
-import net.tridentsdk.api.factory.Factories;
-import net.tridentsdk.api.threads.TaskExecutor;
+import com.google.common.collect.Lists;
+import net.tridentsdk.Trident;
+import net.tridentsdk.concurrent.TaskExecutor;
+import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.event.Listener;
+import net.tridentsdk.factory.ExecutorFactory;
+import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
-import net.tridentsdk.plugin.cmd.CommandHandler;
+import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
+import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+/**
+ * Handles server plugins, loading and unloading, class management, and lifecycle management for plugins
+ *
+ * @author The TridentSDK Team
+ */
 public class TridentPluginHandler {
-    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads().executor(2);
-    private final List<TridentPlugin> plugins = new ArrayList<>();
+    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads()
+            .executor(2, "Plugins");
+    private final List<TridentPlugin> plugins = Lists.newArrayList();
+
+    /**
+     * Do not instantiate this without being Trident
+     */
+    public TridentPluginHandler() {
+        if (!Trident.isTrident())
+            TridentLogger.error(new IllegalAccessException("Can only be instantiated by Trident"));
+    }
 
     @InternalUseOnly
     public void load(final File pluginFile) {
         final TaskExecutor executor = PLUGIN_EXECUTOR_FACTORY.scaledThread();
+
         executor.addTask(new Runnable() {
             @Override
             public void run() {
+                TridentPlugin plugin = null;
                 JarFile jarFile = null;
                 try {
                     // load all classes
-                    PluginClassLoader loader = new PluginClassLoader(pluginFile);
                     jarFile = new JarFile(pluginFile);
-                    Enumeration<JarEntry> entries = jarFile.entries();
+                    PluginClassLoader loader = new PluginClassLoader(pluginFile, getClass().getClassLoader());
+                    Class<? extends TridentPlugin> pluginClass = null;
 
+                    Enumeration<JarEntry> entries = jarFile.entries();
                     while (entries.hasMoreElements()) {
                         JarEntry entry = entries.nextElement();
 
-                        if (!entry.getName().endsWith(".class")) continue;
-                        loader.loadClass(entry.getName().replace('/', '.'));
+                        if(entry.isDirectory() || !entry.getName().endsWith(".class")) {
+                            continue;
+                        }
+
+                        String name = entry.getName().replace(".class", "").replace('/', '.');
+                        Class<?> loadedClass = loader.loadClass(name);
+
+                        loader.putClass(loadedClass);
+
+                        if(TridentPlugin.class.isAssignableFrom(loadedClass)) {
+                            if(pluginClass != null)
+                                TridentLogger.error(new PluginLoadException("Plugin has more than one main class!"));
+
+                            pluginClass = loadedClass.asSubclass(TridentPlugin.class);
+                        }
                     }
 
                     // start initiating the plugin class and registering commands and listeners
-                    Class<? extends TridentPlugin> pluginClass = loader.getPluginClass();
+                    if (pluginClass == null) {
+                        TridentLogger.error(new PluginLoadException("Plugin does not have a main class"));
+                        loader.unloadClasses();
+                        loader = null; // help gc
+                        return;
+                    }
+
                     PluginDescription description = pluginClass.getAnnotation(PluginDescription.class);
 
                     if (description == null) {
-                        throw new PluginLoadException("Description annotation does not exist!");
+                        TridentLogger.error(new PluginLoadException("PluginDescription annotation does not exist!"));
+                        loader.unloadClasses();
+                        loader = null; // help gc
+                        return;
                     }
 
-                    Constructor<? extends TridentPlugin> defaultConstructor =
-                            pluginClass.getConstructor(File.class, PluginDescription.class);
-                    final TridentPlugin plugin = defaultConstructor.newInstance(pluginFile, description);
+                    TridentLogger.log("Loading " + description.name() + " version " + description.version());
+
+                    Constructor<? extends TridentPlugin> defaultConstructor = pluginClass.getSuperclass()
+                            .asSubclass(TridentPlugin.class)
+                            .getDeclaredConstructor(File.class, PluginDescription.class, PluginClassLoader.class);
+                    defaultConstructor.setAccessible(true);
+                    plugin = defaultConstructor.newInstance(pluginFile, description, loader);
 
                     plugins.add(plugin);
                     PLUGIN_EXECUTOR_FACTORY.set(executor, plugin);
 
+                    plugin.startup(executor);
                     plugin.onLoad();
 
-                    for (Class<?> cls : plugin.classLoader.classes.values()) {
-                        if (Listener.class.isAssignableFrom(cls) &&
-                                !cls.isAnnotationPresent(IgnoreRegistration.class)) {
-                            Trident.getServer().getEventManager().registerListener(executor,
-                                    (Listener) cls.newInstance());
-                        }
-
-                        if (Command.class.isAssignableFrom(cls)) {
-                            CommandHandler.addCommand((Command) cls.newInstance());
-                        }
+                    for (Class<?> cls : loader.locallyLoaded.values()) {
+                        register(plugin, cls, executor);
                     }
 
                     plugin.onEnable();
-
-                    plugin.startup(executor);
-                } catch (IOException | ClassNotFoundException | NoSuchMethodException
-                        | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
-                    throw new PluginLoadException(ex);
+                    TridentLogger.success("Loaded " + description.name() + " version " + description.version());
+                } catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException
+                        | InstantiationException | ClassNotFoundException ex) { // UNLOAD PLYGIN
+                    TridentLogger.error(new PluginLoadException(ex));
+                    if (plugin != null)
+                        disable(plugin);
                 } finally {
                     if (jarFile != null)
                         try {
                             jarFile.close();
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            TridentLogger.error(e);
                         }
                 }
             }
         });
     }
 
-    public void disable(TridentPlugin plugin) {
-        plugin.onDisable();
+    private void register(TridentPlugin plugin, Class<?> cls, TaskExecutor executor) throws InstantiationException {
+        if (Modifier.isAbstract(cls.getModifiers()))
+            return;
 
-        this.plugins.remove(plugin);
-        plugin.classLoader.unloadClasses();
+        Object instance = null;
+        Constructor<?> c = null;
+
+        try {
+            if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
+                c = cls.getConstructor();
+                Trident.eventHandler().registerListener(plugin, executor, (Listener) (instance = c.newInstance()));
+            }
+
+            if (Command.class.isAssignableFrom(cls)) {
+                if (c == null)
+                    c = cls.getConstructor();
+                Trident.commandHandler()
+                        .addCommand(plugin, executor, (Command) (instance == null ? c.newInstance() : instance));
+            }
+        } catch (NoSuchMethodException e) {
+            TridentLogger.error(
+                    new PluginLoadException("A no-arg constructor for class " + cls.getName() + " does not exist"));
+        } catch (IllegalAccessException e) {
+            TridentLogger.error(
+                    new PluginLoadException("A no-arg constructor for class " + cls.getName() + " is not accessible"));
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Iterable<TridentPlugin> getPlugins() {
+    /**
+     * Disables the plugin unloading the classes and removing the subprocess
+     *
+     * @param plugin the plugin to disable
+     */
+    public void disable(final TridentPlugin plugin) {
+        plugin.executor().addTask(new Runnable() {
+            @Override
+            public void run() {
+                // Perform disabling first, we don't want to unload everything
+                // then disable it
+                // State checking could be performed which breaks the class loader
+                plugin.onDisable();
+
+                PLUGIN_EXECUTOR_FACTORY.removeAssignment(plugin);
+                plugins.remove(plugin);
+
+                plugin.classLoader.unloadClasses();
+                plugin.classLoader = null;
+            }
+        });
+    }
+
+    /**
+     * Obtains a list of plugins that are currently <strong>loaded</strong>
+     * (not the plugins that are inside the plugin directory)
+     *
+     * @return the collection of plugins that are loaded
+     */
+    public List<TridentPlugin> plugins() {
         return Collections.unmodifiableList(this.plugins);
-    }
-
-    public static ExecutorFactory<TridentPlugin> getPluginExecutorFactory() {
-        return PLUGIN_EXECUTOR_FACTORY;
     }
 }

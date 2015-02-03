@@ -14,22 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin.annotation;
 
+import java.lang.annotation.*;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
+/**
+ * Represents command information for loading purposes
+ *
+ * @author The TridentSDK Team
+ */
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CommandDescription {
+    /**
+     * The actual command that can be typed in
+     */
     String name();
 
+    /**
+     * The priority of the command, which is used for conflicts between command names
+     */
     int priority() default 1;
 
+    /**
+     * The required permission to execute the command
+     */
     String permission();
 
+    /**
+     * The commands that can also be typed in to execute the same command
+     */
     String[] aliases();
 }

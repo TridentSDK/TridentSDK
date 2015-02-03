@@ -14,62 +14,117 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin;
 
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
-import net.tridentsdk.api.Trident;
-import net.tridentsdk.api.config.JsonConfig;
-import net.tridentsdk.api.threads.HeldValueLatch;
-import net.tridentsdk.api.threads.TaskExecutor;
+import net.tridentsdk.Trident;
+import net.tridentsdk.concurrent.HeldValueLatch;
+import net.tridentsdk.concurrent.TaskExecutor;
+import net.tridentsdk.config.JsonConfig;
+import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.annotation.PluginDescription;
+import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 
+/**
+ * Must be extended by a non-inner class to represent a plugin's <em>main class</em>
+ *
+ * @author The TridentSDK Team
+ */
 public class TridentPlugin {
     private static final HashFunction HASHER = Hashing.murmur3_32();
-
-    final PluginClassLoader classLoader;
     private final File pluginFile;
     private final File configDirectory;
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
-    private final HeldValueLatch<TaskExecutor> executor = new HeldValueLatch<>();
+    private final HeldValueLatch<TaskExecutor> executor = HeldValueLatch.create();
+    PluginClassLoader classLoader;
 
+    /**
+     * It's not a good idea to use this constructor
+     */
     protected TridentPlugin() {
-        this.pluginFile = null;
-        this.description = null;
-        this.defaultConfig = null;
-        this.configDirectory = null;
-        this.classLoader = null;
+        // Prevent stack continuation
+        throw new IllegalStateException("Cannot be directly instantiated");
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for (TridentPlugin plugin : Trident.getServer().getPluginHandler().getPlugins()) {
-            if (plugin.getDescription().name().equalsIgnoreCase(description.name())) {
-                throw new IllegalStateException("Plugin already initialized or plugin with this name already exists! " +
-                        "Name: " + description.name());
+        for (TridentPlugin plugin : Trident.pluginHandler().plugins()) {
+            if (plugin.description().name().equalsIgnoreCase(description.name())) {
+                TridentLogger.error(new IllegalStateException(
+                        "Plugin already initialized or plugin named" + description.name() + " exists already"));
             }
         }
 
         this.pluginFile = pluginFile;
         this.description = description;
-        this.configDirectory = new File("plugins/" + description.name() + '/');
+        this.configDirectory = new File("plugins" + File.separator + description.name() + File.separator);
         this.defaultConfig = new JsonConfig(new File(this.configDirectory, "config.json"));
         this.classLoader = loader;
     }
 
-    public void onEnable() {
-        // Method intentionally left blank
+    /**
+     * Obtains the instance of the plugin which the caller class is in
+     *
+     * <p>Returns {@code null} if the plugin has not been loaded yet, or if the class is not a plugin loaded on the
+     * server.</p>
+     *
+     * @return the instance of the plugin
+     */
+    @Nullable
+    public static TridentPlugin instance() {
+        Class<?> caller = Trident.findCaller(3);
+        ClassLoader loader = caller.getClassLoader();
+        for (TridentPlugin plugin : Trident.pluginHandler().plugins())
+            if (plugin.classLoader.equals(loader))
+                return plugin;
+        return null;
     }
 
+    /**
+     * Obtains the instance of the plugin which has the specified main class
+     *
+     * <p>Returns {@code null} if the plugin has not been loaded yet, or if the class is not a plugin loaded on the
+     * server.</p>
+     *
+     * @param c the main class of the plugin to obtain the instance of
+     * @return the instance of the plugin with the specified main class
+     */
+    @Nullable
+    public static TridentPlugin instance(Class<? extends TridentPlugin> c) {
+        ClassLoader loader = c.getClassLoader();
+        for (TridentPlugin plugin : Trident.pluginHandler().plugins())
+            if (plugin.classLoader.equals(loader))
+                return plugin;
+        return null;
+    }
+
+    /**
+     * Called by the handler to indicate the plugin has been constructed
+     */
     public void onLoad() {
         // Method intentionally left blank
     }
 
+    /**
+     * Called by the handler to indicate the enabling of this plugin
+     */
+    public void onEnable() {
+        // Method intentionally left blank
+    }
+
+    /**
+     * Called by the handler to indicate the disabling of this plugin
+     */
     public void onDisable() {
         // Method intentionally left blank
     }
@@ -79,10 +134,41 @@ public class TridentPlugin {
         this.executor.countDown(executor);
     }
 
+    /**
+     * Obtains the listener instance with the class specified
+     *
+     * @param c the class to find the listener instance by
+     * @return the listener instance registered to the server
+     */
+    public <T extends Listener> T listenerBy(Class<T> c) {
+        return (T) Trident.eventHandler().listenersFor(this).get(c);
+    }
+
+    /**
+     * Obtains the command instance with the class specified
+     *
+     * @param c the class to find the command instance by
+     * @return the command instance registered to the server
+     */
+    public <T extends Command> T commandBy(Class<T> c) {
+        return (T) Trident.commandHandler().commandsFor(this).get(c);
+    }
+
+    /**
+     * Saves the configuration inside the jar to the plugin directory
+     *
+     * <p>If the configuration is already saved, this does not overwrite it.</p>
+     */
     public void saveDefaultConfig() {
         this.saveResource("config.json", false);
     }
 
+    /**
+     * Saves a resource inside the jar to the plugin directory
+     *
+     * @param name    the filename of the directory
+     * @param replace whether or not replace the old resource, if it exists
+     */
     public void saveResource(String name, boolean replace) {
         try {
             InputStream is = this.getClass().getResourceAsStream('/' + name);
@@ -98,44 +184,76 @@ public class TridentPlugin {
 
             Files.copy(is, file.getAbsoluteFile().toPath());
         } catch (IOException ex) {
-            ex.printStackTrace();
+            TridentLogger.error(ex);
         }
     }
 
-    public final File getFile() {
+    /**
+     * Obtains the file which this plugin was loaded from
+     *
+     * @return the file which the plugin is loaded from
+     */
+    public final File pluginFile() {
         return this.pluginFile;
     }
 
-    public JsonConfig getDefaultConfig() {
+    /**
+     * The default configuration for this plugin, which may or may not exist physically
+     *
+     * @return the default configuration given to this plugin
+     */
+    public JsonConfig defaultConfig() {
         return this.defaultConfig;
     }
 
-    public File getConfigDirectory() {
+    /**
+     * The plugin directory
+     *
+     * <p>The returned file includes the trailing file separator</p>
+     *
+     * @return the plugin directory where resources like the default config are saved
+     */
+    public File configDirectory() {
         return this.configDirectory;
     }
 
-    public final PluginDescription getDescription() {
+    /**
+     * Obtains the annotation given by this plugin
+     *
+     * @return the plugin descriptor for this plugin
+     */
+    @Nonnull
+    public final PluginDescription description() {
         return this.description;
     }
 
-    public TaskExecutor getExecutor() {
+    /**
+     * Obtains the executor for this plugin
+     *
+     * <p>If threads are manipulated, this executor MUST be used to ensure that the data read is consistent with the
+     * plugin.</p>
+     *
+     * @return the executor which loaded this plugin
+     */
+    public TaskExecutor executor() {
         try {
             return executor.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            TridentLogger.error(e);
         }
 
         // Should NEVER happen
-        throw new PluginLoadException(
-                "Plugin not loaded correctly, the executor is null for " + getDescription().name());
+        TridentLogger.error(new PluginLoadException(
+                "Plugin not loaded correctly, the executor is null for " + description().name()));
+        return null;
     }
 
     @Override
     public boolean equals(Object other) {
         if (other instanceof TridentPlugin) {
             TridentPlugin otherPlugin = (TridentPlugin) other;
-            if (otherPlugin.getDescription().name().equals(this.getDescription().name())) {
-                if (otherPlugin.getDescription().author().equals(this.getDescription().author())) {
+            if (otherPlugin.description().name().equals(this.description().name())) {
+                if (otherPlugin.description().author().equals(this.description().author())) {
                     return true;
                 }
             }
@@ -146,14 +264,9 @@ public class TridentPlugin {
     @Override
     public int hashCode() {
         // Find constants
-        String name = this.getDescription().name();
-        String author = this.getDescription().author();
+        String name = this.description().name();
+        String author = this.description().author();
 
-        return HASHER.newHasher()
-                .putUnencodedChars(name)
-                .putUnencodedChars(author)
-                .hash().hashCode();
+        return HASHER.newHasher().putUnencodedChars(name).putUnencodedChars(author).hash().hashCode();
     }
-
-    // TODO: override hashvalue as well
 }

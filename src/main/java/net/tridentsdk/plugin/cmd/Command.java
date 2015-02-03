@@ -14,18 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.api.entity.living.Player;
+import net.tridentsdk.entity.living.Player;
 
+/**
+ * Overriden by the command handler, annotated with {@link net.tridentsdk.plugin.annotation.CommandDescription} to
+ * process executed commands
+ *
+ * @author The TridentSDK Team
+ */
 public abstract class Command {
-
     /**
      * Called when this cmd is invoked by a player
      *
-     * @param player player executing the command
+     * @param player    player executing the command
      * @param arguments may be null
-     * @param alias the alias of the command
+     * @param alias     the alias of the command
      */
     public void handlePlayer(Player player, String arguments, String alias) {
         // Method intentionally left blank
@@ -34,20 +40,20 @@ public abstract class Command {
     /**
      * Called when this cmd is invoked by the console
      *
-     * @param sender the command sender
+     * @param sender    the command sender
      * @param arguments may be null
-     * @param alias the alias for the command
+     * @param alias     the alias for the command
      */
-    public void handleConsole(ConsoleSender sender, String arguments, String alias) {
+    public void handleConsole(ServerConsole sender, String arguments, String alias) {
         // Method intentionally left blank
     }
 
     /**
      * Called when this cmd is invoked by a player, console, or other sender
      *
-     * @param sender the command sender
+     * @param sender    the command sender
      * @param arguments may be null
-     * @param alias the command alias
+     * @param alias     the command alias
      */
     public void handle(CommandIssuer sender, String arguments, String alias) {
         // Method intentionally left blank
@@ -58,7 +64,5 @@ public abstract class Command {
      */
     public void notifyOverriden() {
         // Method intentionally left blank
-
     }
-
 }
