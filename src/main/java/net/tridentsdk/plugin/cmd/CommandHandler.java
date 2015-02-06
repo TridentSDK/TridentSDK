@@ -23,6 +23,7 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
+import net.tridentsdk.meta.MessageBuilder;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
@@ -69,7 +70,11 @@ public class CommandHandler {
             }
         } else {
             // Command not found
-            issuer.sendRaw("Command not found");
+            if(issuer instanceof Player) {
+                ((Player) issuer).sendMessage("Command not found!");
+            } else {
+                issuer.sendRaw("Command not found");
+            }
         }
     }
 
