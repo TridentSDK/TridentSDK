@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.docs.PossiblyThreadSafe;
 import net.tridentsdk.util.Vector;
+import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
 
 /**
@@ -146,6 +147,14 @@ public class Position implements Cloneable {
      */
     public World world() {
         return this.world;
+    }
+
+    /**
+     * Chunk of the current position
+     * @return Chunk of the position
+     */
+    public Chunk chunk() {
+        return world().chunkAt((int) x >> 4, (int) z >> 4, true);
     }
 
     /**
