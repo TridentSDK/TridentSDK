@@ -69,5 +69,9 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
             index ++;
             return retVal;
         }
+
+        @Override
+        public void remove() {
+        }
     }
 }
