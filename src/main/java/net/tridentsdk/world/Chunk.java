@@ -30,7 +30,7 @@ public interface Chunk {
 
     World world();
 
-    Block tileAt(int relX, int y, int relZ);
+    Block blockAt(int relX, int y, int relZ);
 
     ChunkSnapshot snapshot();
 }

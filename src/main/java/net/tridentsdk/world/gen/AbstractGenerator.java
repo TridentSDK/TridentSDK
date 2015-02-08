@@ -38,22 +38,23 @@ public abstract class AbstractGenerator {
     public abstract int height(int x, int z);
 
     /**
-     * The tile to be set at the coordinates
+     * The block to be set at the coordinates
      *
      * @param x the x coordinate
      * @param y the y coordinate
      * @param z the z coordinate
-     * @return the tile to be set at the coordinates
+     * @return the block to be set at the coordinates
      */
-    public abstract ChunkTile atCoordinate(int x, int y, int z);
+    public abstract TempGenBlock atCoordinate(int x, int y, int z);
 
-    public List<ChunkTile> doGen(ChunkLocation corner1, ChunkLocation corner2) {
+
+    public List<TempGenBlock> doGen(ChunkLocation corner1, ChunkLocation corner2) {
         int minX = Math.min(corner1.x(), corner2.x()) << 4;
         int maxX = (Math.max(corner1.x(), corner2.x()) << 4) + 16;
         int minZ = Math.min(corner1.z(), corner2.z()) << 4;
         int maxZ = (Math.max(corner1.z(), corner2.z()) << 4) + 16;
 
-        List<ChunkTile> gen = Lists.newArrayList();
+        List<TempGenBlock> gen = Lists.newArrayList();
 
         for (int x = minX; x < maxX; x++) {
             for (int z = minZ; z < maxZ; z++) {
@@ -68,4 +69,26 @@ public abstract class AbstractGenerator {
 
         return gen;
     }
+
+
+    /**
+     * What is called to populate the block ids for a chunk
+     *
+     * <p>The first array index is the section number, the
+     * second index is the position in that section, i.e.
+     * x << 8 + y << 4 + z</p>
+     *
+     * <p>Should only be invoked by TridentChunk</p>
+     * @param location
+     * @return
+     */
+    public abstract char[][] generateChunkBlocks(ChunkLocation location);
+
+
+    /**
+     * What is called to populate block data for a chunk
+     * @param location
+     * @return
+     */
+    public abstract byte[][] generateBlockData(ChunkLocation location);
 }

@@ -27,14 +27,14 @@ import net.tridentsdk.world.Chunk;
  *
  * @author The TridentSDK Team
  */
-public class ChunkTile {
+public class TempGenBlock {
     private final int x;
     private final int y;
     private final int z;
     private final Substance substance;
     private final byte data;
 
-    private ChunkTile(int x, int y, int z, Substance substance, byte data) {
+    private TempGenBlock(int x, int y, int z, Substance substance, byte data) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -51,12 +51,12 @@ public class ChunkTile {
      * @param substance the material to set at the location
      * @return the new pending chunk tile
      */
-    public static ChunkTile create(int x, int y, int z, Substance substance) {
-        return new ChunkTile(x, y, z, substance, (byte) 0);
+    public static TempGenBlock create(int x, int y, int z, Substance substance) {
+        return new TempGenBlock(x, y, z, substance, (byte) 0);
     }
 
-    public static ChunkTile create(int x, int y, int z, Substance substance, byte data) {
-        return new ChunkTile(x, y, z, substance, data);
+    public static TempGenBlock create(int x, int y, int z, Substance substance, byte data) {
+        return new TempGenBlock(x, y, z, substance, data);
     }
 
     public Position coordinates() {

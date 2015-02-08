@@ -66,7 +66,7 @@ public interface World extends Cloneable {
      *
      * @return The block on the given location
      */
-    Block tileAt(Position location);
+    Block blockAt(Position location);
 
     /**
      * Gets the dimension of a world

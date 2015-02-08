@@ -56,7 +56,7 @@ public final class BlockSnapshot {
      * <p>Does not clear data from this snapshot</p>
      */
     public void load() {
-        Block block = location.world().tileAt(location);
+        Block block = location.world().blockAt(location);
         block.setSubstance(material);
         block.setMeta(data);
     }

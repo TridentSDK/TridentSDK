@@ -18,8 +18,6 @@
 package net.tridentsdk.world.gen;
 
 import net.tridentsdk.world.Chunk;
-import net.tridentsdk.world.ChunkLocation;
-import net.tridentsdk.world.World;
 
 /**
  * Handles world generation
@@ -33,19 +31,26 @@ public class WorldGenHandler {
         this.generator = generator;
     }
 
-    public static WorldGenHandler create(AbstractGenerator generator) {
+    /*public static WorldGenHandler create(AbstractGenerator generator) {
         return new WorldGenHandler(generator);
-    }
+    }*/
 
-    public void apply(World world, ChunkLocation corner1, ChunkLocation corner2) {
-        for (ChunkTile tile : generator.doGen(corner1, corner2)) {
-            tile.apply(world.chunkAt((int) tile.coordinates().x() / 16, (int) tile.coordinates().z() / 12, false));
+    /*public void apply(World world, ChunkLocation corner1, ChunkLocation corner2) {
+        *//*for (TempGenBlock block : generator.doGen(corner1, corner2)) {
+            block.apply(world.chunkAt((int) block.coordinates().x() / 16, (int) block.coordinates().z() / 12, false));
+        }*//*
+
+        for (ChunkLocation location : new ChunkAxisAlignedBoundingBox(corner1, corner2)) {
+            generator.generateChunkBlocks(world.chunkAt(location,false));
         }
-    }
+    }*/
 
     public void apply(Chunk chunk) {
-        for (ChunkTile tile : generator.doGen(chunk.location(), chunk.location())) {
-            tile.apply(chunk);
-        }
+        /*for (TempGenBlock block : generator.doGen(chunk.location(), chunk.location())) {
+            block.apply(chunk);
+        }*/
+
+        //generator.generateChunkBlocks(chunk);
     }
+
 }

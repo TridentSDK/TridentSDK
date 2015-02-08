@@ -224,7 +224,7 @@ public class Position implements Cloneable {
      * @return the tile occupying the coordinates of this location
      */
     public Block tile() {
-        return world().tileAt(this);
+        return world().blockAt(this);
     }
 
     /**
