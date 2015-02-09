@@ -257,7 +257,8 @@ public final class WeakEntity<T extends Entity> {
      * implementation also delegates the same identifying functions to the reference, this is the preferred way to find
      * a WeakEntity from a collection or to match with a stored version.</p>
      *
-     * <p>This method current does not work.</p>
+     * <p>This method never returns null. If there is no entity which is known to exist with a WeakEntity, then the
+     * returned object {@code finderOf(null).equals(null)}.</p>
      *
      * @param entity the entity to get the finder for
      * @return an object that possesses the properties of the entity so that they match up with an WeakEntity containing
@@ -463,29 +464,29 @@ public final class WeakEntity<T extends Entity> {
         @Override
         public void run() {
             while (true) {
-                // Step 1: find nodes
-                Set<RefEntry> entries = entries();
-
-                // Try to make the collector run
-                // This might help stored references be checked
-                // In case the GC doesn't run, who cares anyways
-                System.gc();
-
-                // Step 2: mark
-                for (RefEntry entry : entries) {
-                    Set<WeakEntity> weakRefs = entry.val().refs();
-
-                    for (WeakEntity ref : weakRefs) {
-                        if (ref.isNull()) {
-                            marked.add(ref);
-                        }
-                    }
-                }
-
                 try {
                     lock.lockInterruptibly();
                     while (marked.isEmpty())
                         hasNodes.await();
+
+                    // Step 1: find nodes
+                    Set<RefEntry> entries = entries();
+
+                    // Try to make the collector run
+                    // This might help stored references be checked
+                    // In case the GC doesn't run, who cares anyways
+                    System.gc();
+
+                    // Step 2: mark
+                    for (RefEntry entry : entries) {
+                        Set<WeakEntity> weakRefs = entry.val().refs();
+
+                        for (WeakEntity ref : weakRefs) {
+                            if (ref.isNull()) {
+                                marked.add(ref);
+                            }
+                        }
+                    }
 
                     // Step 3: sweep
                     for (RefEntry entry : entries) {

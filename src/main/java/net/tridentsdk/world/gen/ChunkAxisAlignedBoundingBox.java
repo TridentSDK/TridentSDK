@@ -3,12 +3,12 @@ package net.tridentsdk.world.gen;
 import net.tridentsdk.world.ChunkLocation;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
 * Created by Dildas on 2/7/2015.
 */
 public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
-
     final int minX;
     final int minZ;
     final int maxX;
@@ -28,7 +28,6 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
     }
 
     private class ChunkAABBIterator implements Iterator<ChunkLocation> {
-
         private final ChunkAxisAlignedBoundingBox parent;
 
         private final int xDistance;
@@ -52,7 +51,7 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
         @Override
         public ChunkLocation next() {
             if (!hasNext()) {
-                throw new IllegalStateException("Iterator has been over-iterated!");
+                throw new NoSuchElementException("No element found past index " + index);
             }
             ChunkLocation retVal;
             if (zDistance == 0 && xDistance == 0) {
