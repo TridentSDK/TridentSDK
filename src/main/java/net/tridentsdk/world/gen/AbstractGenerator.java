@@ -26,25 +26,6 @@ import net.tridentsdk.world.ChunkLocation;
  */
 public abstract class AbstractGenerator {
     /**
-     * Where ChunkLocation is the x/z of the block for the height to be specified in the value
-     *
-     * @param x the x coordinate to find the height
-     * @param z the z coordinate to find the height
-     * @return the height at that coordinate
-     */
-    public abstract int height(int x, int z);
-
-    /**
-     * The block to be set at the coordinates
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
-     * @return the block to be set at the coordinates
-     */
-    public abstract TempGenBlock atCoordinate(int x, int y, int z);
-
-    /**
      * Populates the block ids for a chunk
      *
      * <p>The first array index is the section number, the

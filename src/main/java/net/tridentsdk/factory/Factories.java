@@ -39,7 +39,6 @@ public final class Factories {
     private static final HeldValueLatch<TaskFactory> taskFactory = HeldValueLatch.create();
     private static final HeldValueLatch<ThreadFactory> threadFactory = HeldValueLatch.create();
     private static final HeldValueLatch<CollectFactory> collectFactory = HeldValueLatch.create();
-    private static final HeldValueLatch<GenFactory> genFactory = HeldValueLatch.create();
 
     private static final ConfigFactory configFactory = new ConfigFactory();
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
@@ -60,11 +59,6 @@ public final class Factories {
     @InternalUseOnly
     public static void init(CollectFactory factory) {
         collectFactory.countDown(factory);
-    }
-
-    @InternalUseOnly
-    public static void init(GenFactory factory) {
-        genFactory.countDown(factory);
     }
 
     /**
@@ -114,21 +108,6 @@ public final class Factories {
     public static CollectFactory collect() {
         try {
             return collectFactory.await();
-        } catch (InterruptedException e) {
-            // Release up the stack
-            Thread.currentThread().interrupt();
-            return null;
-        }
-    }
-
-    /**
-     * Obtains world generation utilities
-     *
-     * @return the world generation factory
-     */
-    public static GenFactory gen() {
-        try {
-            return genFactory.await();
         } catch (InterruptedException e) {
             // Release up the stack
             Thread.currentThread().interrupt();

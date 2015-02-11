@@ -17,6 +17,8 @@
 
 package net.tridentsdk.world;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
@@ -25,6 +27,7 @@ import java.io.Serializable;
  *
  * @author The TridentSDK Team
  */
+@Immutable
 public class ChunkLocation implements Serializable, Cloneable {
     private static final long serialVersionUID = 9083698035337137603L;
     private final int x;
