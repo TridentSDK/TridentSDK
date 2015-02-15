@@ -39,7 +39,7 @@ public interface ChatProvider {
      *     </ul>
      * </p>
      *
-     * <p>The default is usually {@code %name>}. The default is filled in, but cannot replace the default string.</p>
+     * <p>The default is usually {@code %n>}. The default is filled in, but cannot replace the default string.</p>
      *
      * <p>Examples:
      * <pre><code>
