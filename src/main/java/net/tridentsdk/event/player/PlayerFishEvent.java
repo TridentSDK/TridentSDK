@@ -70,13 +70,13 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * The state of a fishing hook when deployed
+     * The state of a fishing inject when deployed
      *
      * @author The TridentSDK Team
      */
     public enum State {
         /**
-         * When the hook is in the water
+         * When the inject is in the water
          */
         FISHING,
         /**
@@ -84,15 +84,15 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
          */
         FAILED_ATTEMPT,
         /**
-         * A fish is caught on the hook
+         * A fish is caught on the inject
          */
         CAUGHT_FISH,
         /**
-         * The hook attaches to an entity
+         * The inject attaches to an entity
          */
         CAUGHT_ENTITY,
         /**
-         * The hook attaches to the ground
+         * The inject attaches to the ground
          */
         IN_GROUND
     }

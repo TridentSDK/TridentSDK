@@ -14,30 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package net.tridentsdk.inject;
 
-package net.tridentsdk.entity.projectile;
-
-import net.tridentsdk.entity.Projectile;
+import java.lang.annotation.*;
 
 /**
- * A inject at the end of the fishing rod that can catch fish or damage entities
+ * Marks a constructor or field that is eligable for instance injection when constructed with an
+ * {@link net.tridentsdk.inject.Injector}
  *
  * @author The TridentSDK Team
  */
-public interface FishHook extends Projectile {
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.CONSTRUCTOR})
+public @interface Inject {
     /**
-     * The chance that a fish will be caught on the inject
+     * This is the implementation selector
      *
-     * <p>Works only in water</p>
+     * <p>Used by the injector to provide different implementations. Leave empty if default should be used.</p>
      *
-     * @return the chance a fish will be caught on the inject
+     * @return the implementation class
      */
-    float biteChance();
-
-    /**
-     * Sets the chance the fish will bite the inject
-     *
-     * @param chance the chance the fish will bite the inject
-     */
-    void setBiteChance(float chance);
+    public Class<?> meta() default Class.class;
 }

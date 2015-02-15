@@ -32,7 +32,7 @@ import java.util.concurrent.locks.Lock;
 public class ConfigSectionList<V> extends ConfigList<V> {
     private final ConfigSection parent;
 
-    private final Lock lock = this.write;
+    private final Lock lock = super.write;
 
     /**
      * Creates a new section list in the config

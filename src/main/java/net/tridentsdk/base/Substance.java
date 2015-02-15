@@ -17,6 +17,8 @@
 
 package net.tridentsdk.base;
 
+import com.google.common.collect.Maps;
+
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -425,7 +427,7 @@ public enum Substance {
     private static final Map<Integer, Substance> ids;
 
     static {
-        HashMap<Integer, Substance> builder = new HashMap<>();
+        HashMap<Integer, Substance> builder = Maps.newHashMap();
         for (Substance substance: EnumSet.allOf(Substance.class)) {
             builder.put(substance.idInt, substance);
         }

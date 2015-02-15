@@ -47,7 +47,7 @@ public class TridentPlugin {
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
     private final HeldValueLatch<TaskExecutor> executor = HeldValueLatch.create();
-    PluginClassLoader classLoader;
+    public PluginClassLoader classLoader;
 
     /**
      * It's not a good idea to use this constructor
@@ -129,7 +129,7 @@ public class TridentPlugin {
         // Method intentionally left blank
     }
 
-    final void startup(TaskExecutor executor) {
+    public final void startup(TaskExecutor executor) {
         // TODO
         this.executor.countDown(executor);
     }

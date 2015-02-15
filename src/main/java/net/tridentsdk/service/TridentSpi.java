@@ -14,30 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package net.tridentsdk.entity.projectile;
-
-import net.tridentsdk.entity.Projectile;
+package net.tridentsdk.service;
 
 /**
- * A inject at the end of the fishing rod that can catch fish or damage entities
+ * The trident service provider interface
  *
  * @author The TridentSDK Team
  */
-public interface FishHook extends Projectile {
-    /**
-     * The chance that a fish will be caught on the inject
-     *
-     * <p>Works only in water</p>
-     *
-     * @return the chance a fish will be caught on the inject
-     */
-    float biteChance();
+public class TridentSpi {
+    private static final ChatHandler CHAT = new ChatHandler();
+    private static final PermissionHandler PERMS = new PermissionHandler();
+    private static final TransactionHandler TRANSACTIONS = new TransactionHandler();
 
-    /**
-     * Sets the chance the fish will bite the inject
-     *
-     * @param chance the chance the fish will bite the inject
-     */
-    void setBiteChance(float chance);
+    public static ChatHandler provideChat() {
+        return CHAT;
+    }
+
+    public static PermissionHandler providePerms() {
+        return PERMS;
+    }
+
+    public static TransactionHandler provideTransactions() {
+        return TRANSACTIONS;
+    }
 }
