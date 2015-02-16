@@ -29,4 +29,6 @@ public class PermissionHandler {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
     }
+
+
 }

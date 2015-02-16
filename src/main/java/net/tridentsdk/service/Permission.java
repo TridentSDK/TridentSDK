@@ -21,11 +21,20 @@ package net.tridentsdk.service;
  *
  * @author The TridentSDK Team
  */
-public interface Permission {
+public abstract class Permission {
+    public static Permission newPermission(final String perm) {
+        return new Permission() {
+            @Override
+            String permission() {
+                return perm;
+            }
+        };
+    }
+
     /**
      * Obtains the permission provided by this node
      *
      * @return the permission
      */
-    String permission();
+    abstract String permission();
 }

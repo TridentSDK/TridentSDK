@@ -17,9 +17,8 @@
 
 package net.tridentsdk.world;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
 import java.io.Serializable;
 
 /**

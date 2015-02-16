@@ -125,7 +125,7 @@ public final class Injector<T> {
 
             for (Class<?> c : constructorParameters) {
                 Producer<?> producer = injectors.get(c);
-                Inject inject = constructor.getDeclaredAnnotation(Inject.class);
+                Inject inject = (Inject) constructor.getAnnotation(Inject.class);
 
                 if (iterator.hasNext()) {
                     if (iterator.peek().getClass() == c) {
