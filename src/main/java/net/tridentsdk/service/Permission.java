@@ -22,6 +22,12 @@ package net.tridentsdk.service;
  * @author The TridentSDK Team
  */
 public abstract class Permission {
+    /**
+     * Creates a new permission from the string provided
+     *
+     * @param perm the permission that the object possesses
+     * @return the permission object which contains the provided node
+     */
     public static Permission newPermission(final String perm) {
         return new Permission() {
             @Override

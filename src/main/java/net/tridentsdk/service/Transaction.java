@@ -24,10 +24,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author The TridentSDK Team
  */
-public abstract class Transaction {
+public abstract class Transaction<S, R> {
     private final Object item;
-    private final Object sender;
-    private final Object receiver;
+    private final S sender;
+    private final R receiver;
     final AtomicInteger amount = new AtomicInteger();
 
     /**
@@ -38,7 +38,7 @@ public abstract class Transaction {
      * @param receiver the receiver of the transaction
      * @param amount the amount to operate upon
      */
-    public Transaction(Object item, Object sender, Object receiver, int amount) {
+    public Transaction(Object item, S sender, R receiver, int amount) {
         this.item = item;
         this.sender = sender;
         this.receiver = receiver;
@@ -54,8 +54,8 @@ public abstract class Transaction {
      * @param amount the amount to operate upon. Do not make negative for withdrawls.
      * @return the new transaction
      */
-    public static Transaction quietTransaction(Object item, Object sender, Object receiver, int amount) {
-        return new Transaction(item, sender, receiver, amount) {
+    public static <S, R> Transaction<S, R> quietTransaction(Object item, S sender, R receiver, int amount) {
+        return new Transaction<S, R>(item, sender, receiver, amount) {
             @Override
             void doTransaction(Type type) {
             }
@@ -83,7 +83,7 @@ public abstract class Transaction {
      *
      * @return the transaction's sender
      */
-    public Object sender() {
+    public S sender() {
         return this.sender;
     }
 
@@ -92,7 +92,7 @@ public abstract class Transaction {
      *
      * @return the transaction's receiver
      */
-    public Object receiver() {
+    public R receiver() {
         return this.receiver;
     }
 

@@ -40,6 +40,14 @@ public interface Window {
     int length();
 
     /**
+     * Finds the item at the specified slot in the window
+     *
+     * @param slot the slot to find the item
+     * @return the item at that slot
+     */
+    Item itemAt(int slot);
+
+    /**
      * Sets the item at the slot. If the index is outside the bound, the effects are unspecified.
      *
      * @param index the index which to set the item at

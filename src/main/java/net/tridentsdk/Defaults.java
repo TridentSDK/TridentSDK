@@ -104,9 +104,8 @@ public final class Defaults {
      */
     public static final TaskExecutor DIRECT_EXECUTOR = new TaskExecutor() {
         @Override
-        public boolean addTask(Runnable task) {
+        public void addTask(Runnable task) {
             task.run();
-            return true;
         }
 
         @Override

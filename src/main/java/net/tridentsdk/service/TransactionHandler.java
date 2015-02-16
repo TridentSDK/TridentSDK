@@ -44,22 +44,22 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     private static final int ECON_ID = handler.newAccount();
  *
  *     // Deposit
- *     handler.deposit(ECON_ID, new Transaction(int.class, playerFrom, playerTo, 100) {
+ *     handler.deposit(ECON_ID, new Transaction&lt;Player, Player&gt;(int.class, playerFrom, playerTo, 100) {
  *         &#64;Override public void doTransaction(Type type) {
  *             // If check is not required but is a good debugging safeguard
  *             if (type == Type.DEPOSIT) {
- *                 ((Player) receiver()).sendMessage(((Player) sender()).displayName() + " has sent you $" + amount());
+ *                 receiver().sendMessage(sender().name() + " has sent you $" + amount());
  *                 // You may give items here as well
  *             }
  *         }
  *     });
  *
  *     // Remove
- *     handler.withdraw(ECON_ID, new Transaction(int.class, playerTo, playerTo, 100) {
+ *     handler.withdraw(ECON_ID, new Transaction&lt;Player, Player&gt;(int.class, playerTo, playerTo, 100) {
  *         &#64;Override public void doTransaction(Type type) {
  *             // If check is not required but is a good debugging safeguard
  *             if (type == Type.WITHDRAW) {
- *                 ((Player) sender()).sendMessage("You have withdrawn $" + amount());
+ *                 sender().sendMessage("You have withdrawn $" + amount());
  *                 // You may give items here as well
  *             }
  *         }
