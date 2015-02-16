@@ -17,12 +17,6 @@ class TransactionAudit {
             if (transactions == null)
                 transactions = Lists.newArrayList();
 
-            for (Transaction t : transactions) {
-                if (t.item().equals(transaction.item())) {
-                    t.amount.set(t.amount() + transaction.amount());
-                }
-            }
-
             transactions.add(transaction);
             audits.put(account, transactions);
         }

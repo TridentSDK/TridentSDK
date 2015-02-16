@@ -63,7 +63,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *                 // You may give items here as well
  *             }
  *         }
- *     }
+ *     });
  *
  *     // Amount
  *     int amount = handler.amount(ECON_ID, playerTo, int.class);
@@ -156,7 +156,7 @@ public class TransactionHandler {
                         transaction.item(),
                         transaction.sender(),
                         transaction.receiver(),
-                        -transaction.amount()) {
+                        -Math.abs(transaction.amount())) {
             @Override
             void doTransaction(Type type) {
                 transaction.doTransaction(type);
@@ -186,14 +186,11 @@ public class TransactionHandler {
 
         List<Transaction> queue = audit.transactionsFor(account);
         if (queue == null)
-            return Integer.MIN_VALUE;
+            return Integer.MAX_VALUE;
 
         int amount = 0;
         for (Transaction transaction : queue) {
             if (type.equals(transaction.item())) {
-                int transactionValue = transaction.amount();
-                if (transactionValue < 0)
-                    continue;
                 amount += transaction.amount();
             }
         }

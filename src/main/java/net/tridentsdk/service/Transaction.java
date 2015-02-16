@@ -104,7 +104,7 @@ public abstract class Transaction {
      * @return the amount of the transaction
      */
     public int amount() {
-        return Math.abs(this.amount.get());
+        return this.amount.get();
     }
 
     /**

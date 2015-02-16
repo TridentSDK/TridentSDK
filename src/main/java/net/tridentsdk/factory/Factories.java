@@ -42,13 +42,13 @@ public final class Factories {
     private static final HeldValueLatch<TaskFactory> taskFactory = HeldValueLatch.create();
     private static final HeldValueLatch<ThreadFactory> threadFactory = HeldValueLatch.create();
     private static final HeldValueLatch<CollectFactory> collectFactory = HeldValueLatch.create();
+    private static final HeldValueLatch<TransactionHandler> TRANSACTIONS = HeldValueLatch.create();
 
     private static final ConfigFactory configFactory = new ConfigFactory();
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
 
     private static final ChatHandler CHAT = new ChatHandler();
     private static final PermissionHandler PERMS = new PermissionHandler();
-    private static final TransactionHandler TRANSACTIONS = new TransactionHandler();
 
     private Factories() {
     }
@@ -66,6 +66,7 @@ public final class Factories {
     @InternalUseOnly
     public static void init(CollectFactory factory) {
         collectFactory.countDown(factory);
+        TRANSACTIONS.countDown(new TransactionHandler());
     }
 
     /**
@@ -140,6 +141,12 @@ public final class Factories {
     }
 
     public static TransactionHandler transactions() {
-        return TRANSACTIONS;
+        try {
+            return TRANSACTIONS.await();
+        } catch (InterruptedException e) {
+            // Release up the stack
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 }
