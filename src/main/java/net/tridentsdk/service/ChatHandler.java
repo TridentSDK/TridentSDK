@@ -26,14 +26,14 @@ import net.tridentsdk.util.TridentLogger;
  * @author The TridentSDK Team
  */
 public class ChatHandler {
-    private volatile ChatProvider provider = new ChatProvider() {
+    private volatile ChatIdentityFormatter provider = new ChatIdentityFormatter() {
         @Override
         public String format(String message, Player sender) {
             return "%n%d";
         }
 
         @Override
-        public void overriden(ChatProvider other, TridentPlugin overrider) {
+        public void overriden(ChatIdentityFormatter other, TridentPlugin overrider) {
             TridentLogger.warn("Trident default chat overriden by " + overrider);
         }
     };
@@ -44,7 +44,7 @@ public class ChatHandler {
      * @param provider the provider to use
      * @param plugin the plugin that registers the new provider
      */
-    public void setProvider(ChatProvider provider, TridentPlugin plugin) {
+    public void setProvider(ChatIdentityFormatter provider, TridentPlugin plugin) {
         this.provider.overriden(provider, plugin);
         this.provider = provider;
     }
