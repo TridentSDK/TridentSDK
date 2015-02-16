@@ -16,18 +16,108 @@
  */
 package net.tridentsdk.service;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Represents a transaction of a type between supported entities, including players via the
- * {@link net.tridentsdk.service.TransactionHandler}
+ * {@link net.tridentsdk.service.TransactionHandler}, and the callback which is executed for the transaction to occur
  *
  * @author The TridentSDK Team
  */
-public abstract class Transaction<T> {
-    private final T item;
+public abstract class Transaction {
+    private final Object item;
+    private final Object sender;
+    private final Object receiver;
+    final AtomicInteger amount = new AtomicInteger();
 
-    public Transaction(T item) {
+    /**
+     * Provides the construction support for transactions
+     *
+     * @param item the item type to transact
+     * @param sender the sender of the transaction. The person being withdrawn from in a withdrawl.
+     * @param receiver the receiver of the transaction
+     * @param amount the amount to operate upon
+     */
+    public Transaction(Object item, Object sender, Object receiver, int amount) {
         this.item = item;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.amount.set(amount);
     }
 
-    abstract void doTransaction(T item);
+    /**
+     * Creates a new transaction that does not have a callback
+     *
+     * @param item the item type to transact
+     * @param sender the sender of the transaction. The person being withdrawn from in a withdrawl.
+     * @param receiver the receiver of the transaction
+     * @param amount the amount to operate upon. Do not make negative for withdrawls.
+     * @return the new transaction
+     */
+    public static Transaction quietTransaction(Object item, Object sender, Object receiver, int amount) {
+        return new Transaction(item, sender, receiver, amount) {
+            @Override
+            void doTransaction(Type type) {
+            }
+        };
+    }
+
+    /**
+     * The callback after the transaction completes. Use this to send messages or send physical items.
+     *
+     * @param type the type of transaction occuring
+     */
+    abstract void doTransaction(Type type);
+
+    /**
+     * The item type being transacted
+     *
+     * @return the transacted item
+     */
+    public Object item() {
+        return this.item;
+    }
+
+    /**
+     * The sender of the transaction
+     *
+     * @return the transaction's sender
+     */
+    public Object sender() {
+        return this.sender;
+    }
+
+    /**
+     * The receiver of the transaction
+     *
+     * @return the transaction's receiver
+     */
+    public Object receiver() {
+        return this.receiver;
+    }
+
+    /**
+     * The amount of this transaction, always supposed to be positive.
+     *
+     * <p>This returns the absolute value of the amount, in case a withdrawl is thought to have a negative number.</p>
+     *
+     * @return the amount of the transaction
+     */
+    public int amount() {
+        return Math.abs(this.amount.get());
+    }
+
+    /**
+     * The transaction type
+     */
+    public enum Type {
+        /**
+         * The transaction represents a deposit
+         */
+        DEPOSIT,
+        /**
+         * The transaction represents a withdrawl
+         */
+        WITHDRAW
+    }
 }

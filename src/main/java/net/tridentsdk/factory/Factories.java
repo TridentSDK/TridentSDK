@@ -19,6 +19,9 @@ package net.tridentsdk.factory;
 
 import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.service.ChatHandler;
+import net.tridentsdk.service.PermissionHandler;
+import net.tridentsdk.service.TransactionHandler;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -42,6 +45,10 @@ public final class Factories {
 
     private static final ConfigFactory configFactory = new ConfigFactory();
     private static final ReflectFactory reflectionFactory = new ReflectFactory();
+
+    private static final ChatHandler CHAT = new ChatHandler();
+    private static final PermissionHandler PERMS = new PermissionHandler();
+    private static final TransactionHandler TRANSACTIONS = new TransactionHandler();
 
     private Factories() {
     }
@@ -122,5 +129,17 @@ public final class Factories {
      */
     public static ConfigFactory configs() {
         return configFactory;
+    }
+
+    public static ChatHandler chat() {
+        return CHAT;
+    }
+
+    public static PermissionHandler perms() {
+        return PERMS;
+    }
+
+    public static TransactionHandler transactions() {
+        return TRANSACTIONS;
     }
 }

@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.service;
 
+import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.util.TridentLogger;
@@ -38,13 +39,21 @@ public class ChatHandler {
         }
     };
 
+    public ChatHandler() {
+        if (!Trident.isTrident())
+            TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
+    }
+
     /**
      * Sets the provider of the chat format, performing the default overriding logic of the original provider
+     *
+     * <p>The provider is notified before it is replaced, so do not try to replace the provider in the
+     * overriden method</p>
      *
      * @param provider the provider to use
      * @param plugin the plugin that registers the new provider
      */
-    public void setProvider(ChatIdentityFormatter provider, TridentPlugin plugin) {
+    public void setFormatter(ChatIdentityFormatter provider, TridentPlugin plugin) {
         this.provider.overriden(provider, plugin);
         this.provider = provider;
     }

@@ -16,11 +16,17 @@
  */
 package net.tridentsdk.service;
 
+import net.tridentsdk.Trident;
+import net.tridentsdk.util.TridentLogger;
+
 /**
  * Handles permissions for players
  *
  * @author The TridentSDK Team
  */
 public class PermissionHandler {
-
+    public PermissionHandler() {
+        if (!Trident.isTrident())
+            TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
+    }
 }
