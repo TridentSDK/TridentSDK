@@ -52,7 +52,7 @@ public class Position implements Cloneable {
         this.pitch = pitch;
     }
 
-    private Position(World world, double x, double y, double z) {
+    public Position(World world, double x, double y, double z) {
         this(world, x, y, z, 0.0F, 0.0F);
     }
 
