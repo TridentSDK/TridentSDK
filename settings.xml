@@ -5,5 +5,10 @@
       <username>${env.CI_DEPLOY_USERNAME}</username>
       <password>${env.CI_DEPLOY_PASSWORD}</password>
     </server>
+    <server>
+      <id>tridentsdk-central</id>
+      <username>${env.central.username}</username>
+      <password>${env.central.password}</password>
+    </server>
   </servers>
 </settings>
