@@ -73,9 +73,6 @@ public class NBTEncoder {
 
         if (tag.hasName() && name) {
             this.writeString(tag.name());
-
-            if(tag.name.equals("ChunkSection"))
-                TridentLogger.log("Wrote ChunkSection tag with name");
         }
 
         switch (tag.type()) {
