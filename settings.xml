@@ -7,8 +7,8 @@
     </server>
     <server>
       <id>tridentsdk-central</id>
-      <username>${env.central.username}</username>
-      <password>${env.central.password}</password>
+      <username>${env.CENTRAL_USER}</username>
+      <password>${env.CENTRAL_PASS}</password>
     </server>
   </servers>
 </settings>
