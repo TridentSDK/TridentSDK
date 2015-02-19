@@ -55,18 +55,27 @@ public class NBTEncoder {
         this.output.writeByte(tag.getInnerType().id());
 
         List<NBTTag> innerTags = tag.listTags();
-        this.output.writeInt(innerTags.size());
+        this.output.writeInt(innerTags.size() - 1);
 
         for (NBTTag inner : innerTags) {
-            this.writeTag(inner);
+            this.writeTag(inner, false, false);
         }
     }
 
-    private void writeTag(NBTTag tag) throws IOException {
-        this.output.writeByte(tag.type().id());
+    public void writeTag(NBTTag tag) throws IOException {
+        writeTag(tag, true, true);
+    }
 
-        if (tag.hasName()) {
+    private void writeTag(NBTTag tag, boolean name, boolean id) throws IOException {
+        if (id) {
+            this.output.writeByte(tag.type().id());
+        }
+
+        if (tag.hasName() && name) {
             this.writeString(tag.name());
+
+            if(tag.name.equals("ChunkSection"))
+                TridentLogger.log("Wrote ChunkSection tag with name");
         }
 
         switch (tag.type()) {
