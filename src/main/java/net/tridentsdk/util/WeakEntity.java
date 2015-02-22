@@ -472,11 +472,6 @@ public final class WeakEntity<T extends Entity> {
                     // Step 1: find nodes
                     Set<RefEntry> entries = entries();
 
-                    // Try to make the collector run
-                    // This might help stored references be checked
-                    // In case the GC doesn't run, who cares anyways
-                    System.gc();
-
                     // Step 2: mark
                     for (RefEntry entry : entries) {
                         Set<WeakEntity> weakRefs = entry.val().refs();

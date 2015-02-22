@@ -79,4 +79,15 @@ public class HeldValueLatch<V> {
         latch.await();
         return value;
     }
+
+    /**
+     * Acquires the value without waiting for the latch to be counted down
+     *
+     * <p>This is still thread-safe, as the internal state is {@code volatile}</p>
+     *
+     * @return the value held by this latch
+     */
+    public V get() {
+        return value;
+    }
 }
