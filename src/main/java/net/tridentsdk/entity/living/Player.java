@@ -23,6 +23,7 @@ import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.PlayerSpeed;
 import net.tridentsdk.entity.decorate.InventoryHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
+import net.tridentsdk.service.PermissionHolder;
 
 import java.util.Locale;
 
@@ -31,7 +32,7 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder, PermissionHolder {
     // TODO: Use word settings?
 
     /**
