@@ -20,9 +20,9 @@ package net.tridentsdk.event;
 import com.esotericsoftware.reflectasm.MethodAccess;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
+import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.ConcurrentCache;
-import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
@@ -30,7 +30,10 @@ import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -49,17 +52,9 @@ public class EventHandler {
             return new PriorityBlockingQueue<>(128, COMPARATOR);
         }
     };
-    private static final Callable<EventHandler> CREATE_HANDLER = new Callable<EventHandler>() {
-        @Override
-        public EventHandler call() throws Exception {
-            return create();
-        }
-    };
 
     private final ConcurrentCache<Class<? extends Event>, Queue<EventReflector>> callers = ConcurrentCache.create();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = ConcurrentCache.create();
-
-    private final ConcurrentCache<TaskExecutor, EventHandler> handles = ConcurrentCache.create();
 
     private EventHandler() {
         if (!Trident.isTrident()) {
@@ -83,11 +78,7 @@ public class EventHandler {
      * @param listener the listener instance to use to register
      */
     @InternalUseOnly
-    public void registerListener(TridentPlugin plugin, TaskExecutor executor, Listener listener) {
-        handles.retrieve(executor, CREATE_HANDLER).doRegister(plugin, listener);
-    }
-
-    private void doRegister(TridentPlugin plugin, Listener listener) {
+    public void registerListener(TridentPlugin plugin, Listener listener) {
         final Class<?> c = listener.getClass();
         HashMultimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(plugin, listener, c);
 
@@ -140,32 +131,26 @@ public class EventHandler {
      * @param event the event to call
      */
     public void fire(final Event event) {
-        Set<Map.Entry<TaskExecutor, EventHandler>> entries = handles.entries();
-        final CountDownLatch latch = new CountDownLatch(entries.size());
+        final Queue<EventReflector> listeners = callers.retrieve(event.getClass());
+        if (listeners == null) return;
 
-        for (final Map.Entry<TaskExecutor, EventHandler> entry : entries) {
-            entry.getKey().addTask(new Runnable() {
-                @Override
-                public void run() {
-                    entry.getValue().doCall(event);
-                    latch.countDown();
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        Handler.forPlugins().executor().addTask(new Runnable() {
+            @Override
+            public void run() {
+                for (EventReflector listener : listeners) {
+                    listener.reflect(event);
                 }
-            });
-        }
+
+                latch.countDown();
+            }
+        });
 
         try {
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-    }
-
-    private void doCall(Event event) {
-        Queue<EventReflector> listeners = callers.retrieve(event.getClass());
-        if (listeners == null)
-            return;
-        for (EventReflector listener : listeners) {
-            listener.reflect(event);
         }
     }
 
@@ -194,12 +179,10 @@ public class EventHandler {
      */
     public Map<Class<? extends Listener>, Listener> listenersFor(TridentPlugin plugin) {
         Map<Class<? extends Listener>, Listener> listeners = Maps.newHashMap();
-        for (EventHandler handler : handles.values()) {
-            for (Queue<EventReflector> reflectors : handler.callers.values()) {
-                for (EventReflector reflector : reflectors) {
-                    if (reflector.plugin().equals(plugin)) {
-                        listeners.put(reflector.instance().getClass(), reflector.instance());
-                    }
+        for (Queue<EventReflector> reflectors : callers.values()) {
+            for (EventReflector reflector : reflectors) {
+                if (reflector.plugin().equals(plugin)) {
+                    listeners.put(reflector.instance().getClass(), reflector.instance());
                 }
             }
         }

@@ -130,9 +130,8 @@ public class TridentPlugin {
         // Method intentionally left blank
     }
 
-    public final void startup(TaskExecutor executor) {
+    public final void startup() {
         // TODO
-        this.executor.countDown(executor);
     }
 
     /**
@@ -226,27 +225,6 @@ public class TridentPlugin {
     @Nonnull
     public final PluginDescription description() {
         return this.description;
-    }
-
-    /**
-     * Obtains the executor for this plugin
-     *
-     * <p>If threads are manipulated, this executor MUST be used to ensure that the data read is consistent with the
-     * plugin.</p>
-     *
-     * @return the executor which loaded this plugin
-     */
-    public TaskExecutor executor() {
-        try {
-            return executor.await();
-        } catch (InterruptedException e) {
-            TridentLogger.error(e);
-        }
-
-        // Should NEVER happen
-        TridentLogger.error(new PluginLoadException(
-                "Plugin not loaded correctly, the executor is null for " + description().name()));
-        return null;
     }
 
     @Override

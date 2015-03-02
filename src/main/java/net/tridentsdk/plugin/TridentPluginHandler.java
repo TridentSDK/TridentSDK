@@ -23,7 +23,6 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.Listener;
-import net.tridentsdk.factory.ExecutorFactory;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
@@ -47,8 +46,7 @@ import java.util.jar.JarFile;
  * @author The TridentSDK Team
  */
 public class TridentPluginHandler {
-    private static final ExecutorFactory<TridentPlugin> PLUGIN_EXECUTOR_FACTORY = Factories.threads()
-            .executor(2, "Plugins");
+    private static final TaskExecutor EXECUTOR = Factories.threads().executor(1, "Plugins").scaledThread();
     private final List<TridentPlugin> plugins = Lists.newArrayList();
 
     /**
@@ -61,9 +59,7 @@ public class TridentPluginHandler {
 
     @InternalUseOnly
     public void load(final File pluginFile) {
-        final TaskExecutor executor = PLUGIN_EXECUTOR_FACTORY.scaledThread();
-
-        executor.addTask(new Runnable() {
+        EXECUTOR.addTask(new Runnable() {
             @Override
             public void run() {
                 TridentPlugin plugin = null;
@@ -121,13 +117,12 @@ public class TridentPluginHandler {
                     plugin = defaultConstructor.newInstance(pluginFile, description, loader);
 
                     plugins.add(plugin);
-                    PLUGIN_EXECUTOR_FACTORY.set(executor, plugin);
 
-                    plugin.startup(executor);
+                    plugin.startup();
                     plugin.onLoad();
 
                     for (Class<?> cls : loader.locallyLoaded.values()) {
-                        register(plugin, cls, executor);
+                        register(plugin, cls, EXECUTOR);
                     }
 
                     plugin.onEnable();
@@ -157,16 +152,17 @@ public class TridentPluginHandler {
         Constructor<?> c = null;
 
         try {
-            if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
-                c = cls.getConstructor();
-                Handler.forEvents().registerListener(plugin, executor, (Listener) (instance = c.newInstance()));
-            }
-
-            if (Command.class.isAssignableFrom(cls)) {
-                if (c == null)
+            if (!cls.isAnnotationPresent(IgnoreRegistration.class)) {
+                if (Listener.class.isAssignableFrom(cls)) {
                     c = cls.getConstructor();
-                Handler.forCommands()
-                        .addCommand(plugin, executor, (Command) (instance == null ? c.newInstance() : instance));
+                    Handler.forEvents().registerListener(plugin, (Listener) (instance = c.newInstance()));
+                }
+
+                if (Command.class.isAssignableFrom(cls)) {
+                    if (c == null)
+                        c = cls.getConstructor();
+                    Handler.forCommands().addCommand(plugin, (Command) (instance == null ? c.newInstance() : instance));
+                }
             }
         } catch (NoSuchMethodException e) {
             TridentLogger.error(
@@ -185,7 +181,7 @@ public class TridentPluginHandler {
      * @param plugin the plugin to disable
      */
     public void disable(final TridentPlugin plugin) {
-        plugin.executor().addTask(new Runnable() {
+        EXECUTOR.addTask(new Runnable() {
             @Override
             public void run() {
                 // Perform disabling first, we don't want to unload everything
@@ -193,7 +189,6 @@ public class TridentPluginHandler {
                 // State checking could be performed which breaks the class loader
                 plugin.onDisable();
 
-                PLUGIN_EXECUTOR_FACTORY.removeAssignment(plugin);
                 plugins.remove(plugin);
 
                 plugin.classLoader.unloadClasses();
@@ -210,5 +205,9 @@ public class TridentPluginHandler {
      */
     public List<TridentPlugin> plugins() {
         return Collections.unmodifiableList(this.plugins);
+    }
+
+    public TaskExecutor executor() {
+        return EXECUTOR;
     }
 }
