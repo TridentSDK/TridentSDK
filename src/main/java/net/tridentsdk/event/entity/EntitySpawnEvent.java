@@ -27,7 +27,7 @@ import net.tridentsdk.entity.Entity;
  */
 public class EntitySpawnEvent extends EntityEvent {
     private final Position location;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     /**
      * @param entity   the entity spawned

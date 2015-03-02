@@ -17,8 +17,8 @@
 
 package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.perf.FastClass;
-import net.tridentsdk.perf.FastField;
+import net.tridentsdk.reflect.FastClass;
+import net.tridentsdk.reflect.FastField;
 import net.tridentsdk.util.TridentLogger;
 
 import java.lang.reflect.Field;

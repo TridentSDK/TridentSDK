@@ -37,7 +37,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
             fix = "Write/Read the entire field ONLY")
     @GuardedBy("this")
     private String[] contents;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);

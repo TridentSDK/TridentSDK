@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 /**
- * Performance enhancing classes, or just utilities that allow for fast facilities for use in the API
+ * Reflectional utilities, such as ReflectASM wrappers and runtime injection
  */
 
-package net.tridentsdk.perf;
+package net.tridentsdk.reflect;

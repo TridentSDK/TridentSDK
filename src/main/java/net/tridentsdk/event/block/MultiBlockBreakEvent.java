@@ -27,7 +27,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     /**
      * @param block Block representing the destroyed block.

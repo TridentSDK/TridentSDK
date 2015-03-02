@@ -14,35 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package net.tridentsdk.reflect;
 
-package net.tridentsdk.perf;
-
-import com.esotericsoftware.reflectasm.ConstructorAccess;
+import java.lang.annotation.*;
 
 /**
- * Instance creator using ASM
+ * Marks a constructor or field that is eligable for instance injection when constructed with an
+ * {@link Injector}
  *
  * @author The TridentSDK Team
  */
-public class FastConstructor {
-    private final ConstructorAccess access;
-
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.CONSTRUCTOR})
+public @interface Inject {
     /**
-     * Creates a new instance accessor to assemble bytecode for fast class creation
+     * This is the implementation selector
      *
-     * @param access the underlying access to the construction ASM facilities
-     */
-    public FastConstructor(ConstructorAccess access) {
-        this.access = access;
-    }
-
-    /**
-     * Creates a new instance of the constructor's class
+     * <p>Used by the injector to provide different implementations. Leave empty if default should be used.</p>
      *
-     * @param <T> the class type
-     * @return the instance of T
+     * @return the implementation class
      */
-    public <T> T newInstance() {
-        return (T) this.access.newInstance();
-    }
+    public Class<?> meta() default Class.class;
 }

@@ -18,6 +18,7 @@
 package net.tridentsdk.plugin;
 
 import com.google.common.collect.Lists;
+import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.docs.InternalUseOnly;
@@ -158,13 +159,13 @@ public class TridentPluginHandler {
         try {
             if (Listener.class.isAssignableFrom(cls) && !cls.isAnnotationPresent(IgnoreRegistration.class)) {
                 c = cls.getConstructor();
-                Trident.eventHandler().registerListener(plugin, executor, (Listener) (instance = c.newInstance()));
+                Handler.forEvents().registerListener(plugin, executor, (Listener) (instance = c.newInstance()));
             }
 
             if (Command.class.isAssignableFrom(cls)) {
                 if (c == null)
                     c = cls.getConstructor();
-                Trident.commandHandler()
+                Handler.forCommands()
                         .addCommand(plugin, executor, (Command) (instance == null ? c.newInstance() : instance));
             }
         } catch (NoSuchMethodException e) {

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.inject;
+package net.tridentsdk.reflect;
 
 import javax.annotation.Nonnull;
 
@@ -39,7 +39,7 @@ public interface Producer<T> {
      * <p>The best practice is throwing an {@link java.lang.IllegalArgumentException} if you do not have more than one
      * implementation</p>
      *
-     * @param metadata the provided class in the {@link net.tridentsdk.inject.Inject} annotation
+     * @param metadata the provided class in the {@link Inject} annotation
      * @return the produced object
      */
     @Nonnull

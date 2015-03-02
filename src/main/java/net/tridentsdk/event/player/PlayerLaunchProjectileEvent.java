@@ -26,7 +26,7 @@ import net.tridentsdk.event.Cancellable;
  */
 public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancellable {
     private final Entity projectile;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public PlayerLaunchProjectileEvent(Player player, Entity projectile) {
         super(player);

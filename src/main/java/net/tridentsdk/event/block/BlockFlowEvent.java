@@ -27,7 +27,7 @@ import net.tridentsdk.event.Cancellable;
  */
 public class BlockFlowEvent extends BlockEvent implements Cancellable {
     private final Block to;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     /**
      * @param from Block where the liquid is flowing from

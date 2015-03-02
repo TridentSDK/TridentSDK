@@ -28,9 +28,9 @@ import net.tridentsdk.window.inventory.Item;
  */
 public class PlayerFishEvent extends PlayerEvent implements Cancellable {
     private final State state;
-    private volatile int exp;
-    private volatile Item item;
-    private volatile boolean cancelled;
+    private int exp;
+    private Item item;
+    private boolean cancelled;
 
     public PlayerFishEvent(Player player, State state, int exp, Item item) {
         super(player);

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.perf;
+package net.tridentsdk.reflect;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 import com.esotericsoftware.reflectasm.FieldAccess;

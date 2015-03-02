@@ -32,7 +32,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
     private final Player player;
     private final BlockOrientation blockFace;
     private final Item itemInHand;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     /**
      * @param player     Player associated with this event

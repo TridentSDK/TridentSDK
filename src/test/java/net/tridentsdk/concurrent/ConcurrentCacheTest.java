@@ -17,8 +17,8 @@
 
 package net.tridentsdk.concurrent;
 
+import net.tridentsdk.AccessBridge;
 import net.tridentsdk.factory.CollectFactory;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class ConcurrentCacheTest {
         TridentLogger.init();
 
         // Oh well, looks like we covered for HeldValueLatch too :P
-        Factories.init(new CollectFactory() {
+        AccessBridge.open().sendSelf(new CollectFactory() {
             @Override
             public <K, V> ConcurrentMap<K, V> createMap() {
                 return new ConcurrentHashMap<>();

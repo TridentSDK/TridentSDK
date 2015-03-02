@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.inject;
+package net.tridentsdk.reflect;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
