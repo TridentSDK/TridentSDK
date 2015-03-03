@@ -32,7 +32,7 @@ public class ConcurrentCacheTest {
         TridentLogger.init();
 
         // Oh well, looks like we covered for HeldValueLatch too :P
-        AccessBridge.open().sendSelf(new CollectFactory() {
+        AccessBridge.open().sendSuper(new CollectFactory() {
             @Override
             public <K, V> ConcurrentMap<K, V> createMap() {
                 return new ConcurrentHashMap<>();
