@@ -17,6 +17,9 @@
 
 package net.tridentsdk.concurrent;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+
 /**
  * Execution abstraction
  *
@@ -27,10 +30,17 @@ public interface TaskExecutor {
      * Adds the task to the queue
      *
      * @param task the task to add
-     * @return {@code true} if the task was added successfully. Return of {@code false} is handled internally, this is
-     * provided for visibility purposes only
      */
-    boolean addTask(Runnable task);
+    void addTask(Runnable task);
+
+    /**
+     * Runs a callback which returns a value as a future
+     *
+     * @param task the callback to run
+     * @param <V> the return type of the callback
+     * @return the returned value
+     */
+    <V> Future<V> submitTask(Callable<V> task);
 
     /**
      * Closes the thread and stops execution of new / remaining tasks

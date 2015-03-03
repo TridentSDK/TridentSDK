@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.docs.PossiblyThreadSafe;
 import net.tridentsdk.util.Vector;
+import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
 
 /**
@@ -51,7 +52,7 @@ public class Position implements Cloneable {
         this.pitch = pitch;
     }
 
-    private Position(World world, double x, double y, double z) {
+    public Position(World world, double x, double y, double z) {
         this(world, x, y, z, 0.0F, 0.0F);
     }
 
@@ -149,6 +150,14 @@ public class Position implements Cloneable {
     }
 
     /**
+     * Chunk of the current position
+     * @return Chunk of the position
+     */
+    public Chunk chunk() {
+        return world().chunkAt((int) x >> 4, (int) z >> 4, true);
+    }
+
+    /**
      * Sets the location's world
      *
      * @param world the world to set the location to
@@ -224,7 +233,7 @@ public class Position implements Cloneable {
      * @return the tile occupying the coordinates of this location
      */
     public Block tile() {
-        return world().tileAt(this);
+        return world().blockAt(this);
     }
 
     /**

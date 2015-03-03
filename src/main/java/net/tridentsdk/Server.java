@@ -20,11 +20,7 @@ package net.tridentsdk;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ai.AiHandler;
-import net.tridentsdk.event.EventHandler;
-import net.tridentsdk.plugin.TridentPluginHandler;
-import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.plugin.cmd.ServerConsole;
-import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
 import net.tridentsdk.world.gen.AbstractGenerator;
@@ -89,43 +85,6 @@ public interface Server {
      * @return a String representing the current version of the Trident server that the server is running
      */
     String version();
-
-    /**
-     * Gets an inventory window
-     *
-     * @param id the ID of the window to be searche
-     * @return the window with the ID
-     */
-    Window windowBy(int id);
-
-    /**
-     * Send a plugin message
-     *
-     * @param channel name of the channel
-     * @param data    the data to send
-     */
-    void sendPluginMessage(String channel, byte... data);
-
-    /**
-     * Get the event manager
-     *
-     * @return the EventManager instance
-     */
-    EventHandler eventHandler();
-
-    /**
-     * Get the Trident Plugin Handler
-     *
-     * @return the TridentPluginHandler instance
-     */
-    TridentPluginHandler pluginHandler();
-
-    /**
-     * Get the Trident command handler to distribute commands or register them
-     *
-     * @return the instance of command handler
-     */
-    CommandHandler commandHandler();
 
     /**
      * Gets the server's display information on the server list

@@ -17,6 +17,7 @@
 
 package net.tridentsdk.plugin.channel;
 
+import net.tridentsdk.Trident;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 
@@ -27,22 +28,22 @@ import java.util.Map;
  *
  * @author The TridentSDK Team
  */
-public final class ChannelHandler {
-    private static final ChannelHandler INSTANCE = new ChannelHandler();
-
+public abstract class ChannelHandler {
     private final Map<String, PluginChannel> channels = Factories.collect().createMap();
 
-    private ChannelHandler() {
+    public ChannelHandler() {
+        if (!Trident.isTrident()) {
+            TridentLogger.error(new IllegalAccessException("Only Trident should instantiate this class"));
+        }
     }
 
     /**
-     * Obtains the static instance of the channel handler
+     * Send a plugin message
      *
-     * @return the channel handler instance
+     * @param channel name of the channel
+     * @param data    the data to send
      */
-    public static ChannelHandler instance() {
-        return INSTANCE;
-    }
+    public abstract void sendPluginMessage(String channel, byte... data);
 
     /**
      * Registers a channel in the listings

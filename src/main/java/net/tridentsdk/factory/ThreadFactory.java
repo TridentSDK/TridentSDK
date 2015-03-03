@@ -19,7 +19,6 @@ package net.tridentsdk.factory;
 
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
@@ -51,13 +50,6 @@ public interface ThreadFactory {
      * @return the values of the concurrent cache
      */
     Collection<Player> players();
-
-    /**
-     * Get all of the wrapped world threads
-     *
-     * @return the worlds being managed by the task executors
-     */
-    Collection<World> worlds();
 
     /**
      * A new concurren task executor reimplemented in the server

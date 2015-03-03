@@ -60,7 +60,7 @@ public class WorldImpl implements World {
             }
 
             @Override
-            public Block tileAt(int relX, int y, int relZ) {
+            public Block blockAt(int relX, int y, int relZ) {
                 return null;
             }
 
@@ -87,7 +87,7 @@ public class WorldImpl implements World {
     }
 
     @Override
-    public Block tileAt(Position location) {
+    public Block blockAt(Position location) {
         return new BlockImpl();
     }
 

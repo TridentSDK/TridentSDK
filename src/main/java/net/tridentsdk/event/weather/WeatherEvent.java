@@ -30,7 +30,7 @@ import net.tridentsdk.world.World;
  */
 public class WeatherEvent extends Event implements Cancellable {
     public final World world;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public WeatherEvent(World world) {
         this.world = world;

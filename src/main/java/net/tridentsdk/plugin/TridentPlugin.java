@@ -19,6 +19,7 @@ package net.tridentsdk.plugin;
 
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
+import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.TaskExecutor;
@@ -47,7 +48,7 @@ public class TridentPlugin {
     private final PluginDescription description;
     private final JsonConfig defaultConfig;
     private final HeldValueLatch<TaskExecutor> executor = HeldValueLatch.create();
-    PluginClassLoader classLoader;
+    public PluginClassLoader classLoader;
 
     /**
      * It's not a good idea to use this constructor
@@ -58,7 +59,7 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for (TridentPlugin plugin : Trident.pluginHandler().plugins()) {
+        for (TridentPlugin plugin : Handler.forPlugins().plugins()) {
             if (plugin.description().name().equalsIgnoreCase(description.name())) {
                 TridentLogger.error(new IllegalStateException(
                         "Plugin already initialized or plugin named" + description.name() + " exists already"));
@@ -84,7 +85,7 @@ public class TridentPlugin {
     public static TridentPlugin instance() {
         Class<?> caller = Trident.findCaller(3);
         ClassLoader loader = caller.getClassLoader();
-        for (TridentPlugin plugin : Trident.pluginHandler().plugins())
+        for (TridentPlugin plugin : Handler.forPlugins().plugins())
             if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
@@ -102,7 +103,7 @@ public class TridentPlugin {
     @Nullable
     public static TridentPlugin instance(Class<? extends TridentPlugin> c) {
         ClassLoader loader = c.getClassLoader();
-        for (TridentPlugin plugin : Trident.pluginHandler().plugins())
+        for (TridentPlugin plugin : Handler.forPlugins().plugins())
             if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
@@ -129,9 +130,8 @@ public class TridentPlugin {
         // Method intentionally left blank
     }
 
-    final void startup(TaskExecutor executor) {
+    public final void startup() {
         // TODO
-        this.executor.countDown(executor);
     }
 
     /**
@@ -141,7 +141,7 @@ public class TridentPlugin {
      * @return the listener instance registered to the server
      */
     public <T extends Listener> T listenerBy(Class<T> c) {
-        return (T) Trident.eventHandler().listenersFor(this).get(c);
+        return (T) Handler.forEvents().listenersFor(this).get(c);
     }
 
     /**
@@ -151,7 +151,7 @@ public class TridentPlugin {
      * @return the command instance registered to the server
      */
     public <T extends Command> T commandBy(Class<T> c) {
-        return (T) Trident.commandHandler().commandsFor(this).get(c);
+        return (T) Handler.forCommands().commandsFor(this).get(c);
     }
 
     /**
@@ -225,27 +225,6 @@ public class TridentPlugin {
     @Nonnull
     public final PluginDescription description() {
         return this.description;
-    }
-
-    /**
-     * Obtains the executor for this plugin
-     *
-     * <p>If threads are manipulated, this executor MUST be used to ensure that the data read is consistent with the
-     * plugin.</p>
-     *
-     * @return the executor which loaded this plugin
-     */
-    public TaskExecutor executor() {
-        try {
-            return executor.await();
-        } catch (InterruptedException e) {
-            TridentLogger.error(e);
-        }
-
-        // Should NEVER happen
-        TridentLogger.error(new PluginLoadException(
-                "Plugin not loaded correctly, the executor is null for " + description().name()));
-        return null;
     }
 
     @Override

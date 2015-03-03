@@ -19,7 +19,6 @@ package net.tridentsdk.concurrent;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A one-time latch that holds a value
@@ -29,7 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @ThreadSafe
 public class HeldValueLatch<V> {
     private final CountDownLatch latch = new CountDownLatch(1);
-    private final AtomicReference<V> value = new AtomicReference<>();
+    private volatile V value;
 
     private HeldValueLatch() {
     }
@@ -53,10 +52,21 @@ public class HeldValueLatch<V> {
      * awaits the value</p>
      *
      * @param value the value to set to the latch
+     * @return the value passed in
      */
-    public void countDown(V value) {
-        this.value.set(value);
+    public V countDown(V value) {
+        this.value = value;
         latch.countDown();
+        return value;
+    }
+
+    /**
+     * Inspects the latch to find of the object has been counted down
+     *
+     * @return {@code true} if the value has been set
+     */
+    public boolean hasValue() {
+        return this.latch.getCount() == 0;
     }
 
     /**
@@ -67,6 +77,17 @@ public class HeldValueLatch<V> {
      */
     public V await() throws InterruptedException {
         latch.await();
-        return value.get();
+        return value;
+    }
+
+    /**
+     * Acquires the value without waiting for the latch to be counted down
+     *
+     * <p>This is still thread-safe, as the internal state is {@code volatile}</p>
+     *
+     * @return the value held by this latch
+     */
+    public V get() {
+        return value;
     }
 }

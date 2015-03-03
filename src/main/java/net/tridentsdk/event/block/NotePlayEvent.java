@@ -32,9 +32,9 @@ import java.util.List;
  */
 public class NotePlayEvent extends BlockEvent implements Cancellable {
     private final List<Player> players;
-    private volatile Note note;
-    private volatile Instrument instrument;
-    private volatile boolean cancelled;
+    private Note note;
+    private Instrument instrument;
+    private boolean cancelled;
 
     /**
      * @param block      Block playing the Note

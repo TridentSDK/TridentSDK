@@ -19,6 +19,7 @@ package net.tridentsdk.util;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
@@ -42,7 +43,7 @@ import java.util.Arrays;
  */
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
-    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Huston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " + "this isn't a bug, it's a feature!" };
+    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Houston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " + "this isn't a bug, it's a feature!" };
 
     private TridentLogger() {
     }
@@ -198,7 +199,8 @@ public final class TridentLogger {
 
         logger.error(ERRORS[(int) FastRandom.random(ERRORS.length - 1)]);
         logger.error("");
-        logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": " + errorMessage);
+        logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": ");
+        logger.error(errorMessage);
         logger.error("");
         logger.error("======== Generating Debug Information =========");
         StackTraceElement main = stackTrace[0];
@@ -222,7 +224,7 @@ public final class TridentLogger {
         logger.error("========     Server info    =========");
         logger.error("Trident version: " + Trident.version());
         logger.error("Plugins:         " + Arrays.toString(
-                Lists.transform(Trident.pluginHandler().plugins(), new Function<TridentPlugin, String>() {
+                Lists.transform(Handler.forPlugins().plugins(), new Function<TridentPlugin, String>() {
                     @Nullable
                     @Override
                     public String apply(TridentPlugin plugin) {

@@ -24,7 +24,7 @@ import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 
 /**
  * Contains the default values used in server.json
@@ -104,9 +104,19 @@ public final class Defaults {
      */
     public static final TaskExecutor DIRECT_EXECUTOR = new TaskExecutor() {
         @Override
-        public boolean addTask(Runnable task) {
+        public void addTask(Runnable task) {
             task.run();
-            return true;
+        }
+
+        @Override
+        public <V> Future<V> submitTask(Callable<V> task) {
+            RunnableFuture<V> future = new FutureTask<>(task);
+            try {
+                future.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return future;
         }
 
         @Override

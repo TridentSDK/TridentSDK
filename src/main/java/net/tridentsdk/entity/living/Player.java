@@ -20,9 +20,10 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
+import net.tridentsdk.entity.PlayerSpeed;
 import net.tridentsdk.entity.decorate.InventoryHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.service.PermissionHolder;
 
 import java.util.Locale;
 
@@ -31,22 +32,15 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder {
-    /**
-     * Returns the flying speed of the Player
-     *
-     * @return float flying speed of the Player
-     */
-    float flyingSpeed();
-
-    /**
-     * Set the flying speed of the Player
-     *
-     * @param flyingSpeed float flying speed of the Player
-     */
-    void setFlyingSpeed(float flyingSpeed);
-
+public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder, PermissionHolder {
     // TODO: Use word settings?
+
+    /**
+     * The name of the player, matches that of Mojang servers
+     *
+     * @return the name of the player
+     */
+    String name();
 
     /**
      * Returns the Player's {@link Locale} settings
@@ -56,13 +50,6 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
     Locale locale();
 
     /**
-     * Returns the ItemStack in the Player's hand
-     *
-     * @return ItemStack current ItemStack in the Player's hand
-     */
-    Item heldItem();
-
-    /**
      * Returns the GameMode the Player is in
      *
      * @return GameMode current GameMode of the Player
@@ -70,46 +57,11 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
     GameMode gameMode();
 
     /**
-     * Returns the move speed of the player
+     * Obtains the settings for the player's speed
      *
-     * @return float the Player's current move speed
+     * @return the player speed settings
      */
-    float moveSpeed();
-
-    /**
-     * Sets the Player's move speed
-     *
-     * @param speed float Player's move speed
-     */
-    void setMoveSpeed(float speed);
-
-    /**
-     * Returns the sneak speed of the player
-     *
-     * @return float the Player's current sneak speed
-     */
-    float sneakSpeed();
-
-    /**
-     * Sets the Player's sneak speed
-     *
-     * @param speed float Player's sneak speed
-     */
-    void setSneakSpeed(float speed);
-
-    /**
-     * Returns the walk speed of the player
-     *
-     * @return float the Player's current walk speed
-     */
-    float walkSpeed();
-
-    /**
-     * Sets the Player's walk speed
-     *
-     * @param speed float Player's walk speed
-     */
-    void setWalkSpeed(float speed);
+    PlayerSpeed speedModifiers();
 
     /**
      * Sends the player a message

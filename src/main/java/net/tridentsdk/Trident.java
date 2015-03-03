@@ -20,11 +20,7 @@ package net.tridentsdk;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.event.EventHandler;
-import net.tridentsdk.plugin.TridentPluginHandler;
-import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.plugin.cmd.ServerConsole;
-import net.tridentsdk.window.Window;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
 import net.tridentsdk.world.gen.AbstractGenerator;
@@ -44,6 +40,13 @@ import java.util.Map;
 @ThreadSafe
 public final class Trident {
     private static final ExposedSecurity SECURITY = new ExposedSecurity();
+    private static class ExposedSecurity extends SecurityManager {
+        @Override
+        protected Class[] getClassContext() {
+            return super.getClassContext();
+        }
+    }
+
     private static volatile Server server;
 
     private Trident() {
@@ -112,38 +115,11 @@ public final class Trident {
         return server.version();
     }
 
-    public static Window windowBy(int id) {
-        return server.windowBy(id);
-    }
-
-    public static void sendPluginMessage(String channel, byte... data) {
-        server.sendPluginMessage(channel, data);
-    }
-
     public static ServerConsole console() {
         return server.console();
     }
 
-    public static EventHandler eventHandler() {
-        return server.eventHandler();
-    }
-
-    public static TridentPluginHandler pluginHandler() {
-        return server.pluginHandler();
-    }
-
-    public static CommandHandler commandHandler() {
-        return server.commandHandler();
-    }
-
     public static JsonConfig config() {
         return server.config();
-    }
-
-    private static class ExposedSecurity extends SecurityManager {
-        @Override
-        protected Class[] getClassContext() {
-            return super.getClassContext();
-        }
     }
 }

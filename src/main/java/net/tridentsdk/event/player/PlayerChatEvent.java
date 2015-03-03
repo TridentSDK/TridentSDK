@@ -26,7 +26,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerChatEvent extends PlayerEvent implements Cancellable {
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     private String message;
 

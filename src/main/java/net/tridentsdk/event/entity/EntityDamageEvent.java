@@ -27,8 +27,8 @@ import net.tridentsdk.entity.LivingEntity;
  */
 public class EntityDamageEvent extends EntityEvent {
     private final Cause cause;
-    private volatile boolean cancelled;
-    private volatile double damage;
+    private boolean cancelled;
+    private double damage;
 
     /**
      * @param entity the entity associated with this event

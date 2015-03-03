@@ -130,6 +130,7 @@ public final class MessageBuilder {
      * {@link #sendTo(net.tridentsdk.entity.living.Player...)} may be called on the returned object
      */
     public MessageBuilder build() {
+        this.extra.add(buildingObject.message());
         this.obj.add("extra", this.extra);
         this.buildingObject = null;
 

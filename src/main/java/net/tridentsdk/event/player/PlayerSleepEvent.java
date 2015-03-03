@@ -28,7 +28,7 @@ import net.tridentsdk.event.Cancellable;
  */
 public class PlayerSleepEvent extends PlayerEvent implements Cancellable {
     private final Block bed;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public PlayerSleepEvent(Player player, Block bed) {
         super(player);

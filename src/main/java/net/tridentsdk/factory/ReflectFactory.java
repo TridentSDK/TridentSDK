@@ -19,10 +19,10 @@ package net.tridentsdk.factory;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 import com.esotericsoftware.reflectasm.MethodAccess;
-import net.tridentsdk.perf.FastClass;
-import net.tridentsdk.perf.FastConstructor;
-import net.tridentsdk.perf.FastField;
-import net.tridentsdk.perf.FastMethod;
+import net.tridentsdk.reflect.FastClass;
+import net.tridentsdk.reflect.FastConstructor;
+import net.tridentsdk.reflect.FastField;
+import net.tridentsdk.reflect.FastMethod;
 
 import javax.annotation.concurrent.ThreadSafe;
 

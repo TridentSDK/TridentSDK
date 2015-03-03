@@ -20,24 +20,24 @@ package net.tridentsdk.entity.projectile;
 import net.tridentsdk.entity.Projectile;
 
 /**
- * A hook at the end of the fishing rod that can catch fish or damage entities
+ * A inject at the end of the fishing rod that can catch fish or damage entities
  *
  * @author The TridentSDK Team
  */
 public interface FishHook extends Projectile {
     /**
-     * The chance that a fish will be caught on the hook
+     * The chance that a fish will be caught on the inject
      *
      * <p>Works only in water</p>
      *
-     * @return the chance a fish will be caught on the hook
+     * @return the chance a fish will be caught on the inject
      */
     float biteChance();
 
     /**
-     * Sets the chance the fish will bite the hook
+     * Sets the chance the fish will bite the inject
      *
-     * @param chance the chance the fish will bite the hook
+     * @param chance the chance the fish will bite the inject
      */
     void setBiteChance(float chance);
 }

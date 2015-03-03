@@ -25,7 +25,7 @@ import net.tridentsdk.event.Cancellable;
  */
 public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable {
     private final boolean toggleState;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public PlayerToggleFlyingEvent(Player player, boolean toggleState) {
         super(player);

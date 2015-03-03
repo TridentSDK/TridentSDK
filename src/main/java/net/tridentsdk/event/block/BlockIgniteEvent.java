@@ -27,7 +27,7 @@ import net.tridentsdk.event.Cancellable;
  */
 public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     private final Cause cause;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     /**
      * @param block Block associated with this event

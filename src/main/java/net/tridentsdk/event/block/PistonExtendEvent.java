@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class PistonExtendEvent extends BlockPistonEvent {
     private final ImmutableList<Block> blocksInfluenced;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public PistonExtendEvent(Block block, Orientation direction, List<Block> influenced) {
         super(block, direction, false, influenced.get(0));

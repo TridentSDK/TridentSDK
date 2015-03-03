@@ -25,7 +25,7 @@ import net.tridentsdk.entity.living.Player;
  */
 public class EntityTameEvent extends EntityEvent {
     private final Player tamer;
-    private volatile boolean cancelled;
+    private boolean cancelled;
 
     public EntityTameEvent(Entity entity, Player tamer) {
         super(entity);

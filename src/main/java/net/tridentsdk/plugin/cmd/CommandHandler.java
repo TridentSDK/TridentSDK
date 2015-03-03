@@ -19,8 +19,8 @@ package net.tridentsdk.plugin.cmd;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
-import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.PluginLoadException;
@@ -28,7 +28,6 @@ import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Set;
 
@@ -54,45 +53,42 @@ public class CommandHandler {
         final String[] contents = message.split(" ");
         final String label = contents[0].toLowerCase();
         final String args = message.substring(label.length());
-        final Map<TaskExecutor, Set<CommandData>> cmdData = findCommand(label);
+        final Set<CommandData> cmdData = findCommand(label);
 
         if (!cmdData.isEmpty()) {
-            for (final Map.Entry<TaskExecutor, Set<CommandData>> entry : cmdData.entrySet()) {
-                entry.getKey().addTask(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (CommandData data : entry.getValue()) {
-                            handleCommand(data.command(), issuer, args, contents);
-                        }
+            Handler.forPlugins().executor().addTask(new Runnable() {
+                @Override
+                public void run() {
+                    for (CommandData data : cmdData) {
+                        handleCommand(data.command(), issuer, args, contents);
                     }
-                });
-            }
+                }
+            });
         } else {
             // Command not found
-            issuer.sendRaw("Command not found");
+            if(issuer instanceof Player) {
+                ((Player) issuer).sendMessage("Command not found!");
+            } else {
+                issuer.sendRaw("Command not found");
+            }
         }
     }
 
-    private Map<TaskExecutor, Set<CommandData>> findCommand(String label) {
-        Map<TaskExecutor, Set<CommandData>> dataMap = Maps.newHashMap();
+    private Set<CommandData> findCommand(String label) {
+        Set<CommandData> dataSet = Sets.newHashSet();
         CommandData data = COMMANDS.get(label);
 
         if (data != null) {
-            dataMap.put(data.executor(), Sets.newHashSet(data));
+            dataSet.add(data);
         }
 
         for (CommandData d : COMMANDS.values()) {
             if (d.hasAlias(label)) {
-                Set<CommandData> set = dataMap.get(d.executor());
-                if (set == null)
-                    set = Sets.newHashSet(d);
-                else
-                    set.add(d);
-                dataMap.put(d.executor(), set);
+                dataSet.add(d);
             }
         }
 
-        return dataMap;
+        return dataSet;
     }
 
     private void handleCommand(Command cmd, CommandIssuer issuer, String args, String[] contents) {
@@ -104,7 +100,7 @@ public class CommandHandler {
         cmd.handle(issuer, args, contents[0]);
     }
 
-    public int addCommand(TridentPlugin plugin, @Nonnull TaskExecutor executor, Command command) throws
+    public int addCommand(TridentPlugin plugin, Command command) throws
             PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
@@ -126,7 +122,7 @@ public class CommandHandler {
 
         String lowerCase = name.toLowerCase();
         CommandData data = COMMANDS.get(lowerCase);
-        CommandData newData = new CommandData(name, priority, aliases, permission, command, plugin, executor);
+        CommandData newData = new CommandData(name, priority, aliases, permission, command, plugin);
 
         if (data != null) {
             if (COMMANDS.get(lowerCase).priority() > priority) {
@@ -166,17 +162,15 @@ public class CommandHandler {
         private final String name;
         private final Command encapsulated;
         private final TridentPlugin plugin;
-        private final TaskExecutor executor;
 
         public CommandData(String name, int priority, String[] aliases, String permission, Command command,
-                TridentPlugin plugin, TaskExecutor executor) {
+                TridentPlugin plugin) {
             this.priority = priority;
             this.name = name;
             this.aliases = aliases;
             this.permission = permission;
             this.encapsulated = command;
             this.plugin = plugin;
-            this.executor = executor;
         }
 
         public Command command() {
@@ -198,10 +192,6 @@ public class CommandHandler {
 
         public TridentPlugin plugin() {
             return plugin;
-        }
-
-        public TaskExecutor executor() {
-            return executor;
         }
     }
 }

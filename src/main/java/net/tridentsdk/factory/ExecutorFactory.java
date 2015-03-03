@@ -22,7 +22,9 @@ import net.tridentsdk.concurrent.TaskExecutor;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 
 /**
  * A task executor that has multiple specified threads
@@ -79,6 +81,14 @@ public interface ExecutorFactory<E> extends Executor {
      * @return the thread list
      */
     List<TaskExecutor> threadList();
+
+    /**
+     * Adds support for running a runnable with callback
+     *
+     * @param callable the callback to run
+     * @return the result of the task, before it has finished
+     */
+    <V> Future<V> submit(Callable<V> callable);
 
     /**
      * Shuts down the thread processes

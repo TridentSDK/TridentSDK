@@ -19,6 +19,7 @@ package net.tridentsdk.entity.decorate;
 
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.window.Window;
+import net.tridentsdk.window.inventory.Item;
 
 /**
  * Represents an Entity that holds an Inventory
@@ -32,4 +33,18 @@ public interface InventoryHolder extends Entity {
      * @return the Inventory that this entity holds
      */
     Window inventory();
+
+    /**
+     * Returns the ItemStack in the Player's hand
+     *
+     * @return ItemStack current ItemStack in the Player's hand
+     */
+    Item heldItem();
+
+    /**
+     * Sets the item held in the selected slot
+     *
+     * @param item the item to set
+     */
+    void setHeldItem(Item item);
 }
