@@ -91,4 +91,8 @@ public class PartRotation {
     public void setRotZ(int rotZ) {
         this.rotZ = rotZ;
     }
+
+    public Vector asVector() {
+        return new Vector(rotX, rotY, rotZ);
+    }
 }
