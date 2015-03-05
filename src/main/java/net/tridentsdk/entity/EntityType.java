@@ -29,6 +29,7 @@ public enum EntityType {
     BAT,
     BLAZE,
     CHICKEN,
+    COW,
     ENDER_DRAGON,
     ENDERMAN,
     ENDERMITE,
