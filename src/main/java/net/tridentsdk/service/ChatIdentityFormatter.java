@@ -46,10 +46,10 @@ public interface ChatIdentityFormatter {
      *     // Default is: John>
      *
      *     // [Prefix]John[Suffix]>>
-     *     return "[Prefix]%name[Suffix]>>";
+     *     return "[Prefix]%n[Suffix]>>";
      *
      *     // [Prefix]JOHN>
-     *     return "[Prefix]" + sender.displayName().toUpperCase() + "%prompt";
+     *     return "[Prefix]" + sender.displayName().toUpperCase() + "%d";
      * </code></pre></p>
      *
      * <p>It is generally a good idea to use the provided variables than to hardcode them, as the implementation is
