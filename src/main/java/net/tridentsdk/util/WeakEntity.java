@@ -19,10 +19,13 @@ package net.tridentsdk.util;
 
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
+import net.tridentsdk.Position;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.traits.DecorationAdapter;
+import net.tridentsdk.entity.traits.EntityProperties;
+import net.tridentsdk.entity.types.EntityType;
+import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -772,7 +775,29 @@ public final class WeakEntity<T extends Entity> {
 
     // A set of references assigned to a particular entity
     private static class RefList implements Iterable<WeakEntity> {
-        private static final Entity NULL = new DecorationAdapter<Entity>(null) {
+        private static final Entity NULL = new Entity() {
+            @Override public void teleport(double x, double y, double z) {}
+            @Override public void teleport(Entity entity) {}
+            @Override public void teleport(Position location) {}
+            @Override public World world() {return null;}
+            @Override public Position position() {return null;}
+            @Override public Vector velocity() {return null;}
+            @Override public void setVelocity(Vector vector) {}
+            @Override public boolean onGround() {return false;}
+            @Override public Set<Entity> withinRange(double radius) {return null;}
+            @Override public String displayName() {return null;}
+            @Override public void setDisplayName(String name) {}
+            @Override public boolean isNameVisible() {return false;}
+            @Override public boolean isSilent() {return false;}
+            @Override public int entityId() {return 0;}
+            @Override public UUID uniqueId() {return null;}
+            @Override public void remove() {}
+            @Override public Entity passenger() {return null;}
+            @Override public void setPassenger(Entity entity) {}
+            @Override public void eject() {}
+            @Override public EntityType type() {return null;}
+            @Override public void applyProperties(EntityProperties properties) {}
+
             @Override
             public int hashCode() {
                 return 0;
