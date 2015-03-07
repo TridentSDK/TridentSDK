@@ -15,27 +15,54 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
-
-import net.tridentsdk.entity.LivingEntity;
+package net.tridentsdk.entity.types;
 
 /**
- * Represents a living entity that can wear a saddle
+ * Types of horses which differ in appearence
  *
- * @author TridentSDK Team
+ * @author The TridentSDK Team
  */
-public interface Saddleable extends LivingEntity {
+public enum HorseType {
     /**
-     * Whether this entity is saddled or not
-     *
-     * @return whether or not this entity has a saddle
+     * Generic Horse
      */
-    boolean isSaddled();
+    HORSE(0),
 
     /**
-     * Set whether or not this entity is saddled
-     *
-     * @param saddled whether this entity should be saddled or not
+     * Donkey
      */
-    void setSaddled(boolean saddled);
+    DONKEY(1),
+
+    /**
+     * Mule
+     */
+    MULE(2),
+
+    /**
+     * Zombie horse
+     */
+    ZOMBIE(3),
+
+    /**
+     * Skeleton horse
+     */
+    SKELETON(4);
+    private static final HorseType[] byId = new HorseType[5];
+
+    static {
+        for (HorseType type : HorseType.values()) {
+            byId[type.id] = type;
+        }
+    }
+
+    private final int id;
+
+    HorseType(int id) {
+        this.id = id;
+    }
+
+    public int id() {
+        return id;
+    }
+
 }

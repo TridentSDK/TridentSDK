@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.types;
 
 /**
  * Occupation of the villager

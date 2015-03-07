@@ -15,36 +15,31 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.window.Window;
 import net.tridentsdk.window.inventory.Item;
 
 /**
- * Represents an Entity that holds an Inventory
+ * Represents an entity that can be equipped
  *
  * @author TridentSDK Team
  */
-public interface InventoryHolder extends Entity {
+public interface Equippable extends Entity {
     /**
-     * The Inventory that this entity holds
+     * This entity's equipment
      *
-     * @return the Inventory that this entity holds
+     * <p>Layout:
+     * <ul>
+     * <li>Index 0: Helmet</li>
+     * <li>Index 1: Chestplate</li>
+     * <li>Index 2: Leggings</li>
+     * <li>Index 3: Boots</li>
+     * </ul></p>
+     *
+     * @return this entity's equipment
      */
-    Window inventory();
+    Item[] equipment();
 
-    /**
-     * Returns the ItemStack in the Player's hand
-     *
-     * @return ItemStack current ItemStack in the Player's hand
-     */
-    Item heldItem();
-
-    /**
-     * Sets the item held in the selected slot
-     *
-     * @param item the item to set
-     */
-    void setHeldItem(Item item);
+    void setEquipment(Item[] stack);
 }

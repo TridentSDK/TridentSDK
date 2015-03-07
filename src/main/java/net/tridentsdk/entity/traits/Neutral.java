@@ -15,15 +15,22 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.living;
+package net.tridentsdk.entity.traits;
 
-import net.tridentsdk.entity.traits.Ageable;
-import net.tridentsdk.entity.traits.Peaceful;
+import net.tridentsdk.entity.LivingEntity;
 
 /**
- * Represents a Cow
+ * Represents a neutral entity Purpose of interface is to provide ease-of-access to large groups of a single type (i.e.
+ * 'Hostiles', 'Friendlies')
  *
  * @author TridentSDK Team
  */
-public interface Cow extends Ageable, Peaceful {
+public interface Neutral extends LivingEntity {
+    /**
+     * Whether or not this entity has been angered. Note, not all neutral entities can be angered. When an entity is
+     * angered, it is considered hostile
+     *
+     * @return Whether this entity is angered or not
+     */
+    boolean isHostile();
 }

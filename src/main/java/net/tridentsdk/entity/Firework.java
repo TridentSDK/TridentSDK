@@ -17,6 +17,8 @@
 
 package net.tridentsdk.entity;
 
+import net.tridentsdk.entity.traits.FireworkProperties;
+
 /**
  * A charge that explodes with various specified colors and properties
  *

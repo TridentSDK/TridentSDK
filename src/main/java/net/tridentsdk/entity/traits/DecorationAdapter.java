@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.Position;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.EntityProperties;
-import net.tridentsdk.entity.EntityType;
+import net.tridentsdk.entity.types.EntityType;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.World;
 

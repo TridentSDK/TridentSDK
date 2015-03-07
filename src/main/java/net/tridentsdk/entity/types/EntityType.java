@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.types;
 
 /**
  * The types of entities that are possible to be in Minecraft, they populate the world, whether being a mob, animal,

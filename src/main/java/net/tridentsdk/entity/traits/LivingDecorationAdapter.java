@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.Position;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.EntityProperties;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.Projectile;
 import net.tridentsdk.entity.living.Player;

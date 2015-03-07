@@ -22,7 +22,7 @@ import com.google.common.reflect.TypeToken;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.decorate.DecorationAdapter;
+import net.tridentsdk.entity.traits.DecorationAdapter;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.NotThreadSafe;

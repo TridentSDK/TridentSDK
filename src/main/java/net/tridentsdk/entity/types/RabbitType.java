@@ -15,54 +15,50 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.types;
 
 /**
- * Types of horses which differ in appearence
+ * Possible rabbit types, color and friendliness
  *
  * @author The TridentSDK Team
  */
-public enum HorseType {
-    /**
-     * Generic Horse
-     */
-    HORSE(0),
+public enum RabbitType {
+    BROWN(0),
 
-    /**
-     * Donkey
-     */
-    DONKEY(1),
+    WHITE(1),
 
-    /**
-     * Mule
-     */
-    MULE(2),
+    BLACK(2),
 
-    /**
-     * Zombie horse
-     */
-    ZOMBIE(3),
+    WHITE_AND_BLACK(3),
 
-    /**
-     * Skeleton horse
-     */
-    SKELETON(4);
-    private static final HorseType[] byId = new HorseType[5];
+    GOLD(4),
 
-    static {
-        for (HorseType type : HorseType.values()) {
-            byId[type.id] = type;
-        }
-    }
+    SALT_AND_PEPPER(5),
+
+    KILLER_RABBIT(99);
 
     private final int id;
 
-    HorseType(int id) {
+    RabbitType(int id) {
         this.id = id;
     }
 
-    public int id() {
-        return id;
+    /**
+     * Returns the {@code int} value of the RabbitType
+     *
+     * @param rabbitType RabbitType
+     * @return {@code int} value of the RabbitType
+     */
+    public static int asInt(RabbitType rabbitType) {
+        return rabbitType.asInt();
     }
 
+    /**
+     * Returns the {@code int} value of the RabbitType
+     *
+     * @return {@code int} value of the RabbitType
+     */
+    public int asInt() {
+        return this.id;
+    }
 }

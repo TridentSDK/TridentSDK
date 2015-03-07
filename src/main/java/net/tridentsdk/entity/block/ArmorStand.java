@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.block;
 
-import net.tridentsdk.entity.decorate.Equippable;
+import net.tridentsdk.entity.traits.Equippable;
 import net.tridentsdk.util.PartRotation;
 
 /**

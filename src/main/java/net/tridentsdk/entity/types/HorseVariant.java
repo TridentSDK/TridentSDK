@@ -15,35 +15,20 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
-
-import java.util.UUID;
+package net.tridentsdk.entity.types;
 
 /**
- * Represents a tameable entity
+ * Represents the variants of a Horse with a type of HORSE (id 0)
  *
  * @author TridentSDK Team
  */
-public interface Tameable extends Ageable {
-    /**
-     * Whether or not this entity is tamed
+public interface HorseVariant {
+    /*
+     * TODO: Implement Variants
+     * general idea is that it may return 2 things:
      *
-     * @return whether or not this entity is tamed
-     */
-    boolean isTamed();
-
-    /**
-     * The UUID of this entity's owner
+     * 1) Pattern
      *
-     * @return the UUID of the {@link net.tridentsdk.entity.living.Player}Player that owns this entity, {@code null} if
-     * untamed
+     * 2) Color
      */
-    UUID owner();
-
-    /**
-     * Whether or not this entity is sitting
-     *
-     * @return whether or not this entity is sitting
-     */
-    boolean isSitting();
 }

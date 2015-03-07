@@ -15,15 +15,12 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.living;
-
-import net.tridentsdk.entity.traits.Ageable;
-import net.tridentsdk.entity.traits.Peaceful;
+package net.tridentsdk.entity.traits;
 
 /**
- * Represents a Cow
+ * Represents the various properties of a Firework ItemStack Mock class only to show uses
  *
  * @author TridentSDK Team
  */
-public interface Cow extends Ageable, Peaceful {
+public interface FireworkProperties {
 }

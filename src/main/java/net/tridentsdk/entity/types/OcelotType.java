@@ -15,31 +15,41 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
-
-import net.tridentsdk.entity.Entity;
-import net.tridentsdk.window.inventory.Item;
+package net.tridentsdk.entity.types;
 
 /**
- * Represents an entity that can be equipped
+ * Represents the type of an Ocelot
  *
  * @author TridentSDK Team
  */
-public interface Equippable extends Entity {
+public enum OcelotType {
     /**
-     * This entity's equipment
-     *
-     * <p>Layout:
-     * <ul>
-     * <li>Index 0: Helmet</li>
-     * <li>Index 1: Chestplate</li>
-     * <li>Index 2: Leggings</li>
-     * <li>Index 3: Boots</li>
-     * </ul></p>
-     *
-     * @return this entity's equipment
+     * Wild
      */
-    Item[] equipment();
+    WILD(0),
 
-    void setEquipment(Item[] stack);
+    /**
+     * Tuxedo
+     */
+    TUXEDO(1),
+
+    /**
+     * Tabby
+     */
+    TABBY(2),
+
+    /**
+     * Siamese
+     */
+    SIAMESE(3);
+
+    private final int id;
+
+    OcelotType(int id) {
+        this.id = id;
+    }
+
+    public int asInt() {
+        return id;
+    }
 }

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.window.trade.Trade;
 
