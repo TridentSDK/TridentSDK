@@ -18,16 +18,19 @@
 package net.tridentsdk.util;
 
 import com.google.common.collect.Sets;
+import com.google.common.reflect.TypeToken;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.decorate.DecorationAdapter;
 
 import javax.annotation.concurrent.GuardedBy;
+import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.Set;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -271,6 +274,88 @@ public final class WeakEntity<T extends Entity> {
     }
 
     /**
+     * Obtains an iterator which cleans elements in a collection which holds {@link net.tridentsdk.util.WeakEntity}
+     * instances
+     *
+     * <p>This method is recommended for usage with any collection which holds instances of
+     * {@link net.tridentsdk.util.WeakEntity}, as although it may reduce memory leaks caused by resources being held
+     * after a referencing class is not fully unloaded, one WeakEntity is referenced is several places internally.</p>
+     *
+     * <p>This supports all collections that are part of the Java Collections Framework. In particular, collections
+     * which have 2 keys and obtain entry sets with a {@link net.tridentsdk.util.WeakEntity} in the key, value, or both
+     * are supported by this iterator.</p>
+     *
+     * <p>Normal use case:
+     * <pre><code>
+     *     List&lt;WeakEntity&lt;Player&gt;&gt; list = Lists.newArrayList();
+     *
+     *     for (WeakEntity&lt;Player&gt; weakEntity : WeakEntity.iterate(list)) {
+     *         // Obtain can be used here
+     *     }
+     * </code></pre></p>
+     *
+     * <p>No support is provided for iteration-then-remove, as the semantics of the iterator precede checks for nullity
+     * before the element is returned.</p>
+     *
+     * @param collect the collection to clean of nulled references
+     * @param <E> the element type for the iterator
+     * @return the iterator which cleans a collection possibly containing {@code null} references to weak entities
+     */
+    public static <E> CleaningIterator<E> iterate(Collection<E> collect) {
+        Type type = ((ParameterizedType) collect.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        TypeToken token = TypeToken.of(type);
+        CleaningIterator<E> iterator;
+
+        // The collection is an entry set
+        if (Map.Entry.class.isAssignableFrom(token.getRawType())) {
+            iterator = new CleaningIterator<E>(collect.iterator()) {
+                @Override
+                boolean shouldRemove(E entry) {
+                    Map.Entry e = (Map.Entry) entry;
+
+                    Object key = e.getKey();
+                    if (key instanceof WeakEntity) {
+                        WeakEntity entity = (WeakEntity) key;
+                        if (entity.isNull()) {
+                            return true;
+                        }
+                    }
+
+                    Object value = e.getValue();
+                    if (value instanceof WeakEntity) {
+                        WeakEntity entity = (WeakEntity) value;
+                        if (entity.isNull()) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            };
+        }
+        // The collection has weak entities
+        else {
+            iterator = new CleaningIterator<E>(collect.iterator()) {
+                @Override
+                boolean shouldRemove(E entry) {
+                    if (entry instanceof WeakEntity) {
+                        WeakEntity entity = (WeakEntity) entry;
+                        if (entity.isNull()) {
+                            return true;
+                        }
+                    }
+
+                    // We do not skip if the first element(s) are not WeakEntities
+                    // as we cannot assume the collection isn't <Object>
+                    return false;
+                }
+            };
+        }
+
+        return iterator;
+    }
+
+    /**
      * Forces the reference handler thread to run the {@code null} or garbage reference collection cycle and reclaim
      * memory lost by those references
      *
@@ -363,7 +448,8 @@ public final class WeakEntity<T extends Entity> {
      */
     @Override
     public boolean equals(Object obj) {
-        return obj == null ? isNull() : obj.equals(referencedEntity.get());
+        Object o = referencedEntity.get();
+        return obj == null ? o == null : obj.equals(o);
     }
 
     /**
@@ -371,7 +457,8 @@ public final class WeakEntity<T extends Entity> {
      */
     @Override
     public int hashCode() {
-        return isNull() ? 0 : referencedEntity.get().hashCode();
+        Object o = referencedEntity.get();
+        return o == null ? 0 : o.hashCode();
     }
 
     /**
@@ -426,7 +513,8 @@ public final class WeakEntity<T extends Entity> {
         }
 
         public void put(WeakEntity<?> weakEntity) {
-            RefList node = RefList.newNode(weakEntity, get(weakEntity.or(null)));
+            if (weakEntity.isNull()) return; // Don't bother with trying
+            RefList node = RefList.newNode(weakEntity, get(weakEntity.entity()));
             add(node.finder(), node);
         }
 
@@ -764,6 +852,79 @@ public final class WeakEntity<T extends Entity> {
         // Used to reference the entity without actually using it
         public Object finder() {
             return this.finder;
+        }
+    }
+
+    /**
+     * An iterator for a collection holding {@link net.tridentsdk.util.WeakEntity}s.
+     *
+     * <p>Before iterating, this method makes sure {@link WeakEntity#isNull()} returns {@code false}. In the case that
+     * it is {@code true}, the iterator removes that entry from the collection being iterated.</p>
+     *
+     * <p>This iterator is not shareable between threads. It is designed for single-threaded iteration. The changes
+     * made in this iterator do not necessarily reflect to the changes to different iterators of the same collection.
+     * This will only become a problem in concurrent iteration, depending on the iterator implementation, as specified
+     * by the collection class.</p>
+     *
+     * @param <E> the element type iterated by this iterator
+     */
+    @NotThreadSafe
+    // An iterator which clears entries based on their WeakEntity nullstate
+    public static abstract class CleaningIterator<E> implements Iterator<E>, Iterable<E> {
+        private final Iterator<E> iterator;
+        private E object;
+
+        abstract boolean shouldRemove(E entry);
+
+        CleaningIterator(Iterator<E> iterator) {
+            this.iterator = iterator;
+        }
+
+        /**
+         * This method also advances the iterator index
+         *
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean hasNext() {
+            while (iterator.hasNext()) {
+                E entry = iterator.next();
+                if (entry == null) {
+                    continue;
+                }
+
+                if (shouldRemove(entry)) {
+                    iterator.remove();
+                } else {
+                    object = entry;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        @Override
+        public E next() {
+            E o = object;
+            if (o == null) {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+            }
+
+            object = null;
+            return o;
+        }
+
+        @Override
+        public void remove() {
+            iterator.remove();
+        }
+
+        @Override
+        public Iterator<E> iterator() {
+            return this;
         }
     }
 }

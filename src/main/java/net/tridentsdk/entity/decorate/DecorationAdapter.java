@@ -76,8 +76,8 @@ public class DecorationAdapter<T extends Entity> implements Entity {
     }
 
     @Override
-    public Position location() {
-        return entity.location();
+    public Position position() {
+        return entity.position();
     }
 
     @Override

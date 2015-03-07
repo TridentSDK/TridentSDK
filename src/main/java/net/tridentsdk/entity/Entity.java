@@ -65,7 +65,7 @@ public interface Entity {
      *
      * @return the entity's location
      */
-    Position location();
+    Position position();
 
     /**
      * The direction and movement magnitude of the entity
