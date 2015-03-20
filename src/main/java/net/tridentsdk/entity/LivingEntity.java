@@ -30,6 +30,7 @@ import net.tridentsdk.event.entity.EntityDamageEvent;
  * @author The TridentSDK Team
  */
 public interface LivingEntity extends Entity, ProjectileLauncher {
+
     /**
      * Makes the specified entity invisible to the current entity
      *
@@ -53,7 +54,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return double health of the Entity
      */
-    double health();
+    double getHealth();
 
     /**
      * Sets the health of the Entity
@@ -93,19 +94,11 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     void setRemainingAir(long ticks);
 
     /**
-     * Returns the display name for the Entity
+     * Returns the position of the Entity's eye
      *
-     * @return String the display name for the Entity
+     * @return Position the position of the Entity's eye
      */
-    @Override
-    String displayName();
-
-    /**
-     * Returns the location of the Entity's eye
-     *
-     * @return Location the location of the Entity's eye
-     */
-    Position headLocation();
+    Position getEyePosition();
 
     /**
      * Returns if the Entity can pickup items
