@@ -104,7 +104,7 @@ public interface Entity {
      *
      * @return Display name
      */
-    String getDisplayName();
+    String displayName();
 
     /**
      * Sets the entity's display name, effects inventories (if applicable) and death messages
