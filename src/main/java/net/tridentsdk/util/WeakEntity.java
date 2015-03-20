@@ -785,7 +785,7 @@ public final class WeakEntity<T extends Entity> {
             @Override public void setVelocity(Vector vector) {}
             @Override public boolean onGround() {return false;}
             @Override public Set<Entity> withinRange(double radius) {return null;}
-            @Override public String getDisplayName() {return null;}
+            @Override public String displayName() {return null;}
             @Override public void setDisplayName(String name) {}
             @Override public boolean isNameVisible() {return false;}
             @Override public boolean isSilent() {return false;}
