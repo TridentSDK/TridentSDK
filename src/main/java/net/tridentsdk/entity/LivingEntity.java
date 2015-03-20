@@ -94,14 +94,6 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     void setRemainingAir(long ticks);
 
     /**
-     * Returns the display name for the Entity
-     *
-     * @return String the display name for the Entity
-     */
-    @Override
-    String getDisplayName();
-
-    /**
      * Returns the position of the Entity's eye
      *
      * @return Position the position of the Entity's eye
