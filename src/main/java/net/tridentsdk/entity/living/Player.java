@@ -77,4 +77,19 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      * @return Player's current position
      */
     Position getPosition();
+
+    /**
+     * Returns if the Player is sneaking
+     *
+     * @return true if Player is sneaking
+     */
+    public boolean isSneaking();
+
+    /**
+     * Gets whether the Player is sprinting
+     *
+     * @return true if Player is sprinting
+     */
+    public boolean isSprinting();
+
 }
