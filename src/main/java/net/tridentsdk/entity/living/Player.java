@@ -19,7 +19,6 @@ package net.tridentsdk.entity.living;
 
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
-import net.tridentsdk.Position;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.InventoryHolder;
