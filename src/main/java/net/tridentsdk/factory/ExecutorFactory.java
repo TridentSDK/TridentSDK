@@ -20,7 +20,6 @@ package net.tridentsdk.factory;
 import net.tridentsdk.concurrent.TaskExecutor;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -29,52 +28,16 @@ import java.util.concurrent.Future;
 /**
  * A task executor that has multiple specified threads
  *
- * @param <E> the task assignment type
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public interface ExecutorFactory<E> extends Executor {
+public interface ExecutorFactory extends Executor {
     /**
      * The thread with the least amount of tasks assigned to it
      *
      * @return the thread with the minimal task count
      */
     TaskExecutor scaledThread();
-
-    /**
-     * Assigns the scaled thread to the assignment
-     *
-     * <p>If already assigned, the executor is returned for the fast-path</p>
-     *
-     * @param assignment the assignment that uses the executor
-     * @return the executor assigned
-     */
-    TaskExecutor assign(E assignment);
-
-    /**
-     * Adds a scaled thread to the assignment Map, useful if the assignment is created with the thread
-     *
-     * <p>Cannot replace existing entries. Acquired threads using {@link #assign(Object)} cannot be set.</p>
-     *
-     * @param executor   the executor assigned
-     * @param assignment the element that is associated with the executor
-     */
-    void set(TaskExecutor executor, E assignment);
-
-    /**
-     * Removes the assigned thread and reduces by one the scale factor for the thread
-     *
-     * @param assignment the assignment that uses the executor to be removed
-     */
-    void removeAssignment(E assignment);
-
-    /**
-     * Returns the assigned objects
-     *
-     * @return the assignments in the maps
-     */
-    Collection<E> values();
-
     /**
      * Lists all available task executors from the threads
      *

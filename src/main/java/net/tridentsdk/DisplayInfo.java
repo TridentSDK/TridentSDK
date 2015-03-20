@@ -17,7 +17,6 @@
 
 package net.tridentsdk;
 
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.imageio.ImageIO;
@@ -31,7 +30,7 @@ import java.io.IOException;
  *
  * @author The TridentSDK Team
  */
-public class DisplayInfo {
+public abstract class DisplayInfo {
     /**
      * A string containing the current broadcast MOTD of the server
      *
@@ -105,7 +104,5 @@ public class DisplayInfo {
      *
      * @return a number representing the number of players on the server
      */
-    public int playerCount() {
-        return Factories.threads().players().size();
-    }
+    public abstract int playerCount();
 }
