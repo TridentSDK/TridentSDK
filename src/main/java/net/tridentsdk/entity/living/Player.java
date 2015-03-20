@@ -72,13 +72,6 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
     void sendMessage(String message);
 
     /**
-     * Returs the Player's {@link Position}
-     *
-     * @return Player's current position
-     */
-    Position getPosition();
-
-    /**
      * Returns if the Player is sneaking
      *
      * @return true if Player is sneaking
