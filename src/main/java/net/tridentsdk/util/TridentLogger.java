@@ -69,10 +69,13 @@ public final class TridentLogger {
                 if (!Files.exists(logs))
                     Files.createDirectory(logs);
 
-                File[] list = logs.toFile().listFiles();
-                copyLog(path, logs, list.length);
+                // Half a gigabyte
+                if (Files.size(path) >= 500_000_000) {
+                    File[] list = logs.toFile().listFiles();
+                    copyLog(path, logs, list.length);
 
-                Files.delete(path);
+                    Files.delete(path);
+                }
             }
         } catch (IOException e) {
             // Well we can't really do anything about it :/
