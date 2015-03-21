@@ -70,7 +70,7 @@ public final class TridentLogger {
                     Files.createDirectory(logs);
 
                 // Half a gigabyte
-                if (Files.size(path) >= 500_000_000) {
+                if (Files.size(path) >= 2_560_000) {
                     File[] list = logs.toFile().listFiles();
                     copyLog(path, logs, list.length);
 
