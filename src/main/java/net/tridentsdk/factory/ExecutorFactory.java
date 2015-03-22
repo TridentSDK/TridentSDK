@@ -33,7 +33,7 @@ import java.util.concurrent.Future;
 @ThreadSafe
 public interface ExecutorFactory extends Executor {
     /**
-     * The maximum amount of threads which are created when executing tasks or finding a scaled thread when
+     * The maximum amount of expiring threads plus non-dying threads which are created when executing tasks or finding a scaled thread when
      * existing workers are occupied
      *
      * @return the maximum scale, by default 500
