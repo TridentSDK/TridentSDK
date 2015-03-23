@@ -37,6 +37,7 @@ import java.util.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 /**
  * A reference to an entity
@@ -165,7 +166,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @ThreadSafe
 public final class WeakEntity<T extends Entity> {
-    private static final WeakEntity<?> NULL_ENTITY = new WeakEntity<>(new SafeReference<Entity>(null));
+    private static final WeakEntity<?> NULL_ENTITY = new WeakEntity<>(new SafeReference<>(null));
     private static final CleaningRefCollection REFERENCE_QUEUE = CleaningRefCollection.newQueue();
 
     // Not automatically instantiated by the server, won't be started if it is not needed
@@ -567,11 +568,7 @@ public final class WeakEntity<T extends Entity> {
                     for (RefEntry entry : entries) {
                         Set<WeakEntity> weakRefs = entry.val().refs();
 
-                        for (WeakEntity ref : weakRefs) {
-                            if (ref.isNull()) {
-                                marked.add(ref);
-                            }
-                        }
+                        marked.addAll(weakRefs.stream().filter(WeakEntity::isNull).collect(Collectors.toList()));
                     }
 
                     // Step 3: sweep
@@ -847,10 +844,7 @@ public final class WeakEntity<T extends Entity> {
         // Removes the references which are empty
         public void clean() throws InterruptedException {
             synchronized (lock) {
-                for (WeakEntity entity : weakEntities) {
-                    if (entity.isNull())
-                        weakEntities.remove(entity);
-                }
+                weakEntities.stream().filter(WeakEntity::isNull).forEach(weakEntities::remove);
             }
         }
 

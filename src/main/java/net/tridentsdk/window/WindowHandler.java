@@ -21,6 +21,11 @@ import java.util.Collection;
 /**
  * Handles windows opened and closed by the server
  *
+ * <p>To access this handler, use this code:
+ * <pre><code>
+ *     ChannelHandler handler = Handlers.forWindows();
+ * </code></pre></p>
+ *
  * @author The TridentSDK Team
  */
 public interface WindowHandler {

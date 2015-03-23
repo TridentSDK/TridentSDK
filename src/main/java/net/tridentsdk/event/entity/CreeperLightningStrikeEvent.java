@@ -32,4 +32,13 @@ public class CreeperLightningStrikeEvent extends EntityEvent {
         super(entity);
         this.cause = cause;
     }
+
+    /**
+     * Obtains the lightning event that caused the creeper to become charged
+     *
+     * @return the cause of the creeper charge
+     */
+    public LightningStrikeEvent cause() {
+        return cause;
+    }
 }

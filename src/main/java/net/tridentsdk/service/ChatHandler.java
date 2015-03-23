@@ -24,6 +24,11 @@ import net.tridentsdk.util.TridentLogger;
 /**
  * Handles server side chat communication
  *
+ * <p>To access this handler, use this code:
+ * <pre><code>
+ *     ChatHandler handler = Handler.forChat();
+ * </code></pre></p>
+ *
  * @author The TridentSDK Team
  */
 public class ChatHandler {
@@ -39,6 +44,14 @@ public class ChatHandler {
         }
     };
 
+    /**
+     * Do not instantiate
+     *
+     * <p>To access this handler, use this code:
+     * <pre><code>
+     *     ChatHandler handler = Handler.forChat();
+     * </code></pre></p>
+     */
     public ChatHandler() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));

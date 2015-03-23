@@ -59,12 +59,8 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        for (TridentPlugin plugin : Handler.forPlugins().plugins()) {
-            if (plugin.description().name().equalsIgnoreCase(description.name())) {
-                TridentLogger.error(new IllegalStateException(
-                        "Plugin already initialized or plugin named" + description.name() + " exists already"));
-            }
-        }
+        Handler.forPlugins().plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
+                "Plugin already initialized or plugin named" + description.name() + " exists already")));
 
         this.pluginFile = pluginFile;
         this.description = description;

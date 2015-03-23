@@ -41,22 +41,47 @@ public final class Handler {
     private Handler() {
     }
 
+    /**
+     * Obtains the event handler
+     *
+     * @return the event handler
+     */
     public static EventHandler forEvents() {
         return EVENT_HANDLER;
     }
 
+    /**
+     * Obtains the plugin handler
+     *
+     * @return the plugin handler
+     */
     public static TridentPluginHandler forPlugins() {
         return PLUGIN_HANDLER;
     }
 
+    /**
+     * Obtains the command handler
+     *
+     * @return the command handler
+     */
     public static CommandHandler forCommands() {
         return COMMAND_HANDLER;
     }
 
+    /**
+     * Obtains the chat handler
+     *
+     * @return the chat handler
+     */
     public static ChatHandler forChat() {
         return CHAT_HANDLER;
     }
 
+    /**
+     * Obtains the transaction handler
+     *
+     * @return the transaction handler
+     */
     public static TransactionHandler forTransactions() {
         return TRANSACTION_HANDLER;
     }
@@ -70,6 +95,11 @@ public final class Handler {
         return BRIDGE.demand(ChannelHandler.class);
     }
 
+    /**
+     * Obtains the window handler
+     *
+     * @return the window handler
+     */
     public static WindowHandler forWindows() {
         return BRIDGE.demand(WindowHandler.class);
     }

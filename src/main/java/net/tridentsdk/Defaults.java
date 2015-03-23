@@ -79,18 +79,13 @@ public final class Defaults {
     /**
      * The thread factory which makes a thread that handles exceptions
      */
-    public static final ThreadFactory ERROR_HANDLED = new ThreadFactory() {
-        @Override
-        public Thread newThread(final Runnable runnable) {
-            return new Thread(() -> {
-                try {
-                    runnable.run();
-                } catch (Exception e) {
-                    TridentLogger.error(e);
-                }
-            });
+    public static final ThreadFactory ERROR_HANDLED = runnable -> new Thread(() -> {
+        try {
+            runnable.run();
+        } catch (Exception e) {
+            TridentLogger.error(e);
         }
-    };
+    });
 
     /**
      * Executes tasks on the same thread that inserts it
