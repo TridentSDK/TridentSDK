@@ -36,7 +36,7 @@ public interface ExecutorFactory extends Executor {
      * The maximum amount of expiring threads plus non-dying threads which are created when executing tasks or finding a scaled thread when
      * existing workers are occupied
      *
-     * @return the maximum scale, by default 500
+     * @return the maximum scale, by default {@code Integer.MAX_VALUE}
      */
     int maxScale();
 
