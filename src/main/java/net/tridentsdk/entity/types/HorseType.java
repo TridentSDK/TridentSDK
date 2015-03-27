@@ -47,6 +47,7 @@ public enum HorseType {
      * Skeleton horse
      */
     SKELETON(4);
+
     private static final HorseType[] byId = new HorseType[5];
 
     static {
@@ -61,8 +62,11 @@ public enum HorseType {
         this.id = id;
     }
 
+    public static HorseType fromId(int id) {
+        return id < 0 || id > 4 ? null : byId[id];
+    }
+
     public int id() {
         return id;
     }
-
 }
