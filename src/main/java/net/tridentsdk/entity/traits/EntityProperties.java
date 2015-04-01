@@ -14,8 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Entity functionality that can be attached or "decorated" over the instance given using the implementation decorators
- */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
+
+/**
+ * Represents the properties of an Entity not yet spawned in the world
+ *
+ * @author TridentSDK Team
+ */
+public interface EntityProperties {
+}

@@ -15,31 +15,20 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
-
-import net.tridentsdk.entity.Entity;
-import net.tridentsdk.window.inventory.Item;
+package net.tridentsdk.entity.types;
 
 /**
- * Represents an entity that can be equipped
+ * Represents the variants of a Horse with a type of HORSE (id 0)
  *
  * @author TridentSDK Team
  */
-public interface Equippable extends Entity {
-    /**
-     * This entity's equipment
+public interface HorseVariant {
+    /*
+     * TODO: Implement Variants
+     * general idea is that it may return 2 things:
      *
-     * <p>Layout:
-     * <ul>
-     * <li>Index 0: Helmet</li>
-     * <li>Index 1: Chestplate</li>
-     * <li>Index 2: Leggings</li>
-     * <li>Index 3: Boots</li>
-     * </ul></p>
+     * 1) Pattern
      *
-     * @return this entity's equipment
+     * 2) Color
      */
-    Item[] equipment();
-
-    void setEquipment(Item[] stack);
 }

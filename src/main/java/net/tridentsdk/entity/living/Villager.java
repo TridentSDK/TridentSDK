@@ -17,11 +17,11 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.VillagerCareer;
-import net.tridentsdk.entity.VillagerProfession;
-import net.tridentsdk.entity.decorate.Ageable;
-import net.tridentsdk.entity.decorate.Peaceful;
-import net.tridentsdk.entity.decorate.Tradeable;
+import net.tridentsdk.entity.types.VillagerCareer;
+import net.tridentsdk.entity.types.VillagerProfession;
+import net.tridentsdk.entity.traits.Ageable;
+import net.tridentsdk.entity.traits.Peaceful;
+import net.tridentsdk.entity.traits.Tradeable;
 
 /**
  * Represents a Villager

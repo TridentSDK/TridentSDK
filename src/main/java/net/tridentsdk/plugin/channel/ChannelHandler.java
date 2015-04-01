@@ -26,11 +26,24 @@ import java.util.Map;
 /**
  * Manages data channels for sending information over the pipeline
  *
+ * <p>To access this handler, use this code:
+ * <pre><code>
+ *     ChannelHandler handler = Handlers.forChannels();
+ * </code></pre></p>
+ *
  * @author The TridentSDK Team
  */
 public abstract class ChannelHandler {
     private final Map<String, PluginChannel> channels = Factories.collect().createMap();
 
+    /**
+     * Do not instantiate
+     *
+     * <p>To access this handler, use this code:
+     * <pre><code>
+     *     ChannelHandler handler = Handlers.forChannels();
+     * </code></pre></p>
+     */
     public ChannelHandler() {
         if (!Trident.isTrident()) {
             TridentLogger.error(new IllegalAccessException("Only Trident should instantiate this class"));

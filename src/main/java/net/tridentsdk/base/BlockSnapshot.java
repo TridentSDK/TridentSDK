@@ -18,6 +18,7 @@
 package net.tridentsdk.base;
 
 import net.tridentsdk.Position;
+import net.tridentsdk.docs.InternalUseOnly;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -50,6 +51,11 @@ public final class BlockSnapshot {
         return new BlockSnapshot(block.location(), block.substance(), block.meta());
     }
 
+    @InternalUseOnly
+    public static BlockSnapshot from(Position location, Substance material, byte data) {
+        return new BlockSnapshot(location, material, data);
+    }
+
     /**
      * Places the data stored in the snapshot into the original block
      *
@@ -59,5 +65,17 @@ public final class BlockSnapshot {
         Block block = location.world().blockAt(location);
         block.setSubstance(material);
         block.setMeta(data);
+    }
+
+    public Position position() {
+        return location;
+    }
+
+    public Substance type() {
+        return material;
+    }
+
+    public byte data() {
+        return data;
     }
 }

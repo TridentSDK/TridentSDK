@@ -17,23 +17,21 @@
 
 package net.tridentsdk.base;
 
-import com.google.common.collect.Sets;
 import net.tridentsdk.Position;
-import net.tridentsdk.base.impl.WorldImpl;
-import net.tridentsdk.entity.Projectile;
+import net.tridentsdk.world.World;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.Set;
-
 public class BlockSnapshotTest {
     private final Block block = Mockito.mock(Block.class);
-    private final Set<Projectile> projectiles = Sets.newHashSet(Mockito.mock(Projectile.class));
     private Substance substance = Substance.ACACIA_STAIRS;
 
     {
-        Mockito.when(block.location()).thenReturn(Position.create(new WorldImpl(), 0, 0, 0));
+        World world = Mockito.mock(World.class);
+
+        Mockito.when(world.blockAt(Position.create(world, 0, 0, 0))).thenReturn(Mockito.mock(Block.class));
+        Mockito.when(block.location()).thenReturn(Position.create(world, 0, 0, 0));
         Mockito.when(block.substance()).thenReturn(substance);
     }
 

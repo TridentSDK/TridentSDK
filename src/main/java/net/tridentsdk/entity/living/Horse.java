@@ -17,12 +17,12 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.HorseType;
-import net.tridentsdk.entity.HorseVariant;
-import net.tridentsdk.entity.decorate.InventoryHolder;
-import net.tridentsdk.entity.decorate.Peaceful;
-import net.tridentsdk.entity.decorate.Saddleable;
-import net.tridentsdk.entity.decorate.Tameable;
+import net.tridentsdk.entity.types.HorseType;
+import net.tridentsdk.entity.types.HorseVariant;
+import net.tridentsdk.entity.traits.InventoryHolder;
+import net.tridentsdk.entity.traits.Peaceful;
+import net.tridentsdk.entity.traits.Saddleable;
+import net.tridentsdk.entity.traits.Tameable;
 
 /**
  * Represents a Horse

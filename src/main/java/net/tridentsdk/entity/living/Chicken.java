@@ -17,8 +17,8 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.decorate.Ageable;
-import net.tridentsdk.entity.decorate.Peaceful;
+import net.tridentsdk.entity.traits.Ageable;
+import net.tridentsdk.entity.traits.Peaceful;
 
 /**
  * Represents a Chicken

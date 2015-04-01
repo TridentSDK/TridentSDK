@@ -18,6 +18,8 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.Position;
+import net.tridentsdk.entity.traits.EntityProperties;
+import net.tridentsdk.entity.types.EntityType;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.World;
 
@@ -65,7 +67,7 @@ public interface Entity {
      *
      * @return the entity's location
      */
-    Position location();
+    Position position();
 
     /**
      * The direction and movement magnitude of the entity

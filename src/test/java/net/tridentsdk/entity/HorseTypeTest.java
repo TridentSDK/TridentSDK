@@ -17,6 +17,7 @@
 
 package net.tridentsdk.entity;
 
+import net.tridentsdk.entity.types.HorseType;
 import org.junit.Assert;
 import org.junit.Test;
 

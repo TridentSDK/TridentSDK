@@ -41,17 +41,18 @@ import java.util.concurrent.PriorityBlockingQueue;
 /**
  * The server's event handler, should only be created once, and only once by the server only
  *
+ * <p>To access this handler, use this code:
+ * <pre><code>
+ *     EventHandler handler = Handler.forEvents();
+ * </code></pre></p>
+ *
  * @author The TridentSDK Team
  */
 @ThreadSafe
 public class EventHandler {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, null, 0, null, null, null);
-    public static final Callable<Queue<EventReflector>> CREATE_QUEUE = new Callable<Queue<EventReflector>>() {
-        @Override
-        public Queue<EventReflector> call() throws Exception {
-            return new PriorityBlockingQueue<>(128, COMPARATOR);
-        }
-    };
+    public static final Callable<Queue<EventReflector>> CREATE_QUEUE = () ->
+            new PriorityBlockingQueue<>(128, COMPARATOR);
 
     private final ConcurrentCache<Class<? extends Event>, Queue<EventReflector>> callers = ConcurrentCache.create();
     private final ConcurrentCache<Class<?>, MethodAccess> accessors = ConcurrentCache.create();
@@ -64,6 +65,11 @@ public class EventHandler {
 
     /**
      * Creates a new event handler, should only be used internally
+     *
+     * <p>To access this handler, use this code:
+     * <pre><code>
+     *     EventHandler handler = Handler.forEvents();
+     * </code></pre></p>
      *
      * @return the new event handler
      */
@@ -90,12 +96,7 @@ public class EventHandler {
 
     private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin, Listener listener,
             final Class<?> c) {
-        MethodAccess access = accessors.retrieve(c, new Callable<MethodAccess>() {
-            @Override
-            public MethodAccess call() throws Exception {
-                return MethodAccess.get(c);
-            }
-        });
+        MethodAccess access = accessors.retrieve(c, () -> MethodAccess.get(c));
 
         Method[] methods = c.getDeclaredMethods();
 
@@ -136,15 +137,12 @@ public class EventHandler {
 
         final CountDownLatch latch = new CountDownLatch(1);
 
-        Handler.forPlugins().executor().addTask(new Runnable() {
-            @Override
-            public void run() {
-                for (EventReflector listener : listeners) {
-                    listener.reflect(event);
-                }
-
-                latch.countDown();
+        Handler.forPlugins().executor().addTask(() -> {
+            for (EventReflector listener : listeners) {
+                listener.reflect(event);
             }
+
+            latch.countDown();
         });
 
         try {
@@ -180,11 +178,7 @@ public class EventHandler {
     public Map<Class<? extends Listener>, Listener> listenersFor(TridentPlugin plugin) {
         Map<Class<? extends Listener>, Listener> listeners = Maps.newHashMap();
         for (Queue<EventReflector> reflectors : callers.values()) {
-            for (EventReflector reflector : reflectors) {
-                if (reflector.plugin().equals(plugin)) {
-                    listeners.put(reflector.instance().getClass(), reflector.instance());
-                }
-            }
+            reflectors.stream().filter(reflector -> reflector.plugin().equals(plugin)).forEach(reflector -> listeners.put(reflector.instance().getClass(), reflector.instance()));
         }
 
         return listeners;

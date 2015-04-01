@@ -14,16 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package net.tridentsdk.entity.decorate;
-
-import net.tridentsdk.entity.LivingEntity;
-
 /**
- * Represents a hostile entity Purpose of interface is to provide ease-of-access to large groups of a single type (i.e.
- * 'Hostiles', 'Friendlies')
- *
- * @author TridentSDK Team
+ * Entity functionality that can be possessed by certain entities
  */
-public interface Hostile extends LivingEntity {
-}
+
+package net.tridentsdk.entity.traits;

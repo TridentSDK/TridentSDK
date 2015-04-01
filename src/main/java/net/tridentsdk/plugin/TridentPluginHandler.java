@@ -43,6 +43,11 @@ import java.util.jar.JarFile;
 /**
  * Handles server plugins, loading and unloading, class management, and lifecycle management for plugins
  *
+ * <p>To access this handler, use this code:
+ * <pre><code>
+ *     TridentPluginHandler handler = Handler.forPlugins();
+ * </code></pre></p>
+ *
  * @author The TridentSDK Team
  */
 public class TridentPluginHandler {
@@ -51,6 +56,11 @@ public class TridentPluginHandler {
 
     /**
      * Do not instantiate this without being Trident
+     *
+     * <p>To access this handler, use this code:
+     * <pre><code>
+     *     TridentPluginHandler handler = Handler.forPlugins();
+     * </code></pre></p>
      */
     public TridentPluginHandler() {
         if (!Trident.isTrident())
@@ -181,19 +191,16 @@ public class TridentPluginHandler {
      * @param plugin the plugin to disable
      */
     public void disable(final TridentPlugin plugin) {
-        EXECUTOR.addTask(new Runnable() {
-            @Override
-            public void run() {
-                // Perform disabling first, we don't want to unload everything
-                // then disable it
-                // State checking could be performed which breaks the class loader
-                plugin.onDisable();
+        EXECUTOR.addTask(() -> {
+            // Perform disabling first, we don't want to unload everything
+            // then disable it
+            // State checking could be performed which breaks the class loader
+            plugin.onDisable();
 
-                plugins.remove(plugin);
+            plugins.remove(plugin);
 
-                plugin.classLoader.unloadClasses();
-                plugin.classLoader = null;
-            }
+            plugin.classLoader.unloadClasses();
+            plugin.classLoader = null;
         });
     }
 

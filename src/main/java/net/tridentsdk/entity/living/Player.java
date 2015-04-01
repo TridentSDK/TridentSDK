@@ -20,8 +20,8 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
-import net.tridentsdk.entity.PlayerSpeed;
-import net.tridentsdk.entity.decorate.InventoryHolder;
+import net.tridentsdk.entity.traits.PlayerSpeed;
+import net.tridentsdk.entity.traits.InventoryHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.service.PermissionHolder;
 

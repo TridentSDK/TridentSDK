@@ -15,41 +15,36 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.traits;
+
+import net.tridentsdk.entity.Entity;
+import net.tridentsdk.window.Window;
+import net.tridentsdk.window.inventory.Item;
 
 /**
- * Represents the type of an Ocelot
+ * Represents an Entity that holds an Inventory
  *
  * @author TridentSDK Team
  */
-public enum OcelotType {
+public interface InventoryHolder extends Entity {
     /**
-     * Wild
+     * The Inventory that this entity holds
+     *
+     * @return the Inventory that this entity holds
      */
-    WILD(0),
-
-    /**
-     * Tuxedo
-     */
-    TUXEDO(1),
+    Window inventory();
 
     /**
-     * Tabby
+     * Returns the ItemStack in the Player's hand
+     *
+     * @return ItemStack current ItemStack in the Player's hand
      */
-    TABBY(2),
+    Item heldItem();
 
     /**
-     * Siamese
+     * Sets the item held in the selected slot
+     *
+     * @param item the item to set
      */
-    SIAMESE(3);
-
-    private final int id;
-
-    OcelotType(int id) {
-        this.id = id;
-    }
-
-    public int asInt() {
-        return id;
-    }
+    void setHeldItem(Item item);
 }

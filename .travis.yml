@@ -12,7 +12,7 @@ notifications:
 install: true
 matrix:
   include:
-  - jdk: openjdk7
+  - jdk: oraclejdk8
 env:
   global:
     - secure: "ewpnnG41+tNBDWHcU69RlQlqItVHQcCso+Dc+gEJdEUSXTHowj18lQR7DpOIsZmnOrg9yP35dXQnoTgnsduvBCZWoUToqoHyiIXBswBmv+s3zwoJ1gBl6l4Wt7uVEW+W8+eCJxxU1NXs43KcCyjx/vL6PHOaDSGBuZYLRdF/3fM="

@@ -15,22 +15,22 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
 
-import net.tridentsdk.window.trade.Trade;
-
-import java.util.Collection;
+import net.tridentsdk.entity.LivingEntity;
 
 /**
- * Represents an entity that can trade with the Player
+ * Represents a neutral entity Purpose of interface is to provide ease-of-access to large groups of a single type (i.e.
+ * 'Hostiles', 'Friendlies')
  *
  * @author TridentSDK Team
  */
-public interface Tradeable {
+public interface Neutral extends LivingEntity {
     /**
-     * The trades this entity offers
+     * Whether or not this entity has been angered. Note, not all neutral entities can be angered. When an entity is
+     * angered, it is considered hostile
      *
-     * @return the trades offered by this entity
+     * @return Whether this entity is angered or not
      */
-    Collection<Trade> trades();
+    boolean isHostile();
 }

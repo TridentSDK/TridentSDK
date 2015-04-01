@@ -29,7 +29,7 @@ public enum GameMode {
     CREATIVE(1),
     ADVENTURE(2),
     SPECTATE(3),
-    HARDCORE(0x8);
+    HARDCORE(8);
 
     private final byte b;
 

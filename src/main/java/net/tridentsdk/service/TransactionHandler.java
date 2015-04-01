@@ -22,7 +22,6 @@ import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -37,7 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>Example:
  * <pre><code>
  *     // Economy
- *     private static final TransactionHandler handler = Factories.transaction();
+ *     private static final TransactionHandler handler = Handler.forTransactions();
  *
  *     // This must be static! Or you would end up with many different transactions
  *     // to the wrong account
@@ -79,7 +78,12 @@ public class TransactionHandler {
     private final AtomicInteger transactionIds = new AtomicInteger(2);
 
     /**
-     * Do not instantiate unless you want to handle it yourself.
+     * Do not instantiate.
+     *
+     * <p>To access this handler, use this code:
+     * <pre><code>
+     *     TransactionHandler handler = Handler.forTransactions();
+     * </code></pre></p>
      */
     public TransactionHandler() {
         if (!Trident.isTrident())
@@ -124,12 +128,7 @@ public class TransactionHandler {
      * @param transaction the transaction to perform
      */
     public void deposit(int account, Transaction transaction) {
-        TransactionAudit audit = transactions.retrieve(transaction.receiver(), new Callable<TransactionAudit>() {
-            @Override
-            public TransactionAudit call() throws Exception {
-                return new TransactionAudit();
-            }
-        });
+        TransactionAudit audit = transactions.retrieve(transaction.receiver(), TransactionAudit::new);
 
         audit.put(account, transaction);
         transaction.doTransaction(Transaction.Type.DEPOSIT);

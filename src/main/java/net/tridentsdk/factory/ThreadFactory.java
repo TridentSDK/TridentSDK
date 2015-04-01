@@ -17,11 +17,7 @@
 
 package net.tridentsdk.factory;
 
-import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.living.Player;
-
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Collection;
 
 /**
  * Creates threads and managers for those threads
@@ -38,26 +34,11 @@ import java.util.Collection;
 @ThreadSafe
 public interface ThreadFactory {
     /**
-     * Get all of the thread entity wrappers
-     *
-     * @return the values of the entity cache
-     */
-    Collection<Entity> entities();
-
-    /**
-     * Gets all of the thread player wrappers
-     *
-     * @return the values of the concurrent cache
-     */
-    Collection<Player> players();
-
-    /**
-     * A new concurren task executor reimplemented in the server
+     * A new concurrent task executor reimplemented in the server
      *
      * @param threads the threads available in the pool
      * @param name    the names appended to the end of the thread name
-     * @param <T>     the assignment type for each thread
      * @return the execution factory
      */
-    <T> ExecutorFactory<T> executor(int threads, String name);
+    ExecutorFactory executor(int threads, String name);
 }

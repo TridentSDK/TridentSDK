@@ -33,12 +33,16 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     /**
      * Makes the specified entity invisible to the current entity
      *
+     * <p>Has no effect if the current entity is not a player</p>
+     *
      * @param entity the entity to make invisible to this entity
      */
     void hide(Entity entity);
 
     /**
      * Un-hides the entity that was hidden from view, or does nothing of already visible
+     *
+     * <p>Has no effect if the current entity is not a player</p>
      *
      * @param entity the entity to make visible to this entity
      */

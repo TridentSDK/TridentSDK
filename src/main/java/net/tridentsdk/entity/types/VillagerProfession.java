@@ -15,48 +15,56 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.types;
 
 /**
- * Possible rabbit types, color and friendliness
+ * Role of the villager in the village
  *
  * @author The TridentSDK Team
  */
-public enum RabbitType {
-    BROWN(0),
+public enum VillagerProfession {
+    /**
+     * Farmer
+     */
+    FARMER(0),
 
-    WHITE(1),
+    /**
+     * Librarian
+     */
+    LIBRARIAN(1),
 
-    BLACK(2),
+    /**
+     * Priest
+     */
+    PRIEST(2),
 
-    WHITE_AND_BLACK(3),
+    /**
+     * Blacksmith
+     */
+    BLACKSMITH(3),
 
-    GOLD(4),
+    /**
+     * Butcher
+     */
+    BUTCHER(4);
+    private static final VillagerProfession[] byId = new VillagerProfession[5];
 
-    SALT_AND_PEPPER(5),
-
-    KILLER_RABBIT(99);
+    static {
+        for (VillagerProfession profession : VillagerProfession.values()) {
+            byId[profession.id] = profession;
+        }
+    }
 
     private final int id;
 
-    RabbitType(int id) {
+    VillagerProfession(int id) {
         this.id = id;
     }
 
     /**
-     * Returns the {@code int} value of the RabbitType
+     * Returns the {@code int} value of the VillagerProfession
      *
-     * @param rabbitType RabbitType
-     * @return {@code int} value of the RabbitType
-     */
-    public static int asInt(RabbitType rabbitType) {
-        return rabbitType.asInt();
-    }
-
-    /**
-     * Returns the {@code int} value of the RabbitType
-     *
-     * @return {@code int} value of the RabbitType
+     * @return {@code int} value of the VillagerProfession
      */
     public int asInt() {
         return this.id;
