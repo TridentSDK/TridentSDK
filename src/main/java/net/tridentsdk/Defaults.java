@@ -56,7 +56,7 @@ public final class Defaults {
     /**
      * The threshold used for compression
      */
-    public static final int COMPRESSION_THRESHHOLD = 256;
+    public static final int COMPRESSION_THRESHOLD = 256;
     /**
      * The server port
      */
