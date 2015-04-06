@@ -19,6 +19,7 @@ package net.tridentsdk.factory;
 
 import net.tridentsdk.concurrent.TaskExecutor;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -114,6 +115,7 @@ public interface ExecutorFactory extends Executor {
      * @param callable the callback to run
      * @return the result of the task, before it has finished
      */
+    @Nonnull
     <V> Future<V> submit(Callable<V> callable);
 
     /**
