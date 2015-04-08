@@ -119,7 +119,8 @@ public class EventHandler {
             ListenerData handler = method.getAnnotation(ListenerData.class);
             Importance importance = handler == null ? Importance.MEDIUM : handler.importance();
 
-            EventReflector registeredListener = new EventReflector(access, plugin, i, listener, eventClass, importance);
+            EventReflector registeredListener = new EventReflector(access, plugin, access.getIndex(method.getName()),
+                    listener, eventClass, importance);
             map.put(eventClass, registeredListener);
         }
 
