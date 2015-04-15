@@ -27,6 +27,7 @@ import net.tridentsdk.world.gen.AbstractGenerator;
 import org.slf4j.Logger;
 
 import java.net.InetAddress;
+import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 
@@ -114,6 +115,8 @@ public interface Server {
      * @return the player who has the specified UUID
      */
     Player playerBy(UUID id);
+
+    Collection<Player> onlinePlayers();
 
     /**
      * Returns the AI handler for the server, determines what AI entities use

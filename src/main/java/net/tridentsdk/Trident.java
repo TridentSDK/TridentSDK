@@ -20,6 +20,7 @@ package net.tridentsdk;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.net.InetAddress;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -121,5 +123,18 @@ public final class Trident {
 
     public static JsonConfig config() {
         return server.config();
+    }
+
+    public static Collection<Player> onlinePlayers() {
+        return server.onlinePlayers();
+    }
+
+    public static void broadcast(String str) {
+        onlinePlayers().stream()
+                .forEach((p) -> p.sendMessage(str));
+    }
+
+    public static Server server() {
+        return server;
     }
 }

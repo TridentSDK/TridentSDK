@@ -14,13 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.tridentsdk;
 
 import net.tridentsdk.util.TridentLogger;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +28,11 @@ import java.io.IOException;
  *
  * @author The TridentSDK Team
  */
-public abstract class DisplayInfo {
+public class DisplayInfo {
+
+    public DisplayInfo() {
+    }
+
     /**
      * A string containing the current broadcast MOTD of the server
      *
@@ -41,22 +43,13 @@ public abstract class DisplayInfo {
     }
 
     /**
-     * Sets the string displayed below the server name in the multiplayer menu
-     *
-     * @param motd the string to set. Supports color codes.
-     */
-    public void setMotd(String motd) {
-        Trident.config().setString("motd", motd);
-    }
-
-    /**
      * Returns the {@link java.io.File} that represents the picture displayed next to the server listing on clients
      *
      * @return the file that represents the picture sent to clients when they ping the server
-     * @see #motdPictureImage() for the representing the image sent to clients
+     * @see #motdImage() for the representing the image sent to clients
      */
     public File motdPicture() {
-        return null;
+        return new File(Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
     }
 
     /**
@@ -65,18 +58,20 @@ public abstract class DisplayInfo {
      * @return the image sent to clients
      * @see #motdPicture() for the file itself
      */
-    public BufferedImage motdPictureImage() {
+    public BufferedImage motdImage() {
         BufferedImage img = null;
+
         try {
-            img = ImageIO.read(new File(Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION)));
+            img = ImageIO.read(motdPicture());
         } catch (IOException ex) {
             TridentLogger.error(ex);
         }
+
         return img;
     }
 
-    public File motdImage() {
-        return new File(Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
+    public String version() {
+        return "1.8";
     }
 
     /**
@@ -85,9 +80,18 @@ public abstract class DisplayInfo {
      * @param image the image to set it to
      * @return 0 for success, -1 if this feature is disabled in config, -2 for generic failure
      */
-    public int setMotdImage(Image image) {
-        // TODO: implement
-        return -1;
+    public int setMotdImage(BufferedImage image) {
+        if (!Trident.config().getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED)) {
+            return -1;
+        }
+
+        try {
+            ImageIO.write(image, "PNG", motdPicture());
+            return 0;
+        } catch (IOException ignored) {
+        }
+
+        return -2;
     }
 
     /**
@@ -99,10 +103,7 @@ public abstract class DisplayInfo {
         return Trident.config().getInt("max-players", Defaults.MAX_PLAYERS);
     }
 
-    /**
-     * Returns the number of players currently on the server
-     *
-     * @return a number representing the number of players on the server
-     */
-    public abstract int playerCount();
+    public int playerCount() {
+        return Trident.onlinePlayers().size();
+    }
 }

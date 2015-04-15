@@ -70,6 +70,8 @@ public final class Defaults {
      */
     public static final int VIEW_DISTANCE = 15;
 
+    public static final boolean IMAGE_CHANGING_ALLOWED = false;
+
     /**
      * The server's default exception handler
      */
