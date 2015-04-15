@@ -22,6 +22,7 @@ import net.tridentsdk.Difficulty;
 import net.tridentsdk.GameMode;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.types.EntityType;
 
 import java.util.Set;
 
@@ -122,7 +123,7 @@ public interface World extends Cloneable {
      *
      * @return The spawn location in a world
      */
-    Position spawnLocation();
+    Position spawnPosition();
 
     /**
      * Checks if it is raining in a world
@@ -186,6 +187,14 @@ public interface World extends Cloneable {
      * @return The time the border has to contract to the contraction target
      */
     int borderSizeContractionTime();
+
+    /**
+     * Spawns an entity in the world
+     *
+     * @param type the type of entity to spawn
+     * @return the entity spawn
+     */
+    Entity spawn(EntityType type, Position spawnPosition);
 
     /**
      * Get the entities currently in this world

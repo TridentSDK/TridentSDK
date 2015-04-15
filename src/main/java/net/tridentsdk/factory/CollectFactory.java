@@ -22,6 +22,7 @@ import net.tridentsdk.concurrent.ConcurrentCache;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -30,15 +31,17 @@ import java.util.concurrent.ConcurrentMap;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public abstract class CollectFactory {
+public class CollectFactory {
     /**
-     * Creates a netty ConcurrentHashMapV8 to provide the fastest platform map
+     * Creates a netty ConcurrentHashMap to provide the fastest platform map
      *
      * @param <K> the key type
      * @param <V> the value type
      * @return a new concurrent hashtable reimplemented backwards
      */
-    public abstract <K, V> ConcurrentMap<K, V> createMap();
+    public <K, V> ConcurrentMap<K, V> createMap() {
+        return new ConcurrentHashMap<>();
+    }
 
     /**
      * Creates a new concurrent cache facility

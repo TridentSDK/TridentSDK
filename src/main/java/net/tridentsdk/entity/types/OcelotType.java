@@ -15,27 +15,41 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
-
-import net.tridentsdk.entity.LivingEntity;
+package net.tridentsdk.entity.types;
 
 /**
- * Represents a living entity that can wear a saddle
+ * Represents the type of an Ocelot
  *
  * @author TridentSDK Team
  */
-public interface Saddleable extends LivingEntity {
+public enum OcelotType {
     /**
-     * Whether this entity is saddled or not
-     *
-     * @return whether or not this entity has a saddle
+     * Wild
      */
-    boolean isSaddled();
+    WILD(0),
 
     /**
-     * Set whether or not this entity is saddled
-     *
-     * @param saddled whether this entity should be saddled or not
+     * Tuxedo
      */
-    void setSaddled(boolean saddled);
+    TUXEDO(1),
+
+    /**
+     * Tabby
+     */
+    TABBY(2),
+
+    /**
+     * Siamese
+     */
+    SIAMESE(3);
+
+    private final int id;
+
+    OcelotType(int id) {
+        this.id = id;
+    }
+
+    public int asInt() {
+        return id;
+    }
 }

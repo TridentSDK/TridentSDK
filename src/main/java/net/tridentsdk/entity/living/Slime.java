@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.decorate.Hostile;
+import net.tridentsdk.entity.traits.Hostile;
 
 /**
  * Represents a Slime

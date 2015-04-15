@@ -22,6 +22,9 @@ import net.tridentsdk.reflect.FastField;
 import net.tridentsdk.util.TridentLogger;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class NBTSerializer {
 
@@ -107,7 +110,23 @@ public final class NBTSerializer {
                     break;
 
                 case LIST:
-                    field.set(instance, value.asType(ListTag.class));
+                    ListTag list = value.asType(ListTag.class);
+                    Class<?> listType = (Class<?>) ((ParameterizedType) f.getGenericType())
+                            .getActualTypeArguments()[0];
+
+                    if (!(NBTSerializable.class.isAssignableFrom(listType))) {
+                        break;
+                    }
+
+                    List<Object> l = new ArrayList<>();
+
+                    for (NBTTag t : list.listTags()) {
+                        CompoundTag compound = t.asType(CompoundTag.class);
+
+                        l.add(deserialize(listType, compound));
+                    }
+
+                    field.set(instance, l);
                     break;
 
                 case STRING:

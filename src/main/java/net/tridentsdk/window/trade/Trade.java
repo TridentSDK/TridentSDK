@@ -20,7 +20,7 @@ package net.tridentsdk.window.trade;
 import net.tridentsdk.window.inventory.Item;
 
 /**
- * Represents a Trade offered by an {@link net.tridentsdk.entity.decorate.Tradeable}
+ * Represents a Trade offered by an {@link net.tridentsdk.entity.traits.Tradeable}
  *
  * @author TridentSDK Team
  */

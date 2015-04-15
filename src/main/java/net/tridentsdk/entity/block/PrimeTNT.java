@@ -31,6 +31,20 @@ public interface PrimeTNT extends FallingBlock {
     int fuse();
 
     /**
+     * Obtains the radius of the explosion
+     *
+     * @return the radius of the explosion
+     */
+    int radius();
+
+    /**
+     * Sets the radius of the explosion
+     *
+     * @param radius the radius
+     */
+    void setRadius(int radius);
+
+    /**
      * Sets the number of fuse ticks
      *
      * @param ticks the number of ticks to set

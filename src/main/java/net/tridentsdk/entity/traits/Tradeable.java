@@ -15,35 +15,22 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.decorate;
+package net.tridentsdk.entity.traits;
 
-import java.util.UUID;
+import net.tridentsdk.window.trade.Trade;
+
+import java.util.Collection;
 
 /**
- * Represents a tameable entity
+ * Represents an entity that can trade with the Player
  *
  * @author TridentSDK Team
  */
-public interface Tameable extends Ageable {
+public interface Tradeable {
     /**
-     * Whether or not this entity is tamed
+     * The trades this entity offers
      *
-     * @return whether or not this entity is tamed
+     * @return the trades offered by this entity
      */
-    boolean isTamed();
-
-    /**
-     * The UUID of this entity's owner
-     *
-     * @return the UUID of the {@link net.tridentsdk.entity.living.Player}Player that owns this entity, {@code null} if
-     * untamed
-     */
-    UUID owner();
-
-    /**
-     * Whether or not this entity is sitting
-     *
-     * @return whether or not this entity is sitting
-     */
-    boolean isSitting();
+    Collection<Trade> trades();
 }

@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.living.ai;
 
-import net.tridentsdk.entity.EntityType;
+import net.tridentsdk.entity.types.EntityType;
 
 /**
  * Handles the assigning of AIs to Entities on the server.

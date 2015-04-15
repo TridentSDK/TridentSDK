@@ -15,12 +15,15 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.traits;
+
+import net.tridentsdk.entity.LivingEntity;
 
 /**
- * Represents the various properties of a Firework ItemStack Mock class only to show uses
+ * Represents a paceful entity Purpose of interface is to provide ease-of-access to large groups of a single type (i.e.
+ * 'Hostiles', 'Friendlies')
  *
  * @author TridentSDK Team
  */
-public interface FireworkProperties {
+public interface Peaceful extends LivingEntity {
 }

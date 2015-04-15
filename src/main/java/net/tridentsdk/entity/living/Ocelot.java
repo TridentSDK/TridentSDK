@@ -17,9 +17,9 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.OcelotType;
-import net.tridentsdk.entity.decorate.Peaceful;
-import net.tridentsdk.entity.decorate.Tameable;
+import net.tridentsdk.entity.types.OcelotType;
+import net.tridentsdk.entity.traits.Peaceful;
+import net.tridentsdk.entity.traits.Tameable;
 
 /**
  * Represents an Ocelot
@@ -28,7 +28,7 @@ import net.tridentsdk.entity.decorate.Tameable;
  */
 public interface Ocelot extends Tameable, Peaceful {
     /**
-     * The breed of this ocelot, represented as a {@link net.tridentsdk.entity.OcelotType}OcelotType
+     * The breed of this ocelot, represented as a {@link net.tridentsdk.entity.types.OcelotType}OcelotType
      *
      * @return the breed of this ocelot
      */

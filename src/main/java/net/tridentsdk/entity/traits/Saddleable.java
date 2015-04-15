@@ -15,12 +15,27 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.traits;
+
+import net.tridentsdk.entity.LivingEntity;
 
 /**
- * Represents the properties of an Entity not yet spawned in the world
+ * Represents a living entity that can wear a saddle
  *
  * @author TridentSDK Team
  */
-public interface EntityProperties {
+public interface Saddleable extends LivingEntity {
+    /**
+     * Whether this entity is saddled or not
+     *
+     * @return whether or not this entity has a saddle
+     */
+    boolean isSaddled();
+
+    /**
+     * Set whether or not this entity is saddled
+     *
+     * @param saddled whether this entity should be saddled or not
+     */
+    void setSaddled(boolean saddled);
 }

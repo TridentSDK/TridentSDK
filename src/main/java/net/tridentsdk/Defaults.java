@@ -38,6 +38,10 @@ public final class Defaults {
      */
     public static final int MAX_PLAYERS = 10;
     /**
+     * The interval which to clean out chunks
+     */
+    public static final int CHUNK_CLEAN_TICK_INTERVAL = 150;
+    /**
      * The text displayed below the server name in the multiplayer menu
      */
     public static final String MOTD = "Just another Trident server...";
@@ -50,13 +54,9 @@ public final class Defaults {
      */
     public static final String MOTD_IMAGE_LOCATION = "/server-icon.png";
     /**
-     * Scheduler mode
-     */
-    public static final boolean IN_A_HURRY_MODE = true;
-    /**
      * The threshold used for compression
      */
-    public static final int COMPRESSION_THRESHHOLD = 256;
+    public static final int COMPRESSION_THRESHOLD = 256;
     /**
      * The server port
      */
@@ -73,31 +73,19 @@ public final class Defaults {
     /**
      * The server's default exception handler
      */
-    public static final Thread.UncaughtExceptionHandler EXCEPTION_HANDLER = new Thread.UncaughtExceptionHandler() {
-        @Override
-        public void uncaughtException(Thread thread, Throwable throwable) {
-            TridentLogger.error(throwable);
-        }
-    };
+    public static final Thread.UncaughtExceptionHandler EXCEPTION_HANDLER =
+            (thread, throwable) -> TridentLogger.error(throwable);
 
     /**
      * The thread factory which makes a thread that handles exceptions
      */
-    public static final ThreadFactory ERROR_HANDLED = new ThreadFactory() {
-        @Override
-        public Thread newThread(final Runnable runnable) {
-            return new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        runnable.run();
-                    } catch (Exception e) {
-                        TridentLogger.error(e);
-                    }
-                }
-            });
+    public static final ThreadFactory ERROR_HANDLED = runnable -> new Thread(() -> {
+        try {
+            runnable.run();
+        } catch (Exception e) {
+            TridentLogger.error(e);
         }
-    };
+    });
 
     /**
      * Executes tasks on the same thread that inserts it

@@ -60,7 +60,7 @@ public final class Factories {
      * @return the collection factory
      */
     public static CollectFactory collect() {
-        return AccessBridge.open().demand(CollectFactory.class);
+        return new CollectFactory();
     }
 
     /**

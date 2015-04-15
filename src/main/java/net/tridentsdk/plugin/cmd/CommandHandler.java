@@ -30,11 +30,30 @@ import net.tridentsdk.util.TridentLogger;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+/**
+ * Handles commands passed from the server
+ *
+ * <p>To access this handler, use this code:
+ * <pre><code>
+ *     CommandHandler handler = Handler.forCommands();
+ * </code></pre></p>
+ *
+ * @author The TridentSDK Team
+ */
 public class CommandHandler {
     // TODO: Make this a dictionary tree for fast lookup
     private static final Map<String, CommandData> COMMANDS = Factories.collect().createMap();
 
+    /**
+     * Do not instantiate
+     *
+     * <p>To access this handler, use this code:
+     * <pre><code>
+     *     CommandHandler handler = Handler.forCommands();
+     * </code></pre></p>
+     */
     public CommandHandler() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("Only TridentSDK is allowed to make a new command handler"));
@@ -56,12 +75,9 @@ public class CommandHandler {
         final Set<CommandData> cmdData = findCommand(label);
 
         if (!cmdData.isEmpty()) {
-            Handler.forPlugins().executor().addTask(new Runnable() {
-                @Override
-                public void run() {
-                    for (CommandData data : cmdData) {
-                        handleCommand(data.command(), issuer, args, contents);
-                    }
+            Handler.forPlugins().executor().addTask(() -> {
+                for (CommandData data : cmdData) {
+                    handleCommand(data.command(), issuer, args, contents);
                 }
             });
         } else {
@@ -82,11 +98,7 @@ public class CommandHandler {
             dataSet.add(data);
         }
 
-        for (CommandData d : COMMANDS.values()) {
-            if (d.hasAlias(label)) {
-                dataSet.add(d);
-            }
-        }
+        dataSet.addAll(COMMANDS.values().stream().filter(d -> d.hasAlias(label)).collect(Collectors.toList()));
 
         return dataSet;
     }
@@ -141,17 +153,12 @@ public class CommandHandler {
     }
 
     public void removeCommand(Class<? extends Command> cls) {
-        for (Map.Entry<String, CommandData> e : COMMANDS.entrySet()) {
-            if (e.getValue().command().getClass().equals(cls))
-                COMMANDS.remove(e.getKey());
-        }
+        COMMANDS.entrySet().stream().filter(e -> e.getValue().command().getClass().equals(cls)).forEach(e -> COMMANDS.remove(e.getKey()));
     }
 
     public Map<Class<? extends Command>, Command> commandsFor(TridentPlugin plugin) {
         Map<Class<? extends Command>, Command> map = Maps.newHashMap();
-        for (CommandData data : COMMANDS.values())
-            if (data.plugin().equals(plugin))
-                map.put(data.encapsulated.getClass(), data.encapsulated);
+        COMMANDS.values().stream().filter(data -> data.plugin().equals(plugin)).forEach(data -> map.put(data.encapsulated.getClass(), data.encapsulated));
         return map;
     }
 

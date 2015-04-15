@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.EntityProperties;
+import net.tridentsdk.entity.traits.EntityProperties;
 import net.tridentsdk.entity.Projectile;
 
 /**

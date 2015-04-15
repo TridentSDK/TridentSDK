@@ -18,7 +18,7 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.base.BlockSnapshot;
-import net.tridentsdk.entity.decorate.Neutral;
+import net.tridentsdk.entity.traits.Neutral;
 
 /**
  * Represents an Enderman

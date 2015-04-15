@@ -15,58 +15,58 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity;
+package net.tridentsdk.entity.types;
 
 /**
- * Role of the villager in the village
+ * Types of horses which differ in appearence
  *
  * @author The TridentSDK Team
  */
-public enum VillagerProfession {
+public enum HorseType {
     /**
-     * Farmer
+     * Generic Horse
      */
-    FARMER(0),
+    HORSE(0),
 
     /**
-     * Librarian
+     * Donkey
      */
-    LIBRARIAN(1),
+    DONKEY(1),
 
     /**
-     * Priest
+     * Mule
      */
-    PRIEST(2),
+    MULE(2),
 
     /**
-     * Blacksmith
+     * Zombie horse
      */
-    BLACKSMITH(3),
+    ZOMBIE(3),
 
     /**
-     * Butcher
+     * Skeleton horse
      */
-    BUTCHER(4);
-    private static final VillagerProfession[] byId = new VillagerProfession[5];
+    SKELETON(4);
+
+    private static final HorseType[] byId = new HorseType[5];
 
     static {
-        for (VillagerProfession profession : VillagerProfession.values()) {
-            byId[profession.id] = profession;
+        for (HorseType type : HorseType.values()) {
+            byId[type.id] = type;
         }
     }
 
     private final int id;
 
-    VillagerProfession(int id) {
+    HorseType(int id) {
         this.id = id;
     }
 
-    /**
-     * Returns the {@code int} value of the VillagerProfession
-     *
-     * @return {@code int} value of the VillagerProfession
-     */
-    public int asInt() {
-        return this.id;
+    public static HorseType fromId(int id) {
+        return id < 0 || id > 4 ? null : byId[id];
+    }
+
+    public int id() {
+        return id;
     }
 }
