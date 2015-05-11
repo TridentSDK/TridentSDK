@@ -36,4 +36,12 @@ public interface CommandIssuer extends Messagable {
      * @return the last command executed by commandissuer
      */
     String lastCommand();
+
+    /**
+     * Gets whether or not this sender has operator permissions, will be true for console and players that are
+     * operators.
+     *
+     * @return if this player is an operator, or if the sender was console
+     */
+    boolean isOperator();
 }

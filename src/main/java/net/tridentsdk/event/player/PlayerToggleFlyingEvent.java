@@ -22,14 +22,20 @@ import net.tridentsdk.event.Cancellable;
 
 /**
  * Called when a player attempts to change their flying state i.e. double-taps jump
+ * <p>
+ *     If a player can't change into this mode due to their fly mode being false, then the server
+ *     will call this event already cancelled, and plugins may uncancel it.
+ * </p>
  */
 public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable {
     private final boolean toggleState;
     private boolean cancelled;
+    private final boolean flyMode;
 
-    public PlayerToggleFlyingEvent(Player player, boolean toggleState) {
+    public PlayerToggleFlyingEvent(Player player, boolean toggleState, boolean flyMode) {
         super(player);
         this.toggleState = toggleState;
+        this.flyMode = flyMode;
     }
 
     /**
@@ -37,6 +43,10 @@ public class PlayerToggleFlyingEvent extends PlayerEvent implements Cancellable 
      */
     public boolean toggleState() {
         return this.toggleState;
+    }
+
+    public boolean isFlyMode() {
+        return this.flyMode;
     }
 
     @Override

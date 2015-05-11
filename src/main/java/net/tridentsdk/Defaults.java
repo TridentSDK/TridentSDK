@@ -72,6 +72,8 @@ public final class Defaults {
 
     public static final boolean IMAGE_CHANGING_ALLOWED = false;
 
+    public static final byte GAME_MODE = GameMode.SURVIVAL.asByte();
+
     /**
      * The server's default exception handler
      */

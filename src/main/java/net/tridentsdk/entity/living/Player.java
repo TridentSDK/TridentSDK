@@ -57,6 +57,11 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
     GameMode gameMode();
 
     /**
+     * Sets the player's gamemode to the specified gamemode
+     */
+    void setGameMode(GameMode mode);
+
+    /**
      * Obtains the settings for the player's speed
      *
      * @return the player speed settings
