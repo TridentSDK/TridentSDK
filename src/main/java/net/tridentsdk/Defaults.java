@@ -40,7 +40,7 @@ public final class Defaults {
     /**
      * The interval which to clean out chunks
      */
-    public static final int CHUNK_CLEAN_TICK_INTERVAL = 150;
+    public static final int CHUNK_CLEAN_TICK_INTERVAL = 500;
     /**
      * The text displayed below the server name in the multiplayer menu
      */
