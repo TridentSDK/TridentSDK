@@ -60,7 +60,7 @@ public class TridentPlugin {
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
         Handler.forPlugins().plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
-                "Plugin already initialized or plugin named" + description.name() + " exists already")));
+                "Plugin already initialized or plugin named " + description.name() + " exists already")));
 
         this.pluginFile = pluginFile;
         this.description = description;
