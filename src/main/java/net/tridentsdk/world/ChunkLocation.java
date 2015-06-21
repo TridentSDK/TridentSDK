@@ -20,6 +20,7 @@ package net.tridentsdk.world;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Stores the location of a Chunk
@@ -56,6 +57,11 @@ public class ChunkLocation implements Serializable, Cloneable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(x, z);
+    }
+
+    @Override
     @Nullable
     public Object clone() {
         try {
@@ -65,5 +71,10 @@ public class ChunkLocation implements Serializable, Cloneable {
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "ChunkLocation(" + x() + ", " + z() + ")@" + hashCode();
     }
 }
