@@ -17,11 +17,11 @@
 package net.tridentsdk.service;
 
 import net.tridentsdk.Trident;
-import net.tridentsdk.concurrent.ConcurrentCache;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -73,8 +73,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author The TridentSDK Team
  */
 public class TransactionHandler {
-    private final ConcurrentCache<Object, TransactionAudit> transactions =
-            Factories.collect().createCache();
+    private final ConcurrentMap<Object, TransactionAudit> transactions = new ConcurrentHashMap<>();
     private final AtomicInteger transactionIds = new AtomicInteger(2);
 
     /**
@@ -128,7 +127,7 @@ public class TransactionHandler {
      * @param transaction the transaction to perform
      */
     public void deposit(int account, Transaction transaction) {
-        TransactionAudit audit = transactions.retrieve(transaction.receiver(), TransactionAudit::new);
+        TransactionAudit audit = transactions.computeIfAbsent(transaction.receiver(), (k) -> new TransactionAudit());
 
         audit.put(account, transaction);
         transaction.doTransaction(Transaction.Type.DEPOSIT);
@@ -146,7 +145,7 @@ public class TransactionHandler {
      *         successfully
      */
     public boolean withdraw(int account, final Transaction transaction) {
-        TransactionAudit audit = transactions.retrieve(transaction.sender());
+        TransactionAudit audit = transactions.get(transaction.sender());
         if (audit == null)
             return false;
 
@@ -179,7 +178,7 @@ public class TransactionHandler {
      *         used for that person
      */
     public int amount(int account, Object person, Object type) {
-        TransactionAudit audit = transactions.retrieve(person);
+        TransactionAudit audit = transactions.get(person);
         if (audit == null)
             return Integer.MIN_VALUE;
 

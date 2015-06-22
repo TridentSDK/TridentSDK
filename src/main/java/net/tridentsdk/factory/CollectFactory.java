@@ -17,8 +17,6 @@
 
 package net.tridentsdk.factory;
 
-import net.tridentsdk.concurrent.ConcurrentCache;
-
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collections;
 import java.util.Set;
@@ -41,17 +39,6 @@ public class CollectFactory {
      */
     public <K, V> ConcurrentMap<K, V> createMap() {
         return new ConcurrentHashMap<>();
-    }
-
-    /**
-     * Creates a new concurrent cache facility
-     *
-     * @param <K> the key type
-     * @param <V> the value type
-     * @return a ConcurrentMap backed cache for storing values
-     */
-    public <K, V> ConcurrentCache<K, V> createCache() {
-        return ConcurrentCache.create();
     }
 
     public <E> Set<E> createSet() {

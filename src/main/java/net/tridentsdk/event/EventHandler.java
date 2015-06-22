@@ -22,7 +22,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
-import net.tridentsdk.concurrent.ConcurrentCache;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
@@ -34,9 +33,11 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
+import java.util.function.Function;
 
 /**
  * The server's event handler, should only be created once, and only once by the server only
@@ -51,11 +52,11 @@ import java.util.concurrent.PriorityBlockingQueue;
 @ThreadSafe
 public class EventHandler {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, null, 0, null, null, null);
-    public static final Callable<Queue<EventReflector>> CREATE_QUEUE = () ->
+    public static final Function<Class<?>, Queue<EventReflector>> CREATE_QUEUE = (k) ->
             new PriorityBlockingQueue<>(128, COMPARATOR);
 
-    private final ConcurrentCache<Class<? extends Event>, Queue<EventReflector>> callers = ConcurrentCache.create();
-    private final ConcurrentCache<Class<?>, MethodAccess> accessors = ConcurrentCache.create();
+    private final ConcurrentMap<Class<? extends Event>, Queue<EventReflector>> callers = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Class<?>, MethodAccess> accessors = new ConcurrentHashMap<>();
 
     private EventHandler() {
         if (!Trident.isTrident()) {
@@ -89,14 +90,14 @@ public class EventHandler {
         HashMultimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(plugin, listener, c);
 
         for (Class<? extends Event> eventClass : reflectors.keys()) {
-            Queue<EventReflector> eventCallers = callers.retrieve(eventClass, CREATE_QUEUE);
+            Queue<EventReflector> eventCallers = callers.computeIfAbsent(eventClass, CREATE_QUEUE);
             eventCallers.addAll(reflectors.get(eventClass));
         }
     }
 
     private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin, Listener listener,
             final Class<?> c) {
-        MethodAccess access = accessors.retrieve(c, () -> MethodAccess.get(c));
+        MethodAccess access = accessors.computeIfAbsent(c, (k) -> MethodAccess.get(c));
 
         Method[] methods = c.getDeclaredMethods();
 
@@ -133,7 +134,7 @@ public class EventHandler {
      * @param event the event to call
      */
     public void fire(final Event event) {
-        final Queue<EventReflector> listeners = callers.retrieve(event.getClass());
+        final Queue<EventReflector> listeners = callers.get(event.getClass());
         if (listeners == null) return;
 
         final CountDownLatch latch = new CountDownLatch(1);
@@ -159,7 +160,7 @@ public class EventHandler {
      * @param cls the listener class to unregister
      */
     public void unregister(Class<? extends Listener> cls) {
-        for (Map.Entry<Class<? extends Event>, Queue<EventReflector>> entry : this.callers.entries()) {
+        for (Map.Entry<Class<? extends Event>, Queue<EventReflector>> entry : this.callers.entrySet()) {
             for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
                 EventReflector it = iterator.next();
                 if (it.instance().getClass().equals(cls)) {
