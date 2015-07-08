@@ -102,7 +102,7 @@ public final class AccessBridge {
 
     /**
      * Obtains the instance sent of the bridge, blocking if it has not been sent yet
-     *
+     * 
      * @param c the identifier for the sent instance
      * @param <T> the type for the object
      * @return the instance of the object sent over the bridge with the provided identifier
