@@ -21,7 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class IntArrayTag extends NBTTag {
-    int[] value;
+    volatile int[] value;
 
     public IntArrayTag(String name) {
         super(name);

@@ -21,7 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class ShortTag extends NBTTag {
-    short value;
+    volatile short value;
 
     public ShortTag(String name) {
         super(name);

@@ -21,8 +21,8 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public abstract class NBTTag {
-    String name;
-    boolean hasName;
+    volatile String name;
+    volatile boolean hasName;
 
     public NBTTag(String name) {
         if (name != null) {
@@ -33,7 +33,6 @@ public abstract class NBTTag {
             this.name = name;
             this.hasName = true;
         }
-
     }
 
     public <T extends NBTTag> T asType(Class<T> type) {

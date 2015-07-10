@@ -21,7 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class DoubleTag extends NBTTag {
-    double value;
+    volatile double value;
 
     public DoubleTag(String name) {
         super(name);

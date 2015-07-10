@@ -21,7 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class FloatTag extends NBTTag {
-    float value;
+    volatile float value;
 
     public FloatTag(String name) {
         super(name);

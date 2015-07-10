@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class NBTSerializer {
-
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
             TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));

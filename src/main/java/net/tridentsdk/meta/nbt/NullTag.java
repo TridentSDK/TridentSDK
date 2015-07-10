@@ -23,7 +23,6 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class NullTag extends NBTTag {
-
     public NullTag(String name) {
         super(name);
     }
