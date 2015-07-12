@@ -20,17 +20,18 @@ package net.tridentsdk;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
-import net.tridentsdk.docs.PossiblyThreadSafe;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
+
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Represents a point on the coordinate grid of the world
  *
  * @author The TridentSDK Team
  */
-@PossiblyThreadSafe
+@ThreadSafe
 public class Position implements Cloneable {
     private volatile double x;
     private volatile double y;

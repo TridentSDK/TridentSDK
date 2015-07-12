@@ -21,7 +21,7 @@ import com.google.common.base.Objects;
 import net.tridentsdk.Position;
 import net.tridentsdk.world.World;
 
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.Serializable;
 
 /**
@@ -29,13 +29,13 @@ import java.io.Serializable;
  *
  * @author The TridentSDK Team
  */
-@NotThreadSafe
+@ThreadSafe
 public class Vector implements Serializable, Cloneable {
     private static final long serialVersionUID = -7634050835106851288L;
 
-    private double x;
-    private double y;
-    private double z;
+    private volatile double x;
+    private volatile double y;
+    private volatile double z;
 
     /**
      * Creates a default vector with x, y, and z set to (0, 0, 0)
