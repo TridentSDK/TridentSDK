@@ -43,7 +43,7 @@ import java.util.Arrays;
  */
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger {
-    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Houston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " + "this isn't a bug, it's a feature!" };
+    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Houston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me this isn't a bug, it's a feature!" };
 
     private TridentLogger() {
     }
@@ -216,7 +216,10 @@ public final class TridentLogger {
 
         logger.error("======== Printing Stacktrace =========");
         for (StackTraceElement element : stackTrace) {
-            logger.error("    at " + element.getClassName() + "." +
+            String className = element.getClassName();
+            if (className.contains("io.netty")) break;
+
+            logger.error("    at " + className + "." +
                     element.getMethodName() + "(...) : " +
                     (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
         }
