@@ -55,7 +55,7 @@ public class NBTEncoder {
         this.output.writeByte(tag.getInnerType().id());
 
         List<NBTTag> innerTags = tag.listTags();
-        this.output.writeInt(innerTags.size() - 1);
+        this.output.writeInt(innerTags.size());
 
         for (NBTTag inner : innerTags) {
             this.writeTag(inner, false, false);
@@ -95,7 +95,6 @@ public class NBTEncoder {
             case FLOAT:
                 this.output.writeFloat(tag.asType(FloatTag.class).value());
                 break;
-
             case DOUBLE:
                 this.output.writeDouble(tag.asType(DoubleTag.class).value());
                 break;

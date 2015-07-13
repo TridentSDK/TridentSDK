@@ -84,7 +84,6 @@ public class NBTDecoder {
     }
 
     private NBTTag resolveTag(TagType type, boolean withName) throws IOException {
-
         //Reads name if required
         String name = null;
         if (withName) {
