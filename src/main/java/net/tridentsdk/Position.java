@@ -210,9 +210,9 @@ public class Position implements Cloneable {
      * @return the relative location
      */
     public Position add(Vector vector) {
-        this.setX(vector.x());
-        this.setY(vector.y());
-        this.setZ(vector.z());
+        this.setX(x + vector.x());
+        this.setY(y + vector.y());
+        this.setZ(z + vector.z());
 
         return this;
     }
