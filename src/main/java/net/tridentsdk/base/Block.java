@@ -31,14 +31,22 @@ public interface Block {
      *
      * @return the type the tile was set
      */
-    public Substance substance();
+    Substance substance();
 
     /**
      * Sets the substance the tile is made of
      *
      * @param material the substance the tile should be set to
      */
-    public void setSubstance(Substance material);
+    void setSubstance(Substance material);
+
+    /**
+     * Sets the substance the tile is made of and its tile data
+     *
+     * @param material the substance the tile should be set to
+     * @param data the data the tile should be set to
+     */
+    void setSubstanceAndMeta(Substance material, byte data);
 
     /**
      * Returns the Location of the Block
@@ -67,5 +75,5 @@ public interface Block {
      * @param vector the direction to look for the block adjacent to the current
      * @return the block adjacent to the current
      */
-    public Block relativeBlock(Vector vector);
+    Block relativeBlock(Vector vector);
 }
