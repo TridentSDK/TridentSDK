@@ -92,7 +92,7 @@ public final class PlatformColor {
         };
     }
 
-    private static boolean isWindows() {
+    public static boolean isWindows() {
         String os = System.getProperty("os.name");
         return os.toLowerCase().contains("windows");
     }

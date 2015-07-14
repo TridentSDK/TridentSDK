@@ -55,6 +55,26 @@ public final class TridentLogger {
         console.setLayout(new PatternLayout(PATTERN));
         console.setThreshold(Level.INFO);
         console.activateOptions();
+        console.setWriter(new Writer() {
+            BufferedWriter writer = new BufferedWriter(new PrintWriter(System.out));
+
+            @Override
+            public void write(char[] cbuf, int off, int len) throws IOException {
+                String s = "\b\b" + new String(cbuf) + "\n";
+                writer.write(s, 0, s.length());
+                System.out.print("$ ");
+            }
+
+            @Override
+            public void flush() throws IOException {
+                writer.flush();
+            }
+
+            @Override
+            public void close() throws IOException {
+                writer.close();
+            }
+        });
 
         Logger.getRootLogger().addAppender(console);
 
@@ -95,7 +115,7 @@ public final class TridentLogger {
 
                 @Override
                 public void write(char[] cbuf, int off, int len) throws IOException {
-                    String s = new String(cbuf, off, len).replaceAll("[\\W]&&[^\n]", "").trim();
+                    String s = new String(cbuf, off, len).replaceAll("[^a-zA-Z_0-9[^\n]]", "").trim();
                     writer.write(s.toCharArray());
                 }
 
