@@ -30,8 +30,7 @@ import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -90,6 +89,29 @@ public final class TridentLogger {
         fa.setThreshold(Level.DEBUG);
         fa.setAppend(true);
         fa.activateOptions();
+        try {
+            fa.setWriter(new Writer() {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fa.getFile()));
+
+                @Override
+                public void write(char[] cbuf, int off, int len) throws IOException {
+                    String s = new String(cbuf, off, len).replaceAll("[\\W]&&[^\n]", "").trim();
+                    writer.write(s.toCharArray());
+                }
+
+                @Override
+                public void flush() throws IOException {
+                    writer.flush();
+                }
+
+                @Override
+                public void close() throws IOException {
+                    writer.close();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Logger.getRootLogger().addAppender(fa);
     }
