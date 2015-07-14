@@ -29,7 +29,7 @@ public final class PlatformColor {
      * An empty string
      */
     public static final String EMPTY = "";
-    private static final String ESC = String.valueOf((char) 0x1B);
+    public static final String ESC = String.valueOf((char) 0x1B);
 
     private PlatformColor() {
     }
@@ -84,6 +84,12 @@ public final class PlatformColor {
         }
 
         return EMPTY;
+    }
+
+    public static String[] colors() {
+        return new String[]{
+                "reset", "black", "red", "green", "yellow", "blue", "purple", "cyan", "white", "cursoreol2"
+        };
     }
 
     private static boolean isWindows() {
