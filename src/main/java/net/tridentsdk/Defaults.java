@@ -38,10 +38,6 @@ public final class Defaults {
      */
     public static final int MAX_PLAYERS = 10;
     /**
-     * The interval which to clean out chunks
-     */
-    public static final int CHUNK_CLEAN_TICK_INTERVAL = 500;
-    /**
      * The text displayed below the server name in the multiplayer menu
      */
     public static final String MOTD = "Just another Trident server...";
