@@ -42,6 +42,7 @@ import java.util.Map;
 @ThreadSafe
 public final class Trident {
     private static final ExposedSecurity SECURITY = new ExposedSecurity();
+
     private static class ExposedSecurity extends SecurityManager {
         @Override
         protected Class[] getClassContext() {
@@ -91,6 +92,10 @@ public final class Trident {
      */
     public static Path fileContainer() {
         return Paths.get(System.getProperty("user.dir") + File.separator);
+    }
+
+    public static DisplayInfo info() {
+        return server.info();
     }
 
     public static int port() {
