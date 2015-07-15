@@ -30,8 +30,7 @@ import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -90,13 +89,25 @@ public final class TridentLogger {
         fa.setThreshold(Level.DEBUG);
         fa.setAppend(true);
         fa.activateOptions();
-        /* try {
+        try {
             fa.setWriter(new Writer() {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(fa.getFile()));
 
                 @Override
                 public void write(char[] cbuf, int off, int len) throws IOException {
-                    String s = new String(cbuf, off, len).replaceAll("[^a-zA-Z_0-9[^\n]]", "").trim();
+                    String s = new String(cbuf, off, len);
+                    String[] ss = s.split("\n");                   // Prevents losing newlines
+                    for (int i = 0; i < ss.length; i++) {
+                        String sss = ss[i];
+                        ss[i] = sss.replaceAll("\\P{Print}", "")   // Replaces Unicode escapes
+                                .replaceAll("\\[[\\d]{1,2}m", ""); // Replaces colors
+                    }
+                    StringBuilder finalS = new StringBuilder();
+                    for (String sss : ss) {
+                        finalS.append(sss).append("\n");
+                    }
+                    s = finalS.toString();
+
                     writer.write(s.toCharArray());
                 }
 
@@ -112,7 +123,7 @@ public final class TridentLogger {
             });
         } catch (IOException e) {
             e.printStackTrace();
-        } */
+        }
 
         Logger.getRootLogger().addAppender(fa);
     }
