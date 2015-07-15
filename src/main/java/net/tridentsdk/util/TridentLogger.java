@@ -55,6 +55,25 @@ public final class TridentLogger {
         console.setLayout(new PatternLayout(PATTERN));
         console.setThreshold(Level.INFO);
         console.activateOptions();
+        console.setWriter(new Writer() {
+            BufferedWriter writer = new BufferedWriter(new PrintWriter(System.out));
+
+            @Override
+            public void write(char[] cbuf, int off, int len) throws IOException {
+                writer.write(("\r" + new String(cbuf)).toCharArray(), off, len + 1);
+                writer.write("$ ".toCharArray());
+            }
+
+            @Override
+            public void flush() throws IOException {
+                writer.flush();
+            }
+
+            @Override
+            public void close() throws IOException {
+                writer.close();
+            }
+        });
 
         Logger.getRootLogger().addAppender(console);
 
