@@ -475,8 +475,8 @@ public enum Substance {
      * @param id
      * @return
      */
-    public static Substance fromId (byte id) {
-        return ids.get((int) id);
+    public static Substance fromId(int id) {
+        return ids.get(id);
     }
 
     /**
@@ -557,6 +557,7 @@ public enum Substance {
             case RABBIT_STEW:
             case MUTTON:
             case COOKED_MUTTON:
+            case POTION:
                 return true;
             default:
                 return false;
@@ -776,6 +777,27 @@ public enum Substance {
             case JUNGLE_FENCE:
             case DARK_OAK_FENCE:
             case ACACIA_FENCE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Returns whether or not the item is a weapon
+     *
+     * @return {@code true} if it is a weapon
+     */
+    public boolean isWeapon() {
+        if (isBlock()) return false;
+
+        switch (this) {
+            case WOOD_SWORD:
+            case STONE_SWORD:
+            case GOLD_SWORD:
+            case IRON_SWORD:
+            case DIAMOND_SWORD:
+            case BOW:
                 return true;
             default:
                 return false;
