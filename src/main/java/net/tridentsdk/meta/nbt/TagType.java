@@ -21,6 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public enum TagType {
+	
     NULL(-1, NullTag.class),
 
     END(0, null),
@@ -71,4 +72,5 @@ public enum TagType {
     public int getID() {
         return this.id;
     }
+    
 }

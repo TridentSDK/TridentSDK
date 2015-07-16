@@ -34,6 +34,7 @@ public abstract class NBTTag {
             }
             this.name = name;
             this.hasName = true;
+            this.type = type;
         }
     }
 

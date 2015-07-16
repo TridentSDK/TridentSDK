@@ -36,4 +36,5 @@ public class IntTagTest {
         IntTag tag = new IntTag("tag");
         Assert.assertEquals(tag.getType(), TagType.INT);
     }
+    
 }
