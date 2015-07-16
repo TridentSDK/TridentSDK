@@ -28,14 +28,21 @@ public interface PrimeTNT extends FallingBlock {
      *
      * @return the number of ticks until this Primed TNT explodes
      */
-    int fuse();
+    int getExplodeTicks();
+
+    /**
+     * Sets the number of fuse ticks
+     *
+     * @param ticks the number of ticks to set
+     */
+    void getExplodeTicks(int ticks);
 
     /**
      * Obtains the radius of the explosion
      *
      * @return the radius of the explosion
      */
-    int radius();
+    int getRadius();
 
     /**
      * Sets the radius of the explosion
@@ -43,11 +50,4 @@ public interface PrimeTNT extends FallingBlock {
      * @param radius the radius
      */
     void setRadius(int radius);
-
-    /**
-     * Sets the number of fuse ticks
-     *
-     * @param ticks the number of ticks to set
-     */
-    void setFuse(int ticks);
 }

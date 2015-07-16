@@ -48,7 +48,7 @@ public final class BlockSnapshot {
      * @return the snapshot of the tile
      */
     public static BlockSnapshot of(Block block) {
-        return new BlockSnapshot(block.location(), block.substance(), block.meta());
+        return new BlockSnapshot(block.getPosition(), block.getSubstance(), block.getMeta());
     }
 
     @InternalUseOnly
@@ -62,20 +62,20 @@ public final class BlockSnapshot {
      * <p>Does not clear data from this snapshot</p>
      */
     public void load() {
-        Block block = location.world().blockAt(location);
+        Block block = location.getWorld().getBlockAt(location);
         block.setSubstance(material);
         block.setMeta(data);
     }
 
-    public Position position() {
+    public Position getPosition() {
         return location;
     }
 
-    public Substance type() {
+    public Substance getSubstance() {
         return material;
     }
 
-    public byte data() {
+    public byte getData() {
         return data;
     }
 }

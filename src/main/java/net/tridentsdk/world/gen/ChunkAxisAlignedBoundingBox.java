@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
+	
     final int minX;
     final int minZ;
     final int maxX;

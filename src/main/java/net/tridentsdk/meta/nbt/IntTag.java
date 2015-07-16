@@ -21,13 +21,14 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class IntTag extends NBTTag {
+	
     volatile int value;
 
     public IntTag(String name) {
-        super(name);
+        super(name, TagType.INT);
     }
 
-    public int value() {
+    public int getValue() {
         return this.value;
     }
 
@@ -36,11 +37,4 @@ public class IntTag extends NBTTag {
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.INT;
-    }
 }

@@ -44,7 +44,7 @@ public class TridentRunnableTest {
             long interval;
 
             @Override
-            public long interval() {
+            public long getInterval() {
                 return interval;
             }
 
@@ -54,17 +54,17 @@ public class TridentRunnableTest {
             }
 
             @Override
-            public SchedulerType type() {
+            public SchedulerType getType() {
                 return SchedulerType.ASYNC_LATER;
             }
 
             @Override
-            public TridentRunnable runnable() {
+            public TridentRunnable getRunnable() {
                 return runnable;
             }
 
             @Override
-            public TridentPlugin owner() {
+            public TridentPlugin getOwner() {
                 return null;
             }
 
@@ -78,9 +78,9 @@ public class TridentRunnableTest {
             }
         });
         runnable.setInterval(21);
-        Assert.assertEquals(runnable.interval(), 21);
+        Assert.assertEquals(runnable.getInterval(), 21);
         Assert.assertEquals(runnable.id(), 1);
-        Assert.assertEquals(runnable.task(), task);
+        Assert.assertEquals(runnable.getTask(), task);
         runnable.cancel(); // Just for the heck of it
     }
 }

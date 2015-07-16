@@ -31,7 +31,7 @@ public interface ArmorStand extends Equippable {
      *
      * @return this armor stand's slot properties
      */
-    SlotProperties slotProperties();
+    SlotProperties getSlotProperties();
 
     /**
      * Whether or not this Armor Stand is invisible
@@ -45,14 +45,14 @@ public interface ArmorStand extends Equippable {
      *
      * @return whether or not this Armor Stand should display its baseplate
      */
-    boolean displayBaseplate();
+    boolean isBaseplateEnabled();
 
     /**
      * Whether or not this Armor Stand should display its arms
      *
      * @return whether or not this Armor Stand should display its arms
      */
-    boolean displayArms();
+    boolean isArmsEnabled();
 
     /**
      * Whether or not this Armor Stand will fall or not
@@ -68,7 +68,7 @@ public interface ArmorStand extends Equippable {
      * @deprecated Uses magic numbers for indexing, exists until another way is pushed
      */
     @Deprecated
-    PartRotation[] pose();
+    PartRotation[] getPose();
 
     /**
      * Whether or not this Armor Stand is small

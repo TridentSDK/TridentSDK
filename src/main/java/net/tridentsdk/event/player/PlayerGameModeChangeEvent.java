@@ -36,12 +36,12 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellabl
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -50,7 +50,7 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellabl
     }
 
     public GameMode currentGameMode() {
-        return this.player().gameMode();
+        return this.player().getGameMode();
     }
 
     public void setNewGamemode(GameMode gameMode) {

@@ -25,21 +25,21 @@ public class WeatherEventTest {
     @Test
     public void testGetWorld() throws Exception {
         WeatherEvent event = new WeatherEvent(null);
-        Assert.assertEquals(event.world(), null);
+        Assert.assertEquals(event.getWorld(), null);
     }
 
     @Test
     public void testIsIgnored() throws Exception {
         WeatherEvent event = new WeatherEvent(null);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 
     @Test
     public void testCancel() throws Exception {
-        new WeatherEvent(null).cancel(true);
-        new WeatherEvent(null).cancel(false);
+        new WeatherEvent(null).setCancelled(true);
+        new WeatherEvent(null).setCancelled(false);
     }
 }

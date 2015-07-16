@@ -41,22 +41,22 @@ public class Item {
             // The item is clicked on in the inventory
         }
 
-        this.id = mat.id();
+        this.id = mat.getID();
         this.mat = mat;
 
         this.quantity = quantity;
         this.damageValue = (short) 100; // psudeo-value
     }
 
-    public int id() {
+    public int getID() {
         return this.id;
     }
 
-    public Substance type() {
+    public Substance getSubstance() {
         return this.mat;
     }
 
-    public short quantity() {
+    public short getQuantity() {
         return this.quantity;
     }
 
@@ -64,7 +64,7 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public short damageValue() {
+    public short getDamageValue() {
         return this.damageValue;
     }
 
@@ -73,16 +73,6 @@ public class Item {
     }
 
     public boolean isSimilar(Item i) {
-        if (id != i.id) {
-            return false;
-        } else if (mat != i.mat) {
-            return false;
-        } else if (quantity != i.quantity) {
-            return false;
-        } else if (damageValue != i.damageValue) {
-            return false;
-        }
-
-        return true;
+        return !(id != i.id || mat != i.mat || quantity != i.quantity || damageValue != i.damageValue);
     }
 }

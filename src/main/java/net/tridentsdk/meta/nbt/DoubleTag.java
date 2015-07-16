@@ -21,10 +21,11 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class DoubleTag extends NBTTag {
+	
     volatile double value;
 
     public DoubleTag(String name) {
-        super(name);
+        super(name, TagType.DOUBLE);
     }
 
     public double value() {
@@ -36,11 +37,4 @@ public class DoubleTag extends NBTTag {
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.DOUBLE;
-    }
 }

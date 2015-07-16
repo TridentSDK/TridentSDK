@@ -27,7 +27,7 @@ public interface PlayerSpeed {
      *
      * @return float flying speed of the Player
      */
-    float flyingSpeed();
+    float getFlyingSpeed();
 
     /**
      * Set the flying speed of the Player
@@ -41,7 +41,7 @@ public interface PlayerSpeed {
      *
      * @return float the Player's current sneak speed
      */
-    float sneakSpeed();
+    float getSneakSpeed();
 
     /**
      * Sets the Player's sneak speed
@@ -55,7 +55,7 @@ public interface PlayerSpeed {
      *
      * @return float the Player's current walk speed
      */
-    float walkSpeed();
+    float setWalkSpeed();
 
     /**
      * Sets the Player's walk speed

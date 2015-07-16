@@ -32,12 +32,12 @@ public interface SpawnerMinecart extends MinecartBase {
      *
      * @return the type of entity
      */
-    EntityType spawnType();
+    EntityType getSpawnerType();
 
     /**
      * The properties that will be applied when an Entity is spawned by this
      *
      * @return the properties applied
      */
-    EntityProperties appliedProperties();
+    EntityProperties getEntityProperties();
 }

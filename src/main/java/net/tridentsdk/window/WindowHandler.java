@@ -35,7 +35,7 @@ public interface WindowHandler {
      * @param id the ID of a window
      * @return the window with the ID, or {@code null} if it doesn't exist
      */
-    public Window windowBy(int id);
+    public Window getById(int id);
 
     /**
      * Registers the window with the manager
@@ -49,5 +49,5 @@ public interface WindowHandler {
      *
      * @return the windows registered
      */
-    public Collection<Window> windows();
+    public Collection<Window> getWindows();
 }

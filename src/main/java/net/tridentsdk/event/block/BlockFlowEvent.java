@@ -43,7 +43,7 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
      *
      * @return Block where the liquid is flowing too
      */
-    public Block to() {
+    public Block getTo() {
         return this.to;
     }
 
@@ -52,17 +52,17 @@ public class BlockFlowEvent extends BlockEvent implements Cancellable {
      *
      * @return Block where the liquid is flowing from
      */
-    public Block from() {
-        return super.block();
+    public Block getFrom() {
+        return super.getBlock();
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

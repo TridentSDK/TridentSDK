@@ -17,20 +17,18 @@
 
 package net.tridentsdk.entity.traits;
 
-import net.tridentsdk.entity.LivingEntity;
-
 /**
- * Represents a LivingEntity that has an age and has the ability to bread
+ * Represents an Entity that has an age and has the ability to breed.
  *
  * @author TridentSDK Team
  */
-public interface Ageable extends LivingEntity {
+public interface Ageable {
     /**
      * The current age of this entity, in ticks
      *
      * @return the age of this entity
      */
-    int age();
+    int getAge();
 
     /**
      * Set the current age of this entity, in ticks
@@ -44,7 +42,7 @@ public interface Ageable extends LivingEntity {
      * can
      * become "in love"
      *
-     * @return whether or not this entity can be bred
+     * @return Whether or not this entity can be bred.
      */
     boolean canBreed();
 
@@ -52,7 +50,14 @@ public interface Ageable extends LivingEntity {
      * Whether or not this entity is "in love", such that it will actively display the particle effect for breeding
      * hearts and search for a mate
      *
-     * @return whether or not this entity is in love
+     * @return Whether or not this entity is in love.
      */
     boolean isInLove();
+    
+    /**
+     * Sets whether or not this entity is "in love", meaning it can breed.
+     * @param love Whether or not it's ready for some action.
+     */
+    void setInLove(boolean love);
+    
 }

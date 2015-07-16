@@ -24,10 +24,10 @@ public class IntArrayTag extends NBTTag {
     volatile int[] value;
 
     public IntArrayTag(String name) {
-        super(name);
+        super(name, TagType.INT_ARRAY);
     }
 
-    public int[] value() {
+    public int[] getValue() {
         return this.value;
     }
 
@@ -36,11 +36,4 @@ public class IntArrayTag extends NBTTag {
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.INT_ARRAY;
-    }
 }

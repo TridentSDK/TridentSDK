@@ -55,7 +55,7 @@ public enum TagType {
         this.implClass = implClass;
     }
 
-    public static TagType fromId(byte fromId) {
+    public static TagType getById(byte fromId) {
         for (TagType type : TagType.values()) {
             if (type.id == fromId) {
                 return type;
@@ -64,11 +64,11 @@ public enum TagType {
         return NULL;
     }
 
-    public Class<? extends NBTTag> implementation() {
+    public Class<? extends NBTTag> getImplementation() {
         return this.implClass;
     }
 
-    public int id() {
+    public int getID() {
         return this.id;
     }
 }

@@ -49,7 +49,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      *
      * @return Orientation
      */
-    public Orientation direction() {
+    public Orientation getDirection() {
         return this.direction;
     }
 
@@ -78,21 +78,21 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      *
      * @return the block being moved, may be null if air, or retracting from a block without this piston being sticky
      */
-    public Block influencedBlock() {
+    public Block getInfluencedBlock() {
         return this.influenced;
     }
 
     public boolean isSticky() {
-        return this.block().substance() == Substance.PISTON_STICKY_BASE;
+        return this.getBlock().getSubstance() == Substance.PISTON_STICKY_BASE;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

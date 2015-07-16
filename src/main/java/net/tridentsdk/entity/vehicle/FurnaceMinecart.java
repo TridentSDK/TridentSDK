@@ -30,7 +30,7 @@ public interface FurnaceMinecart extends InventoryHolder, MinecartBase {
      *
      * @return the number of fuel ticks
      */
-    int fuelTicks();
+    int getFuelTicks();
 
     /**
      * Set the number of fuel ticks this Furnace Minecart has

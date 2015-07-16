@@ -33,7 +33,7 @@ public class LightningStrikeEvent extends WeatherEvent {
         this.location = location;
     }
 
-    public Position location() {
+    public Position getPosition() {
         return this.location;
     }
 }

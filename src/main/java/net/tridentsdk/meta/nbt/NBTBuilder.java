@@ -21,6 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class NBTBuilder {
+	
     final CompoundTag base;
 
     private NBTBuilder(CompoundTag base) {
@@ -46,5 +47,6 @@ public class NBTBuilder {
     public CompoundTag build() {
         return this.base;
     }
+    
 }
 

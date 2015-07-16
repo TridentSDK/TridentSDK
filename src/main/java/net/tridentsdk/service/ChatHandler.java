@@ -39,7 +39,7 @@ public class ChatHandler {
         }
 
         @Override
-        public void overriden(ChatIdentityFormatter other, TridentPlugin overrider) {
+        public void overridden(ChatIdentityFormatter other, TridentPlugin overrider) {
             TridentLogger.warn("Trident default chat overriden by " + overrider);
         }
     };
@@ -67,7 +67,7 @@ public class ChatHandler {
      * @param plugin the plugin that registers the new provider
      */
     public void setFormatter(ChatIdentityFormatter provider, TridentPlugin plugin) {
-        this.provider.overriden(provider, plugin);
+        this.provider.overridden(provider, plugin);
         this.provider = provider;
     }
 

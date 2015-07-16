@@ -38,9 +38,10 @@ class TransactionAudit {
         }
     }
 
-    public List<Transaction> transactionsFor(int account) {
+    public List<Transaction> getTransactionsByAccount(int account) {
         synchronized (audits) {
             return audits.get(account);
         }
     }
+    
 }

@@ -171,7 +171,7 @@ public class TridentPluginHandler {
                 if (Command.class.isAssignableFrom(cls)) {
                     if (c == null)
                         c = cls.getConstructor();
-                    Handler.forCommands().addCommand(plugin, (Command) (instance == null ? c.newInstance() : instance));
+                    Handler.forCommands().registerCommand(plugin, (Command) (instance == null ? c.newInstance() : instance));
                 }
             }
         } catch (NoSuchMethodException e) {

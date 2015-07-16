@@ -27,27 +27,27 @@ public class NotePlayEventTest {
     @Test
     public void testSetNote() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
-        Assert.assertEquals(event.note().id(), 10);
+        Assert.assertEquals(event.getNote().id(), 10);
 
         event.setNote(new Note(5));
-        Assert.assertEquals(event.note().id(), 5);
+        Assert.assertEquals(event.getNote().id(), 5);
     }
 
     @Test
     public void testSetInstrument() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
-        Assert.assertEquals(event.instrument(), Instrument.BASS_GUITAR);
+        Assert.assertEquals(event.getInstrument(), Instrument.BASS_GUITAR);
 
         event.setInstrument(Instrument.STICKS);
-        Assert.assertEquals(event.instrument(), Instrument.STICKS);
+        Assert.assertEquals(event.getInstrument(), Instrument.STICKS);
     }
 
     @Test
     public void testIsIgnored() throws Exception {
         NotePlayEvent event = new NotePlayEvent(null, null, new Note(10), Instrument.BASS_GUITAR);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 }

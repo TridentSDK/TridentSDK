@@ -25,7 +25,7 @@ public class GameManager {
     private static final Map<Integer, Game> GAMES = Maps.newHashMap();
     private static final Map<WeakEntity<Player>, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
     private static final JsonConfig storage = Factories.configs().
-            createConfig(TridentPlugin.instance(BattleDome.class).configDirectory() + "games.json");
+            createConfig(TridentPlugin.instance(BattleDome.class).getConfigDirectory() + "games.json");
     private static int counter = 0;
 
     private GameManager() {

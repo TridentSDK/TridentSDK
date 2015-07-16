@@ -21,10 +21,12 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public abstract class NBTTag {
+	
     volatile String name;
     volatile boolean hasName;
+    volatile TagType type;
 
-    public NBTTag(String name) {
+    public NBTTag(String name, TagType type) {
         if (name != null) {
             if(name.equals("")) {
                 // a blank name is a null name
@@ -43,9 +45,12 @@ public abstract class NBTTag {
         return this.name;
     }
 
-    public abstract TagType type();
+    public TagType getType() {
+    	return type;
+    }
 
     public boolean hasName() {
         return this.hasName;
     }
+    
 }

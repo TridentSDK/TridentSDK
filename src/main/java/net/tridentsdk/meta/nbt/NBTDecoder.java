@@ -43,7 +43,7 @@ public class NBTDecoder {
     }
 
     public CompoundTag decode(byte b) throws NBTException {
-        TagType initType = TagType.fromId(b);
+        TagType initType = TagType.getById(b);
 
         //NBT source must start with a compound tag or is invalid
         if (initType != TagType.COMPOUND) {
@@ -64,7 +64,7 @@ public class NBTDecoder {
         CompoundTag compound = new CompoundTag(name);
         TagType innerType;
 
-        while ((innerType = TagType.fromId(this.input.readByte())) != TagType.END) {
+        while ((innerType = TagType.getById(this.input.readByte())) != TagType.END) {
             compound.addTag(this.resolveTag(innerType, true));
         }
 
@@ -72,7 +72,7 @@ public class NBTDecoder {
     }
 
     private ListTag resolveListTag(String name) throws IOException {
-        TagType listType = TagType.fromId(this.input.readByte());
+        TagType listType = TagType.getById(this.input.readByte());
         ListTag list = new ListTag(name, listType);
         int length = this.input.readInt();
 

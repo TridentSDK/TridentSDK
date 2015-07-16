@@ -30,12 +30,12 @@ public class BattleListener implements Listener {
     }
 
     public void breakBlock(BlockBreakEvent event) {
-        Substance substance = event.block().substance();
-        Player player = event.player();
+        Substance substance = event.getBlock().getSubstance();
+        Player player = event.getPlayer();
 
         if (substance == Substance.GLASS) {
             player.sendMessage(CommandHandler.ERROR + "You cannot break glass");
-            event.cancel(true);
+            event.setCancelled(true);
         } else if (substance == Substance.OBSIDIAN) {
             Game game = this.manager.findGame(player);
 
@@ -45,19 +45,19 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.FIGHT) {
                 Game.Team team = game.teamOf(player);
-                Position position = event.block().location();
+                Position position = event.getBlock().getPosition();
 
                 if (team == Game.Team.PURPLE) {
                     if (position.equals(game.purpleObby())) {
                         player.sendMessage(CommandHandler.ERROR + "You cannot break your own obsidian");
-                        event.cancel(true);
+                        event.setCancelled(true);
                     } else {
                         game.win(Game.Team.PURPLE);
                     }
                 } else {
                     if (position.equals(game.greenObby())) {
                         player.sendMessage(CommandHandler.ERROR + "You cannot break your own obsidian");
-                        event.cancel(true);
+                        event.setCancelled(true);
                     } else {
                         game.win(Game.Team.GREEN);
                     }
@@ -67,12 +67,12 @@ public class BattleListener implements Listener {
     }
 
     public void putBlock(BlockPlaceEvent event) {
-        Player player = event.player();
-        Substance sub = event.block().substance();
+        Player player = event.getPlayer();
+        Substance sub = event.getBlock().getSubstance();
 
         if (sub == Substance.GLASS) {
             player.sendMessage(CommandHandler.ERROR + "You cannot place glass");
-            event.cancel(true);
+            event.setCancelled(true);
         } else if (sub == Substance.OBSIDIAN) {
             Game game = this.manager.findGame(player);
 
@@ -82,7 +82,7 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.IN_GAME) {
                 Game.Team team = game.teamOf(player);
-                Position location = event.block().location();
+                Position location = event.getBlock().getPosition();
 
                 boolean done;
                 if (team == Game.Team.PURPLE)
@@ -95,7 +95,7 @@ public class BattleListener implements Listener {
                 else {
                     player.sendMessage(
                             CommandHandler.ERROR + "Obsidian already set, removing the one you placed.");
-                    event.cancel(true);
+                    event.setCancelled(true);
                 }
             }
         }
@@ -103,12 +103,12 @@ public class BattleListener implements Listener {
 
     public void interactBlock(PlayerInteractEvent event) {
         Player player = event.player();
-        if (player.heldItem().type() != Substance.BLAZE_ROD)
+        if (player.getHeldItem().getSubstance() != Substance.BLAZE_ROD)
             return;
 
         SetupSession session = sessions.get(player);
         if (session != null) {
-            Position position = event.block().location();
+            Position position = event.block().getPosition();
             Game game = session.game();
             switch (session.stage()) {
                 case SPAWN:
@@ -143,11 +143,11 @@ public class BattleListener implements Listener {
         Game game = manager.findGame(event.player());
         if (game != null) {
             if (game.state() == Game.GameState.STARTING)
-                event.cancel(true);
+                event.setCancelled(true);
             if (game.state() == Game.GameState.LOBBY)
-                event.cancel(true);
+                event.setCancelled(true);
             if (game.state() == Game.GameState.IN_GAME)
-                event.cancel(true);
+                event.setCancelled(true);
         }
     }
 
@@ -155,7 +155,7 @@ public class BattleListener implements Listener {
         Game game = manager.findGame(event.player());
         if (game != null)
             if (game.state() == Game.GameState.STARTING)
-                event.cancel(true);
+                event.setCancelled(true);
     }
 
     private enum SetupStage {

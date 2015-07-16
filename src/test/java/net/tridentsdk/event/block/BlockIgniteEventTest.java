@@ -25,15 +25,15 @@ public class BlockIgniteEventTest {
     @Test
     public void testIsIgnored() throws Exception {
         BlockIgniteEvent event = new BlockIgniteEvent(null, BlockIgniteEvent.Cause.FIRE_SPREAD);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 
     @Test
     public void testGetCause() throws Exception {
         BlockIgniteEvent event = new BlockIgniteEvent(null, BlockIgniteEvent.Cause.FIRE_SPREAD);
-        Assert.assertEquals(event.cause(), BlockIgniteEvent.Cause.FIRE_SPREAD);
+        Assert.assertEquals(event.getCause(), BlockIgniteEvent.Cause.FIRE_SPREAD);
     }
 }

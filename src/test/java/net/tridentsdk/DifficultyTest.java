@@ -32,11 +32,11 @@ public class DifficultyTest {
 
     @Test
     public void testGetDifficulty() throws Exception {
-        Assert.assertEquals(Difficulty.difficultyOf(0), Difficulty.PEACEFUL);
-        Assert.assertEquals(Difficulty.difficultyOf(1), Difficulty.EASY);
-        Assert.assertEquals(Difficulty.difficultyOf(2), Difficulty.NORMAL);
-        Assert.assertEquals(Difficulty.difficultyOf(3), Difficulty.HARD);
+        Assert.assertEquals(Difficulty.getById(0), Difficulty.PEACEFUL);
+        Assert.assertEquals(Difficulty.getById(1), Difficulty.EASY);
+        Assert.assertEquals(Difficulty.getById(2), Difficulty.NORMAL);
+        Assert.assertEquals(Difficulty.getById(3), Difficulty.HARD);
 
-        Assert.assertEquals(Difficulty.difficultyOf(10), Difficulty.NORMAL);
+        Assert.assertEquals(Difficulty.getById(10), Difficulty.NORMAL);
     }
 }

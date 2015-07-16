@@ -38,5 +38,5 @@ public interface Chicken extends Ageable, Peaceful {
      *
      * @return the number of ticks until this Chicken will lay an egg
      */
-    int nextLayInterval();
+    int getNextLayInterval();
 }

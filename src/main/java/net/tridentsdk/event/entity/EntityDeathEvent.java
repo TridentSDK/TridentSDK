@@ -35,14 +35,14 @@ public class EntityDeathEvent extends EntityEvent {
     }
 
     public EntityDamageEvent deathCause() {
-        return this.entity().lastDamageEvent();
+        return this.entity().getLastDamageEvent();
     }
 
     /**
      * Returns a Player if a player was involved in the killing of this entity, else null
      */
     public Player killedByPlayer() {
-        return this.entity().lastPlayerDamager();
+        return this.entity().getLastPlayerDamager();
     }
 
     /**

@@ -34,6 +34,6 @@ public class ByteArrayTagTest {
     @Test
     public void testGetType() throws Exception {
         ByteArrayTag tag = new ByteArrayTag("tag");
-        Assert.assertEquals(tag.type(), TagType.BYTE_ARRAY);
+        Assert.assertEquals(tag.getType(), TagType.BYTE_ARRAY);
     }
 }

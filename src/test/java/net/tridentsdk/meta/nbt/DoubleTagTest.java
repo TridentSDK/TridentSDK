@@ -34,6 +34,6 @@ public class DoubleTagTest {
     @Test
     public void testGetType() throws Exception {
         DoubleTag tag = new DoubleTag("tag");
-        Assert.assertEquals(tag.type(), TagType.DOUBLE);
+        Assert.assertEquals(tag.getType(), TagType.DOUBLE);
     }
 }

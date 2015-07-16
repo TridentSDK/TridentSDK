@@ -32,21 +32,21 @@ public interface World extends Cloneable {
      *
      * @return the name of the world
      */
-    String name();
+    String getName();
 
     /**
      * Gets the chunk on the given location, and generates the chunk if it does not exist.
      *
      * @return The chunk on the given location
      */
-    Chunk chunkAt(ChunkLocation loc, boolean generateIfNotFound);
+    Chunk getChunkAt(ChunkLocation loc, boolean generateIfNotFound);
 
     /**
      * Gets the chunk on the given x and z , and generates the chunk if it does not exist
      *
      * @return The chunk on the given location
      */
-    Chunk chunkAt(int x, int z, boolean generateIfNotFound);
+    Chunk getChunkAt(int x, int z, boolean generateIfNotFound);
 
     /**
      * Generates the chunk on the given location
@@ -67,63 +67,63 @@ public interface World extends Cloneable {
      *
      * @return The block on the given location
      */
-    Block blockAt(Position location);
+    Block getBlockAt(Position location);
 
     /**
      * Gets the dimension of a world
      *
      * @return The dimension of a world
      */
-    Dimension dimension();
+    Dimension getDimension();
 
     /**
      * Gets the difficulty set in a world
      *
      * @return The difficulty set in a world
      */
-    Difficulty difficulty();
+    Difficulty getDifficulty();
 
     /**
      * Gets the default gamemode in a given chunk
      *
      * @return The default gamemode in a given chunk
      */
-    GameMode defaultGamemode();
+    GameMode getDefaultGamemode();
 
     /**
      * Obtains the loading handler which created this object, passed in from the constructor
      *
      * @return the world loader for this world
      */
-    WorldLoader loader();
+    WorldLoader getLoader();
 
     /**
      * Gets the type of a world
      *
      * @return The type of a world
      */
-    LevelType levelType();
+    LevelType getLevelType();
 
     /**
      * Gets the set boolean for the given gamerule
      *
      * @return The set boolean for the given gamerule
      */
-    boolean gameRule(String rule);
+    boolean getGameRule(String rule);
 
     /**
      * Gets the time in a world
      *
      * @return The time in a world
      */
-    long time();
+    long getTime();
 
     /**
      * Gets the spawn location of a world
      *
      * @return The spawn location in a world
      */
-    Position spawnPosition();
+    Position getSpawnPosition();
 
     /**
      * Checks if it is raining in a world
@@ -137,7 +137,7 @@ public interface World extends Cloneable {
      *
      * @return The number of ticks before raining is toggled
      */
-    int rainTime();
+    int getRainTime();
 
     /**
      * Checks if it is thundering in a world
@@ -151,7 +151,7 @@ public interface World extends Cloneable {
      *
      * @return The number of ticks before thundering is toggled
      */
-    int thunderTime();
+    int getThunderTime();
 
     /**
      * Checks if structures are generated in a world (Stronghold, villages, dungeons)
@@ -165,28 +165,28 @@ public interface World extends Cloneable {
      *
      * @return The size of the worldborder
      */
-    double borderSize();
+    double getBorderSize();
 
     /**
      * Gets the location where the worldborder is centered
      *
      * @return The location where the worldborder is centered
      */
-    Position borderCenter();
+    Position getBorderCenter();
 
     /**
      * Gets to what size a border is contracting, 60000000 by default
      *
      * @return To what size a border is contracting, 60000000 by default
      */
-    int borderSizeContraction();
+    int getBorderSizeContraction();
 
     /**
      * Gets the time the border has to contract to the contraction target
      *
      * @return The time the border has to contract to the contraction target
      */
-    int borderSizeContractionTime();
+    int getBorderSizeContractionTime();
 
     /**
      * Spawns an entity in the world
@@ -201,5 +201,5 @@ public interface World extends Cloneable {
      *
      * @return the entities in the world
      */
-    Set<Entity> entities();
+    Set<Entity> getEntities();
 }

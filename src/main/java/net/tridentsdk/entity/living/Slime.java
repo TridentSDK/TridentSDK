@@ -30,5 +30,5 @@ public interface Slime extends Hostile {
      *
      * @return the size of this slime
      */
-    int size();
+    int getSlimeSize();
 }

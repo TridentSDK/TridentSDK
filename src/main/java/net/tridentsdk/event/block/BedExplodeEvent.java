@@ -39,12 +39,12 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -53,7 +53,7 @@ public class BedExplodeEvent extends BlockEvent implements Cancellable {
      *
      * @return Float strength of explosion
      */
-    public float strength() {
+    public float getStrength() {
         return this.strength;
     }
 

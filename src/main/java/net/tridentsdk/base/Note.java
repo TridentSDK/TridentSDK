@@ -36,7 +36,7 @@ public class Note {
         } else if (id < 0) {
             TridentLogger.error(new IllegalArgumentException("Note is too low!"));
         }
-
+        // just noticing, since this is sandwiched between 0 <= id <= 24, a byte can be used instead of a short -- Nick R
         this.id = (short) id;
     }
 
@@ -45,7 +45,7 @@ public class Note {
      */
     public Note sharpen() {
         if ((int) this.id + 1 > 24) {
-            TridentLogger.error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
+            TridentLogger.error(new IllegalArgumentException("Cannot sharpen this note, it is already the maximum"));
         }
         return new Note((int) this.id + 1);
     }
@@ -55,7 +55,7 @@ public class Note {
      */
     public Note flatten() {
         if ((int) this.id - 1 < 0) {
-            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the min"));
+            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the minimum"));
         }
         return new Note((int) this.id - 1);
     }

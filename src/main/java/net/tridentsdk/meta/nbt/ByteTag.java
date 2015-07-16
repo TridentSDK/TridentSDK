@@ -21,10 +21,11 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class ByteTag extends NBTTag {
+	
     volatile byte value;
 
     public ByteTag(String name) {
-        super(name);
+        super(name, TagType.BYTE);
     }
 
     public byte value() {
@@ -40,11 +41,4 @@ public class ByteTag extends NBTTag {
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.BYTE;
-    }
 }

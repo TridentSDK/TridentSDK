@@ -26,17 +26,17 @@ public class BlockOrientationTest {
 
     @Test
     public void testGetDifference() throws Exception {
-        Assert.assertEquals(BlockOrientation.NORTH.difference(), new Vector(0, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH.difference(), new Vector(0, 0, 1));
-        Assert.assertEquals(BlockOrientation.EAST.difference(), new Vector(1, 0, 0));
-        Assert.assertEquals(BlockOrientation.WEST.difference(), new Vector(-1, 0, 0));
-        Assert.assertEquals(BlockOrientation.NORTH_EAST.difference(), new Vector(1, 0, -1));
-        Assert.assertEquals(BlockOrientation.NORTH_WEST.difference(), new Vector(-1, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH_EAST.difference(), new Vector(1, 0, 1));
-        Assert.assertEquals(BlockOrientation.SOUTH_WEST.difference(), new Vector(-1, 0, 1));
-        Assert.assertEquals(BlockOrientation.TOP.difference(), new Vector(0, 1, 0));
-        Assert.assertEquals(BlockOrientation.BOTTOM.difference(), new Vector(0, -1, 0));
-        Assert.assertEquals(BlockOrientation.SELF.difference(), new Vector(0, 0, 0));
+        Assert.assertEquals(BlockOrientation.NORTH.getVector(), new Vector(0, 0, -1));
+        Assert.assertEquals(BlockOrientation.SOUTH.getVector(), new Vector(0, 0, 1));
+        Assert.assertEquals(BlockOrientation.EAST.getVector(), new Vector(1, 0, 0));
+        Assert.assertEquals(BlockOrientation.WEST.getVector(), new Vector(-1, 0, 0));
+        Assert.assertEquals(BlockOrientation.NORTH_EAST.getVector(), new Vector(1, 0, -1));
+        Assert.assertEquals(BlockOrientation.NORTH_WEST.getVector(), new Vector(-1, 0, -1));
+        Assert.assertEquals(BlockOrientation.SOUTH_EAST.getVector(), new Vector(1, 0, 1));
+        Assert.assertEquals(BlockOrientation.SOUTH_WEST.getVector(), new Vector(-1, 0, 1));
+        Assert.assertEquals(BlockOrientation.TOP.getVector(), new Vector(0, 1, 0));
+        Assert.assertEquals(BlockOrientation.BOTTOM.getVector(), new Vector(0, -1, 0));
+        Assert.assertEquals(BlockOrientation.SELF.getVector(), new Vector(0, 0, 0));
     }
 
     @Test

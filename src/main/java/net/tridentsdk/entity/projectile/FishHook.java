@@ -32,7 +32,7 @@ public interface FishHook extends Projectile {
      *
      * @return the chance a fish will be caught on the inject
      */
-    float biteChance();
+    float setBiteChance();
 
     /**
      * Sets the chance the fish will bite the inject

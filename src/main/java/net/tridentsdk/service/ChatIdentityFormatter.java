@@ -67,5 +67,5 @@ public interface ChatIdentityFormatter {
      * @param other the chat provider that is being set
      * @param overrider the plugin that is setting the overrider
      */
-    void overriden(ChatIdentityFormatter other, TridentPlugin overrider);
+    void overridden(ChatIdentityFormatter other, TridentPlugin overrider);
 }

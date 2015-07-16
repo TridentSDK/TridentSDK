@@ -31,5 +31,5 @@ public interface CommandMinecart extends MinecartBase {
      *
      * @return the state of this Minecart's command block
      */
-    BlockSnapshot commandBlockState();
+    BlockSnapshot getCommandBlock();
 }

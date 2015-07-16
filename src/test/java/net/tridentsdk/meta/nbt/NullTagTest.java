@@ -25,6 +25,6 @@ public class NullTagTest {
     @Test
     public void testGetType() throws Exception {
         NullTag tag = new NullTag("tag");
-        Assert.assertEquals(tag.type(), TagType.NULL);
+        Assert.assertEquals(tag.getType(), TagType.NULL);
     }
 }

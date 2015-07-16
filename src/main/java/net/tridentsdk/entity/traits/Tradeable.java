@@ -19,7 +19,7 @@ package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.window.trade.Trade;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Represents an entity that can trade with the Player
@@ -27,10 +27,12 @@ import java.util.Collection;
  * @author TridentSDK Team
  */
 public interface Tradeable {
+	
     /**
      * The trades this entity offers
      *
      * @return the trades offered by this entity
      */
-    Collection<Trade> trades();
+    List<Trade> getTrades();
+    
 }

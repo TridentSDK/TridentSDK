@@ -32,7 +32,7 @@ public class CompoundTag extends NBTTag implements TagContainer {
     final Map<String, NBTTag> tags = Collections.synchronizedMap(new LinkedHashMap<>()); //Hashmap for quick lookup with names
 
     public CompoundTag(String name) {
-        super(name);
+        super(name, TagType.COMPOUND);
     }
 
     public List<NBTTag> listTags() {
@@ -64,11 +64,4 @@ public class CompoundTag extends NBTTag implements TagContainer {
         this.tags.clear();
     }
 
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.COMPOUND;
-    }
 }

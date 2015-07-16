@@ -30,6 +30,7 @@ import net.tridentsdk.event.entity.EntityDamageEvent;
  * @author The TridentSDK Team
  */
 public interface LivingEntity extends Entity, ProjectileLauncher {
+	
     /**
      * Makes the specified entity invisible to the current entity
      *
@@ -53,7 +54,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return double health of the Entity
      */
-    double health();
+    double getHealth();
 
     /**
      * Sets the health of the Entity
@@ -67,7 +68,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return double maximum health of the Entity
      */
-    double maxHealth();
+    double getMaxHealth();
 
     /**
      * Sets the maximum health of the Entity
@@ -83,7 +84,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return long remaining amount of air in ticks
      */
-    long remainingAir();
+    long getRemainingAir();
 
     /**
      * Sets the amount of remaining air for the LivingAir
@@ -98,14 +99,14 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * @return String the display name for the Entity
      */
     @Override
-    String displayName();
+    String getDisplayName();
 
     /**
      * Returns the location of the Entity's eye
      *
      * @return Location the location of the Entity's eye
      */
-    Position headLocation();
+    Position getHeadPosition();
 
     /**
      * Returns if the Entity can pickup items
@@ -121,7 +122,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return EntityDamageEvent the last Entity to inflict this Entity
      */
-    EntityDamageEvent lastDamageEvent();
+    EntityDamageEvent getLastDamageEvent();
 
     /**
      * Returns the player who dealt damage to this Entity since its last full heal
@@ -131,7 +132,7 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * @return Player the player who dealt damage to this entity since last full heal Returns null if no player has
      * damaged the Entity
      */
-    Player lastPlayerDamager();
+    Player getLastPlayerDamager();
 
     /**
      * Checks if the entity has died, or has 0 health. Should only apply to entities that are {@code instanceof} {@link
@@ -147,17 +148,17 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      *
      * @return the AI module that controls this entity
      */
-    AiModule aiModule();
+    AiModule getAI();
 
     /**
      * Overides defaults and previous AI Modules for this entity, assigning a new module to it
      */
-    void setAiModule(AiModule module);
+    void setAI(AiModule module);
 
     /**
      * Gets the path that this entity is currently following
      */
-    Path path();
+    Path getPath();
 
     /**
      * Sets a path for this entity to follow, should only be used in an AiHandler

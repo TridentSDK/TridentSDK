@@ -42,17 +42,17 @@ public interface Server {
      *
      * @return the port the server runs on
      */
-    int port();
+    int getPort();
 
     /**
      * The server's console
      *
      * @return the server console
      */
-    ServerConsole console();
+    ServerConsole getConsole();
 
     /**
-     * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
+     * Closes the server as per the /stop command.
      */
     void shutdown();
 
@@ -61,65 +61,80 @@ public interface Server {
      *
      * @return a Map of all the worlds, where the String is the world name
      */
-    Map<String, World> worlds();
+    Map<String, World> getWorlds();
 
     /**
      * Creates a new world loader, which can use its own generator
      *
-     * <p>The provided class must have a no-arg constructor.</p>
+     * <p><i>The provided class must have a no-arg constructor.</i></p>
      *
      * @param generator the generator to use, a class to defensively protect the signature
-     * @return the new world loader
+     * 
+     * @return The created world loader.
      */
-    WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator);
+    WorldLoader createWorldLoader(Class<? extends AbstractGenerator> generator);
 
     /**
-     * Gets the Internet Address of this server
+     * Gets the InetAddress of this server
      *
-     * @return the address of this server
+     * @return The address of this server given by configuration.
      */
-    InetAddress serverIp();
+    InetAddress getServerIP();
 
     /**
-     * Gets the version of Trident that the server is currently running
+     * Gets the version of Trident that the server is currently running.
      *
-     * @return a String representing the current version of the Trident server that the server is running
+     * @return A String representing the current version of the Trident server that the server is running.
      */
-    String version();
+    String getVersion();
 
     /**
-     * Gets the server's display information on the server list
+     * Gets the server's display information for server list pings.
      *
-     * @return the display information manager
+     * @return The display information manager.
      */
-    DisplayInfo info();
+    DisplayInfo getDisplayInfo();
 
     /**
      * Gets the server's console logger for the this class
      *
-     * @return the server's logger
+     * @return The server's logger.
      */
-    Logger logger();
+    Logger getLogger();
 
     /**
-     * The server configuration file
+     * The server's configuration file.
      *
-     * @return the server config
+     * @return The server's configuration.
      */
-    JsonConfig config();
+    JsonConfig getConfig();
 
     /**
-     * Get the player by UUID
+     * Gets a player with the provided UUID.
      *
-     * @param id the UUID to find the player with
-     * @return the player who has the specified UUID
+     * @param id The UUID corresponding to the desired player.
+     * @return The player who has the specified UUID, or null if not found.
      */
-    Player playerBy(UUID id);
-
-    Collection<Player> onlinePlayers();
+    Player getPlayer(UUID uuid);
 
     /**
-     * Returns the AI handler for the server, determines what AI entities use
+     * Gets a listing of all currently online players.
+     * @return A Collection containing all online players.
      */
-    AiHandler aiHandler();
+    Collection<Player> getOnlinePlayers();
+
+    /**
+     * Gets the AI handler for the server, which determines what AI entities use.
+     * @return The server's AI handler.
+     */
+    AiHandler getAIHandler();
+    
+    /**
+     * Broadcasts a message to all currently online players.
+     * @param message The message to be sent.
+     */
+    default void broadcastMessage(String message) {
+    	getOnlinePlayers().stream().forEach((p) -> p.sendMessage(message));
+    }
+    
 }

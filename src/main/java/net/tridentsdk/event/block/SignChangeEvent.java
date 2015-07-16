@@ -31,13 +31,14 @@ import javax.annotation.concurrent.GuardedBy;
  * @author The TridentSDK Team
  */
 public class SignChangeEvent extends BlockEvent implements Cancellable {
-    private final Player editor;
+	
     @Volatile(policy = "No individual element modify",
             reason = "Not thread safe",
             fix = "Write/Read the entire field ONLY")
     @GuardedBy("this")
     private String[] contents;
     private boolean cancelled;
+    private final Player editor;
 
     public SignChangeEvent(Block block, Player editor, String... contents) {
         super(block);
@@ -46,32 +47,32 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
     /**
-     * Returns the contents of the Sign
+     * Returns the lines of the Sign.
      *
-     * @return String[] contents of the Sign
+     * @return The Sign's text in lines.
      */
-    public String[] contents() {
+    public String[] getLines() {
         synchronized (this) {
             return contents;
         }
     }
 
     /**
-     * Sets the contents of the Sign
+     * Sets the contents of the Sign.
      *
      * @param contents String[] contents of the Sign
      */
-    public void setContents(String... contents) {
+    public void setLines(String... contents) {
         synchronized (this) {
             this.contents = contents;
         }
@@ -83,9 +84,9 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      * @param i line of the Sign
      * @return String text of the specified line
      */
-    public String line(int i) {
+    public String getLine(int i) {
         Preconditions.checkArgument(i >= 0, "Sign line is below 0");
-        Preconditions.checkNotNull(i <= 3, "Sign line is above 3");
+        Preconditions.checkArgument(i <= 3, "Sign line is above 3");
         synchronized (this) {
             return this.contents[i];
         }
@@ -114,7 +115,7 @@ public class SignChangeEvent extends BlockEvent implements Cancellable {
      *
      * @return Player editor of the sign, null if no player
      */
-    public Player editor() {
+    public Player getEditor() {
         return this.editor;
     }
 }

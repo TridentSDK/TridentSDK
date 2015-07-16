@@ -17,9 +17,18 @@
 
 package net.tridentsdk.event;
 
-import com.esotericsoftware.reflectasm.MethodAccess;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
+import java.lang.reflect.Method;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.function.Function;
+
+import javax.annotation.concurrent.ThreadSafe;
+
 import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
@@ -27,17 +36,10 @@ import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.util.TridentLogger;
 
-import javax.annotation.concurrent.ThreadSafe;
-import java.lang.reflect.Method;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.PriorityBlockingQueue;
-import java.util.function.Function;
+import com.esotericsoftware.reflectasm.MethodAccess;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 
 /**
  * The server's event handler, should only be created once, and only once by the server only
@@ -55,8 +57,8 @@ public class EventHandler {
     public static final Function<Class<?>, Queue<EventReflector>> CREATE_QUEUE = (k) ->
             new PriorityBlockingQueue<>(128, COMPARATOR);
 
-    private final ConcurrentMap<Class<? extends Event>, Queue<EventReflector>> callers = new ConcurrentHashMap<>();
-    private final ConcurrentMap<Class<?>, MethodAccess> accessors = new ConcurrentHashMap<>();
+    private final Map<Class<? extends Event>, Queue<EventReflector>> callers = new ConcurrentHashMap<>();
+    private final Map<Class<?>, MethodAccess> accessors = new ConcurrentHashMap<>();
 
     private EventHandler() {
         if (!Trident.isTrident()) {
@@ -87,7 +89,7 @@ public class EventHandler {
     @InternalUseOnly
     public void registerListener(TridentPlugin plugin, Listener listener) {
         final Class<?> c = listener.getClass();
-        HashMultimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(plugin, listener, c);
+        Multimap<Class<? extends Event>, EventReflector> reflectors = reflectorsFrom(plugin, listener, c);
 
         for (Class<? extends Event> eventClass : reflectors.keys()) {
             Queue<EventReflector> eventCallers = callers.computeIfAbsent(eventClass, CREATE_QUEUE);
@@ -95,7 +97,7 @@ public class EventHandler {
         }
     }
 
-    private HashMultimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin, Listener listener,
+    private Multimap<Class<? extends Event>, EventReflector> reflectorsFrom(TridentPlugin plugin, Listener listener,
             final Class<?> c) {
         MethodAccess access = accessors.computeIfAbsent(c, (k) -> MethodAccess.get(c));
 
@@ -163,7 +165,7 @@ public class EventHandler {
         for (Map.Entry<Class<? extends Event>, Queue<EventReflector>> entry : this.callers.entrySet()) {
             for (Iterator<EventReflector> iterator = entry.getValue().iterator(); iterator.hasNext(); ) {
                 EventReflector it = iterator.next();
-                if (it.instance().getClass().equals(cls)) {
+                if (it.getListener().getClass().equals(cls)) {
                     iterator.remove();
                     break;
                 }
@@ -180,7 +182,7 @@ public class EventHandler {
     public Map<Class<? extends Listener>, Listener> listenersFor(TridentPlugin plugin) {
         Map<Class<? extends Listener>, Listener> listeners = Maps.newHashMap();
         for (Queue<EventReflector> reflectors : callers.values()) {
-            reflectors.stream().filter(reflector -> reflector.plugin().equals(plugin)).forEach(reflector -> listeners.put(reflector.instance().getClass(), reflector.instance()));
+            reflectors.stream().filter(reflector -> reflector.getPlugin().equals(plugin)).forEach(reflector -> listeners.put(reflector.getListener().getClass(), reflector.getListener()));
         }
 
         return listeners;

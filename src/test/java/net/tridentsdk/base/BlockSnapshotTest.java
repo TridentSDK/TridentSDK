@@ -30,9 +30,9 @@ public class BlockSnapshotTest {
     {
         World world = Mockito.mock(World.class);
 
-        Mockito.when(world.blockAt(Position.create(world, 0, 0, 0))).thenReturn(Mockito.mock(Block.class));
-        Mockito.when(block.location()).thenReturn(Position.create(world, 0, 0, 0));
-        Mockito.when(block.substance()).thenReturn(substance);
+        Mockito.when(world.getBlockAt(Position.create(world, 0, 0, 0))).thenReturn(Mockito.mock(Block.class));
+        Mockito.when(block.getPosition()).thenReturn(Position.create(world, 0, 0, 0));
+        Mockito.when(block.getSubstance()).thenReturn(substance);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class BlockSnapshotTest {
         block.setMeta((byte) 0x5F);
         BlockSnapshot.of(block).load();
 
-        Assert.assertEquals(block.substance(), Substance.ACACIA_STAIRS);
-        Assert.assertEquals(block.meta(), 0);
+        Assert.assertEquals(block.getSubstance(), Substance.ACACIA_STAIRS);
+        Assert.assertEquals(block.getMeta(), 0);
     }
 }

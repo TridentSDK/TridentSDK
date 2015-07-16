@@ -31,12 +31,12 @@ public interface ItemFrame extends Hanging {
      *
      * @return the current ItemStack this ItemFrame has
      */
-    Item item();
+    Item getItem();
 
     /**
      * Get the rotation of this ItemFrame's ItemStack This is the number of times this has been rotated 45 degrees
      *
      * @return the rotation of this ItemFrame's ItemStack
      */
-    byte itemRotation();
+    byte getRotation();
 }

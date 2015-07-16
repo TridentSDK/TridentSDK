@@ -17,7 +17,7 @@
 
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.Messagable;
+import net.tridentsdk.Messageable;
 
 /**
  * Represents a console which runs the server, can be sent messages and execute commands
@@ -26,7 +26,7 @@ import net.tridentsdk.Messagable;
  *
  * @author The TridentSDK Team
  */
-public interface ServerConsole extends Messagable, CommandIssuer {
+public interface ServerConsole extends Messageable, CommandIssuer {
     public static final String RESET = PlatformColor.forColor("reset");
     public static final String BLACK = PlatformColor.forColor("black");
     public static final String RED = PlatformColor.forColor("red");

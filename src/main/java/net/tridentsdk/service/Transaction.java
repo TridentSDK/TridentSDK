@@ -74,7 +74,7 @@ public abstract class Transaction<S, R> {
      *
      * @return the transacted item
      */
-    public Object item() {
+    public Object getItem() {
         return this.item;
     }
 
@@ -83,7 +83,7 @@ public abstract class Transaction<S, R> {
      *
      * @return the transaction's sender
      */
-    public S sender() {
+    public S getSender() {
         return this.sender;
     }
 
@@ -92,7 +92,7 @@ public abstract class Transaction<S, R> {
      *
      * @return the transaction's receiver
      */
-    public R receiver() {
+    public R getReceiver() {
         return this.receiver;
     }
 
@@ -103,7 +103,7 @@ public abstract class Transaction<S, R> {
      *
      * @return the amount of the transaction
      */
-    public int amount() {
+    public int getAmount() {
         return this.amount.get();
     }
 

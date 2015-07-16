@@ -25,9 +25,9 @@ public class MultiBlockBreakEventTest {
     @Test
     public void testIsIgnored() throws Exception {
         MultiBlockBreakEvent event = new MultiBlockBreakEvent(null);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 }

@@ -21,13 +21,14 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class StringTag extends NBTTag {
+	
     volatile String value;
 
     public StringTag(String name) {
-        super(name);
+        super(name, TagType.STRING);
     }
 
-    public String value() {
+    public String getValue() {
         return this.value;
     }
 
@@ -35,12 +36,5 @@ public class StringTag extends NBTTag {
         this.value = value;
         return this;
     }
-
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.STRING;
-    }
+    
 }

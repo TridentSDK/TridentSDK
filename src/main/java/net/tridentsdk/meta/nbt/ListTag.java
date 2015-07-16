@@ -27,11 +27,12 @@ import java.util.List;
  * @author The TridentSDK Team
  */
 public class ListTag extends NBTTag implements TagContainer {
+	
     final List<NBTTag> tags = Collections.synchronizedList(new ArrayList<>());
     final TagType innerType;
 
     public ListTag(String name, TagType innerType) {
-        super(name);
+        super(name, TagType.LIST);
         this.innerType = innerType;
     }
 
@@ -53,7 +54,7 @@ public class ListTag extends NBTTag implements TagContainer {
 
     @Override
     public void addTag(NBTTag tag) {
-        if (tag.type() == this.innerType) {
+        if (tag.getType() == this.innerType) {
             this.tags.add(tag);
         }
     }
@@ -65,12 +66,5 @@ public class ListTag extends NBTTag implements TagContainer {
     public TagType getInnerType() {
         return this.innerType;
     }
-
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.LIST;
-    }
+    
 }

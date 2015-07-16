@@ -25,21 +25,21 @@ public class BlockRedstoneEventTest {
     @Test
     public void testGetCause() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
-        Assert.assertEquals(event.cause(), BlockRedstoneEvent.Cause.BUTTON);
+        Assert.assertEquals(event.getCause(), BlockRedstoneEvent.Cause.BUTTON);
     }
 
     @Test
     public void testGetStrength() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
-        Assert.assertEquals(event.strength(), 10);
+        Assert.assertEquals(event.getStrength(), 10);
     }
 
     @Test
     public void testIsIgnored() throws Exception {
         BlockRedstoneEvent event = new BlockRedstoneEvent(null, 10, null, BlockRedstoneEvent.Cause.BUTTON);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 }

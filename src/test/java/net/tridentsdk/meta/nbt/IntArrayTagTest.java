@@ -25,20 +25,20 @@ public class IntArrayTagTest {
     @Test
     public void testSetValue() throws Exception {
         IntArrayTag tag = new IntArrayTag("tag");
-        Assert.assertEquals(tag.value(), null);
+        Assert.assertEquals(tag.getValue(), null);
 
         tag.setValue(1, 2, 3, 4, 5);
 
-        Assert.assertEquals(tag.value()[0], 1);
-        Assert.assertEquals(tag.value()[1], 2);
-        Assert.assertEquals(tag.value()[2], 3);
-        Assert.assertEquals(tag.value()[3], 4);
-        Assert.assertEquals(tag.value()[4], 5);
+        Assert.assertEquals(tag.getValue()[0], 1);
+        Assert.assertEquals(tag.getValue()[1], 2);
+        Assert.assertEquals(tag.getValue()[2], 3);
+        Assert.assertEquals(tag.getValue()[3], 4);
+        Assert.assertEquals(tag.getValue()[4], 5);
     }
 
     @Test
     public void testGetType() throws Exception {
         IntArrayTag tag = new IntArrayTag("tag");
-        Assert.assertEquals(tag.type(), TagType.INT_ARRAY);
+        Assert.assertEquals(tag.getType(), TagType.INT_ARRAY);
     }
 }

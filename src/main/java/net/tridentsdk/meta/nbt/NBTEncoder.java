@@ -47,12 +47,12 @@ public class NBTEncoder {
             this.writeTag(inner);
         }
         //Write Tag_End to signify end of Compound
-        this.output.writeByte(TagType.END.id());
+        this.output.writeByte(TagType.END.getID());
     }
 
     private void writeListTag(ListTag tag) throws IOException {
         //Write inner tag-type id
-        this.output.writeByte(tag.getInnerType().id());
+        this.output.writeByte(tag.getInnerType().getID());
 
         List<NBTTag> innerTags = tag.listTags();
         this.output.writeInt(innerTags.size());
@@ -68,32 +68,32 @@ public class NBTEncoder {
 
     private void writeTag(NBTTag tag, boolean name, boolean id) throws IOException {
         if (id) {
-            this.output.writeByte(tag.type().id());
+            this.output.writeByte(tag.getType().getID());
         }
 
         if (tag.hasName() && name) {
             this.writeString(tag.name());
         }
 
-        switch (tag.type()) {
+        switch (tag.getType()) {
             case BYTE:
                 this.output.writeByte((int) tag.asType(ByteTag.class).value());
                 break;
 
             case SHORT:
-                this.output.writeShort((int) tag.asType(ShortTag.class).value());
+                this.output.writeShort((int) tag.asType(ShortTag.class).getValue());
                 break;
 
             case INT:
-                this.output.writeInt(tag.asType(IntTag.class).value());
+                this.output.writeInt(tag.asType(IntTag.class).getValue());
                 break;
 
             case LONG:
-                this.output.writeLong(tag.asType(LongTag.class).value());
+                this.output.writeLong(tag.asType(LongTag.class).getValue());
                 break;
 
             case FLOAT:
-                this.output.writeFloat(tag.asType(FloatTag.class).value());
+                this.output.writeFloat(tag.asType(FloatTag.class).getValue());
                 break;
             case DOUBLE:
                 this.output.writeDouble(tag.asType(DoubleTag.class).value());
@@ -106,7 +106,7 @@ public class NBTEncoder {
                 break;
 
             case STRING:
-                this.writeString(tag.asType(StringTag.class).value());
+                this.writeString(tag.asType(StringTag.class).getValue());
                 break;
 
             case LIST:
@@ -118,7 +118,7 @@ public class NBTEncoder {
                 break;
 
             case INT_ARRAY:
-                int[] iarray = tag.asType(IntArrayTag.class).value();
+                int[] iarray = tag.asType(IntArrayTag.class).getValue();
                 this.output.writeInt(iarray.length);
                 for (int anIarray : iarray) {
                     this.output.writeInt(anIarray);

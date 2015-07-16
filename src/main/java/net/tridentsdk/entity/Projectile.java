@@ -25,6 +25,7 @@ import net.tridentsdk.entity.living.ProjectileLauncher;
  * @author TridentSDK Team
  */
 public interface Projectile extends Entity {
+	
     /**
      * Performs hit action
      */
@@ -35,7 +36,7 @@ public interface Projectile extends Entity {
      *
      * @return gets the source of the projectile
      */
-    ProjectileLauncher launcher();
+    ProjectileLauncher getLauncher();
 
     /**
      * Returns the shooter of the Projectile

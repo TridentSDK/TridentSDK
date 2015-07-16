@@ -15,21 +15,25 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.entity.living;
-
-import net.tridentsdk.entity.types.RabbitType;
-import net.tridentsdk.entity.traits.Neutral;
+package net.tridentsdk;
 
 /**
- * Represents a Rabbit
+ * Implemented to represent an object which messages can be sent to
  *
- * @author TridentSDK Team
+ * @author The TridentSDK Team
  */
-public interface Rabbit extends Neutral {
+public interface Messageable {
     /**
-     * Get the breed of Rabbit that this Rabbit is
+     * Send an array of messages to this recipient
      *
-     * @return the breed of Rabbit this rabbit is
+     * @param messages String[] messages to be sent
      */
-    RabbitType getBreed();
+    void sendRaw(String... messages);
+
+    /**
+     * Gets the last message sent to this Messagable
+     *
+     * @return the last method sent to this messagable
+     */
+    String getLastMessage();
 }

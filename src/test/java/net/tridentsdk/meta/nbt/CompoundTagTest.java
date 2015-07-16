@@ -70,6 +70,6 @@ public class CompoundTagTest {
     @Test
     public void testGetType() throws Exception {
         CompoundTag tag = new CompoundTag("tag");
-        Assert.assertEquals(tag.type(), TagType.COMPOUND);
+        Assert.assertEquals(tag.getType(), TagType.COMPOUND);
     }
 }

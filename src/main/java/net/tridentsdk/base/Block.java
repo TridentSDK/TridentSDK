@@ -31,7 +31,7 @@ public interface Block {
      *
      * @return the type the tile was set
      */
-    Substance substance();
+    Substance getSubstance();
 
     /**
      * Sets the substance the tile is made of
@@ -53,14 +53,14 @@ public interface Block {
      *
      * @return Location of the Block
      */
-    Position location();
+    Position getPosition();
 
     /**
      * Gets the tile data
      *
      * @return the data of the tile
      */
-    byte meta();
+    byte getMeta();
 
     /**
      * Sets the tile data
@@ -75,5 +75,5 @@ public interface Block {
      * @param vector the direction to look for the block adjacent to the current
      * @return the block adjacent to the current
      */
-    Block relativeBlock(Vector vector);
+    Block getBlockRelative(Vector vector);
 }
