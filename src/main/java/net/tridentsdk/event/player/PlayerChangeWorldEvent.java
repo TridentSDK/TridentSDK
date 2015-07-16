@@ -26,6 +26,7 @@ import net.tridentsdk.world.World;
  * @author The TridentSDK Team
  */
 public class PlayerChangeWorldEvent extends PlayerEvent {
+	
     private final World to;
     private final World from;
 
@@ -35,11 +36,12 @@ public class PlayerChangeWorldEvent extends PlayerEvent {
         this.from = from;
     }
 
-    public World to() {
+    public World getTo() {
         return this.to;
     }
 
-    public World from() {
+    public World getFrom() {
         return this.from;
     }
+    
 }

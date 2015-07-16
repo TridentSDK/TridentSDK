@@ -27,6 +27,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
+	
     private boolean cancelled;
 
     private Block block;
@@ -45,7 +46,7 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     /**
      * @return return the interacted block (null means no block was interacted with)
      */
-    public Block block() {
+    public Block getBlock() {
         return this.block;
     }
 
@@ -65,4 +66,5 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

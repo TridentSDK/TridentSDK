@@ -17,6 +17,9 @@
 
 package net.tridentsdk.event.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.tridentsdk.entity.living.Player;
 
 /**
@@ -25,25 +28,22 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class PlayerTabCompleteEvent extends PlayerEvent {
+	
     private final String message;
-    private final String[] suggestions;
+    private final List<String> suggestions = new ArrayList<>();
 
     public PlayerTabCompleteEvent(Player player, String message) {
         super(player);
 
         this.message = message;
-        this.suggestions = new String[] { };
     }
 
-    public String message() {
+    public String getMessage() {
         return this.message;
     }
 
-    public String[] suggestions() {
+    public List<String> getSuggestions() {
         return this.suggestions;
     }
-
-    public void addSuggestion(String suggestion) {
-        this.suggestions[this.suggestions.length] = suggestion;
-    }
+    
 }

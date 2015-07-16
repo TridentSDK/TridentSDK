@@ -26,6 +26,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
+	
     private double feed;
     private boolean cancelled;
 
@@ -34,11 +35,11 @@ public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
         this.feed = feed;
     }
 
-    public double feed() {
+    public double getHunger() {
         return this.feed;
     }
 
-    public void setFeed(double feed) {
+    public void setHunger(double feed) {
         this.feed = feed;
     }
 
@@ -51,4 +52,5 @@ public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

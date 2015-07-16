@@ -27,7 +27,8 @@ import net.tridentsdk.event.Event;
  *
  * @author The TridentSDK Team
  */
-public class PlayerEvent extends Event {
+public abstract class PlayerEvent extends Event {
+	
     private final Player player;
 
     /**
@@ -43,4 +44,5 @@ public class PlayerEvent extends Event {
     public final Player player() {
         return this.player;
     }
+    
 }

@@ -22,7 +22,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.entity.EntityDeathEvent;
 
 /**
- * Called when a player dies
+ * Called when a player dies.
  *
  * @author The TridentSDK Team
  */
@@ -34,7 +34,7 @@ public class PlayerDeathEvent extends EntityDeathEvent {
         super(player);
     }
 
-    public Player player() {
-        return (Player) super.entity();
+    public Player getPlayer() {
+        return (Player) super.getEntity();
     }
 }

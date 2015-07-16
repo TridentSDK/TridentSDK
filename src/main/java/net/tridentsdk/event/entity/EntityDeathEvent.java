@@ -34,27 +34,27 @@ public class EntityDeathEvent extends EntityEvent {
         super(entity);
     }
 
-    public EntityDamageEvent deathCause() {
-        return this.entity().getLastDamageEvent();
+    public EntityDamageEvent getLastDamageEvent() {
+        return this.getEntity().getLastDamageEvent();
     }
 
     /**
      * Returns a Player if a player was involved in the killing of this entity, else null
      */
-    public Player killedByPlayer() {
-        return this.entity().getLastPlayerDamager();
+    public Player getPlayerKiller() {
+        return this.getEntity().getLastPlayerDamager();
     }
 
     /**
      * Returns whether or not a player was involved in the killing of this entity
      */
     public boolean wasKilledByPlayer() {
-        return this.killedByPlayer() == null;
+        return this.getPlayerKiller() == null;
     }
 
     @Override
-    public LivingEntity entity() {
-        return (LivingEntity) super.entity();
+    public LivingEntity getEntity() {
+        return (LivingEntity) super.getEntity();
     }
 }
 

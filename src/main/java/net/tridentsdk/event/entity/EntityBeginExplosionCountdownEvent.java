@@ -20,11 +20,12 @@ package net.tridentsdk.event.entity;
 import net.tridentsdk.entity.Entity;
 
 /**
- * Called when an Entity thinks it's just about time to explode
+ * Called when an Entity thinks it's just about time to explode. #YODO
  *
  * @author The TridentSDK Team
  */
 public class EntityBeginExplosionCountdownEvent extends EntityEvent {
+	
     private int length;
 
     public EntityBeginExplosionCountdownEvent(Entity entity, int length) {
@@ -32,11 +33,12 @@ public class EntityBeginExplosionCountdownEvent extends EntityEvent {
         this.length = length;
     }
 
-    public int length() {
+    public int getLength() {
         return this.length;
     }
 
     public void setLength(int length) {
         this.length = length;
     }
+    
 }

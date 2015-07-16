@@ -25,6 +25,7 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityDamageEntityEvent extends EntityDamageEvent {
+	
     private final Entity damager;
 
     public EntityDamageEntityEvent(Entity entity, Entity damager, double damage, Cause cause) {
@@ -32,7 +33,8 @@ public class EntityDamageEntityEvent extends EntityDamageEvent {
         this.damager = damager;
     }
 
-    public Entity damager() {
+    public Entity getDamager() {
         return this.damager;
     }
+    
 }

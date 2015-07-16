@@ -25,7 +25,9 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityIgniteEvent extends EntityEvent {
+	
     public EntityIgniteEvent(Entity entity) {
         super(entity);
     }
+    
 }

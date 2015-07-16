@@ -25,6 +25,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a player launches a projectile e.g. an arrow or snowball
  */
 public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancellable {
+	
     private final Entity projectile;
     private boolean cancelled;
 
@@ -43,7 +44,8 @@ public class PlayerLaunchProjectileEvent extends PlayerEvent implements Cancella
         this.cancelled = cancelled;
     }
 
-    public Entity projectile() {
+    public Entity getProjectile() {
         return this.projectile;
     }
+    
 }

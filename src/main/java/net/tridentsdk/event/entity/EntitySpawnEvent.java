@@ -43,7 +43,7 @@ public class EntitySpawnEvent extends EntityEvent {
      * @return return the location where the entity was spawned
      */
 
-    public Position location() {
+    public Position getPosition() {
         return this.location;
     }
 

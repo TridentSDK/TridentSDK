@@ -108,7 +108,7 @@ public class BattleListener implements Listener {
 
         SetupSession session = sessions.get(player);
         if (session != null) {
-            Position position = event.block().getPosition();
+            Position position = event.getBlock().getPosition();
             Game game = session.game();
             switch (session.stage()) {
                 case SPAWN:
@@ -131,7 +131,7 @@ public class BattleListener implements Listener {
     }
 
     public void die(PlayerDeathEvent event) {
-        Player player = event.player();
+        Player player = event.getPlayer();
         Game game = manager.findGame(player);
         if (game != null) {
             game.handleDeath(player);
@@ -140,7 +140,7 @@ public class BattleListener implements Listener {
     }
 
     public void damage(PlayerDamageEvent event) {
-        Game game = manager.findGame(event.player());
+        Game game = manager.findGame(event.getPlayer());
         if (game != null) {
             if (game.state() == Game.GameState.STARTING)
                 event.setCancelled(true);

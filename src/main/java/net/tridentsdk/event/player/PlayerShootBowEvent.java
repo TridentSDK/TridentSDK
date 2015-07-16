@@ -27,11 +27,13 @@ import net.tridentsdk.entity.projectile.Arrow;
  * @author The TridentSDK Team
  */
 public class PlayerShootBowEvent extends PlayerLaunchProjectileEvent {
+	
     public PlayerShootBowEvent(Player player, Entity projectile) {
         super(player, projectile);
     }
 
     public Arrow getArrow() {
-        return (Arrow) this.projectile();
+        return (Arrow) this.getProjectile();
     }
+    
 }

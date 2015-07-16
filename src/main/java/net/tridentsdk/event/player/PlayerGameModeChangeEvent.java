@@ -27,11 +27,24 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellable {
+	
     private GameMode gameMode;
     private boolean cancelled;
 
     public PlayerGameModeChangeEvent(Player player, GameMode gameMode) {
         super(player);
+        this.gameMode = gameMode;
+    }
+
+    public GameMode getNewGameMode() {
+        return this.gameMode;
+    }
+
+    public GameMode getCurrentGameMode() {
+        return this.player().getGameMode();
+    }
+
+    public void setNewGamemode(GameMode gameMode) {
         this.gameMode = gameMode;
     }
 
@@ -44,16 +57,5 @@ public class PlayerGameModeChangeEvent extends PlayerEvent implements Cancellabl
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
-
-    public GameMode newGameMode() {
-        return this.gameMode;
-    }
-
-    public GameMode currentGameMode() {
-        return this.player().getGameMode();
-    }
-
-    public void setNewGamemode(GameMode gameMode) {
-        this.gameMode = gameMode;
-    }
+    
 }
