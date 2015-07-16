@@ -28,7 +28,7 @@ public interface DroppedItem extends Entity {
      *
      * @return the age of this Item entity
      */
-    int age();
+    int getAge();
 
     /**
      * Sets the age of this Item entity
@@ -36,25 +36,27 @@ public interface DroppedItem extends Entity {
      * @param age the age to set
      */
     void setAge(int age);
-
-    /**
-     * Represents the health of this Item entity.
-     *
-     * @return the health of this Item entity
-     */
-    short health();
-
-    /**
-     * Sets the health for this Item entity
-     *
-     * @param health the value to set the health to
-     */
-    void setHealth(short health);
+    
+//  Pretty sure Dropped Items don't have health, hm?
+//
+//    /**
+//     * Represents the health of this Item entity.
+//     *
+//     * @return the health of this Item entity
+//     */
+//    short getHealth();
+//
+//    /**
+//     * Sets the health for this Item entity
+//     *
+//     * @param health the value to set the health to
+//     */
+//    void setHealth(short health);
 
     /**
      * Represents the owner of this Item entity
      */
-    String owner();
+    String getOwner();
 
     /**
      * Sets the owner of this Item entity. Nobody else can pickup this Item until 10 seconds are left in its life if

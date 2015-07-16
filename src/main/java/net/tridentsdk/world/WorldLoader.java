@@ -106,5 +106,5 @@ public interface WorldLoader {
      *
      * @return the generation abstraction to generated chunks
      */
-    AbstractGenerator generator();
+    AbstractGenerator getGenerator();
 }

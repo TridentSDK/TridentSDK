@@ -44,15 +44,19 @@ class EventReflector implements Comparator<EventReflector> {
         this.importance = importance;
     }
 
-    public MethodAccess method() {
+    public MethodAccess getMethod() {
         return this.handle;
     }
 
-    public TridentPlugin plugin() {
+    public TridentPlugin getPlugin() {
         return plugin;
     }
 
-    public int index() {
+    public Listener getListener() {
+        return this.instance;
+    }
+
+    public int getIndex() {
         return index;
     }
 
@@ -76,10 +80,6 @@ class EventReflector implements Comparator<EventReflector> {
         }
 
         this.handle.invoke(this.instance, this.index, event);
-    }
-
-    public Listener instance() {
-        return this.instance;
     }
 
     @Override

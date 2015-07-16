@@ -39,19 +39,19 @@ public class PistonExtendEvent extends BlockPistonEvent {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
     /**
      * Returns an ImmutableList of the blocks that are being pushed by this piston, may be empty
      */
-    public List<Block> blocksInfluenced() {
+    public List<Block> getBlocksInfluenced() {
         return this.blocksInfluenced;
     }
 }

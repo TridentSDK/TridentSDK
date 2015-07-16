@@ -40,7 +40,7 @@ public abstract class BlockEvent extends Event {
     /**
      * @return return the block associated with the event
      */
-    public Block block() {
+    public Block getBlock() {
         return this.block;
     }
 }

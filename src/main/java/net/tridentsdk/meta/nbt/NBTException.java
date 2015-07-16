@@ -21,6 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class NBTException extends Exception {
+	
     private static final long serialVersionUID = -1801178872689804597L;
 
     public NBTException(String message) {
@@ -34,4 +35,5 @@ public class NBTException extends Exception {
     public NBTException(Throwable cause) {
         super(cause);
     }
+    
 }

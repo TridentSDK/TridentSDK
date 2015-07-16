@@ -25,7 +25,9 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class PlayerFamishEvent extends PlayerHungerEvent {
+	
     public PlayerFamishEvent(Player player, double feed) {
         super(player, feed);
     }
+    
 }

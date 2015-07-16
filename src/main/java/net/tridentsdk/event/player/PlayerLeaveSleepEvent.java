@@ -27,6 +27,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
+	
     private final Block bed;
     private boolean cancelled;
 
@@ -36,19 +37,20 @@ public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
     /**
      * Gets the bed that the player tried to leave
      */
-    public Block bed() {
+    public Block getBed() {
         return this.bed;
     }
+    
 }

@@ -18,6 +18,7 @@
 package net.tridentsdk.world;
 
 public interface ChunkSnapshot extends Chunk {
+	
     /**
      * Loads the data of the snapshot into the specified chunk
      *
@@ -29,4 +30,5 @@ public interface ChunkSnapshot extends Chunk {
      * Updates the chunk from this snapshot with the data contained in this snapshot
      */
     public void load();
+    
 }

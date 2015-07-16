@@ -35,7 +35,7 @@ public interface Horse extends Tameable, Saddleable, InventoryHolder, Peaceful {
      *
      * @return the HorseType that represents this breed
      */
-    HorseType breed();
+    HorseType getBreed();
 
     /**
      * Whether or not this horse is grazing
@@ -49,7 +49,7 @@ public interface Horse extends Tameable, Saddleable, InventoryHolder, Peaceful {
      *
      * @return the temper of this horse. Range of 0-100
      */
-    int temper();
+    int getTemper();
 
     /**
      * Whether or not this horse has a chest
@@ -63,5 +63,5 @@ public interface Horse extends Tameable, Saddleable, InventoryHolder, Peaceful {
      *
      * @return the variant of this horse
      */
-    HorseVariant variant();
+    HorseVariant getVariant();
 }

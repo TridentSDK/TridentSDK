@@ -31,9 +31,9 @@ public class DimensionTest {
 
     @Test
     public void testGetDimension() throws Exception {
-        Assert.assertEquals(Dimension.dimension(-1), Dimension.NETHER);
-        Assert.assertEquals(Dimension.dimension(0), Dimension.OVERWORLD);
-        Assert.assertEquals(Dimension.dimension(1), Dimension.END);
-        Assert.assertEquals(Dimension.dimension(5), null);
+        Assert.assertEquals(Dimension.getDimension(-1), Dimension.NETHER);
+        Assert.assertEquals(Dimension.getDimension(0), Dimension.OVERWORLD);
+        Assert.assertEquals(Dimension.getDimension(1), Dimension.END);
+        Assert.assertEquals(Dimension.getDimension(5), null);
     }
 }

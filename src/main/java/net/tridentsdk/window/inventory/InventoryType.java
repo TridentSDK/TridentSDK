@@ -23,6 +23,7 @@ package net.tridentsdk.window.inventory;
  * @author The TridentSDK Team
  */
 public enum InventoryType {
+	
     CHEST("minecraft:chest"),
     CRAFTING_TABLE("minecraft:crafting_table"),
     FURNACE("minecraft:furnace"),

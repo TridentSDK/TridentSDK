@@ -25,15 +25,16 @@ public class IntTagTest {
     @Test
     public void testSetValue() throws Exception {
         IntTag tag = new IntTag("tag");
-        Assert.assertEquals(tag.value(), 0);
+        Assert.assertEquals(tag.getValue(), 0);
 
         tag.setValue(10);
-        Assert.assertEquals(tag.value(), 10);
+        Assert.assertEquals(tag.getValue(), 10);
     }
 
     @Test
     public void testGetType() throws Exception {
         IntTag tag = new IntTag("tag");
-        Assert.assertEquals(tag.type(), TagType.INT);
+        Assert.assertEquals(tag.getType(), TagType.INT);
     }
+    
 }

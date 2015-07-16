@@ -26,10 +26,10 @@ public interface Cancellable {
     /**
      * @return return true if event is set to cancelled
      */
-    boolean isIgnored();
+    boolean isCancelled();
 
     /**
      * @param cancel set the cancellation state of the event
      */
-    void cancel(boolean cancel);
+    void setCancelled(boolean cancel);
 }

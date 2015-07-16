@@ -27,6 +27,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
+	
     private final Position fromLoc;
     private final Position toLoc;
     private boolean cancelled;
@@ -43,7 +44,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
      * @return returns the previous player location
      */
 
-    public Position fromLocation() {
+    public Position getFrom() {
         return this.fromLoc;
     }
 
@@ -52,17 +53,18 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
      *
      * @return returns the next player location
      */
-    public Position toLocation() {
+    public Position getTo() {
         return this.toLoc;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

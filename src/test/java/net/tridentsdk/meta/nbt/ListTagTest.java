@@ -65,6 +65,6 @@ public class ListTagTest {
     @Test
     public void testGetType() throws Exception {
         ListTag tag = new ListTag("tag", TagType.INT);
-        Assert.assertEquals(tag.type(), TagType.LIST);
+        Assert.assertEquals(tag.getType(), TagType.LIST);
     }
 }

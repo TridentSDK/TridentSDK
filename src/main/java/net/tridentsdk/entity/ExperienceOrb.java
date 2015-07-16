@@ -23,12 +23,13 @@ package net.tridentsdk.entity;
  * @author TridentSDK Team
  */
 public interface ExperienceOrb extends Entity {
+	
     /**
      * Represents the age of this Experience Orb entity
      *
      * @return the age of this Experience Orb entity
      */
-    int age();
+    int getAge();
 
     /**
      * Sets the age of this Experience Orb entity
@@ -37,17 +38,19 @@ public interface ExperienceOrb extends Entity {
      */
     void setAge(int age);
 
-    /**
-     * Represents the health of this Experience Orb entity.
-     *
-     * @return the health of this Experience Orb entity
-     */
-    short health();
-
-    /**
-     * Sets the health for this Experience Orb entity
-     *
-     * @param health the value to set the health to
-     */
-    void setHealth(short health);
+// 	  I feel as if experience orbs don't have health.
+//  
+//    /**
+//     * Represents the health of this Experience Orb entity.
+//     *
+//     * @return the health of this Experience Orb entity
+//     */
+//    short health();
+//
+//    /**
+//     * Sets the health for this Experience Orb entity
+//     *
+//     * @param health the value to set the health to
+//     */
+//    void setHealth(short health);
 }

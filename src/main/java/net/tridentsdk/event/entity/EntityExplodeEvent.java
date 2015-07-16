@@ -27,19 +27,20 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityExplodeEvent extends EntityEvent {
+	
     private float strength;
 
     public EntityExplodeEvent(Entity entity, float strength) {
-
         super(entity);
         this.strength = strength;
     }
 
-    public float strength() {
+    public float getStrength() {
         return this.strength;
     }
 
     public void setStrength(float strength) {
         this.strength = strength;
     }
+    
 }

@@ -17,8 +17,8 @@ public class PlayerSnapshot {
 
     private PlayerSnapshot(Player player, int gameId) {
         this.gameId = gameId;
-        this.home = player.position();
-        this.uuid = player.uniqueId();
+        this.home = player.getPosition();
+        this.uuid = player.getUniqueId();
     }
 
     public static PlayerSnapshot take(Player player, int gameId) {

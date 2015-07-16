@@ -32,7 +32,13 @@ public interface Sheep extends Ageable, Peaceful {
      *
      * @return the color of this sheep's wool
      */
-    SubstanceColor color();
+    SubstanceColor getColor();
+    
+    /**
+     * Sets the sheep's wool color.
+     * @param color The new color.
+     */
+    void setColor(SubstanceColor color);
 
     /**
      * Whether or not this sheep can be sheared

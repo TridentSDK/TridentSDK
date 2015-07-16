@@ -25,15 +25,15 @@ public class LongTagTest {
     @Test
     public void testSetValue() throws Exception {
         LongTag tag = new LongTag("tag");
-        Assert.assertEquals(tag.value(), 0);
+        Assert.assertEquals(tag.getValue(), 0);
 
         tag.setValue(10);
-        Assert.assertEquals(tag.value(), 10);
+        Assert.assertEquals(tag.getValue(), 10);
     }
 
     @Test
     public void testGetType() throws Exception {
         LongTag tag = new LongTag("tag");
-        Assert.assertEquals(tag.type(), TagType.LONG);
+        Assert.assertEquals(tag.getType(), TagType.LONG);
     }
 }

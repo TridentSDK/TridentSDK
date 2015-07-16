@@ -21,13 +21,14 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class ShortTag extends NBTTag {
-    volatile short value;
+	
+    volatile short value = 0;
 
     public ShortTag(String name) {
-        super(name);
+        super(name, TagType.SHORT);
     }
 
-    public short value() {
+    public short getValue() {
         return this.value;
     }
 
@@ -35,12 +36,5 @@ public class ShortTag extends NBTTag {
         this.value = value;
         return this;
     }
-
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.SHORT;
-    }
+    
 }

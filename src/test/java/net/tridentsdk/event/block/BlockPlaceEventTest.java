@@ -26,15 +26,15 @@ public class BlockPlaceEventTest {
     @Test
     public void testGetFaceClicked() throws Exception {
         BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockOrientation.BOTTOM);
-        Assert.assertEquals(event.faceClicked(), BlockOrientation.BOTTOM);
+        Assert.assertEquals(event.getClickedFace(), BlockOrientation.BOTTOM);
     }
 
     @Test
     public void testIsIgnored() throws Exception {
         BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockOrientation.BOTTOM);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 }

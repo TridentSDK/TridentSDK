@@ -30,14 +30,14 @@ public interface Window {
      *
      * @return the window ID of this window
      */
-    int windowId();
+    int getWindowID();
 
     /**
      * The available slots (not the slots taken up) in this window
      *
      * @return the window slots available
      */
-    int length();
+    int getSize();
 
     /**
      * Finds the item at the specified slot in the window
@@ -45,7 +45,7 @@ public interface Window {
      * @param slot the slot to find the item
      * @return the item at that slot
      */
-    Item itemAt(int slot);
+    Item getItem(int slot);
 
     /**
      * Sets the item at the slot. If the index is outside the bound, the effects are unspecified.
@@ -53,7 +53,7 @@ public interface Window {
      * @param index the index which to set the item at
      * @param value the item to set at the index
      */
-    void setSlot(int index, Item value);
+    void setItem(int index, Item value);
 
     /**
      * Places an item into the player's inventory, where there is room, or drops onto the ground if the inventory is
@@ -61,19 +61,19 @@ public interface Window {
      *
      * @param item the item to place
      */
-    void putItem(Item item);
+    void addItem(Item item);
 
     /**
      * The title of the inventory
      *
      * @return the name displayed at the top of the window
      */
-    String name();
+    String getName();
 
     /**
      * Obtains the contents of the inventory represented by this window
      *
      * @return the items in the window
      */
-    public Item[] items();
+    public Item[] getItems();
 }

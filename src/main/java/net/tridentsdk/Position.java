@@ -92,7 +92,7 @@ public class Position implements Cloneable {
      *
      * @return the x value of this location
      */
-    public double x() {
+    public double getX() {
         return this.x;
     }
 
@@ -110,7 +110,7 @@ public class Position implements Cloneable {
      *
      * @return the y value of this location
      */
-    public double y() {
+    public double getY() {
         return this.y;
     }
 
@@ -128,7 +128,7 @@ public class Position implements Cloneable {
      *
      * @return the z value of this location
      */
-    public double z() {
+    public double getZ() {
         return this.z;
     }
 
@@ -146,16 +146,8 @@ public class Position implements Cloneable {
      *
      * @return the world where the location is
      */
-    public World world() {
+    public World getWorld() {
         return this.world;
-    }
-
-    /**
-     * Chunk of the current position
-     * @return Chunk of the position
-     */
-    public Chunk chunk() {
-        return world().chunkAt((int) x >> 4, (int) z >> 4, true);
     }
 
     /**
@@ -168,11 +160,19 @@ public class Position implements Cloneable {
     }
 
     /**
+     * Chunk of the current position
+     * @return Chunk of the position
+     */
+    public Chunk getChunk() {
+        return getWorld().getChunkAt((int) x >> 4, (int) z >> 4, true);
+    }
+
+    /**
      * The yaw of the location
      *
      * @return the yaw of this location
      */
-    public float yaw() {
+    public float getYaw() {
         return this.yaw;
     }
 
@@ -190,7 +190,7 @@ public class Position implements Cloneable {
      *
      * @return the pitch value of this location
      */
-    public float pitch() {
+    public float getPitch() {
         return this.pitch;
     }
 
@@ -210,9 +210,9 @@ public class Position implements Cloneable {
      * @return the relative location
      */
     public Position add(Vector vector) {
-        this.setX(x + vector.x());
-        this.setY(y + vector.y());
-        this.setZ(z + vector.z());
+        this.setX(x + vector.getX());
+        this.setY(y + vector.getY());
+        this.setZ(z + vector.getZ());
 
         return this;
     }
@@ -224,8 +224,8 @@ public class Position implements Cloneable {
      * @return the relative location
      */
     public Position relative(Vector vector) {
-        return new Position(this.world(), vector.x() + this.x(), vector.y() + this.y(),
-                vector.z() + this.z(), this.yaw(), this.pitch());
+        return new Position(this.getWorld(), vector.getX() + this.getX(), vector.getY() + this.getY(),
+                vector.getZ() + this.getZ(), this.getYaw(), this.getPitch());
     }
 
     /**
@@ -234,7 +234,7 @@ public class Position implements Cloneable {
      * @return the tile occupying the coordinates of this location
      */
     public Block block() {
-        return world().blockAt(this);
+        return getWorld().getBlockAt(this);
     }
 
     /**
@@ -243,7 +243,7 @@ public class Position implements Cloneable {
      * @return New Vector containing this Location's coordinates
      */
     public Vector asVector() {
-        return new Vector(this.x(), this.y(), this.z());
+        return new Vector(this.getX(), this.getY(), this.getZ());
     }
 
     /**
@@ -252,8 +252,8 @@ public class Position implements Cloneable {
      * @param location the location to measure distance with
      * @return distance from this location to another
      */
-    public double distance(Position location) {
-        return Math.sqrt(this.distanceSquared(location));
+    public double getDistanceTo(Position location) {
+        return Math.sqrt(this.getDistanceSquaredTo(location));
     }
 
     /**
@@ -262,12 +262,12 @@ public class Position implements Cloneable {
      * @param location the location to measure distance with
      * @return distance squared from this location to another
      */
-    public double distanceSquared(Position location) {
+    public double getDistanceSquaredTo(Position location) {
         Preconditions.checkNotNull(location, "Location cannot be null.");
-        if (!this.world().equals(location.world()))
+        if (!this.getWorld().equals(location.getWorld()))
             return 0.0;
-        return square(this.x() - location.x()) + square(this.y() - location.y()) +
-                square(this.z() - location.z());
+        return square(this.getX() - location.getX()) + square(this.getY() - location.getY()) +
+                square(this.getZ() - location.getZ());
     }
 
     @Override

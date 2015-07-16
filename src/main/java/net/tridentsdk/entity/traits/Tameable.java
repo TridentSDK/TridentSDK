@@ -38,7 +38,13 @@ public interface Tameable extends Ageable {
      * @return the UUID of the {@link net.tridentsdk.entity.living.Player}Player that owns this entity, {@code null} if
      * untamed
      */
-    UUID owner();
+    UUID getTamer();
+    
+    /**
+     * Sets the tamer of this entity.
+     * @param uuid The UUID of the tamer, or null if setting to untamed.
+     */ 
+    void setTamer(UUID uuid);
 
     /**
      * Whether or not this entity is sitting
@@ -46,4 +52,11 @@ public interface Tameable extends Ageable {
      * @return whether or not this entity is sitting
      */
     boolean isSitting();
+    
+    /**
+     * Sets whether or not this entity is sitting.
+     * @param sitting Whether the entity should sit or not.
+     */
+    void setSitting(boolean sitting);
+    
 }

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class NBTSerializer {
+	
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
             TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
@@ -62,11 +63,11 @@ public final class NBTSerializer {
                 value = tag.getTag(tagName);
             }
 
-            if (value.type() != type) {
+            if (value.getType() != type) {
                 continue;
             }
 
-            switch (value.type()) {
+            switch (value.getType()) {
                 case BYTE:
                     field.set(instance, value.asType(ByteTag.class).value());
                     break;
@@ -89,23 +90,23 @@ public final class NBTSerializer {
                     break;
 
                 case FLOAT:
-                    field.set(instance, value.asType(FloatTag.class).value());
+                    field.set(instance, value.asType(FloatTag.class).getValue());
                     break;
 
                 case INT:
-                    field.set(instance, value.asType(IntTag.class).value());
+                    field.set(instance, value.asType(IntTag.class).getValue());
                     break;
 
                 case INT_ARRAY:
-                    field.set(instance, value.asType(IntArrayTag.class).value());
+                    field.set(instance, value.asType(IntArrayTag.class).getValue());
                     break;
 
                 case LONG:
-                    field.set(instance, value.asType(LongTag.class).value());
+                    field.set(instance, value.asType(LongTag.class).getValue());
                     break;
 
                 case SHORT:
-                    field.set(instance, value.asType(ShortTag.class).value());
+                    field.set(instance, value.asType(ShortTag.class).getValue());
                     break;
 
                 case LIST:
@@ -129,7 +130,7 @@ public final class NBTSerializer {
                     break;
 
                 case STRING:
-                    field.set(instance, value.asType(StringTag.class).value());
+                    field.set(instance, value.asType(StringTag.class).getValue());
                     break;
 
                 case NULL:

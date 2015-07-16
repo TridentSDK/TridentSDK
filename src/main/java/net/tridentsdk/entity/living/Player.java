@@ -18,12 +18,11 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.GameMode;
-import net.tridentsdk.Messagable;
+import net.tridentsdk.Messageable;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.InventoryHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
-import net.tridentsdk.service.PermissionHolder;
 
 import java.util.Locale;
 
@@ -32,7 +31,7 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder, PermissionHolder {
+public interface Player extends LivingEntity, Messageable, CommandIssuer, InventoryHolder {
     // TODO: Use word settings?
 
     /**
@@ -40,21 +39,21 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      *
      * @return the name of the player
      */
-    String name();
+    String getName();
 
     /**
      * Returns the Player's {@link Locale} settings
      *
      * @return Locale the Player's Locale settings
      */
-    Locale locale();
+    Locale getLocale();
 
     /**
      * Returns the GameMode the Player is in
      *
      * @return GameMode current GameMode of the Player
      */
-    GameMode gameMode();
+    GameMode getGameMode();
 
     /**
      * Sets the player's gamemode to the specified gamemode
@@ -66,7 +65,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      *
      * @return the player speed settings
      */
-    PlayerSpeed speedModifiers();
+    PlayerSpeed getSpeedModifiers();
 
     /**
      * Sends the player a message

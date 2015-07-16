@@ -25,6 +25,7 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public abstract class EntityBurnEvent extends EntityEvent {
+	
     private boolean cancelled;
     private int fireTicks;
 
@@ -36,7 +37,7 @@ public abstract class EntityBurnEvent extends EntityEvent {
     /**
      * Gets how long this entity will be on fire for, in ticks
      */
-    public int fireTicks() {
+    public int getFireTicks() {
         return this.fireTicks;
     }
 
@@ -48,12 +49,13 @@ public abstract class EntityBurnEvent extends EntityEvent {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

@@ -26,6 +26,7 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class EntitySaddleEvent extends EntityEvent {
+	
     private final Player player;
     private boolean cancelled;
 
@@ -37,17 +38,18 @@ public class EntitySaddleEvent extends EntityEvent {
     /**
      * Gets the player that saddled this pig
      */
-    public Player player() {
+    public Player getPlayer() {
         return this.player;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

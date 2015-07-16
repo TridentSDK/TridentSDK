@@ -26,6 +26,7 @@ import net.tridentsdk.window.inventory.Item;
  * @author The TridentSDK Team
  */
 public class PlayerConsumeEvent extends PlayerHungerEvent {
+	
     private final Item item;
     private boolean cancelled;
 
@@ -44,31 +45,32 @@ public class PlayerConsumeEvent extends PlayerHungerEvent {
     /**
      * @return return the amount of hunger replenished
      */
-    public double replenishAmount() {
-        return super.feed();
+    public double getReplenishAmount() {
+        return super.getHunger();
     }
 
     /**
      * @param feed the amount of hunger replenished
      */
     public void setReplenishAmount(double feed) {
-        super.setFeed(feed);
+        super.setHunger(feed);
     }
 
     /**
      * @return return the item consumed
      */
-    public Item item() {
+    public Item getItem() {
         return this.item;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

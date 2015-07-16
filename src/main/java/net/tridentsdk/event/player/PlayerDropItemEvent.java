@@ -38,17 +38,18 @@ public class PlayerDropItemEvent extends PlayerEvent implements Cancellable {
     /**
      * @return return the dropped item
      */
-    public Item item() {
+    public Item getItem() {
         return this.item;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

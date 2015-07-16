@@ -30,28 +30,28 @@ public interface Trade {
      *
      * @return Whether or not this trade should reward xp
      */
-    boolean rewardExp();
+    boolean getExpReward();
 
     /**
      * How many times this trade can be fulfilled
      *
      * @return the number of times this trade can be fulfilled
      */
-    int maxUses();
+    int getMaxUses();
 
     /**
      * How many times this trade has been fulfilled
      *
      * @return how many times this trade has been fulfilled
      */
-    int uses();
+    int getUses();
 
     /**
      * The itemstack given as a result of this trade
      *
      * @return the itemstack that is given as a result of fulfilling this trade
      */
-    Item offer();
+    Item getResult();
 
     /**
      * The itemstacks required to be input in order to fulfilled this trade This accepts both implementations of
@@ -59,5 +59,5 @@ public interface Trade {
      *
      * @return the input that will fulfill this trade
      */
-    ItemPair input();
+    ItemPair getInputItems();
 }

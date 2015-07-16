@@ -26,31 +26,31 @@ public class VillagerCareerTest {
 
     @Test
     public void testGetParent() throws Exception {
-        Assert.assertEquals(VillagerCareer.FLETCHER.parent(), VillagerProfession.FARMER);
-        Assert.assertEquals(VillagerCareer.FARMER.parent(), VillagerProfession.FARMER);
-        Assert.assertEquals(VillagerCareer.FISHERMAN.parent(), VillagerProfession.FARMER);
-        Assert.assertEquals(VillagerCareer.SHEPHERD.parent(), VillagerProfession.FARMER);
-        Assert.assertEquals(VillagerCareer.LIBRARIAN.parent(), VillagerProfession.LIBRARIAN);
-        Assert.assertEquals(VillagerCareer.CLERIC.parent(), VillagerProfession.PRIEST);
-        Assert.assertEquals(VillagerCareer.TOOL_SMITH.parent(), VillagerProfession.BLACKSMITH);
-        Assert.assertEquals(VillagerCareer.ARMORER.parent(), VillagerProfession.BLACKSMITH);
-        Assert.assertEquals(VillagerCareer.WEAPON_SMITH.parent(), VillagerProfession.BLACKSMITH);
-        Assert.assertEquals(VillagerCareer.BUTCHER.parent(), VillagerProfession.BUTCHER);
-        Assert.assertEquals(VillagerCareer.LEATHERWORKER.parent(), VillagerProfession.BUTCHER);
+        Assert.assertEquals(VillagerCareer.FLETCHER.getProfession(), VillagerProfession.FARMER);
+        Assert.assertEquals(VillagerCareer.FARMER.getProfession(), VillagerProfession.FARMER);
+        Assert.assertEquals(VillagerCareer.FISHERMAN.getProfession(), VillagerProfession.FARMER);
+        Assert.assertEquals(VillagerCareer.SHEPHERD.getProfession(), VillagerProfession.FARMER);
+        Assert.assertEquals(VillagerCareer.LIBRARIAN.getProfession(), VillagerProfession.LIBRARIAN);
+        Assert.assertEquals(VillagerCareer.CLERIC.getProfession(), VillagerProfession.PRIEST);
+        Assert.assertEquals(VillagerCareer.TOOL_SMITH.getProfession(), VillagerProfession.BLACKSMITH);
+        Assert.assertEquals(VillagerCareer.ARMORER.getProfession(), VillagerProfession.BLACKSMITH);
+        Assert.assertEquals(VillagerCareer.WEAPON_SMITH.getProfession(), VillagerProfession.BLACKSMITH);
+        Assert.assertEquals(VillagerCareer.BUTCHER.getProfession(), VillagerProfession.BUTCHER);
+        Assert.assertEquals(VillagerCareer.LEATHERWORKER.getProfession(), VillagerProfession.BUTCHER);
     }
 
     @Test
     public void testGetId() throws Exception {
-        Assert.assertEquals(VillagerCareer.FLETCHER.id(), 0);
-        Assert.assertEquals(VillagerCareer.FARMER.id(), 1);
-        Assert.assertEquals(VillagerCareer.FISHERMAN.id(), 2);
-        Assert.assertEquals(VillagerCareer.SHEPHERD.id(), 3);
-        Assert.assertEquals(VillagerCareer.LIBRARIAN.id(), 0);
-        Assert.assertEquals(VillagerCareer.CLERIC.id(), 0);
-        Assert.assertEquals(VillagerCareer.TOOL_SMITH.id(), 0);
-        Assert.assertEquals(VillagerCareer.ARMORER.id(), 1);
-        Assert.assertEquals(VillagerCareer.WEAPON_SMITH.id(), 2);
-        Assert.assertEquals(VillagerCareer.BUTCHER.id(), 0);
-        Assert.assertEquals(VillagerCareer.LEATHERWORKER.id(), 1);
+        Assert.assertEquals(VillagerCareer.FLETCHER.asInt(), 0);
+        Assert.assertEquals(VillagerCareer.FARMER.asInt(), 1);
+        Assert.assertEquals(VillagerCareer.FISHERMAN.asInt(), 2);
+        Assert.assertEquals(VillagerCareer.SHEPHERD.asInt(), 3);
+        Assert.assertEquals(VillagerCareer.LIBRARIAN.asInt(), 0);
+        Assert.assertEquals(VillagerCareer.CLERIC.asInt(), 0);
+        Assert.assertEquals(VillagerCareer.TOOL_SMITH.asInt(), 0);
+        Assert.assertEquals(VillagerCareer.ARMORER.asInt(), 1);
+        Assert.assertEquals(VillagerCareer.WEAPON_SMITH.asInt(), 2);
+        Assert.assertEquals(VillagerCareer.BUTCHER.asInt(), 0);
+        Assert.assertEquals(VillagerCareer.LEATHERWORKER.asInt(), 1);
     }
 }

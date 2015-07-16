@@ -23,15 +23,9 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class NullTag extends NBTTag {
+	
     public NullTag(String name) {
-        super(name);
+        super(name, TagType.NULL);
     }
-
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.NULL;
-    }
+    
 }

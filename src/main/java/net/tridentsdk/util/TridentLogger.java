@@ -80,8 +80,8 @@ public final class TridentLogger {
         // We will copy the current log to the logs directory to prevent the file
         // from destroying the text editor if it needs to be opened after a week
         // of continuous errors
-        Path logs = Trident.fileContainer().resolve("logs");
-        Path path = Trident.fileContainer().resolve("trident.log");
+        Path logs = Trident.getWorkingDirectory().resolve("logs");
+        Path path = Trident.getWorkingDirectory().resolve("trident.log");
         try {
             if (Files.exists(path)) {
                 if (!Files.exists(logs))
@@ -281,13 +281,13 @@ public final class TridentLogger {
         logger.error("");
 
         logger.error("========     Server info    =========");
-        logger.error("Trident version: " + Trident.version());
+        logger.error("Trident version: " + Trident.getServer().getVersion());
         logger.error("Plugins:         " + Arrays.toString(
                 Lists.transform(Handler.forPlugins().plugins(), new Function<TridentPlugin, String>() {
                     @Nullable
                     @Override
                     public String apply(TridentPlugin plugin) {
-                        return plugin.description().name();
+                        return plugin.getDescription().name();
                     }
                 }).toArray()));
         logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +

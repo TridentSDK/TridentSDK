@@ -27,7 +27,8 @@ import net.tridentsdk.window.inventory.Item;
  * @author The TridentSDK Team
  */
 public class PlayerFishEvent extends PlayerEvent implements Cancellable {
-    private final State state;
+	
+    private State state;
     private int exp;
     private Item item;
     private boolean cancelled;
@@ -40,20 +41,24 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
-    public State state() {
+    public State getState() {
         return this.state;
     }
+    
+    public void setState(State state) {
+    	this.state = state;
+    }
 
-    public int experience() {
+    public int getExp() {
         return this.exp;
     }
 
@@ -61,7 +66,7 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
         this.exp = exp;
     }
 
-    public Item item() {
+    public Item getItem() {
         return this.item;
     }
 

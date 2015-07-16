@@ -48,12 +48,12 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -62,25 +62,25 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return ItemStack in the player's hand
      */
-    public Item itemInHand() {
+    public Item getItemInHand() {
         return this.itemInHand;
     }
 
     /**
      * Returns the block face clicked to break this block
      *
-     * @return BlockFlace of the clicked block
+     * @return BlockFace of the clicked block
      */
-    public BlockOrientation blockFace() {
+    public BlockOrientation getClickedFace() {
         return this.blockFace;
     }
 
     /**
      * Get the player associated with this event
      *
-     * @return Player assoctaed with this event
+     * @return Player associated with this event
      */
-    public Player player() {
+    public Player getPlayer() {
         return this.player;
     }
 }

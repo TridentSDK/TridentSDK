@@ -38,8 +38,8 @@ public class DisplayInfo {
      *
      * @return a string containing the MOTD of the server, may be empty, never null
      */
-    public String motd() {
-        return Trident.config().getString("motd", Defaults.MOTD);
+    public String getMotd() {
+        return Trident.getServer().getConfig().getString("motd", Defaults.MOTD);
     }
 
     /**
@@ -48,21 +48,21 @@ public class DisplayInfo {
      * @return the file that represents the picture sent to clients when they ping the server
      * @see #motdImage() for the representing the image sent to clients
      */
-    public File motdPicture() {
-        return new File(Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
+    public File getIcon() {
+        return new File(Trident.getServer().getConfig().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
     }
 
     /**
      * Gets the {@link java.awt.image.BufferedImage} that represents the Motd picture sent to clients
      *
      * @return the image sent to clients
-     * @see #motdPicture() for the file itself
+     * @see #getIcon() for the file itself
      */
     public BufferedImage motdImage() {
         BufferedImage img = null;
 
         try {
-            img = ImageIO.read(motdPicture());
+            img = ImageIO.read(getIcon());
         } catch (IOException ex) {
             TridentLogger.error(ex);
         }
@@ -70,7 +70,7 @@ public class DisplayInfo {
         return img;
     }
 
-    public String version() {
+    public String getVersion() {
         return "1.8";
     }
 
@@ -80,13 +80,13 @@ public class DisplayInfo {
      * @param image the image to set it to
      * @return 0 for success, -1 if this feature is disabled in config, -2 for generic failure
      */
-    public int setMotdImage(BufferedImage image) {
-        if (!Trident.config().getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED)) {
+    public int setIcon(BufferedImage image) {
+        if (!Trident.getServer().getConfig().getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED)) {
             return -1;
         }
 
         try {
-            ImageIO.write(image, "PNG", motdPicture());
+            ImageIO.write(image, "PNG", getIcon());
             return 0;
         } catch (IOException ignored) {
         }
@@ -99,11 +99,11 @@ public class DisplayInfo {
      *
      * @return the maximum number of players the server will allow
      */
-    public int maxPlayers() {
-        return Trident.config().getInt("max-players", Defaults.MAX_PLAYERS);
+    public int getMaxPlayers() {
+        return Trident.getServer().getConfig().getInt("max-players", Defaults.MAX_PLAYERS);
     }
 
-    public int playerCount() {
-        return Trident.onlinePlayers().size();
+    public int getPlayerCount() {
+        return Trident.getServer().getOnlinePlayers().size();
     }
 }

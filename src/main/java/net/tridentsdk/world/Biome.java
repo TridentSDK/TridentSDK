@@ -105,15 +105,15 @@ public enum Biome {
         this.id = (byte) id;
     }
 
-    public int id() {
+    public int getID() {
         return id;
     }
 
-    public static Biome fromId(byte id) {
+    public static Biome getById(byte id) {
         return map.get(id);
     }
 
-    public static Biome fromId(int id) {
-        return fromId((byte) id);
+    public static Biome getById(int id) {
+        return getById((byte) id);
     }
 }

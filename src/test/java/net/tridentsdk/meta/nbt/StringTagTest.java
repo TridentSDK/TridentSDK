@@ -25,15 +25,15 @@ public class StringTagTest {
     @Test
     public void testSetValue() throws Exception {
         StringTag tag = new StringTag("tag");
-        Assert.assertEquals(tag.value(), null);
+        Assert.assertEquals(tag.getValue(), null);
 
         tag.setValue("Hello World!");
-        Assert.assertEquals(tag.value(), "Hello World!");
+        Assert.assertEquals(tag.getValue(), "Hello World!");
     }
 
     @Test
     public void testGetType() throws Exception {
         StringTag tag = new StringTag("tag");
-        Assert.assertEquals(tag.type(), TagType.STRING);
+        Assert.assertEquals(tag.getType(), TagType.STRING);
     }
 }

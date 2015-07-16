@@ -36,17 +36,17 @@ public class WeatherEvent extends Event implements Cancellable {
         this.world = world;
     }
 
-    public World world() {
+    public World getWorld() {
         return this.world;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

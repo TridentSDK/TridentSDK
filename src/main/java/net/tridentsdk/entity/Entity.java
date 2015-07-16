@@ -60,21 +60,21 @@ public interface Entity {
      *
      * @return the world that contains the entity
      */
-    World world();
+    World getWorld();
 
     /**
      * The location of the entity with respect to the coordinate grid
      *
      * @return the entity's location
      */
-    Position position();
+    Position getPosition();
 
     /**
      * The direction and movement magnitude of the entity
      *
      * @return the vector representing the entity's velocity
      */
-    Vector velocity();
+    Vector getVelocity();
 
     /**
      * Sets the entity's movement direction and speed to the magnitude of the vector
@@ -89,7 +89,7 @@ public interface Entity {
      * @return {@code true} if the entity touches the ground, {@code false} if it is in the air (such as if it was
      * falling)
      */
-    boolean onGround();
+    boolean isOnGround();
 
     /**
      * Gets the entities that are within proximity to this entity
@@ -97,14 +97,14 @@ public interface Entity {
      * @param radius the spherical radius to look for entities around
      * @return the collection of entities within the radius around the entity
      */
-    Set<Entity> withinRange(double radius);
+    Set<Entity> getNearbyEntities(double radius);
 
     /**
      * Gets the display name for the entity, used on inventories and deaths
      *
      * @return Display name
      */
-    String displayName();
+    String getDisplayName();
 
     /**
      * Sets the entity's display name, effects inventories (if applicable) and death messages
@@ -131,16 +131,16 @@ public interface Entity {
      * The identifier for this entity for runtime, see uniqueId for a set id of the entity
      *
      * @return the id to all entities on the server at runtime
-     * @see net.tridentsdk.entity.Entity#uniqueId()
+     * @see net.tridentsdk.entity.Entity#getUniqueId()
      */
-    int entityId();
+    int getEntityId();
 
     /**
      * The unique id for the entity to the server
      *
      * @return The unique id for the entity
      */
-    UUID uniqueId();
+    UUID getUniqueId();
 
     /**
      * Removes the entity from the world and destroys it, freeing all memory associated with it
@@ -148,11 +148,11 @@ public interface Entity {
     void remove();
 
     /**
-     * Gets the entity that is riding this entity, if there is any
+     * Gets the entity that is riding this entity, if there is any.
      *
-     * @return the entity that is riding, {@code null} if there are none
+     * @return The entity that is riding, or {@code null} if there isn't one.
      */
-    Entity passenger();
+    Entity getPassenger();
 
     /**
      * Mounts the specified entity on this entity
@@ -171,7 +171,7 @@ public interface Entity {
      *
      * @return the entity type that is represented
      */
-    EntityType type();
+    EntityType getType();
 
     /**
      * Sets the properties of this entity to the specified properties

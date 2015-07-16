@@ -28,6 +28,7 @@ import net.tridentsdk.event.Cancellable;
  * @author The TridentSDK Team
  */
 public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
+	
     private final LivingEntity sheared;
     private DroppedItem drop;
     private boolean cancelled;
@@ -41,14 +42,14 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     /**
      * Gets the entity that was sheared
      */
-    public LivingEntity sheared() {
+    public LivingEntity getEntity() {
         return this.sheared;
     }
 
     /**
      * Gets the item that shearing this entity will drop
      */
-    public DroppedItem drop() {
+    public DroppedItem getDrops() {
         return this.drop;
     }
 
@@ -60,12 +61,12 @@ public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

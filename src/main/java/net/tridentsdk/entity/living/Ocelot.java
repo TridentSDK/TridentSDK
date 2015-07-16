@@ -32,5 +32,5 @@ public interface Ocelot extends Tameable, Peaceful {
      *
      * @return the breed of this ocelot
      */
-    OcelotType breed();
+    OcelotType getBreed();
 }

@@ -15,25 +15,30 @@
  * limitations under the License.
  */
 
-package net.tridentsdk;
+package net.tridentsdk.permission;
 
 /**
- * Implemented to represent an object which messages can be sent to
- *
- * @author The TridentSDK Team
+ * An interface describing an object that can be a server operator.
+ * Typical examples include Players and the Console.
+ * 
+ * @author Nick Robson
  */
-public interface Messagable {
-    /**
-     * Send an array of messages to this recipient
-     *
-     * @param messages String[] messages to be sent
-     */
-    void sendRaw(String... messages);
+public interface ServerOperator {
 
     /**
-     * Gets the last message sent to this Messagable
+     * Gets whether or not this user has operator permissions, will be true for console and players that are
+     * operators.
      *
-     * @return the last method sent to this messagable
+     * @return If this user is an operator or the console
      */
-    String lastMessage();
+    boolean isOperator();
+    
+    /**
+     * [[HAZARD]]
+     * 
+     * Sets whether or not this user is an operator.
+     * @param op Whether or not they should be.
+     */
+    void setOperator(boolean op);
+
 }

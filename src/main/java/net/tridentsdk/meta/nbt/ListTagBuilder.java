@@ -21,6 +21,7 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class ListTagBuilder<B> {
+	
     private final TagContainer parent;
     private final ListTag current;
     private final B parentBuilder;
@@ -99,4 +100,5 @@ public class ListTagBuilder<B> {
 
         return this;
     }
+    
 }

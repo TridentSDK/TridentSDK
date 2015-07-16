@@ -26,17 +26,25 @@ import net.tridentsdk.entity.Entity;
  * @author TridentSDK Team
  */
 public interface FallingBlock extends Entity {
+	
     /**
      * The state this FallingBlock represents
      *
-     * @return the BlockState of this falling block
+     * @return The BlockSnapshot of this falling block
      */
-    BlockSnapshot blockSnapshot();
+    BlockSnapshot getSnapshot();
 
     /**
      * Whether or not this FallingBlock should drop when it breaks
      *
-     * @return whether or not this FallingBlock should drop its item when it breaks
+     * @return Whether or not this FallingBlock will drop its item when it breaks
      */
     boolean shouldDrop();
+    
+    /**
+     * Sets whether or not this FallingBlock should drop the block when broken.
+     * @param drop Whether or not to drop the item.
+     */
+    void setShouldDrop(boolean drop);
+    
 }

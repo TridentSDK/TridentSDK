@@ -26,6 +26,7 @@ import javax.annotation.concurrent.ThreadSafe;
 @AccessNoDoc
 @ThreadSafe
 final class GsonFactory {
+	
     private static final GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
     private static final Gson gson = builder.create();
 
@@ -35,4 +36,5 @@ final class GsonFactory {
     protected static Gson gson() {
         return gson;
     }
+    
 }

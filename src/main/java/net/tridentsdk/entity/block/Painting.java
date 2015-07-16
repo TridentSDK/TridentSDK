@@ -25,10 +25,12 @@ import net.tridentsdk.entity.Hanging;
  * @author TridentSDK Team
  */
 public interface Painting extends Hanging {
+	
     /**
-     * Get the motive of this Painting
+     * Get the art of this Painting
      *
-     * @return the name of this Painting's motive
+     * @return the name of this Painting's art
      */
-    String motive();
+    String getArt();
+    
 }

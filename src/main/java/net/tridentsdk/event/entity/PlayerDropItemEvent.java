@@ -29,6 +29,7 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class PlayerDropItemEvent extends EntitySpawnEvent {
+	
     private final Player player;
 
     public PlayerDropItemEvent(Entity item, Position location, Player player) {
@@ -37,15 +38,16 @@ public class PlayerDropItemEvent extends EntitySpawnEvent {
         this.player = player;
     }
 
-    public Player player() {
+    public Player getPlayer() {
         return this.player;
     }
 
-    public DroppedItem item() {
-        return (DroppedItem) super.entity();
+    public DroppedItem getItem() {
+        return (DroppedItem) super.getEntity();
     }
 
     public void setItem(Entity item) {
         super.setEntity(item);
     }
+    
 }

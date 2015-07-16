@@ -66,7 +66,7 @@ public enum HorseType {
         return id < 0 || id > 4 ? null : byId[id];
     }
 
-    public int id() {
+    public int asInt() {
         return id;
     }
 }

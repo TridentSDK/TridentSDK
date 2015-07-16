@@ -26,6 +26,7 @@ import net.tridentsdk.entity.LivingEntity;
  * @author The TridentSDK Team
  */
 public class EntityDamageEvent extends EntityEvent {
+	
     private final Cause cause;
     private boolean cancelled;
     private double damage;
@@ -41,7 +42,7 @@ public class EntityDamageEvent extends EntityEvent {
         this.cause = cause;
     }
 
-    public Cause cause() {
+    public Cause getCause() {
         return this.cause;
     }
 
@@ -49,7 +50,7 @@ public class EntityDamageEvent extends EntityEvent {
      * @return return the amount of damage dealt
      */
 
-    public double damage() {
+    public double getDamage() {
         return this.damage;
     }
 
@@ -64,17 +65,17 @@ public class EntityDamageEvent extends EntityEvent {
     }
 
     @Override
-    public LivingEntity entity() {
-        return (LivingEntity) super.entity();
+    public LivingEntity getEntity() {
+        return (LivingEntity) super.getEntity();
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -101,4 +102,5 @@ public class EntityDamageEvent extends EntityEvent {
         WITHER,
         VOID
     }
+    
 }

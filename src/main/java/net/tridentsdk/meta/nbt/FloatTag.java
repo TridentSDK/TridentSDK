@@ -21,13 +21,14 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class FloatTag extends NBTTag {
-    volatile float value;
+	
+    volatile float value = 0;
 
     public FloatTag(String name) {
-        super(name);
+        super(name, TagType.FLOAT);
     }
 
-    public float value() {
+    public float getValue() {
         return this.value;
     }
 
@@ -36,11 +37,4 @@ public class FloatTag extends NBTTag {
         return this;
     }
 
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.FLOAT;
-    }
 }

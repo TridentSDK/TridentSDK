@@ -17,31 +17,28 @@
 
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.Messagable;
+import net.tridentsdk.Messageable;
+import net.tridentsdk.permission.ServerOperator;
+import net.tridentsdk.permission.Permissible;
 
 /**
- * A server entity which can execute commands, which can be players or the console
+ * A server entity which can execute commands, which can be players or the console.
  *
  * @author The TridentSDK Team
  */
-public interface CommandIssuer extends Messagable {
+public interface CommandIssuer extends Messageable, Permissible, ServerOperator {
+	
     /**
-     * Issues a command from this sender, forcing them to run it
+     * Issues a command from this sender, forcing them to run it.
+     * @param command The command to be sent.
      */
-    void invokeCommand(String message);
+    void runCommand(String command);
 
     /**
-     * Gets the last command executed by this CommandIssuer, without the preceding "/"
+     * Gets the last command executed by this CommandIssuer, without the preceding '/'.
      *
-     * @return the last command executed by commandissuer
+     * @return The last command executed by the sender.
      */
-    String lastCommand();
-
-    /**
-     * Gets whether or not this sender has operator permissions, will be true for console and players that are
-     * operators.
-     *
-     * @return if this player is an operator, or if the sender was console
-     */
-    boolean isOperator();
+    String getLastCommand();
+    
 }

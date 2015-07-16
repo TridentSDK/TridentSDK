@@ -27,6 +27,7 @@ import net.tridentsdk.event.entity.EntityDamageEvent;
  * @author The TridentSDK Team
  */
 public class PlayerDamageEvent extends EntityDamageEvent {
+	
     /**
      * @param player the player associated with this event
      * @param damage the amount of damage dealt to the player
@@ -35,7 +36,8 @@ public class PlayerDamageEvent extends EntityDamageEvent {
         super(player, damage, cause);
     }
 
-    public Player player() {
-        return (Player) super.entity();
+    public Player getPlayer() {
+        return (Player) super.getEntity();
     }
+    
 }

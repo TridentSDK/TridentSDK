@@ -33,7 +33,7 @@ public interface Chunk {
      *
      * @return the entities
      */
-    Set<Entity> entities();
+    Set<Entity> getEntities();
 
     /**
      * Generates the chunk
@@ -45,28 +45,28 @@ public interface Chunk {
      *
      * @return the chunk's location
      */
-    ChunkLocation location();
+    ChunkLocation getLocation();
 
     /**
-     * Shortcut for: {@code location().x()}
+     * Shortcut for: {@code getLocation().getX()}
      *
      * @return the chunk's x coordinate
      */
-    int x();
+    int getX();
 
     /**
-     * Shortcut for: {@code location().z()}
+     * Shortcut for: {@code getLocation().getZ()}
      *
      * @return the chunk's z coordinate
      */
-    int z();
+    int getZ();
 
     /**
      * The world which contains this chunk
      *
      * @return the containing world
      */
-    World world();
+    World getWorld();
 
     /**
      * Obtains a block relative to the chunk
@@ -76,14 +76,14 @@ public interface Chunk {
      * @param relZ the relative z 0-15
      * @return the block at that coordinate
      */
-    Block blockAt(int relX, int y, int relZ);
+    Block getBlockAt(int relX, int y, int relZ);
 
     /**
      * Obtains a snapshot of the state of the chunk
      *
      * @return the chunk's frozen state which can be restored
      */
-    ChunkSnapshot snapshot();
+    ChunkSnapshot getSnapshot();
 
     /**
      * Unloads the chunk

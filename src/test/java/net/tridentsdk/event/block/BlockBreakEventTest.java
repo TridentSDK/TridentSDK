@@ -28,17 +28,17 @@ public class BlockBreakEventTest {
     @Test
     public void testIsIgnored() throws Exception {
         BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM, null);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 
     @Test
     public void testGetItemInHand() throws Exception {
         BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM,
                 new Item(Substance.STICK, (short) 10));
-        if (!event.itemInHand().isSimilar(new Item(Substance.STICK, (short) 10))) {
+        if (!event.getItemInHand().isSimilar(new Item(Substance.STICK, (short) 10))) {
             Assert.fail();
         }
     }
@@ -46,6 +46,6 @@ public class BlockBreakEventTest {
     @Test
     public void testGetBlockFace() throws Exception {
         BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM, null);
-        Assert.assertEquals(event.blockFace(), BlockOrientation.BOTTOM);
+        Assert.assertEquals(event.getClickedFace(), BlockOrientation.BOTTOM);
     }
 }

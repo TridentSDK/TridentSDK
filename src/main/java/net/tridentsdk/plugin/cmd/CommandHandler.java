@@ -17,8 +17,11 @@
 
 package net.tridentsdk.plugin.cmd;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
@@ -28,9 +31,9 @@ import net.tridentsdk.plugin.TridentPlugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * Handles commands passed from the server
@@ -77,7 +80,7 @@ public class CommandHandler {
         if (!cmdData.isEmpty()) {
             Handler.forPlugins().executor().addTask(() -> {
                 for (CommandData data : cmdData) {
-                    handleCommand(data.command(), issuer, args, contents);
+                    handleCommand(data.getCommand(), issuer, args, contents);
                 }
             });
         } else {
@@ -112,7 +115,7 @@ public class CommandHandler {
         cmd.handle(issuer, args, contents[0]);
     }
 
-    public int addCommand(TridentPlugin plugin, Command command) throws
+    public int registerCommand(TridentPlugin plugin, Command command) throws
             PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
@@ -137,9 +140,9 @@ public class CommandHandler {
         CommandData newData = new CommandData(name, priority, aliases, permission, command, plugin);
 
         if (data != null) {
-            if (COMMANDS.get(lowerCase).priority() > priority) {
+            if (COMMANDS.get(lowerCase).getPriority() > priority) {
                 // put the new, more important cmd in place and notify the old cmd that it has been overridden
-                COMMANDS.put(lowerCase, newData).command().notifyOverriden();
+                COMMANDS.put(lowerCase, newData).getCommand().notifyOverriden();
             } else {
                 // don't register this cmd and notify it has been overridden
                 command.notifyOverriden();
@@ -152,35 +155,34 @@ public class CommandHandler {
         return 0;
     }
 
-    public void removeCommand(Class<? extends Command> cls) {
-        COMMANDS.entrySet().stream().filter(e -> e.getValue().command().getClass().equals(cls)).forEach(e -> COMMANDS.remove(e.getKey()));
+    public void unregisterCommand(Class<? extends Command> cls) {
+        COMMANDS.entrySet().stream().filter(e -> e.getValue().getCommand().getClass().equals(cls)).forEach(e -> COMMANDS.remove(e.getKey()));
     }
 
-    public Map<Class<? extends Command>, Command> commandsFor(TridentPlugin plugin) {
+    public Map<Class<? extends Command>, Command> getCommands(TridentPlugin plugin) {
         Map<Class<? extends Command>, Command> map = Maps.newHashMap();
-        COMMANDS.values().stream().filter(data -> data.plugin().equals(plugin)).forEach(data -> map.put(data.encapsulated.getClass(), data.encapsulated));
+        COMMANDS.values().stream().filter(data -> data.getPlugin().equals(plugin)).forEach(data -> map.put(data.encapsulated.getClass(), data.encapsulated));
         return map;
     }
 
     private static class CommandData {
+    	
+        private final List<String> aliases;
         private final String permission;
-        private final int priority;
-        private final String[] aliases;
-        private final String name;
         private final Command encapsulated;
         private final TridentPlugin plugin;
+        private final int priority;
 
         public CommandData(String name, int priority, String[] aliases, String permission, Command command,
                 TridentPlugin plugin) {
-            this.priority = priority;
-            this.name = name;
-            this.aliases = aliases;
+            this.aliases = Lists.asList(name, aliases);
             this.permission = permission;
             this.encapsulated = command;
             this.plugin = plugin;
+            this.priority = priority;
         }
 
-        public Command command() {
+        public Command getCommand() {
             return this.encapsulated;
         }
 
@@ -193,12 +195,18 @@ public class CommandHandler {
             return false;
         }
 
-        public int priority() {
+        public int getPriority() {
             return this.priority;
         }
 
-        public TridentPlugin plugin() {
+        public TridentPlugin getPlugin() {
             return plugin;
         }
+        
+        public String getPermission() {
+        	return permission;
+        }
+        
     }
+    
 }

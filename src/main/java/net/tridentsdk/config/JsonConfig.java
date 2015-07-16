@@ -65,7 +65,7 @@ public class JsonConfig extends ConfigSection {
      *
      * @return the path where this configuration is stored
      */
-    public Path path() {
+    public Path getPath() {
         return path;
     }
 
@@ -85,12 +85,12 @@ public class JsonConfig extends ConfigSection {
     }
 
     @Override
-    public JsonConfig rootSection() {
+    public JsonConfig getRootSection() {
         return this;
     }
 
     @Override
-    public JsonConfig parentSection() {
+    public JsonConfig getParentSection() {
         return this;
     }
 
@@ -110,4 +110,5 @@ public class JsonConfig extends ConfigSection {
             jsonHandle = object;
         }
     }
+    
 }

@@ -21,13 +21,14 @@ package net.tridentsdk.meta.nbt;
  * @author The TridentSDK Team
  */
 public class LongTag extends NBTTag {
-    volatile long value;
+	
+    volatile long value = 0;
 
     public LongTag(String name) {
-        super(name);
+        super(name, TagType.LONG);
     }
 
-    public long value() {
+    public long getValue() {
         return this.value;
     }
 
@@ -35,12 +36,5 @@ public class LongTag extends NBTTag {
         this.value = value;
         return this;
     }
-
-    /* (non-Javadoc)
-     * @see net.tridentsdk.meta.nbt.NBTTag#type()
-     */
-    @Override
-    public TagType type() {
-        return TagType.LONG;
-    }
+    
 }

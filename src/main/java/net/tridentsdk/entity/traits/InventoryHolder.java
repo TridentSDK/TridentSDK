@@ -32,14 +32,14 @@ public interface InventoryHolder extends Entity {
      *
      * @return the Inventory that this entity holds
      */
-    Window inventory();
+    Window getInventory();
 
     /**
      * Returns the ItemStack in the Player's hand
      *
      * @return ItemStack current ItemStack in the Player's hand
      */
-    Item heldItem();
+    Item getHeldItem();
 
     /**
      * Sets the item held in the selected slot

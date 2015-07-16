@@ -59,7 +59,7 @@ public class TridentPlugin {
     } // avoid any plugin initiation outside of this package
 
     TridentPlugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        Handler.forPlugins().plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
+        Handler.forPlugins().plugins().stream().filter(plugin -> plugin.getDescription().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
                 "Plugin already initialized or plugin named " + description.name() + " exists already")));
 
         this.pluginFile = pluginFile;
@@ -147,7 +147,7 @@ public class TridentPlugin {
      * @return the command instance registered to the server
      */
     public <T extends Command> T commandBy(Class<T> c) {
-        return (T) Handler.forCommands().commandsFor(this).get(c);
+        return (T) Handler.forCommands().getCommands(this).get(c);
     }
 
     /**
@@ -189,7 +189,7 @@ public class TridentPlugin {
      *
      * @return the file which the plugin is loaded from
      */
-    public final File pluginFile() {
+    public final File getFile() {
         return this.pluginFile;
     }
 
@@ -198,7 +198,7 @@ public class TridentPlugin {
      *
      * @return the default configuration given to this plugin
      */
-    public JsonConfig defaultConfig() {
+    public JsonConfig getDefaultConfig() {
         return this.defaultConfig;
     }
 
@@ -209,7 +209,7 @@ public class TridentPlugin {
      *
      * @return the plugin directory where resources like the default config are saved
      */
-    public File configDirectory() {
+    public File getConfigDirectory() {
         return this.configDirectory;
     }
 
@@ -219,7 +219,7 @@ public class TridentPlugin {
      * @return the plugin descriptor for this plugin
      */
     @Nonnull
-    public final PluginDescription description() {
+    public final PluginDescription getDescription() {
         return this.description;
     }
 
@@ -227,8 +227,8 @@ public class TridentPlugin {
     public boolean equals(Object other) {
         if (other instanceof TridentPlugin) {
             TridentPlugin otherPlugin = (TridentPlugin) other;
-            if (otherPlugin.description().name().equals(this.description().name())) {
-                if (otherPlugin.description().author().equals(this.description().author())) {
+            if (otherPlugin.getDescription().name().equals(this.getDescription().name())) {
+                if (otherPlugin.getDescription().author().equals(this.getDescription().author())) {
                     return true;
                 }
             }
@@ -239,8 +239,8 @@ public class TridentPlugin {
     @Override
     public int hashCode() {
         // Find constants
-        String name = this.description().name();
-        String author = this.description().author();
+        String name = this.getDescription().name();
+        String author = this.getDescription().author();
 
         return HASHER.newHasher().putUnencodedChars(name).putUnencodedChars(author).hash().hashCode();
     }

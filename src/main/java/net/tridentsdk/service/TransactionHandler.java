@@ -40,7 +40,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  *     // This must be static! Or you would end up with many different transactions
  *     // to the wrong account
- *     private static final int ECON_ID = handler.newAccount();
+ *     private static final int ECON_ID = handler.getNewAccount();
  *
  *     // Deposit
  *     handler.deposit(ECON_ID, new Transaction&lt;Player, Player&gt;(int.class, playerFrom, playerTo, 100) {
@@ -94,7 +94,7 @@ public class TransactionHandler {
      *
      * @return the new account ID used in transactions
      */
-    public int newAcount() {
+    public int getNewAccount() {
         return transactionIds.incrementAndGet();
     }
 
@@ -105,7 +105,7 @@ public class TransactionHandler {
      *
      * @return the global economy transaction ID
      */
-    public int globalEconomy() {
+    public int getGlobalEconomy() {
         return 1;
     }
 
@@ -116,7 +116,7 @@ public class TransactionHandler {
      *
      * @return the global exchange transaction ID
      */
-    public int globalExchange() {
+    public int getGlobalExchange() {
         return 2;
     }
 
@@ -127,7 +127,7 @@ public class TransactionHandler {
      * @param transaction the transaction to perform
      */
     public void deposit(int account, Transaction transaction) {
-        TransactionAudit audit = transactions.computeIfAbsent(transaction.receiver(), (k) -> new TransactionAudit());
+        TransactionAudit audit = transactions.computeIfAbsent(transaction.getReceiver(), (k) -> new TransactionAudit());
 
         audit.put(account, transaction);
         transaction.doTransaction(Transaction.Type.DEPOSIT);
@@ -145,24 +145,23 @@ public class TransactionHandler {
      *         successfully
      */
     public boolean withdraw(int account, final Transaction transaction) {
-        TransactionAudit audit = transactions.get(transaction.sender());
+        TransactionAudit audit = transactions.get(transaction.getSender());
         if (audit == null)
             return false;
 
-        Transaction withdrawl =
-                new Transaction(
-                        transaction.item(),
-                        transaction.sender(),
-                        transaction.receiver(),
-                        -Math.abs(transaction.amount())) {
+        Transaction withdrawal = new Transaction(
+                        transaction.getItem(),
+                        transaction.getSender(),
+                        transaction.getReceiver(),
+                        -Math.abs(transaction.getAmount())) {
             @Override
             void doTransaction(Type type) {
                 transaction.doTransaction(type);
             }
         };
 
-        audit.put(account, withdrawl);
-        withdrawl.doTransaction(Transaction.Type.WITHDRAW);
+        audit.put(account, withdrawal);
+        withdrawal.doTransaction(Transaction.Type.WITHDRAW);
         return true;
     }
 
@@ -172,7 +171,7 @@ public class TransactionHandler {
      * @param account the account ID to be used
      * @param person the object which the transactions were sent to that is checked by this amounting
      * @param type the types to find the amount of. Also the parameter in
-     *             {@link net.tridentsdk.service.Transaction#item()}
+     *             {@link net.tridentsdk.service.Transaction#getItem()}
      * @return the amount of an item of type {@code type} found the account of {@code person},
      *         or {@code Integer.MIN_VALUE} if the account for {@code person} does not exist, or the accound ID is not
      *         used for that person
@@ -182,14 +181,14 @@ public class TransactionHandler {
         if (audit == null)
             return Integer.MIN_VALUE;
 
-        List<Transaction> queue = audit.transactionsFor(account);
+        List<Transaction> queue = audit.getTransactionsByAccount(account);
         if (queue == null)
             return Integer.MAX_VALUE;
 
         int amount = 0;
         for (Transaction transaction : queue) {
-            if (type.equals(transaction.item())) {
-                amount += transaction.amount();
+            if (type.equals(transaction.getItem())) {
+                amount += transaction.getAmount();
             }
         }
 

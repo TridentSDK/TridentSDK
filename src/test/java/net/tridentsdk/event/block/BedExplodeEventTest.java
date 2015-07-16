@@ -25,18 +25,18 @@ public class BedExplodeEventTest {
     @Test
     public void testIsIgnored() throws Exception {
         BedExplodeEvent event = new BedExplodeEvent(null, 10);
-        Assert.assertEquals(event.isIgnored(), false);
+        Assert.assertEquals(event.isCancelled(), false);
 
-        event.cancel(true);
-        Assert.assertEquals(event.isIgnored(), true);
+        event.setCancelled(true);
+        Assert.assertEquals(event.isCancelled(), true);
     }
 
     @Test
     public void testGetStrength() throws Exception {
         BedExplodeEvent event = new BedExplodeEvent(null, 10);
-        Assert.assertEquals(event.strength(), 10, 1);
+        Assert.assertEquals(event.getStrength(), 10, 1);
 
         event.setStrength(20);
-        Assert.assertEquals(event.strength(), 20, 1);
+        Assert.assertEquals(event.getStrength(), 20, 1);
     }
 }

@@ -73,15 +73,15 @@ public abstract class TridentRunnable implements Runnable {
      * <p>WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
      * will be thrown. This can be called when {@code task() != null}.</p>
      */
-    public final long interval() {
-        return task.get().interval();
+    public final long getInterval() {
+        return task.get().getInterval();
     }
 
     /**
      * Sets how long this runnable should wait between executions if this is a repeating task
      *
      * <p>If this task is  synchronous to the main thread, the change will be immediate, if it is not, the change may
-     * take an iteration to take effect, however {@link TridentRunnable#interval()} will reflect the changes
+     * take an iteration to take effect, however {@link TridentRunnable#getInterval()} will reflect the changes
      * immediately</p>
      *
      * <p>WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
@@ -103,7 +103,7 @@ public abstract class TridentRunnable implements Runnable {
      *
      * @return the {@link ScheduledTask} object held within the scheduling implementation
      */
-    public ScheduledTask task() {
+    public ScheduledTask getTask() {
         return this.task.get();
     }
 

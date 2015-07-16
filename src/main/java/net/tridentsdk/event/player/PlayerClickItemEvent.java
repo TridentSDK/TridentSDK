@@ -27,6 +27,7 @@ import net.tridentsdk.window.Window;
  * @author The TridentSDK Team
  */
 public class PlayerClickItemEvent extends Event implements Cancellable {
+	
     private final Window window;
     private final short clickedSlot;
     private final int actionId;
@@ -40,25 +41,26 @@ public class PlayerClickItemEvent extends Event implements Cancellable {
         this.cancelled = false;
     }
 
-    public Window window() {
+    public Window getWindow() {
         return this.window;
     }
 
-    public short clickedSlot() {
+    public short getClickedSlot() {
         return this.clickedSlot;
     }
 
-    public int actionId() {
+    public int getActionId() {
         return this.actionId;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

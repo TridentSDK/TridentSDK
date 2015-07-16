@@ -60,7 +60,7 @@ public final class Trident {
      *
      * @return the server that is running
      */
-    public static Server instance() {
+    public static Server getServer() {
         return server;
     }
 
@@ -90,56 +90,12 @@ public final class Trident {
      *
      * @return the server working directory
      */
-    public static Path fileContainer() {
+    public static Path getWorkingDirectory() {
         return Paths.get(System.getProperty("user.dir") + File.separator);
-    }
-
-    public static DisplayInfo info() {
-        return server.info();
-    }
-
-    public static int port() {
-        return server.port();
-    }
-
-    public static void shutdown() {
-        server.shutdown();
-    }
-
-    public static Map<String, World> worlds() {
-        return server.worlds();
-    }
-
-    public static WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator) {
-        return server.newWorldLoader(generator);
-    }
-
-    public static InetAddress serverIp() {
-        return server.serverIp();
-    }
-
-    public static String version() {
-        return server.version();
-    }
-
-    public static ServerConsole console() {
-        return server.console();
-    }
-
-    public static JsonConfig config() {
-        return server.config();
-    }
-
-    public static Collection<Player> onlinePlayers() {
-        return server.onlinePlayers();
-    }
-
-    public static void broadcast(String str) {
-        onlinePlayers().stream()
-                .forEach((p) -> p.sendMessage(str));
     }
 
     public static Server server() {
         return server;
     }
+    
 }

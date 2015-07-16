@@ -26,6 +26,7 @@ import net.tridentsdk.entity.Projectile;
  * @author The TridentSDK Team
  */
 public class EntityLaunchProjectileEvent extends EntityEvent {
+	
     private final Projectile projectile;
     private final Entity target;
     private boolean cancelled;
@@ -42,12 +43,12 @@ public class EntityLaunchProjectileEvent extends EntityEvent {
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 
@@ -57,4 +58,5 @@ public class EntityLaunchProjectileEvent extends EntityEvent {
     public Entity getTarget() {
         return this.target;
     }
+    
 }

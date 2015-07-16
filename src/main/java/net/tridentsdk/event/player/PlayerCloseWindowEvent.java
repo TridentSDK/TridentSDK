@@ -27,6 +27,7 @@ import net.tridentsdk.window.Window;
  * @author The TridentSDK Team
  */
 public class PlayerCloseWindowEvent extends Event implements Cancellable {
+	
     private final Window window;
     private boolean cancelled;
 
@@ -35,17 +36,18 @@ public class PlayerCloseWindowEvent extends Event implements Cancellable {
         this.cancelled = false;
     }
 
-    public Window window() {
+    public Window getWindow() {
         return this.window;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
+    
 }

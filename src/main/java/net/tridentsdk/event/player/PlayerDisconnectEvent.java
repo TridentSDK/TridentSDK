@@ -25,6 +25,7 @@ import net.tridentsdk.entity.living.Player;
  * @author The TridentSDK Team
  */
 public class PlayerDisconnectEvent extends PlayerEvent {
+	
     /**
      * TODO perhaps include disconnection reason (quit, timeout, etc)
      *
@@ -33,4 +34,5 @@ public class PlayerDisconnectEvent extends PlayerEvent {
     public PlayerDisconnectEvent(Player player) {
         super(player);
     }
+    
 }

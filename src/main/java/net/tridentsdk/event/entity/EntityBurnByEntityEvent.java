@@ -25,6 +25,7 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityBurnByEntityEvent extends EntityBurnEvent {
+	
     private final Entity causer;
 
     public EntityBurnByEntityEvent(Entity entity, int fireTicks, Entity causer) {
@@ -35,7 +36,8 @@ public class EntityBurnByEntityEvent extends EntityBurnEvent {
     /**
      * Gets the entity that set this entity on fire
      */
-    public Entity burner() {
+    public Entity getBurnerEntity() {
         return this.causer;
     }
+    
 }

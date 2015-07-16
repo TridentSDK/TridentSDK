@@ -29,7 +29,7 @@ public interface HopperMinecart extends MinecartBase, InventoryHolder {
     /**
      * Gets the transfer cooldown of this Hopper Minecart
      */
-    int transferCooldown();
+    int getTransferCooldown();
 
     /**
      * Sets the transfer cooldown of this Hopper Minecart

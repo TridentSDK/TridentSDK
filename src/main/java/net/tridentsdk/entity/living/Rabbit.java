@@ -31,5 +31,5 @@ public interface Rabbit extends Neutral {
      *
      * @return the breed of Rabbit this rabbit is
      */
-    RabbitType breed();
+    RabbitType getBreed();
 }

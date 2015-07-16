@@ -81,7 +81,7 @@ public enum BlockOrientation {
     }
 
     BlockOrientation(BlockOrientation face1, BlockOrientation face2) {
-        this.difference = face1.difference().add(face2.difference());
+        this.difference = face1.getVector().add(face2.getVector());
     }
 
     /**
@@ -89,7 +89,7 @@ public enum BlockOrientation {
      *
      * @return the cloned vector pointing to the specified face
      */
-    public Vector difference() {
+    public Vector getVector() {
         return this.difference.clone();
     }
 

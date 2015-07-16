@@ -25,10 +25,10 @@ public class HorseTypeTest {
 
     @Test
     public void testGetId() throws Exception {
-        Assert.assertEquals(HorseType.HORSE.id(), 0);
-        Assert.assertEquals(HorseType.DONKEY.id(), 1);
-        Assert.assertEquals(HorseType.MULE.id(), 2);
-        Assert.assertEquals(HorseType.ZOMBIE.id(), 3);
-        Assert.assertEquals(HorseType.SKELETON.id(), 4);
+        Assert.assertEquals(HorseType.HORSE.asInt(), 0);
+        Assert.assertEquals(HorseType.DONKEY.asInt(), 1);
+        Assert.assertEquals(HorseType.MULE.asInt(), 2);
+        Assert.assertEquals(HorseType.ZOMBIE.asInt(), 3);
+        Assert.assertEquals(HorseType.SKELETON.asInt(), 4);
     }
 }

@@ -62,7 +62,7 @@ public class PluginClassLoader extends URLClassLoader {
             }
 
             if (Command.class.isAssignableFrom(cls)) {
-                Handler.forCommands().removeCommand(cls.asSubclass(Command.class));
+                Handler.forCommands().unregisterCommand(cls.asSubclass(Command.class));
             }
 
             for (Field field : cls.getDeclaredFields()) {

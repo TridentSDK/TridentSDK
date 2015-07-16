@@ -31,7 +31,7 @@ public interface MinecartBase extends Entity {
      *
      * @return the display tile of this Minecart
      */
-    BlockSnapshot displayTitle();
+    BlockSnapshot getDisplayTile();
 
     /**
      * Set this Minecart's display tile to the specified block state
@@ -45,7 +45,7 @@ public interface MinecartBase extends Entity {
      *
      * @return the offset for this Minecart's display tile
      */
-    int titleOffset();
+    int getTileOffset();
 
     /**
      * Set the offset for this Minecart's display tile
@@ -59,7 +59,7 @@ public interface MinecartBase extends Entity {
      *
      * @return the custom name of this Minecart
      */
-    String name();
+    String getName();
 
     /**
      * Sets the custom name of this Minecart

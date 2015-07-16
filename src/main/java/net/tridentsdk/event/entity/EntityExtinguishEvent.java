@@ -25,7 +25,9 @@ import net.tridentsdk.entity.Entity;
  * @author The TridentSDK Team
  */
 public class EntityExtinguishEvent extends EntityEvent {
+	
     public EntityExtinguishEvent(Entity entity) {
         super(entity);
     }
+    
 }

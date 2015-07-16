@@ -24,10 +24,10 @@ public class ImportanceTest {
 
     @Test
     public void testGetImportance() throws Exception {
-        Assert.assertEquals(Importance.LOWEST.importance(), 0);
-        Assert.assertEquals(Importance.LOW.importance(), 1);
-        Assert.assertEquals(Importance.MEDIUM.importance(), 2);
-        Assert.assertEquals(Importance.HIGH.importance(), 3);
-        Assert.assertEquals(Importance.HIGHEST.importance(), 4);
+        Assert.assertEquals(Importance.LOWEST.getImportance(), 0);
+        Assert.assertEquals(Importance.LOW.getImportance(), 1);
+        Assert.assertEquals(Importance.MEDIUM.getImportance(), 2);
+        Assert.assertEquals(Importance.HIGH.getImportance(), 3);
+        Assert.assertEquals(Importance.HIGHEST.getImportance(), 4);
     }
 }

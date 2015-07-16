@@ -54,7 +54,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      *
      * @return Note representing the sound that is being played
      */
-    public Note note() {
+    public Note getNote() {
         return this.note;
     }
 
@@ -72,7 +72,7 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      *
      * @return Instrument being used to play the Note
      */
-    public Instrument instrument() {
+    public Instrument getInstrument() {
         return this.instrument;
     }
 
@@ -90,17 +90,17 @@ public class NotePlayEvent extends BlockEvent implements Cancellable {
      *
      * @return List of Players who can hear the Note
      */
-    public List<Player> players() {
+    public List<Player> getPlayers() {
         return this.players;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }

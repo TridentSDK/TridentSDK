@@ -45,11 +45,11 @@ public class ItemPair {
         this.two = two;
     }
 
-    public Item first() {
+    public Item getFirst() {
         return this.one;
     }
 
-    public Item second() {
+    public Item getSecond() {
         return this.two;
     }
 }

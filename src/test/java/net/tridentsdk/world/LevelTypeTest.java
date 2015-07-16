@@ -33,11 +33,11 @@ public class LevelTypeTest {
 
     @Test
     public void testGetLevelType() throws Exception {
-        Assert.assertEquals(LevelType.levelTypeOf("default"), LevelType.DEFAULT);
-        Assert.assertEquals(LevelType.levelTypeOf("flat"), LevelType.FLAT);
-        Assert.assertEquals(LevelType.levelTypeOf("largeBiomes"), LevelType.LARGE_BIOMES);
-        Assert.assertEquals(LevelType.levelTypeOf("amplified"), LevelType.AMPLIFIED);
-        Assert.assertEquals(LevelType.levelTypeOf("default_1_1"), LevelType.DEFAULT_1_1);
-        Assert.assertEquals(LevelType.levelTypeOf("invalid"), LevelType.DEFAULT);
+        Assert.assertEquals(LevelType.getLevelType("default"), LevelType.DEFAULT);
+        Assert.assertEquals(LevelType.getLevelType("flat"), LevelType.FLAT);
+        Assert.assertEquals(LevelType.getLevelType("largeBiomes"), LevelType.LARGE_BIOMES);
+        Assert.assertEquals(LevelType.getLevelType("amplified"), LevelType.AMPLIFIED);
+        Assert.assertEquals(LevelType.getLevelType("default_1_1"), LevelType.DEFAULT_1_1);
+        Assert.assertEquals(LevelType.getLevelType("invalid"), LevelType.DEFAULT);
     }
 }

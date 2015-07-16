@@ -43,17 +43,17 @@ public class EntitySpawnEvent extends EntityEvent {
      * @return return the location where the entity was spawned
      */
 
-    public Position location() {
+    public Position getPosition() {
         return this.location;
     }
 
     @Override
-    public boolean isIgnored() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
     @Override
-    public void cancel(boolean cancelled) {
+    public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }
 }
