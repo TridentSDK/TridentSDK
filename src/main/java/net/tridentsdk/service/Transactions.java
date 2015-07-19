@@ -16,9 +16,13 @@
  */
 package net.tridentsdk.service;
 
+import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.ImmutableList;
 import net.tridentsdk.Trident;
+import net.tridentsdk.registry.Registry;
 import net.tridentsdk.util.TridentLogger;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -36,7 +40,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>Example:
  * <pre><code>
  *     // Economy
- *     private static final TransactionHandler handler = Handler.forTransactions();
+ *     private static final Transactions handler = Registered.transactions();
  *
  *     // This must be static! Or you would end up with many different transactions
  *     // to the wrong account
@@ -72,7 +76,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author The TridentSDK Team
  */
-public class TransactionHandler {
+public class Transactions extends ForwardingCollection<TransactionAudit> implements Registry<TransactionAudit> {
     private final ConcurrentMap<Object, TransactionAudit> transactions = new ConcurrentHashMap<>();
     private final AtomicInteger transactionIds = new AtomicInteger(2);
 
@@ -81,10 +85,10 @@ public class TransactionHandler {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     TransactionHandler handler = Handler.forTransactions();
+     *     Transactions handler = Registered.transactions();
      * </code></pre></p>
      */
-    public TransactionHandler() {
+    public Transactions() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
     }
@@ -194,5 +198,10 @@ public class TransactionHandler {
         }
 
         return amount;
+    }
+
+    @Override
+    protected Collection<TransactionAudit> delegate() {
+        return ImmutableList.copyOf(transactions.values());
     }
 }

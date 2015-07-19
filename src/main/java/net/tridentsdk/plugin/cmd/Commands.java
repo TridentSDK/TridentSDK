@@ -19,12 +19,12 @@ package net.tridentsdk.plugin.cmd;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.Plugin;
+import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.Map;
@@ -37,12 +37,12 @@ import java.util.stream.Collectors;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     CommandHandler handler = Handler.forCommands();
+ *     Commands handler = Registered.commands();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
  */
-public class CommandHandler {
+public class Commands {
     // TODO: Make this a dictionary tree for fast lookup
     private static final Map<String, CommandData> COMMANDS = new ConcurrentHashMap<>();
 
@@ -51,10 +51,10 @@ public class CommandHandler {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     CommandHandler handler = Handler.forCommands();
+     *     Commands handler = Handler.commands();
      * </code></pre></p>
      */
-    public CommandHandler() {
+    public Commands() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("Only TridentSDK is allowed to make a new command handler"));
     }
@@ -75,7 +75,7 @@ public class CommandHandler {
         final Set<CommandData> cmdData = findCommand(label);
 
         if (!cmdData.isEmpty()) {
-            Handler.forPlugins().executor().execute(() -> {
+            Registered.plugins().executor().execute(() -> {
                 for (CommandData data : cmdData) {
                     handleCommand(data.command(), issuer, args, contents);
                 }

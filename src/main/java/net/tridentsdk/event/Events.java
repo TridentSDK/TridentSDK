@@ -18,21 +18,20 @@
 package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import net.tridentsdk.Handler;
+import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
+import net.tridentsdk.registry.Registered;
+import net.tridentsdk.registry.Registry;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Method;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
@@ -44,13 +43,13 @@ import java.util.function.Function;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     EventHandler handler = Handler.forEvents();
+ *     Events handler = Handler.forEvents();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public class EventHandler {
+public class Events extends ForwardingCollection<EventReflector> implements Registry<EventReflector> {
     private static final Comparator<EventReflector> COMPARATOR = new EventReflector(null, null, 0, null, null, null);
     public static final Function<Class<?>, Queue<EventReflector>> CREATE_QUEUE = (k) ->
             new PriorityBlockingQueue<>(128, COMPARATOR);
@@ -58,7 +57,7 @@ public class EventHandler {
     private final ConcurrentMap<Class<? extends Event>, Queue<EventReflector>> callers = new ConcurrentHashMap<>();
     private final ConcurrentMap<Class<?>, MethodAccess> accessors = new ConcurrentHashMap<>();
 
-    private EventHandler() {
+    private Events() {
         if (!Trident.isTrident()) {
             TridentLogger.error(new IllegalAccessException("EventManager must be initiated by TridentSDK!"));
         }
@@ -69,14 +68,14 @@ public class EventHandler {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     EventHandler handler = Handler.forEvents();
+     *     Events handler = Registered.events();
      * </code></pre></p>
      *
      * @return the new event handler
      */
     @InternalUseOnly
-    public static EventHandler create() {
-        return new EventHandler();
+    public static Events create() {
+        return new Events();
     }
 
     /**
@@ -139,7 +138,7 @@ public class EventHandler {
 
         final CountDownLatch latch = new CountDownLatch(1);
 
-        Handler.forPlugins().executor().execute(() -> {
+        Registered.plugins().executor().execute(() -> {
             for (EventReflector listener : listeners) {
                 listener.reflect(event);
             }
@@ -171,18 +170,14 @@ public class EventHandler {
         }
     }
 
-    /**
-     * Acquires a list of the listeners registered to the plugin provided
-     *
-     * @param plugin the plugin to find the listeners for
-     * @return the listeners for that plugin
-     */
-    public Map<Class<? extends Listener>, Listener> listenersFor(Plugin plugin) {
-        Map<Class<? extends Listener>, Listener> listeners = Maps.newHashMap();
-        for (Queue<EventReflector> reflectors : callers.values()) {
-            reflectors.stream().filter(reflector -> reflector.plugin().equals(plugin)).forEach(reflector -> listeners.put(reflector.instance().getClass(), reflector.instance()));
+    @Override
+    protected Collection<EventReflector> delegate() {
+        List<EventReflector> reflectors = Lists.newArrayList();
+        for (Queue<EventReflector> reflectors1 : callers.values()) {
+            reflectors.addAll(reflectors1);
         }
 
-        return listeners;
+        // TODO better way
+        return reflectors;
     }
 }

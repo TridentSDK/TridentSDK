@@ -26,7 +26,7 @@ import java.lang.reflect.Method;
 import java.util.Comparator;
 
 @AccessNoDoc
-class EventReflector implements Comparator<EventReflector> {
+public class EventReflector implements Comparator<EventReflector> {
     private final MethodAccess handle;
     private final Plugin plugin;
     private final int index;

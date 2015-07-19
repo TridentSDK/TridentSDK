@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.window;
 
-import java.util.Collection;
+import net.tridentsdk.registry.Registry;
 
 /**
  * Handles windows opened and closed by the server
@@ -28,7 +28,7 @@ import java.util.Collection;
  *
  * @author The TridentSDK Team
  */
-public interface Inventories extends Collection<Inventory> {
+public interface Inventories extends Registry<Inventory> {
     /**
      * Gets a window by its ID
      *

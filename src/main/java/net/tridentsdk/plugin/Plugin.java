@@ -17,7 +17,6 @@
 
 package net.tridentsdk.plugin;
 
-import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.SelectableThread;
@@ -25,6 +24,7 @@ import net.tridentsdk.config.Config;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.Nonnull;
@@ -57,7 +57,7 @@ public class Plugin {
     } // avoid any plugin initiation outside of this package
 
     Plugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        Handler.forPlugins().plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
+        Registered.plugins().plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
                 "Plugin already initialized or plugin named " + description.name() + " exists already")));
 
         this.pluginFile = pluginFile;
@@ -79,7 +79,7 @@ public class Plugin {
     public static Plugin instance() {
         Class<?> caller = Trident.findCaller(3);
         ClassLoader loader = caller.getClassLoader();
-        for (Plugin plugin : Handler.forPlugins().plugins())
+        for (Plugin plugin : Registered.plugins().plugins())
             if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
@@ -96,7 +96,7 @@ public class Plugin {
      */
     @Nullable
     public static Plugin instance(Class<? extends Plugin> c) {
-        for (Plugin plugin : Handler.forPlugins().plugins())
+        for (Plugin plugin : Registered.plugins().plugins())
             if (plugin.getClass().equals(c))
                 return plugin;
         return null;
@@ -130,7 +130,7 @@ public class Plugin {
      * @return the listener instance registered to the server
      */
     public <T extends Listener> T listenerBy(Class<T> c) {
-        return (T) Handler.forEvents().listenersFor(this).get(c);
+        return (T) Registered.forEvents().listenersFor(this).get(c);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Plugin {
      * @return the command instance registered to the server
      */
     public <T extends Command> T commandBy(Class<T> c) {
-        return (T) Handler.forCommands().commandsFor(this).get(c);
+        return (T) Registered.commands().commandsFor(this).get(c);
     }
 
     /**

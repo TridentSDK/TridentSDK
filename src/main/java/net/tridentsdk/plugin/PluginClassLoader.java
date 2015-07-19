@@ -17,9 +17,9 @@
 
 package net.tridentsdk.plugin;
 
-import net.tridentsdk.Handler;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
@@ -58,11 +58,11 @@ public class PluginClassLoader extends URLClassLoader {
     void unloadClasses() {
         for (Class<?> cls : locallyLoaded.values()) {
             if (Listener.class.isAssignableFrom(cls)) {
-                Handler.forEvents().unregister(cls.asSubclass(Listener.class));
+                Registered.forEvents().unregister(cls.asSubclass(Listener.class));
             }
 
             if (Command.class.isAssignableFrom(cls)) {
-                Handler.forCommands().removeCommand(cls.asSubclass(Command.class));
+                Registered.commands().removeCommand(cls.asSubclass(Command.class));
             }
 
             for (Field field : cls.getDeclaredFields()) {

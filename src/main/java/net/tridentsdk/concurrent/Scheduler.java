@@ -18,6 +18,7 @@
 package net.tridentsdk.concurrent;
 
 import net.tridentsdk.plugin.Plugin;
+import net.tridentsdk.registry.Registry;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -34,7 +35,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public interface Scheduler {
+public interface Scheduler extends Registry<ScheduledTask> {
     /**
      * Asynchronously run a task after the next tick
      *

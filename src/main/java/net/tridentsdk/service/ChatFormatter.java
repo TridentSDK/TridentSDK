@@ -16,22 +16,29 @@
  */
 package net.tridentsdk.service;
 
+import com.google.common.collect.ForwardingCollection;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.Plugin;
+import net.tridentsdk.registry.Registry;
 import net.tridentsdk.util.TridentLogger;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Handles server side chat communication
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     ChatHandler handler = Handler.forChat();
+ *     ChatFormatter handler = Registered.chatFormatter();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
  */
-public class ChatHandler {
+public class ChatFormatter
+        extends ForwardingCollection<ChatIdentityFormatter>
+        implements Registry<ChatIdentityFormatter> {
     private volatile ChatIdentityFormatter provider = new ChatIdentityFormatter() {
         @Override
         public String format(String message, Player sender) {
@@ -49,10 +56,10 @@ public class ChatHandler {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     ChatHandler handler = Handler.forChat();
+     *     ChatFormatter handler = Registered.chatFormatter();
      * </code></pre></p>
      */
-    public ChatHandler() {
+    public ChatFormatter() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
     }
@@ -80,5 +87,10 @@ public class ChatHandler {
      */
     public String format(String message, Player player) {
         return provider.format(message, player);
+    }
+
+    @Override
+    protected Collection<ChatIdentityFormatter> delegate() {
+        return Collections.singleton(provider);
     }
 }

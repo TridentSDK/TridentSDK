@@ -12,9 +12,9 @@ import net.tridentsdk.world.gen.AbstractGenerator;
 public interface Implementation {
     SelectableThreadPool newPool(int i, String s);
     WorldLoader newLoader(Class<? extends AbstractGenerator> g);
+
+    PluginChannels channels();
     Scheduler scheduler();
 
-    PluginChannels chanHandler();
-
-    Inventories winHandler();
+    Inventories inventories();
 }

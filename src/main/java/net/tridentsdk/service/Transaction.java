@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents a transaction of a type between supported entities, including players via the
- * {@link net.tridentsdk.service.TransactionHandler}, and the callback which is executed for the transaction to occur
+ * {@link Transactions}, and the callback which is executed for the transaction to occur
  *
  * @author The TridentSDK Team
  */

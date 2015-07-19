@@ -17,9 +17,13 @@
 
 package net.tridentsdk.plugin.channel;
 
+import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.ImmutableList;
 import net.tridentsdk.Trident;
+import net.tridentsdk.registry.Registry;
 import net.tridentsdk.util.TridentLogger;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,7 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author The TridentSDK Team
  */
-public abstract class PluginChannels {
+public abstract class PluginChannels extends ForwardingCollection<PluginChannel> implements Registry<PluginChannel> {
     private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
 
     /**
@@ -41,7 +45,7 @@ public abstract class PluginChannels {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     PluginChannels handler = Handlers.channels();
+     *     PluginChannels handler = Registered.channels();
      * </code></pre></p>
      */
     public PluginChannels() {
@@ -56,7 +60,7 @@ public abstract class PluginChannels {
      * @param channel name of the channel
      * @param data    the data to send
      */
-    public abstract void sendPluginMessage(String channel, byte... data);
+    protected abstract void sendPluginMessage(String channel, byte... data);
 
     /**
      * Registers a channel in the listings
@@ -67,6 +71,7 @@ public abstract class PluginChannels {
     public void register(String name, PluginChannel channel) {
         if (this.channels.containsKey(name)) {
             TridentLogger.error(new UnsupportedOperationException("Cannot register 2 channels of the same name"));
+            return;
         }
 
         this.channels.put(name, channel);
@@ -87,7 +92,12 @@ public abstract class PluginChannels {
      * @param name the name to find the channel by
      * @return the channel having the specified name
      */
-    public PluginChannel forChannel(String name) {
+    public PluginChannel fromName(String name) {
         return this.channels.get(name);
+    }
+
+    @Override
+    protected Collection<PluginChannel> delegate() {
+        return ImmutableList.copyOf(channels.values());
     }
 }
