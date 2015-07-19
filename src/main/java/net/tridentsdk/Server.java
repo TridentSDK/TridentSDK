@@ -18,16 +18,11 @@
 package net.tridentsdk;
 
 import net.tridentsdk.config.Config;
-import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ai.AiHandler;
 import net.tridentsdk.plugin.cmd.ServerConsole;
-import net.tridentsdk.world.World;
-import org.slf4j.Logger;
+import net.tridentsdk.util.TridentLogger;
 
 import java.net.InetAddress;
-import java.util.Collection;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * The access to the server internals
@@ -55,13 +50,6 @@ public interface Server {
     void shutdown();
 
     /**
-     * Get all the worlds loaded on the server
-     *
-     * @return a Map of all the worlds, where the String is the world name
-     */
-    Map<String, World> worlds();
-
-    /**
      * Gets the Internet Address of this server
      *
      * @return the address of this server
@@ -87,7 +75,7 @@ public interface Server {
      *
      * @return the server's logger
      */
-    Logger logger();
+    TridentLogger logger();
 
     /**
      * The server configuration file
@@ -95,16 +83,6 @@ public interface Server {
      * @return the server config
      */
     Config config();
-
-    /**
-     * Get the player by UUID
-     *
-     * @param id the UUID to find the player with
-     * @return the player who has the specified UUID
-     */
-    Player playerBy(UUID id);
-
-    Collection<Player> onlinePlayers();
 
     /**
      * Returns the AI handler for the server, determines what AI entities use

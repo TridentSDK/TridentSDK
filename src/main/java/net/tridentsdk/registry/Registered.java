@@ -1,5 +1,6 @@
 package net.tridentsdk.registry;
 
+import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.event.Events;
 import net.tridentsdk.plugin.PluginHandler;
@@ -7,7 +8,11 @@ import net.tridentsdk.plugin.channel.PluginChannels;
 import net.tridentsdk.plugin.cmd.Commands;
 import net.tridentsdk.service.ChatFormatter;
 import net.tridentsdk.service.Transactions;
+import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.window.Inventories;
+import net.tridentsdk.world.World;
+
+import java.util.Map;
 
 /**
  * Allows access to the instance of various server objects
@@ -15,13 +20,13 @@ import net.tridentsdk.window.Inventories;
  * @author The TridentSDK Team
  */
 public class Registered {
-    public static final Events EVENT_HANDLER = Events.create();
-    public static final PluginHandler PLUGIN_HANDLER = new PluginHandler();
-    public static final Commands COMMAND_HANDLER = new Commands();
-    public static final ChatFormatter CHAT_HANDLER = new ChatFormatter();
-    public static final Transactions TRANSACTION_HANDLER = new Transactions();
+    private static final Events EVENTS = Events.create();
+    private static final PluginHandler PLUGINS = new PluginHandler();
+    private static final Commands CMDS = new Commands();
+    private static final ChatFormatter CHAT = new ChatFormatter();
+    private static final Transactions TRANSACTIONS = new Transactions();
 
-    private static Implementation impl;
+    private static volatile Implementation impl;
 
     public static void setProvider(Implementation implementation) {
         impl = implementation;
@@ -34,6 +39,19 @@ public class Registered {
      */
     public static PluginChannels channels() {
         return impl.channels();
+    }
+
+    public static Players players() {
+        return impl.players();
+    }
+
+    /**
+     * Obtains the loaded worlds, name to world pairs
+     *
+     * @return the worlds that have been loaded
+     */
+    public static Map<String, World> worlds() {
+        return impl.worlds();
     }
 
     /**
@@ -59,8 +77,8 @@ public class Registered {
      *
      * @return the event handler
      */
-    public static Events forEvents() {
-        return EVENT_HANDLER;
+    public static Events events() {
+        return EVENTS;
     }
 
     /**
@@ -69,7 +87,7 @@ public class Registered {
      * @return the plugin handler
      */
     public static PluginHandler plugins() {
-        return PLUGIN_HANDLER;
+        return PLUGINS;
     }
 
     /**
@@ -78,7 +96,16 @@ public class Registered {
      * @return the command handler
      */
     public static Commands commands() {
-        return COMMAND_HANDLER;
+        return CMDS;
+    }
+
+    /**
+     * Obtains the root logger which contains the collection of all the loggers
+     *
+     * @return the root collection of loggers
+     */
+    public static TridentLogger loggers() {
+        return Trident.instance().logger();
     }
 
     /**
@@ -87,7 +114,7 @@ public class Registered {
      * @return the chat handler
      */
     public static ChatFormatter chatFormatter() {
-        return CHAT_HANDLER;
+        return CHAT;
     }
 
     /**
@@ -96,6 +123,6 @@ public class Registered {
      * @return the transaction handler
      */
     public static Transactions transactions() {
-        return TRANSACTION_HANDLER;
+        return TRANSACTIONS;
     }
 }

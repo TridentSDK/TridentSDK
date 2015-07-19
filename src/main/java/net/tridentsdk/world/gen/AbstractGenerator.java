@@ -25,6 +25,21 @@ import net.tridentsdk.world.ChunkLocation;
  * @author The TridentSDK Team
  */
 public abstract class AbstractGenerator {
+    protected final long seed;
+
+    public AbstractGenerator(long seed) {
+        this.seed = seed;
+    }
+
+    /**
+     * Obtains the chunk generation seed
+     *
+     * @return the seed
+     */
+    public long seed() {
+        return this.seed;
+    }
+
     /**
      * Populates the block ids for a chunk
      *

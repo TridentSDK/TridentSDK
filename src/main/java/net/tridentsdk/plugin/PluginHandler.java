@@ -17,15 +17,15 @@
 
 package net.tridentsdk.plugin;
 
-import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.ForwardingList;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.Listener;
+import net.tridentsdk.plugin.annotation.Desc;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
-import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.registry.Factory;
 import net.tridentsdk.registry.Registered;
@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -53,7 +52,7 @@ import java.util.jar.JarFile;
  *
  * @author The TridentSDK Team
  */
-public class PluginHandler extends ForwardingCollection<Plugin> implements Registry<Plugin> {
+public class PluginHandler extends ForwardingList<Plugin> implements Registry<Plugin> {
     private static final SelectableThread EXECUTOR = Factory.newExecutor(1, "Plugins").selectNext();
     private final List<Plugin> plugins = Lists.newArrayList();
 
@@ -112,10 +111,10 @@ public class PluginHandler extends ForwardingCollection<Plugin> implements Regis
                         return;
                     }
 
-                    PluginDescription description = pluginClass.getAnnotation(PluginDescription.class);
+                    Desc description = pluginClass.getAnnotation(Desc.class);
 
                     if (description == null) {
-                        TridentLogger.error(new PluginLoadException("PluginDescription annotation does not exist!"));
+                        TridentLogger.error(new PluginLoadException("Desc annotation does not exist!"));
                         loader.unloadClasses();
                         loader = null; // help gc
                         return;
@@ -125,7 +124,7 @@ public class PluginHandler extends ForwardingCollection<Plugin> implements Regis
 
                     Constructor<? extends Plugin> defaultConstructor = pluginClass.getSuperclass()
                             .asSubclass(Plugin.class)
-                            .getDeclaredConstructor(File.class, PluginDescription.class, PluginClassLoader.class);
+                            .getDeclaredConstructor(File.class, Desc.class, PluginClassLoader.class);
                     defaultConstructor.setAccessible(true);
                     plugin = defaultConstructor.newInstance(pluginFile, description, loader);
 
@@ -167,13 +166,13 @@ public class PluginHandler extends ForwardingCollection<Plugin> implements Regis
             if (!cls.isAnnotationPresent(IgnoreRegistration.class)) {
                 if (Listener.class.isAssignableFrom(cls)) {
                     c = cls.getConstructor();
-                    Registered.forEvents().registerListener(plugin, (Listener) (instance = c.newInstance()));
+                    Registered.events().registerListener(plugin, (Listener) (instance = c.newInstance()));
                 }
 
                 if (Command.class.isAssignableFrom(cls)) {
                     if (c == null)
                         c = cls.getConstructor();
-                    Registered.commands().addCommand(plugin, (Command) (instance == null ? c.newInstance() : instance));
+                    Registered.commands().register(plugin, (Command) (instance == null ? c.newInstance() : instance));
                 }
             }
         } catch (NoSuchMethodException e) {
@@ -207,7 +206,7 @@ public class PluginHandler extends ForwardingCollection<Plugin> implements Regis
     }
 
     @Override
-    protected Collection<Plugin> delegate() {
+    protected List<Plugin> delegate() {
         return ImmutableList.copyOf(plugins);
     }
 

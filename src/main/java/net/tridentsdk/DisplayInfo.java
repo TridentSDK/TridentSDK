@@ -16,6 +16,9 @@
  */
 package net.tridentsdk;
 
+import net.tridentsdk.config.Config;
+import net.tridentsdk.registry.Factory;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.imageio.ImageIO;
@@ -29,6 +32,10 @@ import java.io.IOException;
  * @author The TridentSDK Team
  */
 public class DisplayInfo {
+    private final Config config = Factory.newConfig(Trident.fileContainer() + "server.json"); // Init code
+    private final String motd = config.getString("motd", Defaults.MOTD);
+    private final int maxPlayers = config.getInt("max-players", Defaults.MAX_PLAYERS);
+    private final boolean canChangeImage = config.getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED);
 
     public DisplayInfo() {
     }
@@ -39,7 +46,7 @@ public class DisplayInfo {
      * @return a string containing the MOTD of the server, may be empty, never null
      */
     public String motd() {
-        return Trident.config().getString("motd", Defaults.MOTD);
+        return motd;
     }
 
     /**
@@ -70,8 +77,13 @@ public class DisplayInfo {
         return img;
     }
 
+    /**
+     * Obtains the minecraft server version
+     *
+     * @return
+     */
     public String version() {
-        return "1.8";
+        return "1.7.10";
     }
 
     /**
@@ -81,7 +93,7 @@ public class DisplayInfo {
      * @return 0 for success, -1 if this feature is disabled in config, -2 for generic failure
      */
     public int setMotdImage(BufferedImage image) {
-        if (!Trident.config().getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED)) {
+        if (!canChangeImage) {
             return -1;
         }
 
@@ -89,9 +101,8 @@ public class DisplayInfo {
             ImageIO.write(image, "PNG", motdPicture());
             return 0;
         } catch (IOException ignored) {
+            return -2;
         }
-
-        return -2;
     }
 
     /**
@@ -100,10 +111,10 @@ public class DisplayInfo {
      * @return the maximum number of players the server will allow
      */
     public int maxPlayers() {
-        return Trident.config().getInt("max-players", Defaults.MAX_PLAYERS);
+        return maxPlayers;
     }
 
     public int playerCount() {
-        return Trident.onlinePlayers().size();
+        return Registered.players().size();
     }
 }

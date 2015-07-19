@@ -17,6 +17,8 @@
 
 package net.tridentsdk.config;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -28,6 +30,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a section of the Config file
@@ -567,6 +572,45 @@ public class ConfigSection {
         } else {
             this.jsonHandle.add(tag, new JsonObject());
             return new ConfigSection(this, this.jsonHandle.get(tag).getAsJsonObject());
+        }
+    }
+
+    /**
+     * Returns all of the topmost keys. Will not have inner section keys.
+     *
+     * @return the config keys
+     */
+    public Set<String> keys() {
+        Set<Map.Entry<String, JsonElement>> entries = entries();
+
+        Set<String> keys = Sets.newHashSet();
+        keys.addAll(entries.stream().map(Map.Entry::getKey).collect(Collectors.toList()));
+
+        return keys;
+    }
+
+    /**
+     * Returns the topmost values
+     *
+     * @return the values
+     */
+    public Collection<JsonElement> values() {
+        Set<Map.Entry<String, JsonElement>> entries = entries();
+
+        List<JsonElement> values = Lists.newArrayList();
+        values.addAll(entries.stream().map(Map.Entry::getValue).collect(Collectors.toList()));
+
+        return values;
+    }
+
+    /**
+     * Obtains the set of the topmost key-value entries
+     *
+     * @return the key-value entry set
+     */
+    public Set<Map.Entry<String, JsonElement>> entries() {
+        synchronized (handleLock) {
+            return jsonHandle.entrySet();
         }
     }
 

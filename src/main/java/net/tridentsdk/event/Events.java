@@ -43,7 +43,7 @@ import java.util.function.Function;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     Events handler = Handler.forEvents();
+ *     Events handler = Registered.events();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
@@ -173,11 +173,8 @@ public class Events extends ForwardingCollection<EventReflector> implements Regi
     @Override
     protected Collection<EventReflector> delegate() {
         List<EventReflector> reflectors = Lists.newArrayList();
-        for (Queue<EventReflector> reflectors1 : callers.values()) {
-            reflectors.addAll(reflectors1);
-        }
+        callers.values().forEach(reflectors::addAll);
 
-        // TODO better way
         return reflectors;
     }
 }

@@ -20,11 +20,10 @@ package net.tridentsdk;
 // if these shouldn't exist, or should go somewhere else, just move them
 // this is probably temporary
 
-import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.concurrent.*;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Contains the default values used in server.json
@@ -48,7 +47,7 @@ public final class Defaults {
     /**
      * The icon on the left of the server
      */
-    public static final String MOTD_IMAGE_LOCATION = "/server-icon.png";
+    public static final String MOTD_IMAGE_LOCATION = "server-icon.png";
     /**
      * The threshold used for compression
      */
@@ -68,14 +67,6 @@ public final class Defaults {
 
     public static final boolean IMAGE_CHANGING_ALLOWED = false;
 
-    public static final byte GAME_MODE = GameMode.SURVIVAL.asByte();
-
-    /**
-     * The server's default exception handler
-     */
-    public static final Thread.UncaughtExceptionHandler EXCEPTION_HANDLER =
-            (thread, throwable) -> TridentLogger.error(throwable);
-
     /**
      * The thread factory which makes a thread that handles exceptions
      */
@@ -86,36 +77,6 @@ public final class Defaults {
             TridentLogger.error(e);
         }
     });
-
-    /**
-     * Executes tasks on the same thread that inserts it
-     */
-    public static final SelectableThread DIRECT_EXECUTOR = new SelectableThread() {
-        @Override
-        public void execute(Runnable task) {
-            task.run();
-        }
-
-        @Override
-        public <V> Future<V> submitTask(Callable<V> task) {
-            RunnableFuture<V> future = new FutureTask<>(task);
-            try {
-                future.run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return future;
-        }
-
-        @Override
-        public void interrupt() {
-        }
-
-        @Override
-        public Thread asThread() {
-            return Thread.currentThread();
-        }
-    };
 
     private Defaults() {
     }

@@ -18,13 +18,14 @@
 package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.Messagable;
+import net.tridentsdk.service.PermissionHolder;
 
 /**
  * A server entity which can execute commands, which can be players or the console
  *
  * @author The TridentSDK Team
  */
-public interface CommandIssuer extends Messagable {
+public interface CommandIssuer extends Messagable, PermissionHolder {
     /**
      * Issues a command from this sender, forcing them to run it
      */

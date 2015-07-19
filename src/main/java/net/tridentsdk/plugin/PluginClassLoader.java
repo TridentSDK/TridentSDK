@@ -58,7 +58,7 @@ public class PluginClassLoader extends URLClassLoader {
     void unloadClasses() {
         for (Class<?> cls : locallyLoaded.values()) {
             if (Listener.class.isAssignableFrom(cls)) {
-                Registered.forEvents().unregister(cls.asSubclass(Listener.class));
+                Registered.events().unregister(cls.asSubclass(Listener.class));
             }
 
             if (Command.class.isAssignableFrom(cls)) {

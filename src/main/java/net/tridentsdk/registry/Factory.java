@@ -5,6 +5,7 @@ import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.docs.AccessNoDoc;
+import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.world.WorldLoader;
 import net.tridentsdk.world.gen.AbstractGenerator;
 
@@ -120,6 +121,35 @@ public final class Factory {
      */
     public static WorldLoader newWorldLoader() {
         return impl.newLoader(null);
+    }
+
+    /**
+     * Obtains a new logger by name, or the existing logger if one has already been created for this name
+     *
+     * @param name the name to use
+     * @return the logger
+     */
+    public static TridentLogger newLogger(String name) {
+        return TridentLogger.get(name);
+    }
+
+    /**
+     * Obtains a new logger by class, or the existing logger if one has already been created for this class
+     *
+     * @param cls the class to use
+     * @return the logger
+     */
+    public static TridentLogger newLogger(Class<?> cls) {
+        return TridentLogger.get(cls);
+    }
+
+    /**
+     * Creates a new logger using the calling class name as the name
+     *
+     * @return the new logger
+     */
+    public static TridentLogger newLogger() {
+        return TridentLogger.get();
     }
 
     @AccessNoDoc

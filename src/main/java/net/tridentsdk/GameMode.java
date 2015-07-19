@@ -47,7 +47,7 @@ public enum GameMode {
         return gameMode.asByte();
     }
 
-    public static GameMode gamemodeOf(int i) {
+    public static GameMode of(int i) {
         for (GameMode mode : values()) {
             if (mode.b == i) {
                 return mode;

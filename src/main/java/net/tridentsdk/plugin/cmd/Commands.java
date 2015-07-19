@@ -21,6 +21,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.meta.MessageBuilder;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.PluginLoadException;
 import net.tridentsdk.plugin.annotation.CommandDescription;
@@ -64,7 +65,7 @@ public class Commands {
      *
      * @param message the command executed
      */
-    public void handleCommand(final String message, final CommandIssuer issuer) {
+    public void handle(final String message, final CommandIssuer issuer) {
         if (message.isEmpty()) {
             return;
         }
@@ -77,7 +78,7 @@ public class Commands {
         if (!cmdData.isEmpty()) {
             Registered.plugins().executor().execute(() -> {
                 for (CommandData data : cmdData) {
-                    handleCommand(data.command(), issuer, args, contents);
+                    handle(data.command(), issuer, args, contents, data);
                 }
             });
         } else {
@@ -103,7 +104,12 @@ public class Commands {
         return dataSet;
     }
 
-    private void handleCommand(Command cmd, CommandIssuer issuer, String args, String[] contents) {
+    private void handle(Command cmd, CommandIssuer issuer, String args, String[] contents, CommandData data) {
+        if (!issuer.holdsPermission(data.permission)) {
+            issuer.sendRaw(new MessageBuilder("You do not have permission").build().asJson());
+            return;
+        }
+
         if (issuer instanceof Player)
             cmd.handlePlayer((Player) issuer, args, contents[0]);
         else if (issuer instanceof ServerConsole)
@@ -112,7 +118,7 @@ public class Commands {
         cmd.handle(issuer, args, contents[0]);
     }
 
-    public int addCommand(Plugin plugin, Command command) throws
+    public int register(Plugin plugin, Command command) throws
             PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 

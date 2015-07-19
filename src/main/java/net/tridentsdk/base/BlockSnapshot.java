@@ -33,16 +33,16 @@ import javax.annotation.concurrent.Immutable;
 public final class BlockSnapshot {
     private final Position location;
     private final Substance material;
-    private final byte data;
+    private final byte meta;
 
     private BlockSnapshot(Position location, Substance material, byte data) {
         this.location = location;
         this.material = material;
-        this.data = data;
+        this.meta = data;
     }
 
     /**
-     * Creates a view of the block at the time when "snapshotted"
+     * Creates a view of the block at the time when taken
      *
      * @param block the tile to view
      * @return the snapshot of the tile
@@ -64,18 +64,33 @@ public final class BlockSnapshot {
     public void load() {
         Block block = location.world().blockAt(location);
         block.setSubstance(material);
-        block.setMeta(data);
+        block.setMeta(meta);
     }
 
+    /**
+     * Obtains the position of the block
+     *
+     * @return the position
+     */
     public Position position() {
         return location;
     }
 
+    /**
+     * Obtains the block substance
+     *
+     * @return the substance
+     */
     public Substance type() {
         return material;
     }
 
-    public byte data() {
-        return data;
+    /**
+     * Obtains the block meta
+     *
+     * @return the block meta
+     */
+    public byte meta() {
+        return meta;
     }
 }

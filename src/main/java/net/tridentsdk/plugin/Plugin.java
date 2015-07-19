@@ -22,7 +22,7 @@ import net.tridentsdk.concurrent.HeldValueLatch;
 import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.event.Listener;
-import net.tridentsdk.plugin.annotation.PluginDescription;
+import net.tridentsdk.plugin.annotation.Desc;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Must be extended by a non-inner class to represent a plugin's <em>main class</em>
@@ -43,7 +44,7 @@ import java.util.Objects;
 public class Plugin {
     private final File pluginFile;
     private final File configDirectory;
-    private final PluginDescription description;
+    private final Desc description;
     private final Config defaultConfig;
     private final HeldValueLatch<SelectableThread> executor = HeldValueLatch.create();
     public PluginClassLoader classLoader;
@@ -56,8 +57,8 @@ public class Plugin {
         throw new IllegalStateException("Cannot be directly instantiated");
     } // avoid any plugin initiation outside of this package
 
-    Plugin(File pluginFile, PluginDescription description, PluginClassLoader loader) {
-        Registered.plugins().plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
+    Plugin(File pluginFile, Desc description, PluginClassLoader loader) {
+        Registered.plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
                 "Plugin already initialized or plugin named " + description.name() + " exists already")));
 
         this.pluginFile = pluginFile;
@@ -79,7 +80,7 @@ public class Plugin {
     public static Plugin instance() {
         Class<?> caller = Trident.findCaller(3);
         ClassLoader loader = caller.getClassLoader();
-        for (Plugin plugin : Registered.plugins().plugins())
+        for (Plugin plugin : Registered.plugins())
             if (plugin.classLoader.equals(loader))
                 return plugin;
         return null;
@@ -96,7 +97,7 @@ public class Plugin {
      */
     @Nullable
     public static Plugin instance(Class<? extends Plugin> c) {
-        for (Plugin plugin : Registered.plugins().plugins())
+        for (Plugin plugin : Registered.plugins())
             if (plugin.getClass().equals(c))
                 return plugin;
         return null;
@@ -130,7 +131,11 @@ public class Plugin {
      * @return the listener instance registered to the server
      */
     public <T extends Listener> T listenerBy(Class<T> c) {
-        return (T) Registered.forEvents().listenersFor(this).get(c);
+        return (T) Registered.events()
+                .stream()
+                .filter(r -> r.eventClass().equals(c))
+                .collect(Collectors.toList())
+                .get(0);
     }
 
     /**
@@ -212,7 +217,7 @@ public class Plugin {
      * @return the plugin descriptor for this plugin
      */
     @Nonnull
-    public final PluginDescription description() {
+    public final Desc description() {
         return this.description;
     }
 

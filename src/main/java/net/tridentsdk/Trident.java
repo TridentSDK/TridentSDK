@@ -20,17 +20,13 @@ package net.tridentsdk;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.cmd.ServerConsole;
-import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
 import java.net.InetAddress;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * Utility static accessor to the {@link Server}
@@ -104,10 +100,6 @@ public final class Trident {
         server.shutdown();
     }
 
-    public static Map<String, World> worlds() {
-        return server.worlds();
-    }
-
     public static InetAddress serverIp() {
         return server.serverIp();
     }
@@ -122,15 +114,6 @@ public final class Trident {
 
     public static Config config() {
         return server.config();
-    }
-
-    public static Collection<Player> onlinePlayers() {
-        return server.onlinePlayers();
-    }
-
-    public static void broadcast(String str) {
-        onlinePlayers().stream()
-                .forEach((p) -> p.sendMessage(str));
     }
 
     public static Server server() {

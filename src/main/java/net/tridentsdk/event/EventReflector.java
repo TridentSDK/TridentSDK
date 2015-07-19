@@ -18,14 +18,17 @@
 package net.tridentsdk.event;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
-import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.event.player.PlayerMoveEvent;
 import net.tridentsdk.plugin.Plugin;
 
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
-@AccessNoDoc
+/**
+ * A fast-reflection based event invoker which notifies event listeners
+ *
+ * @author The TridentSDK Team
+ */
 public class EventReflector implements Comparator<EventReflector> {
     private final MethodAccess handle;
     private final Plugin plugin;

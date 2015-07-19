@@ -18,6 +18,8 @@
 package net.tridentsdk.util;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
@@ -26,6 +28,7 @@ import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.registry.Registered;
+import net.tridentsdk.registry.Registry;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +37,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Logger for Trident, automatically obtains the correct logger for the class
@@ -41,18 +47,14 @@ import java.util.Arrays;
  * @author The TridentSDK Team
  */
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
-public final class TridentLogger {
+public final class TridentLogger extends ForwardingCollection<TridentLogger> implements Registry<TridentLogger> {
     private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Houston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me this isn't a bug, it's a feature!" };
-
-    private TridentLogger() {
-    }
+    private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 
     @InternalUseOnly
     public static void init() {
-        String PATTERN = "%d{dd MMM HH:mm} [%p][%t] %m%n";
-
         ConsoleAppender console = new ConsoleAppender(); //create appender
-        console.setLayout(new PatternLayout(PATTERN));
+        console.setLayout(new PatternLayout("%d{dd MMM HH:mm} [%p] %m%n"));
         console.setThreshold(Level.INFO);
         console.activateOptions();
         console.setWriter(new Writer() {
@@ -104,7 +106,7 @@ public final class TridentLogger {
 
         fa.setName("FileLogger");
         fa.setFile("trident.log");
-        fa.setLayout(new PatternLayout(PATTERN));
+        fa.setLayout(new PatternLayout("%d{dd MMM HH:mm} [%p][%c{1}][%t] %m%n"));
         fa.setThreshold(Level.DEBUG);
         fa.setAppend(true);
         fa.activateOptions();
@@ -152,13 +154,53 @@ public final class TridentLogger {
         Files.copy(original, newPath);
     }
 
+    private final org.slf4j.Logger logger;
+
+    private TridentLogger(String name) {
+        this.logger = LoggerFactory.getLogger(name);
+    }
+
+    /**
+     * Obtains the internal underlying representation of the logger
+     *
+     * @return the SLF4J raw logger
+     */
+    public org.slf4j.Logger internal() {
+        return this.logger;
+    }
+
+    @Override
+    protected Collection<TridentLogger> delegate() {
+        return ImmutableList.copyOf(LOGGERS.values());
+    }
+
     /**
      * Obtains the logger for the class that calls this method
      *
      * @return the logger for that class
      */
-    public static org.slf4j.Logger logger() {
-        return LoggerFactory.getLogger(Trident.findCaller(4));
+    public static TridentLogger get() {
+        return get(Trident.findCaller(4));
+    }
+
+    /**
+     * Obtains the logger for the class that is specified
+     *
+     * @param cls the specified class
+     * @return the logger for that class
+     */
+    public static TridentLogger get(Class<?> cls) {
+        return get(cls.getName());
+    }
+
+    /**
+     * Obtains a logger, creating a new one if it does not exist in the logger registry
+     *
+     * @param name the logger name
+     * @return the new logger
+     */
+    public static TridentLogger get(String name) {
+        return LOGGERS.computeIfAbsent(name, k -> new TridentLogger(name));
     }
 
     /**
@@ -167,7 +209,7 @@ public final class TridentLogger {
      * @param item the item to log
      */
     public static void log(String item) {
-        logger().info(parse(item) + ServerConsole.RESET);
+        get().internal().info(parse(item) + ServerConsole.RESET);
     }
 
     /**
@@ -176,7 +218,7 @@ public final class TridentLogger {
      * @param message the message to log
      */
     public static void error(String message) {
-        logger().error(ServerConsole.RED + parse(message) + ServerConsole.RESET);
+        get().internal().error(ServerConsole.RED + parse(message) + ServerConsole.RESET);
     }
 
     /**
@@ -185,7 +227,7 @@ public final class TridentLogger {
      * @param item the item to log
      */
     public static void warn(String item) {
-        logger().warn(ServerConsole.YELLOW + parse(item) + ServerConsole.RESET);
+        get().internal().warn(ServerConsole.YELLOW + parse(item) + ServerConsole.RESET);
     }
 
     /**
@@ -241,7 +283,7 @@ public final class TridentLogger {
      * @param throwable the error to log
      */
     public static void error(Throwable throwable) {
-        org.slf4j.Logger logger = logger();
+        org.slf4j.Logger logger = get().internal();
         StackTraceElement[] stackTrace = throwable.getStackTrace();
 
         logger.error("========  BEGIN ERROR =========");
@@ -283,7 +325,7 @@ public final class TridentLogger {
         logger.error("========     Server info    =========");
         logger.error("Trident version: " + Trident.version());
         logger.error("Plugins:         " + Arrays.toString(
-                Lists.transform(Registered.plugins().plugins(), new Function<Plugin, String>() {
+                Lists.transform(Registered.plugins(), new Function<Plugin, String>() {
                     @Nullable
                     @Override
                     public String apply(Plugin plugin) {

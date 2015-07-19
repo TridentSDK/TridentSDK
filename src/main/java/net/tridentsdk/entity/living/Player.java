@@ -74,4 +74,11 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowH
      * @param message the message to display to the player
      */
     void sendMessage(String message);
+
+    /**
+     * Obtains whether this player is currently on the server or not
+     *
+     * @return {@true to indicate the player is connected to the server}
+     */
+    boolean connected();
 }
