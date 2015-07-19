@@ -17,7 +17,7 @@
 package net.tridentsdk.service;
 
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 
 /**
  * Provides chat properties to the {@link net.tridentsdk.service.ChatHandler}
@@ -67,5 +67,5 @@ public interface ChatIdentityFormatter {
      * @param other the chat provider that is being set
      * @param overrider the plugin that is setting the overrider
      */
-    void overriden(ChatIdentityFormatter other, TridentPlugin overrider);
+    void overriden(ChatIdentityFormatter other, Plugin overrider);
 }

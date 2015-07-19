@@ -23,7 +23,7 @@ import java.util.Collection;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     ChannelHandler handler = Handlers.forWindows();
+ *     WindowHandler handler = Handlers.forWindows();
  * </code></pre></p>
  *
  * @author The TridentSDK Team

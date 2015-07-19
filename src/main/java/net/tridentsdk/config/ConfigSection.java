@@ -536,7 +536,7 @@ public class ConfigSection {
      *
      * @return the parent root section
      */
-    public JsonConfig rootSection() {
+    public Config rootSection() {
         synchronized (parentLock) {
             return this.parent.rootSection();
         }

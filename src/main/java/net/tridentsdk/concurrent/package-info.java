@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * Miscellaneous concurrency tools and utilities, especially those that a plugin can use
  */
-
 package net.tridentsdk.concurrent;

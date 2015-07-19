@@ -17,7 +17,7 @@
 package net.tridentsdk;
 
 import net.tridentsdk.event.EventHandler;
-import net.tridentsdk.plugin.TridentPluginHandler;
+import net.tridentsdk.plugin.PluginHandler;
 import net.tridentsdk.plugin.channel.ChannelHandler;
 import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.service.ChatHandler;
@@ -33,7 +33,7 @@ public final class Handler {
     private static final AccessBridge BRIDGE = AccessBridge.open();
 
     private static final EventHandler EVENT_HANDLER = EventHandler.create();
-    private static final TridentPluginHandler PLUGIN_HANDLER = new TridentPluginHandler();
+    private static final PluginHandler PLUGIN_HANDLER = new PluginHandler();
     private static final CommandHandler COMMAND_HANDLER = new CommandHandler();
     private static final ChatHandler CHAT_HANDLER = new ChatHandler();
     private static final TransactionHandler TRANSACTION_HANDLER = new TransactionHandler();
@@ -55,7 +55,7 @@ public final class Handler {
      *
      * @return the plugin handler
      */
-    public static TridentPluginHandler forPlugins() {
+    public static PluginHandler forPlugins() {
         return PLUGIN_HANDLER;
     }
 

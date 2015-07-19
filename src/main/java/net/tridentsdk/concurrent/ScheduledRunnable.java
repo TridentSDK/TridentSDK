@@ -17,8 +17,9 @@
 
 package net.tridentsdk.concurrent;
 
+import net.tridentsdk.docs.InternalUseOnly;
+
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A wrapper over {@link java.lang.Runnable} that provides access to the scheduling facilities after scheduled
@@ -26,19 +27,21 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public abstract class TridentRunnable implements Runnable {
+public abstract class ScheduledRunnable implements Runnable {
     private static volatile int currentId = 0;
 
     private final int id;
-    private final AtomicReference<ScheduledTask> task = new AtomicReference<>();
+    private volatile ScheduledTask task;
 
-    public TridentRunnable() {
+    public ScheduledRunnable() {
         id = currentId += 1;
     }
 
     /**
      * Guaranteed to be run before this Runnable on the main thread, even if this runnable is going to be run
      * asynchronously, useful for collecting resources to work on.
+     *
+     * <p>This method is invoked synchronously relative to the {@link #run()} method</p>
      */
     public void beforeRun() {
     }
@@ -64,7 +67,7 @@ public abstract class TridentRunnable implements Runnable {
      * will be thrown. This can be called when {@code task() != null}.</p>
      */
     public final void cancel() {
-        task.get().cancel();
+        task.cancel();
     }
 
     /**
@@ -74,21 +77,21 @@ public abstract class TridentRunnable implements Runnable {
      * will be thrown. This can be called when {@code task() != null}.</p>
      */
     public final long interval() {
-        return task.get().interval();
+        return task.interval();
     }
 
     /**
      * Sets how long this runnable should wait between executions if this is a repeating task
      *
      * <p>If this task is  synchronous to the main thread, the change will be immediate, if it is not, the change may
-     * take an iteration to take effect, however {@link TridentRunnable#interval()} will reflect the changes
+     * take an iteration to take effect, however {@link ScheduledRunnable#interval()} will reflect the changes
      * immediately</p>
      *
      * <p>WARNING: This is a delegated function. DO NOT call this method before it is scheduled. A NullPointerException
      * will be thrown. This can be called when {@code task() != null}.</p>
      */
     public final void setInterval(long interval) {
-        task.get().setInterval(interval);
+        task.setInterval(interval);
     }
 
     /**
@@ -103,16 +106,12 @@ public abstract class TridentRunnable implements Runnable {
      *
      * @return the {@link ScheduledTask} object held within the scheduling implementation
      */
-    public ScheduledTask task() {
-        return this.task.get();
+    public ScheduledTask asScheduledTask() {
+        return this.task;
     }
 
-    /**
-     * Invoked by the scheduler to mark that the task has been scheduled.
-     *
-     * @param task the task handed down to delegate off functionality
-     */
+    @InternalUseOnly
     public void markSchedule(ScheduledTask task) {
-        this.task.set(task);
+        this.task = task;
     }
 }

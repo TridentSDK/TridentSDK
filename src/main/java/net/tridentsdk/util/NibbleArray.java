@@ -66,7 +66,6 @@ public final class NibbleArray {
         System.arraycopy(source, 0, data, 0, source.length);
     }
 
-
     public static byte get (byte[] source, int index) {
         return (byte) (source[index / 2] >> ((index) % 2 * 4) & 0xF);
     }

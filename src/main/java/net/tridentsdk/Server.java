@@ -17,7 +17,7 @@
 
 package net.tridentsdk;
 
-import net.tridentsdk.config.JsonConfig;
+import net.tridentsdk.config.Config;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ai.AiHandler;
 import net.tridentsdk.plugin.cmd.ServerConsole;
@@ -106,7 +106,7 @@ public interface Server {
      *
      * @return the server config
      */
-    JsonConfig config();
+    Config config();
 
     /**
      * Get the player by UUID

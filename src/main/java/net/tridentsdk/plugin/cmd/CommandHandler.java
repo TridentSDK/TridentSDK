@@ -22,14 +22,14 @@ import com.google.common.collect.Sets;
 import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.PluginLoadException;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
  */
 public class CommandHandler {
     // TODO: Make this a dictionary tree for fast lookup
-    private static final Map<String, CommandData> COMMANDS = Factories.collect().createMap();
+    private static final Map<String, CommandData> COMMANDS = new ConcurrentHashMap<>();
 
     /**
      * Do not instantiate
@@ -75,7 +75,7 @@ public class CommandHandler {
         final Set<CommandData> cmdData = findCommand(label);
 
         if (!cmdData.isEmpty()) {
-            Handler.forPlugins().executor().addTask(() -> {
+            Handler.forPlugins().executor().execute(() -> {
                 for (CommandData data : cmdData) {
                     handleCommand(data.command(), issuer, args, contents);
                 }
@@ -112,7 +112,7 @@ public class CommandHandler {
         cmd.handle(issuer, args, contents[0]);
     }
 
-    public int addCommand(TridentPlugin plugin, Command command) throws
+    public int addCommand(Plugin plugin, Command command) throws
             PluginLoadException {
         CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
 
@@ -156,7 +156,7 @@ public class CommandHandler {
         COMMANDS.entrySet().stream().filter(e -> e.getValue().command().getClass().equals(cls)).forEach(e -> COMMANDS.remove(e.getKey()));
     }
 
-    public Map<Class<? extends Command>, Command> commandsFor(TridentPlugin plugin) {
+    public Map<Class<? extends Command>, Command> commandsFor(Plugin plugin) {
         Map<Class<? extends Command>, Command> map = Maps.newHashMap();
         COMMANDS.values().stream().filter(data -> data.plugin().equals(plugin)).forEach(data -> map.put(data.encapsulated.getClass(), data.encapsulated));
         return map;
@@ -168,10 +168,10 @@ public class CommandHandler {
         private final String[] aliases;
         private final String name;
         private final Command encapsulated;
-        private final TridentPlugin plugin;
+        private final Plugin plugin;
 
         public CommandData(String name, int priority, String[] aliases, String permission, Command command,
-                TridentPlugin plugin) {
+                Plugin plugin) {
             this.priority = priority;
             this.name = name;
             this.aliases = aliases;
@@ -197,7 +197,7 @@ public class CommandHandler {
             return this.priority;
         }
 
-        public TridentPlugin plugin() {
+        public Plugin plugin() {
             return plugin;
         }
     }

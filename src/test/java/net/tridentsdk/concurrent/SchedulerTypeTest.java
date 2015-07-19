@@ -24,11 +24,11 @@ public class SchedulerTypeTest {
 
     @Test
     public void testEnum() throws Exception {
-        Assert.assertEquals(SchedulerType.ASYNC_RUN, SchedulerType.ASYNC_RUN);
-        Assert.assertEquals(SchedulerType.ASYNC_LATER, SchedulerType.ASYNC_LATER);
-        Assert.assertEquals(SchedulerType.ASYNC_REPEAT, SchedulerType.ASYNC_REPEAT);
-        Assert.assertEquals(SchedulerType.SYNC_RUN, SchedulerType.SYNC_RUN);
-        Assert.assertEquals(SchedulerType.SYNC_LATER, SchedulerType.SYNC_LATER);
-        Assert.assertEquals(SchedulerType.SYNC_REPEAT, SchedulerType.SYNC_REPEAT);
+        Assert.assertEquals(TaskType.ASYNC_RUN, TaskType.ASYNC_RUN);
+        Assert.assertEquals(TaskType.ASYNC_LATER, TaskType.ASYNC_LATER);
+        Assert.assertEquals(TaskType.ASYNC_REPEAT, TaskType.ASYNC_REPEAT);
+        Assert.assertEquals(TaskType.SYNC_RUN, TaskType.SYNC_RUN);
+        Assert.assertEquals(TaskType.SYNC_LATER, TaskType.SYNC_LATER);
+        Assert.assertEquals(TaskType.SYNC_REPEAT, TaskType.SYNC_REPEAT);
     }
 }

@@ -19,7 +19,6 @@ package net.tridentsdk.plugin;
 
 import net.tridentsdk.Handler;
 import net.tridentsdk.event.Listener;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.util.TridentLogger;
 
@@ -30,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The classloader for plugins
@@ -37,7 +37,7 @@ import java.util.Map;
  * @author The TridentSDK Team
  */
 public class PluginClassLoader extends URLClassLoader {
-    final Map<String, Class<?>> locallyLoaded = Factories.collect().createMap();
+    final Map<String, Class<?>> locallyLoaded = new ConcurrentHashMap<>();
 
     PluginClassLoader(File pluginFile, ClassLoader loader) throws MalformedURLException {
         super(new URL[]{pluginFile.toURI().toURL()}, loader);

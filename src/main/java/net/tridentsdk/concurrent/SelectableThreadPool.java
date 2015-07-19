@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.factory;
-
-import net.tridentsdk.concurrent.TaskExecutor;
+package net.tridentsdk.concurrent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -32,35 +30,35 @@ import java.util.concurrent.Future;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public interface ExecutorFactory extends Executor {
+public interface SelectableThreadPool extends Executor {
     /**
      * The maximum amount of expiring threads plus non-dying threads which are created when executing tasks or finding a scaled thread when
      * existing workers are occupied
      *
      * @return the maximum scale, by default {@code Integer.MAX_VALUE}
      */
-    int maxScale();
+    int maxThreads();
 
     /**
-     * Sets the maximum scale (explained in {@link #maxScale()}
+     * Sets the maximum scale (explained in {@link #maxThreads()}
      *
      * @param maxScale the maximum extra scaling threads
      */
-    void setMaxScale(int maxScale);
+    void setMaxThreads(int maxScale);
 
     /**
-     * The interval at which an expiring worker will die after inactivity
+     * The interval at which an <em>expiring</em> worker will die after inactivity
      *
      * @return the time, in milliseconds, which will need to elapse before an expiring worker dies
      */
-    long expireIntervalMillis();
+    long threadExpiryTime();
 
     /**
      * Sets the interval at which an expiring worker will die after inactivity
      *
      * @param expireIntervalMillis the interval, in milliseconds
      */
-    void setExpireIntervalMillis(long expireIntervalMillis);
+    void setThreadExpiryTime(long expireIntervalMillis);
 
     /**
      * Obtains whether an expiring worker will check the task list size before dieing
@@ -79,20 +77,20 @@ public interface ExecutorFactory extends Executor {
     /**
      * Obtains a worker which is available in the thread pool
      *
-     * <p>Unlike using {@link #scaledThread()}, this does not create a new thread if all workers are occupied.</p>
+     * <p>Unlike using {@link #selectScaled()}, this does not create a new thread if all workers are occupied.</p>
      *
      * <p>Obtaining an executor and immediately adding a task is a broken idiom.
      * Store the executor, or use {@link #execute(Runnable)}</p>
      *
      * @return the next worker in the pool
      */
-    TaskExecutor nextWorker();
+    SelectableThread selectNext();
 
     /**
      * Obtains an unoccupied thread, or if none exists, create a new thread
      *
      * <p>The new thread, if created, will expire. The default time is 60 seconds, if there are no tasks left.
-     * The timer is renewed if there are still tasks. The timer is a lazy {@code long} stamp set when tasks are polled
+     * The timer is not renewed if there are still tasks. The timer is a lazy {@code long} stamp set when tasks are polled
      * if the worker wakes up spuriously or a task is added.</p>
      *
      * <p>Obtaining an executor and immediately adding a task is a broken idiom.
@@ -100,14 +98,14 @@ public interface ExecutorFactory extends Executor {
      *
      * @return the thread which is unoccupied when observed
      */
-    TaskExecutor scaledThread();
+    SelectableThread selectScaled();
 
     /**
      * Lists all available task executors from the threads
      *
      * @return the thread list
      */
-    List<TaskExecutor> threadList();
+    List<SelectableThread> workers();
 
     /**
      * Adds support for running a runnable with callback

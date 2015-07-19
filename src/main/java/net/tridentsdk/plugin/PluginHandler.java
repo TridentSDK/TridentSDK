@@ -20,13 +20,13 @@ package net.tridentsdk.plugin;
 import com.google.common.collect.Lists;
 import net.tridentsdk.Handler;
 import net.tridentsdk.Trident;
-import net.tridentsdk.concurrent.TaskExecutor;
+import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.Listener;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.plugin.annotation.IgnoreRegistration;
 import net.tridentsdk.plugin.annotation.PluginDescription;
 import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.registry.Factory;
 import net.tridentsdk.util.TridentLogger;
 
 import java.io.File;
@@ -50,9 +50,9 @@ import java.util.jar.JarFile;
  *
  * @author The TridentSDK Team
  */
-public class TridentPluginHandler {
-    private static final TaskExecutor EXECUTOR = Factories.threads().executor(1, "Plugins").scaledThread();
-    private final List<TridentPlugin> plugins = Lists.newArrayList();
+public class PluginHandler {
+    private static final SelectableThread EXECUTOR = Factory.newExecutor(1, "Plugins").selectNext();
+    private final List<Plugin> plugins = Lists.newArrayList();
 
     /**
      * Do not instantiate this without being Trident
@@ -62,29 +62,29 @@ public class TridentPluginHandler {
      *     TridentPluginHandler handler = Handler.forPlugins();
      * </code></pre></p>
      */
-    public TridentPluginHandler() {
+    public PluginHandler() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("Can only be instantiated by Trident"));
     }
 
     @InternalUseOnly
     public void load(final File pluginFile) {
-        EXECUTOR.addTask(new Runnable() {
+        EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
-                TridentPlugin plugin = null;
+                Plugin plugin = null;
                 JarFile jarFile = null;
                 try {
                     // load all classes
                     jarFile = new JarFile(pluginFile);
                     PluginClassLoader loader = new PluginClassLoader(pluginFile, getClass().getClassLoader());
-                    Class<? extends TridentPlugin> pluginClass = null;
+                    Class<? extends Plugin> pluginClass = null;
 
                     Enumeration<JarEntry> entries = jarFile.entries();
                     while (entries.hasMoreElements()) {
                         JarEntry entry = entries.nextElement();
 
-                        if(entry.isDirectory() || !entry.getName().endsWith(".class")) {
+                        if (entry.isDirectory() || !entry.getName().endsWith(".class")) {
                             continue;
                         }
 
@@ -93,11 +93,11 @@ public class TridentPluginHandler {
 
                         loader.putClass(loadedClass);
 
-                        if(TridentPlugin.class.isAssignableFrom(loadedClass)) {
-                            if(pluginClass != null)
+                        if (Plugin.class.isAssignableFrom(loadedClass)) {
+                            if (pluginClass != null)
                                 TridentLogger.error(new PluginLoadException("Plugin has more than one main class!"));
 
-                            pluginClass = loadedClass.asSubclass(TridentPlugin.class);
+                            pluginClass = loadedClass.asSubclass(Plugin.class);
                         }
                     }
 
@@ -120,22 +120,21 @@ public class TridentPluginHandler {
 
                     TridentLogger.log("Loading " + description.name() + " version " + description.version());
 
-                    Constructor<? extends TridentPlugin> defaultConstructor = pluginClass.getSuperclass()
-                            .asSubclass(TridentPlugin.class)
+                    Constructor<? extends Plugin> defaultConstructor = pluginClass.getSuperclass()
+                            .asSubclass(Plugin.class)
                             .getDeclaredConstructor(File.class, PluginDescription.class, PluginClassLoader.class);
                     defaultConstructor.setAccessible(true);
                     plugin = defaultConstructor.newInstance(pluginFile, description, loader);
 
                     plugins.add(plugin);
 
-                    plugin.startup();
-                    plugin.onLoad();
+                    plugin.load();
 
                     for (Class<?> cls : loader.locallyLoaded.values()) {
                         register(plugin, cls, EXECUTOR);
                     }
 
-                    plugin.onEnable();
+                    plugin.enable();
                     TridentLogger.success("Loaded " + description.name() + " version " + description.version());
                 } catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException
                         | InstantiationException | ClassNotFoundException ex) { // UNLOAD PLYGIN
@@ -154,7 +153,7 @@ public class TridentPluginHandler {
         });
     }
 
-    private void register(TridentPlugin plugin, Class<?> cls, TaskExecutor executor) throws InstantiationException {
+    private void register(Plugin plugin, Class<?> cls, SelectableThread executor) throws InstantiationException {
         if (Modifier.isAbstract(cls.getModifiers()))
             return;
 
@@ -190,12 +189,12 @@ public class TridentPluginHandler {
      *
      * @param plugin the plugin to disable
      */
-    public void disable(final TridentPlugin plugin) {
-        EXECUTOR.addTask(() -> {
+    public void disable(final Plugin plugin) {
+        EXECUTOR.execute(() -> {
             // Perform disabling first, we don't want to unload everything
             // then disable it
             // State checking could be performed which breaks the class loader
-            plugin.onDisable();
+            plugin.disable();
 
             plugins.remove(plugin);
 
@@ -205,16 +204,21 @@ public class TridentPluginHandler {
     }
 
     /**
-     * Obtains a list of plugins that are currently <strong>loaded</strong>
+     * Obtains an immutable list of plugins that are currently <strong>loaded</strong>
      * (not the plugins that are inside the plugin directory)
      *
      * @return the collection of plugins that are loaded
      */
-    public List<TridentPlugin> plugins() {
+    public List<Plugin> plugins() {
         return Collections.unmodifiableList(this.plugins);
     }
 
-    public TaskExecutor executor() {
+    /**
+     * Obtains the worker used to load plugins. Use this executor to send plugin tasks from the server.
+     *
+     * @return the worker
+     */
+    public SelectableThread executor() {
         return EXECUTOR;
     }
 }

@@ -15,11 +15,10 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.factory;
+package net.tridentsdk.concurrent;
 
-import net.tridentsdk.concurrent.ScheduledTask;
-import net.tridentsdk.concurrent.TridentRunnable;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.AccessBridge;
+import net.tridentsdk.plugin.Plugin;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -36,7 +35,11 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public interface TaskFactory {
+public interface Scheduler {
+    public static Scheduler registry() {
+        return AccessBridge.open().demand(Scheduler.class);
+    }
+
     /**
      * Asynchronously run a task after the next tick
      *
@@ -44,7 +47,7 @@ public interface TaskFactory {
      * @param runnable the runnable to perform the task
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask asyncRun(TridentPlugin plugin, TridentRunnable runnable);
+    public ScheduledTask asyncRun(Plugin plugin, ScheduledRunnable runnable);
 
     /**
      * Synchronously run a task after the next tick
@@ -53,7 +56,7 @@ public interface TaskFactory {
      * @param runnable the runnable to perform the task
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask syncRun(TridentPlugin plugin, TridentRunnable runnable);
+    public ScheduledTask syncRun(Plugin plugin, ScheduledRunnable runnable);
 
     /**
      * Asynchronously run a task after a specified time has passed
@@ -63,7 +66,7 @@ public interface TaskFactory {
      * @param delay    the amount of ticks to wait until the task is executed
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask asyncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
+    public ScheduledTask asyncLater(Plugin plugin, ScheduledRunnable runnable, long delay);
 
     /**
      * Asynchronously run a task after a specified time has passed
@@ -73,7 +76,7 @@ public interface TaskFactory {
      * @param delay    the amount of ticks to wait until the task is executed
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask syncLater(TridentPlugin plugin, TridentRunnable runnable, long delay);
+    public ScheduledTask syncLater(Plugin plugin, ScheduledRunnable runnable, long delay);
 
     /**
      * Asynchronously run a task repeatedly
@@ -84,7 +87,7 @@ public interface TaskFactory {
      * @param initialInterval the amount of time between each execution which occurs repeatedly until cancelled
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask asyncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
+    public ScheduledTask asyncRepeat(Plugin plugin, ScheduledRunnable runnable, long delay, long initialInterval);
 
     /**
      * Synchronously run a task repeatedly
@@ -95,5 +98,5 @@ public interface TaskFactory {
      * @param initialInterval the amount of time between each execution which occurs repeatedly until cancelled
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask syncRepeat(TridentPlugin plugin, TridentRunnable runnable, long delay, long initialInterval);
+    public ScheduledTask syncRepeat(Plugin plugin, ScheduledRunnable runnable, long delay, long initialInterval);
 }

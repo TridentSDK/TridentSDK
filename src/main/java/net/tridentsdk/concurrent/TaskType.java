@@ -17,40 +17,39 @@
 
 package net.tridentsdk.concurrent;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-
 /**
- * Execution abstraction
+ * Type of task that will be run by the scheduler, how it will be run, when it will be scheduled
  *
  * @author The TridentSDK Team
  */
-public interface TaskExecutor {
+public enum TaskType {
     /**
-     * Adds the task to the queue
-     *
-     * @param task the task to add
+     * Asynchronously runs the task the next tick
      */
-    void addTask(Runnable task);
+    ASYNC_RUN,
 
     /**
-     * Runs a callback which returns a value as a future
-     *
-     * @param task the callback to run
-     * @param <V> the return type of the callback
-     * @return the returned value
+     * Asynchronously runs the task later
      */
-    <V> Future<V> submitTask(Callable<V> task);
+    ASYNC_LATER,
 
     /**
-     * Closes the thread and stops execution of new / remaining tasks
+     * Asynchronously runs the task repeatedly, until stopped.
      */
-    void interrupt();
+    ASYNC_REPEAT,
 
     /**
-     * Thread form
-     *
-     * @return the thread that is running
+     * Synchronously runs the task the next tick
      */
-    Thread asThread();
+    SYNC_RUN,
+
+    /**
+     * Synchronously runs the task later
+     */
+    SYNC_LATER,
+
+    /**
+     * Synchronously runs the task repeatedly, until stopped.
+     */
+    SYNC_REPEAT
 }

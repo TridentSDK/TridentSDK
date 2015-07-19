@@ -20,7 +20,7 @@ package net.tridentsdk.event;
 import com.esotericsoftware.reflectasm.MethodAccess;
 import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.event.player.PlayerMoveEvent;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 
 import java.lang.reflect.Method;
 import java.util.Comparator;
@@ -28,13 +28,13 @@ import java.util.Comparator;
 @AccessNoDoc
 class EventReflector implements Comparator<EventReflector> {
     private final MethodAccess handle;
-    private final TridentPlugin plugin;
+    private final Plugin plugin;
     private final int index;
     private final Listener instance;
     private final Class<? extends Event> eventClass;
     private final Importance importance;
 
-    EventReflector(MethodAccess handle, TridentPlugin plugin, int index, Listener instance,
+    EventReflector(MethodAccess handle, Plugin plugin, int index, Listener instance,
             Class<? extends Event> eventClass, Importance importance) {
         this.handle = handle;
         this.plugin = plugin;
@@ -48,7 +48,7 @@ class EventReflector implements Comparator<EventReflector> {
         return this.handle;
     }
 
-    public TridentPlugin plugin() {
+    public Plugin plugin() {
         return plugin;
     }
 

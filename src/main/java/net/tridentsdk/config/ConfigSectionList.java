@@ -37,7 +37,7 @@ public class ConfigSectionList<V> extends ConfigList<V> {
     /**
      * Creates a new section list in the config
      *
-     * @param parent the parent configuration section, usually a {@link net.tridentsdk.config.JsonConfig}.
+     * @param parent the parent configuration section, usually a {@link Config}.
      * @param handle the array handler
      */
     protected ConfigSectionList(ConfigSection parent, JsonArray handle) {

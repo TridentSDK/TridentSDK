@@ -18,7 +18,7 @@ package net.tridentsdk.service;
 
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.util.TridentLogger;
 
 /**
@@ -39,7 +39,7 @@ public class ChatHandler {
         }
 
         @Override
-        public void overriden(ChatIdentityFormatter other, TridentPlugin overrider) {
+        public void overriden(ChatIdentityFormatter other, Plugin overrider) {
             TridentLogger.warn("Trident default chat overriden by " + overrider);
         }
     };
@@ -66,7 +66,7 @@ public class ChatHandler {
      * @param provider the provider to use
      * @param plugin the plugin that registers the new provider
      */
-    public void setFormatter(ChatIdentityFormatter provider, TridentPlugin plugin) {
+    public void setFormatter(ChatIdentityFormatter provider, Plugin plugin) {
         this.provider.overriden(provider, plugin);
         this.provider = provider;
     }

@@ -18,10 +18,10 @@
 package net.tridentsdk.plugin.channel;
 
 import net.tridentsdk.Trident;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.util.TridentLogger;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Manages data channels for sending information over the pipeline
@@ -34,7 +34,7 @@ import java.util.Map;
  * @author The TridentSDK Team
  */
 public abstract class ChannelHandler {
-    private final Map<String, PluginChannel> channels = Factories.collect().createMap();
+    private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
 
     /**
      * Do not instantiate

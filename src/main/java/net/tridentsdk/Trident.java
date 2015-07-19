@@ -18,7 +18,7 @@
 package net.tridentsdk;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.config.JsonConfig;
+import net.tridentsdk.config.Config;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.cmd.ServerConsole;
@@ -126,7 +126,7 @@ public final class Trident {
         return server.console();
     }
 
-    public static JsonConfig config() {
+    public static Config config() {
         return server.config();
     }
 

@@ -37,7 +37,7 @@ import java.nio.file.StandardOpenOption;
  * @author The TridentSDK Team
  */
 @ThreadSafe
-public class JsonConfig extends ConfigSection {
+public class Config extends ConfigSection {
     private final Path path;
 
     /**
@@ -45,7 +45,7 @@ public class JsonConfig extends ConfigSection {
      *
      * @param path the NIO path for file directory
      */
-    public JsonConfig(Path path) {
+    public Config(Path path) {
         this.path = path;
         this.reload();
     }
@@ -55,7 +55,7 @@ public class JsonConfig extends ConfigSection {
      *
      * @param file the file to use as a JSON config, preferably suffixed with {@code .json}
      */
-    public JsonConfig(File file) {
+    public Config(File file) {
         this.path = file.toPath();
         this.reload();
     }
@@ -85,12 +85,12 @@ public class JsonConfig extends ConfigSection {
     }
 
     @Override
-    public JsonConfig rootSection() {
+    public Config rootSection() {
         return this;
     }
 
     @Override
-    public JsonConfig parentSection() {
+    public Config parentSection() {
         return this;
     }
 

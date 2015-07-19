@@ -24,7 +24,7 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
 import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
@@ -283,10 +283,10 @@ public final class TridentLogger {
         logger.error("========     Server info    =========");
         logger.error("Trident version: " + Trident.version());
         logger.error("Plugins:         " + Arrays.toString(
-                Lists.transform(Handler.forPlugins().plugins(), new Function<TridentPlugin, String>() {
+                Lists.transform(Handler.forPlugins().plugins(), new Function<Plugin, String>() {
                     @Nullable
                     @Override
-                    public String apply(TridentPlugin plugin) {
+                    public String apply(Plugin plugin) {
                         return plugin.description().name();
                     }
                 }).toArray()));

@@ -30,7 +30,7 @@ public interface Window {
      *
      * @return the window ID of this window
      */
-    int windowId();
+    int id();
 
     /**
      * The available slots (not the slots taken up) in this window
