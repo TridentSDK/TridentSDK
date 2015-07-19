@@ -21,7 +21,7 @@ import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
-import net.tridentsdk.entity.traits.InventoryHolder;
+import net.tridentsdk.entity.traits.WindowHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.service.PermissionHolder;
 
@@ -32,7 +32,7 @@ import java.util.Locale;
  *
  * @author The TridentSDK Team
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder, PermissionHolder {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionHolder {
     // TODO: Use word settings?
 
     /**

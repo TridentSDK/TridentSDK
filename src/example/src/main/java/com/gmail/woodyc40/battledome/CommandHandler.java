@@ -3,7 +3,7 @@ package com.gmail.woodyc40.battledome;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.plugin.cmd.Command;
 import net.tridentsdk.plugin.cmd.ServerConsole;
@@ -22,7 +22,7 @@ public class CommandHandler extends Command {
 
     // Initialized after the plugin object is created
     // therefore, this is completely safe
-    private final GameManager manager = GameManager.newHandler();
+    private final GameManager manager = GameManager.instance();
 
     @Override
     public void handlePlayer(Player player, String arguments, String alias) {
@@ -118,11 +118,11 @@ public class CommandHandler extends Command {
     }
 
     private void handleCreate(Player player) {
-        BattleListener listener = TridentPlugin.instance().listenerBy(BattleListener.class);
+        BattleListener listener = Plugin.instance().listenerBy(BattleListener.class);
         Game game = this.manager.createGame();
 
         listener.putSession(player, game);
-        player.inventory().putItem(new Item(Substance.BLAZE_ROD));
+        player.window().putItem(new Item(Substance.BLAZE_ROD));
         player.sendMessage(PREFIX + "Beginning setup of game " + game.id());
         player.sendMessage(CommandHandler.PREFIX + "Click the lobby spawn with the blaze rod");
     }

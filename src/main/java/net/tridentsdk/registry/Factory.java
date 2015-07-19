@@ -1,11 +1,13 @@
 package net.tridentsdk.registry;
 
 import com.google.gson.JsonObject;
-import net.tridentsdk.AccessBridge;
+import net.tridentsdk.Implementation;
 import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.docs.AccessNoDoc;
+import net.tridentsdk.world.WorldLoader;
+import net.tridentsdk.world.gen.AbstractGenerator;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -20,7 +22,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author The TridentSDK Team
  */
 public final class Factory {
+    private static volatile Implementation impl;
+
     private Factory() {
+    }
+
+    public static void setProvider(Implementation implementation) {
+        impl = implementation;
     }
 
     /**
@@ -91,7 +99,28 @@ public final class Factory {
      * @return the new thread pool
      */
     public static SelectableThreadPool newExecutor(int startingThreads, String name) {
-        return AccessBridge.open().demand(SelectableThreadPool.class);
+        return impl.newPool(startingThreads, name);
+    }
+
+    /**
+     * Creates a new world loader, which can use its own generator
+     *
+     * <p>The provided class must have a no-arg constructor.</p>
+     *
+     * @param generator the generator to use, a class to defensively protect the signature
+     * @return the new world loader
+     */
+    public static WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator) {
+        return impl.newLoader(generator);
+    }
+
+    /**
+     * Creates a new world loader, which can use its own generator
+     *
+     * @return the new world loader
+     */
+    public static WorldLoader newWorldLoader() {
+        return impl.newLoader(null);
     }
 
     @AccessNoDoc

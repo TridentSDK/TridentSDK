@@ -22,7 +22,7 @@ import net.tridentsdk.event.Event;
 import net.tridentsdk.window.Window;
 
 /**
- * Called when a player closes an inventory window
+ * Called when a player closes an window window
  *
  * @author The TridentSDK Team
  */

@@ -12,13 +12,13 @@ import net.tridentsdk.plugin.annotation.PluginDescription;
 public class BattleDome extends Plugin {
     @Override
     public void enable() {
-        GameManager manager = GameManager.newHandler();
+        GameManager manager = GameManager.instance();
         manager.loadGames();
     }
 
     @Override
     public void disable() {
-        GameManager manager = GameManager.newHandler();
+        GameManager manager = GameManager.instance();
         manager.save();
     }
 }

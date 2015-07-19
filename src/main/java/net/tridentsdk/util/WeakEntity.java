@@ -139,7 +139,7 @@ import java.util.stream.Collectors;
  * <pre><code>
  *     Map&lt;WeakEntity&lt;Entity&gt;, Object&gt; map = Maps.newHashMap();
  *     ...
- *     Object o = map.get(WeakEntity.finderOf(entity));
+ *     Object o = map.get(WeakEntity.searchFor(entity));
  * </code></pre>
  *
  * <p>Finally, WeakEntity can be used to find and prevent bugs which would otherwise cause NullPointerExceptions.</p>
@@ -265,13 +265,13 @@ public final class WeakEntity<T extends Entity> {
      * a WeakEntity from a collection or to match with a stored version.</p>
      *
      * <p>This method never returns null. If there is no entity which is known to exist with a WeakEntity, then the
-     * returned object {@code finderOf(null).equals(null)}.</p>
+     * returned object {@code searchFor(null).equals(null)}.</p>
      *
      * @param entity the entity to get the finder for
      * @return an object that possesses the properties of the entity so that they match up with an WeakEntity containing
      * the same entity
      */
-    public static Object finderOf(Entity entity) {
+    public static Object searchFor(Entity entity) {
         if (entity == null)
             return RefList.NULL;
         return REFERENCE_QUEUE.finderOf(entity);
@@ -436,7 +436,7 @@ public final class WeakEntity<T extends Entity> {
     }
 
     /**
-     * Instance method of {@link #finderOf(net.tridentsdk.entity.Entity)}. See that method for the documentation and
+     * Instance method of {@link #searchFor(net.tridentsdk.entity.Entity)}. See that method for the documentation and
      * implementation.
      *
      * <p>This method still internally polls the reference queue for the entity's cached finder.</p>

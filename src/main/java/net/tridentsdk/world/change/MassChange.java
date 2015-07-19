@@ -21,13 +21,11 @@ import net.tridentsdk.base.Substance;
 
 /**
  * Change large amounts of blocks at one time
- * <p/>
+ *
  * <p>Normally, block changes cause changes to immediately be sent to the client
  * which can be expensive with large amounts of changes being sent at once near a lot of players</p>
  */
 public interface MassChange {
-
-
     /**
      * Add a change to make at when this change is committed
      *
@@ -70,7 +68,7 @@ public interface MassChange {
      * @param z         the z of the block to set
      * @param substance the substance to change the block to
      * @param data      the data value to give the new block
-     * @throws java.lang.IllegalStateException
+     * @throws IllegalStateException
      */
     public void setBlock(int x, int y, int z, Substance substance, byte data)
             throws IllegalStateException;

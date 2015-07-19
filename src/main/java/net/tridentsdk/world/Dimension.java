@@ -28,7 +28,7 @@ public enum Dimension {
         this.b = (byte) i;
     }
 
-    public static Dimension dimension(int i) {
+    public static Dimension of(int i) {
         for (Dimension dimension : values()) {
             if (dimension.b == i) {
                 return dimension;

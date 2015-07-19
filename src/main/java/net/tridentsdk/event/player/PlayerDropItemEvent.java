@@ -22,7 +22,7 @@ import net.tridentsdk.event.Cancellable;
 import net.tridentsdk.window.inventory.Item;
 
 /**
- * Occurs when a player drops an item out of their inventory, usually by default pressing 'q'
+ * Occurs when a player drops an item out of their window, usually by default pressing 'q'
  *
  * @author The TridentSDK Team
  */

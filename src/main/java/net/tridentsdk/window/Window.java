@@ -20,7 +20,7 @@ package net.tridentsdk.window;
 import net.tridentsdk.window.inventory.Item;
 
 /**
- * Represents an inventory or window that is opened to players
+ * Represents an window or window that is opened to players
  *
  * @author The TridentSDK Team
  */
@@ -56,7 +56,7 @@ public interface Window {
     void setSlot(int index, Item value);
 
     /**
-     * Places an item into the player's inventory, where there is room, or drops onto the ground if the inventory is
+     * Places an item into the player's window, where there is room, or drops onto the ground if the window is
      * full
      *
      * @param item the item to place
@@ -64,14 +64,14 @@ public interface Window {
     void putItem(Item item);
 
     /**
-     * The title of the inventory
+     * The title of the window
      *
      * @return the name displayed at the top of the window
      */
     String name();
 
     /**
-     * Obtains the contents of the inventory represented by this window
+     * Obtains the contents of the window represented by this window
      *
      * @return the items in the window
      */

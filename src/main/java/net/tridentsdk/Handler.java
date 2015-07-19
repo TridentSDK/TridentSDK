@@ -18,11 +18,9 @@ package net.tridentsdk;
 
 import net.tridentsdk.event.EventHandler;
 import net.tridentsdk.plugin.PluginHandler;
-import net.tridentsdk.plugin.channel.ChannelHandler;
 import net.tridentsdk.plugin.cmd.CommandHandler;
 import net.tridentsdk.service.ChatHandler;
 import net.tridentsdk.service.TransactionHandler;
-import net.tridentsdk.window.WindowHandler;
 
 /**
  * Contains the singleton instances for all the Trident handlers
@@ -30,8 +28,6 @@ import net.tridentsdk.window.WindowHandler;
  * @author The TridentSDK Team
  */
 public final class Handler {
-    private static final AccessBridge BRIDGE = AccessBridge.open();
-
     private static final EventHandler EVENT_HANDLER = EventHandler.create();
     private static final PluginHandler PLUGIN_HANDLER = new PluginHandler();
     private static final CommandHandler COMMAND_HANDLER = new CommandHandler();
@@ -84,23 +80,5 @@ public final class Handler {
      */
     public static TransactionHandler forTransactions() {
         return TRANSACTION_HANDLER;
-    }
-
-    /**
-     * Obtains the static instance of the channel handler
-     *
-     * @return the channel handler instance
-     */
-    public static ChannelHandler forChannels() {
-        return BRIDGE.demand(ChannelHandler.class);
-    }
-
-    /**
-     * Obtains the window handler
-     *
-     * @return the window handler
-     */
-    public static WindowHandler forWindows() {
-        return BRIDGE.demand(WindowHandler.class);
     }
 }

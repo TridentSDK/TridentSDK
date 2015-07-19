@@ -21,6 +21,11 @@ import net.tridentsdk.world.ChunkLocation;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Represents an iterator over chunks within a specified range
+ *
+ * @author The TridentSDK Team
+ */
 public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
     final int minX;
     final int minZ;

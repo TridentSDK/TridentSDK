@@ -96,9 +96,8 @@ public class Plugin {
      */
     @Nullable
     public static Plugin instance(Class<? extends Plugin> c) {
-        ClassLoader loader = c.getClassLoader();
         for (Plugin plugin : Handler.forPlugins().plugins())
-            if (plugin.classLoader.equals(loader))
+            if (plugin.getClass().equals(c))
                 return plugin;
         return null;
     }

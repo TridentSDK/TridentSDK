@@ -26,13 +26,13 @@ import net.tridentsdk.window.inventory.Item;
  *
  * @author TridentSDK Team
  */
-public interface InventoryHolder extends Entity {
+public interface WindowHolder extends Entity {
     /**
      * The Inventory that this entity holds
      *
      * @return the Inventory that this entity holds
      */
-    Window inventory();
+    Window window();
 
     /**
      * Returns the ItemStack in the Player's hand

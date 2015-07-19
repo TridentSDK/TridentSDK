@@ -109,7 +109,7 @@ public interface World extends Cloneable {
      *
      * @return The set boolean for the given gamerule
      */
-    boolean gameRule(String rule);
+    boolean isRule(String rule);
 
     /**
      * Gets the time in a world
@@ -158,7 +158,7 @@ public interface World extends Cloneable {
      *
      * @return True if structures are generated in a world (Stronghold, villages, dungeons)
      */
-    boolean canGenerateStructures();
+    boolean generateStructures();
 
     /**
      * Gets the size of the worldborder

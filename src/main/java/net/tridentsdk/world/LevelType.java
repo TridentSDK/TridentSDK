@@ -31,7 +31,7 @@ public enum LevelType {
         this.s = s;
     }
 
-    public static LevelType levelTypeOf(String s) {
+    public static LevelType of(String s) {
         for (LevelType level : values()) {
             if (level.s.equalsIgnoreCase(s)) {
                 return level;

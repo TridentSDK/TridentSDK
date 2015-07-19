@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     ChannelHandler handler = Handlers.forChannels();
+ *     ChannelHandler handler = Registered.channels();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
@@ -41,7 +41,7 @@ public abstract class ChannelHandler {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     ChannelHandler handler = Handlers.forChannels();
+     *     ChannelHandler handler = Handlers.channels();
      * </code></pre></p>
      */
     public ChannelHandler() {

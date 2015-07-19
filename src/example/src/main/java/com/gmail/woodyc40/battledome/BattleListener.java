@@ -23,7 +23,7 @@ public class BattleListener implements Listener {
 
     // Listeners loaded after the plugin has
     // therefore, this is safe no matter what
-    private final GameManager manager = GameManager.newHandler();
+    private final GameManager manager = GameManager.instance();
 
     public void putSession(Player player, Game game) {
         sessions.put(player, new SetupSession(player, game));

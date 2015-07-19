@@ -23,7 +23,7 @@ import java.util.Collection;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     WindowHandler handler = Handlers.forWindows();
+ *     WindowHandler handler = Registered.windows();
  * </code></pre></p>
  *
  * @author The TridentSDK Team

@@ -38,7 +38,7 @@ public class Item {
     public Item(Substance mat, short quantity) {
         if (mat == null) {
             mat = Substance.AIR;
-            // The item is clicked on in the inventory
+            // The item is clicked on in the window
         }
 
         this.id = mat.id();

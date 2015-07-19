@@ -2,11 +2,11 @@ package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
 import net.tridentsdk.Position;
-import net.tridentsdk.concurrent.TridentRunnable;
+import net.tridentsdk.concurrent.ScheduledRunnable;
+import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.factory.Factories;
 import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.util.WeakEntity;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ public class Game {
         this.id = id;
         this.players = players;
 
-        Factories.tasks().syncRepeat(TridentPlugin.instance(), runnable, 0L, 20L);
+        Scheduler.registry().syncRepeat(Plugin.instance(), runnable, 0L, 20L);
     }
 
     public static Game newGame(int id) {
@@ -72,7 +72,7 @@ public class Game {
     }
 
     public Team teamOf(Player player) {
-        return players.get(WeakEntity.finderOf(player));
+        return players.get(WeakEntity.searchFor(player));
     }
 
     public void join(Player player) {
@@ -82,7 +82,7 @@ public class Game {
     /////////////////////////////////////////// TEAMS //////////////////////////////////////////////
 
     public void remove(Player player) {
-        this.players.remove(WeakEntity.finderOf(player));
+        this.players.remove(WeakEntity.searchFor(player));
     }
 
     private Team nextTeam() {
@@ -130,11 +130,11 @@ public class Game {
             player.obtain().sendMessage(CommandHandler.PREFIX + "Team " + team.toString() + " has won the game");
         }
 
-        Factories.tasks().syncLater(TridentPlugin.instance(), new TridentRunnable() {
+        Scheduler.registry().syncLater(Plugin.instance(), new ScheduledRunnable() {
             @Override
             public void run() {
                 for (WeakEntity<Player> player : players.keySet()) {
-                    GameManager.newHandler().removePlayer(player.entity());
+                    GameManager.instance().removePlayer(player.entity());
                 }
             }
         }, 200L);
