@@ -1,7 +1,6 @@
 package net.tridentsdk.registry;
 
 import com.google.gson.JsonObject;
-import net.tridentsdk.Implementation;
 import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;

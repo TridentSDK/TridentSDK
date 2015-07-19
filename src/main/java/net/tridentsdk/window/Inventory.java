@@ -24,7 +24,7 @@ import net.tridentsdk.window.inventory.Item;
  *
  * @author The TridentSDK Team
  */
-public interface Window {
+public interface Inventory {
     /**
      * Obtains the ID of the window
      *
@@ -75,5 +75,5 @@ public interface Window {
      *
      * @return the items in the window
      */
-    public Item[] items();
+    Item[] items();
 }

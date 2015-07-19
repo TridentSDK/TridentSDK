@@ -18,7 +18,7 @@
 package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.window.Window;
+import net.tridentsdk.window.Inventory;
 import net.tridentsdk.window.inventory.Item;
 
 /**
@@ -32,7 +32,7 @@ public interface WindowHolder extends Entity {
      *
      * @return the Inventory that this entity holds
      */
-    Window window();
+    Inventory window();
 
     /**
      * Returns the ItemStack in the Player's hand

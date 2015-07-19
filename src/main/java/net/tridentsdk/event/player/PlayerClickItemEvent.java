@@ -19,7 +19,7 @@ package net.tridentsdk.event.player;
 
 import net.tridentsdk.event.Cancellable;
 import net.tridentsdk.event.Event;
-import net.tridentsdk.window.Window;
+import net.tridentsdk.window.Inventory;
 
 /**
  * Called when a player clicks an item inside a window
@@ -27,20 +27,20 @@ import net.tridentsdk.window.Window;
  * @author The TridentSDK Team
  */
 public class PlayerClickItemEvent extends Event implements Cancellable {
-    private final Window window;
+    private final Inventory window;
     private final short clickedSlot;
     private final int actionId;
 
     private boolean cancelled;
 
-    public PlayerClickItemEvent(Window window, short clickedSlot, int actionId) {
+    public PlayerClickItemEvent(Inventory window, short clickedSlot, int actionId) {
         this.window = window;
         this.clickedSlot = clickedSlot;
         this.actionId = actionId;
         this.cancelled = false;
     }
 
-    public Window window() {
+    public Inventory window() {
         return this.window;
     }
 

@@ -1,10 +1,10 @@
-package net.tridentsdk;
+package net.tridentsdk.registry;
 
 import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.plugin.channel.ChannelHandler;
-import net.tridentsdk.window.WindowHandler;
+import net.tridentsdk.plugin.channel.PluginChannels;
+import net.tridentsdk.window.Inventories;
 import net.tridentsdk.world.WorldLoader;
 import net.tridentsdk.world.gen.AbstractGenerator;
 
@@ -13,6 +13,8 @@ public interface Implementation {
     SelectableThreadPool newPool(int i, String s);
     WorldLoader newLoader(Class<? extends AbstractGenerator> g);
     Scheduler scheduler();
-    ChannelHandler chanHandler();
-    WindowHandler winHandler();
+
+    PluginChannels chanHandler();
+
+    Inventories winHandler();
 }

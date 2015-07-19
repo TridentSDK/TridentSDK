@@ -17,7 +17,6 @@
 
 package net.tridentsdk.concurrent;
 
-import net.tridentsdk.AccessBridge;
 import net.tridentsdk.plugin.Plugin;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -36,10 +35,6 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @ThreadSafe
 public interface Scheduler {
-    public static Scheduler registry() {
-        return AccessBridge.open().demand(Scheduler.class);
-    }
-
     /**
      * Asynchronously run a task after the next tick
      *
@@ -47,7 +42,7 @@ public interface Scheduler {
      * @param runnable the runnable to perform the task
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask asyncRun(Plugin plugin, ScheduledRunnable runnable);
+    ScheduledTask asyncRun(Plugin plugin, ScheduledRunnable runnable);
 
     /**
      * Synchronously run a task after the next tick
@@ -56,7 +51,7 @@ public interface Scheduler {
      * @param runnable the runnable to perform the task
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask syncRun(Plugin plugin, ScheduledRunnable runnable);
+    ScheduledTask syncRun(Plugin plugin, ScheduledRunnable runnable);
 
     /**
      * Asynchronously run a task after a specified time has passed
@@ -66,7 +61,7 @@ public interface Scheduler {
      * @param delay    the amount of ticks to wait until the task is executed
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask asyncLater(Plugin plugin, ScheduledRunnable runnable, long delay);
+    ScheduledTask asyncLater(Plugin plugin, ScheduledRunnable runnable, long delay);
 
     /**
      * Asynchronously run a task after a specified time has passed
@@ -76,7 +71,7 @@ public interface Scheduler {
      * @param delay    the amount of ticks to wait until the task is executed
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask syncLater(Plugin plugin, ScheduledRunnable runnable, long delay);
+    ScheduledTask syncLater(Plugin plugin, ScheduledRunnable runnable, long delay);
 
     /**
      * Asynchronously run a task repeatedly
@@ -87,7 +82,7 @@ public interface Scheduler {
      * @param initialInterval the amount of time between each execution which occurs repeatedly until cancelled
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask asyncRepeat(Plugin plugin, ScheduledRunnable runnable, long delay, long initialInterval);
+    ScheduledTask asyncRepeat(Plugin plugin, ScheduledRunnable runnable, long delay, long initialInterval);
 
     /**
      * Synchronously run a task repeatedly
@@ -98,5 +93,5 @@ public interface Scheduler {
      * @param initialInterval the amount of time between each execution which occurs repeatedly until cancelled
      * @return the task which was wrapped by the scheduler
      */
-    public ScheduledTask syncRepeat(Plugin plugin, ScheduledRunnable runnable, long delay, long initialInterval);
+    ScheduledTask syncRepeat(Plugin plugin, ScheduledRunnable runnable, long delay, long initialInterval);
 }

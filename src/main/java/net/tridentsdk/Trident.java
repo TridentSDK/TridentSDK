@@ -23,8 +23,6 @@ import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.world.World;
-import net.tridentsdk.world.WorldLoader;
-import net.tridentsdk.world.gen.AbstractGenerator;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
@@ -108,10 +106,6 @@ public final class Trident {
 
     public static Map<String, World> worlds() {
         return server.worlds();
-    }
-
-    public static WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator) {
-        return server.newWorldLoader(generator);
     }
 
     public static InetAddress serverIp() {

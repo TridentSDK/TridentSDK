@@ -19,7 +19,7 @@ package net.tridentsdk.event.player;
 
 import net.tridentsdk.event.Cancellable;
 import net.tridentsdk.event.Event;
-import net.tridentsdk.window.Window;
+import net.tridentsdk.window.Inventory;
 
 /**
  * Called when a player closes an window window
@@ -27,15 +27,15 @@ import net.tridentsdk.window.Window;
  * @author The TridentSDK Team
  */
 public class PlayerCloseWindowEvent extends Event implements Cancellable {
-    private final Window window;
+    private final Inventory window;
     private boolean cancelled;
 
-    public PlayerCloseWindowEvent(Window window) {
+    public PlayerCloseWindowEvent(Inventory window) {
         this.window = window;
         this.cancelled = false;
     }
 
-    public Window window() {
+    public Inventory window() {
         return this.window;
     }
 

@@ -22,8 +22,6 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ai.AiHandler;
 import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.world.World;
-import net.tridentsdk.world.WorldLoader;
-import net.tridentsdk.world.gen.AbstractGenerator;
 import org.slf4j.Logger;
 
 import java.net.InetAddress;
@@ -62,16 +60,6 @@ public interface Server {
      * @return a Map of all the worlds, where the String is the world name
      */
     Map<String, World> worlds();
-
-    /**
-     * Creates a new world loader, which can use its own generator
-     *
-     * <p>The provided class must have a no-arg constructor.</p>
-     *
-     * @param generator the generator to use, a class to defensively protect the signature
-     * @return the new world loader
-     */
-    WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator);
 
     /**
      * Gets the Internet Address of this server

@@ -49,7 +49,7 @@ public final class TridentLogger {
 
     @InternalUseOnly
     public static void init() {
-        String PATTERN = "%d{dd MMM HH:mm} [%p] %m%n";
+        String PATTERN = "%d{dd MMM HH:mm} [%p][%t] %m%n";
 
         ConsoleAppender console = new ConsoleAppender(); //create appender
         console.setLayout(new PatternLayout(PATTERN));

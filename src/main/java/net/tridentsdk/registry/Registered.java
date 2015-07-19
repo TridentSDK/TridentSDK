@@ -1,8 +1,8 @@
 package net.tridentsdk.registry;
 
-import net.tridentsdk.Implementation;
-import net.tridentsdk.plugin.channel.ChannelHandler;
-import net.tridentsdk.window.WindowHandler;
+import net.tridentsdk.concurrent.Scheduler;
+import net.tridentsdk.plugin.channel.PluginChannels;
+import net.tridentsdk.window.Inventories;
 
 /**
  * Allows access to the instance of various server objects
@@ -21,16 +21,25 @@ public class Registered {
      *
      * @return the channel handler instance
      */
-    public static ChannelHandler channels() {
+    public static PluginChannels channels() {
         return impl.chanHandler();
     }
 
     /**
-     * Obtains the window handler
+     * Obtains the inventory handler
      *
-     * @return the window handler
+     * @return the inventory handler
      */
-    public static WindowHandler windows() {
+    public static Inventories inventories() {
         return impl.winHandler();
+    }
+
+    /**
+     * Obtains the scheduler
+     *
+     * @return the scheduler
+     */
+    public static Scheduler tasks() {
+        return impl.scheduler();
     }
 }

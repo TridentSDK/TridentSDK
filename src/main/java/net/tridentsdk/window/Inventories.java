@@ -23,31 +23,24 @@ import java.util.Collection;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     WindowHandler handler = Registered.windows();
+ *     Inventories handler = Registered.inventories();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
  */
-public interface WindowHandler {
+public interface Inventories extends Collection<Inventory> {
     /**
      * Gets a window by its ID
      *
      * @param id the ID of a window
      * @return the window with the ID, or {@code null} if it doesn't exist
      */
-    public Window windowBy(int id);
+    Inventory fromId(int id);
 
     /**
      * Registers the window with the manager
      *
      * @param window the window to be registered
      */
-    public void registerWindow(Window window);
-
-    /**
-     * Gets all registered windows with the manager
-     *
-     * @return the windows registered
-     */
-    public Collection<Window> windows();
+    void register(Inventory window);
 }

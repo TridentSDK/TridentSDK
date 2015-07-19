@@ -28,12 +28,12 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * <p>To access this handler, use this code:
  * <pre><code>
- *     ChannelHandler handler = Registered.channels();
+ *     PluginChannels handler = Registered.channels();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
  */
-public abstract class ChannelHandler {
+public abstract class PluginChannels {
     private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
 
     /**
@@ -41,10 +41,10 @@ public abstract class ChannelHandler {
      *
      * <p>To access this handler, use this code:
      * <pre><code>
-     *     ChannelHandler handler = Handlers.channels();
+     *     PluginChannels handler = Handlers.channels();
      * </code></pre></p>
      */
-    public ChannelHandler() {
+    public PluginChannels() {
         if (!Trident.isTrident()) {
             TridentLogger.error(new IllegalAccessException("Only Trident should instantiate this class"));
         }
