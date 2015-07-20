@@ -19,6 +19,7 @@ package net.tridentsdk.meta.nbt;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class FloatTag extends NBTTag {
     volatile float value;

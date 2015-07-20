@@ -29,6 +29,7 @@ import java.util.List;
  * Called when a note is played, has a list of players that will hear this note
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class NotePlayEvent extends BlockEvent implements Cancellable {
     private final List<Player> players;

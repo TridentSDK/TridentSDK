@@ -35,6 +35,7 @@ import java.util.Map;
  * Injects the target class, or creates a new instance of an injected class
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  * @param <T> the type to inject for
  */
 public final class Injector<T> {

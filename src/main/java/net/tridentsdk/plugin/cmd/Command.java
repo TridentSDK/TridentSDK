@@ -17,6 +17,7 @@
 
 package net.tridentsdk.plugin.cmd;
 
+import net.tridentsdk.ServerConsole;
 import net.tridentsdk.entity.living.Player;
 
 /**
@@ -24,6 +25,7 @@ import net.tridentsdk.entity.living.Player;
  * process executed commands
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class Command {
     /**

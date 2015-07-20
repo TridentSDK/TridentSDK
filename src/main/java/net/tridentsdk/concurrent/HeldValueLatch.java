@@ -23,6 +23,8 @@ import java.util.concurrent.CountDownLatch;
 /**
  * A one-time latch that holds a value
  *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  * @param <V> the value type of the latch
  */
 @ThreadSafe

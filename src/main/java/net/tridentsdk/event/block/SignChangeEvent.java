@@ -29,6 +29,7 @@ import javax.annotation.concurrent.GuardedBy;
  * Called when a player edits a sign, or when the sign is first created
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class SignChangeEvent extends BlockEvent implements Cancellable {
     private final Player editor;

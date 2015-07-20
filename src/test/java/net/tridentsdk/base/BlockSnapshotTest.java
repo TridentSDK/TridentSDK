@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.world.World;
 import org.junit.Assert;
 import org.junit.Test;

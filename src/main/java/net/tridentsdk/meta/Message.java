@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
  * Chat message properties, encoded in the JSON format
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public final class Message {
     private final JsonObject message;

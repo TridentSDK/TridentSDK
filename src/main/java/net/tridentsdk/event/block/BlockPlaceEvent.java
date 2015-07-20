@@ -27,6 +27,7 @@ import net.tridentsdk.event.Cancellable;
  * Called whenever a block is placed
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     private final Player player;

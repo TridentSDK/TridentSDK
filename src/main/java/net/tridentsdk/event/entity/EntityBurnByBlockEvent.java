@@ -24,6 +24,7 @@ import net.tridentsdk.entity.Entity;
  * Called when an Entity is set on fire by a block
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityBurnByBlockEvent extends EntityBurnEvent {
     private final Block causer;

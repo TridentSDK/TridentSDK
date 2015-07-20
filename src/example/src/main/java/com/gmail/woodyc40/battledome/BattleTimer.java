@@ -1,9 +1,9 @@
 package com.gmail.woodyc40.battledome;
 
 import net.tridentsdk.concurrent.ScheduledRunnable;
-import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.Plugin;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.WeakEntity;
 
 import java.util.Map;
@@ -133,7 +133,7 @@ public class BattleTimer extends ScheduledRunnable {
                 }
                 break;
             case END:
-                Scheduler.registry().syncLater(Plugin.instance(), new ScheduledRunnable() {
+                Registered.tasks().syncLater(Plugin.instance(), new ScheduledRunnable() {
                     @Override
                     public void run() {
                         for (WeakEntity<Player> player : WeakEntity.iterate(game.players().keySet())) {

@@ -17,9 +17,6 @@ import java.util.Map;
  * @author Pierre C
  */
 public class GameManager {
-    // TODO plugin storage config way to verbose
-    // TODO find values in a config/section
-
     public final String SNAP_SHOTS = "snapshots";
     private final String STORED_COUNT = "counter";
     private final Map<Integer, Game> GAMES = Maps.newHashMap();
@@ -88,13 +85,10 @@ public class GameManager {
         counter = storage.getInt(STORED_COUNT);
 
         // Load each arena ID
-        for (int i = 0; i <= counter; i++) {
-            // Once we reach the tail, it becomes null
-            String tag = String.valueOf(i);
-            if (!storage.contains(tag))
-                break;
+        for (String key : storage.keys()) {
+            int i = Integer.parseInt(key);
 
-            GAMES.put(i, Game.newGame(i, storage.getObject(tag, Game.class)));
+            GAMES.put(i, Game.newGame(i, storage.getObject(key, Game.class)));
         }
     }
 
@@ -132,7 +126,7 @@ public class GameManager {
         if (game == null)
             return null;
 
-        // Clear window
+        // Clear inventory
         snapshot.restore(player);
         game.remove(player);
         return game;

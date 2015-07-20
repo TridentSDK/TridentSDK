@@ -21,6 +21,7 @@ package net.tridentsdk.base;
  * Represents a color in minecraft
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum SubstanceColor {
     WHITE(0), ORANGE(1), MAGENTA(2), LIGHT_BLUE(3),

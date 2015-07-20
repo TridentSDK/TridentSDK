@@ -36,6 +36,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * A LinkedList [implementation] that also makes changes to the underlying JsonArray object
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class ConfigList<V> implements List<V> {

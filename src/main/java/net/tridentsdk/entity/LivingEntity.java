@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.entity.living.ai.AiModule;
@@ -28,6 +28,7 @@ import net.tridentsdk.event.entity.EntityDamageEvent;
  * An entity that is alive, which can be damaged and move with AI
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface LivingEntity extends Entity, ProjectileLauncher {
     /**

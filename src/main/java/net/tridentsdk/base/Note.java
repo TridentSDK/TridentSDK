@@ -25,6 +25,7 @@ import javax.annotation.concurrent.Immutable;
  * Immutable value representing the pitch of a note played
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Immutable
 public class Note {

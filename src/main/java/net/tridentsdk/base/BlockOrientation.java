@@ -17,13 +17,13 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 
 /**
  * Represents an orientation towards a given direction set from a {@link net.tridentsdk.util.Vector}
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum BlockOrientation {
     /**

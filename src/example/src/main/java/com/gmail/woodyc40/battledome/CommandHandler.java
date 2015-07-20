@@ -1,13 +1,13 @@
 package com.gmail.woodyc40.battledome;
 
+import net.tridentsdk.ServerConsole;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.inventory.inventory.Item;
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.plugin.annotation.CommandDescription;
 import net.tridentsdk.plugin.cmd.Command;
-import net.tridentsdk.plugin.cmd.ServerConsole;
-import net.tridentsdk.window.inventory.Item;
 
 /**
  * Handles commands for BattleDome

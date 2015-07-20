@@ -30,10 +30,12 @@ import java.io.IOException;
  * Information displayed to the client in the server list
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class DisplayInfo {
     private final Config config = Factory.newConfig(Trident.fileContainer() + "server.json"); // Init code
     private final String motd = config.getString("motd", Defaults.MOTD);
+    private final File file = new File(config.getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
     private final int maxPlayers = config.getInt("max-players", Defaults.MAX_PLAYERS);
     private final boolean canChangeImage = config.getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED);
 
@@ -56,7 +58,7 @@ public class DisplayInfo {
      * @see #motdImage() for the representing the image sent to clients
      */
     public File motdPicture() {
-        return new File(Trident.config().getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
+        return file;
     }
 
     /**
@@ -83,7 +85,7 @@ public class DisplayInfo {
      * @return
      */
     public String version() {
-        return "1.7.10";
+        return "1.8";
     }
 
     /**

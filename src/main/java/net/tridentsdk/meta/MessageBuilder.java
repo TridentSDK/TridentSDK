@@ -26,6 +26,7 @@ import net.tridentsdk.entity.living.Player;
  * Builds a formatted message using JSON to be sent to the player(s)
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 // FIXME
 public final class MessageBuilder {

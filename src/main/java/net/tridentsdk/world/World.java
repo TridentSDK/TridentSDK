@@ -17,16 +17,30 @@
 
 package net.tridentsdk.world;
 
-import net.tridentsdk.Position;
-import net.tridentsdk.Difficulty;
-import net.tridentsdk.GameMode;
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.types.EntityType;
+import net.tridentsdk.registry.Registered;
+import net.tridentsdk.world.settings.WorldSettings;
 
 import java.util.Set;
 
-public interface World extends Cloneable {
+/**
+ * A Minecraft world
+ * <p>
+ * <p>Worlds can be created using the following code:
+ * <pre>{@code
+ *      WorldLoader loader = Factory.newWorldLoader();
+ *      loader.createWorld("New world");
+ * }</pre></p>
+ * <p>
+ * <p>A collection of the worlds on the server can be obtained using {@link Registered#worlds()}</p>
+ *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
+ */
+public interface World extends Cloneable, WorldSettings {
     /**
      * Gets the name of the world
      *
@@ -70,27 +84,6 @@ public interface World extends Cloneable {
     Block blockAt(Position location);
 
     /**
-     * Gets the dimension of a world
-     *
-     * @return The dimension of a world
-     */
-    Dimension dimension();
-
-    /**
-     * Gets the difficulty set in a world
-     *
-     * @return The difficulty set in a world
-     */
-    Difficulty difficulty();
-
-    /**
-     * Gets the default gamemode in a given chunk
-     *
-     * @return The default gamemode in a given chunk
-     */
-    GameMode defaultGamemode();
-
-    /**
      * Obtains the loading handler which created this object, passed in from the constructor
      *
      * @return the world loader for this world
@@ -98,95 +91,32 @@ public interface World extends Cloneable {
     WorldLoader loader();
 
     /**
-     * Gets the type of a world
+     * Gets the time in the world
      *
-     * @return The type of a world
-     */
-    LevelType levelType();
-
-    /**
-     * Gets the set boolean for the given gamerule
-     *
-     * @return The set boolean for the given gamerule
-     */
-    boolean isRule(String rule);
-
-    /**
-     * Gets the time in a world
-     *
-     * @return The time in a world
+     * @return The time in the world
      */
     long time();
 
     /**
-     * Gets the spawn location of a world
+     * Gets the spawn location of the world
      *
-     * @return The spawn location in a world
+     * @return The spawn location in the world
      */
     Position spawnPosition();
 
     /**
-     * Checks if it is raining in a world
+     * Obtains the weather controller for the world
      *
-     * @return True if it is raining in a world
+     * @return the weather controller
      */
-    boolean isRaining();
+    WeatherConditions weather();
 
     /**
-     * Gets the number of ticks before raining is toggled
+     * Obtains the world border properties of this world
      *
-     * @return The number of ticks before raining is toggled
+     * @return the border properties
      */
-    int rainTime();
-
-    /**
-     * Checks if it is thundering in a world
-     *
-     * @return True if it is thundering in a world
-     */
-    boolean isThundering();
-
-    /**
-     * Gets the number of ticks before thundering is toggled
-     *
-     * @return The number of ticks before thundering is toggled
-     */
-    int thunderTime();
-
-    /**
-     * Checks if structures are generated in a world (Stronghold, villages, dungeons)
-     *
-     * @return True if structures are generated in a world (Stronghold, villages, dungeons)
-     */
-    boolean generateStructures();
-
-    /**
-     * Gets the size of the worldborder
-     *
-     * @return The size of the worldborder
-     */
-    double borderSize();
-
-    /**
-     * Gets the location where the worldborder is centered
-     *
-     * @return The location where the worldborder is centered
-     */
-    Position borderCenter();
-
-    /**
-     * Gets to what size a border is contracting, 60000000 by default
-     *
-     * @return To what size a border is contracting, 60000000 by default
-     */
-    int borderSizeContraction();
-
-    /**
-     * Gets the time the border has to contract to the contraction target
-     *
-     * @return The time the border has to contract to the contraction target
-     */
-    int borderSizeContractionTime();
+    WorldBorder border();
 
     /**
      * Spawns an entity in the world

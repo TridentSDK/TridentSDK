@@ -23,6 +23,7 @@ import net.tridentsdk.entity.Entity;
  * Called when an Entity thinks it's just about time to explode
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityBeginExplosionCountdownEvent extends EntityEvent {
     private int length;

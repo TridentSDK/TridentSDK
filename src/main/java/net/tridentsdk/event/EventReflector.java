@@ -28,6 +28,7 @@ import java.util.Comparator;
  * A fast-reflection based event invoker which notifies event listeners
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EventReflector implements Comparator<EventReflector> {
     private final MethodAccess handle;

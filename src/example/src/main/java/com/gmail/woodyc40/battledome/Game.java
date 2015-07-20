@@ -1,12 +1,12 @@
 package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.concurrent.ScheduledRunnable;
-import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.Plugin;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.WeakEntity;
 
 import java.util.Map;
@@ -34,7 +34,7 @@ public class Game {
         this.id = id;
         this.players = players;
 
-        Scheduler.registry().syncRepeat(Plugin.instance(), runnable, 0L, 20L);
+        Registered.tasks().syncRepeat(Plugin.instance(), runnable, 0L, 20L);
     }
 
     public static Game newGame(int id) {
@@ -130,7 +130,7 @@ public class Game {
             player.obtain().sendMessage(CommandHandler.PREFIX + "Team " + team.toString() + " has won the game");
         }
 
-        Scheduler.registry().syncLater(Plugin.instance(), new ScheduledRunnable() {
+        Registered.tasks().syncLater(Plugin.instance(), new ScheduledRunnable() {
             @Override
             public void run() {
                 for (WeakEntity<Player> player : players.keySet()) {

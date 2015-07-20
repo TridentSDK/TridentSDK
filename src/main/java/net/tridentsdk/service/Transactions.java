@@ -75,6 +75,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <p>This class also contains global account IDs for economy and exchange [of items].</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class Transactions extends ForwardingCollection<TransactionAudit> implements Registry<TransactionAudit> {
     private final ConcurrentMap<Object, TransactionAudit> transactions = new ConcurrentHashMap<>();

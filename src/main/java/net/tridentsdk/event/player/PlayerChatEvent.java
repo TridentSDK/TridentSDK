@@ -24,6 +24,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a player chats
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerChatEvent extends PlayerEvent implements Cancellable {
     private boolean cancelled;

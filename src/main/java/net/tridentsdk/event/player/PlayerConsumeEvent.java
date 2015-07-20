@@ -18,12 +18,13 @@
 package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.inventory.Item;
 
 /**
  * Called when a player consumes food, or potions
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerConsumeEvent extends PlayerHungerEvent {
     private final Item item;

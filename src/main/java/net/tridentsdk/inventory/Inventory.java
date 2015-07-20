@@ -15,32 +15,33 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.window;
+package net.tridentsdk.inventory;
 
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.inventory.Item;
 
 /**
- * Represents an window or window that is opened to players
+ * Represents an inventory or inventory that is opened to players
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Inventory {
     /**
-     * Obtains the ID of the window
+     * Obtains the ID of the inventory
      *
-     * @return the window ID of this window
+     * @return the inventory ID of this inventory
      */
     int id();
 
     /**
-     * The available slots (not the slots taken up) in this window
+     * The available slots (not the slots taken up) in this inventory
      *
-     * @return the window slots available
+     * @return the inventory slots available
      */
     int length();
 
     /**
-     * Finds the item at the specified slot in the window
+     * Finds the item at the specified slot in the inventory
      *
      * @param slot the slot to find the item
      * @return the item at that slot
@@ -56,7 +57,7 @@ public interface Inventory {
     void setSlot(int index, Item value);
 
     /**
-     * Places an item into the player's window, where there is room, or drops onto the ground if the window is
+     * Places an item into the player's inventory, where there is room, or drops onto the ground if the inventory is
      * full
      *
      * @param item the item to place
@@ -64,16 +65,16 @@ public interface Inventory {
     void putItem(Item item);
 
     /**
-     * The title of the window
+     * The title of the inventory
      *
-     * @return the name displayed at the top of the window
+     * @return the name displayed at the top of the inventory
      */
     String name();
 
     /**
-     * Obtains the contents of the window represented by this window
+     * Obtains the contents of the inventory represented by this inventory
      *
-     * @return the items in the window
+     * @return the items in the inventory
      */
     Item[] items();
 }

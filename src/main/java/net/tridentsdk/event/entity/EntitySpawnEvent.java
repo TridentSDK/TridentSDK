@@ -17,13 +17,14 @@
 
 package net.tridentsdk.event.entity;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.Entity;
 
 /**
  * Called when an entity spawns
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntitySpawnEvent extends EntityEvent {
     private final Position location;

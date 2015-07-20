@@ -23,6 +23,7 @@ import net.tridentsdk.entity.Entity;
  * Called when an entity teleports, e.g. enderman
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityTeleportEvent extends EntityMoveEvent {
     public EntityTeleportEvent(Entity entity) {

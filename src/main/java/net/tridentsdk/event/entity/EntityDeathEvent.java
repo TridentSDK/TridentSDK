@@ -25,6 +25,7 @@ import net.tridentsdk.entity.living.Player;
  * Called when an entity dies, especially if it was a LivingEntity
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityDeathEvent extends EntityEvent {
     /**

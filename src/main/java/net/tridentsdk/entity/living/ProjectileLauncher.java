@@ -17,13 +17,14 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.entity.traits.EntityProperties;
 import net.tridentsdk.entity.Projectile;
+import net.tridentsdk.entity.traits.EntityProperties;
 
 /**
  * Represents the source of a launched Projectile
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface ProjectileLauncher {
     /**

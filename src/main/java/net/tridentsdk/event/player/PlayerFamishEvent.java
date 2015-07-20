@@ -23,6 +23,7 @@ import net.tridentsdk.entity.living.Player;
  * Called when a player's hunger bar decreases
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerFamishEvent extends PlayerHungerEvent {
     public PlayerFamishEvent(Player player, double feed) {

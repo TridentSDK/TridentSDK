@@ -21,12 +21,13 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.inventory.Item;
 
 /**
  * Called whenever a Block is broken
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class BlockBreakEvent extends BlockEvent implements Cancellable {
     private final Player player;

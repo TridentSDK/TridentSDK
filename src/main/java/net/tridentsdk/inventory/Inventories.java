@@ -14,33 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.window;
+package net.tridentsdk.inventory;
 
 import net.tridentsdk.registry.Registry;
 
 /**
  * Handles windows opened and closed by the server
- *
+ * <p>
  * <p>To access this handler, use this code:
  * <pre><code>
  *     Inventories handler = Registered.inventories();
  * </code></pre></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Inventories extends Registry<Inventory> {
     /**
-     * Gets a window by its ID
+     * Gets a inventory by its ID
      *
-     * @param id the ID of a window
-     * @return the window with the ID, or {@code null} if it doesn't exist
+     * @param id the ID of a inventory
+     * @return the inventory with the ID, or {@code null} if it doesn't exist
      */
     Inventory fromId(int id);
 
     /**
-     * Registers the window with the manager
+     * Registers the inventory with the manager
      *
-     * @param window the window to be registered
+     * @param window the inventory to be registered
      */
     void register(Inventory window);
 }

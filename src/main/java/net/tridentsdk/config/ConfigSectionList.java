@@ -27,6 +27,7 @@ import java.util.concurrent.locks.Lock;
  * Section of the config dedicated to storing values from a collection
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class ConfigSectionList<V> extends ConfigList<V> {

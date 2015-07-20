@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.window.inventory;
+package net.tridentsdk.inventory.inventory;
 
 import net.tridentsdk.base.Substance;
 
@@ -23,6 +23,7 @@ import net.tridentsdk.base.Substance;
  * Inventory item, holding all properties of the item
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class Item {
     private final int id;
@@ -38,7 +39,7 @@ public class Item {
     public Item(Substance mat, short quantity) {
         if (mat == null) {
             mat = Substance.AIR;
-            // The item is clicked on in the window
+            // The item is clicked on in the inventory
         }
 
         this.id = mat.id();

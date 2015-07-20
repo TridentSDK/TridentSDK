@@ -21,6 +21,7 @@ package net.tridentsdk;
 // this is probably temporary
 
 import net.tridentsdk.util.TridentLogger;
+import net.tridentsdk.world.settings.Difficulty;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.ThreadFactory;
@@ -29,6 +30,7 @@ import java.util.concurrent.ThreadFactory;
  * Contains the default values used in server.json
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public final class Defaults {

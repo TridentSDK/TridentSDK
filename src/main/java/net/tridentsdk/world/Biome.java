@@ -22,6 +22,12 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The possible climate zones which divide the world
+ *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
+ */
 public enum Biome {
     OCEAN(0),
     PLAINS(1),
@@ -33,21 +39,21 @@ public enum Biome {
     RIVER(7),
     HELL(8),
     THE_END(9),
-    @Deprecated
     /**
-     * This biome exists only in code, and does not generate naturally
+     * @deprecated This biome exists only in code, and does not generate naturally
      */
-            FROZEN_OCEAN(10),
+    @Deprecated
+    FROZEN_OCEAN(10),
     FROZEN_RIVER(11),
     ICE_PLAINS(12),
     MUSHROOM_ISLAND(14),
     MUSHROOM_ISLAND_SHORE(15),
     BEACH(16),
-    @Deprecated
     /**
-     * This biome exists only in code, and does not generate naturally
+     * @deprecated This biome exists only in code, and does not generate naturally
      */
-            EXTREME_HILLS_EDGE(20),
+    @Deprecated
+    EXTREME_HILLS_EDGE(20),
     JUNGLE(21),
     JUNGLE_EDGE(23),
     DEEP_OCEAN(24),

@@ -21,12 +21,13 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.block.BlockPlaceEvent;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.inventory.Item;
 
 /**
  * Called when a player empties a bucket
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerBucketEmptyEvent extends BlockPlaceEvent {
     private final Item blockInHand;

@@ -22,6 +22,7 @@ package net.tridentsdk.entity.types;
  * player, dropped items, or item frames.
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum EntityType {
     NOT_IMPL,

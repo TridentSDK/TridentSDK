@@ -17,14 +17,27 @@
 
 package net.tridentsdk.world;
 
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.gen.AbstractGenerator;
+import net.tridentsdk.world.settings.*;
 
 /**
  * Manages the worlds for the server
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
-public interface WorldLoader {
+public interface WorldLoader extends WorldSettings {
+    /**
+     * Checks if the world has been loaded yet
+     *
+     * @param world the name of the folder to check
+     * @return {@code true} if the world has been loaded
+     */
+    static boolean worldExists(String world) {
+        return Registered.worlds().containsKey(world);
+    }
+
     /**
      * Load an existing world inside the server's file container
      *
@@ -32,13 +45,6 @@ public interface WorldLoader {
      * @return the world loaded
      */
     World load(String world);
-
-    /**
-     * Writes the changes made to the world to the world folder
-     *
-     * @param world the world to save the changes
-     */
-    void save(World world);
 
     /**
      * Creates a new world
@@ -49,50 +55,43 @@ public interface WorldLoader {
     World createWorld(String name);
 
     /**
-     * Checks if the world has been loaded yet
-     *
-     * @param world the name of the folder to check
-     * @return {@code true} if the world has been loaded
+     * Writes the changes made to the world to the world folder
      */
-    boolean worldExists(String world);
+    void save();
 
     /**
      * Checks the existence of a chunk in a world, based on the world directory
      *
-     * @param world the world which to check the existence of a chunk
      * @param x     the X coordinate of the chunk
      * @param z     the Z coordinate of the chunk
      * @return {@code true} if the chunk is not present within the world directory
      */
-    boolean chunkExists(World world, int x, int z);
+    boolean chunkExists(int x, int z);
 
     /**
      * Checks the existence of a chunk in a world, based on the world directory
      *
-     * @param world    the world which to check the existence of a chunk
      * @param location the location which the chunk should be checked for existence
      * @return {@code true} if the chunk is not present within the world directory
      */
-    boolean chunkExists(World world, ChunkLocation location);
+    boolean chunkExists(ChunkLocation location);
 
     /**
      * Loads the chunk into the world
      *
-     * @param world the world which to load the chunk
      * @param x     the X of the chunk
      * @param z     the Z of the chunk
      * @return the chunk which was loaded
      */
-    Chunk loadChunk(World world, int x, int z);
+    Chunk loadChunk(int x, int z);
 
     /**
      * Loads the chunk into the world
      *
-     * @param world    the world which to load the chunk
      * @param location the location of the chunk to load
      * @return the chunk which was loaded
      */
-    Chunk loadChunk(World world, ChunkLocation location);
+    Chunk loadChunk(ChunkLocation location);
 
     /**
      * Writes the changes in the chunk to the world file
@@ -107,4 +106,52 @@ public interface WorldLoader {
      * @return the generation abstraction to generated chunks
      */
     AbstractGenerator generator();
+
+    /**
+     * Sets the dimension for the world generator
+     *
+     * @param dimension the dimension
+     * @return the current instance
+     */
+    WorldLoader dimension(Dimension dimension);
+
+    /**
+     * Sets the difficulty of the world to be generated
+     *
+     * @param difficulty the difficulty
+     * @return the the current instance
+     */
+    WorldLoader difficulty(Difficulty difficulty);
+
+    /**
+     * Sets the gamemode of the world to be generated
+     *
+     * @param gameMode the gamemode
+     * @return the current instance
+     */
+    WorldLoader gameMode(GameMode gameMode);
+
+    /**
+     * Sets the leveltype of the world to be generated
+     *
+     * @param levelType the leveltype
+     * @return the current instance
+     */
+    WorldLoader level(LevelType levelType);
+
+    /**
+     * Sets the game rules of the world to be generated
+     *
+     * @param rules the game rules
+     * @return the current instance
+     */
+    WorldLoader rule(String... rules);
+
+    /**
+     * Sets whether or not to generate structures (caves, villages, etc)
+     *
+     * @param gen {@code true} to generate structures
+     * @return the current instance
+     */
+    WorldLoader structures(boolean gen);
 }

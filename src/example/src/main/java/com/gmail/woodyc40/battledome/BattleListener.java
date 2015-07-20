@@ -1,13 +1,16 @@
 package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.event.block.BlockBreakEvent;
 import net.tridentsdk.event.block.BlockPlaceEvent;
-import net.tridentsdk.event.player.*;
+import net.tridentsdk.event.player.PlayerDamageEvent;
+import net.tridentsdk.event.player.PlayerDeathEvent;
+import net.tridentsdk.event.player.PlayerInteractEvent;
+import net.tridentsdk.event.player.PlayerMoveEvent;
 
 import java.util.Map;
 

@@ -14,31 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/**
+ * Trading API
+ */
 
-package net.tridentsdk.world;
-
-public enum Dimension {
-    NETHER(-1),
-    OVERWORLD(0),
-    END(1);
-
-    private final byte b;
-
-    Dimension(int i) {
-        this.b = (byte) i;
-    }
-
-    public static Dimension of(int i) {
-        for (Dimension dimension : values()) {
-            if (dimension.b == i) {
-                return dimension;
-            }
-        }
-
-        return null;
-    }
-
-    public byte asByte() {
-        return this.b;
-    }
-}
+package net.tridentsdk.inventory.trade;

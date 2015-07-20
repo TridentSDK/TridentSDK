@@ -33,6 +33,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * ticking thread comparing the timestamps since the epoch.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public interface Scheduler extends Registry<ScheduledTask> {

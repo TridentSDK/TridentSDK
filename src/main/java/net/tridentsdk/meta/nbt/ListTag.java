@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class ListTag extends NBTTag implements TagContainer {
     final List<NBTTag> tags = Collections.synchronizedList(new ArrayList<>());

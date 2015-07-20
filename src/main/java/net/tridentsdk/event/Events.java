@@ -47,6 +47,7 @@ import java.util.function.Function;
  * </code></pre></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class Events extends ForwardingCollection<EventReflector> implements Registry<EventReflector> {

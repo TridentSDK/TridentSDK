@@ -25,6 +25,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a player tries to leave a bed
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerLeaveSleepEvent extends PlayerEvent implements Cancellable {
     private final Block bed;

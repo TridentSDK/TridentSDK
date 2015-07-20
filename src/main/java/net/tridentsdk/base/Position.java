@@ -15,11 +15,10 @@
  * limitations under the License.
  */
 
-package net.tridentsdk;
+package net.tridentsdk.base;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-import net.tridentsdk.base.Block;
 import net.tridentsdk.util.Vector;
 import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
@@ -30,6 +29,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * Represents a point on the coordinate grid of the world
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class Position implements Cloneable {
@@ -152,6 +152,7 @@ public class Position implements Cloneable {
 
     /**
      * Chunk of the current position
+     *
      * @return Chunk of the position
      */
     public Chunk chunk() {

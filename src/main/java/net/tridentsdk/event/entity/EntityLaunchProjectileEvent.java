@@ -24,6 +24,7 @@ import net.tridentsdk.entity.Projectile;
  * Called when an entity launches a projectile
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityLaunchProjectileEvent extends EntityEvent {
     private final Projectile projectile;

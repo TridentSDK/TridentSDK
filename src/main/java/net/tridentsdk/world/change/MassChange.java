@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world.change;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.base.Substance;
 
 /**
@@ -35,7 +35,7 @@ public interface MassChange {
      * @param id the block id to change the block to
      * @throws java.lang.IllegalStateException if this change has already been committed
      */
-    public void setBlock(int x, int y, int z, int id) throws IllegalStateException;
+    void setBlock(int x, int y, int z, int id) throws IllegalStateException;
 
     /**
      * Add a change to make at when this change is committed
@@ -46,7 +46,7 @@ public interface MassChange {
      * @param substance the substance to change the block to
      * @throws java.lang.IllegalStateException if this change has already been committed
      */
-    public void setBlock(int x, int y, int z, Substance substance) throws IllegalStateException;
+    void setBlock(int x, int y, int z, Substance substance) throws IllegalStateException;
 
     /**
      * Add a change to make at when this change is committed
@@ -58,7 +58,7 @@ public interface MassChange {
      * @param data the data value to give the new block
      * @throws java.lang.IllegalStateException if this change has already been committed
      */
-    public void setBlock(int x, int y, int z, int id, byte data) throws IllegalStateException;
+    void setBlock(int x, int y, int z, int id, byte data) throws IllegalStateException;
 
     /**
      * Add a change to make at when this change is committed
@@ -70,7 +70,7 @@ public interface MassChange {
      * @param data      the data value to give the new block
      * @throws IllegalStateException
      */
-    public void setBlock(int x, int y, int z, Substance substance, byte data)
+    void setBlock(int x, int y, int z, Substance substance, byte data)
             throws IllegalStateException;
 
     /**
@@ -81,7 +81,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Position coords, int id)
+    void setBlock(Position coords, int id)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -93,7 +93,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Position coords, int id, byte data)
+    void setBlock(Position coords, int id, byte data)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -104,7 +104,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Position coords, Substance substance)
+    void setBlock(Position coords, Substance substance)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -116,7 +116,7 @@ public interface MassChange {
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
      */
-    public void setBlock(Position coords, Substance substance, byte data)
+    void setBlock(Position coords, Substance substance, byte data)
             throws IllegalArgumentException, IllegalStateException;
 
     /**
@@ -127,5 +127,5 @@ public interface MassChange {
      * @return Whether or not the changes were successful.
      * @throws java.lang.IllegalStateException if this change has already been committed
      */
-    public boolean commitChanges() throws IllegalStateException;
+    boolean commitChanges() throws IllegalStateException;
 }

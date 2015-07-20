@@ -15,9 +15,10 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.plugin.cmd;
+package net.tridentsdk;
 
-import net.tridentsdk.Messagable;
+import net.tridentsdk.plugin.cmd.CommandIssuer;
+import net.tridentsdk.plugin.cmd.PlatformColor;
 
 /**
  * Represents a console which runs the server, can be sent messages and execute commands
@@ -25,15 +26,16 @@ import net.tridentsdk.Messagable;
  * <p>Includes hardcoded ANSI escapes for console colors</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface ServerConsole extends Messagable, CommandIssuer {
-    public static final String RESET = PlatformColor.forColor("reset");
-    public static final String BLACK = PlatformColor.forColor("black");
-    public static final String RED = PlatformColor.forColor("red");
-    public static final String GREEN = PlatformColor.forColor("green");
-    public static final String YELLOW = PlatformColor.forColor("yellow");
-    public static final String BLUE = PlatformColor.forColor("blue");
-    public static final String PURPLE = PlatformColor.forColor("purple");
-    public static final String CYAN = PlatformColor.forColor("cyan");
-    public static final String WHITE = PlatformColor.forColor("white");
+    String RESET = PlatformColor.forColor("reset");
+    String BLACK = PlatformColor.forColor("black");
+    String RED = PlatformColor.forColor("red");
+    String GREEN = PlatformColor.forColor("green");
+    String YELLOW = PlatformColor.forColor("yellow");
+    String BLUE = PlatformColor.forColor("blue");
+    String PURPLE = PlatformColor.forColor("purple");
+    String CYAN = PlatformColor.forColor("cyan");
+    String WHITE = PlatformColor.forColor("white");
 }

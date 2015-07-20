@@ -26,9 +26,10 @@ import java.util.Objects;
  * Stores the location of a Chunk
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Immutable
-public class ChunkLocation implements Serializable, Cloneable {
+public final class ChunkLocation implements Serializable, Cloneable {
     private static final long serialVersionUID = 9083698035337137603L;
     private final int x;
     private final int z;

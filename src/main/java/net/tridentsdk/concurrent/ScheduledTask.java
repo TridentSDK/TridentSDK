@@ -23,7 +23,8 @@ import net.tridentsdk.plugin.Plugin;
  * The internal representation of a scheduled task, implemented inside the scheduler to manage the wrapping for {@link
  * ScheduledRunnable}
  *
- * @author The TridentSDk Team
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface ScheduledTask extends Runnable {
     /**

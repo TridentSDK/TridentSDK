@@ -19,7 +19,7 @@ package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.BlockOrientation;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.inventory.Item;
 import org.junit.Assert;
 import org.junit.Test;
 

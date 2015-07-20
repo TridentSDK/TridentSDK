@@ -23,6 +23,7 @@ package net.tridentsdk.service;
  * which is invoked by the handler for that particular permission.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface PermissionHolder {
     /**

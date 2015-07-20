@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.docs.InternalUseOnly;
 
 import javax.annotation.concurrent.Immutable;
@@ -28,6 +27,7 @@ import javax.annotation.concurrent.Immutable;
  * <p>Snapshot using the {@link #of(Block)} method</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Immutable
 public final class BlockSnapshot {

@@ -33,6 +33,7 @@ import java.util.concurrent.Future;
  * Scaled: Creates a new thread if all workers are occupied and the count is below maxThreads. Otherwise returns nextThread.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public interface SelectableThreadPool extends Executor {

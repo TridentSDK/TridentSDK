@@ -8,6 +8,7 @@ import java.util.UUID;
  * The player registry
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Players extends Registry<Player> {
     /**

@@ -23,6 +23,7 @@ import net.tridentsdk.world.ChunkLocation;
  * The base class for implementing world generation extensions
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class AbstractGenerator {
     protected final long seed;

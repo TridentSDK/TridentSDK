@@ -27,6 +27,7 @@ import java.lang.reflect.Field;
  * Accessors to the members of a class, does not actually have a ReflectASM equivalent
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class FastClass {
     private final Class<?> cls;

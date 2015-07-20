@@ -25,6 +25,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * A wrapper over {@link java.lang.Runnable} that provides access to the scheduling facilities after scheduled
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public abstract class ScheduledRunnable implements Runnable {

@@ -25,6 +25,7 @@ import java.lang.annotation.*;
  * <p>The information provided to each field has no semantic properties</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

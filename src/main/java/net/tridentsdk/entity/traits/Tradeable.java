@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity.traits;
 
-import net.tridentsdk.window.trade.Trade;
+import net.tridentsdk.inventory.trade.Trade;
 
 import java.util.Collection;
 

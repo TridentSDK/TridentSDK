@@ -21,6 +21,7 @@ package net.tridentsdk.meta;
  * This event occurs when a player clicks on a chat item
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class ClickEvent {
     private ClickAction action;
@@ -72,6 +73,7 @@ public class ClickEvent {
      * An action that occurs when the player clicks on the chat message
      *
      * @author The TridentSDK Team
+     * @since 0.3-alpha-DP
      */
     public enum ClickAction {
         OPEN_URL,

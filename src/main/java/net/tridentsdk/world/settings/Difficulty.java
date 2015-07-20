@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk;
+package net.tridentsdk.world.settings;
 
 /**
  * Minecraft difficulty for the players
@@ -23,6 +23,7 @@ package net.tridentsdk;
  * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Difficulty">Minecraft Wiki</a>.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum Difficulty {
     PEACEFUL(0),
@@ -36,7 +37,7 @@ public enum Difficulty {
         this.b = (byte) i;
     }
 
-    public static Difficulty difficultyOf(int i) {
+    public static Difficulty of(int i) {
         for (Difficulty difficulty : values()) {
             if (difficulty.b == i) {
                 return difficulty;

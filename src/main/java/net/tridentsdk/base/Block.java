@@ -17,13 +17,13 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 
 /**
  * A basic structure in minecraft, a material bearing piece set at a given location
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Block {
     /**

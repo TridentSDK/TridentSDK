@@ -14,8 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Inventory and windows such as crafting, enchanting, trading access
- */
 
-package net.tridentsdk.window;
+package net.tridentsdk.world.settings;
+
+/**
+ * The world types
+ *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
+ */
+public enum Dimension {
+    NETHER(-1),
+    OVERWORLD(0),
+    END(1);
+
+    private final byte b;
+
+    Dimension(int i) {
+        this.b = (byte) i;
+    }
+
+    public static Dimension of(int i) {
+        for (Dimension dimension : values()) {
+            if (dimension.b == i) {
+                return dimension;
+            }
+        }
+
+        return null;
+    }
+
+    public byte asByte() {
+        return this.b;
+    }
+}

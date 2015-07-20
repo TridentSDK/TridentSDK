@@ -23,6 +23,7 @@ import net.tridentsdk.entity.Entity;
  * Called when an entity moves, cancels short movements
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityMoveEvent extends EntityEvent {
     public EntityMoveEvent(Entity entity) {

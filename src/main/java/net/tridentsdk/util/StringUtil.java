@@ -21,6 +21,7 @@ package net.tridentsdk.util;
  * String utilities
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public final class StringUtil {
     private StringUtil() {

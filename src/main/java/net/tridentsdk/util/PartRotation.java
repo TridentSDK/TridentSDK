@@ -92,6 +92,11 @@ public class PartRotation {
         this.rotZ = rotZ;
     }
 
+    /**
+     * Obtains the rotation of this part as a vector of the rotation xyz
+     *
+     * @return the rotation vector
+     */
     public Vector asVector() {
         return new Vector(rotX, rotY, rotZ);
     }

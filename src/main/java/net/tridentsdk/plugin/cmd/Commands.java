@@ -19,6 +19,7 @@ package net.tridentsdk.plugin.cmd;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import net.tridentsdk.ServerConsole;
 import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.meta.MessageBuilder;
@@ -42,6 +43,7 @@ import java.util.stream.Collectors;
  * </code></pre></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class Commands {
     // TODO: Make this a dictionary tree for fast lookup

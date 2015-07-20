@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </code></pre></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class PluginChannels extends ForwardingCollection<PluginChannel> implements Registry<PluginChannel> {
     private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();

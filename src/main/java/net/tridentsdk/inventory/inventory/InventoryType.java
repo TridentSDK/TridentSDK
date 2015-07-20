@@ -15,12 +15,13 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.window.inventory;
+package net.tridentsdk.inventory.inventory;
 
 /**
  * Type of inventories
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum InventoryType {
     CHEST("minecraft:chest"),

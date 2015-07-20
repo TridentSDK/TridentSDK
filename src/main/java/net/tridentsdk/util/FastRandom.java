@@ -36,6 +36,7 @@ package net.tridentsdk.util;
  * a hash do not create a new object, rather it does not hash the nanoTime at all.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class FastRandom {
     private FastRandom() {

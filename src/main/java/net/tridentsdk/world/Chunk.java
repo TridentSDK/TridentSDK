@@ -26,6 +26,7 @@ import java.util.Set;
  * Represents a 16x16x256 cube of blocks which stores a partition of the world's data
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Chunk {
     /**

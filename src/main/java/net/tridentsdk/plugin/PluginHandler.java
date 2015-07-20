@@ -51,6 +51,7 @@ import java.util.jar.JarFile;
  * </code></pre></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PluginHandler extends ForwardingList<Plugin> implements Registry<Plugin> {
     private static final SelectableThread EXECUTOR = Factory.newExecutor(1, "Plugins").selectCore();

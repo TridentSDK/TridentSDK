@@ -17,7 +17,7 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.traits.EntityProperties;
 import net.tridentsdk.entity.types.EntityType;
 import net.tridentsdk.util.Vector;
@@ -30,6 +30,7 @@ import java.util.UUID;
  * Represents the abstraction for a mob, player, animal, or other "object" that is not a block type
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Entity {
     /**

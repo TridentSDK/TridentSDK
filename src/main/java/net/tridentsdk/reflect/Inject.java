@@ -23,6 +23,7 @@ import java.lang.annotation.*;
  * {@link Injector}
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -35,5 +36,5 @@ public @interface Inject {
      *
      * @return the implementation class
      */
-    public Class<?> meta() default Class.class;
+    Class<?> meta() default Class.class;
 }

@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 import org.junit.Assert;
 import org.junit.Test;

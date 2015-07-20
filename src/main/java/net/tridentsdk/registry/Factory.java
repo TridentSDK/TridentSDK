@@ -20,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Provides access points for creating instances of server objects
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public final class Factory {
     private static volatile Implementation impl;

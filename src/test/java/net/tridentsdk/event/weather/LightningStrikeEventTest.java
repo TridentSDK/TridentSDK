@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.weather;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import org.junit.Assert;
 import org.junit.Test;
 

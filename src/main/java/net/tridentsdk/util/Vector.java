@@ -18,7 +18,7 @@
 package net.tridentsdk.util;
 
 import com.google.common.base.Objects;
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -28,6 +28,7 @@ import java.io.Serializable;
  * Just like in math, a vector represents magnitude and direction, where magnitude is usually the speed of an entity.
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class Vector implements Serializable, Cloneable {

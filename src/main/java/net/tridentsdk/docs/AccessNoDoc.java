@@ -33,6 +33,7 @@ import java.lang.annotation.Target;
  * <p>This annotation doesn't do anything</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Documented
 @Target(ElementType.TYPE)

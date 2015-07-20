@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -25,6 +25,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a player moves their location
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     private final Position fromLoc;

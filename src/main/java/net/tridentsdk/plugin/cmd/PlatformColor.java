@@ -17,12 +17,15 @@
 
 package net.tridentsdk.plugin.cmd;
 
+import net.tridentsdk.ServerConsole;
+
 /**
  * ANSI codes for coloring the console
  *
- * <p>Don't use this class if you need console colors. Use {@link net.tridentsdk.plugin.cmd.ServerConsole}</p>
+ * <p>Don't use this class if you need console colors. Use {@link ServerConsole}</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public final class PlatformColor {
     /**

@@ -20,7 +20,6 @@ package net.tridentsdk;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.plugin.cmd.ServerConsole;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
@@ -29,9 +28,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Utility static accessor to the {@link Server}
+ * Utility static accessor which delegates to the {@link Server}
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public final class Trident {
@@ -80,7 +80,7 @@ public final class Trident {
     }
 
     /**
-     * Returns the server's working directory, with the file spearator appended
+     * Returns the server's working directory, with the file separator appended
      *
      * @return the server working directory
      */
@@ -88,34 +88,72 @@ public final class Trident {
         return Paths.get(System.getProperty("user.dir") + File.separator);
     }
 
+    /**
+     * The information displayed on the client server list when pinged
+     *
+     * @return the display information
+     */
     public static DisplayInfo info() {
         return server.info();
     }
 
+    /**
+     * The port which the server connection has been opened on
+     *
+     * @return the port number
+     */
     public static int port() {
         return server.port();
     }
 
+    /**
+     * Stops the server
+     */
     public static void shutdown() {
         server.shutdown();
     }
 
-    public static InetAddress serverIp() {
-        return server.serverIp();
+    /**
+     * Obtains the IP of the server
+     *
+     * @return the server IP
+     */
+    public static InetAddress ip() {
+        return server.ip();
     }
 
+    /**
+     * Obtains the server release version
+     *
+     * @return the server release version
+     */
     public static String version() {
         return server.version();
     }
 
+    /**
+     * Obtains access to the server console
+     *
+     * @return the console
+     */
     public static ServerConsole console() {
         return server.console();
     }
 
+    /**
+     * The server configuration file
+     *
+     * @return the config
+     */
     public static Config config() {
         return server.config();
     }
 
+    /**
+     * The singleton instance of the server
+     *
+     * @return the server instance
+     */
     public static Server server() {
         return server;
     }

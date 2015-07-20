@@ -24,6 +24,7 @@ import net.tridentsdk.entity.living.Player;
  * Called whenever a player saddles a pig
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntitySaddleEvent extends EntityEvent {
     private final Player player;

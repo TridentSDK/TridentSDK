@@ -17,13 +17,13 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.WindowHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.service.PermissionHolder;
+import net.tridentsdk.world.settings.GameMode;
 
 import java.util.Locale;
 
@@ -31,6 +31,7 @@ import java.util.Locale;
  * Represents a player entity after joining the server
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionHolder {
     // TODO: Use word settings?

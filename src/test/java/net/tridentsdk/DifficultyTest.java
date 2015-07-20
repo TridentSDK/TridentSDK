@@ -17,6 +17,7 @@
 
 package net.tridentsdk;
 
+import net.tridentsdk.world.settings.Difficulty;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,11 +33,11 @@ public class DifficultyTest {
 
     @Test
     public void testGetDifficulty() throws Exception {
-        Assert.assertEquals(Difficulty.difficultyOf(0), Difficulty.PEACEFUL);
-        Assert.assertEquals(Difficulty.difficultyOf(1), Difficulty.EASY);
-        Assert.assertEquals(Difficulty.difficultyOf(2), Difficulty.NORMAL);
-        Assert.assertEquals(Difficulty.difficultyOf(3), Difficulty.HARD);
+        Assert.assertEquals(Difficulty.of(0), Difficulty.PEACEFUL);
+        Assert.assertEquals(Difficulty.of(1), Difficulty.EASY);
+        Assert.assertEquals(Difficulty.of(2), Difficulty.NORMAL);
+        Assert.assertEquals(Difficulty.of(3), Difficulty.HARD);
 
-        Assert.assertEquals(Difficulty.difficultyOf(10), Difficulty.NORMAL);
+        Assert.assertEquals(Difficulty.of(10), Difficulty.NORMAL);
     }
 }

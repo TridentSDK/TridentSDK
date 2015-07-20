@@ -35,6 +35,7 @@ import java.util.Collections;
  * </code></pre></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class ChatFormatter
         extends ForwardingCollection<ChatIdentityFormatter>

@@ -15,10 +15,15 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.world;
+package net.tridentsdk.world.settings;
 
+/**
+ * The generator type
+ *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
+ */
 public enum LevelType {
-
     DEFAULT("default"),
     FLAT("flat"),
     LARGE_BIOMES("largeBiomes"), // why lowerCamelCase I'll never know

@@ -23,6 +23,7 @@ import com.esotericsoftware.reflectasm.ConstructorAccess;
  * Instance creator using ASM
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class FastConstructor {
     private final ConstructorAccess access;

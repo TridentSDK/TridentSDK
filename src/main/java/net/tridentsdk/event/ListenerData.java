@@ -23,6 +23,7 @@ import java.lang.annotation.*;
  * An annotation to mark the priority of a listener method
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Documented
 @Target(ElementType.METHOD)

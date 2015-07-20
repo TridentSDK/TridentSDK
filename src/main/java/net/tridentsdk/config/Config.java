@@ -35,6 +35,7 @@ import java.nio.file.StandardOpenOption;
  * Represents the root ConfigSection of a Configuration file Controls all IO actions of the file
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class Config extends ConfigSection {

@@ -17,6 +17,7 @@
 
 package net.tridentsdk.world;
 
+import net.tridentsdk.world.settings.LevelType;
 import org.junit.Assert;
 import org.junit.Test;
 

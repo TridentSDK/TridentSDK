@@ -25,6 +25,7 @@ import java.util.NoSuchElementException;
  * Represents an iterator over chunks within a specified range
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
     final int minX;

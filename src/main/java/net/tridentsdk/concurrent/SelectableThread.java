@@ -24,6 +24,7 @@ import java.util.concurrent.Future;
  * Execution abstraction
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface SelectableThread {
     /**

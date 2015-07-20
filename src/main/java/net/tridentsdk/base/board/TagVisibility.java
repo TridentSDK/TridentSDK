@@ -21,6 +21,7 @@ package net.tridentsdk.base.board;
  * Visibility flag of the player tag
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum TagVisibility {
     /**

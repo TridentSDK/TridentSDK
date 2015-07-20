@@ -25,6 +25,7 @@ package net.tridentsdk.event;
  * events remain consistent with the modifications made by the listeners.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class Event {
 }

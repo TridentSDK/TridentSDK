@@ -38,6 +38,7 @@ import java.util.stream.Collectors;
  * Represents a section of the Config file
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public class ConfigSection {

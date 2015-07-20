@@ -24,6 +24,7 @@ import net.tridentsdk.config.Config;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.annotation.Desc;
 import net.tridentsdk.plugin.cmd.Command;
+import net.tridentsdk.registry.Factory;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
 
@@ -40,6 +41,7 @@ import java.util.stream.Collectors;
  * Must be extended by a non-inner class to represent a plugin's <em>main class</em>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class Plugin {
     private final File pluginFile;
@@ -96,10 +98,10 @@ public class Plugin {
      * @return the instance of the plugin with the specified main class
      */
     @Nullable
-    public static Plugin instance(Class<? extends Plugin> c) {
+    public static <T extends Plugin> T instance(Class<T> c) {
         for (Plugin plugin : Registered.plugins())
             if (plugin.getClass().equals(c))
-                return plugin;
+                return (T) plugin;
         return null;
     }
 
@@ -146,6 +148,15 @@ public class Plugin {
      */
     public <T extends Command> T commandBy(Class<T> c) {
         return (T) Registered.commands().commandsFor(this).get(c);
+    }
+
+    /**
+     * Gets the logger for this plugin
+     *
+     * @return the logger
+     */
+    public TridentLogger logger() {
+        return Factory.newLogger(description.name());
     }
 
     /**

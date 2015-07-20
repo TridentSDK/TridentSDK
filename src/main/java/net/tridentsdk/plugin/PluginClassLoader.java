@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * The classloader for plugins
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PluginClassLoader extends URLClassLoader {
     final Map<String, Class<?>> locallyLoaded = new ConcurrentHashMap<>();

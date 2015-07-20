@@ -21,12 +21,12 @@ import com.google.common.base.Function;
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import net.tridentsdk.ServerConsole;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.Plugin;
-import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.registry.Registry;
 import org.apache.log4j.*;
@@ -45,6 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Logger for Trident, automatically obtains the correct logger for the class
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger extends ForwardingCollection<TridentLogger> implements Registry<TridentLogger> {
@@ -210,6 +211,10 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      */
     public static void log(String item) {
         get().internal().info(parse(item) + ServerConsole.RESET);
+    }
+
+    public void info(String item) {
+        internal().info(parse(item) + ServerConsole.RESET);
     }
 
     /**

@@ -17,6 +17,7 @@
 
 package net.tridentsdk;
 
+import net.tridentsdk.world.settings.GameMode;
 import org.junit.Assert;
 import org.junit.Test;
 

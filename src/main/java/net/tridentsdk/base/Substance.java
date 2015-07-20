@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
  * Enumeration of possible materials in minecraft
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum Substance {
     /**

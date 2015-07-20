@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.window.inventory;
+package net.tridentsdk.inventory.inventory;
 
 import org.junit.Assert;
 import org.junit.Test;

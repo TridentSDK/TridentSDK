@@ -25,6 +25,7 @@ import net.tridentsdk.plugin.Plugin;
  * <p>The formatting provides only the left most portion (the player name and prompt), not the actual chat message</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface ChatIdentityFormatter {
     /**

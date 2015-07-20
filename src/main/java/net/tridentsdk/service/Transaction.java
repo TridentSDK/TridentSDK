@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * {@link Transactions}, and the callback which is executed for the transaction to occur
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class Transaction<S, R> {
     private final Object item;

@@ -27,6 +27,7 @@ import java.lang.annotation.*;
  * {@link net.tridentsdk.plugin.Plugin#commandBy(Class)} to find an instance of a command</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

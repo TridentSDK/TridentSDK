@@ -26,6 +26,7 @@ import java.util.Map;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class CompoundTag extends NBTTag implements TagContainer {
     // Will work for now

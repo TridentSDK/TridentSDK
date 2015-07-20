@@ -23,6 +23,7 @@ import java.lang.annotation.*;
  * Represents command information for loading purposes
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

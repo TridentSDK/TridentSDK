@@ -19,8 +19,8 @@ package net.tridentsdk.util;
 
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
-import net.tridentsdk.Position;
 import net.tridentsdk.Trident;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.traits.EntityProperties;
@@ -163,6 +163,7 @@ import java.util.stream.Collectors;
  * </code></pre>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public final class WeakEntity<T extends Entity> {

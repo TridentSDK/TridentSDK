@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 /**
- * Represents Minecraft inventories, items, and their properties
+ * Inventory and windows such as crafting, enchanting, trading access
  */
 
-package net.tridentsdk.window.inventory;
+package net.tridentsdk.inventory;

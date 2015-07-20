@@ -21,6 +21,7 @@ package net.tridentsdk.plugin.channel;
  * A channel which listens for data received by the opened pipeline
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class PluginChannel {
     /**

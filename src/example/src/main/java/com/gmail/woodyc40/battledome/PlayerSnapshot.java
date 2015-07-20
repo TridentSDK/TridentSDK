@@ -1,8 +1,8 @@
 package com.gmail.woodyc40.battledome;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.window.Inventory;
+import net.tridentsdk.inventory.Inventory;
 
 import java.util.UUID;
 

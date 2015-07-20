@@ -3,13 +3,13 @@ package net.tridentsdk.registry;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.event.Events;
+import net.tridentsdk.inventory.Inventories;
 import net.tridentsdk.plugin.PluginHandler;
 import net.tridentsdk.plugin.channel.PluginChannels;
 import net.tridentsdk.plugin.cmd.Commands;
 import net.tridentsdk.service.ChatFormatter;
 import net.tridentsdk.service.Transactions;
 import net.tridentsdk.util.TridentLogger;
-import net.tridentsdk.window.Inventories;
 import net.tridentsdk.world.World;
 
 import java.util.Map;
@@ -18,6 +18,7 @@ import java.util.Map;
  * Allows access to the instance of various server objects
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class Registered {
     private static final Events EVENTS = Events.create();

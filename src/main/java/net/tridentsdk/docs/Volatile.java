@@ -20,7 +20,8 @@ package net.tridentsdk.docs;
 /**
  * Represents a type or member that is not safe to use normally without sufficient understanding of how it works
  *
- * @author the TridentSDK Team
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public @interface Volatile {
     /**

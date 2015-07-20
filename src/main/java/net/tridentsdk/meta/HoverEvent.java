@@ -21,6 +21,7 @@ package net.tridentsdk.meta;
  * This even occurs when the player hovers the mouse over the chat message
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class HoverEvent {
     private HoverAction action;
@@ -72,6 +73,7 @@ public class HoverEvent {
      * An action that occurs when the player hovers over the chat message
      *
      * @author The TridentSDK Team
+     * @since 0.3-alpha-DP
      */
     public enum HoverAction {
         SHOW_TEXT,

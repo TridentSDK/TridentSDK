@@ -18,7 +18,7 @@
 package net.tridentsdk.event.entity;
 
 import com.google.common.base.Preconditions;
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.DroppedItem;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
@@ -27,6 +27,7 @@ import net.tridentsdk.entity.living.Player;
  * Called when a player drops an item
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerDropItemEvent extends EntitySpawnEvent {
     private final Player player;

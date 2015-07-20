@@ -21,6 +21,7 @@ package net.tridentsdk.base;
  * Represents the instruments that can be played on a note block
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum Instrument {
     /**

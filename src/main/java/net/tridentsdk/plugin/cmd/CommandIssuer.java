@@ -18,12 +18,14 @@
 package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.Messagable;
+import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.service.PermissionHolder;
 
 /**
  * A server entity which can execute commands, which can be players or the console
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface CommandIssuer extends Messagable, PermissionHolder {
     /**
@@ -45,4 +47,11 @@ public interface CommandIssuer extends Messagable, PermissionHolder {
      * @return if this player is an operator, or if the sender was console
      */
     boolean isOperator();
+
+    /**
+     * Obtains this command issuer as a player
+     *
+     * @return the player executing, or null if it isn't a player
+     */
+    Player asPlayer();
 }

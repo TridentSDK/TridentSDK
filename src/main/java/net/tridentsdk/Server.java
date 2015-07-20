@@ -18,16 +18,15 @@
 package net.tridentsdk;
 
 import net.tridentsdk.config.Config;
-import net.tridentsdk.entity.living.ai.AiHandler;
-import net.tridentsdk.plugin.cmd.ServerConsole;
 import net.tridentsdk.util.TridentLogger;
 
 import java.net.InetAddress;
 
 /**
- * The access to the server internals
+ * The access point to the server information
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Server {
     /**
@@ -38,37 +37,18 @@ public interface Server {
     int port();
 
     /**
+     * Gets the Internet Address of this server
+     *
+     * @return the address of this server
+     */
+    InetAddress ip();
+
+    /**
      * The server's console
      *
      * @return the server console
      */
     ServerConsole console();
-
-    /**
-     * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
-     */
-    void shutdown();
-
-    /**
-     * Gets the Internet Address of this server
-     *
-     * @return the address of this server
-     */
-    InetAddress serverIp();
-
-    /**
-     * Gets the version of Trident that the server is currently running
-     *
-     * @return a String representing the current version of the Trident server that the server is running
-     */
-    String version();
-
-    /**
-     * Gets the server's display information on the server list
-     *
-     * @return the display information manager
-     */
-    DisplayInfo info();
 
     /**
      * Gets the server's console logger for the this class
@@ -85,7 +65,21 @@ public interface Server {
     Config config();
 
     /**
-     * Returns the AI handler for the server, determines what AI entities use
+     * Gets the server's display information on the server list
+     *
+     * @return the display information manager
      */
-    AiHandler aiHandler();
+    DisplayInfo info();
+
+    /**
+     * Gets the version of Trident that the server is currently running
+     *
+     * @return a String representing the current version of the Trident server that the server is running
+     */
+    String version();
+
+    /**
+     * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
+     */
+    void shutdown();
 }

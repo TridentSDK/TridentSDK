@@ -21,6 +21,7 @@ package net.tridentsdk.plugin;
  * Represents an exception which occurs when the plugin is loaded incorrectly
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PluginLoadException extends RuntimeException {
     private static final long serialVersionUID = 644578736382376769L;

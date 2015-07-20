@@ -27,6 +27,7 @@ import net.tridentsdk.world.World;
  * <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class WeatherEvent extends Event implements Cancellable {
     public final World world;

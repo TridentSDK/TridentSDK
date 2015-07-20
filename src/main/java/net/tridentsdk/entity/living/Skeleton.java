@@ -24,6 +24,7 @@ import net.tridentsdk.entity.traits.Hostile;
  * Represents a skeleton mob
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Skeleton extends Hostile, Equippable {
     /**

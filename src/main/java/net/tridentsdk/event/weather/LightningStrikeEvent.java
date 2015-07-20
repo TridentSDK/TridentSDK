@@ -17,13 +17,14 @@
 
 package net.tridentsdk.event.weather;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.world.World;
 
 /**
  * Called when lightning strikes somewhere in the world
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class LightningStrikeEvent extends WeatherEvent {
     private final Position location;

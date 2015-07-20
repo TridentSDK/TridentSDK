@@ -20,6 +20,7 @@ package net.tridentsdk.reflect;
  * Produces an object for a particular injection class
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @FunctionalInterface
 public interface Producer<T> {
@@ -28,7 +29,7 @@ public interface Producer<T> {
      *
      * @return the produced object
      */
-    public T produce();
+    T produce();
 
     /**
      * Produce an object for an {@link Inject#meta()} class provided by the annotation

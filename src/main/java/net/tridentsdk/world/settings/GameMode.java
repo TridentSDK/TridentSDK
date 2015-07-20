@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk;
+package net.tridentsdk.world.settings;
 
 /**
  * Minecraft game modes
@@ -23,6 +23,7 @@ package net.tridentsdk;
  * <p>If you need more help, take a look at <a href="http://minecraft.gamepedia.com/Gameplay#Game_modes">Wiki</a></p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum GameMode {
     SURVIVAL(0),
