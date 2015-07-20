@@ -27,6 +27,11 @@ import java.util.concurrent.Future;
 /**
  * A tunable task executor which represents a scalable thread pool
  *
+ * <p>This class contains 3 selection methods:
+ * Core: Selects a non-dying thread
+ * Next: Selects a thread, might be non-dying
+ * Scaled: Creates a new thread if all workers are occupied and the count is below maxThreads. Otherwise returns nextThread.</p>
+ *
  * @author The TridentSDK Team
  */
 @ThreadSafe
@@ -73,6 +78,16 @@ public interface SelectableThreadPool extends Executor {
      * @param mustEmptyBeforeExpire {@code true} (default) if the worker needs to ensure the task list is empty
      */
     void setMustEmptyBeforeExpire(boolean mustEmptyBeforeExpire);
+
+    /**
+     * Selects a thread in much the same way as {@link #selectNext()}, however, it does not include threads that have been
+     * added to the scaling pool.
+     *
+     * <p>This is useful for caching SelectableThreads for thread-confinement</p>
+     *
+     * @return the next selected thread
+     */
+    SelectableThread selectCore();
 
     /**
      * Obtains a worker which is available in the thread pool

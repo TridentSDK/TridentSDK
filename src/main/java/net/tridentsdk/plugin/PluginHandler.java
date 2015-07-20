@@ -53,7 +53,7 @@ import java.util.jar.JarFile;
  * @author The TridentSDK Team
  */
 public class PluginHandler extends ForwardingList<Plugin> implements Registry<Plugin> {
-    private static final SelectableThread EXECUTOR = Factory.newExecutor(1, "Plugins").selectNext();
+    private static final SelectableThread EXECUTOR = Factory.newExecutor(1, "Plugins").selectCore();
     private final List<Plugin> plugins = Lists.newArrayList();
 
     /**
