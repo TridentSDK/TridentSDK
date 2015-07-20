@@ -172,7 +172,7 @@ public enum ChatColor {
      * @return the chat color with that character
      */
     @Nullable
-    public static ChatColor forColor(char color) {
+    public static ChatColor of(char color) {
         String find = String.valueOf(color);
         for (ChatColor chatColor : values()) {
             if (chatColor.toString().contains(find))
@@ -180,6 +180,15 @@ public enum ChatColor {
         }
 
         return null;
+    }
+
+    /**
+     * Obtains the section symbol preceeding chat colors
+     *
+     * @return the precceding section symbol
+     */
+    public static char magicCharacter() {
+        return '§';
     }
 
     /**

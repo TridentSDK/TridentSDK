@@ -17,12 +17,15 @@
 
 package net.tridentsdk.util;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * Represents the rotation of an Armor Stand part
  *
  * @author TridentSDK Team
  */
-public class PartRotation {
+@NotThreadSafe
+public final class PartRotation {
     private int rotX;
     private int rotY;
     private int rotZ;

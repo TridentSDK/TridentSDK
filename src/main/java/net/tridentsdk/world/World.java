@@ -28,13 +28,15 @@ import java.util.Set;
 
 /**
  * A Minecraft world
- * <p>
+ *
  * <p>Worlds can be created using the following code:
  * <pre>{@code
  *      WorldLoader loader = Factory.newWorldLoader();
+ *      // Set world settings
  *      loader.createWorld("New world");
- * }</pre></p>
- * <p>
+ * }</pre>
+ * You can use your own generator using {@link net.tridentsdk.registry.Factory#newWorldLoader(Class)}</p>
+ *
  * <p>A collection of the worlds on the server can be obtained using {@link Registered#worlds()}</p>
  *
  * @author The TridentSDK Team

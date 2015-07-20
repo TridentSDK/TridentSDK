@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.world;
+package net.tridentsdk.world.settings;
 
 import java.util.Collections;
 import java.util.EnumSet;

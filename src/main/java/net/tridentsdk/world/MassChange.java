@@ -14,13 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world.change;
+package net.tridentsdk.world;
 
 import net.tridentsdk.base.Position;
 import net.tridentsdk.base.Substance;
 
 /**
  * Change large amounts of blocks at one time
+ *
+ * <p>Don't forget to call {@link #commitChanges()} to finish the operation</p>
+ *
+ * <p>An instance of this class can be acquired using
+ * {@link net.tridentsdk.registry.Factory#newMassChange(net.tridentsdk.world.World)}</p>
  *
  * <p>Normally, block changes cause changes to immediately be sent to the client
  * which can be expensive with large amounts of changes being sent at once near a lot of players</p>
@@ -121,8 +126,8 @@ public interface MassChange {
 
     /**
      * Sends the block changes to the clients and does lighting recalculations
-     * <p/>
-     * <p>This change will be rendered useless after this method is called, and should be discarded</p>
+     *
+     * <p>This instance of MassChange will be rendered useless after this method is called, and should be discarded</p>
      *
      * @return Whether or not the changes were successful.
      * @throws java.lang.IllegalStateException if this change has already been committed

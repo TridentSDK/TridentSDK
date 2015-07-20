@@ -16,8 +16,10 @@
  */
 package net.tridentsdk.world.gen;
 
+import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.world.ChunkLocation;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -27,12 +29,19 @@ import java.util.NoSuchElementException;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@NotThreadSafe
 public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
     final int minX;
     final int minZ;
     final int maxX;
     final int maxZ;
 
+    /**
+     * Creates a new Chunk bounding box
+     *
+     * @param location1 the first chunk corner
+     * @param location2 the second chunk corner
+     */
     public ChunkAxisAlignedBoundingBox(ChunkLocation location1, ChunkLocation location2) {
         minX = (location1.x() < location2.x()) ? location1.x() : location2.x();
         minZ = (location1.z() < location2.z()) ? location1.z() : location2.z();
@@ -46,6 +55,7 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
         return new ChunkAABBIterator(this);
     }
 
+    @AccessNoDoc
     private class ChunkAABBIterator implements Iterator<ChunkLocation> {
         private final ChunkAxisAlignedBoundingBox parent;
 

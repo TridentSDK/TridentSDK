@@ -1,12 +1,32 @@
+/*
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package net.tridentsdk.registry;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.docs.AccessNoDoc;
+import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.util.TridentLogger;
+import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
+import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.gen.AbstractGenerator;
 
 import java.io.File;
@@ -20,7 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Provides access points for creating instances of server objects
  *
  * @author The TridentSDK Team
- * @since 0.3-alpha-DP
+ * @since 0.4-alpha
  */
 public final class Factory {
     private static volatile Implementation impl;
@@ -28,7 +48,9 @@ public final class Factory {
     private Factory() {
     }
 
+    @InternalUseOnly
     public static void setProvider(Implementation implementation) {
+        Preconditions.checkArgument(impl == null, "You may not set the provider of Factory");
         impl = implementation;
     }
 
@@ -142,6 +164,16 @@ public final class Factory {
      */
     public static TridentLogger newLogger(Class<?> cls) {
         return TridentLogger.get(cls);
+    }
+
+    /**
+     * Returns a new mass change for the specified world
+     *
+     * @param world the world to apply the mass change to
+     * @return the new mass change
+     */
+    public static MassChange newMassChange(World world) {
+        return impl.newMc(world);
     }
 
     /**

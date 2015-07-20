@@ -147,6 +147,8 @@ public class Events extends ForwardingCollection<EventReflector> implements Regi
             latch.countDown();
         });
 
+        // Setting of event state happens-before counting down
+        // therefore event state need not be volatile
         try {
             latch.await();
         } catch (InterruptedException e) {

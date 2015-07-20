@@ -31,7 +31,7 @@ import java.io.Serializable;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public class Vector implements Serializable, Cloneable {
+public final class Vector implements Serializable, Cloneable {
     private static final long serialVersionUID = -7634050835106851288L;
 
     private volatile double x;

@@ -251,7 +251,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
             if (c == '§') {
                 // Find the character after that
                 char esc = item.charAt(i + 1);
-                ChatColor color = ChatColor.forColor(esc);
+                ChatColor color = ChatColor.of(esc);
 
                 // Not a real color, continue on
                 if (color == null) {

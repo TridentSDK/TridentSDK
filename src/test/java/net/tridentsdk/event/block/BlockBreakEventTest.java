@@ -37,8 +37,8 @@ public class BlockBreakEventTest {
     @Test
     public void testGetItemInHand() throws Exception {
         BlockBreakEvent event = new BlockBreakEvent(null, null, BlockOrientation.BOTTOM,
-                new Item(Substance.STICK, (short) 10));
-        if (!event.itemInHand().isSimilar(new Item(Substance.STICK, (short) 10))) {
+                new Item(Substance.STICK, 10, (byte) 0));
+        if (!event.itemInHand().isSimilar(new Item(Substance.STICK, 10, (byte) 0))) {
             Assert.fail();
         }
     }

@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * World generation API, used to set block locations for the chunk
  */
-
 package net.tridentsdk.world.gen;

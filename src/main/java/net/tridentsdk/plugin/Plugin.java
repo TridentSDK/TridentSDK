@@ -18,8 +18,6 @@
 package net.tridentsdk.plugin;
 
 import net.tridentsdk.Trident;
-import net.tridentsdk.concurrent.HeldValueLatch;
-import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.plugin.annotation.Desc;
@@ -44,25 +42,16 @@ import java.util.stream.Collectors;
  * @since 0.3-alpha-DP
  */
 public class Plugin {
-    private final File pluginFile;
-    private final File configDirectory;
-    private final Desc description;
-    private final Config defaultConfig;
-    private final HeldValueLatch<SelectableThread> executor = HeldValueLatch.create();
+    private File pluginFile;
+    private File configDirectory;
+    private Desc description;
+    private Config defaultConfig;
     public PluginClassLoader classLoader;
 
-    /**
-     * It's not a good idea to use this constructor
-     */
     protected Plugin() {
-        // Prevent stack continuation
-        throw new IllegalStateException("Cannot be directly instantiated");
-    } // avoid any plugin initiation outside of this package
+    }
 
-    Plugin(File pluginFile, Desc description, PluginClassLoader loader) {
-        Registered.plugins().stream().filter(plugin -> plugin.description().name().equalsIgnoreCase(description.name())).forEach(plugin -> TridentLogger.error(new IllegalStateException(
-                "Plugin already initialized or plugin named " + description.name() + " exists already")));
-
+    public void init(File pluginFile, Desc description, PluginClassLoader loader) {
         this.pluginFile = pluginFile;
         this.description = description;
         this.configDirectory = new File("plugins" + File.separator + description.name() + File.separator);
@@ -99,9 +88,10 @@ public class Plugin {
      */
     @Nullable
     public static <T extends Plugin> T instance(Class<T> c) {
-        for (Plugin plugin : Registered.plugins())
-            if (plugin.getClass().equals(c))
+        for (Object plugin : Registered.plugins().plugins.values())
+            if (((Plugin) plugin).classLoader.locallyLoaded.containsKey(c.getName())) {
                 return (T) plugin;
+            }
         return null;
     }
 

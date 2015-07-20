@@ -50,15 +50,16 @@ public abstract class AbstractGenerator {
      *
      * <p>Should only be invoked by TridentChunk</p>
      *
-     * @param location
-     * @return
+     * @param location the location of the chunk to be generated
+     * @return the data array to fill the chunk with
      */
     public abstract char[][] generateChunkBlocks(ChunkLocation location);
 
     /**
      * Populates block data for a chunk
-     * @param location
-     * @return
+     *
+     * @param location the location of the chunk to be generated
+     * @return the data to apply to each block
      */
     public abstract byte[][] generateBlockData(ChunkLocation location);
 }

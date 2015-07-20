@@ -27,25 +27,39 @@ import net.tridentsdk.base.Substance;
  */
 public class Item {
     private final int id;
-    private final Substance mat;
+    private final Substance substance;
 
+    private volatile byte meta;
     private volatile short quantity;
     private volatile short damageValue;
 
-    public Item(Substance mat) {
-        this(mat, (short) 1);
+    /**
+     * Creates a new item with the specified substance and quantity 1, 0 data
+     *
+     * @param substance the substance for the item
+     */
+    public Item(Substance substance) {
+        this(substance, (short) 1, (byte) 0);
     }
 
-    public Item(Substance mat, short quantity) {
-        if (mat == null) {
-            mat = Substance.AIR;
+    /**
+     * Creates a new item with the specified properties
+     *
+     * @param substance the substance
+     * @param quantity the quantity
+     * @param meta the meta
+     */
+    public Item(Substance substance, int quantity, byte meta) {
+        if (substance == null) {
+            substance = Substance.AIR;
             // The item is clicked on in the inventory
         }
 
-        this.id = mat.id();
-        this.mat = mat;
+        this.id = substance.id();
+        this.substance = substance;
 
-        this.quantity = quantity;
+        this.meta = meta;
+        this.quantity = (short) quantity;
         this.damageValue = (short) 100; // psudeo-value
     }
 
@@ -54,7 +68,15 @@ public class Item {
     }
 
     public Substance type() {
-        return this.mat;
+        return this.substance;
+    }
+
+    public byte meta() {
+        return this.meta;
+    }
+
+    public void setMeta(byte meta) {
+        this.meta = meta;
     }
 
     public short quantity() {
@@ -76,7 +98,7 @@ public class Item {
     public boolean isSimilar(Item i) {
         if (id != i.id) {
             return false;
-        } else if (mat != i.mat) {
+        } else if (substance != i.substance) {
             return false;
         } else if (quantity != i.quantity) {
             return false;

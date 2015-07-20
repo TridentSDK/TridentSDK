@@ -19,7 +19,7 @@ package net.tridentsdk.plugin;
 
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import net.tridentsdk.Trident;
 import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.docs.InternalUseOnly;
@@ -39,6 +39,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -53,9 +55,9 @@ import java.util.jar.JarFile;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class PluginHandler extends ForwardingList<Plugin> implements Registry<Plugin> {
+public class Plugins extends ForwardingList<Plugin> implements Registry<Plugin> {
     private static final SelectableThread EXECUTOR = Factory.newExecutor(1, "Plugins").selectCore();
-    private final List<Plugin> plugins = Lists.newArrayList();
+    final Map<String, Plugin> plugins = Maps.newConcurrentMap();
 
     /**
      * Do not instantiate this without being Trident
@@ -65,13 +67,15 @@ public class PluginHandler extends ForwardingList<Plugin> implements Registry<Pl
      *     TridentPluginHandler handler = Handler.plugins();
      * </code></pre></p>
      */
-    public PluginHandler() {
+    public Plugins() {
         if (!Trident.isTrident())
             TridentLogger.error(new IllegalAccessException("Can only be instantiated by Trident"));
     }
 
     @InternalUseOnly
     public void load(final File pluginFile) {
+        CountDownLatch latch = new CountDownLatch(1);
+
         EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
@@ -121,29 +125,24 @@ public class PluginHandler extends ForwardingList<Plugin> implements Registry<Pl
                         return;
                     }
 
-                    TridentLogger.log("Loading " + description.name() + " version " + description.version());
-
-                    Constructor<? extends Plugin> defaultConstructor = pluginClass.getSuperclass()
-                            .asSubclass(Plugin.class)
-                            .getDeclaredConstructor(File.class, Desc.class, PluginClassLoader.class);
-                    defaultConstructor.setAccessible(true);
-                    plugin = defaultConstructor.newInstance(pluginFile, description, loader);
-
-                    plugins.add(plugin);
-
-                    plugin.load();
-
-                    for (Class<?> cls : loader.locallyLoaded.values()) {
-                        register(plugin, cls, EXECUTOR);
+                    if (plugins.containsKey(description.name())) {
+                        TridentLogger.error(new PluginLoadException("Plugin with name " + description.name() +
+                                " has been loaded"));
+                        loader.unloadClasses();
+                        loader = null; // help gc
+                        return;
                     }
 
-                    plugin.enable();
+                    TridentLogger.log("Loading " + description.name() + " version " + description.version());
+
+                    plugin = pluginClass.newInstance();
+                    plugin.init(pluginFile, description, loader);
+                    plugins.put(description.name(), plugin);
+                    plugin.load();
+                    latch.countDown();
                     TridentLogger.success("Loaded " + description.name() + " version " + description.version());
-                } catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException
-                        | InstantiationException | ClassNotFoundException ex) { // UNLOAD PLYGIN
+                } catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException ex) { // UNLOAD PLUGIN
                     TridentLogger.error(new PluginLoadException(ex));
-                    if (plugin != null)
-                        disable(plugin);
                 } finally {
                     if (jarFile != null)
                         try {
@@ -154,6 +153,26 @@ public class PluginHandler extends ForwardingList<Plugin> implements Registry<Pl
                 }
             }
         });
+
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enable(Plugin plugin) {
+        TridentLogger.log("Enabling " + plugin.description().name() + " version " + plugin.description().version());
+        for (Class<?> cls : plugin.classLoader.locallyLoaded.values()) {
+            try {
+                register(plugin, cls, EXECUTOR);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+        }
+
+        plugin.enable();
+        TridentLogger.success("Enabled " + plugin.description().name() + " version " + plugin.description().version());
     }
 
     private void register(Plugin plugin, Class<?> cls, SelectableThread executor) throws InstantiationException {
@@ -208,7 +227,7 @@ public class PluginHandler extends ForwardingList<Plugin> implements Registry<Pl
 
     @Override
     protected List<Plugin> delegate() {
-        return ImmutableList.copyOf(plugins);
+        return ImmutableList.copyOf(plugins.values());
     }
 
     /**

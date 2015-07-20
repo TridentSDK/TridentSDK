@@ -60,7 +60,7 @@ public class BattleTimer extends ScheduledRunnable {
                     warned = false;
 
                     for (Map.Entry<WeakEntity<Player>, Game.Team> entry : game.players().entrySet()) {
-                        game.teleport(entry.getKey().entity(), entry.getValue());
+                        game.teleport(entry.getKey().obtain(), entry.getValue());
                     }
                 }
                 break;

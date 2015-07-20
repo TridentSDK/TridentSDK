@@ -67,7 +67,7 @@ public class FastRandom {
         x ^= (x >>> 35);
         x ^= (x << 4);
 
-        long rand = x % upper;
+        long rand = x & (upper - 1);
         return (rand > 0) ? rand : -rand;
     }
 
@@ -98,7 +98,7 @@ public class FastRandom {
         x ^= (x >>> 35);
         x ^= (x << 4);
 
-        long rand = x % upper;
+        long rand = x & (upper - 1);
         return (rand > 0) ? rand : -rand;
     }
 }
