@@ -88,8 +88,8 @@ public class Plugin {
      */
     @Nullable
     public static <T extends Plugin> T instance(Class<T> c) {
-        for (Object plugin : Registered.plugins().plugins.values())
-            if (((Plugin) plugin).classLoader.locallyLoaded.containsKey(c.getName())) {
+        for (Plugin plugin : Registered.plugins())
+            if (plugin.classLoader.locallyLoaded.containsKey(c.getName())) {
                 return (T) plugin;
             }
         return null;
