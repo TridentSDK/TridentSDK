@@ -39,10 +39,6 @@ import java.util.Map;
  * @since 0.4-alpha
  */
 public class Registered {
-    private static final Commands CMDS = new Commands();
-    private static final ChatFormatter CHAT = new ChatFormatter();
-    private static final Transactions TRANSACTIONS = new Transactions();
-
     private static volatile Implementation impl;
 
     @InternalUseOnly
@@ -130,7 +126,7 @@ public class Registered {
      * @return the command handler
      */
     public static Commands commands() {
-        return CMDS;
+        return impl.cmds();
     }
 
     /**
@@ -148,7 +144,7 @@ public class Registered {
      * @return the chat handler
      */
     public static ChatFormatter chatFormatter() {
-        return CHAT;
+        return impl.format();
     }
 
     /**
@@ -157,6 +153,6 @@ public class Registered {
      * @return the transaction handler
      */
     public static Transactions transactions() {
-        return TRANSACTIONS;
+        return impl.trasacts();
     }
 }

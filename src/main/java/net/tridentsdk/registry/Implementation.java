@@ -23,6 +23,9 @@ import net.tridentsdk.event.Events;
 import net.tridentsdk.inventory.Inventories;
 import net.tridentsdk.plugin.Plugins;
 import net.tridentsdk.plugin.channel.PluginChannels;
+import net.tridentsdk.plugin.cmd.Commands;
+import net.tridentsdk.service.ChatFormatter;
+import net.tridentsdk.service.Transactions;
 import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
@@ -38,14 +41,19 @@ public interface Implementation {
 
     Map<String, World> worlds();
 
-    Players players();
+    Transactions trasacts();
 
+    ChatFormatter format();
+
+    Players players();
     PlayerStatus statuses();
 
     Events events();
-
     Plugins plugins();
+
     PluginChannels channels();
+
+    Commands cmds();
     Scheduler scheduler();
     Inventories inventories();
 }

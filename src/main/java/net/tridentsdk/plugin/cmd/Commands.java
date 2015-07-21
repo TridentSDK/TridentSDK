@@ -14,27 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.tridentsdk.plugin.cmd;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import net.tridentsdk.ServerConsole;
-import net.tridentsdk.Trident;
-import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.meta.MessageBuilder;
 import net.tridentsdk.plugin.Plugin;
-import net.tridentsdk.plugin.PluginLoadException;
-import net.tridentsdk.plugin.annotation.CommandDescription;
-import net.tridentsdk.registry.Registered;
-import net.tridentsdk.util.TridentLogger;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
+import net.tridentsdk.registry.Registry;
 
 /**
+ * /**
  * Handles commands passed from the server
  *
  * <p>To access this handler, use this code:
@@ -45,166 +31,30 @@ import java.util.stream.Collectors;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class Commands {
-    // TODO: Make this a dictionary tree for fast lookup
-    private static final Map<String, CommandData> COMMANDS = new ConcurrentHashMap<>();
-
-    /**
-     * Do not instantiate
-     *
-     * <p>To access this handler, use this code:
-     * <pre><code>
-     *     Commands handler = Handler.commands();
-     * </code></pre></p>
-     */
-    public Commands() {
-        if (!Trident.isTrident())
-            TridentLogger.error(new IllegalAccessException("Only TridentSDK is allowed to make a new command handler"));
-    }
-
+public interface Commands extends Registry<Command> {
     /**
      * Handles the message sent, without the preceding "/"
      *
      * @param message the command executed
      */
-    public void handle(final String message, final CommandIssuer issuer) {
-        if (message.isEmpty()) {
-            return;
-        }
+    void handle(String message, CommandIssuer issuer);
 
-        final String[] contents = message.split(" ");
-        final String label = contents[0].toLowerCase();
-        final String args = message.substring(label.length() + (message.contains(" ") ? 1 : 0));
-        final Set<CommandData> cmdData = findCommand(label);
+    /**
+     * Registers the command for the plugin
+     *
+     * <p>You do not need to call this method unless the command is marked with
+     * {@link net.tridentsdk.plugin.annotation.IgnoreRegistration}</p>
+     *
+     * @param plugin the plugin to register for
+     * @param command the command to register
+     * @return unspecified
+     */
+    int register(Plugin plugin, Command command);
 
-        if (!cmdData.isEmpty()) {
-            Registered.plugins().executor().execute(() -> {
-                for (CommandData data : cmdData) {
-                    handle(data.command(), issuer, args, contents, data);
-                }
-            });
-        } else {
-            // Command not found
-            issuer.sendRaw("Command not found");
-        }
-    }
-
-    private Set<CommandData> findCommand(String label) {
-        Set<CommandData> dataSet = Sets.newHashSet();
-        CommandData data = COMMANDS.get(label);
-
-        if (data != null) {
-            dataSet.add(data);
-        }
-
-        dataSet.addAll(COMMANDS.values().stream().filter(d -> d.hasAlias(label)).collect(Collectors.toList()));
-
-        return dataSet;
-    }
-
-    private void handle(Command cmd, CommandIssuer issuer, String args, String[] contents, CommandData data) {
-        if (!issuer.holdsPermission(data.permission)) {
-            issuer.sendRaw(new MessageBuilder("You do not have permission").build().asJson());
-            return;
-        }
-
-        if (issuer instanceof Player)
-            cmd.handlePlayer((Player) issuer, args, contents[0]);
-        else if (issuer instanceof ServerConsole)
-            cmd.handleConsole((ServerConsole) issuer, args, contents[0]);
-
-        cmd.handle(issuer, args, contents[0]);
-    }
-
-    public int register(Plugin plugin, Command command) throws
-            PluginLoadException {
-        CommandDescription description = command.getClass().getAnnotation(CommandDescription.class);
-
-        if (description == null) {
-            TridentLogger.error(new PluginLoadException(
-                    "Error in registering commands: Class does not have annotation " + "\"CommandDescription\"!"));
-            return 0;
-        }
-
-        String name = description.name();
-        int priority = description.priority();
-        String[] aliases = description.aliases();
-        String permission = description.permission();
-
-        if (name == null || "".equals(name)) {
-            TridentLogger.error(new PluginLoadException("cmd does not declare a valid name!"));
-            return 0;
-        }
-
-        String lowerCase = name.toLowerCase();
-        CommandData data = COMMANDS.get(lowerCase);
-        CommandData newData = new CommandData(name, priority, aliases, permission, command, plugin);
-
-        if (data != null) {
-            if (COMMANDS.get(lowerCase).priority() > priority) {
-                // put the new, more important cmd in place and notify the old cmd that it has been overridden
-                COMMANDS.put(lowerCase, newData).command().notifyOverriden();
-            } else {
-                // don't register this cmd and notify it has been overridden
-                command.notifyOverriden();
-            }
-        } else {
-            COMMANDS.put(name, newData);
-        }
-
-        // TODO: return something meaningful
-        return 0;
-    }
-
-    public void removeCommand(Class<? extends Command> cls) {
-        COMMANDS.entrySet().stream().filter(e -> e.getValue().command().getClass().equals(cls)).forEach(e -> COMMANDS.remove(e.getKey()));
-    }
-
-    public Map<Class<? extends Command>, Command> commandsFor(Plugin plugin) {
-        Map<Class<? extends Command>, Command> map = Maps.newHashMap();
-        COMMANDS.values().stream().filter(data -> data.plugin().equals(plugin)).forEach(data -> map.put(data.encapsulated.getClass(), data.encapsulated));
-        return map;
-    }
-
-    private static class CommandData {
-        private final String permission;
-        private final int priority;
-        private final String[] aliases;
-        private final String name;
-        private final Command encapsulated;
-        private final Plugin plugin;
-
-        public CommandData(String name, int priority, String[] aliases, String permission, Command command,
-                Plugin plugin) {
-            this.priority = priority;
-            this.name = name;
-            this.aliases = aliases;
-            this.permission = permission;
-            this.encapsulated = command;
-            this.plugin = plugin;
-        }
-
-        public Command command() {
-            return this.encapsulated;
-        }
-
-        public boolean hasAlias(String alias) {
-            if (name.equals(alias)) return true;
-
-            for (String string : this.aliases) {
-                if (alias.equalsIgnoreCase(string)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public int priority() {
-            return this.priority;
-        }
-
-        public Plugin plugin() {
-            return plugin;
-        }
-    }
+    /**
+     * Unregisters the given command handler
+     *
+     * @param cls the command to unregister
+     */
+    void unregister(Class<? extends Command> cls);
 }

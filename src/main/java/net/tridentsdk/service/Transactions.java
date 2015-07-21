@@ -16,17 +16,7 @@
  */
 package net.tridentsdk.service;
 
-import com.google.common.collect.ForwardingCollection;
-import com.google.common.collect.ImmutableList;
-import net.tridentsdk.Trident;
 import net.tridentsdk.registry.Registry;
-import net.tridentsdk.util.TridentLogger;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Handles player transactions, such objects, items, and currency
@@ -77,31 +67,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class Transactions extends ForwardingCollection<TransactionAudit> implements Registry<TransactionAudit> {
-    private final ConcurrentMap<Object, TransactionAudit> transactions = new ConcurrentHashMap<>();
-    private final AtomicInteger transactionIds = new AtomicInteger(2);
-
-    /**
-     * Do not instantiate.
-     *
-     * <p>To access this handler, use this code:
-     * <pre><code>
-     *     Transactions handler = Registered.transactions();
-     * </code></pre></p>
-     */
-    public Transactions() {
-        if (!Trident.isTrident())
-            TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
-    }
-
+public interface Transactions extends Registry<Transaction> {
     /**
      * Creates a new account from the internal account clock
      *
      * @return the new account ID used in transactions
      */
-    public int newAcount() {
-        return transactionIds.incrementAndGet();
-    }
+    int newAcount();
 
     /**
      * The global economy ID to be used as the transaction ID
@@ -110,9 +82,7 @@ public class Transactions extends ForwardingCollection<TransactionAudit> impleme
      *
      * @return the global economy transaction ID
      */
-    public int globalEconomy() {
-        return 1;
-    }
+    int globalEconomy();
 
     /**
      * The global exchange ID to be used as the transaction ID
@@ -121,9 +91,7 @@ public class Transactions extends ForwardingCollection<TransactionAudit> impleme
      *
      * @return the global exchange transaction ID
      */
-    public int globalExchange() {
-        return 2;
-    }
+    int globalExchange();
 
     /**
      * Performs a transaction from the transaction's sender to the transaction's receiver
@@ -131,12 +99,7 @@ public class Transactions extends ForwardingCollection<TransactionAudit> impleme
      * @param account the account ID to be used
      * @param transaction the transaction to perform
      */
-    public void deposit(int account, Transaction transaction) {
-        TransactionAudit audit = transactions.computeIfAbsent(transaction.receiver(), (k) -> new TransactionAudit());
-
-        audit.put(account, transaction);
-        transaction.doTransaction(Transaction.Type.DEPOSIT);
-    }
+    void deposit(int account, Transaction transaction);
 
     /**
      * Withdraws an item from the account
@@ -149,27 +112,7 @@ public class Transactions extends ForwardingCollection<TransactionAudit> impleme
      * @return {@code false} if the account for the withdrawer does not exist, {@code true} if the transaction completes
      *         successfully
      */
-    public boolean withdraw(int account, final Transaction transaction) {
-        TransactionAudit audit = transactions.get(transaction.sender());
-        if (audit == null)
-            return false;
-
-        Transaction withdrawl =
-                new Transaction(
-                        transaction.item(),
-                        transaction.sender(),
-                        transaction.receiver(),
-                        -Math.abs(transaction.amount())) {
-            @Override
-            void doTransaction(Type type) {
-                transaction.doTransaction(type);
-            }
-        };
-
-        audit.put(account, withdrawl);
-        withdrawl.doTransaction(Transaction.Type.WITHDRAW);
-        return true;
-    }
+    boolean withdraw(int account, Transaction transaction);
 
     /**
      * Obtains the amount of an item as indicated by the amount field in each transaction
@@ -177,32 +120,10 @@ public class Transactions extends ForwardingCollection<TransactionAudit> impleme
      * @param account the account ID to be used
      * @param person the object which the transactions were sent to that is checked by this amounting
      * @param type the types to find the amount of. Also the parameter in
-     *             {@link net.tridentsdk.service.Transaction#item()}
+     *             {@link Transaction#item()}
      * @return the amount of an item of type {@code type} found the account of {@code person},
      *         or {@code Integer.MIN_VALUE} if the account for {@code person} does not exist, or the accound ID is not
      *         used for that person
      */
-    public int amount(int account, Object person, Object type) {
-        TransactionAudit audit = transactions.get(person);
-        if (audit == null)
-            return Integer.MIN_VALUE;
-
-        List<Transaction> queue = audit.transactionsFor(account);
-        if (queue == null)
-            return Integer.MAX_VALUE;
-
-        int amount = 0;
-        for (Transaction transaction : queue) {
-            if (type.equals(transaction.item())) {
-                amount += transaction.amount();
-            }
-        }
-
-        return amount;
-    }
-
-    @Override
-    protected Collection<TransactionAudit> delegate() {
-        return ImmutableList.copyOf(transactions.values());
-    }
+    int amount(int account, Object person, Object type);
 }

@@ -16,15 +16,9 @@
  */
 package net.tridentsdk.service;
 
-import com.google.common.collect.ForwardingCollection;
-import net.tridentsdk.Trident;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.registry.Registry;
-import net.tridentsdk.util.TridentLogger;
-
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Handles server side chat communication
@@ -37,34 +31,7 @@ import java.util.Collections;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class ChatFormatter
-        extends ForwardingCollection<ChatIdentityFormatter>
-        implements Registry<ChatIdentityFormatter> {
-    private volatile ChatIdentityFormatter provider = new ChatIdentityFormatter() {
-        @Override
-        public String format(String message, Player sender) {
-            return "%n%d";
-        }
-
-        @Override
-        public void overriden(ChatIdentityFormatter other, Plugin overrider) {
-            TridentLogger.warn("Trident default chat overriden by " + overrider);
-        }
-    };
-
-    /**
-     * Do not instantiate
-     *
-     * <p>To access this handler, use this code:
-     * <pre><code>
-     *     ChatFormatter handler = Registered.chatFormatter();
-     * </code></pre></p>
-     */
-    public ChatFormatter() {
-        if (!Trident.isTrident())
-            TridentLogger.error(new IllegalAccessException("This class should only be instantiated by Trident"));
-    }
-
+public interface ChatFormatter extends Registry<ChatIdentityFormatter> {
     /**
      * Sets the provider of the chat format, performing the default overriding logic of the original provider
      *
@@ -74,10 +41,7 @@ public class ChatFormatter
      * @param provider the provider to use
      * @param plugin the plugin that registers the new provider
      */
-    public void setFormatter(ChatIdentityFormatter provider, Plugin plugin) {
-        this.provider.overriden(provider, plugin);
-        this.provider = provider;
-    }
+    void setFormatter(ChatIdentityFormatter provider, Plugin plugin);
 
     /**
      * Obtains the formatted string, not including the message that will be sent
@@ -86,12 +50,5 @@ public class ChatFormatter
      * @param player the player that is sending the message
      * @return the formatted string from the provider
      */
-    public String format(String message, Player player) {
-        return provider.format(message, player);
-    }
-
-    @Override
-    protected Collection<ChatIdentityFormatter> delegate() {
-        return Collections.singleton(provider);
-    }
+    String format(String message, Player player);
 }

@@ -58,7 +58,7 @@ public abstract class Transaction<S, R> {
     public static <S, R> Transaction<S, R> quietTransaction(Object item, S sender, R receiver, int amount) {
         return new Transaction<S, R>(item, sender, receiver, amount) {
             @Override
-            void doTransaction(Type type) {
+            public void doTransaction(Type type) {
             }
         };
     }
@@ -68,7 +68,7 @@ public abstract class Transaction<S, R> {
      *
      * @param type the type of transaction occuring
      */
-    abstract void doTransaction(Type type);
+    public abstract void doTransaction(Type type);
 
     /**
      * The item type being transacted

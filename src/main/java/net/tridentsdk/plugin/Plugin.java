@@ -137,7 +137,10 @@ public class Plugin {
      * @return the command instance registered to the server
      */
     public <T extends Command> T commandBy(Class<T> c) {
-        return (T) Registered.commands().commandsFor(this).get(c);
+        return (T) Registered.commands().stream()
+                .filter(cmd -> cmd.getClass().equals(c))
+                .collect(Collectors.toList())
+                .get(0);
     }
 
     /**
