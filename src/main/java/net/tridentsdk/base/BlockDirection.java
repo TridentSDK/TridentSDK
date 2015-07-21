@@ -25,7 +25,7 @@ import net.tridentsdk.util.Vector;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public enum BlockOrientation {
+public enum BlockDirection {
     /**
      * Facing north
      */
@@ -76,11 +76,11 @@ public enum BlockOrientation {
 
     private final Vector difference;
 
-    BlockOrientation(Vector difference) {
+    BlockDirection(Vector difference) {
         this.difference = difference;
     }
 
-    BlockOrientation(BlockOrientation face1, BlockOrientation face2) {
+    BlockDirection(BlockDirection face1, BlockDirection face2) {
         this.difference = face1.difference().add(face2.difference());
     }
 
@@ -94,10 +94,10 @@ public enum BlockOrientation {
     }
 
     /**
-     * Gets the location relative to the given direction
+     * Gets the position relative to the given direction
      *
-     * @param loc the location to get relative to
-     * @return the relative location
+     * @param loc the position to get relative to
+     * @return the relative position
      */
     public Position apply(Position loc) {
         return loc.relative(this.difference);

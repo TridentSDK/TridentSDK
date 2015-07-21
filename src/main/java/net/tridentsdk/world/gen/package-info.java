@@ -16,6 +16,6 @@
  */
 
 /**
- * World generation API, used to set block locations for the chunk
+ * World generation API, used to set block positions for the chunk
  */
 package net.tridentsdk.world.gen;

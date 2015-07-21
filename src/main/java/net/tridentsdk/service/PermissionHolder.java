@@ -50,4 +50,11 @@ public interface PermissionHolder {
      * @return {@code true} if the permission is held, {@code false} if it is not
      */
     boolean holdsPermission(String perm);
+
+    /**
+     * Checks if the permission holder has operator status
+     *
+     * @return {@code true} to indicate that the holder is an operator
+     */
+    boolean opped();
 }

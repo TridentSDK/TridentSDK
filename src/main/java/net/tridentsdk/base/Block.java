@@ -20,7 +20,7 @@ package net.tridentsdk.base;
 import net.tridentsdk.util.Vector;
 
 /**
- * A basic structure in minecraft, a material bearing piece set at a given location
+ * A basic structure in minecraft, a substance bearing piece set at a given position
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
@@ -36,24 +36,24 @@ public interface Block {
     /**
      * Sets the substance the tile is made of
      *
-     * @param material the substance the tile should be set to
+     * @param substance the substance the tile should be set to
      */
-    void setSubstance(Substance material);
+    void setSubstance(Substance substance);
 
     /**
      * Sets the substance the tile is made of and its tile data
      *
-     * @param material the substance the tile should be set to
+     * @param substance the substance the tile should be set to
      * @param data the data the tile should be set to
      */
-    void setSubstanceAndMeta(Substance material, byte data);
+    void setSubstanceAndMeta(Substance substance, byte data);
 
     /**
      * Returns the Location of the Block
      *
      * @return Location of the Block
      */
-    Position location();
+    Position position();
 
     /**
      * Gets the tile data

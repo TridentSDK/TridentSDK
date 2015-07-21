@@ -81,7 +81,7 @@ public interface MassChange {
     /**
      * Add a change to make at when this change is committed
      *
-     * @param coords the location to set, values will be rounded
+     * @param coords the position to set, values will be rounded
      * @param id     the id to change the block to
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
@@ -92,7 +92,7 @@ public interface MassChange {
     /**
      * Add a change to make at when this change is committed
      *
-     * @param coords the location to set, values will be rounded
+     * @param coords the position to set, values will be rounded
      * @param id     the id to change the block to
      * @param data   the data value to change the block to
      * @throws IllegalArgumentException if coords are not from the same world as this change
@@ -104,7 +104,7 @@ public interface MassChange {
     /**
      * Add a change to make at when this change is committed
      *
-     * @param coords    the location to set, values will be rounded
+     * @param coords    the position to set, values will be rounded
      * @param substance the substance to change the block to
      * @throws IllegalArgumentException if coords are not from the same world as this change
      * @throws IllegalStateException    if this change has already been committed
@@ -115,7 +115,7 @@ public interface MassChange {
     /**
      * Add a change to make at when this change is committed
      *
-     * @param coords    the location to set, values will be rounded
+     * @param coords    the position to set, values will be rounded
      * @param substance the id to change the block to
      * @param data      the data value to change the block to
      * @throws IllegalArgumentException if coords are not from the same world as this change

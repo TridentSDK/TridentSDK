@@ -29,7 +29,7 @@ public class BlockSpreadEvent extends BlockGrowthEvent {
     private final Block blockFrom;
 
     /**
-     * @param to   Block representing the location of the spread
+     * @param to   Block representing the position of the spread
      * @param from Block which represents the origin
      */
     public BlockSpreadEvent(Block to, Block from) {

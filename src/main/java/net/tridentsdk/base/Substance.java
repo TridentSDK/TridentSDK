@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * Enumeration of possible materials in minecraft
+ * Enumeration of possible substances in minecraft
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
@@ -507,9 +507,9 @@ public enum Substance {
     }
 
     /**
-     * Checks if the material is a block
+     * Checks if the substance is a block
      *
-     * @return True if the material is a block
+     * @return True if the substance is a block
      */
     public boolean isBlock() {
         return Integer.parseInt(this.id) < 255;
@@ -525,9 +525,9 @@ public enum Substance {
     }
 
     /**
-     * Checks if the material is edible or not
+     * Checks if the substance is edible or not
      *
-     * @return True if the material is edible
+     * @return True if the substance is edible
      */
     public boolean isEdible() {
         switch (this) {

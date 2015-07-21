@@ -19,11 +19,13 @@ package net.tridentsdk.registry;
 import net.tridentsdk.concurrent.Scheduler;
 import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.event.Events;
 import net.tridentsdk.inventory.Inventories;
+import net.tridentsdk.plugin.Plugins;
 import net.tridentsdk.plugin.channel.PluginChannels;
+import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
-import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.gen.AbstractGenerator;
 
 import java.util.Map;
@@ -38,8 +40,12 @@ public interface Implementation {
 
     Players players();
 
+    PlayerStatus statuses();
+
+    Events events();
+
+    Plugins plugins();
     PluginChannels channels();
     Scheduler scheduler();
-
     Inventories inventories();
 }

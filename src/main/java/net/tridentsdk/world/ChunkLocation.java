@@ -23,7 +23,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Stores the location of a Chunk
+ * Stores the position of a Chunk
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP

@@ -27,14 +27,14 @@ import net.tridentsdk.world.World;
  * @since 0.3-alpha-DP
  */
 public class LightningStrikeEvent extends WeatherEvent {
-    private final Position location;
+    private final Position position;
 
-    public LightningStrikeEvent(World world, Position location) {
+    public LightningStrikeEvent(World world, Position position) {
         super(world);
-        this.location = location;
+        this.position = position;
     }
 
-    public Position location() {
-        return this.location;
+    public Position position() {
+        return this.position;
     }
 }

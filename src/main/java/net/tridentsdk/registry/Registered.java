@@ -39,8 +39,6 @@ import java.util.Map;
  * @since 0.4-alpha
  */
 public class Registered {
-    private static final Events EVENTS = Events.create();
-    private static final Plugins PLUGINS = new Plugins();
     private static final Commands CMDS = new Commands();
     private static final ChatFormatter CHAT = new ChatFormatter();
     private static final Transactions TRANSACTIONS = new Transactions();
@@ -69,6 +67,16 @@ public class Registered {
      */
     public static Players players() {
         return impl.players();
+    }
+
+    /**
+     * Obtains the status handler for the players
+     *
+     * @see PlayerStatus
+     * @return the statuses handler
+     */
+    public static PlayerStatus statuses() {
+        return impl.statuses();
     }
 
     /**
@@ -104,7 +112,7 @@ public class Registered {
      * @return the event handler
      */
     public static Events events() {
-        return EVENTS;
+        return impl.events();
     }
 
     /**
@@ -113,7 +121,7 @@ public class Registered {
      * @return the plugin handler
      */
     public static Plugins plugins() {
-        return PLUGINS;
+        return impl.plugins();
     }
 
     /**

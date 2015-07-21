@@ -33,9 +33,9 @@ public interface WorldBorder {
     double borderSize();
 
     /**
-     * Gets the location where the worldborder is centered
+     * Gets the position where the worldborder is centered
      *
-     * @return The location where the worldborder is centered
+     * @return The position where the worldborder is centered
      */
     Position borderCenter();
 

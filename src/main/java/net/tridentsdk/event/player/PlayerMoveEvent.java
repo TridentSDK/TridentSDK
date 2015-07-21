@@ -22,7 +22,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
 /**
- * Called when a player moves their location
+ * Called when a player moves their position
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
@@ -39,9 +39,9 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Return previous location
+     * Return previous position
      *
-     * @return returns the previous player location
+     * @return returns the previous player position
      */
 
     public Position fromLocation() {
@@ -49,9 +49,9 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     }
 
     /**
-     * Return next location
+     * Return next position
      *
-     * @return returns the next player location
+     * @return returns the next player position
      */
     public Position toLocation() {
         return this.toLoc;

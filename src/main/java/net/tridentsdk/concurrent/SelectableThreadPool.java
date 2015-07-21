@@ -38,7 +38,7 @@ import java.util.concurrent.Future;
 @ThreadSafe
 public interface SelectableThreadPool extends Executor {
     /**
-     * The maximum amount of expiring threads plus non-dying threads which are created when executing tasks or finding a scaled thread when
+     * The maximum amount of expiring concurrent plus non-dying concurrent which are created when executing tasks or finding a scaled thread when
      * existing workers are occupied
      *
      * @return the maximum scale, by default {@code Integer.MAX_VALUE}
@@ -48,7 +48,7 @@ public interface SelectableThreadPool extends Executor {
     /**
      * Sets the maximum scale (explained in {@link #maxThreads()}
      *
-     * @param maxScale the maximum extra scaling threads
+     * @param maxScale the maximum extra scaling concurrent
      */
     void setMaxThreads(int maxScale);
 
@@ -81,7 +81,7 @@ public interface SelectableThreadPool extends Executor {
     void setMustEmptyBeforeExpire(boolean mustEmptyBeforeExpire);
 
     /**
-     * Selects a thread in much the same way as {@link #selectNext()}, however, it does not include threads that have been
+     * Selects a thread in much the same way as {@link #selectNext()}, however, it does not include concurrent that have been
      * added to the scaling pool.
      *
      * <p>This is useful for caching SelectableThreads for thread-confinement</p>
@@ -117,7 +117,7 @@ public interface SelectableThreadPool extends Executor {
     SelectableThread selectScaled();
 
     /**
-     * Lists all available task executors from the threads
+     * Lists all available task executors from the concurrent
      *
      * @return the thread list
      */

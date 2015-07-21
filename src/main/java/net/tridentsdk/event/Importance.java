@@ -35,7 +35,7 @@ public enum Importance {
     /**
      * @return the importance level
      */
-    public int importance() {
+    public int level() {
         return this.importance;
     }
 }

@@ -17,7 +17,7 @@
 
 package net.tridentsdk.event.block;
 
-import net.tridentsdk.base.BlockOrientation;
+import net.tridentsdk.base.BlockDirection;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,13 +25,13 @@ public class BlockPlaceEventTest {
 
     @Test
     public void testGetFaceClicked() throws Exception {
-        BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockOrientation.BOTTOM);
-        Assert.assertEquals(event.faceClicked(), BlockOrientation.BOTTOM);
+        BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockDirection.BOTTOM);
+        Assert.assertEquals(event.faceClicked(), BlockDirection.BOTTOM);
     }
 
     @Test
     public void testIsIgnored() throws Exception {
-        BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockOrientation.BOTTOM);
+        BlockPlaceEvent event = new BlockPlaceEvent(null, null, null, BlockDirection.BOTTOM);
         Assert.assertEquals(event.isIgnored(), false);
 
         event.cancel(true);

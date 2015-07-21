@@ -32,8 +32,8 @@ import net.tridentsdk.entity.living.Player;
 public class PlayerDropItemEvent extends EntitySpawnEvent {
     private final Player player;
 
-    public PlayerDropItemEvent(Entity item, Position location, Player player) {
-        super(item, location);
+    public PlayerDropItemEvent(Entity item, Position position, Player player) {
+        super(item, position);
         Preconditions.checkArgument(item instanceof DroppedItem, "Must drop an item!");
         this.player = player;
     }

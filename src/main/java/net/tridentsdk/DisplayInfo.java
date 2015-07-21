@@ -35,7 +35,7 @@ import java.io.IOException;
 public class DisplayInfo {
     private final Config config = Factory.newConfig(Trident.fileContainer() + "server.json"); // Init code
     private final String motd = config.getString("motd", Defaults.MOTD);
-    private final File file = new File(config.getString("image-location", Defaults.MOTD_IMAGE_LOCATION));
+    private final File file = new File(config.getString("image-position", Defaults.MOTD_IMAGE_LOCATION));
     private final int maxPlayers = config.getInt("max-players", Defaults.MAX_PLAYERS);
     private final boolean canChangeImage = config.getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED);
 

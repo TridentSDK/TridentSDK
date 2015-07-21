@@ -38,7 +38,7 @@ package net.tridentsdk.util;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class FastRandom {
+public final class FastRandom {
     private FastRandom() {
     }
 

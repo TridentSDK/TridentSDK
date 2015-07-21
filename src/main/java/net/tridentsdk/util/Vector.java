@@ -306,7 +306,7 @@ public final class Vector implements Serializable, Cloneable {
     }
 
     /**
-     * Returns a new location in this world, with the coordinates the x, y, and z values
+     * Returns a new position in this world, with the coordinates the x, y, and z values
      */
     public Position asLocation(World world) {
         return Position.create(world, this.x, this.y, this.z);

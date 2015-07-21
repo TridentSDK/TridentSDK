@@ -39,15 +39,15 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
     /**
      * Creates a new Chunk bounding box
      *
-     * @param location1 the first chunk corner
-     * @param location2 the second chunk corner
+     * @param position1 the first chunk corner
+     * @param position2 the second chunk corner
      */
-    public ChunkAxisAlignedBoundingBox(ChunkLocation location1, ChunkLocation location2) {
-        minX = (location1.x() < location2.x()) ? location1.x() : location2.x();
-        minZ = (location1.z() < location2.z()) ? location1.z() : location2.z();
+    public ChunkAxisAlignedBoundingBox(ChunkLocation position1, ChunkLocation position2) {
+        minX = (position1.x() < position2.x()) ? position1.x() : position2.x();
+        minZ = (position1.z() < position2.z()) ? position1.z() : position2.z();
 
-        maxX = (location1.x() > location2.x()) ? location1.x() : location2.x();
-        maxZ = (location1.z() > location2.z()) ? location1.z() : location2.z();
+        maxX = (position1.x() > position2.x()) ? position1.x() : position2.x();
+        maxZ = (position1.z() > position2.z()) ? position1.z() : position2.z();
     }
 
     @Override
@@ -101,6 +101,7 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
 
         @Override
         public void remove() {
+            throw new UnsupportedOperationException("Cannot remove items from CAABB");
         }
     }
 }

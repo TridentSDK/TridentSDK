@@ -51,39 +51,39 @@ public interface World extends Cloneable, WorldSettings {
     String name();
 
     /**
-     * Gets the chunk on the given location, and generates the chunk if it does not exist.
+     * Gets the chunk on the given position, and generates the chunk if it does not exist.
      *
-     * @return The chunk on the given location
+     * @return The chunk on the given position
      */
     Chunk chunkAt(ChunkLocation loc, boolean generateIfNotFound);
 
     /**
      * Gets the chunk on the given x and z , and generates the chunk if it does not exist
      *
-     * @return The chunk on the given location
+     * @return The chunk on the given position
      */
     Chunk chunkAt(int x, int z, boolean generateIfNotFound);
 
     /**
-     * Generates the chunk on the given location
+     * Generates the chunk on the given position
      *
      * @return The generated chunk
      */
     Chunk generateChunk(int x, int z);
 
     /**
-     * Generates the chunk on the given location
+     * Generates the chunk on the given position
      *
      * @return The generated chunk
      */
-    Chunk generateChunk(ChunkLocation location);
+    Chunk generateChunk(ChunkLocation position);
 
     /**
-     * Gets the block on the given location
+     * Gets the block on the given position
      *
-     * @return The block on the given location
+     * @return The block on the given position
      */
-    Block blockAt(Position location);
+    Block blockAt(Position position);
 
     /**
      * Obtains the loading handler which created this object, passed in from the constructor
@@ -100,9 +100,9 @@ public interface World extends Cloneable, WorldSettings {
     long time();
 
     /**
-     * Gets the spawn location of the world
+     * Gets the spawn position of the world
      *
-     * @return The spawn location in the world
+     * @return The spawn position in the world
      */
     Position spawnPosition();
 

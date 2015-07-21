@@ -102,9 +102,9 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     String displayName();
 
     /**
-     * Returns the location of the Entity's eye
+     * Returns the position of the Entity's eye
      *
-     * @return Location the location of the Entity's eye
+     * @return Location the position of the Entity's eye
      */
     Position headLocation();
 

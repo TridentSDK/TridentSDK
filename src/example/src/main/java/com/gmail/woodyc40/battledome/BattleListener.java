@@ -49,7 +49,7 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.FIGHT) {
                 Game.Team team = game.teamOf(player);
-                Position position = event.block().location();
+                Position position = event.block().position();
 
                 if (team == Game.Team.PURPLE) {
                     if (position.equals(game.purpleObby())) {
@@ -86,16 +86,16 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.IN_GAME) {
                 Game.Team team = game.teamOf(player);
-                Position location = event.block().location();
+                Position position = event.block().position();
 
                 boolean done;
                 if (team == Game.Team.PURPLE)
-                    done = game.setGreenObby(location);
+                    done = game.setGreenObby(position);
                 else
-                    done = game.setPurpleObby(location);
+                    done = game.setPurpleObby(position);
 
                 if (done)
-                    player.sendMessage(CommandHandler.PREFIX + "Set the obsidian at the placed location.");
+                    player.sendMessage(CommandHandler.PREFIX + "Set the obsidian at the placed position.");
                 else {
                     player.sendMessage(
                             CommandHandler.ERROR + "Obsidian already set, removing the one you placed.");
@@ -112,7 +112,7 @@ public class BattleListener implements Listener {
 
         SetupSession session = sessions.get(player);
         if (session != null) {
-            Position position = event.block().location();
+            Position position = event.block().position();
             Game game = session.game();
             switch (session.stage()) {
                 case SPAWN:

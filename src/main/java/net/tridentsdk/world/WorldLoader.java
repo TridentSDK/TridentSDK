@@ -71,10 +71,10 @@ public interface WorldLoader extends WorldSettings {
     /**
      * Checks the existence of a chunk in a world, based on the world directory
      *
-     * @param location the location which the chunk should be checked for existence
+     * @param position the position which the chunk should be checked for existence
      * @return {@code true} if the chunk is not present within the world directory
      */
-    boolean chunkExists(ChunkLocation location);
+    boolean chunkExists(ChunkLocation position);
 
     /**
      * Loads the chunk into the world
@@ -88,10 +88,10 @@ public interface WorldLoader extends WorldSettings {
     /**
      * Loads the chunk into the world
      *
-     * @param location the location of the chunk to load
+     * @param position the position of the chunk to load
      * @return the chunk which was loaded
      */
-    Chunk loadChunk(ChunkLocation location);
+    Chunk loadChunk(ChunkLocation position);
 
     /**
      * Writes the changes in the chunk to the world file

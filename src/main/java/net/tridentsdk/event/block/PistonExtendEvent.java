@@ -19,7 +19,7 @@ package net.tridentsdk.event.block;
 
 import com.google.common.collect.ImmutableList;
 import net.tridentsdk.base.Block;
-import net.tridentsdk.base.Orientation;
+import net.tridentsdk.base.BlockDirection;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class PistonExtendEvent extends BlockPistonEvent {
     private final ImmutableList<Block> blocksInfluenced;
     private boolean cancelled;
 
-    public PistonExtendEvent(Block block, Orientation direction, List<Block> influenced) {
+    public PistonExtendEvent(Block block, BlockDirection direction, List<Block> influenced) {
         super(block, direction, false, influenced.get(0));
 
         this.blocksInfluenced = ImmutableList.copyOf(influenced);

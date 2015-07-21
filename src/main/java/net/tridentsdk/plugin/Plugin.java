@@ -46,12 +46,12 @@ public class Plugin {
     private File configDirectory;
     private Desc description;
     private Config defaultConfig;
-    public PluginClassLoader classLoader;
+    public PluginLoader classLoader;
 
     protected Plugin() {
     }
 
-    public void init(File pluginFile, Desc description, PluginClassLoader loader) {
+    public void init(File pluginFile, Desc description, PluginLoader loader) {
         this.pluginFile = pluginFile;
         this.description = description;
         this.configDirectory = new File("plugins" + File.separator + description.name() + File.separator);
@@ -89,7 +89,7 @@ public class Plugin {
     @Nullable
     public static <T extends Plugin> T instance(Class<T> c) {
         for (Plugin plugin : Registered.plugins())
-            if (plugin.classLoader.locallyLoaded.containsKey(c.getName())) {
+            if (plugin.classLoader.loadedClasses().containsKey(c.getName())) {
                 return (T) plugin;
             }
         return null;
@@ -125,7 +125,7 @@ public class Plugin {
     public <T extends Listener> T listenerBy(Class<T> c) {
         return (T) Registered.events()
                 .stream()
-                .filter(r -> r.eventClass().equals(c))
+                .filter(r -> r.listener().getClass().equals(c))
                 .collect(Collectors.toList())
                 .get(0);
     }

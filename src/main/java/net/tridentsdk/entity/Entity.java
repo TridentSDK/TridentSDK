@@ -34,27 +34,27 @@ import java.util.UUID;
  */
 public interface Entity {
     /**
-     * Moves the entity to the specified location
+     * Moves the entity to the specified position
      *
-     * @param x the x coordinate of the location
-     * @param y the y coordinate of the location
-     * @param z the z coordinate of the location
+     * @param x the x coordinate of the position
+     * @param y the y coordinate of the position
+     * @param z the z coordinate of the position
      */
     void teleport(double x, double y, double z);
 
     /**
-     * Moves the current entity to the provided entity's location
+     * Moves the current entity to the provided entity's position
      *
      * @param entity the entity to move the current entity to
      */
     void teleport(Entity entity);
 
     /**
-     * Moves the entity to the coordinates specified by the location object passed in
+     * Moves the entity to the coordinates specified by the position object passed in
      *
-     * @param location the location to move the entity to
+     * @param position the position to move the entity to
      */
-    void teleport(Position location);
+    void teleport(Position position);
 
     /**
      * The world which the entity resides in
@@ -64,9 +64,9 @@ public interface Entity {
     World world();
 
     /**
-     * The location of the entity with respect to the coordinate grid
+     * The position of the entity with respect to the coordinate grid
      *
-     * @return the entity's location
+     * @return the entity's position
      */
     Position position();
 

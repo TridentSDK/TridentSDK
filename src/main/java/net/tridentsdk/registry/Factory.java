@@ -24,9 +24,9 @@ import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.util.TridentLogger;
+import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
-import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.gen.AbstractGenerator;
 
 import java.io.File;
@@ -117,7 +117,7 @@ public final class Factory {
     /**
      * Creates a new thread pool which allows extra customization and worker selection
      *
-     * @param startingThreads the threads to keep alive at all times. Must be over 0.
+     * @param startingThreads the concurrent to keep alive at all times. Must be over 0.
      * @param name the name of the executor
      * @return the new thread pool
      */

@@ -20,10 +20,6 @@ package net.tridentsdk.event;
 /**
  * Represents an event that could be listened by the plugin listeners
  *
- * <p>All events <strong>MUST</strong> be thread safe. This does not at all require synchronization, but does need any
- * API developers to make sure that non-{@code final} fields are {@code volatile} in order to ensure that the state of
- * events remain consistent with the modifications made by the listeners.</p>
- *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */

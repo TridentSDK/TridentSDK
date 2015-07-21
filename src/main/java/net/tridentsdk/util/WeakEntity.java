@@ -776,7 +776,10 @@ public final class WeakEntity<T extends Entity> {
         private static final Entity NULL = new Entity() {
             @Override public void teleport(double x, double y, double z) {}
             @Override public void teleport(Entity entity) {}
-            @Override public void teleport(Position location) {}
+
+            @Override
+            public void teleport(Position position) {
+            }
             @Override public World world() {return null;}
             @Override public Position position() {return null;}
             @Override public Vector velocity() {return null;}
@@ -881,7 +884,7 @@ public final class WeakEntity<T extends Entity> {
      * <p>Before iterating, this method makes sure {@link WeakEntity#isNull()} returns {@code false}. In the case that
      * it is {@code true}, the iterator removes that entry from the collection being iterated.</p>
      *
-     * <p>This iterator is not shareable between threads. It is designed for single-threaded iteration. The changes
+     * <p>This iterator is not shareable between concurrent. It is designed for single-threaded iteration. The changes
      * made in this iterator do not necessarily reflect to the changes to different iterators of the same collection.
      * This will only become a problem in concurrent iteration, depending on the iterator implementation, as specified
      * by the collection class.</p>

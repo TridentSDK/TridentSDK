@@ -18,9 +18,9 @@
 package net.tridentsdk.util;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import net.tridentsdk.ServerConsole;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
@@ -282,7 +282,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
     /**
      * Formats a throwable to be logged to the console
      *
-     * <p>By default this is not needed as the threads which runs almost all operations by default have a set
+     * <p>By default this is not needed as the concurrent which runs almost all operations by default have a set
      * uncaught exception handler</p>
      *
      * @param throwable the error to log
@@ -330,7 +330,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
         logger.error("========     Server info    =========");
         logger.error("Trident version: " + Trident.version());
         logger.error("Plugins:         " + Arrays.toString(
-                Lists.transform(Registered.plugins(), new Function<Plugin, String>() {
+                Collections2.transform(Registered.plugins(), new Function<Plugin, String>() {
                     @Nullable
                     @Override
                     public String apply(Plugin plugin) {

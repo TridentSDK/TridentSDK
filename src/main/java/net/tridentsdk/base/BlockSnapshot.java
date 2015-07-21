@@ -31,13 +31,13 @@ import javax.annotation.concurrent.Immutable;
  */
 @Immutable
 public final class BlockSnapshot {
-    private final Position location;
-    private final Substance material;
+    private final Position position;
+    private final Substance substance;
     private final byte meta;
 
-    private BlockSnapshot(Position location, Substance material, byte data) {
-        this.location = location;
-        this.material = material;
+    private BlockSnapshot(Position position, Substance substance, byte data) {
+        this.position = position;
+        this.substance = substance;
         this.meta = data;
     }
 
@@ -48,12 +48,12 @@ public final class BlockSnapshot {
      * @return the snapshot of the tile
      */
     public static BlockSnapshot of(Block block) {
-        return new BlockSnapshot(block.location(), block.substance(), block.meta());
+        return new BlockSnapshot(block.position(), block.substance(), block.meta());
     }
 
     @InternalUseOnly
-    public static BlockSnapshot from(Position location, Substance material, byte data) {
-        return new BlockSnapshot(location, material, data);
+    public static BlockSnapshot from(Position position, Substance substance, byte data) {
+        return new BlockSnapshot(position, substance, data);
     }
 
     /**
@@ -62,8 +62,8 @@ public final class BlockSnapshot {
      * <p>Does not clear data from this snapshot</p>
      */
     public void load() {
-        Block block = location.world().blockAt(location);
-        block.setSubstance(material);
+        Block block = position.world().blockAt(position);
+        block.setSubstance(substance);
         block.setMeta(meta);
     }
 
@@ -73,7 +73,7 @@ public final class BlockSnapshot {
      * @return the position
      */
     public Position position() {
-        return location;
+        return position;
     }
 
     /**
@@ -82,7 +82,7 @@ public final class BlockSnapshot {
      * @return the substance
      */
     public Substance type() {
-        return material;
+        return substance;
     }
 
     /**

@@ -30,7 +30,7 @@ public class BlockSnapshotTest {
         World world = Mockito.mock(World.class);
 
         Mockito.when(world.blockAt(Position.create(world, 0, 0, 0))).thenReturn(Mockito.mock(Block.class));
-        Mockito.when(block.location()).thenReturn(Position.create(world, 0, 0, 0));
+        Mockito.when(block.position()).thenReturn(Position.create(world, 0, 0, 0));
         Mockito.when(block.substance()).thenReturn(substance);
     }
 

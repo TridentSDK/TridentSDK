@@ -26,6 +26,6 @@ public class LightningStrikeEventTest {
     @Test
     public void testGetLocation() throws Exception {
         LightningStrikeEvent event = new LightningStrikeEvent(null, Position.create(null, 0, 0, 0));
-        Assert.assertEquals(event.location(), Position.create(null, 0, 0, 0));
+        Assert.assertEquals(event.position(), Position.create(null, 0, 0, 0));
     }
 }
