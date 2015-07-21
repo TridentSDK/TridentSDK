@@ -40,7 +40,7 @@ public interface WeatherConditions {
     /**
      * Toggles raining within the world
      *
-     * @param ticks the ticks to run rain further, or {@code 0} to stop raining
+     * @param ticks the ticks until the next rain toggle, or {@code 0} to start raining
      */
     void toggleRain(int ticks);
 
@@ -61,7 +61,7 @@ public interface WeatherConditions {
     /**
      * Toggles thundering within the world
      *
-     * @param ticks the amount of ticks to continue thundering, {@code 0} to stop thundering
+     * @param ticks the amount of ticks until the next thunder toggle, {@code 0} to start thundering
      */
     void toggleThunder(int ticks);
 }
