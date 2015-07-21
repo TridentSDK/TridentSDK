@@ -47,5 +47,5 @@ public @interface CommandDescription {
     /**
      * The commands that can also be typed in to execute the same command
      */
-    String[] aliases();
+    String[] aliases() default {};
 }

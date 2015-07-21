@@ -74,7 +74,7 @@ public class Commands {
 
         final String[] contents = message.split(" ");
         final String label = contents[0].toLowerCase();
-        final String args = message.substring(label.length());
+        final String args = message.substring(label.length() + (message.contains(" ") ? 1 : 0));
         final Set<CommandData> cmdData = findCommand(label);
 
         if (!cmdData.isEmpty()) {
@@ -85,11 +85,7 @@ public class Commands {
             });
         } else {
             // Command not found
-            if(issuer instanceof Player) {
-                ((Player) issuer).sendMessage("Command not found!");
-            } else {
-                issuer.sendRaw("Command not found");
-            }
+            issuer.sendRaw("Command not found");
         }
     }
 
@@ -193,6 +189,8 @@ public class Commands {
         }
 
         public boolean hasAlias(String alias) {
+            if (name.equals(alias)) return true;
+
             for (String string : this.aliases) {
                 if (alias.equalsIgnoreCase(string)) {
                     return true;
