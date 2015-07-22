@@ -21,6 +21,8 @@ import java.util.Collection;
 /**
  * A collection of items which have been registered
  *
+ * <p>Most classes implementing this class will have its instane stored in {@link Registered}</p>
+ *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
