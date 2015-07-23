@@ -78,7 +78,7 @@ public class Plugin {
     }
 
     /**
-     * Obtains the instance of the plugin which has the specified main class
+     * Obtains the instance of the plugin which has the specified class
      *
      * <p>Returns {@code null} if the plugin has not been loaded yet, or if the class is not a plugin loaded on the
      * server.</p>
