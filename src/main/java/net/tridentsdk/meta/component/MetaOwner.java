@@ -28,9 +28,9 @@ public interface MetaOwner<T> {
      *
      * @param cls the class type of the meta value
      * @param <M> the meta type
-     * @return the meta value
+     * @return the meta value, or {@code null} if the meta is not owned
      */
-    <M extends T> M valueOf(Class<M> cls);
+    <M extends T> M obtainMeta(Class<M> cls);
 
     /**
      * Creates a new metadata value for the type specified if this block supports it, and it is not already
@@ -40,7 +40,14 @@ public interface MetaOwner<T> {
      * @param <M> the meta
      * @return the meta value, or {@code null} if it could not be made
      */
-    <M extends T> M makeIfEmpty(Class<M> cls);
+    <M extends T> M newMetaIfNull(Class<M> cls);
+
+    /**
+     * Gets all of the metadata values currently owned by this meta owner
+     *
+     * @return the currently owned collection of meta values
+     */
+    <M extends MetaOwner> MetaCollection<M> ownedMeta();
 
     /**
      * Commits the changes from the meta value to the block
@@ -51,4 +58,9 @@ public interface MetaOwner<T> {
      * @return {@code true} if the change took effect
      */
     <M extends T> boolean applyMeta(M meta, boolean replace);
+
+    /**
+     * Removes all meta values and sets the block meta to {@code (byte) 0}
+     */
+    void clearMeta();
 }

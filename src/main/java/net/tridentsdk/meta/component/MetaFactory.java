@@ -18,7 +18,9 @@ package net.tridentsdk.meta.component;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.util.Value;
 
 /**
  * Allows Factory access to metadata components
@@ -48,10 +50,10 @@ public final class MetaFactory {
     }
 
     /**
-     * @see MetaProvider#decode(Block, byte[])
+     * @see MetaProvider#decode(Block, net.tridentsdk.base.Substance, byte[], net.tridentsdk.util.Value)
      */
-    public static boolean decode(Block block, byte[] data) {
-        return provider.decode(block, data);
+    public static boolean decode(Block block, Substance substance, byte[] data, Value<Byte> result) {
+        return provider.decode(block, substance, data, result);
     }
 
     /**

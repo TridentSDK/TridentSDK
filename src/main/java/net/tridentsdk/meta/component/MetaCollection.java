@@ -16,6 +16,9 @@
  */
 package net.tridentsdk.meta.component;
 
+import java.util.Map;
+import java.util.function.Consumer;
+
 /**
  * Represents a collection of {@link Meta} objects
  *
@@ -87,4 +90,16 @@ public interface MetaCollection<S> {
      * @return the meta value associated with the type, or {@code null} if this operation had no effect
      */
     <T extends Meta<S>> T remove(Class<T> cls);
+
+    /**
+     * Iterates the collection
+     *
+     * @param consumer the iteration function
+     */
+    void iterate(Consumer<Map.Entry<Class<? extends Meta<S>>, Meta<S>>> consumer);
+
+    /**
+     * Clear the meta collection of meta values
+     */
+    void clear();
 }

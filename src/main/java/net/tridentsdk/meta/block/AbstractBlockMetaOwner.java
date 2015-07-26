@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.meta.block;
 
+import net.tridentsdk.meta.component.ImmutableMetaCollection;
 import net.tridentsdk.meta.component.MetaCollection;
 import net.tridentsdk.meta.component.MetaFactory;
 import net.tridentsdk.meta.component.MetaOwner;
@@ -37,13 +38,13 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements Blo
     protected abstract MetaCollection<T> collect();
 
     @Override
-    public <M extends BlockMeta<T>> M valueOf(Class<M> cls) {
+    public <M extends BlockMeta<T>> M obtainMeta(Class<M> cls) {
         return collection.get(cls);
     }
 
     @Override
-    public <M extends BlockMeta<T>> M makeIfEmpty(Class<M> cls) {
-        M meta = valueOf(cls);
+    public <M extends BlockMeta<T>> M newMetaIfNull(Class<M> cls) {
+        M meta = obtainMeta(cls);
         if (meta == null) {
             meta = MetaFactory.newValue(cls);
 
@@ -54,6 +55,11 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements Blo
     }
 
     @Override
+    public <M extends MetaOwner> MetaCollection<M> ownedMeta() {
+        return ImmutableMetaCollection.copyOf((MetaCollection<M>) collection);
+    }
+
+    @Override
     public <M extends BlockMeta<T>> boolean applyMeta(M meta, boolean replace) {
         if (replace) {
             return collection.putIfAbsent(meta);
@@ -61,5 +67,10 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements Blo
 
         collection.put(meta);
         return true;
+    }
+
+    @Override
+    public void clearMeta() {
+        collection.clear();
     }
 }

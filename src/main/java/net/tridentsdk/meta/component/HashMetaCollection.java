@@ -20,6 +20,7 @@ import net.tridentsdk.util.Value;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 /**
  * Represents a hash-based lookup mapping of meta values
@@ -68,5 +69,17 @@ class HashMetaCollection<S> implements MetaCollection<S> {
     @Override
     public <T extends Meta<S>> T remove(Class<T> cls) {
         return (T) metaMap.remove(cls);
+    }
+
+    @Override
+    public void iterate(Consumer<Map.Entry<Class<? extends Meta<S>>, Meta<S>>> consumer) {
+        for (Map.Entry<Class<? extends Meta<S>>, Meta<S>> entry : metaMap.entrySet()) {
+            consumer.accept(entry);
+        }
+    }
+
+    @Override
+    public void clear() {
+        this.metaMap.clear();
     }
 }

@@ -17,6 +17,8 @@
 package net.tridentsdk.meta.component;
 
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Substance;
+import net.tridentsdk.util.Value;
 
 /**
  * Provides metadata values
@@ -47,8 +49,9 @@ public interface MetaProvider {
      * {@link net.tridentsdk.meta.block.BlockMeta#decode(Object, byte[])}
      *
      * @param block the block
-     * @param data  the data
-     * @return {@code true} if the block can be placed, {@code false} if otherwise
+     * @param substance
+     *@param data  the data
+     * @param result  @return {@code true} if the block can be placed, {@code false} if otherwise
      */
-    boolean decode(Block block, byte[] data);
+    boolean decode(Block block, Substance substance, byte[] data, Value<Byte> result);
 }

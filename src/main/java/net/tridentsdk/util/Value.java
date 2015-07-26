@@ -16,13 +16,16 @@
  */
 package net.tridentsdk.util;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Holds a value to cheat inner class finalization requirements
  *
  * @author The TridentSDK Team
  */
+@ThreadSafe
 public final class Value<T> {
-    private T value;
+    private volatile T value;
 
     private Value(T t) {
         this.value = t;
