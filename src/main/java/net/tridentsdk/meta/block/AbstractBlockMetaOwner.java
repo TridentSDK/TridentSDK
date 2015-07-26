@@ -25,7 +25,7 @@ import net.tridentsdk.meta.component.MetaOwner;
  *
  * @author The TridentSDK Team
  */
-public abstract class AbstractBlockMetaOwner<T extends MetaOwner<T>> implements BlockMetaOwner<T> {
+public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements BlockMetaOwner<T> {
     private final MetaCollection<T> collection = collect();
 
     /**
@@ -53,7 +53,7 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner<T>> implements 
     }
 
     @Override
-    public <M extends BlockMeta<T>> boolean commit(M meta, boolean replace) {
+    public <M extends BlockMeta<T>> boolean applyMeta(M meta, boolean replace) {
         if (replace) {
             return collection.putIfAbsent(meta);
         }

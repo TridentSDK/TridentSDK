@@ -45,9 +45,9 @@ public interface MetaOwner<T> {
      * Commits the changes from the meta value to the block
      *
      * @param meta    the metadata
-     * @param replace {@code true} to commit anyways if the data mapping already exists
+     * @param replace {@code true} to apply meta anyways if the data mapping already exists
      * @param <M>     the meta type
      * @return {@code true} if the change took effect
      */
-    <M extends T> boolean commit(M meta, boolean replace);
+    <M extends T> boolean applyMeta(M meta, boolean replace);
 }
