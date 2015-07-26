@@ -22,6 +22,7 @@ import net.tridentsdk.meta.component.MetaOwner;
  * Represents a block which can hold metadata
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface BlockMetaOwner<T> extends MetaOwner<BlockMeta<T>> {
 }

@@ -20,6 +20,7 @@ package net.tridentsdk.meta.component;
  * Represents an object which carries metadata
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface MetaOwner<T> {
     /**

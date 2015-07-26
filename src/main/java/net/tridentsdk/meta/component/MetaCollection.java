@@ -20,6 +20,7 @@ package net.tridentsdk.meta.component;
  * Represents a collection of {@link Meta} objects
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface MetaCollection<S> {
     /**

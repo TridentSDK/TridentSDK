@@ -24,6 +24,7 @@ import net.tridentsdk.meta.component.MetaOwner;
  * Implementation of a block meta owner which provides access to the collection factory
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements BlockMetaOwner<T> {
     private final MetaCollection<T> collection = collect();

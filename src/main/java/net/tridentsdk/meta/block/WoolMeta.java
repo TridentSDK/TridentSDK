@@ -23,6 +23,7 @@ import net.tridentsdk.base.SubstanceColor;
  * Represents metadata belonging to blocks of wool
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface WoolMeta extends BlockMeta<Block> {
     /**

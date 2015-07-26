@@ -29,7 +29,7 @@ public class Item {
     private final int id;
     private final Substance substance;
 
-    private volatile byte meta;
+    private volatile short durability;
     private volatile short quantity;
     private volatile short damageValue;
 
@@ -39,7 +39,7 @@ public class Item {
      * @param substance the substance for the item
      */
     public Item(Substance substance) {
-        this(substance, (short) 1, (byte) 0);
+        this(substance, (short) 1, (short) 0, (short) 0);
     }
 
     /**
@@ -47,9 +47,10 @@ public class Item {
      *
      * @param substance the substance
      * @param quantity the quantity
-     * @param meta the meta
+     * @param durability the durability
+     * @param damageValue the damage value
      */
-    public Item(Substance substance, int quantity, byte meta) {
+    public Item(Substance substance, int quantity, short durability, short damageValue) {
         if (substance == null) {
             substance = Substance.AIR;
             // The item is clicked on in the inventory
@@ -58,9 +59,9 @@ public class Item {
         this.id = substance.id();
         this.substance = substance;
 
-        this.meta = meta;
+        this.durability = durability;
         this.quantity = (short) quantity;
-        this.damageValue = (short) 100; // psudeo-value
+        this.damageValue = damageValue;
     }
 
     public int id() {
@@ -71,12 +72,12 @@ public class Item {
         return this.substance;
     }
 
-    public byte meta() {
-        return this.meta;
+    public short durability() {
+        return this.durability;
     }
 
-    public void setMeta(byte meta) {
-        this.meta = meta;
+    public void durability(short durability) {
+        this.durability = durability;
     }
 
     public short quantity() {

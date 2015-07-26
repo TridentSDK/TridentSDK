@@ -25,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Represents a hash-based lookup mapping of meta values
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 class HashMetaCollection<S> implements MetaCollection<S> {
     private final Map<Class<? extends Meta<S>>, Meta<S>> metaMap = new ConcurrentHashMap<>();

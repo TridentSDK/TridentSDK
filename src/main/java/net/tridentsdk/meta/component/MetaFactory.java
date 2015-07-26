@@ -17,12 +17,14 @@
 package net.tridentsdk.meta.component;
 
 import com.google.common.base.Preconditions;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.docs.InternalUseOnly;
 
 /**
  * Allows Factory access to metadata components
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public final class MetaFactory {
     private static volatile MetaProvider provider;
@@ -43,6 +45,13 @@ public final class MetaFactory {
      */
     public static <T extends MetaOwner> MetaCollection<T> newCollection() {
         return new HashMetaCollection<>();
+    }
+
+    /**
+     * @see MetaProvider#decode(Block, byte[])
+     */
+    public static boolean decode(Block block, byte[] data) {
+        return provider.decode(block, data);
     }
 
     /**

@@ -22,16 +22,41 @@ import net.tridentsdk.meta.component.Meta;
  * Represents a {@link Meta} object which is possessed by blocks
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface BlockMeta<T> extends Meta<T> {
     /**
-     * In BlockMeta, the data always has 2 elements: the first to represent the block damage, and
-     * the second is the block data
+     * In BlockMeta, the data always has 8 elements laid out like so:
+     * <ul>
+     *     <li>0-1: Player yaw * 10</li>
+     *     <li>2: Block direction</li>
+     *     <li>3: Cursor x</li>
+     *     <li>4: Cursor y</li>
+     *     <li>5: Cursor z</li>
+     *     <li>6-7: item damage</li>
+     * </ul>
      *
      * @param instance the data owner which the value will be applied upon
      * @param data     the data
      * @return the new meta instance
      */
     @Override
-    Meta<T> decode(T instance, byte[] data);
+    default Meta<T> decode(T instance, byte[] data) {
+        return decode(instance, ByteArray.readShort(data[0], data[1]) / 10F, data[2], data[3], data[4], data[5],
+                ByteArray.readShort(data[6], data[7]));
+    }
+
+    /**
+     * Decodes the block meta
+     *
+     * @param instance    the block instance
+     * @param yaw         the player yaw
+     * @param direction   the block direction
+     * @param cx          the cursor x
+     * @param cy          the cursor y
+     * @param cz          the cursor z
+     * @param damageValue the item damage
+     * @return the new meta instance
+     */
+    Meta<T> decode(T instance, float yaw, byte direction, byte cx, byte cy, byte cz, short damageValue);
 }

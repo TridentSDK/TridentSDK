@@ -22,6 +22,7 @@ import net.tridentsdk.base.Substance;
  * Represents an abstract metadata value which can be possessed by items, entities, blocks, among others
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface Meta<T> {
     /**
@@ -31,6 +32,13 @@ public interface Meta<T> {
      * @param data     the data
      */
     Meta<T> decode(T instance, byte[] data);
+
+    /**
+     * Transforms the data into a byte which can be represented in a block data byte
+     *
+     * @return the byte data
+     */
+    byte encode();
 
     /**
      * Make a new instance of this meta object

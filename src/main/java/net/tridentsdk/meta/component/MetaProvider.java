@@ -16,10 +16,13 @@
  */
 package net.tridentsdk.meta.component;
 
+import net.tridentsdk.base.Block;
+
 /**
  * Provides metadata values
  *
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface MetaProvider {
     /**
@@ -38,4 +41,14 @@ public interface MetaProvider {
      * @param meta the meta
      */
     void register(Meta meta);
+
+    /**
+     * Decodes and applies the byte data to the block as specified in
+     * {@link net.tridentsdk.meta.block.BlockMeta#decode(Object, byte[])}
+     *
+     * @param block the block
+     * @param data  the data
+     * @return {@code true} if the block can be placed, {@code false} if otherwise
+     */
+    boolean decode(Block block, byte[] data);
 }
