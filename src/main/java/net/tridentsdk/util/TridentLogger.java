@@ -53,10 +53,10 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
     private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 
     @InternalUseOnly
-    public static void init() {
+    public static void init(Level level) {
         ConsoleAppender console = new ConsoleAppender(); //create appender
         console.setLayout(new PatternLayout("%d{dd MMM HH:mm} [%p] %m%n"));
-        console.setThreshold(Level.INFO);
+        console.setThreshold(level);
         console.activateOptions();
         console.setWriter(new Writer() {
             BufferedWriter writer = new BufferedWriter(new PrintWriter(System.out));
