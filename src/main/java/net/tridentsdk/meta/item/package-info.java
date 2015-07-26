@@ -1,4 +1,4 @@
 /**
- * Item meta
+ * Item metadata components
  */
 package net.tridentsdk.meta.item;

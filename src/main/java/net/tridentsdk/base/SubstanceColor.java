@@ -37,6 +37,22 @@ public enum SubstanceColor {
     }
 
     /**
+     * Gets a substance color from the byte value
+     *
+     * @param v the byte value
+     * @return the substance color with that value, or {@code null} if it is out of bounds (bound: 0 <= x <= 15)
+     */
+    public static SubstanceColor of(byte v) {
+        for (SubstanceColor color : values()) {
+            if (color.asInt() == v) {
+                return color;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Gets the color value as an int
      *
      * @return the value given to the color by the protocol

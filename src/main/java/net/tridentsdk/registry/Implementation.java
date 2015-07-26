@@ -21,6 +21,7 @@ import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.Events;
 import net.tridentsdk.inventory.Inventories;
+import net.tridentsdk.meta.component.MetaProvider;
 import net.tridentsdk.plugin.Plugins;
 import net.tridentsdk.plugin.channel.PluginChannels;
 import net.tridentsdk.plugin.cmd.Commands;
@@ -40,6 +41,8 @@ public interface Implementation {
     MassChange newMc(World world);
 
     Map<String, World> worlds();
+
+    MetaProvider meta();
 
     Transactions trasacts();
 

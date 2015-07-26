@@ -23,6 +23,7 @@ import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.meta.component.MetaFactory;
 import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.World;
@@ -52,6 +53,7 @@ public final class Factory {
     public static void setProvider(Implementation implementation) {
         Preconditions.checkArgument(impl == null, "You may not set the provider of Factory");
         impl = implementation;
+        MetaFactory.setProvider(implementation.meta());
     }
 
     /**

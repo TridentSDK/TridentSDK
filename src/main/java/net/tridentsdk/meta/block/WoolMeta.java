@@ -1,14 +1,14 @@
 package net.tridentsdk.meta.block;
 
+import net.tridentsdk.base.Block;
 import net.tridentsdk.base.SubstanceColor;
-import net.tridentsdk.block.BlockWool;
 
 /**
  * Represents metadata belonging to blocks of wool
  *
  * @author The TridentSDK Team
  */
-public interface WoolMeta extends BlockMeta<BlockWool> {
+public interface WoolMeta extends BlockMeta<Block> {
     /**
      * Sets the wool colour
      *

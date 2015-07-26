@@ -17,6 +17,7 @@
 
 package net.tridentsdk.base;
 
+import net.tridentsdk.meta.block.BlockMetaOwner;
 import net.tridentsdk.util.Vector;
 
 /**
@@ -25,7 +26,7 @@ import net.tridentsdk.util.Vector;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public interface Block {
+public interface Block extends BlockMetaOwner<Block> {
     /**
      * Gets the substance the tile is made of
      *
