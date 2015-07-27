@@ -30,26 +30,26 @@ public interface WorldBorder {
      *
      * @return The size of the worldborder
      */
-    double borderSize();
+    double size();
 
     /**
      * Gets the position where the worldborder is centered
      *
      * @return The position where the worldborder is centered
      */
-    Position borderCenter();
+    Position center();
 
     /**
      * Gets to what size a border is contracting, 60000000 by default
      *
      * @return To what size a border is contracting, 60000000 by default
      */
-    int borderSizeContraction();
+    int sizeContraction();
 
     /**
      * Gets the time the border has to contract to the contraction target
      *
      * @return The time the border has to contract to the contraction target
      */
-    int borderSizeContractionTime();
+    int contractionTime();
 }

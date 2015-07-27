@@ -14,35 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package net.tridentsdk.event.weather;
 
-package net.tridentsdk.event.player;
-
-import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.event.Cancellable;
+import net.tridentsdk.world.World;
 
 /**
- * Called when a player joins the server
+ * Represents the world weather toggling to thundering
  *
  * @author The TridentSDK Team
- * @since 0.3-alpha-DP
  */
-public class PlayerJoinEvent extends PlayerEvent implements Cancellable {
-    private boolean cancelled;
-
-    /**
-     * @param player the player associated with this event
-     */
-    public PlayerJoinEvent(Player player) {
-        super(player);
-    }
-
-    @Override
-    public boolean isIgnored() {
-        return cancelled;
-    }
-
-    @Override
-    public void cancel(boolean cancel) {
-        this.cancelled = cancel;
+public class ThunderEvent extends WeatherEvent {
+    public ThunderEvent(World world) {
+        super(world);
     }
 }
