@@ -218,6 +218,15 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
     }
 
     /**
+     * Logs debug to the logger output
+     *
+     * @param message the message to log
+     */
+    public static void debug(String message) {
+        get().internal().debug(message);
+    }
+
+    /**
      * Logs an error message to the class logger with a red escape
      *
      * @param message the message to log
