@@ -60,12 +60,25 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements Blo
     }
 
     @Override
-    public <M extends BlockMeta<T>> boolean applyMeta(M meta, boolean replace) {
+    public <M extends BlockMeta<T>> void applyMeta(M... meta) {
+        applyMeta(true, meta);
+    }
+
+    @Override
+    public <M extends BlockMeta<T>> boolean applyMeta(boolean replace, M... meta) {
         if (replace) {
-            return collection.putIfAbsent(meta);
+            boolean success = true;
+            for (M m : meta) {
+                if (!collection.putIfAbsent(m)) {
+                    success = false;
+                }
+            }
+            return success;
         }
 
-        collection.put(meta);
+        for (M m : meta) {
+            collection.put(m);
+        }
         return true;
     }
 

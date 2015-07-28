@@ -50,14 +50,22 @@ public interface MetaOwner<T> {
     <M extends MetaOwner> MetaCollection<M> ownedMeta();
 
     /**
+     * Applies the specified metas to the owner, replacing the previous value if present
+     *
+     * @param meta the metas to apply
+     * @param <M> the meta type
+     */
+    <M extends T> void applyMeta(M... meta);
+
+    /**
      * Commits the changes from the meta value to the block
      *
      * @param meta    the metadata
      * @param replace {@code true} to apply meta anyways if the data mapping already exists
      * @param <M>     the meta type
-     * @return {@code true} if the change took effect
+     * @return {@code true} if the <em>all</em> of the meta changes took effect
      */
-    <M extends T> boolean applyMeta(M meta, boolean replace);
+    <M extends T> boolean applyMeta(boolean replace, M... meta);
 
     /**
      * Removes all meta values and sets the block meta to {@code (byte) 0}
