@@ -37,13 +37,13 @@ public interface IllegalMeta<T> extends Meta<T> {
     }
 
     @Override
-    default Meta<T> decode(T instance, byte[] data) {
+    default Meta<T> decodeMeta(T instance, byte[] data) {
         return null;
     }
 
     @Override
-    default byte encode() {
-        return 0;
+    default byte[] encodeMeta() {
+        return new byte[0];
     }
 
     @Override

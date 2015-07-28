@@ -41,10 +41,35 @@ public interface BlockMeta<T> extends Meta<T> {
      * @return the new meta instance
      */
     @Override
-    default Meta<T> decode(T instance, byte[] data) {
+    default Meta<T> decodeMeta(T instance, byte[] data) {
         return decode(instance, ByteArray.readShort(data[0], data[1]) / 10F, data[2], data[3], data[4], data[5],
                 ByteArray.readShort(data[6], data[7]));
     }
+
+    /**
+     * In blocks, only one meta field byte is needed
+     */
+    @Override
+    default byte[] encodeMeta() {
+        return new byte[]{encode()};
+    }
+
+    /**
+     * Used by the metadata compiler to order the specific metadata value before this one
+     * to preserve bit order
+     *
+     * @return the classes to have dependencies on
+     */
+    default Class[] dependencies() {
+        return new Class[0];
+    }
+
+    /**
+     * Encodes the block metadata into a single byte, which is then combined with the rest of the metadata
+     *
+     * @return the byte data
+     */
+    byte encode();
 
     /**
      * Decodes the block meta

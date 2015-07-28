@@ -46,7 +46,7 @@ public interface MetaProvider {
 
     /**
      * Decodes and applies the byte data to the block as specified in
-     * {@link net.tridentsdk.meta.block.BlockMeta#decode(Object, byte[])}
+     * {@link net.tridentsdk.meta.block.BlockMeta#decodeMeta(Object, byte[])}
      *
      * @param block the block
      * @param substance

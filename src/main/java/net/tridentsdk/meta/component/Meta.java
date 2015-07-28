@@ -31,14 +31,14 @@ public interface Meta<T> {
      * @param instance the data owner which the value will be applied upon
      * @param data     the data
      */
-    Meta<T> decode(T instance, byte[] data);
+    Meta<T> decodeMeta(T instance, byte[] data);
 
     /**
      * Transforms the data into a byte which can be represented in a block data byte
      *
      * @return the byte data
      */
-    byte encode();
+    byte[] encodeMeta();
 
     /**
      * Make a new instance of this meta object

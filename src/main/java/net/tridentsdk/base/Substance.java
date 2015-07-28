@@ -296,32 +296,32 @@ public enum Substance {
     FLINT("318"),
     PORK("319"),
     GRILLED_PORK("320"),
-    PAINTING("321"),
+    PAINTING("321"),                // Can place
     GOLDEN_APPLE("322"),
-    SIGN("323", 16),
-    WOOD_DOOR("324"),
+    SIGN("323", 16),                // Can place
+    WOOD_DOOR("324"),               // Can place
     BUCKET("325", 16),
-    WATER_BUCKET("326", 1),
-    LAVA_BUCKET("327", 1),
-    MINECART("328", 1),
+    WATER_BUCKET("326", 1),         // Can place
+    LAVA_BUCKET("327", 1),          // Can place
+    MINECART("328", 1),             // Can spawn
     SADDLE("329", 1),
-    IRON_DOOR("330", 1),
-    REDSTONE("331"),
-    SNOW_BALL("332", 16),
-    BOAT("333", 1),
+    IRON_DOOR("330", 1),            // Can place
+    REDSTONE("331"),                // Can place
+    SNOW_BALL("332", 16),           // Can spawn
+    BOAT("333", 1),                 // Can spawn
     LEATHER("334"),
     MILK_BUCKET("335", 1),
     CLAY_BRICK("336"),
     CLAY_BALL("337"),
-    SUGAR_CANE("338"),
+    SUGAR_CANE("338"),              // Can place
     PAPER("339"),
     BOOK("340"),
     SLIME_BALL("341"),
-    STORAGE_MINECART("342", 1),
-    POWERED_MINECART("343", 1),
-    EGG("344", 16),
+    STORAGE_MINECART("342", 1),     // Can spawn
+    POWERED_MINECART("343", 1),     // Can spawn
+    EGG("344", 16),                 // Can spawn
     COMPASS("345"),
-    FISHING_ROD("346", 1),
+    FISHING_ROD("346", 1),          // Can spawn
     WATCH("347"),
     GLOWSTONE_DUST("348"),
     RAW_FISH("349"),
@@ -329,13 +329,13 @@ public enum Substance {
     INK_SACK("351"),
     BONE("352"),
     SUGAR("353"),
-    CAKE("354", 1),
-    BED("355", 1),
-    DIODE("356"),
+    CAKE("354", 1),                 // Can place
+    BED("355", 1),                  // Can place
+    DIODE("356"),                   // Can place
     COOKIE("357"),
     MAP("358"),
     SHEARS("359", 1),
-    MELON("360"),
+    MELON("360"),                   // Can place
     PUMPKIN_SEEDS("361"),
     MELON_SEEDS("362"),
     RAW_BEEF("363"),
@@ -343,46 +343,46 @@ public enum Substance {
     RAW_CHICKEN("365"),
     COOKED_CHICKEN("366"),
     ROTTEN_FLESH("367"),
-    ENDER_PEARL("368", 16),
+    ENDER_PEARL("368", 16),         // Can spawn
     BLAZE_ROD("369"),
     GHAST_TEAR("370"),
     GOLD_NUGGET("371"),
-    POTION("373", 1),
+    POTION("373", 1),               // Can spawn
     GLASS_BOTTLE("374"),
     SPIDER_EYE("375"),
     FERMENTED_SPIDER_EYE("376"),
     BLAZE_POWDER("377"),
     MAGMA_CREAM("378"),
     BREWING_STAND_ITEM("379"),
-    CAULDRON_ITEM("380"),
-    EYE_OF_ENDER("381"),
+    CAULDRON_ITEM("380"),           // Can place?
+    EYE_OF_ENDER("381"),            // Can spawn
     SPECKLED_MELON("382"),
-    MONSTER_EGG("383"),
-    EXP_BOTTLE("384"),
+    MONSTER_EGG("383"),             // Can spawn
+    EXP_BOTTLE("384"),              // Can spawn
     FIREBALL("385"),
     BOOK_AND_QUILL("386", 1),
     WRITTEN_BOOK("387", 16),
     EMERALD("388"),
-    ITEM_FRAME("389"),
-    FLOWER_POT_ITEM("390"),
+    ITEM_FRAME("389"),              // Can spawn
+    FLOWER_POT_ITEM("390"),         // Applyable
     CARROT_ITEM("391"),
     POTATO_ITEM("392"),
     BAKED_POTATO("393"),
     POISONOUS_POTATO("394"),
     EMPTY_MAP("395"),
     GOLDEN_CARROT("396"),
-    SKULL_ITEM("397"),
+    SKULL_ITEM("397"),              // Can place
     CARROT_STICK("398", 1),
     NETHER_STAR("399"),
     PUMPKIN_PIE("400"),
-    FIREWORK("401"),
+    FIREWORK("401"),                // Can spawn
     FIREWORK_CHARGE("402"),
     ENCHANTED_BOOK("403", 1),
-    REDSTONE_COMPARATOR("404"),
+    REDSTONE_COMPARATOR("404"),     // Can place
     NETHER_BRICK_ITEM("405"),
     QUARTZ("406"),
-    EXPLOSIVE_MINECART("407", 1),
-    HOPPER_MINECART("408", 1),
+    EXPLOSIVE_MINECART("407", 1),   // Can spawn
+    HOPPER_MINECART("408", 1),      // Can spawn
     PRISMARINE_SHARD("409"),
     PRISMARINE_CRYSTALS("410"),
     RABBIT("411"),
@@ -396,15 +396,15 @@ public enum Substance {
     DIAMOND_BARDING("419", 1),
     LEASH("420"),
     NAME_TAG("421"),
-    COMMAND_MINECART("422", 1),
+    COMMAND_MINECART("422", 1),     // Can spawn
     MUTTON("423"),
     COOKED_MUTTON("424"),
-    BANNER("425"),
-    SPRUCE_DOOR("427"),
-    BIRCH_DOOR("428"),
-    JUNGLE_DOOR("429"),
-    ACACIA_DOOR("430"),
-    DARK_OAK_DOOR("431"),
+    BANNER("425"),                  // Can place?
+    SPRUCE_DOOR("427"),             // Can place
+    BIRCH_DOOR("428"),              // Can place
+    JUNGLE_DOOR("429"),             // Can place
+    ACACIA_DOOR("430"),             // Can place
+    DARK_OAK_DOOR("431"),           // Can place
     GOLD_RECORD("2256", 1),
     GREEN_RECORD("2257", 1),
     RECORD_3("2258", 1),
