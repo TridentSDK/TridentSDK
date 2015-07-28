@@ -828,5 +828,4 @@ public enum Substance {
     public char asExtended () {
         return (char) (this.idInt << 4);
     }
-
 }

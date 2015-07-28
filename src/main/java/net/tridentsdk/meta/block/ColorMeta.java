@@ -25,7 +25,7 @@ import net.tridentsdk.base.SubstanceColor;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
-public interface WoolMeta extends BlockMeta<Block> {
+public interface ColorMeta extends BlockMeta<Block> {
     /**
      * Sets the wool colour
      *
