@@ -11,216 +11,216 @@ public enum ParticleEffectType {
     /**
      * Small Explosion
      */
-    SMALL_EXPLOSION((byte) 0),
+    SMALL_EXPLOSION(0),
 
     /**
      * Large Explosion
      */
-    LARGE_EXPLOSION((byte) 1),
+    LARGE_EXPLOSION(1),
 
     /**
      * Huge Explosion
      */
-    HUGE_EXPLOSION((byte) 2),
+    HUGE_EXPLOSION(2),
 
     /**
      * Firework Spark
      */
-    FIREWORK_SPARK((byte) 3),
+    FIREWORK_SPARK(3),
 
     /**
      * Bubble
      */
-    BUBBLE((byte) 4),
+    BUBBLE(4),
 
     /**
      * Water Splash
      */
-    SPLASH((byte) 5),
+    SPLASH(5),
 
     /**
      * Fishing Animation
      */
-    WAKE((byte) 6),
+    WAKE(6),
 
     /**
      * Underwater Suspended
      */
-    SUSPENDED((byte) 7),
+    SUSPENDED(7),
 
     /**
      * Depth Suspended
      */
-    DEPTH_SUSPENDED((byte) 8),
+    DEPTH_SUSPENDED(8),
 
     /**
      * Critical Hit
      */
-    CRIT((byte) 9),
+    CRIT(9),
 
     /**
      * Magical Crit
      */
-    MAGIC_CRIT((byte) 10),
+    MAGIC_CRIT(10),
 
     /**
      * Small Smoke (like torches)
      */
-    SMALL_SMOKE((byte) 11),
+    SMALL_SMOKE(11),
 
     /**
      * Large Smoke (like fire)
      */
-    LARGE_SMOKE((byte) 12),
+    LARGE_SMOKE(12),
 
     /**
      * Splash Potion / Bottle O' Enchanting
      */
-    SPELL((byte) 13),
+    SPELL(13),
 
     /**
      * Instant Health/Damage Potion
      */
-    INSTANT_SPELL((byte) 14),
+    INSTANT_SPELL(14),
 
     /**
      * Status Effect / Trading / Wither
      */
-    MOB_SPELL((byte) 15),
+    MOB_SPELL(15),
 
     /**
      * Beacon Effects
      */
-    MOB_SPELL_AMBIENT((byte) 16),
+    MOB_SPELL_AMBIENT(16),
 
     /**
      * Witch Effect
      */
-    WITCH_MAGIC((byte) 17),
+    WITCH_MAGIC(17),
 
     /**
      * Dripping Water Through Blocks
      */
-    DRIP_WATER((byte) 18),
+    DRIP_WATER(18),
 
     /**
      * Dripping Lava Through Blocks
      */
-    DRIP_LAVA((byte) 19),
+    DRIP_LAVA(19),
 
     /**
      * Angry Villager Cloud
      */
-    ANGRY_VILLAGER((byte) 20),
+    ANGRY_VILLAGER(20),
 
     /**
      * Happy Villager / Bone Meal / Feeding Animal
      */
-    HAPPY_VILLAGER((byte) 21),
+    HAPPY_VILLAGER(21),
 
     /**
      * Mycelium Effect
      */
-    TOWN_AURA((byte) 22),
+    TOWN_AURA(22),
 
     /**
      * Note Block Note
      */
-    NOTE((byte) 23),
+    NOTE(23),
 
     /**
      * Nether Portal / Endermen Effect
      */
-    PORTAL((byte) 24),
+    PORTAL(24),
 
     /**
      * Enchantment Table Glyphs
      */
-    ENCHANTMENT_TABLE((byte) 25),
+    ENCHANTMENT_TABLE(25),
 
     /**
      * Flame
      */
-    FLAME((byte) 26),
+    FLAME(26),
 
     /**
      * Small Lava Fireballs
      */
-    LAVA((byte) 27),
+    LAVA(27),
 
     /**
      * Footsteps
      */
-    FOOTSTEP((byte) 28),
+    FOOTSTEP(28),
 
     /**
      * Cloud Smoke Effect
      */
-    CLOUD((byte) 29),
+    CLOUD(29),
 
     /**
      * Active Redstone Effect
      */
-    RED_DUST((byte) 30),
+    RED_DUST(30),
 
     /**
      * Snowball Poof
      */
-    SNOWBALL_POOF((byte) 31),
+    SNOWBALL_POOF(31),
 
     /**
      * Breaking Snow / Creating Snow Golem
      */
-    SNOW_SHOVEL((byte) 32),
+    SNOW_SHOVEL(32),
 
     /**
      * Slime Particles
      */
-    SLIME((byte) 33),
+    SLIME(33),
 
     /**
      * Hearts From Breeding/Taming
      */
-    HEART((byte) 34),
+    HEART(34),
 
     /**
      * Barrier Block Sign
      */
-    BARRIER((byte) 35),
+    BARRIER(35),
 
     /**
      * Eating / Thrown Egg / Potion / Eye Of Ender / Breaking Tool
      */
-    ICON_CRACK((byte) 36),
+    ICON_CRACK(36),
 
     /**
      * Breaking Blocks / Sprinting
      */
-    BLOCK_CRACK((byte) 37),
+    BLOCK_CRACK(37),
 
     /**
      * Breaking Armor Stand / Falling
      */
-    BLOCK_DUST((byte) 38),
+    BLOCK_DUST(38),
 
     /**
      * Rain Droplets
      */
-    DROPLET((byte) 39),
+    DROPLET(39),
 
     /**
      * ...?
      */
-    TAKE((byte) 40),
+    TAKE(40),
 
     /**
      * Elder Guardian Animation
      */
-    MOB_APPEARANCE((byte) 41);
+    MOB_APPEARANCE(41);
 
-    private final byte data;
+    private final int data;
 
-    ParticleEffectType(byte data) {
+    ParticleEffectType(int data) {
         this.data = data;
     }
 
@@ -229,7 +229,7 @@ public enum ParticleEffectType {
      *
      * @return The data value of the effect
      */
-    public byte data(){
+    public int data(){
         return data;
     }
 

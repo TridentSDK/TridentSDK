@@ -26,4 +26,11 @@ public interface RemoteEffect<T> extends Effect<T> {
      */
     void apply(Player player, Position position);
 
+    /**
+     * Set the position of the effect
+     *
+     * @param position The position of the effect
+     */
+    void setPosition(Position position);
+
 }

@@ -6,7 +6,7 @@ package net.tridentsdk.effect.entity;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
-public enum EntityEffectType {
+public enum EntityStatusEffectType {
 
     /**
      * When an entity gets hurt
@@ -137,7 +137,7 @@ public enum EntityEffectType {
 
     private final byte data;
 
-    EntityEffectType(byte data) {
+    EntityStatusEffectType(byte data) {
         this.data = data;
     }
 
