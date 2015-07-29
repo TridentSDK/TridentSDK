@@ -248,6 +248,20 @@ public class Position implements Cloneable {
     }
 
     /**
+     * Obtains the unit vector pointing in the direction of the pitch and yaw
+     *
+     * @return the direction vector
+     */
+    public Vector asUnitVector() {
+        // queerest calculations ever, apparently x goes towards 3pi/2 and z to 0...?
+        double x = -Math.cos(pitch) * Math.sin(yaw);
+        double y = -Math.sin(pitch);
+        double z = Math.cos(pitch) * Math.cos(yaw);
+
+        return new Vector(x, y, z);
+    }
+
+    /**
      * The distance this from position to another. Math.sqrt is costly, ergo calling this method a lot is not advised.
      *
      * @param position the position to measure distance with
