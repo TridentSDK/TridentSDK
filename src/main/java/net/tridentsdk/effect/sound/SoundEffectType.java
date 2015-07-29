@@ -76,13 +76,13 @@ public enum SoundEffectType {
     PLAYER_HURT("game.player.hurt"),
 
     /**
-     * A passive mob taking damage.
+     * A passive mob taking damage.<br>
      * Always overridden by the damage sound specific to each mob
      */
     NEUTRAL_HURT("game.neutral.hurt"),
 
     /**
-     * A hostile mob taking damage. Used only by Giants.
+     * A hostile mob taking damage. Used only by Giants.<br>
      * Overridden by the damage sound specific to each mob in any other case
      */
     HOSTILE_HURT("game.hostile.hurt"),
@@ -93,12 +93,13 @@ public enum SoundEffectType {
     PLAYER_DIE("game.player.die"),
 
     /**
-     * A passive mob dies. Always overridden by the death sound specific to each mob
+     * A passive mob dies. <br>
+     * Always overridden by the death sound specific to each mob
      */
     NEUTRAL_DIE("game.neutral.die"),
 
     /**
-     * A hostile mob dies. Used only by Giants.
+     * A hostile mob dies. Used only by Giants.<br>
      * Overridden by the death sound specific to each mob in any other case
      */
     HOSTILE_DIE("game.hostile.die"),
@@ -234,7 +235,8 @@ public enum SoundEffectType {
     LAVA("liquid.lava"),
 
     /**
-     * Randomly when being near Lava. Accompanied by a lava fireball particle effect
+     * Randomly when being near Lava. <br>
+     * Accompanied by a lava fireball particle effect
      */
     LAVAPOP("liquid.lavapop"),
 
@@ -319,23 +321,23 @@ public enum SoundEffectType {
     RANDOM_ANVIL_USE("random.anvil_use"),
 
     /**
-     * A player or Skeleton shoots an Arrow.
-     * A player casts a Fishing Rod.
-     * A player throws a Snowball, Egg, Splash Potion, Bottle O' Enchanting, Ender Pearl, or Eye of Ender.
-     * A Snow Golem throws a snowball at a mob.
+     * A player or Skeleton shoots an Arrow.<br>
+     * A player casts a Fishing Rod.<br>
+     * A player throws a Snowball, Egg, Splash Potion, Bottle O' Enchanting, Ender Pearl, or Eye of Ender.<br>
+     * A Snow Golem throws a snowball at a mob.<br>
      * A Dispenser shoots an Arrow, Snowball, Egg, Splash Potion, or Bottle O' Enchanting
      */
     RANDOM_BOW("random.bow"),
 
     /**
-     * An Arrow gets stuck in a block, an arrow hits an entity.
-     * An active Tripwire (connected to Tripwire Hooks) is broken with Shears.
+     * An Arrow gets stuck in a block, an arrow hits an entity.<br>
+     * An active Tripwire (connected to Tripwire Hooks) is broken with Shears.<br>
      * An active Tripwire Hook is broken
      */
     RANDOM_BOW_HIT("random.bowhit"),
 
     /**
-     * A player breaks a Pickaxe, Sword, Axe, Shovel, Bow, Flint and Steel, Shears, or Fishing Rod.
+     * A player breaks a Pickaxe, Sword, Axe, Shovel, Bow, Flint and Steel, Shears, or Fishing Rod.<br>
      * A piece of armor a mob (excluding players) is wearing breaks
      */
     RANDOM_BREAK("random.break"),
@@ -356,21 +358,21 @@ public enum SoundEffectType {
     RANDOM_CHEST_OPEN("random.chestopen"),
 
     /**
-     * Any kind of switch changes its power state (on or off)
-     * A Dispenser or Dropper is powered
-     * A Redstone Comparator's mode is changed
+     * Any kind of switch changes its power state (on or off)<br>
+     * A Dispenser or Dropper is powered<br>
+     * A Redstone Comparator's mode is changed<br>
      * Two Tripwire Hooks are connected with String
      */
     RANDOM_CLICK("random.click"),
 
     /**
-     * A Door, Trapdoor, or Fence Gate is opened or closed
+     * A Door, Trapdoor, or Fence Gate is opened or closed<br>
      * A player attempts to open a locked container and is not holding the correct key item
      */
     RANDOM_DOOR_OPEN("random.door_open"),
 
     /**
-     * A Door, Trapdoor, or Fence Gate is opened or closed
+     * A Door, Trapdoor, or Fence Gate is opened or closed<br>
      * A player attempts to open a locked container and is not holding the correct key item
      */
     RANDOM_DOOR_CLOSE("random.door_close"),
@@ -386,16 +388,16 @@ public enum SoundEffectType {
     RANDOM_EAT("random.eat"),
 
     /**
-     * TNT, a Creeper, a Ghast's fireball, a Wither Skull, an Ender Crystal, or a Bed (in the Nether or the End) explodes
+     * TNT, a Creeper, a Ghast's fireball, a Wither Skull, an Ender Crystal, or a Bed (in the Nether or the End) explodes<br>
      * Lightning strikes at close range
      */
     RANDOM_EXPLODE("random.explode"),
 
     /**
-     * Fire is extinguished
-     * An Item or Experience Orb is destroyed by Lava
-     * Lava touches Water
-     * Lava destroys a non-solid block in its path
+     * Fire is extinguished<br>
+     * An Item or Experience Orb is destroyed by Lava<br>
+     * Lava touches Water<br>
+     * Lava destroys a non-solid block in its path<br>
      * A Redstone Torch burns out
      */
     RANDOM_FIZZ("random.fizz"),
@@ -441,51 +443,51 @@ public enum SoundEffectType {
     TNT_PRIME("game.tnt.primed"),
 
     /**
-     * An entity walks on a block classified as "cloth"
+     * An entity walks on a block classified as "cloth"<br>
      * A player is breaking a block classified as "cloth" (during the cracking animation)
      */
     STEP_CLOTH("step.cloth"),
 
     /**
-     * An entity walks on a block classified as "grass"\
+     * An entity walks on a block classified as "grass"<br>
      * A player is breaking a block classified as "grass" (during the cracking animation)
      */
     STEP_GRASS("step.grass"),
 
     /**
-     * An entity walks on a block classified as "gravel"
-     * Dirt/Grass/Mycelium is tilled with a Hoe (creating Farmland)
+     * An entity walks on a block classified as "gravel"<br>
+     * Dirt/Grass/Mycelium is tilled with a Hoe (creating Farmland)<br>
      * A player is breaking a block classified as "gravel" (during the cracking animation)
      */
     STEP_GRAVEL("step.gravel"),
 
     /**
-     * An entity climbs or descends a Ladder
+     * An entity climbs or descends a Ladder<br>
      * A player is breaking a Ladder (during the cracking animation)
      */
     STEP_LADDER("step.ladder"),
 
     /**
-     * An entity walks on a block classified as "sand"
+     * An entity walks on a block classified as "sand"<br>
      * A player is breaking a block classified as "sand" (during the cracking animation)
      */
     STEP_SAND("step.sand"),
 
     /**
-     * An entity walks on a block classified as "snow"
+     * An entity walks on a block classified as "snow"<br>
      * A player is breaking a block classified as "snow" (during the cracking animation)
      */
     STEP_SNOW("step.snow"),
 
     /**
-     * An entity walks on a block classified as "stone" or "glass"
-     * A player is breaking a block classified as "stone" or "glass" (during the cracking animation)
+     * An entity walks on a block classified as "stone" or "glass"<br>
+     * A player is breaking a block classified as "stone" or "glass" (during the cracking animation)<br>
      * A player places a block classified as "glass"
      */
     STEP_STONE("step.stone"),
 
     /**
-     * An entity walks on a block classified as "wood"
+     * An entity walks on a block classified as "wood"<br>
      * A player is breaking a block classified as "wood" (during the cracking animation)
      */
     STEP_WOOD("step.wood"),
@@ -741,9 +743,9 @@ public enum SoundEffectType {
     GUARDIAN_LAND_DEATH("mob.guardian.land.death"),
 
     /**
-     * A player is within 50 blocks of an Elder Guardian and does not have the Mining Fatigue effect,
-     * has Mining Fatigue II or lower, or has less than a minute left of Mining Fatigue III.
-     *
+     * A player is within 50 blocks of an Elder Guardian and does not have the Mining Fatigue effect,<br>
+     * has Mining Fatigue II or lower, or has less than a minute left of Mining Fatigue III.<br>
+     * <br>
      * Accompanied by a ghostly image of an Elder Guardian and Mining Fatigue III for five minutes
      */
     GUARDIAN_CURSE("mob.guardian.curse"),
@@ -1259,15 +1261,15 @@ public enum SoundEffectType {
     MUSIC_MENU("music.menu"),
 
     /**
-     * During sunrise, noon, sunset, and midnight.
-     *
+     * During sunrise, noon, sunset, and midnight.<br>
+     * <br>
      * If the day cycle is turned off, the music plays every 5 minutes
      */
     MUSIC_GAME("music.game"),
 
     /**
-     * During sunrise, noon, sunset, and midnight (player must be in Creative mode).
-     *
+     * During sunrise, noon, sunset, and midnight (player must be in Creative mode).<br>
+     * <br>
      * If the day cycle is turned off, the music plays every 5 minutes
      */
     MUSIC_GAME_CREATIVE("music.game.creative"),

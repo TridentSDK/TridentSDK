@@ -135,19 +135,19 @@ public enum EntityStatusEffectType {
      */
     RESET_DEBUG((byte) 23);
 
-    private final byte data;
+    private final byte id;
 
-    EntityStatusEffectType(byte data) {
-        this.data = data;
+    EntityStatusEffectType(byte id) {
+        this.id = id;
     }
 
     /**
-     * Get the data value of the effect
+     * Get the id value of the effect
      *
-     * @return The data value of the effect
+     * @return The id value of the effect
      */
-    public byte data(){
-        return data;
+    public byte id(){
+        return id;
     }
 
 }

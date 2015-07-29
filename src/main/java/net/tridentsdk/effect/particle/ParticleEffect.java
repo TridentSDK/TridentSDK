@@ -14,12 +14,12 @@ public interface ParticleEffect extends RemoteEffect<ParticleEffectType> {
     /**
      * Set the count how many of the effects should be spawned
      *
-     * @param count The cound how many should be spawned
+     * @param count The count how many should be spawned
      */
     void setCount(int count);
 
     /**
-     * Set the particle to be long distance
+     * Set the particle to be long distance<br>
      * Increases distance from 256 to 65536
      *
      * @param longDistance Whether the particle should be long distance
@@ -27,9 +27,9 @@ public interface ParticleEffect extends RemoteEffect<ParticleEffectType> {
     void setLongDistance(boolean longDistance);
 
     /**
-     * Set the data of the particle
-     * Only used for ICON_CRACK, BLOCK_CRACK and BLOCK_DUST
-     * ICON_CRACK requires array of two integers
+     * Set the data of the particle<br>
+     * Only used for ICON_CRACK, BLOCK_CRACK and BLOCK_DUST<br>
+     * ICON_CRACK requires array of two integers<br>
      * BLOCK_CRACK and BLOCK_DUST requires an array of a single integer
      *
      * @param data Data of the particle
@@ -37,7 +37,7 @@ public interface ParticleEffect extends RemoteEffect<ParticleEffectType> {
     void setData(int[] data);
 
     /**
-     * The randomized offset for each particle
+     * The randomized offset for each particle<br>
      * If multiple particles are spawned, this will be re-run for each
      *
      * @param offset The offset for each particle

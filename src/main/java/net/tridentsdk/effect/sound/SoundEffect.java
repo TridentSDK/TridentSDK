@@ -10,6 +10,32 @@ import net.tridentsdk.effect.RemoteEffect;
  */
 public interface SoundEffect extends RemoteEffect<SoundEffectType> {
 
-    // TODO
+    /**
+     * Set the volume of the sound
+     *
+     * @param volume The volume of the sound (1 is 100%, can be higher)
+     */
+    void setVolume(float volume);
+
+    /**
+     * Set the pitch of the sound
+     *
+     * @param pitch The pitch of the sound (63 is 100%, can be higher)
+     */
+    void setPitch(byte pitch);
+
+    /**
+     * Returns the volume of the sound
+     *
+     * @return The volume of the sound
+     */
+    float volume();
+
+    /**
+     * Returns the pitch of the sound
+     *
+     * @return The pitch of the sound
+     */
+    byte pitch();
 
 }

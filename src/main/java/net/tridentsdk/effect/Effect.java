@@ -24,4 +24,18 @@ public interface Effect<T> {
      */
     T type();
 
+    /**
+     * Set the type of the effect
+     *
+     * @param type The type of the effect
+     */
+    void setType(T type);
+
+    /**
+     * Returns the packet ID of the effect
+     *
+     * @return The packet ID of the effect
+     */
+    byte packetId();
+
 }

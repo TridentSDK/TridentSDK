@@ -38,19 +38,19 @@ public enum VisualEffectType {
      */
     HAPPY_VILLAGER(2005);
 
-    private final int data;
+    private final int id;
 
-    VisualEffectType(int data) {
-        this.data = data;
+    VisualEffectType(int id) {
+        this.id = id;
     }
 
     /**
-     * Get the data value of the effect
+     * Get the id value of the effect
      *
-     * @return The data value of the effect
+     * @return The id value of the effect
      */
     public int data(){
-        return data;
+        return id;
     }
 
 }
