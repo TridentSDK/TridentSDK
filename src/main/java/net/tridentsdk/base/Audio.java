@@ -22,7 +22,9 @@ package net.tridentsdk.base;
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP TODO more darude sandstorm's
+ * @deprecated Use net.tridentsdk.effect.sound.SoundEffectType instead
  */
+@Deprecated
 public enum Audio {
     AMBIENT_CAVE("ambient.cave.cave"),
     AMBIENT_RAIN("ambient.weather.rain"),
