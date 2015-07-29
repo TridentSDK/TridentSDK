@@ -16,11 +16,12 @@
  */
 package net.tridentsdk.meta.component;
 
-import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.Value;
+
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Allows Factory access to metadata components
@@ -28,17 +29,9 @@ import net.tridentsdk.util.Value;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public final class MetaFactory {
     private static volatile MetaProvider provider;
-
-    private MetaFactory() {
-    }
-
-    @InternalUseOnly
-    public static void setProvider(MetaProvider provider) {
-        Preconditions.checkArgument(MetaFactory.provider == null, "Provider has already been set");
-        MetaFactory.provider = provider;
-    }
 
     /**
      * Creates a new meta collection
@@ -53,6 +46,7 @@ public final class MetaFactory {
      * @see MetaProvider#decode(Block, net.tridentsdk.base.Substance, byte[], net.tridentsdk.util.Value)
      */
     public static boolean decode(Block block, Substance substance, byte[] data, Value<Byte> result) {
+        ensureInit();
         return provider.decode(block, substance, data, result);
     }
 
@@ -65,6 +59,7 @@ public final class MetaFactory {
      * @return the new meta value
      */
     public static <S, T extends Meta<S>> T newValue(Class<T> type) {
+        ensureInit();
         return provider.provide(type);
     }
 
@@ -74,6 +69,14 @@ public final class MetaFactory {
      * @param meta the meta
      */
     public static void register(Meta meta) {
+        ensureInit();
         provider.register(meta);
+    }
+
+    private static void ensureInit() {
+        if (provider == null) {
+            // hacky initializations
+            provider = Registered.impl().meta();
+        }
     }
 }

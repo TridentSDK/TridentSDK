@@ -18,12 +18,15 @@ package net.tridentsdk.world;
 
 import net.tridentsdk.base.Position;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Access to the world border properties
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface WorldBorder {
     /**
      * Gets the size of the worldborder

@@ -18,12 +18,15 @@ package net.tridentsdk.meta.block;
 
 import net.tridentsdk.meta.component.Meta;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents a {@link Meta} object which is possessed by blocks
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface BlockMeta<T> extends Meta<T> {
     /**
      * In BlockMeta, the data always has 8 elements laid out like so:

@@ -30,6 +30,7 @@ import net.tridentsdk.service.Transactions;
 import net.tridentsdk.util.TridentLogger;
 import net.tridentsdk.world.World;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Map;
 
 /**
@@ -38,6 +39,7 @@ import java.util.Map;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public class Registered {
     private static volatile Implementation impl;
 
@@ -45,6 +47,11 @@ public class Registered {
     public static void setProvider(Implementation implementation) {
         Preconditions.checkArgument(impl == null, "You may not set the provider of Registered");
         impl = implementation;
+    }
+
+    @InternalUseOnly
+    public static Implementation impl() {
+        return impl;
     }
 
     /**

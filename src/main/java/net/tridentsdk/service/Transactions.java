@@ -18,6 +18,8 @@ package net.tridentsdk.service;
 
 import net.tridentsdk.registry.Registry;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Handles player transactions, such objects, items, and currency
  *
@@ -67,6 +69,7 @@ import net.tridentsdk.registry.Registry;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Transactions extends Registry<Transaction> {
     /**
      * Creates a new account from the internal account clock

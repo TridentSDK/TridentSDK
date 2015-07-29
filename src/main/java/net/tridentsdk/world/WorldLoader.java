@@ -21,13 +21,35 @@ import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.gen.AbstractGenerator;
 import net.tridentsdk.world.settings.*;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Manages the worlds for the server
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface WorldLoader extends WorldSettings {
+    /**
+     * Creates a new world loader using the default generator
+     *
+     * @return the new world loader
+     */
+    static WorldLoader newLoader() {
+        return Registered.impl().newLoader(null);
+    }
+
+    /**
+     * Creates a new world loader using the generator specified
+     *
+     * @param clas the class of the generator to use
+     * @return the new world loaer
+     */
+    static WorldLoader newLoader(Class<? extends AbstractGenerator> clas) {
+        return Registered.impl().newLoader(clas);
+    }
+
     /**
      * Checks if the world has been loaded yet
      *

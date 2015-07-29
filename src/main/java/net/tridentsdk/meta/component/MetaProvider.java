@@ -20,12 +20,15 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.util.Value;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Provides metadata values
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface MetaProvider {
     /**
      * Obtains a new instance of a meta value

@@ -24,6 +24,7 @@ import net.tridentsdk.entity.types.EntityType;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.settings.WorldSettings;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Set;
 
 /**
@@ -31,17 +32,18 @@ import java.util.Set;
  *
  * <p>Worlds can be created using the following code:
  * <pre>{@code
- *      WorldLoader loader = Factory.newWorldLoader();
+ *      WorldLoader loader = WorldLoader.newLoader();
  *      // Set world settings
  *      loader.createWorld("New world");
  * }</pre>
- * You can use your own generator using {@link net.tridentsdk.registry.Factory#newWorldLoader(Class)}</p>
+ * You can use your own generator using {@link WorldLoader#newLoader(Class)}</p>
  *
  * <p>A collection of the worlds on the server can be obtained using {@link Registered#worlds()}</p>
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface World extends Cloneable, WorldSettings {
     /**
      * Gets the name of the world

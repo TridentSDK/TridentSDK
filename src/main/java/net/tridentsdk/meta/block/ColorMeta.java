@@ -19,12 +19,15 @@ package net.tridentsdk.meta.block;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.SubstanceColor;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents metadata belonging to blocks of wool
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface ColorMeta extends BlockMeta<Block> {
     /**
      * Sets the wool colour

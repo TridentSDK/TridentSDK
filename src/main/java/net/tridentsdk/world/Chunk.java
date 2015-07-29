@@ -20,6 +20,7 @@ package net.tridentsdk.world;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.Entity;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Set;
 
 /**
@@ -28,6 +29,7 @@ import java.util.Set;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Chunk {
     /**
      * The entities in the chunk

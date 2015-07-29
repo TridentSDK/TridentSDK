@@ -17,6 +17,7 @@
 package net.tridentsdk.meta.component;
 
 import com.google.common.collect.ImmutableMap;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -27,6 +28,7 @@ import java.util.function.Consumer;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@Immutable
 public class ImmutableMetaCollection<S> implements MetaCollection<S> {
     private final Map<Class<? extends Meta<S>>, Meta<S>> map;
 

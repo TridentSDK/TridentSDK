@@ -19,6 +19,8 @@ package net.tridentsdk.plugin.cmd;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.registry.Registry;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * /**
  * Handles commands passed from the server
@@ -31,6 +33,7 @@ import net.tridentsdk.registry.Registry;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Commands extends Registry<Command> {
     /**
      * Handles the message sent, without the preceding "/"

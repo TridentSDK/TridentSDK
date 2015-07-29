@@ -17,6 +17,7 @@
 
 package net.tridentsdk.concurrent;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
@@ -26,6 +27,7 @@ import java.util.concurrent.Future;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface SelectableThread {
     /**
      * Adds the task to the queue

@@ -20,14 +20,15 @@ package net.tridentsdk.plugin;
 import net.tridentsdk.Trident;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.event.Listener;
-import net.tridentsdk.plugin.annotation.Desc;
+import net.tridentsdk.plugin.annotation.PluginDesc;
 import net.tridentsdk.plugin.cmd.Command;
-import net.tridentsdk.registry.Factory;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
+import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,17 +42,18 @@ import java.util.stream.Collectors;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@NotThreadSafe
 public class Plugin {
     private File pluginFile;
     private File configDirectory;
-    private Desc description;
+    private PluginDesc description;
     private Config defaultConfig;
     public PluginLoader classLoader;
 
     protected Plugin() {
     }
 
-    public void init(File pluginFile, Desc description, PluginLoader loader) {
+    public void init(File pluginFile, PluginDesc description, PluginLoader loader) {
         this.pluginFile = pluginFile;
         this.description = description;
         this.configDirectory = new File("plugins" + File.separator + description.name() + File.separator);
@@ -148,8 +150,8 @@ public class Plugin {
      *
      * @return the logger
      */
-    public TridentLogger logger() {
-        return Factory.newLogger(description.name());
+    public Logger logger() {
+        return TridentLogger.get(description.name()).internal();
     }
 
     /**
@@ -221,7 +223,7 @@ public class Plugin {
      * @return the plugin descriptor for this plugin
      */
     @Nonnull
-    public final Desc description() {
+    public final PluginDesc description() {
         return this.description;
     }
 

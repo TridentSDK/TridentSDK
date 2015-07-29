@@ -26,19 +26,14 @@ import net.tridentsdk.world.World;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Represents a point on the coordinate grid of the world
+ * Represents a point on the coordinate grid of the world, including pitch and yaw
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public class Position implements Cloneable {
-    private volatile double x;
-    private volatile double y;
-    private volatile double z;
-
+public final class Position extends Vector implements Cloneable {
     private volatile World world;
-
     private volatile float yaw;
     private volatile float pitch;
 
@@ -88,60 +83,6 @@ public class Position implements Cloneable {
     }
 
     /**
-     * The x position of the position
-     *
-     * @return the x value of this position
-     */
-    public double x() {
-        return this.x;
-    }
-
-    /**
-     * Sets the x value of the position
-     *
-     * @param x the x coordinate to set
-     */
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    /**
-     * The y position of the position
-     *
-     * @return the y value of this position
-     */
-    public double y() {
-        return this.y;
-    }
-
-    /**
-     * Sets the y value of the position
-     *
-     * @param y the y coordinate to set
-     */
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    /**
-     * The z position of the position
-     *
-     * @return the z value of this position
-     */
-    public double z() {
-        return this.z;
-    }
-
-    /**
-     * Sets the z value of the position
-     *
-     * @param z the z coordinate to set
-     */
-    public void setZ(double z) {
-        this.z = z;
-    }
-
-    /**
      * The world the position is in
      *
      * @return the world where the position is
@@ -156,7 +97,7 @@ public class Position implements Cloneable {
      * @return Chunk of the position
      */
     public Chunk chunk() {
-        return world().chunkAt((int) x >> 4, (int) z >> 4, true);
+        return world.chunkAt((int) x >> 4, (int) z >> 4, true);
     }
 
     /**
@@ -211,9 +152,9 @@ public class Position implements Cloneable {
      * @return the relative position
      */
     public Position add(Vector vector) {
-        this.setX(x + vector.x());
-        this.setY(y + vector.y());
-        this.setZ(z + vector.z());
+        this.setX(x() + vector.x());
+        this.setY(y() + vector.y());
+        this.setZ(z() + vector.z());
 
         return this;
     }
@@ -287,11 +228,7 @@ public class Position implements Cloneable {
 
     @Override
     public Position clone() {
-        try {
-            return (Position) super.clone();
-        } catch (CloneNotSupportedException ignored) {
-            return null;
-        }
+        return new Position(world, x, y, z(), yaw, pitch);
     }
 
     @Override

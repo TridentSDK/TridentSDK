@@ -18,11 +18,14 @@ package net.tridentsdk.meta.block;
 
 import net.tridentsdk.meta.component.MetaOwner;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents a block which can hold metadata
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface BlockMetaOwner<T> extends MetaOwner<BlockMeta<T>> {
 }

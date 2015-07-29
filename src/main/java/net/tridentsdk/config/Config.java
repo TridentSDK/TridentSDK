@@ -22,6 +22,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -29,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 /**
@@ -59,6 +61,26 @@ public class Config extends ConfigSection {
     public Config(File file) {
         this.path = file.toPath();
         this.reload();
+    }
+
+    /**
+     * Creates a new JSON configuration file from the String path
+     *
+     * @param path the path
+     */
+    public Config(String path) {
+        this.path = Paths.get(path);
+        this.reload();
+    }
+
+    /**
+     * Creates a new configuration using the plugin's config direction
+     *
+     * @param plugin   the plugin directory to use
+     * @param fileName the file name
+     */
+    public Config(Plugin plugin, String fileName) {
+        this(plugin.configDirectory() + fileName);
     }
 
     /**

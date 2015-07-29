@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.service;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -25,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public abstract class Transaction<S, R> {
     private final Object item;
     private final S sender;

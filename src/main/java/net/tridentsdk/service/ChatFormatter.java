@@ -20,6 +20,8 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.registry.Registry;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Handles server side chat communication
  *
@@ -31,6 +33,7 @@ import net.tridentsdk.registry.Registry;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface ChatFormatter extends Registry<ChatIdentityFormatter> {
     /**
      * Sets the provider of the chat format, performing the default overriding logic of the original provider

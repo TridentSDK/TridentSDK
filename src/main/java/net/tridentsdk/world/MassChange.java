@@ -19,6 +19,8 @@ package net.tridentsdk.world;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.base.Substance;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * Change large amounts of blocks at one time
  *
@@ -30,6 +32,7 @@ import net.tridentsdk.base.Substance;
  * <p>Normally, block changes cause changes to immediately be sent to the client
  * which can be expensive with large amounts of changes being sent at once near a lot of players</p>
  */
+@NotThreadSafe
 public interface MassChange {
     /**
      * Add a change to make at when this change is committed

@@ -16,8 +16,8 @@
  */
 package net.tridentsdk;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import net.tridentsdk.config.Config;
-import net.tridentsdk.registry.Factory;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.util.TridentLogger;
 
@@ -32,8 +32,9 @@ import java.io.IOException;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@Immutable
 public class DisplayInfo {
-    private final Config config = Factory.newConfig(Trident.fileContainer() + "server.json"); // Init code
+    private final Config config = new Config(Trident.fileContainer().resolve("server.json")); // Init code
     private final String motd = config.getString("motd", Defaults.MOTD);
     private final File file = new File(config.getString("image-position", Defaults.MOTD_IMAGE_LOCATION));
     private final int maxPlayers = config.getInt("max-players", Defaults.MAX_PLAYERS);

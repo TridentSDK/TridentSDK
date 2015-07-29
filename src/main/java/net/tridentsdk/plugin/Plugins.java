@@ -19,6 +19,7 @@ package net.tridentsdk.plugin;
 import net.tridentsdk.concurrent.SelectableThread;
 import net.tridentsdk.registry.Registry;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
 
 /**
@@ -32,6 +33,7 @@ import java.io.File;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Plugins extends Registry<Plugin> {
     /**
      * Loads the plugin file

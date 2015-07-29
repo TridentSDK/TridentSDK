@@ -5,7 +5,6 @@ import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.Plugin;
-import net.tridentsdk.registry.Factory;
 import net.tridentsdk.util.WeakEntity;
 
 import javax.annotation.Nullable;
@@ -21,7 +20,7 @@ public class GameManager {
     private final String STORED_COUNT = "counter";
     private final Map<Integer, Game> GAMES = Maps.newHashMap();
     private final Map<WeakEntity<Player>, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
-    private final Config storage = Factory.newConfig(Plugin.instance(BattleDome.class).configDirectory() + "games.json");
+    private final Config storage = new Config(Plugin.instance(BattleDome.class), "games.json");
     private int counter = 0;
 
     private static GameManager instance;

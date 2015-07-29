@@ -22,7 +22,7 @@ import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.WindowHolder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
-import net.tridentsdk.service.PermissionHolder;
+import net.tridentsdk.service.PermissionOwner;
 import net.tridentsdk.world.settings.GameMode;
 
 import java.util.Locale;
@@ -33,7 +33,7 @@ import java.util.Locale;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionHolder {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner {
     // TODO: Use word settings?
 
     /**

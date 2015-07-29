@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.service;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents an object which holds tags called permissions
  *
@@ -25,7 +27,8 @@ package net.tridentsdk.service;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public interface PermissionHolder {
+@ThreadSafe
+public interface PermissionOwner {
     /**
      * Offers the permission holder a permission which they can hold
      *

@@ -18,6 +18,7 @@
 package net.tridentsdk.concurrent;
 
 import net.tridentsdk.plugin.Plugin;
+import net.tridentsdk.registry.Registered;
 import net.tridentsdk.registry.Registry;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -31,6 +32,8 @@ import javax.annotation.concurrent.ThreadSafe;
  *
  * <p>Ticks are a measurement of time which take place every 1/20th of a second. This is measured by the server's
  * ticking thread comparing the timestamps since the epoch.</p>
+ *
+ * <p>This class can be accessed using {@link Registered#tasks()}</p>
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP

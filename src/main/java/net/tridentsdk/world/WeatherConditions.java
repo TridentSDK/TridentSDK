@@ -16,12 +16,15 @@
  */
 package net.tridentsdk.world;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Obtains the state of the weather, and allows control of the Weather in a world
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface WeatherConditions {
     /**
      * Checks if it is raining in a world
@@ -45,6 +48,13 @@ public interface WeatherConditions {
     void toggleRain(int ticks);
 
     /**
+     * Sets raining to the provided boolean
+     *
+     * @param raining {@code true} to start raining, {@code false} to stop
+     */
+    void setRaining(boolean raining);
+
+    /**
      * Checks if it is thundering in a world
      *
      * @return True if it is thundering in a world
@@ -64,4 +74,23 @@ public interface WeatherConditions {
      * @param ticks the amount of ticks until the next thunder toggle, {@code 0} to toggle immediately
      */
     void toggleThunder(int ticks);
+
+    /**
+     * Sets thundering to the boolean provided
+     *
+     * @param thundering {@code true} to start thundering, {@code false} to stop
+     */
+    void setThundering(boolean thundering);
+
+    /**
+     * Whether or not any weather is occurring within the world
+     *
+     * @return {@code true} if no weather is occurring, {@code false} if it is
+     */
+    boolean isSunny();
+
+    /**
+     * Sets the world to sunny
+     */
+    void setSunny();
 }

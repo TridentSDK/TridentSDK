@@ -22,6 +22,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.PeekingIterator;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -38,6 +39,7 @@ import java.util.Map;
  * @since 0.3-alpha-DP
  * @param <T> the type to inject for
  */
+@ThreadSafe
 public final class Injector<T> {
     private static final Map<Class<?>, Producer<?>> injectors = Maps.newConcurrentMap();
 

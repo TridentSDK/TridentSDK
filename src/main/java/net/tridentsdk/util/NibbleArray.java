@@ -19,8 +19,10 @@ package net.tridentsdk.util;
 
 import com.google.common.base.Preconditions;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Arrays;
 
+@NotThreadSafe
 public final class NibbleArray {
     private final byte[] data;
 

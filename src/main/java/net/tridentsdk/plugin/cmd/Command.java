@@ -19,9 +19,10 @@ package net.tridentsdk.plugin.cmd;
 
 import net.tridentsdk.ServerConsole;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.plugin.annotation.CommandDesc;
 
 /**
- * Overriden by the command handler, annotated with {@link net.tridentsdk.plugin.annotation.CommandDescription} to
+ * Overriden by the command handler, annotated with {@link CommandDesc} to
  * process executed commands
  *
  * @author The TridentSDK Team

@@ -20,12 +20,15 @@ import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.registry.Registry;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * The access point to the server's event handler
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface Events extends Registry<EventNotifier> {
     /**
      * Notifies listeners of the event type of the event to be fired

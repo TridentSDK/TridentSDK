@@ -19,12 +19,15 @@ package net.tridentsdk.meta.block;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.BlockDirection;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents the metadata of a block that has a direction
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface DirectionMeta extends BlockMeta<Block> {
     /**
      * Obtains the facing direction of this block

@@ -18,12 +18,15 @@ package net.tridentsdk.meta.component;
 
 import net.tridentsdk.base.Substance;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Provides a marker class which represents an illegal type metadata
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface IllegalMeta<T> extends Meta<T> {
     /**
      * Create a new illegal meta value

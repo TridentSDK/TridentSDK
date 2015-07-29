@@ -20,12 +20,15 @@ package net.tridentsdk.base;
 import net.tridentsdk.meta.block.BlockMetaOwner;
 import net.tridentsdk.util.Vector;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * A basic structure in minecraft, a substance bearing piece set at a given position
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Block extends BlockMetaOwner<Block> {
     /**
      * Gets the substance the tile is made of

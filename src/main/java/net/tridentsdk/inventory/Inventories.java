@@ -18,6 +18,8 @@ package net.tridentsdk.inventory;
 
 import net.tridentsdk.registry.Registry;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Handles windows opened and closed by the server
  * <p>
@@ -29,6 +31,7 @@ import net.tridentsdk.registry.Registry;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Inventories extends Registry<Inventory> {
     /**
      * Gets a inventory by its ID

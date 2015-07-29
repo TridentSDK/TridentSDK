@@ -21,12 +21,15 @@ import net.tridentsdk.meta.component.MetaCollection;
 import net.tridentsdk.meta.component.MetaFactory;
 import net.tridentsdk.meta.component.MetaOwner;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Implementation of a block meta owner which provides access to the collection factory
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements BlockMetaOwner<T> {
     private final MetaCollection<T> collection = collect();
 

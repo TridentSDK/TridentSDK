@@ -19,12 +19,15 @@ package net.tridentsdk.inventory;
 
 import net.tridentsdk.inventory.inventory.Item;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents an inventory or inventory that is opened to players
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Inventory {
     /**
      * Obtains the ID of the inventory

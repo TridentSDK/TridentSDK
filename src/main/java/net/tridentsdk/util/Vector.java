@@ -27,16 +27,18 @@ import java.io.Serializable;
 /**
  * Just like in math, a vector represents magnitude and direction, where magnitude is usually the speed of an entity.
  *
+ * <p>This class is essentially just 3 arbitrary values</p>
+ *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public final class Vector implements Serializable, Cloneable {
+public class Vector implements Serializable, Cloneable {
     private static final long serialVersionUID = -7634050835106851288L;
 
-    private volatile double x;
-    private volatile double y;
-    private volatile double z;
+    protected volatile double x;
+    protected volatile double y;
+    protected volatile double z;
 
     /**
      * Creates a default vector with x, y, and z set to (0, 0, 0)

@@ -18,12 +18,15 @@ package net.tridentsdk.meta.component;
 
 import net.tridentsdk.base.Substance;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents an abstract metadata value which can be possessed by items, entities, blocks, among others
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface Meta<T> {
     /**
      * Creates a new meta value containing the decoded data provided

@@ -6,7 +6,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.inventory.inventory.Item;
 import net.tridentsdk.meta.ChatColor;
 import net.tridentsdk.plugin.Plugin;
-import net.tridentsdk.plugin.annotation.CommandDescription;
+import net.tridentsdk.plugin.annotation.CommandDesc;
 import net.tridentsdk.plugin.cmd.Command;
 
 /**
@@ -14,7 +14,7 @@ import net.tridentsdk.plugin.cmd.Command;
  *
  * @author Pierre C
  */
-@CommandDescription(name = "bd", permission = "bd.all", aliases = "battledome")
+@CommandDesc(name = "bd", permission = "bd.all", aliases = "battledome")
 public class CommandHandler extends Command {
     public static final String PREFIX = ChatColor.GREEN + "[Battle" + ChatColor.DARK_PURPLE + "Dome]" + ChatColor.AQUA;
     public static final String ERROR = PREFIX + ChatColor.RED;

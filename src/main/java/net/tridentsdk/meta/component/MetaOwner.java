@@ -16,12 +16,15 @@
  */
 package net.tridentsdk.meta.component;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents an object which carries metadata
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface MetaOwner<T> {
     /**
      * Obtains the meta tag from the class type

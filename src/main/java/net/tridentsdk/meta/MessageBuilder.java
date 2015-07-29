@@ -22,6 +22,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.tridentsdk.entity.living.Player;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * Builds a formatted message using JSON to be sent to the player(s)
  *
@@ -29,6 +31,7 @@ import net.tridentsdk.entity.living.Player;
  * @since 0.3-alpha-DP
  */
 // FIXME
+@NotThreadSafe
 public final class MessageBuilder {
     static final Gson GSON = new Gson();
 

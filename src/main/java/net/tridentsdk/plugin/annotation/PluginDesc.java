@@ -20,7 +20,9 @@ package net.tridentsdk.plugin.annotation;
 import java.lang.annotation.*;
 
 /**
- * Represents command information for loading purposes
+ * Describes a plugin properties and information
+ *
+ * <p>The information provided to each field has no semantic properties</p>
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
@@ -28,24 +30,37 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface CommandDescription {
+public @interface PluginDesc {
+    // TODO: Provide documentation on what this priority actually is
+    int priority() default 1;
+
     /**
-     * The actual command that can be typed in
+     * The plugin name, which will always be loaded even if it has the same name as another
      */
     String name();
 
     /**
-     * The priority of the command, which is used for conflicts between command names
+     * The plugin version
      */
-    int priority() default 1;
+    String version() default "1.0";
 
     /**
-     * The required permission to execute the command
+     * Purpose of the plugin
      */
-    String permission();
+    String description() default "Plugin made for TridentSDK";
 
     /**
-     * The commands that can also be typed in to execute the same command
+     * The person who wrote the plugin
      */
-    String[] aliases() default {};
+    String author() default "";
+
+    /**
+     * The people that wrote the plugin
+     */
+    String[] authors() default { };
+
+    /**
+     * The plugin(s) which is depended on by the described plugin
+     */
+    String[] dependencies() default { };
 }

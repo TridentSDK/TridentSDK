@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.registry;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.net.InetSocketAddress;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ import java.util.UUID;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface PlayerStatus {
     /**
      * Checks the ban status of the player with the given UUID

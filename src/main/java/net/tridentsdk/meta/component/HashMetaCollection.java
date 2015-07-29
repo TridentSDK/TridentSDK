@@ -18,6 +18,7 @@ package net.tridentsdk.meta.component;
 
 import net.tridentsdk.util.Value;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
@@ -28,6 +29,7 @@ import java.util.function.Consumer;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 class HashMetaCollection<S> implements MetaCollection<S> {
     private final Map<Class<? extends Meta<S>>, Meta<S>> metaMap = new ConcurrentHashMap<>();
 

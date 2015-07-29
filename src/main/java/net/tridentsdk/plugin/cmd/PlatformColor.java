@@ -17,6 +17,7 @@
 
 package net.tridentsdk.plugin.cmd;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import net.tridentsdk.ServerConsole;
 
 /**
@@ -27,6 +28,7 @@ import net.tridentsdk.ServerConsole;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@Immutable
 public final class PlatformColor {
     /**
      * An empty string

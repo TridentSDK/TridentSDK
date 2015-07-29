@@ -25,7 +25,6 @@ public class BattleTimer extends ScheduledRunnable {
         this.game = game;
     }
 
-    @Override
     public void run() {
         switch (game.state()) {
             case LOBBY:
@@ -134,7 +133,6 @@ public class BattleTimer extends ScheduledRunnable {
                 break;
             case END:
                 Registered.tasks().syncLater(Plugin.instance(), new ScheduledRunnable() {
-                    @Override
                     public void run() {
                         for (WeakEntity<Player> player : WeakEntity.iterate(game.players().keySet())) {
                             GameManager.instance().removePlayer(player.entity());

@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.meta.component;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -25,6 +26,7 @@ import java.util.function.Consumer;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface MetaCollection<S> {
     /**
      * Obtains the metadata value from the component type specified

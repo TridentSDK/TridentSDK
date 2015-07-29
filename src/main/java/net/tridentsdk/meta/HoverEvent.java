@@ -17,12 +17,15 @@
 
 package net.tridentsdk.meta;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * This even occurs when the player hovers the mouse over the chat message
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@NotThreadSafe
 public class HoverEvent {
     private HoverAction action;
     private String value;

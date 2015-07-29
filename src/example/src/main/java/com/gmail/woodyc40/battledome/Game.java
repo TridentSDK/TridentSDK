@@ -131,7 +131,6 @@ public class Game {
         }
 
         Registered.tasks().syncLater(Plugin.instance(), new ScheduledRunnable() {
-            @Override
             public void run() {
                 for (WeakEntity<Player> player : players.keySet()) {
                     GameManager.instance().removePlayer(player.entity());

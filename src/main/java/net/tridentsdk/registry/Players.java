@@ -18,6 +18,7 @@ package net.tridentsdk.registry;
 
 import net.tridentsdk.entity.living.Player;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.UUID;
 
 /**
@@ -26,6 +27,7 @@ import java.util.UUID;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface Players extends Registry<Player> {
     /**
      * Obtains a player from the player's UUID

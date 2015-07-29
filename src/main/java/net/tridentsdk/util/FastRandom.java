@@ -17,8 +17,10 @@
 
 package net.tridentsdk.util;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
- * A fast random class which generates medium-quality pseudo-random values
+ * A fast random class which generates low-quality pseudo-random values
  *
  * <p>Normally such a class should have been implemented upon using the time system with currentTimeMills(), however
  * this was avoided for two reasons:
@@ -38,6 +40,7 @@ package net.tridentsdk.util;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public final class FastRandom {
     private FastRandom() {
     }

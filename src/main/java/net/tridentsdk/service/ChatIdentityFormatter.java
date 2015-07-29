@@ -20,7 +20,7 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.Plugin;
 
 /**
- * Provides chat properties to the {@link ChatHandler}
+ * Provides chat properties to the {@link ChatFormatter}
  *
  * <p>The formatting provides only the left most portion (the player name and prompt), not the actual chat message</p>
  *

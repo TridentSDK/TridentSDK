@@ -20,6 +20,7 @@ package net.tridentsdk;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.net.InetAddress;
 
 /**
@@ -28,6 +29,7 @@ import java.net.InetAddress;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Server {
     /**
      * Gets the port the server currently runs on

@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.world.settings;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Set;
 
 /**
@@ -24,6 +25,7 @@ import java.util.Set;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public interface WorldSettings {
     /**
      * Gets the dimension of a world

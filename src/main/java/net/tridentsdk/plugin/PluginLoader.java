@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.plugin;
 
+import net.tridentsdk.docs.PossiblyThreadSafe;
+
 import java.util.Map;
 
 /**
@@ -24,6 +26,7 @@ import java.util.Map;
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@PossiblyThreadSafe
 public interface PluginLoader {
     /**
      * Links all of the class dependencies

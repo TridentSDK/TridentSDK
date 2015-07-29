@@ -23,6 +23,7 @@ import net.tridentsdk.Trident;
 import net.tridentsdk.registry.Registry;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,6 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public abstract class PluginChannels extends ForwardingCollection<PluginChannel> implements Registry<PluginChannel> {
     private final Map<String, PluginChannel> channels = new ConcurrentHashMap<>();
 

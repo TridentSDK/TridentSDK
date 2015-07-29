@@ -17,12 +17,15 @@
 
 package net.tridentsdk.world;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents the state of a chunk at a certain point in time
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface ChunkSnapshot extends Chunk {
     /**
      * Loads the data of the snapshot into the specified chunk

@@ -16,12 +16,15 @@
  */
 package net.tridentsdk.meta.block;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Utility class for manipulating byte arrays
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
+@ThreadSafe
 public final class ByteArray {
     private ByteArray() {
     }
