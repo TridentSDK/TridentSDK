@@ -28,6 +28,11 @@ import net.tridentsdk.util.Vector;
 public interface RemoteEffect<T> extends Effect<T> {
 
     /**
+     * Execute the effect at the given location
+     */
+    void apply();
+
+    /**
      * Execute the effect at the given location for specified player
      *
      * @param player The player to send the effect to
