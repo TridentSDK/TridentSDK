@@ -245,7 +245,7 @@ public enum ParticleEffectType {
      *
      * @return The id value of the effect
      */
-    public int data(){
+    public int id(){
         return id;
     }
 

@@ -38,7 +38,7 @@ public interface SoundEffect extends RemoteEffect<SoundEffectType> {
      *
      * @param pitch The pitch of the sound (63 is 100%, can be higher)
      */
-    void setPitch(byte pitch);
+    void setPitch(int pitch);
 
     /**
      * Returns the volume of the sound
@@ -52,6 +52,6 @@ public interface SoundEffect extends RemoteEffect<SoundEffectType> {
      *
      * @return The pitch of the sound
      */
-    byte pitch();
+    int pitch();
 
 }

@@ -65,7 +65,7 @@ public enum VisualEffectType {
      *
      * @return The id value of the effect
      */
-    public int data(){
+    public int id(){
         return id;
     }
 
