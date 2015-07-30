@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.effect;
 
-import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.util.Vector;
 
 /**
@@ -26,18 +25,6 @@ import net.tridentsdk.util.Vector;
  * @since 0.4-alpha
  */
 public interface RemoteEffect<T> extends Effect<T> {
-
-    /**
-     * Execute the effect at the given location
-     */
-    void apply();
-
-    /**
-     * Execute the effect at the given location for specified player
-     *
-     * @param player The player to send the effect to
-     */
-    void apply(Player player);
 
     /**
      * Set the position of the effect

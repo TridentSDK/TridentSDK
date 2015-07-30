@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.effect;
 
-import net.tridentsdk.entity.LivingEntity;
+import net.tridentsdk.entity.living.Player;
 
 /**
  * Represents all visual, sound, particle and entity effects
@@ -27,11 +27,23 @@ import net.tridentsdk.entity.LivingEntity;
 public interface Effect<T> {
 
     /**
+     * Execute the effect at the given location
+     */
+    void apply();
+
+    /**
      * Execute the effect at the given location for specified player
      *
-     * @param entity The entity to apply the effect on
+     * @param player The player to send the effect to
      */
-    void apply(LivingEntity entity);
+    void apply(Player player);
+
+    /**
+     * Execute the effect at the given location for all players except specified player
+     *
+     * @param player The player to not send the effect to
+     */
+    void applyToEveryoneExcept(Player player);
 
     /**
      * The type of the effect
