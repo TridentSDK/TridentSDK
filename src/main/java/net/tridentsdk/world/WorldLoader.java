@@ -19,9 +19,11 @@ package net.tridentsdk.world;
 
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.gen.AbstractGenerator;
+import net.tridentsdk.world.gen.AbstractOverlayBrush;
 import net.tridentsdk.world.settings.*;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.List;
 
 /**
  * Manages the worlds for the server
@@ -128,6 +130,13 @@ public interface WorldLoader extends WorldSettings {
      * @return the generation abstraction to generated chunks
      */
     AbstractGenerator generator();
+
+    /**
+     * Obtains a mutable collection of the overlay brushes used to generate the world
+     *
+     * @return the overlay brushes
+     */
+    List<AbstractOverlayBrush> brushes();
 
     /**
      * Sets the dimension for the world generator

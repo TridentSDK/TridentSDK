@@ -19,6 +19,8 @@ package net.tridentsdk.world.gen;
 
 import net.tridentsdk.world.ChunkLocation;
 
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
 /**
  * The base class for implementing world generation extensions
  *
@@ -51,9 +53,10 @@ public abstract class AbstractGenerator {
      * <p>Should only be invoked by TridentChunk</p>
      *
      * @param position the position of the chunk to be generated
+     * @param heights the array of max heights
      * @return the data array to fill the chunk with
      */
-    public abstract char[][] generateChunkBlocks(ChunkLocation position);
+    public abstract char[][] generateChunkBlocks(ChunkLocation position, AtomicReferenceArray<Integer> heights);
 
     /**
      * Populates block data for a chunk
