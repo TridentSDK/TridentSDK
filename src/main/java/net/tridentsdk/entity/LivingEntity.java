@@ -18,6 +18,8 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.base.Position;
+import net.tridentsdk.effect.entity.EntityStatusEffect;
+import net.tridentsdk.effect.entity.EntityStatusEffectType;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.entity.living.ai.AiModule;
@@ -164,4 +166,12 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * Sets a path for this entity to follow, should only be used in an AiHandler
      */
     void setPath(Path path);
+
+    /**
+     * Creates a new entity status effect
+     *
+     * @param status The status to apply
+     * @return A new instance of EntityStatusEffect
+     */
+    EntityStatusEffect createStatusEffect(EntityStatusEffectType status);
 }

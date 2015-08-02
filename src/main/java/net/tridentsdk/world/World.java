@@ -19,6 +19,12 @@ package net.tridentsdk.world;
 
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Position;
+import net.tridentsdk.effect.particle.ParticleEffect;
+import net.tridentsdk.effect.particle.ParticleEffectType;
+import net.tridentsdk.effect.sound.SoundEffect;
+import net.tridentsdk.effect.sound.SoundEffectType;
+import net.tridentsdk.effect.visual.VisualEffect;
+import net.tridentsdk.effect.visual.VisualEffectType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.types.EntityType;
 import net.tridentsdk.registry.Registered;
@@ -136,4 +142,28 @@ public interface World extends Cloneable, WorldSettings {
      * @return the entities in the world
      */
     Set<Entity> entities();
+
+    /**
+     * Creates a new particle effect
+     *
+     * @param particle The particle to spawn
+     * @return A new instance of ParticleEffect
+     */
+    ParticleEffect spawnParticle(ParticleEffectType particle);
+
+    /**
+     * Creates a new visual effect
+     *
+     * @param visual The visual to spawn
+     * @return A new instance of VisualEffect
+     */
+    VisualEffect spawnVisual(VisualEffectType visual);
+
+    /**
+     * Creates a new sound effect
+     *
+     * @param sound The sound to play
+     * @return A new instance of VisualEffect
+     */
+    SoundEffect playSound(SoundEffectType sound);
 }
