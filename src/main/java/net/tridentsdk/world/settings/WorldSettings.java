@@ -28,6 +28,13 @@ import java.util.Set;
 @ThreadSafe
 public interface WorldSettings {
     /**
+     * Obtains the seed used to generate the world
+     *
+     * @return the world seed
+     */
+    long seed();
+
+    /**
      * Gets the dimension of a world
      *
      * @return The dimension of a world

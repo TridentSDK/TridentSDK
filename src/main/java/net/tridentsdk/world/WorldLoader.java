@@ -139,6 +139,14 @@ public interface WorldLoader extends WorldSettings {
     List<AbstractOverlayBrush> brushes();
 
     /**
+     * Sets the seed used to generate the world
+     *
+     * @param seed the seed used to generate the world
+     * @return the current instance
+     */
+    WorldLoader seed(long seed);
+
+    /**
      * Sets the dimension for the world generator
      *
      * @param dimension the dimension
