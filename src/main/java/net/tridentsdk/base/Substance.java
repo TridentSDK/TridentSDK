@@ -18,6 +18,7 @@
 package net.tridentsdk.base;
 
 import com.google.common.collect.Maps;
+import net.tridentsdk.effect.sound.SoundEffectType;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -822,6 +823,133 @@ public enum Substance {
                 return true;
             default:
                 return false;
+        }
+    }
+
+    /**
+     * Returns the break sound of the block
+     *
+     * @return The break sound of the block
+     */
+    public SoundEffectType breakSound(){
+        if(!this.isBlock()){
+            return null;
+        }
+
+        switch(this){
+            case WOOL:
+            case CACTUS:
+            case CAKE_BLOCK:
+            case CARPET:
+                return SoundEffectType.DIG_CLOTH;
+            case GRASS:
+            case SPONGE:
+            case LEAVES:
+            case LEAVES_2:
+            case LONG_GRASS:
+            case SAPLING:
+            case DEAD_BUSH:
+            case YELLOW_FLOWER:
+            case RED_ROSE:
+            case DOUBLE_PLANT:
+            case BROWN_MUSHROOM:
+            case RED_MUSHROOM:
+            case TNT:
+            case CROPS:
+            case SUGAR_CANE_BLOCK:
+            case VINE:
+            case MYCEL:
+            case WATER_LILY:
+            case HAY_BLOCK:
+                return SoundEffectType.DIG_GRASS;
+            case DIRT:
+            case GRAVEL:
+            case SOIL:
+            case CLAY:
+                return SoundEffectType.DIG_GRAVEL;
+            case SAND:
+            case SOUL_SAND:
+                return SoundEffectType.DIG_SAND;
+            case SNOW:
+            case SNOW_BLOCK:
+                return SoundEffectType.DIG_SNOW;
+            case WOOD:
+            case LOG:
+            case LOG_2:
+            case BED_BLOCK:
+            case BOOKSHELF:
+            case TORCH:
+            case FIRE:
+            case ACACIA_STAIRS:
+            case BIRCH_WOOD_STAIRS:
+            case DARK_OAK_STAIRS:
+            case JUNGLE_WOOD_STAIRS:
+            case SPRUCE_WOOD_STAIRS:
+            case WOOD_STAIRS:
+            case CHEST:
+            case WORKBENCH:
+            case LADDER:
+            case SIGN_POST:
+            case WALL_SIGN:
+            case LEVER:
+            case WOOD_PLATE:
+            case REDSTONE_TORCH_OFF:
+            case REDSTONE_TORCH_ON:
+            case FENCE:
+            case ACACIA_FENCE:
+            case BIRCH_FENCE:
+            case DARK_OAK_FENCE:
+            case JUNGLE_FENCE:
+            case SPRUCE_FENCE:
+            case ACACIA_FENCE_GATE:
+            case BIRCH_FENCE_GATE:
+            case DARK_OAK_FENCE_GATE:
+            case FENCE_GATE:
+            case JUNGLE_FENCE_GATE:
+            case SPRUCE_FENCE_GATE:
+            case PUMPKIN:
+            case PUMPKIN_STEM:
+            case MELON_BLOCK:
+            case MELON_STEM:
+            case JACK_O_LANTERN:
+            case DIODE_BLOCK_ON:
+            case DIODE_BLOCK_OFF:
+            case TRAP_DOOR:
+            case HUGE_MUSHROOM_1:
+            case HUGE_MUSHROOM_2:
+            case WOOD_STEP:
+            case WOOD_DOUBLE_STEP:
+            case COCOA:
+            case WOOD_BUTTON:
+            case GOLD_PLATE:
+            case IRON_PLATE:
+            case STONE_PLATE:
+            case REDSTONE_COMPARATOR_OFF:
+            case REDSTONE_COMPARATOR_ON:
+            case DAYLIGHT_DETECTOR:
+            case DAYLIGHT_DETECTOR_INVERTED:
+            case STANDING_BANNER:
+            case WALL_BANNER:
+            case ACACIA_DOOR:
+            case BIRCH_DOOR:
+            case DARK_OAK_DOOR:
+            case JUNGLE_DOOR:
+            case SPRUCE_DOOR:
+            case WOOD_DOOR:
+            case WOODEN_DOOR:
+                return SoundEffectType.DIG_WOOD;
+            case GLASS:
+            case ICE:
+            case PACKED_ICE:
+            case GLOWSTONE:
+            case PORTAL:
+            case STAINED_GLASS:
+            case THIN_GLASS:
+            case STAINED_GLASS_PANE:
+            case SEA_LANTERN:
+                return SoundEffectType.DIG_GLASS;
+            default:
+                return SoundEffectType.DIG_STONE;
         }
     }
 
