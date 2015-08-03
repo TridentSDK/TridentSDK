@@ -1,4 +1,4 @@
-BRANCH=$(git symbolic-ref HEAD --short)
+BRANCH=$(git status | grep "On branch" | awk '{print $3}')
 
 if [[ '$BRANCH' == 'bleeding-edge' ]];
 then
