@@ -27,6 +27,7 @@ import net.tridentsdk.plugin.Plugin;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
+@FunctionalInterface
 public interface ChatIdentityFormatter {
     /**
      * Obtains a formatted string of the chat identifier
@@ -68,5 +69,6 @@ public interface ChatIdentityFormatter {
      * @param other the chat provider that is being set
      * @param overrider the plugin that is setting the overrider
      */
-    void overriden(ChatIdentityFormatter other, Plugin overrider);
+    default void overriden(ChatIdentityFormatter other, Plugin overrider) {
+    }
 }

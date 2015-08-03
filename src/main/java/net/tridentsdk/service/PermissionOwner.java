@@ -39,7 +39,7 @@ public interface PermissionOwner {
     void grantPermission(String perm);
 
     /**
-     * Removes the permission tag from the holder such that the next invocation of {@link #holdsPermission(String)}
+     * Removes the permission tag from the holder such that the next invocation of {@link #ownsPermission(String)}
      * returns {@code false}
      *
      * @param perm the permission to remove
@@ -52,7 +52,7 @@ public interface PermissionOwner {
      * @param perm the permission to check if held
      * @return {@code true} if the permission is held, {@code false} if it is not
      */
-    boolean holdsPermission(String perm);
+    boolean ownsPermission(String perm);
 
     /**
      * Checks if the permission holder has operator status
