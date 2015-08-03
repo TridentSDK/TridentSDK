@@ -18,6 +18,7 @@
 package net.tridentsdk;
 
 import net.tridentsdk.config.Config;
+import net.tridentsdk.scoreboard.ScoreboardManager;
 import net.tridentsdk.util.TridentLogger;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -84,4 +85,11 @@ public interface Server {
      * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
      */
     void shutdown();
+
+    /**
+     * Returns the scoreboard manager
+     *
+     * @return The scoreboard manager
+     */
+    ScoreboardManager scoreboardManager();
 }

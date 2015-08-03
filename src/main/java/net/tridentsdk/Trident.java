@@ -20,6 +20,7 @@ package net.tridentsdk;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.docs.InternalUseOnly;
+import net.tridentsdk.scoreboard.ScoreboardManager;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
@@ -147,6 +148,10 @@ public final class Trident {
      */
     public static Config config() {
         return server.config();
+    }
+
+    public static ScoreboardManager scoreboardManager() {
+        return server.scoreboardManager();
     }
 
     /**
