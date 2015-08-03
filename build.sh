@@ -1,5 +1,5 @@
-BRANCH=$(git status | grep "On branch" | awk '{print $3}')
-git status
+BRANCH=$(git branch | grep "\*" | awk '{print $2}')
+
 echo "Currently on branch:  $BRANCH"
 
 if [ "$BRANCH" == "bleeding-edge" ];
