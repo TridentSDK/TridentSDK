@@ -28,7 +28,7 @@ import javax.annotation.concurrent.Immutable;
  * @since 0.3-alpha-DP
  */
 @Immutable
-public class Note {
+public final class Note {
     private final short id;
 
     public Note(int id) {
