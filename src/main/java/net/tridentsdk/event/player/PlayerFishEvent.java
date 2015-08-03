@@ -19,7 +19,7 @@ package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.inventory.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Called when a player's fishing state changes,e.g. throws line, catches a fish, catches an entity, etc.

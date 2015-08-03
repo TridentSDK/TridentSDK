@@ -17,8 +17,6 @@
 
 package net.tridentsdk.inventory;
 
-import net.tridentsdk.inventory.inventory.Item;
-
 import javax.annotation.concurrent.ThreadSafe;
 
 /**

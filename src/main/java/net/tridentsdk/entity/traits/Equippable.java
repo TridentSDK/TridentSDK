@@ -18,7 +18,7 @@
 package net.tridentsdk.entity.traits;
 
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.inventory.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Represents an entity that can be equipped

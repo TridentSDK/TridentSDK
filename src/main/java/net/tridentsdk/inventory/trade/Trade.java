@@ -17,7 +17,7 @@
 
 package net.tridentsdk.inventory.trade;
 
-import net.tridentsdk.inventory.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Represents a Trade offered by an {@link net.tridentsdk.entity.traits.Tradeable}

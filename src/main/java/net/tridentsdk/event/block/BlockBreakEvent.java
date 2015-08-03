@@ -21,7 +21,7 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.BlockDirection;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.inventory.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Called whenever a Block is broken

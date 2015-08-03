@@ -18,7 +18,7 @@
 package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.inventory.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Called when a player consumes food, or potions

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.inventory.inventory;
+package net.tridentsdk.inventory;
 
 import net.tridentsdk.base.Substance;
 
@@ -86,6 +86,7 @@ public class Item {
 
     public void setQuantity(short quantity) {
         this.quantity = quantity;
+
     }
 
     public short damageValue() {

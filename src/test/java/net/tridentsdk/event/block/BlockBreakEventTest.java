@@ -19,7 +19,7 @@ package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.BlockDirection;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.inventory.inventory.Item;
+import net.tridentsdk.inventory.Item;
 import org.junit.Assert;
 import org.junit.Test;
 

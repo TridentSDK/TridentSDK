@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package net.tridentsdk.inventory.inventory;
+package net.tridentsdk.inventory;
 
 /**
  * Type of inventories
