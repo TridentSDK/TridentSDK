@@ -403,4 +403,13 @@ public class Vector implements Serializable, Cloneable {
     public int hashCode() {
         return Objects.hashCode(x, y, z);
     }
+
+    @Override
+    public String toString(){
+        return "Vector{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }

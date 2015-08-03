@@ -25,7 +25,7 @@ import net.tridentsdk.base.Substance;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class Item {
+public class Item implements Cloneable {
     private final int id;
     private final Substance substance;
 
@@ -109,5 +109,19 @@ public class Item {
         }
 
         return true;
+    }
+
+    @Override
+    public Item clone(){
+        return new Item(substance, quantity, durability, damageValue);
+    }
+
+    @Override
+    public String toString(){
+        String data = "Item{substance=" + substance;
+        if(quantity() > 0) data += ", quantity=" + quantity;
+        if(durability() > 0) data += ", durability=" + durability;
+        if(damageValue() > 0) data += ", damageValue=" + damageValue;
+        return data + '}';
     }
 }

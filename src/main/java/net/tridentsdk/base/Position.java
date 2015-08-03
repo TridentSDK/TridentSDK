@@ -226,6 +226,22 @@ public final class Position extends Vector implements Cloneable {
                 square(this.z() - position.z());
     }
 
+    /**
+     * Convert the Pitch and Yaw to a Vectorized direction
+     *
+     * @return Vector of the direction of the position
+     */
+    public Vector toDirection(){
+        Vector vector = new Vector();
+        double rotX = yaw;
+        double rotY = pitch;
+        double xz = Math.cos(Math.toRadians(rotY));
+        vector.setY(-Math.sin(Math.toRadians(rotY)));
+        vector.setX(-xz * Math.sin(Math.toRadians(rotX)));
+        vector.setZ(xz * Math.cos(Math.toRadians(rotX)));
+        return vector;
+    }
+
     @Override
     public Position clone() {
         return new Position(world, x, y, z(), yaw, pitch);
@@ -257,5 +273,17 @@ public final class Position extends Vector implements Cloneable {
     @Override
     public int hashCode() {
         return Objects.hashCode(world, x, y, z, pitch, yaw);
+    }
+
+    @Override
+    public String toString(){
+        return "Position{" +
+                "world=" + world +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", yaw=" + yaw +
+                ", pitch=" + pitch +
+                '}';
     }
 }
