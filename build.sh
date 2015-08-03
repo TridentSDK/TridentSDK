@@ -1,8 +1,6 @@
-BRANCH=$(git branch | grep "\*" | awk '{print $2}')
-git branch
-echo "Currently on branch:  $BRANCH"
+echo "Currently on branch: $TRAVIS_BRANCH"
 
-if [ "$BRANCH" == "bleeding-edge" ];
+if [ "$TRAVIS_BRANCH" == "bleeding-edge" ];
 then
     echo "Compiling with deployment"
     mvn clean install deploy --settings target/travis/settings.xml
