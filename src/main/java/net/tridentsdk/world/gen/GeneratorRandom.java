@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.world.gen;
 
+import net.tridentsdk.util.FastRandom;
+
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Used to generate random values for world generators
@@ -27,23 +27,14 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @ThreadSafe
 public class GeneratorRandom {
-    private static final ThreadLocalRandom SEED_SOURCE = ThreadLocalRandom.current();
-
     private final long seed;
-    private final int randomInt;
-    private final Random random;
-    private final ThreadLocal<GeneratorRandom> randomThreadLocal = new ThreadLocal<GeneratorRandom>() {
-        @Override
-        protected GeneratorRandom initialValue() {
-            return new GeneratorRandom(seed());
-        }
-    };
+    private volatile long next;
 
     /**
-     * Creates a new generator random using the internal seed source
+     * Creates a new generator random using a random seed
      */
     public GeneratorRandom() {
-        this(SEED_SOURCE.nextLong());
+        this(FastRandom.random());
     }
 
     /**
@@ -52,18 +43,16 @@ public class GeneratorRandom {
      * @param seed the seed
      */
     public GeneratorRandom(long seed) {
-        this.random = new Random(seed);
         this.seed = seed;
-        this.randomInt = next();
+        this.next = seed;
     }
 
-    /**
-     * Obtains the internal random used to generate values
-     *
-     * @return the internal random
-     */
-    public Random internal() {
-        return random;
+    // non-atomic bit ops, nice.
+    private long next() {
+        next ^= (next << 21);
+        next ^= (next >>> 35);
+        next ^= (next << 4);
+        return next;
     }
 
     /**
@@ -86,74 +75,18 @@ public class GeneratorRandom {
     }
 
     /**
-     * Obtains the thread-specific random
-     *
-     * @return the random
-     */
-    public GeneratorRandom get() {
-        return randomThreadLocal.get();
-    }
-
-    /**
-     * Obtains the next int in the random sequence
-     *
-     * @return a random int
-     */
-    public int next() {
-        return random.nextInt();
-    }
-
-    /**
-     * Obtains the next int given the inclusive bounds
-     *
-     * @param start the lower bound
-     * @param end the upper bound
-     * @return a random int
-     */
-    public int between(int start, int end) {
-        return random.nextInt((end - start) + 1) + start;
-    }
-
-    /**
-     * Obtains the next int between 0 and the upper limit (inclusive)
+     * Obtains the next long between 0 and the upper limit (inclusive)
      *
      * @param end the upper bound
-     * @return a random int
+     * @return a random long
      */
-    public int under(int end) {
-        return between(0, end);
+    public long under(long end) {
+        long random = next();
+        return Math.abs(random % end);
     }
 
     /**
-     * Scales the next random int between the given min and max values
-     *
-     * <p>Helps smooth the random distribution curve</p>
-     *
-     * @param min the minimum
-     * @param max the maximum
-     * @return the scaled random
-     */
-    public int scale(int min, int max) {
-        return (int) (((double)(max - min)) * ((next() + 1) / 2)) + min;
-    }
-
-    /**
-     * Scales the random int bound by the start and end between the given min and max values
-     *
-     * <p>Helps smooth the random distribution curve</p>
-     *
-     * @param start the lower random bound
-     * @param end the upper random bound
-     * @param min the minimum
-     * @param max the maximum
-     * @return the scaled random
-     */
-    public int scaleBetween(int start, int end, int min, int max) {
-        return (int) (((double)(max - min)) * ((between(start, end) + 1) / 2)) + min;
-    }
-
-    /**
-     * Scales the next random int between the given min and max values
+     * Scales the next random long between the given min and max values
      *
      * <p>Helps smooth the random distribution curve</p>
      *
@@ -162,22 +95,12 @@ public class GeneratorRandom {
      * @param max the maximum
      * @return the scaled random
      */
-    public int scaleUnder(int end, int min, int max) {
-        return scaleBetween(0, end, min, max);
+    public long scaleUnder(long end, long min, long max) {
+        return (long) (((double) (max - min)) * ((under(end) + 1) / 2)) + min;
     }
 
     /**
-     * Obtains the initial random int. This is semantically equivalent to calling
-     * {@link #next()} as soon as the random has been generated
-     *
-     * @return a random int (will always remain constant with this instance)
-     */
-    public int value() {
-        return randomInt;
-    }
-
-    /**
-     * Obtains the seed used to generate the random ints
+     * Obtains the seed used to generate the random longs
      *
      * @return the seed
      */
