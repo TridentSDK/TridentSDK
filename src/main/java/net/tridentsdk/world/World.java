@@ -28,12 +28,12 @@ import net.tridentsdk.effect.visual.VisualEffect;
 import net.tridentsdk.effect.visual.VisualEffectType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.types.EntityType;
-import net.tridentsdk.meta.block.Tile;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.settings.WorldSettings;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -61,6 +61,13 @@ public interface World extends Cloneable, WorldSettings {
      * @return the name of the world
      */
     String name();
+
+    /**
+     * Obtains the loaded chunks in the world
+     *
+     * @return the loaded chunks
+     */
+    Collection<Chunk> chunks();
 
     /**
      * Gets the chunk on the given position, and generates the chunk if it does not exist.
@@ -146,13 +153,6 @@ public interface World extends Cloneable, WorldSettings {
      * @return the entities in the world
      */
     Set<Entity> entities();
-
-    /**
-     * Gets the set of tiles within the world
-     *
-     * @return the world tiles
-     */
-    Set<Tile> tiles();
 
     /**
      * Creates a new particle effect

@@ -20,9 +20,11 @@ package net.tridentsdk.world;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.BoundingBox;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.meta.block.Tile;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -40,6 +42,13 @@ public interface Chunk {
      * @return the entities
      */
     Set<Entity> entities();
+
+    /**
+     * Obtains the tile entities in this chunk
+     *
+     * @return the tile entities
+     */
+    Collection<Tile> tiles();
 
     /**
      * Generates the chunk
