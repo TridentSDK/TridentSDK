@@ -20,6 +20,8 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.world.ChunkLocation;
 
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
 /**
  * An overlay brush is a block populator that is used to lay blocks or structures once the chunk has been generated
  *
@@ -46,17 +48,17 @@ public abstract class AbstractOverlayBrush {
      *
      * @param location the location of the chunk to brush
      * @param relX the relative chunk X of the chunk
-     * @param top the top of the chunk at the relative x/z
      * @param relZ the relative Z
      * @param random the generator random
+     * @param heights the height array to edit
      * @param manipulator the tool used to set block types in the chunk and to cross
      *                    chunk boundaries if needed
      */
     public abstract void brush(ChunkLocation location,
                                int relX,
-                               int top,
                                int relZ,
                                GeneratorRandom random,
+                               AtomicReferenceArray<Integer> heights,
                                ChunkManipulator manipulator);
 
     /**
