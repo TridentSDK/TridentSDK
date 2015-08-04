@@ -43,9 +43,9 @@ public final class MetaFactory {
     }
 
     /**
-     * @see MetaProvider#decode(Block, net.tridentsdk.base.Substance, byte[], net.tridentsdk.util.Value)
+     * @see MetaProvider#decode(Block, net.tridentsdk.util.Value, byte[], net.tridentsdk.util.Value)
      */
-    public static boolean decode(Block block, Substance substance, byte[] data, Value<Byte> result) {
+    public static boolean decode(Block block, Value<Substance> substance, byte[] data, Value<Byte> result) {
         ensureInit();
         return provider.decode(block, substance, data, result);
     }

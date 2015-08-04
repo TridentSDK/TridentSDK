@@ -27,6 +27,7 @@ import net.tridentsdk.effect.visual.VisualEffect;
 import net.tridentsdk.effect.visual.VisualEffectType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.types.EntityType;
+import net.tridentsdk.meta.block.Tile;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.settings.WorldSettings;
 
@@ -142,6 +143,13 @@ public interface World extends Cloneable, WorldSettings {
      * @return the entities in the world
      */
     Set<Entity> entities();
+
+    /**
+     * Gets the set of tiles within the world
+     *
+     * @return the world tiles
+     */
+    Set<Tile> tiles();
 
     /**
      * Creates a new particle effect

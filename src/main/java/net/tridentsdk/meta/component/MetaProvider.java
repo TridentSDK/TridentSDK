@@ -52,9 +52,9 @@ public interface MetaProvider {
      * {@link net.tridentsdk.meta.block.BlockMeta#decodeMeta(Object, byte[])}
      *
      * @param block the block
-     * @param substance
-     *@param data  the data
+     * @param substance the type to set the block
+     * @param data  the data
      * @param result  @return {@code true} if the block can be placed, {@code false} if otherwise
      */
-    boolean decode(Block block, Substance substance, byte[] data, Value<Byte> result);
+    boolean decode(Block block, Value<Substance> substance, byte[] data, Value<Byte> result);
 }

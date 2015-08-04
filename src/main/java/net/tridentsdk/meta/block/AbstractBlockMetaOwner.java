@@ -72,7 +72,12 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements Blo
         if (replace) {
             boolean success = true;
             for (M m : meta) {
-                if (!collection.putIfAbsent(m)) {
+                Class cls = m.getClass();
+                if (cls.getSimpleName().contains("Impl")) {
+                    cls = cls.getInterfaces()[0];
+                }
+
+                if (!collection.putIfAbsent(cls, m)) {
                     success = false;
                 }
             }
@@ -80,7 +85,12 @@ public abstract class AbstractBlockMetaOwner<T extends MetaOwner> implements Blo
         }
 
         for (M m : meta) {
-            collection.put(m);
+            Class cls = m.getClass();
+            if (cls.getSimpleName().contains("Impl")) {
+                cls = cls.getInterfaces()[0];
+            }
+
+            collection.put(cls, m);
         }
         return true;
     }
