@@ -17,6 +17,7 @@
 
 package net.tridentsdk.entity;
 
+import net.tridentsdk.base.BoundingBox;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.traits.EntityProperties;
 import net.tridentsdk.entity.types.EntityType;
@@ -180,4 +181,19 @@ public interface Entity {
      * @param properties the properties to set
      */
     void applyProperties(EntityProperties properties);
+
+    /**
+     * Set the width and height of the entity
+     *
+     * @param width Width of entity
+     * @param height Height of entity
+     */
+    void setSize(float width, float height);
+
+    /**
+     * Returns the bounding box of the entity
+     *
+     * @return The bounding box of the entity
+     */
+    BoundingBox boundingBox();
 }

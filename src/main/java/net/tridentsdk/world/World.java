@@ -18,6 +18,7 @@
 package net.tridentsdk.world;
 
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.BoundingBox;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.effect.particle.ParticleEffect;
 import net.tridentsdk.effect.particle.ParticleEffectType;
@@ -32,7 +33,9 @@ import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.settings.WorldSettings;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * A Minecraft world
@@ -174,4 +177,13 @@ public interface World extends Cloneable, WorldSettings {
      * @return A new instance of VisualEffect
      */
     SoundEffect playSound(SoundEffectType sound);
+
+    /**
+     * Find all entities that are colliding with the bounding box
+     *
+     * @param boundingBox The bounding box to search in
+     * @param predicate Predicate to filter results
+     * @return List of entities inside the bounding box
+     */
+    ArrayList<Entity> getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
 }

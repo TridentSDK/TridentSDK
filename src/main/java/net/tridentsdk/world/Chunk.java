@@ -18,10 +18,13 @@
 package net.tridentsdk.world;
 
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.BoundingBox;
 import net.tridentsdk.entity.Entity;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Represents a 16x16x256 cube of blocks which stores a partition of the world's data
@@ -92,4 +95,13 @@ public interface Chunk {
      * Unloads the chunk
      */
     void unload();
+
+    /**
+     * Find all entities that are colliding with the bounding box
+     *
+     * @param boundingBox The bounding box to search in
+     * @param predicate Predicate to filter results
+     * @return List of entities inside the bounding box
+     */
+    ArrayList getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
 }

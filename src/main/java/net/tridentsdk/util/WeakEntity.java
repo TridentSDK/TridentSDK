@@ -20,6 +20,7 @@ package net.tridentsdk.util;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
 import net.tridentsdk.Trident;
+import net.tridentsdk.base.BoundingBox;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
@@ -798,6 +799,8 @@ public final class WeakEntity<T extends Entity> {
             @Override public void eject() {}
             @Override public EntityType type() {return null;}
             @Override public void applyProperties(EntityProperties properties) {}
+            @Override public void setSize(float width, float height) {}
+            @Override public BoundingBox boundingBox() {return null;}
 
             @Override
             public int hashCode() {

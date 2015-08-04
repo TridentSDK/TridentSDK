@@ -111,6 +111,18 @@ public class Item implements Cloneable {
         return true;
     }
 
+    public boolean isSimilarIgnoreQuantity(Item i) {
+        if (id != i.id) {
+            return false;
+        } else if (substance != i.substance) {
+            return false;
+        } else if (damageValue != i.damageValue) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public Item clone(){
         return new Item(substance, quantity, durability, damageValue);
