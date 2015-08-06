@@ -77,3 +77,23 @@ Fortunately, because there are no releases yet, you don't need to do that quite 
 None yet
 
 ## API ##
+
+TridentSDK provides an extensive API which allows both high and low level control over the Trident server.
+
+A jar placed in the `plugins` folder is a valid plugin, if it has a class that does not have the same descriptor as an existing Trident or TridentSDK class. It must also have one and only one class whose superclass is `net.tridentsdk.plugin.Plugin`, annotated with `net.tridentsdk.plugin.annotation.PluginDesc` with a non-empty name field.
+
+Example:
+
+```java
+package com.example;
+
+import net.tridentsdk.plugin.Plugin;
+
+@PluginDesc(name = "Plugin")
+public class ExamplePlugin extends Plugin {
+}
+```
+
+This is the minimal requirements to have a plugin loaded by the server.
+
+For more information on how to use the API, visit the [Wiki](https://tridentsdkwiki.atlassian.net/wiki/dashboard.action) page.
