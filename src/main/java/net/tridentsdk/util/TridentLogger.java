@@ -65,7 +65,22 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
             "Budgie, your NBT... It's leaking...",
             "Vilsol is a Java developer? What?",
             "gg Tigur",
-            "Orange? No, no, Trident is blue. Oh, Max?"};
+            "Orange? No, no, Trident is blue. Oh, Max?",
+            "If anyone asks, you never saw me",
+            "Hey look, we got another one!",
+            "I feel... so... empty...",
+            "I just can't even anymore",
+            "And this is the point where I give up",
+            "Indeed, there seems to be an error, m'lord!",
+            "I don't know how this happened, I thought black holes were sefe!",
+            "I promise* that this won't happen again! * Please read license agreement",
+            "I pronounce you owner and error, you may now report me.",
+            "This kinda feels funny...",
+            "DONT LOOK AT ME, IM NAKED!",
+            "So class, what have we learned today?",
+            "I... I think I just... nevermind! You saw nothing!",
+            "Quick hide! Did anyone see us?",
+            "It wasn't me! It was him! *Points at Dinnerbone*"};
     private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 
     @InternalUseOnly
