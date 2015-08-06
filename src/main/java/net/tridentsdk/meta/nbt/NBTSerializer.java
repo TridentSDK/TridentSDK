@@ -29,7 +29,7 @@ import java.util.List;
 public final class NBTSerializer {
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
-            TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
+            TridentLogger.get().error(new IllegalArgumentException("Provided object is not serializable!"));
         }
 
         FastClass cls = FastClass.get(clzz);
@@ -40,7 +40,7 @@ public final class NBTSerializer {
 
     public static <T> T deserialize(T instance, CompoundTag tag) {
         if (!(NBTSerializable.class.isAssignableFrom(instance.getClass()))) {
-            TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
+            TridentLogger.get().error(new IllegalArgumentException("Provided object is not serializable!"));
         }
 
         FastClass cls = FastClass.get(instance.getClass());

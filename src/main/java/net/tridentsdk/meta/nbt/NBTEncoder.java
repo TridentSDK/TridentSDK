@@ -39,7 +39,7 @@ public class NBTEncoder {
         try {
             this.writeTag(tag);
         } catch (IOException e) {
-            TridentLogger.error(new NBTException("IO Error encoding the NBT Data", e));
+            TridentLogger.get().error(new NBTException("IO Error encoding the NBT Data", e));
         }
     }
 

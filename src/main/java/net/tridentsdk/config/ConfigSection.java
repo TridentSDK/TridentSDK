@@ -75,7 +75,7 @@ public class ConfigSection {
      */
     public static <V> ConfigSection addToList(Collection<V> list) {
         if (!(list instanceof ConfigSectionList)) {
-            TridentLogger.error(
+            TridentLogger.get().error(
                     new UnsupportedOperationException("Can only add new ConfigSection-s to ConfigSectionList"));
             return null;
         }

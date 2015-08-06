@@ -17,27 +17,21 @@
 
 package net.tridentsdk.util;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.ImmutableList;
 import net.tridentsdk.ServerConsole;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Volatile;
-import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.plugin.Plugin;
-import net.tridentsdk.registry.Registered;
 import net.tridentsdk.registry.Registry;
 import org.apache.log4j.*;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+import org.slf4j.*;
 
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -51,36 +45,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @ThreadSafe
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger extends ForwardingCollection<TridentLogger> implements Registry<TridentLogger> {
-    private static final String[] ERRORS = { "Aw, Mazen! Really?",
-            "I feel funny",
-            "9 + 10 does not equal 21",
-            "Dang",
-            "Tony Abbot, the fax didn't go through",
-            "This wasn't supposed to happen. It did anyways.",
-            "Houston, we have a problem",
-            "Oh great, a stacktrace. Can't we write good software for once?",
-            "Trust me this isn't a bug, it's a feature!",
-            "Pierre pls",
-            "Myth is extra salty today",
-            "Budgie, your NBT... It's leaking...",
-            "Vilsol is a Java developer? What?",
-            "gg Tigur",
-            "Orange? No, no, Trident is blue. Oh, Max?",
-            "If anyone asks, you never saw me",
-            "Hey look, we got another one!",
-            "I feel... so... empty...",
-            "I just can't even anymore",
-            "And this is the point where I give up",
-            "Indeed, there seems to be an error, m'lord!",
-            "I don't know how this happened, I thought black holes were sefe!",
-            "I promise* that this won't happen again! * Please read license agreement",
-            "I pronounce you owner and error, you may now report me.",
-            "This kinda feels funny...",
-            "DONT LOOK AT ME, IM NAKED!",
-            "So class, what have we learned today?",
-            "I... I think I just... nevermind! You saw nothing!",
-            "Quick hide! Did anyone see us?",
-            "It wasn't me! It was him! *Points at Dinnerbone*"};
     private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 
     @InternalUseOnly
@@ -186,10 +150,10 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
         Files.copy(original, newPath);
     }
 
-    private final org.slf4j.Logger logger;
+    private final LoggerDelegate logger;
 
     private TridentLogger(String name) {
-        this.logger = LoggerFactory.getLogger(name);
+        this.logger = new LoggerDelegate(LoggerFactory.getLogger(name));
     }
 
     /**
@@ -197,7 +161,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @return the SLF4J raw logger
      */
-    public org.slf4j.Logger internal() {
+    public LoggerDelegate internal() {
         return this.logger;
     }
 
@@ -226,6 +190,16 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
     }
 
     /**
+     * Wraps the logger with a TridentLogger instance
+     *
+     * @param logger the logger to wrap
+     * @return the cached, or a new instance of a logger wrapper
+     */
+    public static TridentLogger get(org.slf4j.Logger logger) {
+        return get(logger.getName());
+    }
+
+    /**
      * Obtains a logger, creating a new one if it does not exist in the logger registry
      *
      * @param name the logger name
@@ -240,12 +214,8 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @param item the item to log
      */
-    public static void log(String item) {
-        get().internal().info(parse(item) + ServerConsole.RESET);
-    }
-
-    public void info(String item) {
-        internal().info(parse(item) + ServerConsole.RESET);
+    public void log(String item) {
+        internal().info(item + ServerConsole.RESET);
     }
 
     /**
@@ -253,8 +223,8 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @param message the message to log
      */
-    public static void debug(String message) {
-        get().internal().debug(message);
+    public void debug(String message) {
+        internal().debug(message);
     }
 
     /**
@@ -262,8 +232,8 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @param message the message to log
      */
-    public static void error(String message) {
-        get().internal().error(ServerConsole.RED + parse(message) + ServerConsole.RESET);
+    public void error(String message) {
+        internal().error(ServerConsole.RED + message + ServerConsole.RESET);
     }
 
     /**
@@ -271,8 +241,8 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @param item the item to log
      */
-    public static void warn(String item) {
-        get().internal().warn(ServerConsole.YELLOW + parse(item) + ServerConsole.RESET);
+    public void warn(String item) {
+        internal().warn(ServerConsole.YELLOW + item + ServerConsole.RESET);
     }
 
     /**
@@ -280,43 +250,8 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @param item the item to log
      */
-    public static void success(String item) {
+    public void success(String item) {
         log(ServerConsole.GREEN + item);
-    }
-
-    private static String parse(String item) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < item.length(); i++) {
-            char c = item.charAt(i);
-            if (c == '§') {
-                // Find the character after that
-                char esc = item.charAt(i + 1);
-                ChatColor color = ChatColor.of(esc);
-
-                // Not a real color, continue on
-                if (color == null) {
-                    builder.append(c);
-                } else {
-                    String s = ChatColor.consoleFormat(color);
-
-                    // Not a console color, append it anyways
-                    if ("".equals(s)) {
-                        builder.append(c);
-                    } else {
-                        // Append the console format instead of the chat color
-                        builder.append(s);
-
-                        // Skip the next character, don't even append it
-                        i++;
-                    }
-                }
-            } else {
-                // No color escape, append normally
-                builder.append(c);
-            }
-        }
-
-        return builder.toString();
     }
 
     /**
@@ -327,66 +262,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      *
      * @param throwable the error to log
      */
-    public static void error(Throwable throwable) {
-        org.slf4j.Logger logger = get().internal();
-        StackTraceElement[] stackTrace = throwable.getStackTrace();
-
-        logger.error("========  BEGIN ERROR =========");
-
-        logger.error("");
-        String errorMessage = throwable.getMessage();
-
-        if (errorMessage == null || errorMessage.equals("null")) {
-            errorMessage = throwable.getClass().getSimpleName();
-        }
-
-        logger.error(ERRORS[(int) FastRandom.random(ERRORS.length - 1)]);
-        logger.error("");
-        logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": ");
-        logger.error(errorMessage);
-        logger.error("");
-        logger.error("======== Generating Debug Information =========");
-        StackTraceElement main = stackTrace[0];
-        logger.error("Class:  " + main.getClassName());
-        logger.error("Method: " + main.getMethodName());
-        logger.error("Line:   " + (main.getLineNumber() > 0 ? main.getLineNumber() : "Native method"));
-        logger.error("========   Ending Debug Information   =========");
-
-        logger.error("");
-
-        logger.error("======== Printing Stacktrace =========");
-        for (StackTraceElement element : stackTrace) {
-            String className = element.getClassName();
-            if (className.contains("io.netty")) break;
-
-            logger.error("    at " + className + "." +
-                    element.getMethodName() + "(...) : " +
-                    (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
-        }
-        logger.error("========  Ending Stacktrace  =========");
-
-        logger.error("");
-
-        logger.error("========     Server info    =========");
-        logger.error("Trident version: " + Trident.version());
-        logger.error("Plugins:         " + Arrays.toString(
-                Collections2.transform(Registered.plugins(), new Function<Plugin, String>() {
-                    @Nullable
-                    @Override
-                    public String apply(Plugin plugin) {
-                        return plugin.description().name();
-                    }
-                }).toArray()));
-        logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +
-                System.getProperty("java.vendor"));
-        logger.error("OS:              running " +
-                System.getProperty("os.name") + " version " +
-                System.getProperty("os.version") + " " +
-                System.getProperty("os.arch"));
-        logger.error("======== Ending Server info =========");
-
-        logger.error("");
-
-        logger.error("========  END ERROR  =========");
+    public void error(Throwable throwable) {
+        internal().error(throwable);
     }
 }

@@ -74,7 +74,7 @@ public class DisplayInfo {
         try {
             img = ImageIO.read(motdPicture());
         } catch (IOException ex) {
-            TridentLogger.error(ex);
+            TridentLogger.get().error(ex);
         }
 
         return img;

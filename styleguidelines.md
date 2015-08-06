@@ -66,5 +66,5 @@ In addition to the above link, below is a brief summary of the key points and ch
 - Static qualifiers are not needed if used inside the class (e.g. INFO instead of TridentServer.INFO inside the class TridentServer)
 - Use parentheses when they improve readability or provide clarity
 - Any ignored (swallowed) exceptions must be commented to explain why
-- Use ```TridentLogger.error(Exception)``` when handling exceptions
+- Use ```TridentLogger.get().error(Exception)``` when handling exceptions
 - Any empty conditionals must have a comment explaining why they are empty

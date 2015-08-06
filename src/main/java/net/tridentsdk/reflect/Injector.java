@@ -145,7 +145,7 @@ public final class Injector<T> {
                         }
                     }
 
-                    TridentLogger.error(new IllegalArgumentException(
+                    TridentLogger.get().error(new IllegalArgumentException(
                             "Constructor " + clazz.getName() + "(" +
                                     Arrays.toString(constructorParameters)
                                             .replaceAll("class ", "")
@@ -169,7 +169,7 @@ public final class Injector<T> {
                 }
                 return t;
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                TridentLogger.error(e);
+                TridentLogger.get().error(e);
                 return null;
             }
         }
@@ -181,7 +181,7 @@ public final class Injector<T> {
             }
             return t;
         } catch (InstantiationException | IllegalAccessException e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
             return null;
         }
     }
@@ -203,7 +203,7 @@ public final class Injector<T> {
         Class<?> type = field.getType();
         Producer<?> producer = injectors.get(type);
         if (producer == null) {
-            TridentLogger.error(new IllegalArgumentException("Class " +
+            TridentLogger.get().error(new IllegalArgumentException("Class " +
                     instance.getClass().getName() + " does not have bound injector for type " + type.getName()));
             return;
         }
@@ -216,7 +216,7 @@ public final class Injector<T> {
                 field.set(instance, producer.produce(inject.meta()));
             }
         } catch (IllegalAccessException e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
         }
     }
 

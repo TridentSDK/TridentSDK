@@ -184,7 +184,7 @@ public class Plugin {
 
             Files.copy(is, file.getAbsoluteFile().toPath());
         } catch (IOException ex) {
-            TridentLogger.error(ex);
+            TridentLogger.get().error(ex);
         }
     }
 

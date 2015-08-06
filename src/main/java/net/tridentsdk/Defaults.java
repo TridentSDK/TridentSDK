@@ -76,7 +76,7 @@ public final class Defaults {
         try {
             runnable.run();
         } catch (Exception e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
         }
     });
 

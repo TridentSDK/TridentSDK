@@ -33,9 +33,9 @@ public final class Note {
 
     public Note(int id) {
         if (id > 24) {
-            TridentLogger.error(new IllegalArgumentException("Note is too high!"));
+            TridentLogger.get().error(new IllegalArgumentException("Note is too high!"));
         } else if (id < 0) {
-            TridentLogger.error(new IllegalArgumentException("Note is too low!"));
+            TridentLogger.get().error(new IllegalArgumentException("Note is too low!"));
         }
 
         this.id = (short) id;
@@ -46,7 +46,7 @@ public final class Note {
      */
     public Note sharpen() {
         if ((int) this.id + 1 > 24) {
-            TridentLogger.error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
+            TridentLogger.get().error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
         }
         return new Note((int) this.id + 1);
     }
@@ -56,7 +56,7 @@ public final class Note {
      */
     public Note flatten() {
         if ((int) this.id - 1 < 0) {
-            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the min"));
+            TridentLogger.get().error(new IllegalArgumentException("Cannot flatten this note, it is already the min"));
         }
         return new Note((int) this.id - 1);
     }

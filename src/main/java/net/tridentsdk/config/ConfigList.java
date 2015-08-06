@@ -89,7 +89,7 @@ public class ConfigList<V> implements List<V> {
         int size = this.size;
 
         if (index < 0 && index > size)
-            TridentLogger.error(new IndexOutOfBoundsException("Index: " + index + ", Size: " + size));
+            TridentLogger.get().error(new IndexOutOfBoundsException("Index: " + index + ", Size: " + size));
     }
 
     private Node<V> nodeAt(int index) {
@@ -391,7 +391,7 @@ public class ConfigList<V> implements List<V> {
      */
     @Override
     public void add(int index, V element) {
-        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        TridentLogger.get().error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
     }
 
     /**
@@ -399,7 +399,7 @@ public class ConfigList<V> implements List<V> {
      */
     @Override
     public boolean addAll(int arg0, Collection<? extends V> arg1) {
-        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        TridentLogger.get().error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
         return false;
     }
 
@@ -408,7 +408,7 @@ public class ConfigList<V> implements List<V> {
      */
     @Override
     public boolean retainAll(Collection<?> arg0) {
-        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        TridentLogger.get().error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
         return false;
     }
 
@@ -417,7 +417,7 @@ public class ConfigList<V> implements List<V> {
      */
     @Override
     public List<V> subList(int arg0, int arg1) {
-        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        TridentLogger.get().error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
         return null;
     }
 
@@ -426,7 +426,7 @@ public class ConfigList<V> implements List<V> {
      */
     @Override
     public V[] toArray() {
-        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        TridentLogger.get().error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
         return null;
     }
 
@@ -435,7 +435,7 @@ public class ConfigList<V> implements List<V> {
      */
     @Override
     public <T> T[] toArray(T[] arg0) {
-        TridentLogger.error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
+        TridentLogger.get().error(new UnsupportedOperationException("Cannot invoke on Lists from Config"));
         return null;
     }
 

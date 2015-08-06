@@ -103,7 +103,7 @@ public class Config extends ConfigSection {
             Files.write(this.path, GsonFactory.gson().toJson(object).getBytes(Charsets.UTF_8),
                     StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException ex) {
-            TridentLogger.error(ex);
+            TridentLogger.get().error(ex);
         }
     }
 
@@ -126,7 +126,7 @@ public class Config extends ConfigSection {
             object = Files.isReadable(this.path) ? new JsonParser().parse(
                     Files.newBufferedReader(this.path, Charsets.UTF_8)).getAsJsonObject() : new JsonObject();
         } catch (JsonIOException | JsonSyntaxException | IOException e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
         }
 
         synchronized (handleLock) {

@@ -53,7 +53,7 @@ public abstract class PluginChannels extends ForwardingCollection<PluginChannel>
      */
     public PluginChannels() {
         if (!Trident.isTrident()) {
-            TridentLogger.error(new IllegalAccessException("Only Trident should instantiate this class"));
+            TridentLogger.get().error(new IllegalAccessException("Only Trident should instantiate this class"));
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class PluginChannels extends ForwardingCollection<PluginChannel>
      */
     public void register(String name, PluginChannel channel) {
         if (this.channels.containsKey(name)) {
-            TridentLogger.error(new UnsupportedOperationException("Cannot register 2 channels of the same name"));
+            TridentLogger.get().error(new UnsupportedOperationException("Cannot register 2 channels of the same name"));
             return;
         }
 
