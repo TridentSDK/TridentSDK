@@ -51,7 +51,21 @@ import java.util.concurrent.ConcurrentHashMap;
 @ThreadSafe
 @Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
 public final class TridentLogger extends ForwardingCollection<TridentLogger> implements Registry<TridentLogger> {
-    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Houston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me this isn't a bug, it's a feature!" };
+    private static final String[] ERRORS = { "Aw, Mazen! Really?",
+            "I feel funny",
+            "9 + 10 does not equal 21",
+            "Dang",
+            "Tony Abbot, the fax didn't go through",
+            "This wasn't supposed to happen. It did anyways.",
+            "Houston, we have a problem",
+            "Oh great, a stacktrace. Can't we write good software for once?",
+            "Trust me this isn't a bug, it's a feature!",
+            "Pierre pls",
+            "Myth is extra salty today",
+            "Budgie, your NBT... It's leaking...",
+            "Vilsol is a Java developer? What?",
+            "gg Tigur",
+            "Orange? No, no, Trident is blue. Oh, Max?"};
     private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 
     @InternalUseOnly
