@@ -29,16 +29,16 @@ public class CraftTuple {
     private char reference;
     private Item source;
 
-    public CraftTuple(char reference, Item source){
+    public CraftTuple(char reference, Item source) {
         this.reference = reference;
         this.source = source;
     }
 
-    public Item source(){
+    public Item source() {
         return source;
     }
 
-    public char reference(){
+    public char reference() {
         return reference;
     }
 }

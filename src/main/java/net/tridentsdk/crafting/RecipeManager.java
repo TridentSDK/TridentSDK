@@ -28,20 +28,19 @@ import java.util.List;
  * @since 0.4-alpha
  */
 public abstract class RecipeManager {
+    protected static RecipeManager instance;
 
-    private static RecipeManager instance;
-
-    public static RecipeManager getInstance(){
+    public static RecipeManager getInstance() {
         return instance;
     }
 
-    public void addShapelessRecipe(Item result, Item source){
+    public void addShapelessRecipe(Item result, Item source) {
         addShapelessRecipe(result, Collections.singletonList(source));
     }
 
     public abstract void addShapelessRecipe(Item result, List<Item> source);
 
-    public void addShapedRecipe(Item result, char[][] grid, CraftTuple source){
+    public void addShapedRecipe(Item result, char[][] grid, CraftTuple source) {
         addShapedRecipe(result, grid, Collections.singletonList(source));
     }
 
@@ -49,7 +48,7 @@ public abstract class RecipeManager {
 
     public abstract void addSmeltingRecipe(Item result, Item source, int smeltTicks, float experience);
 
-    public void addSmeltingFuel(Item source, int burnTicks){
+    public void addSmeltingFuel(Item source, int burnTicks) {
         addSmeltingFuel(source, burnTicks, null);
     }
 

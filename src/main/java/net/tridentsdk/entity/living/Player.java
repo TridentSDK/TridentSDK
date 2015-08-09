@@ -84,7 +84,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowH
      */
     boolean connected();
 
-    Item itemPickedWithCursor();
+    Item cursorItem();
 
-    void setItemPickedWithCursor(Item item);
+    void setCursorItem(Item item);
 }
