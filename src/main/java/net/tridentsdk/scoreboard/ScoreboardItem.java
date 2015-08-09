@@ -27,7 +27,7 @@ public class ScoreboardItem {
     private int score;
     private String value;
 
-    public ScoreboardItem(String value){
+    public ScoreboardItem(String value) {
         this.value = value;
     }
 
@@ -36,7 +36,7 @@ public class ScoreboardItem {
      *
      * @return the item value
      */
-    public String value(){
+    public String value() {
         return value;
     }
 
@@ -45,7 +45,7 @@ public class ScoreboardItem {
      *
      * @return the item score
      */
-    public int score(){
+    public int score() {
         return score;
     }
 
@@ -54,25 +54,25 @@ public class ScoreboardItem {
      *
      * @param score The score to set to
      */
-    public void setScore(int score){
+    public void setScore(int score) {
         this.score = score;
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return this == o || !(o == null || getClass() != o.getClass()) && score == ((ScoreboardItem) o).score && value.equals(((ScoreboardItem) o).value);
 
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = score;
         result = 31 * result + value.hashCode();
         return result;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "ScoreboardItem{" +
                 "score=" + score +
                 ", value='" + value + '\'' +

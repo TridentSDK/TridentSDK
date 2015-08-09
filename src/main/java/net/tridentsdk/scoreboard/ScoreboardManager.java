@@ -31,7 +31,7 @@ public interface ScoreboardManager {
      *
      * @return The global server scoreboard
      */
-    Scoreboard getGlobalScoreboard();
+    Scoreboard globalScoreboard();
 
     /**
      * Returns the specified player scoreboard
@@ -39,6 +39,6 @@ public interface ScoreboardManager {
      * @param player The player to get the scoreboard from
      * @return The specified player scoreboard (creates a new one if doesn't exist)
      */
-    Scoreboard getPlayerScoreboard(Player player);
+    Scoreboard scoreboardFor(Player player);
 
 }

@@ -37,11 +37,11 @@ public abstract class ScoreboardModule {
 
     public abstract void onTick();
 
-    public void setTickInterval(int ticks){
+    public void setTickInterval(int ticks) {
         this.tickInterval = ticks;
     }
 
-    public ScoreboardItem addPermanentSpace(){
+    public ScoreboardItem addPermanentSpace() {
         ScoreboardItem item = new ScoreboardItem("%SPACE%" + space++);
         resetSpace++;
         if(!permanentItems.contains(item)){
@@ -50,7 +50,7 @@ public abstract class ScoreboardModule {
         return item;
     }
 
-    public ScoreboardItem addSpace(){
+    public ScoreboardItem addSpace() {
         ScoreboardItem item = new ScoreboardItem("%SPACE%" + space++);
         if(!lastItems.contains(item)){
             liveItems.add(item);
@@ -58,7 +58,7 @@ public abstract class ScoreboardModule {
         return item;
     }
 
-    public ScoreboardModule addSpace(int score){
+    public ScoreboardModule addSpace(int score) {
         ScoreboardItem item = new ScoreboardItem("%SPACE%" + space++);
         item.setScore(score);
         if(!lastItems.contains(item)){
@@ -67,7 +67,7 @@ public abstract class ScoreboardModule {
         return this;
     }
 
-    public ScoreboardItem addPermanentItem(String value){
+    public ScoreboardItem addPermanentItem(String value) {
         ScoreboardItem item = new ScoreboardItem(value);
         if(!permanentItems.contains(item)){
             permanentItems.add(item);
@@ -75,7 +75,7 @@ public abstract class ScoreboardModule {
         return item;
     }
 
-    public ScoreboardItem addItem(String value){
+    public ScoreboardItem addItem(String value) {
         ScoreboardItem item = new ScoreboardItem(value);
         if(!lastItems.contains(item)){
             liveItems.add(item);
@@ -83,7 +83,7 @@ public abstract class ScoreboardModule {
         return item;
     }
 
-    public ScoreboardModule addItem(String value, int score){
+    public ScoreboardModule addItem(String value, int score) {
         ScoreboardItem item = new ScoreboardItem(value);
         item.setScore(score);
         if(!lastItems.contains(item)){
@@ -92,7 +92,7 @@ public abstract class ScoreboardModule {
         return this;
     }
 
-    public boolean update(int tick){
+    public boolean update(int tick) {
         if(tick % tickInterval == 0){
             space = resetSpace;
             lastItems.clear();
@@ -105,19 +105,19 @@ public abstract class ScoreboardModule {
         return false;
     }
 
-    public List<ScoreboardItem> updatedItems(){
+    public List<ScoreboardItem> updatedItems() {
         return liveItems.stream().filter(item -> !lastItems.contains(item)).collect(Collectors.toList());
     }
 
-    public List<ScoreboardItem> removedItems(){
+    public List<ScoreboardItem> removedItems() {
         return lastItems.stream().filter(item -> !liveItems.contains(item)).collect(Collectors.toList());
     }
 
-    public List<ScoreboardItem> permanentItems(){
+    public List<ScoreboardItem> permanentItems() {
         return permanentItems;
     }
 
-    public List<ScoreboardItem> liveItems(){
+    public List<ScoreboardItem> liveItems() {
         return liveItems;
     }
 
