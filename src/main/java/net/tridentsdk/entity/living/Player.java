@@ -21,6 +21,7 @@ import net.tridentsdk.Messagable;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.WindowHolder;
+import net.tridentsdk.inventory.Item;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.service.PermissionOwner;
 import net.tridentsdk.world.settings.GameMode;
@@ -82,4 +83,8 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowH
      * @return {@true to indicate the player is connected to the server}
      */
     boolean connected();
+
+    Item itemPickedWithCursor();
+
+    void setItemPickedWithCursor(Item item);
 }

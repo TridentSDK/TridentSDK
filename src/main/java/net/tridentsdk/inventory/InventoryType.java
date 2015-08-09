@@ -24,23 +24,25 @@ package net.tridentsdk.inventory;
  * @since 0.3-alpha-DP
  */
 public enum InventoryType {
-    CHEST("minecraft:chest"),
-    CRAFTING_TABLE("minecraft:crafting_table"),
-    FURNACE("minecraft:furnace"),
-    DISPENSER("minecraft:dispenser"),
-    ENCHANTING_TABLE("minecraft:enchanting_table"),
-    BREWING_STAND("minecraft:brewing_stand"),
-    VILLAGER_TRADE("minecraft:villager"),
-    BEACON("minecraft:beacon"),
-    ANVIL("minecraft:anvil"),
-    HOPPER("minecraft:hopper"),
-    DROPPER("minecraft:dropper"),
-    HORSE("minecraft:horse");
+    CHEST("minecraft:chest", "Chest"),
+    CRAFTING_TABLE("minecraft:crafting_table", "Crafting Table"),
+    FURNACE("minecraft:furnace", "Furnace"),
+    DISPENSER("minecraft:dispenser", "Dispenser"),
+    ENCHANTING_TABLE("minecraft:enchanting_table", "Enchanting Table"),
+    BREWING_STAND("minecraft:brewing_stand", "Brewing Stand"),
+    VILLAGER_TRADE("minecraft:villager", "Villager"),
+    BEACON("minecraft:beacon", "Beacon"),
+    ANVIL("minecraft:anvil", "Anvil"),
+    HOPPER("minecraft:hopper", "Hopper"),
+    DROPPER("minecraft:dropper", "Dropper"),
+    HORSE("minecraft:horse", "Horse");
 
     private final String s;
+    private final String defaultName;
 
-    InventoryType(String s) {
+    InventoryType(String s, String defaultName) {
         this.s = s;
+        this.defaultName = defaultName;
     }
 
     /**
@@ -52,4 +54,9 @@ public enum InventoryType {
     public String toString() {
         return this.s;
     }
+
+    public String defaultName(){
+        return defaultName;
+    }
+
 }
