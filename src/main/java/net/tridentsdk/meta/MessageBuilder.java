@@ -156,6 +156,15 @@ public final class MessageBuilder {
     }
 
     /**
+     * Returns if the {@link #build()} method has been called or not
+     *
+     * @return if the build method has been called or not
+     */
+    public boolean isBuilt() {
+        return buildingObject == null;
+    }
+
+    /**
      * Sends the formatted text to the specified players
      *
      * @param players the players to send the formatted text

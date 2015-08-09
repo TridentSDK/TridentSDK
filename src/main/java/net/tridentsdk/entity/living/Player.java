@@ -22,6 +22,7 @@ import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.WindowHolder;
 import net.tridentsdk.inventory.Item;
+import net.tridentsdk.meta.MessageBuilder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.service.PermissionOwner;
 import net.tridentsdk.world.settings.GameMode;
@@ -36,6 +37,32 @@ import java.util.Locale;
  */
 public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner {
     // TODO: Use word settings?
+
+    /**
+     * Current header on TAB, returns null if non-existent
+     *
+     * @return current header on TAB
+     */
+    String header();
+
+    default void setHeader(String message) {
+        setHeader(new MessageBuilder(message));
+    }
+
+    void setHeader(MessageBuilder builder);
+
+    /**
+     * Current footer on TAB, returns null if non-existent
+     *
+     * @return current footer on TAB
+     */
+    String footer();
+
+    default void setFooter(String message) {
+        setFooter(new MessageBuilder(message));
+    }
+
+    void setFooter(MessageBuilder builder);
 
     /**
      * The name of the player, matches that of Mojang servers
@@ -84,7 +111,7 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowH
      */
     boolean connected();
 
-    Item cursorItem();
+    Item pickedItem();
 
-    void setCursorItem(Item item);
+    void setPickedItem(Item item);
 }
