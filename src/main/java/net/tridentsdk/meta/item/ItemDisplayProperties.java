@@ -62,8 +62,10 @@ public interface ItemDisplayProperties extends NBTSerializable {
     
     /**
      * Adds lore to the item starting from a specific index.    
+     * 
      * @param index Index to begin insertion at. If equal to number of lore, it appends.
      * @param lore Lore to be added.
+     * 
      * @see #addLore(String...)
      */
     default void addLore(int index, String... lore) {
@@ -80,7 +82,9 @@ public interface ItemDisplayProperties extends NBTSerializable {
     
     /**
      * Appends lore to the item.
+     * 
      * @param lore Lore to be appended.
+     * 
      * @see #addLore(int, String...)
      */
     default void addLore(String... lore) {
