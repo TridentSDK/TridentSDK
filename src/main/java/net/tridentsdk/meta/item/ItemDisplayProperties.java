@@ -25,6 +25,7 @@ import net.tridentsdk.meta.nbt.NBTSerializable;
  * Represents the display properties of an Item
  */
 public interface ItemDisplayProperties extends NBTSerializable {
+
     /**
      * Returns display name of the item, {@code null} if non-existent
      * @return display name of the item
@@ -58,19 +59,19 @@ public interface ItemDisplayProperties extends NBTSerializable {
     }
     
     /**
-     * Adds lore to the item starting from a specific index.
-     * @param index Index to begin at.
+     * Adds lore to the item starting from a specific index.    
+     * @param index Index to begin insertion at. If equal to number of lore, it appends.
      * @param lore Lore to be added.
      * @see #addLore(String...)
      */
     default void addLore(int index, String... lore) {
-    	List<String> curr = lore();
-    	if (curr.isEmpty() || index == curr.size()) {
-    		curr.addAll(Arrays.asList(lore));
-    	} else {
-    		curr.addAll(index, Arrays.asList(lore));
-    	}
-    	setLore(curr);
+        List<String> curr = lore();
+        if (curr.isEmpty() || index == curr.size()) {
+            curr.addAll(Arrays.asList(lore));
+        } else {
+            curr.addAll(index, Arrays.asList(lore));
+        }
+        setLore(curr);
     }
     
     /**
@@ -79,7 +80,7 @@ public interface ItemDisplayProperties extends NBTSerializable {
      * @see #addLore(int, String...)
      */
     default void addLore(String... lore) {
-    	addLore(lore().size(), lore);
+        addLore(lore().size(), lore);
     }
     
 }
