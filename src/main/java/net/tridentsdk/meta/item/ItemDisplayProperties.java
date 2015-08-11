@@ -19,6 +19,8 @@ package net.tridentsdk.meta.item;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import net.tridentsdk.meta.nbt.NBTSerializable;
 
 /**
@@ -66,6 +68,8 @@ public interface ItemDisplayProperties extends NBTSerializable {
      */
     default void addLore(int index, String... lore) {
         List<String> curr = lore();
+        if (curr == null)
+            curr = Lists.newArrayList();
         if (curr.isEmpty() || index == curr.size()) {
             curr.addAll(Arrays.asList(lore));
         } else {
