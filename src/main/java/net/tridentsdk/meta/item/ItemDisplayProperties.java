@@ -16,10 +16,10 @@
  */
 package net.tridentsdk.meta.item;
 
-import net.tridentsdk.meta.nbt.NBTSerializable;
-
 import java.util.Arrays;
 import java.util.List;
+
+import net.tridentsdk.meta.nbt.NBTSerializable;
 
 /**
  * Represents the display properties of an Item
@@ -56,4 +56,30 @@ public interface ItemDisplayProperties extends NBTSerializable {
     default void setLore(String... lore) {
         setLore(Arrays.asList(lore));
     }
+    
+    /**
+     * Adds lore to the item starting from a specific index.
+     * @param index Index to begin at.
+     * @param lore Lore to be added.
+     * @see #addLore(String...)
+     */
+    default void addLore(int index, String... lore) {
+    	List<String> curr = lore();
+    	if (curr.isEmpty() || index == curr.size()) {
+    		curr.addAll(Arrays.asList(lore));
+    	} else {
+    		curr.addAll(index, Arrays.asList(lore));
+    	}
+    	setLore(curr);
+    }
+    
+    /**
+     * Appends lore to the item.
+     * @param lore Lore to be appended.
+     * @see #addLore(int, String...)
+     */
+    default void addLore(String... lore) {
+    	addLore(lore().size(), lore);
+    }
+    
 }
