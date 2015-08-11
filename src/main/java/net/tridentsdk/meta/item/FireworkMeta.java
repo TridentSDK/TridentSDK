@@ -18,29 +18,18 @@ package net.tridentsdk.meta.item;
 
 import java.util.List;
 
-/**
- * Represents the additional metadata for a skull
- */
-public interface SkullMeta extends ItemMeta {
+public interface FireworkMeta {
     /**
-     * Returns the name of the owner of this skull
-     * 
-     * @return the name of the owner of this skull
-     */
-    String owner();
-
-    /**
-     * Sets the name of the owner of this skull
+     * Gets a number representing how far this Firework will fly.
      *
-     * @param name
-     *            name of the owner you wish to set it to
+     * @return The flight.
      */
-    void setOwner(String name);
+    byte flight();
 
     /**
-     * Gets the skull's textures
+     * Gets a list containing all explosions on this Firework.
      * 
-     * @return The skull's textures
+     * @return The explosions.
      */
-    List<SkullTexture> textures();
+    List<ExplosionMeta> explosions();
 }

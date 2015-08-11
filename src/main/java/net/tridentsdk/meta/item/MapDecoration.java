@@ -16,31 +16,39 @@
  */
 package net.tridentsdk.meta.item;
 
-import java.util.List;
-
-/**
- * Represents the additional metadata for a skull
- */
-public interface SkullMeta extends ItemMeta {
+public interface MapDecoration {
     /**
-     * Returns the name of the owner of this skull
-     * 
-     * @return the name of the owner of this skull
-     */
-    String owner();
-
-    /**
-     * Sets the name of the owner of this skull
+     * Gets this decoration's unique ID.
      *
-     * @param name
-     *            name of the owner you wish to set it to
+     * @return The ID.
      */
-    void setOwner(String name);
+    String id();
 
     /**
-     * Gets the skull's textures
+     * Gets this decoration's type position in the client-side decorations file.
      * 
-     * @return The skull's textures
+     * @return The type position.
      */
-    List<SkullTexture> textures();
+    byte type();
+
+    /**
+     * Gets the X-coordinate of the decoration's location.
+     * 
+     * @return The location's X-coordinate.
+     */
+    double x();
+
+    /**
+     * Gets the Z-coordinate of the decoration's location.
+     * 
+     * @return The location's Z-coordinate.
+     */
+    double z();
+
+    /**
+     * Gets the decoration's rotation.
+     * 
+     * @return The rotation.
+     */
+    double rot();
 }

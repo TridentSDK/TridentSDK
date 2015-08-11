@@ -25,7 +25,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface NBTField {
+
     String name();
 
     TagType type();
+
+    boolean required() default false;
+
+    Class<? extends NBTSerializable> asClass() default NBTSerializable.class;
+
 }

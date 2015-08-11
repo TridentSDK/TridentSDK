@@ -21,74 +21,82 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import net.tridentsdk.meta.nbt.NBTSerializable;
-
 /**
  * Represents the display properties of an Item
  */
-public interface ItemDisplayProperties extends NBTSerializable {
-
+public interface ItemDisplayProperties {
     /**
-     * Returns display name of the item, {@code null} if non-existent
-     * @return display name of the item
+     * Returns display name of the item, {@code null} if non-existent.
+     *
+     * @return The display name of the item.
      */
     String displayName();
 
     /**
-     * Sets the display name
-     * @param displayName Display name you wish to set the item to
+     * Sets the display name.
+     *
+     * @param displayName
+     *            Display name you wish to set the item to.
      */
     void setDisplayName(String displayName);
 
     /**
-     * Returns lore of the item, {@code null} if non-existent
-     * @return lore of the item
+     * Returns lore of the item, {@code null} if non-existent.
+     *
+     * @return The lore of the item.
      */
     List<String> lore();
 
     /**
-     * Sets the lore of the item
-     * @param lore Lore you wish to set the item to
+     * Sets the lore of the item.
+     *
+     * @param lore
+     *            Lore you wish to set the item to.
      */
     void setLore(List<String> lore);
 
     /**
-     * Set the lore of the item
-     * @param lore Lore you wish to set it to
+     * Set the lore of the item.
+     *
+     * @param lore
+     *            Lore you wish to set it to.
      */
     default void setLore(String... lore) {
-        setLore(Arrays.asList(lore));
+        this.setLore(Arrays.asList(lore));
     }
 
     /**
-     * Adds lore to the item starting from a specific index.    
-     * 
-     * @param index Index to begin insertion at. If equal to number of lore, it appends.
-     * @param lore Lore to be added.
-     * 
+     * Adds lore to the item starting from a specific index.
+     *
+     * @param index
+     *            Index to begin insertion at.
+     * @param lore
+     *            Lore to be added.
+     *
      * @see #addLore(String...)
      */
     default void addLore(int index, String... lore) {
-        List<String> curr = lore();
-        if (curr == null)
+        List<String> curr = this.lore();
+        if (curr == null) {
             curr = Lists.newArrayList();
-        if (curr.isEmpty() || index == curr.size()) {
+        }
+        if (curr.isEmpty()) {
             curr.addAll(Arrays.asList(lore));
         } else {
             curr.addAll(index, Arrays.asList(lore));
         }
-        setLore(curr);
+        this.setLore(curr);
     }
 
     /**
      * Appends lore to the item.
-     * 
-     * @param lore Lore to be appended.
-     * 
+     *
+     * @param lore
+     *            Lore to be appended.
+     *
      * @see #addLore(int, String...)
      */
     default void addLore(String... lore) {
-        addLore(lore().size(), lore);
+        this.addLore(this.lore().size(), lore);
     }
-
 }

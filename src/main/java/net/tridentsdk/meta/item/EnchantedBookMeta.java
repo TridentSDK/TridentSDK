@@ -16,31 +16,22 @@
  */
 package net.tridentsdk.meta.item;
 
-import java.util.List;
+import java.util.Map;
 
-/**
- * Represents the additional metadata for a skull
- */
-public interface SkullMeta extends ItemMeta {
-    /**
-     * Returns the name of the owner of this skull
-     * 
-     * @return the name of the owner of this skull
-     */
-    String owner();
+import net.tridentsdk.base.Enchantment;
 
+public interface EnchantedBookMeta {
     /**
-     * Sets the name of the owner of this skull
+     * Gets a mapping of all enchantments stored in this Enchanted Book.
      *
-     * @param name
-     *            name of the owner you wish to set it to
+     * @return The enchantments.
      */
-    void setOwner(String name);
+    Map<Enchantment, Short> storedEnchantments();
 
     /**
-     * Gets the skull's textures
+     * Gets this EnchantedBook's cost to apply in an anvil in experience levels.
      * 
-     * @return The skull's textures
+     * @return The cost to apply this enchanted book to an item.
      */
-    List<SkullTexture> textures();
+    int repairCost();
 }

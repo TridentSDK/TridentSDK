@@ -18,4 +18,10 @@
 package net.tridentsdk.meta.nbt;
 
 public interface NBTSerializable {
+
+    /**
+     * Called when all fields have been set.
+     */
+    default void process() {}
+
 }

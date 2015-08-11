@@ -18,29 +18,18 @@ package net.tridentsdk.meta.item;
 
 import java.util.List;
 
-/**
- * Represents the additional metadata for a skull
- */
-public interface SkullMeta extends ItemMeta {
+public interface MapMeta {
     /**
-     * Returns the name of the owner of this skull
+     * Gets whether or not this Map has scaling enabled.
      * 
-     * @return the name of the owner of this skull
+     * @return True if enabled.
      */
-    String owner();
+    boolean isScaling();
 
     /**
-     * Sets the name of the owner of this skull
-     *
-     * @param name
-     *            name of the owner you wish to set it to
-     */
-    void setOwner(String name);
-
-    /**
-     * Gets the skull's textures
+     * Gets a List of all currently applied {@linkplain MapDecoration}s.
      * 
-     * @return The skull's textures
+     * @return The currently applied decorations.
      */
-    List<SkullTexture> textures();
+    List<MapDecoration> decorations();
 }
