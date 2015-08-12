@@ -16,31 +16,11 @@
  */
 package net.tridentsdk.meta.item;
 
-import java.util.List;
-
-/**
- * Represents the additional metadata for a skull
- */
-public interface SkullMeta extends ItemMeta {
+public interface FireworkStarMeta {
     /**
-     * Returns the name of the owner of this skull
-     * 
-     * @return the name of the owner of this skull
-     */
-    String owner();
-
-    /**
-     * Sets the name of the owner of this skull
+     * Gets the Explosion meta on this Firework Star.
      *
-     * @param name
-     *            name of the owner you wish to set it to
+     * @return The Explosion meta.
      */
-    void setOwner(String name);
-
-    /**
-     * Gets the skull's textures
-     * 
-     * @return The skull's textures
-     */
-    List<SkullTexture> textures();
+    ExplosionMeta explosion();
 }

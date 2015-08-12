@@ -16,22 +16,39 @@
  */
 package net.tridentsdk.meta.item;
 
-import net.tridentsdk.effect.potion.PotionEffect;
-
 import java.util.List;
+
+import net.tridentsdk.effect.potion.PotionEffect;
 
 /**
  * Represents a Potion's additional metadata
  */
 public interface PotionMeta extends ItemMeta {
+    /**
+     * Gets this Potion's applied effects.
+     *
+     * @return The effects.
+     */
     List<PotionEffect> effects();
 
+    /**
+     * Sets this Potion's applied effects.
+     * 
+     * @param effects
+     *            The effects to use in place of the current ones.
+     */
     void setEffects(List<PotionEffect> effects);
 
+    /**
+     * Adds a provided potion effect to this item.
+     * 
+     * @param effect
+     *            The effect.
+     */
     default void addEffect(PotionEffect effect) {
-        List<PotionEffect> effects = effects();
+        List<PotionEffect> effects = this.effects();
 
         effects.add(effect);
-        setEffects(effects);
+        this.setEffects(effects);
     }
 }

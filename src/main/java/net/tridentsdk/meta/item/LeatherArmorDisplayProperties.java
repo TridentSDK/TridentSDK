@@ -23,14 +23,17 @@ import net.tridentsdk.base.Color;
  */
 public interface LeatherArmorDisplayProperties extends ItemDisplayProperties {
     /**
-     * Returns the color of the leather armor
-     * @return the color of the leather armor
+     * Returns the color of the leather armor.
+     *
+     * @return the color of the leather armor.
      */
     Color color();
 
     /**
-     * Sets the color of the leather armor
-     * @param color the color you wish to set the leather armor to
+     * Sets the color of the leather armor.
+     *
+     * @param color
+     *            the color you wish to set the leather armor to
      */
     void setColor(Color color);
 }
