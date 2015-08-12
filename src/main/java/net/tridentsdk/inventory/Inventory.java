@@ -58,12 +58,12 @@ public interface Inventory {
     void setSlot(int index, Item value);
 
     /**
-     * Places an item into the player's inventory, where there is room, or drops onto the ground if the inventory is
-     * full
+     * Places an item into the player's inventory, where there is room
      *
      * @param item the item to place
+     * @return True if managed to place an item, false if failed
      */
-    void putItem(Item item);
+    boolean putItem(Item item);
 
     /**
      * The title of the inventory
