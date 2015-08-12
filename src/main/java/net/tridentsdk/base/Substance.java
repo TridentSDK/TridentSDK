@@ -1132,4 +1132,15 @@ public enum Substance {
         }
     }
 
+    public boolean canBeReplaced(){
+        switch(this){
+            case LONG_GRASS:
+            case DEAD_BUSH:
+            case SNOW:
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }
