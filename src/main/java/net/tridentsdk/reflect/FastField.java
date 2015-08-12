@@ -17,39 +17,33 @@
 
 package net.tridentsdk.reflect;
 
-import com.esotericsoftware.reflectasm.FieldAccess;
-
 import java.lang.reflect.Field;
 
 /*
  * @NotJavaDoc
  * NOTE: This class only applies to any field which is not private
  */
-public class FastField {
-    private final FieldAccess access;
+public abstract class FastField {
     private final String field;
-    private final FastClass owner;
+    private final Class<?> owner;
 
-    public FastField(FastClass owner, FieldAccess access, String field) {
-        this.access = access;
+    public FastField(Class<?> owner, String field) {
         this.field = field;
         this.owner = owner;
     }
 
-    public void set(Object instance, Object value) {
-        this.access.set(instance, this.field, value);
+    public String field() {
+        return field;
     }
 
-    public <T> T get(Object instance) {
-        return (T) this.access.get(instance, this.field);
-    }
+    public abstract void set(Object instance, Object value);
+
+    public abstract <T> T get(Object instance);
 
     public Field toField() {
         try {
-            return owner.asClass().getDeclaredField(this.field);
-        } catch (NoSuchFieldException ignored) {
-        }
-
+            return owner.getDeclaredField(this.field);
+        } catch (NoSuchFieldException ignored) {}
         return null;
     }
 }

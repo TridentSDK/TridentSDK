@@ -28,12 +28,13 @@ public enum Enchantment {
     private static final Map<String, Enchantment> enchsByName = Maps.newConcurrentMap();
 
     static {
+
         for (Enchantment ench : values()) {
             if (!enchsById.containsKey(ench.id)) {
                 enchsById.put(ench.id, ench);
             }
-            if (!Enchantment.enchsByName.containsKey(ench.name.toLowerCase())) {
-                Enchantment.enchsByName.put(ench.name.toLowerCase(), ench);
+            if (!enchsByName.containsKey(ench.name.toLowerCase())) {
+                enchsByName.put(ench.name.toLowerCase(), ench);
             }
         }
     }

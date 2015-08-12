@@ -16,8 +16,10 @@
  */
 package net.tridentsdk.meta.item;
 
+import java.util.Map;
 import java.util.Set;
 
+import net.tridentsdk.base.Enchantment;
 import net.tridentsdk.meta.nbt.NBTSerializable;
 
 /**
@@ -76,6 +78,50 @@ public interface ItemMeta extends NBTSerializable {
      *            hidden.
      */
     void setFlag(HiddenModifierFlag flag, boolean shown);
+
+    /**
+     * Gets a mapping of all enchantments to their levels applied to this item.
+     *
+     * @return The enchantments applied to this item.
+     */
+    Map<Enchantment, Short> enchantments();
+
+    /**
+     * Adds the specified enchantment to the item with a specific level.
+     *
+     * @param enchantment
+     *            The enchantment.
+     * @param level
+     *            The level.
+     *
+     * @see #addSafeEnchantment(Enchantment, int)
+     */
+    void addEnchantment(Enchantment enchantment, int level);
+
+    /**
+     * <p>Attempts to safely add a specified enchantment to the item with a
+     * specific level.<p>
+     *
+     * <p>An enchantment is considered to be 'safe' if it can be applied to an
+     * item through an Enchanting Table.</p>
+     *
+     * @param enchantment
+     *            The enchantment.
+     * @param level
+     *            The level.
+     * @return True if and only if the enchantment was safely applied.
+     *
+     * @see #addEnchantment(Enchantment, int)
+     */
+    boolean addSafeEnchantment(Enchantment enchantment, int level);
+
+    /**
+     * Removes the specified enchantment from the item if it exists on it.
+     *
+     * @param enchantment
+     *            The enchantment.
+     */
+    void removeEnchantment(Enchantment enchantment);
 
     /**
      * Gets the display properties of this item

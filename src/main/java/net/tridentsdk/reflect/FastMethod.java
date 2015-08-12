@@ -17,7 +17,6 @@
 
 package net.tridentsdk.reflect;
 
-import com.esotericsoftware.reflectasm.MethodAccess;
 import net.tridentsdk.docs.InternalUseOnly;
 
 /**
@@ -26,37 +25,25 @@ import net.tridentsdk.docs.InternalUseOnly;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public class FastMethod {
-    private final MethodAccess access;
+public abstract class FastMethod {
+    private final Class<?> owner;
     private final String name;
-    private final Object instance;
+    private final Class<?>[] args;
 
     @InternalUseOnly
-    public FastMethod(Object instance, MethodAccess access, String name) {
-        this.access = access;
+    public FastMethod(Class<?> owner, String name, Class<?>[] args) {
+        this.owner = owner;
         this.name = name;
-        this.instance = instance;
+        this.args = args;
     }
 
     /**
-     * Invokes the method with parameters
+     * Gets the method's name.
      *
-     * @param instance the instance of the class to use, to {@code null for static methods}
-     * @param args     the parameter values for the method
-     * @return the return type of the method, or {@code null} for {@code void} methods
+     * @return The method's name.
      */
-    public Object invoke(Object instance, Object... args) {
-        return this.access.invoke(instance, this.name, args);
-    }
-
-    /**
-     * Invokes the method without parameters (no-arg)
-     *
-     * @param instance the instance of the class to use, to {@code null for static methods}
-     * @return the return type of the method, or {@code null} for {@code void} methods
-     */
-    public Object invoke(Object instance) {
-        return this.access.invoke(instance, this.name);
+    public String name() {
+        return name;
     }
 
     /**
@@ -64,7 +51,29 @@ public class FastMethod {
      *
      * @return the instance for method invocation
      */
-    public Object instance() {
-        return instance;
+    public Class<?> owner() {
+        return owner;
     }
+
+    /**
+     * Gets the method's args.
+     *
+     * @return The arguments.
+     */
+    public Class<?>[] args() {
+        return args;
+    }
+
+    /**
+     * Invokes the method.
+     *
+     * @param instance
+     *            the instance of the class to use, to
+     *            {@code null for static methods}
+     * @param args
+     *            The arguments to be used.
+     * @return the return type of the method, or {@code null} for {@code void}
+     *         methods
+     */
+    public abstract Object invoke(Object instance, Object... args);
 }
