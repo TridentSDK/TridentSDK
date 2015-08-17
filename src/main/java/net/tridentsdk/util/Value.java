@@ -43,12 +43,24 @@ public final class Value<T> {
     }
 
     /**
+     * Creates a new null value
+     *
+     * @param <T> the value type
+     * @return the null value
+     */
+    public static <T> Value<T> none() {
+        return new Value<>(null);
+    }
+
+    /**
      * Sets the value
      *
      * @param t the value
+     * @return the set value
      */
-    public void set(T t) {
+    public T set(T t) {
         this.value = t;
+        return t;
     }
 
     /**

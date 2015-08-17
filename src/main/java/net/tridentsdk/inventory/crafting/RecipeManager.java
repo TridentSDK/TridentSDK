@@ -18,6 +18,7 @@ package net.tridentsdk.inventory.crafting;
 
 import net.tridentsdk.inventory.Item;
 import net.tridentsdk.registry.Registered;
+import net.tridentsdk.util.Value;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
  * @since 0.4-alpha
  */
 public interface RecipeManager {
-    RecipeManager instance = Registered.impl().recipe();
+    Value<RecipeManager> instance = Value.none();
 
     /**
      * Obtains an instance of the recipe manager
@@ -37,7 +38,11 @@ public interface RecipeManager {
      * @return the recipe manager instance
      */
     static RecipeManager instance() {
-        return instance;
+        RecipeManager recipeManager = instance.get();
+        if (recipeManager == null) {
+            recipeManager = instance.set(Registered.impl().recipe());
+        }
+        return recipeManager;
     }
 
     /**
