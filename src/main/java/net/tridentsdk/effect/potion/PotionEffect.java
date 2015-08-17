@@ -20,6 +20,9 @@ import net.tridentsdk.meta.nbt.NBTSerializable;
 
 /**
  * Represents a potion effect with all the according values
+ *
+ * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 public interface PotionEffect extends NBTSerializable {
     /**

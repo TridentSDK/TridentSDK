@@ -26,7 +26,6 @@ import net.tridentsdk.entity.Entity;
  * @since 0.4-alpha
  */
 public interface EntityStatusEffect extends Effect<EntityStatusEffectType> {
-
     /**
      * Set the entity to which the status effect will be applied
      *
@@ -40,5 +39,4 @@ public interface EntityStatusEffect extends Effect<EntityStatusEffectType> {
      * @return The entity to which the status effect will be applied
      */
     Entity entity();
-
 }

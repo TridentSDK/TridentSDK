@@ -25,7 +25,6 @@ import net.tridentsdk.entity.living.Player;
  * @since 0.4-alpha
  */
 public interface Effect<T> {
-
     /**
      * Execute the effect at the given location
      */
@@ -58,5 +57,4 @@ public interface Effect<T> {
      * @param type The type of the effect
      */
     void setType(T type);
-
 }

@@ -25,12 +25,10 @@ import net.tridentsdk.util.Vector;
  * @since 0.4-alpha
  */
 public interface RemoteEffect<T> extends Effect<T> {
-
     /**
      * Set the position of the effect
      *
      * @param vector The vector of the effect
      */
     void setPosition(Vector vector);
-
 }

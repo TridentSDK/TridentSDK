@@ -40,6 +40,7 @@ import java.util.Map;
  * @since 0.4-alpha
  */
 @ThreadSafe
+@Deprecated
 public class Registered {
     private static volatile Implementation impl;
 

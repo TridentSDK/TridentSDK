@@ -23,7 +23,6 @@ package net.tridentsdk.effect.entity;
  * @since 0.4-alpha
  */
 public enum EntityStatusEffectType {
-
     /**
      * When an entity gets hurt
      */
@@ -165,5 +164,4 @@ public enum EntityStatusEffectType {
     public byte id(){
         return id;
     }
-
 }

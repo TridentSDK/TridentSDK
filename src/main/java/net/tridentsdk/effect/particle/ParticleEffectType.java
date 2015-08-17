@@ -23,7 +23,6 @@ package net.tridentsdk.effect.particle;
  * @since 0.4-alpha
  */
 public enum ParticleEffectType {
-
     /**
      * Small Explosion
      */
@@ -248,5 +247,4 @@ public enum ParticleEffectType {
     public int id(){
         return id;
     }
-
 }

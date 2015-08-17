@@ -21,6 +21,7 @@ import net.tridentsdk.concurrent.SelectableThreadPool;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.event.Events;
 import net.tridentsdk.inventory.Inventories;
+import net.tridentsdk.inventory.crafting.RecipeManager;
 import net.tridentsdk.meta.component.MetaProvider;
 import net.tridentsdk.plugin.Plugins;
 import net.tridentsdk.plugin.channel.PluginChannels;
@@ -59,4 +60,6 @@ public interface Implementation {
     Commands cmds();
     Scheduler scheduler();
     Inventories inventories();
+
+    RecipeManager recipe();
 }

@@ -14,30 +14,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.crafting;
+package net.tridentsdk.inventory.crafting;
 
 import net.tridentsdk.inventory.Item;
 
 /**
- * TODO Write Description
+ * Represents a pair of an item and character used to describe the crafting recipe
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
 public class CraftTuple {
-
     private char reference;
     private Item source;
 
+    /**
+     * Creates a new char-item pair
+     *
+     * @param reference the character that represents the item
+     * @param source    the item represented by the character
+     */
     public CraftTuple(char reference, Item source) {
         this.reference = reference;
         this.source = source;
     }
 
+    /**
+     * The item referenced by the char
+     *
+     * @return the reference item
+     */
     public Item source() {
         return source;
     }
 
+    /**
+     * The character used to reference the item
+     *
+     * @return the reference char
+     */
     public char reference() {
         return reference;
     }

@@ -26,7 +26,6 @@ import net.tridentsdk.util.Vector;
  * @since 0.4-alpha
  */
 public interface ParticleEffect extends RemoteEffect<ParticleEffectType> {
-
     /**
      * Set the count how many of the effects should be spawned
      *
@@ -87,5 +86,4 @@ public interface ParticleEffect extends RemoteEffect<ParticleEffectType> {
      * @return The offset for each particle
      */
     Vector offset();
-
 }

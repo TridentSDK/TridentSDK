@@ -24,7 +24,6 @@ package net.tridentsdk.effect.sound;
  * @since 0.4-alpha
  */
 public enum SoundEffectType {
-
     /**
      * Being within 10 to 20 blocks of an area not exposed to the sky with a light level of less than eight
      */
@@ -1304,5 +1303,4 @@ public enum SoundEffectType {
     public String toString() {
         return this.s;
     }
-
 }

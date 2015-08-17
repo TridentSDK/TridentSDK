@@ -19,6 +19,12 @@ package net.tridentsdk.effect.potion;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents the types of potion effects
+ *
+ * @author The TridentSDK Team
+ * @since 0.4-alpha
+ */
 public enum PotionEffectType {
     SPEED(1),
     SLOWNESS(2),

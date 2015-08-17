@@ -25,7 +25,6 @@ import net.tridentsdk.effect.RemoteEffect;
  * @since 0.4-alpha
  */
 public interface VisualEffect extends RemoteEffect<VisualEffectType> {
-
     /**
      * Set the data of the effect<br>
      * Only used for FIRE_SMOKE, BLOCK_BREAK and SPLASH_POTION<br>
@@ -48,5 +47,4 @@ public interface VisualEffect extends RemoteEffect<VisualEffectType> {
      * @return The data of the effect
      */
     int data();
-
 }

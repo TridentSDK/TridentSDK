@@ -25,7 +25,6 @@ import net.tridentsdk.effect.RemoteEffect;
  * @since 0.4-alpha
  */
 public interface SoundEffect extends RemoteEffect<SoundEffectType> {
-
     /**
      * Set the volume of the sound
      *
@@ -53,5 +52,4 @@ public interface SoundEffect extends RemoteEffect<SoundEffectType> {
      * @return The pitch of the sound
      */
     int pitch();
-
 }
