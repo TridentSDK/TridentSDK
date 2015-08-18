@@ -26,6 +26,17 @@ See the [Trident Development Wiki Page](https://tridentsdkwiki.atlassian.net/wik
 6. Push to the fork
 7. Create a new Pull Request following the below guidlines
 
+## Getting your PR accepted ##
+
+We are more likely to accept your Pull Request should you follow all of the given bullet points listed below. That is:
+
+- Your code meets the code requirements
+- Your PR fits within the PR guidelines
+- Your code is tested and provides testing materials
+- Your PR adds or fixes a bug, and lies within the scope of the TridentSDK project
+
+Once you have created your Pull Request, do not abandon GitHub for a week. We provide responses and code comments, as well as general discussion on the PR page. This feedback, along with proper action taken in response to our feedback will help improve your chances of getting the PR pulled.
+
 ## Code Requirements ##
 
 - We expect all public members to be thouroughly documented
