@@ -1,8 +1,8 @@
 before_install:
   - "git clone -b travis `git config --get remote.origin.url` target/travis"
   - chmod 777 *.sh
-script: ./build.sh
-after_script: ./javadoc.sh
+script: ./scripts/build.sh
+after_script: ./scripts/javadoc.sh
 language: java
 notifications:
   email: false
