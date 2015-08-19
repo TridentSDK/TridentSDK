@@ -24,14 +24,26 @@ import javax.annotation.concurrent.ThreadSafe;
 /**
  * MetaData contained in a Cauldron.
  *
- * @since 0.4-alpha
  * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
 @ThreadSafe
 public interface CauldronMeta extends BlockMeta<Block> {
+    /**
+     * Gets the filled water level of the respective cauldron.
+     * @return The water level.
+     */
     short filledLevel();
 
+    /**
+     * Sets the filled water level of the cauldron.
+     * @param level The desired water level.
+     */
     void setFilledLevel(short level);
 
+    /**
+     * Gets the filled water level as a percentage.
+     * @return Water level as a percentage.
+     */
     double filledPercentage();
 }
