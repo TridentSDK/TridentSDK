@@ -28,9 +28,11 @@ import java.util.concurrent.Future;
  * A tunable task executor which represents a scalable thread pool
  *
  * <p>This class contains 3 selection methods:
- * Core: Selects a non-dying thread
- * Next: Selects a thread, might be non-dying
- * Scaled: Creates a new thread if all workers are occupied and the count is below maxThreads. Otherwise returns nextThread.</p>
+ * <ul>
+ *   <li>Core: Selects a non-dying thread</li>
+ *   <li>Next: Selects a thread, might be non-dying</li>
+ *   <li>Scaled: Creates a new thread if all workers are occupied and the count is below maxThreads. Otherwise returns nextThread.</li>
+ * </ul></p>
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
@@ -41,7 +43,7 @@ public interface SelectableThreadPool extends Executor {
      * The maximum amount of expiring concurrent plus non-dying concurrent which are created when executing tasks or finding a scaled thread when
      * existing workers are occupied
      *
-     * @return the maximum scale, by default {@code Integer.MAX_VALUE}
+     * @return the maximum scale, by default {@code 50}
      */
     int maxThreads();
 
