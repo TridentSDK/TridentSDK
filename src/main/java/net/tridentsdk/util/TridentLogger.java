@@ -22,11 +22,10 @@ import com.google.common.collect.ImmutableList;
 import net.tridentsdk.ServerConsole;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.docs.Volatile;
+import net.tridentsdk.docs.Policy;
 import net.tridentsdk.registry.Registry;
 import org.apache.log4j.*;
-import org.apache.log4j.Logger;
-import org.slf4j.*;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.*;
@@ -43,7 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-@Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
+@Policy("Ensure initialization ASAP in main class")
 public final class TridentLogger extends ForwardingCollection<TridentLogger> implements Registry<TridentLogger> {
     private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 

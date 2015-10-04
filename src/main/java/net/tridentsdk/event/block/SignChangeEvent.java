@@ -19,7 +19,7 @@ package net.tridentsdk.event.block;
 
 import com.google.common.base.Preconditions;
 import net.tridentsdk.base.Block;
-import net.tridentsdk.docs.Volatile;
+import net.tridentsdk.docs.Policy;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
 
@@ -33,9 +33,7 @@ import javax.annotation.concurrent.GuardedBy;
  */
 public class SignChangeEvent extends BlockEvent implements Cancellable {
     private final Player editor;
-    @Volatile(policy = "No individual element modify",
-            reason = "Not thread safe",
-            fix = "Write/Read the entire field ONLY")
+    @Policy(Policy.VOLATILE_ARRAY)
     @GuardedBy("this")
     private String[] contents;
     private boolean cancelled;
