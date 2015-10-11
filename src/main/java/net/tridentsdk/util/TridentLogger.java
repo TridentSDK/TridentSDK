@@ -175,7 +175,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      * @return the logger for that class
      */
     public static TridentLogger get() {
-        return get(Trident.findCaller(4));
+        return get(Trident.findCaller(3));
     }
 
     /**

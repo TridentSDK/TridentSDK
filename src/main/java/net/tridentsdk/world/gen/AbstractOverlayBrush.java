@@ -87,5 +87,18 @@ public abstract class AbstractOverlayBrush {
          * @return the block
          */
         Block blockAt(int relX, int y, int relZ);
+
+        /**
+         * Ensures that the particular feature fits within the bounds of the chunk
+         *
+         * @param relX  the relative x
+         * @param relZ  the relative z
+         * @param bound the range from the center non-inclusively counting the last block
+         * @return {@code true} if the node is within bound
+         */
+        default boolean nodeFits(int relX, int relZ, int bound) {
+            return relX - bound >= 0 && relX + bound <= 15
+                    && relZ - bound >= 0 && relZ + bound <= 15;
+        }
     }
 }
