@@ -4,7 +4,7 @@ TridentSDK [![Build Status](https://travis-ci.org/TridentSDK/TridentSDK.svg?bran
 The TridentSDK project. The API for the new generation of multithreaded, high-performance, cleanroom Minecraft servers.
 
 * [Website](https://tridentsdk.net)
-* [Chat](https://tridentsdk.net/chat)
+* [Chat](https://www.hipchat.com/g20bt22H2?v=2)
 * [Issues](https://tridentsdk.atlassian.net/projects/SDK/issues)
 * [Wiki](https://tridentsdkwiki.atlassian.net/wiki/dashboard.action)
 * [Javadoc](https://tridentsdk.github.io/javadocs)
