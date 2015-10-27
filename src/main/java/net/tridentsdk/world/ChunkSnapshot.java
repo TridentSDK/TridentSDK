@@ -32,10 +32,10 @@ public interface ChunkSnapshot extends Chunk {
      *
      * @param chunk the chunk to reset the data contained in this snapshot to
      */
-    void load(Chunk chunk);
+    void apply(Chunk chunk);
 
     /**
      * Updates the chunk from this snapshot with the data contained in this snapshot
      */
-    void load();
+    void apply();
 }
