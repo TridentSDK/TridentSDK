@@ -155,6 +155,16 @@ public interface World extends Cloneable, WorldSettings {
     Set<Entity> entities();
 
     /**
+     * Find all entities that are colliding with the bounding box
+     *
+     * @param exclude the entity to exclude from searching
+     * @param boundingBox The bounding box to search in
+     * @param predicate Predicate to filter results
+     * @return List of entities inside the bounding box
+     */
+    ArrayList<Entity> getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
+
+    /**
      * Creates a new particle effect
      *
      * @param particle The particle to spawn
@@ -177,13 +187,4 @@ public interface World extends Cloneable, WorldSettings {
      * @return A new instance of VisualEffect
      */
     SoundEffect playSound(SoundEffectType sound);
-
-    /**
-     * Find all entities that are colliding with the bounding box
-     *
-     * @param boundingBox The bounding box to search in
-     * @param predicate Predicate to filter results
-     * @return List of entities inside the bounding box
-     */
-    ArrayList<Entity> getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
 }

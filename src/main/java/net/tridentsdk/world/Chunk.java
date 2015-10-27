@@ -37,6 +37,31 @@ import java.util.function.Predicate;
 @ThreadSafe
 public interface Chunk {
     /**
+     * Generates the chunk
+     */
+    void generate();
+
+    /**
+     * Loads the chunk
+     *
+     * @return {@code true} to signify that the chunk was successfully loaded from file, {@code false} to signify that
+     * it does not exist on file, or already loaded
+     */
+    boolean load();
+
+    /**
+     * Checks the chunk to ensure it is loaded
+     *
+     * @return {@code true} to signify that the chunk is loaded, {@code false} if it is not
+     */
+    boolean isLoaded();
+
+    /**
+     * Unloads the chunk
+     */
+    void unload();
+
+    /**
      * The entities in the chunk
      *
      * @return the entities
@@ -44,16 +69,21 @@ public interface Chunk {
     Set<Entity> entities();
 
     /**
+     * Find all entities that are colliding with the bounding box
+     *
+     * @param exclude the entity to exclude from the search
+     * @param boundingBox The bounding box to search in
+     * @param predicate Predicate to filter results
+     * @return List of entities inside the bounding box
+     */
+    ArrayList<Entity> getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
+
+    /**
      * Obtains the tile entities in this chunk
      *
      * @return the tile entities
      */
     Collection<Tile> tiles();
-
-    /**
-     * Generates the chunk
-     */
-    void generate();
 
     /**
      * The location of the chunk
@@ -99,18 +129,4 @@ public interface Chunk {
      * @return the chunk's frozen state which can be restored
      */
     ChunkSnapshot snapshot();
-
-    /**
-     * Unloads the chunk
-     */
-    void unload();
-
-    /**
-     * Find all entities that are colliding with the bounding box
-     *
-     * @param boundingBox The bounding box to search in
-     * @param predicate Predicate to filter results
-     * @return List of entities inside the bounding box
-     */
-    ArrayList getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
 }

@@ -27,10 +27,10 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public abstract class AbstractGenerator {
+public abstract class ChunkGenerator {
     protected final long seed;
 
-    public AbstractGenerator(long seed) {
+    public ChunkGenerator(long seed) {
         this.seed = seed;
     }
 
@@ -56,7 +56,7 @@ public abstract class AbstractGenerator {
      * @param heights the array of max heights
      * @return the data array to fill the chunk with
      */
-    public abstract char[][] generateChunkBlocks(ChunkLocation position, AtomicReferenceArray<Integer> heights);
+    public abstract char[][] generateBlocks(ChunkLocation position, AtomicReferenceArray<Integer> heights);
 
     /**
      * Populates block data for a chunk
@@ -64,5 +64,5 @@ public abstract class AbstractGenerator {
      * @param position the position of the chunk to be generated
      * @return the data to apply to each block
      */
-    public abstract byte[][] generateBlockData(ChunkLocation position);
+    public abstract byte[][] generateData(ChunkLocation position);
 }

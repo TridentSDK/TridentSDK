@@ -90,7 +90,7 @@ public interface WeatherConditions {
     boolean isSunny();
 
     /**
-     * Sets the world to sunny
+     * Sets the world to sunny, stopping both thundering and raining if present
      */
     void setSunny();
 }

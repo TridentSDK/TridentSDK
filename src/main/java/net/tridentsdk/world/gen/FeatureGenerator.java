@@ -23,14 +23,14 @@ import net.tridentsdk.world.ChunkLocation;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
- * An overlay brush is a block populator that is used to lay blocks or structures once the chunk has been generated
+ * An overlay generate is a block populator that is used to lay blocks or structures once the chunk has been generated
  *
  * @author The TridentSDK Team
  */
-public abstract class AbstractOverlayBrush {
+public abstract class FeatureGenerator {
     protected final long seed;
 
-    public AbstractOverlayBrush(long seed) {
+    public FeatureGenerator(long seed) {
         this.seed = seed;
     }
 
@@ -46,7 +46,7 @@ public abstract class AbstractOverlayBrush {
     /**
      * Brushes the terrain
      *
-     * @param location the location of the chunk to brush
+     * @param location the location of the chunk to generate
      * @param relX the relative chunk X of the chunk
      * @param relZ the relative Z
      * @param random the generator random
@@ -54,12 +54,12 @@ public abstract class AbstractOverlayBrush {
      * @param manipulator the tool used to set block types in the chunk and to cross
      *                    chunk boundaries if needed
      */
-    public abstract void brush(ChunkLocation location,
-                               int relX,
-                               int relZ,
-                               GeneratorRandom random,
-                               AtomicReferenceArray<Integer> heights,
-                               ChunkManipulator manipulator);
+    public abstract void generate(ChunkLocation location,
+                                  int relX,
+                                  int relZ,
+                                  GeneratorRandom random,
+                                  AtomicReferenceArray<Integer> heights,
+                                  ChunkManipulator manipulator);
 
     /**
      * Provides special functionality for chunk manipulation

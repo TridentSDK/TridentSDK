@@ -17,27 +17,21 @@
 package net.tridentsdk.base;
 
 /**
- * TODO Write Description
+ * An axis-aligned, rectangular polygon in which entities reside
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
  */
 public class BoundingBox implements Cloneable {
-
-    public double minX;
-    public double minY;
-    public double minZ;
-    public double maxX;
-    public double maxY;
-    public double maxZ;
+    private double minX;
+    private double minY;
+    private double minZ;
+    private double maxX;
+    private double maxY;
+    private double maxZ;
 
     public BoundingBox(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
-        this.minX = minX;
-        this.minY = minY;
-        this.minZ = minZ;
-        this.maxX = maxX;
-        this.maxY = maxY;
-        this.maxZ = maxZ;
+        set(minX, minY, minZ, maxX, maxY, maxZ);
     }
 
     public BoundingBox set(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
@@ -51,33 +45,56 @@ public class BoundingBox implements Cloneable {
     }
 
     public BoundingBox add(double x, double y, double z) {
-        this.minX += x;
-        this.minY += y;
-        this.minZ += z;
-        this.maxX += x;
-        this.maxY += y;
-        this.maxZ += z;
+        this.minX = this.minX() + x;
+        this.minY = this.minY() + y;
+        this.minZ = this.minZ() + z;
+        this.maxX = this.maxX() + x;
+        this.maxY = this.maxY() + y;
+        this.maxZ = this.maxZ() + z;
         return this;
     }
 
     public BoundingBox grow(double x, double y, double z) {
-        return new BoundingBox(this.minX - x, this.minY - y, this.minZ - z, this.maxX + x, this.maxY + y, this.maxZ + z);
+        return new BoundingBox(this.minX() - x, this.minY() - y, this.minZ() - z, this.maxX() + x, this.maxY() + y, this.maxZ() + z);
     }
 
     public BoundingBox shrink(double x, double y, double z) {
-        return new BoundingBox(this.minX + x, this.minY + y, this.minZ + z, this.maxX - x, this.maxY - y, this.maxZ - z);
+        return new BoundingBox(this.minX() + x, this.minY() + y, this.minZ() + z, this.maxX() - x, this.maxY() - y, this.maxZ() - z);
     }
 
     public boolean collidesWith(BoundingBox box){
-        return !(this.maxX < box.minX || this.minX > box.maxX) && !(this.maxY < box.minY || this.minY > box.maxY) && !(this.maxZ < box.minZ || this.minZ > box.maxZ);
+        return !(this.maxX() < box.minX() || this.minX() > box.maxX()) && !(this.maxY() < box.minY() || this.minY() > box.maxY()) && !(this.maxZ() < box.minZ() || this.minZ() > box.maxZ());
     }
 
     public BoundingBox clone() {
-        return new BoundingBox(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ);
+        return new BoundingBox(this.minX(), this.minY(), this.minZ(), this.maxX(), this.maxY(), this.maxZ());
     }
 
     public String toString() {
-        return "BoundingBox{" + this.minX + ", " + this.minY + ", " + this.minZ + " -> " + this.maxX + ", " + this.maxY + ", " + this.maxZ + "}";
+        return "BoundingBox{" + this.minX() + ", " + this.minY() + ", " + this.minZ() + " -> " + this.maxX() + ", " + this.maxY() + ", " + this.maxZ() + "}";
     }
 
+    public double minX() {
+        return minX;
+    }
+
+    public double minY() {
+        return minY;
+    }
+
+    public double minZ() {
+        return minZ;
+    }
+
+    public double maxX() {
+        return maxX;
+    }
+
+    public double maxY() {
+        return maxY;
+    }
+
+    public double maxZ() {
+        return maxZ;
+    }
 }

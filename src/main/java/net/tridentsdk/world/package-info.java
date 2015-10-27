@@ -16,6 +16,6 @@
  */
 
 /**
- * World access: Chunks, dimensions, and loading, and later world generation
+ * World access: Chunks, dimensions, and loading, and world generation
  */
 package net.tridentsdk.world;

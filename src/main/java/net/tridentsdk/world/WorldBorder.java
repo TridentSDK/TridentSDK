@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world;
 
-import net.tridentsdk.base.Position;
+import net.tridentsdk.util.Pair;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -25,22 +25,44 @@ import javax.annotation.concurrent.ThreadSafe;
  *
  * @author The TridentSDK Team
  * @since 0.4-alpha
+ * @deprecated the world border is deprecated because the units which are used are unclear and are subject to change at
+ *             any time. Use at your own risk.
  */
 @ThreadSafe
+@Deprecated
 public interface WorldBorder {
     /**
      * Gets the size of the worldborder
      *
      * @return The size of the worldborder
      */
-    double size();
+    int size();
+
+    /**
+     * Modifies the border square's length and width
+     *
+     * @param mod a positive integer to indicate an expansion by that amount, a negative to indicate a regression by
+     *            that amount
+     * @param time the time over which the border will expand or contract, 0 to apply immediately
+     */
+    void modify(int mod, int time);
 
     /**
      * Gets the position where the worldborder is centered
      *
+     * <p>The returned immutable pair of integers represents the X and Y coordinates respectively</p>
+     *
      * @return The position where the worldborder is centered
      */
-    Position center();
+    Pair<Integer, Integer> center();
+
+    /**
+     * Sets the center X and Z coordinates for the border
+     *
+     * @param x the X coordinate
+     * @param z the Z coordinate
+     */
+    void setCenter(int x, int z);
 
     /**
      * Gets to what size a border is contracting, 60000000 by default

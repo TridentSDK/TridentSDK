@@ -18,8 +18,8 @@
 package net.tridentsdk.world;
 
 import net.tridentsdk.registry.Registered;
-import net.tridentsdk.world.gen.AbstractGenerator;
-import net.tridentsdk.world.gen.AbstractOverlayBrush;
+import net.tridentsdk.world.gen.ChunkGenerator;
+import net.tridentsdk.world.gen.FeatureGenerator;
 import net.tridentsdk.world.settings.*;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -48,7 +48,7 @@ public interface WorldLoader extends WorldSettings {
      * @param clas the class of the generator to use
      * @return the new world loaer
      */
-    static WorldLoader newLoader(Class<? extends AbstractGenerator> clas) {
+    static WorldLoader newLoader(Class<? extends ChunkGenerator> clas) {
         return Registered.impl().newLoader(clas);
     }
 
@@ -129,14 +129,14 @@ public interface WorldLoader extends WorldSettings {
      *
      * @return the generation abstraction to generated chunks
      */
-    AbstractGenerator generator();
+    ChunkGenerator generator();
 
     /**
      * Obtains a mutable collection of the overlay brushes used to generate the world
      *
      * @return the overlay brushes
      */
-    List<AbstractOverlayBrush> brushes();
+    List<FeatureGenerator> brushes();
 
     /**
      * Sets the seed used to generate the world

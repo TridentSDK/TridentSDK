@@ -31,14 +31,15 @@ import net.tridentsdk.service.Transactions;
 import net.tridentsdk.world.MassChange;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.WorldLoader;
-import net.tridentsdk.world.gen.AbstractGenerator;
+import net.tridentsdk.world.gen.ChunkGenerator;
 
 import java.util.Map;
 
 @InternalUseOnly
 public interface Implementation {
     SelectableThreadPool newPool(int i, String s);
-    WorldLoader newLoader(Class<? extends AbstractGenerator> g);
+
+    WorldLoader newLoader(Class<? extends ChunkGenerator> g);
     MassChange newMc(World world);
 
     Map<String, World> worlds();

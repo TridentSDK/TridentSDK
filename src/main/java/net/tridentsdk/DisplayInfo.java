@@ -81,12 +81,12 @@ public class DisplayInfo {
     }
 
     /**
-     * Obtains the minecraft server version
+     * Obtains the highest minecraft server version which supports clients
      *
-     * @return
+     * @return the minecraft server version
      */
     public String version() {
-        return "1.8";
+        return "1.8.8";
     }
 
     /**
@@ -117,6 +117,11 @@ public class DisplayInfo {
         return maxPlayers;
     }
 
+    /**
+     * Obtains the amount of players on the server
+     *
+     * @return the amount of players on the server
+     */
     public int playerCount() {
         return Registered.players().size();
     }

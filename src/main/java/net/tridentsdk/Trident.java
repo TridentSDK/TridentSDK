@@ -36,7 +36,6 @@ import java.nio.file.Paths;
 @ThreadSafe
 public final class Trident {
     private static final ExposedSecurity SECURITY = new ExposedSecurity();
-
     private static class ExposedSecurity extends SecurityManager {
         @Override
         protected Class[] getClassContext() {
@@ -65,11 +64,13 @@ public final class Trident {
      *
      * @param s the server to set
      */
+    @InternalUseOnly
     public static void setServer(Server s) {
         Preconditions.checkState(isTrident(), "Server instance can only be set by TridentSDK!");
         server = s;
     }
 
+    @InternalUseOnly
     public static boolean isTrident() {
         return findCaller(3).getClassLoader().equals(Trident.class.getClassLoader());
     }
