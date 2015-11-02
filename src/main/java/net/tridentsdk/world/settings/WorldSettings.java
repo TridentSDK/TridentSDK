@@ -90,6 +90,15 @@ public interface WorldSettings {
      */
     Set<String> gameRules();
 
+    boolean allowPvp();
+
+    /**
+     *
+     *
+     * @param enable
+     */
+    void setAllowPvp(boolean enable);
+
     /**
      * Checks if structures are generated in a world (Stronghold, villages, dungeons)
      *

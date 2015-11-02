@@ -20,7 +20,7 @@ package net.tridentsdk.world;
 import net.tridentsdk.registry.Registered;
 import net.tridentsdk.world.gen.ChunkGenerator;
 import net.tridentsdk.world.gen.FeatureGenerator;
-import net.tridentsdk.world.settings.*;
+import net.tridentsdk.world.settings.WorldCreateOptions;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.List;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface WorldLoader extends WorldSettings {
+public interface WorldLoader {
     /**
      * Creates a new world loader using the default generator
      *
@@ -125,6 +125,13 @@ public interface WorldLoader extends WorldSettings {
     void saveChunk(Chunk chunk);
 
     /**
+     * Options used for creating the world
+     *
+     * @return the world creation options
+     */
+    WorldCreateOptions options();
+
+    /**
      * The generator used to load new chunks used by this world loader
      *
      * @return the generation abstraction to generated chunks
@@ -137,60 +144,4 @@ public interface WorldLoader extends WorldSettings {
      * @return the overlay brushes
      */
     List<FeatureGenerator> brushes();
-
-    /**
-     * Sets the seed used to generate the world
-     *
-     * @param seed the seed used to generate the world
-     * @return the current instance
-     */
-    WorldLoader seed(long seed);
-
-    /**
-     * Sets the dimension for the world generator
-     *
-     * @param dimension the dimension
-     * @return the current instance
-     */
-    WorldLoader dimension(Dimension dimension);
-
-    /**
-     * Sets the difficulty of the world to be generated
-     *
-     * @param difficulty the difficulty
-     * @return the the current instance
-     */
-    WorldLoader difficulty(Difficulty difficulty);
-
-    /**
-     * Sets the gamemode of the world to be generated
-     *
-     * @param gameMode the gamemode
-     * @return the current instance
-     */
-    WorldLoader gameMode(GameMode gameMode);
-
-    /**
-     * Sets the leveltype of the world to be generated
-     *
-     * @param levelType the leveltype
-     * @return the current instance
-     */
-    WorldLoader level(LevelType levelType);
-
-    /**
-     * Sets the game rules of the world to be generated
-     *
-     * @param rules the game rules
-     * @return the current instance
-     */
-    WorldLoader rule(String... rules);
-
-    /**
-     * Sets whether or not to generate structures (caves, villages, etc)
-     *
-     * @param gen {@code true} to generate structures
-     * @return the current instance
-     */
-    WorldLoader structures(boolean gen);
 }
