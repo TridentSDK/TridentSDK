@@ -54,7 +54,7 @@ import java.util.function.Predicate;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface World extends Cloneable, WorldSettings {
+public interface World extends Cloneable {
     /**
      * Gets the name of the world
      *
@@ -131,6 +131,13 @@ public interface World extends Cloneable, WorldSettings {
      * @return the weather controller
      */
     WeatherConditions weather();
+
+    /**
+     * Obtains the settings which modify the behavior of the world
+     *
+     * @return the world settigs
+     */
+    WorldSettings settings();
 
     /**
      * Obtains the world border properties of this world

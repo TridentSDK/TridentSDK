@@ -90,12 +90,17 @@ public interface WorldSettings {
      */
     Set<String> gameRules();
 
+    /**
+     * Obtains the boolean value indicating the allowance or disallowance of pvp
+     *
+     * @return {@code true} to allow, {@code false} to disallow
+     */
     boolean allowPvp();
 
     /**
+     * Allows or disallows player vs. player damage
      *
-     *
-     * @param enable
+     * @param enable {@code true} to allow, {@code false} to disallow
      */
     void setAllowPvp(boolean enable);
 

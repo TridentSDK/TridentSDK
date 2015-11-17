@@ -1,14 +1,30 @@
+/*
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2014 The TridentSDK Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package net.tridentsdk.world.settings;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.util.FastRandom;
 import net.tridentsdk.world.gen.ChunkGenerator;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.Map;
 
 /**
- * World settings which are applid when a world is created by a worldloader
+ * World settings which are applied when a world is created by a worldloader
  *
  * @author The TridentSDK Team
  */
@@ -17,11 +33,12 @@ public final class WorldCreateOptions {
     private volatile Difficulty difficulty = Difficulty.NORMAL;
     private volatile GameMode gameMode = GameMode.SURVIVAL;
     private volatile LevelType levelType = LevelType.DEFAULT;
-    private final Set<String> rules = Sets.newHashSet();
+    private final Map<GameRule, GameRule.Value> rules = Maps.newConcurrentMap();
     private volatile Class<? extends ChunkGenerator> generator = null;
     private volatile boolean structures = true;
     private volatile boolean pvp = true;
     private volatile long seed = FastRandom.random();
+    private final Position spawn = Position.create(null, 0, 0, 0);
 
     /**
      * Sets the dimension for the world generator
@@ -70,22 +87,12 @@ public final class WorldCreateOptions {
     /**
      * Sets the game rules of the world to be generated
      *
-     * @param rules the game rules
+     * @param rule the game rule to add
+     * @param value the game rule's parameter value
      * @return the current instance
      */
-    public WorldCreateOptions rule(String... rules) {
-        Collections.addAll(this.rules, rules);
-        return this;
-    }
-
-    /**
-     * Sets the game rules of the world to be generated
-     *
-     * @param rules the game rules
-     * @return the current instance
-     */
-    public WorldCreateOptions rule(Set<String> rules) {
-        this.rules.addAll(rules);
+    public WorldCreateOptions rule(GameRule rule, GameRule.Value value) {
+        rules.put(rule, value);
         return this;
     }
 
@@ -188,16 +195,30 @@ public final class WorldCreateOptions {
     }
 
     /**
-     * Checks whether the ru
+     * Checks whether the rule is enabled
      *
-     * @param rule
-     * @return
+     * @param rule the game rule
+     * @return {@code true} if the game rule is equal to the provided argument
      */
-    public boolean isRule(String rule) {
-        return rules.contains(rule);
+    public boolean isRule(GameRule rule, GameRule.Value value) {
+        if (value.isInteger()) {
+            GameRule.Value v = rules.get(rule);
+            if (v == null) {
+                return rule.intEqualToValue(value.asInt());
+            } else {
+                return v.asInt() == value.asInt();
+            }
+        } else {
+            GameRule.Value v = rules.get(rule);
+            if (v == null) {
+                return rule.boolEqualToValue(value.asBoolean());
+            } else {
+                return v.asBoolean() == value.asBoolean();
+            }
+        }
     }
 
-    public Set<String> gameRules() {
+    public Map<GameRule, GameRule.Value> gameRules() {
         return rules;
     }
 
