@@ -16,8 +16,9 @@
  */
 package net.tridentsdk.world.settings;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
 import net.tridentsdk.docs.AccessNoDoc;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Gamerules are applied on a per-world basis and are options for more advanced/low-level properties of the world
@@ -33,50 +34,50 @@ public enum GameRule {
     /**
      * Whether command blocks should notify admins when they perform commands
      */
-    COMMAND_BLOCK_OUTPUT("commandBlockOutput", Value.newBoolean(true)),
+    COMMAND_BLOCK_OUTPUT("commandBlockOutput", Value.of(true)),
     /**
      * Whether time progresses
      */
-    DO_DAYLIGHT_CYCLE("doDaylightCycle", Value.newBoolean(true)),
+    DO_DAYLIGHT_CYCLE("doDaylightCycle", Value.of(true)),
     /**
      * Whether entities that are not mobs should have drops
      */
-    DO_ENTITY_DROPS("doEntityDrops", Value.newBoolean(true)),
+    DO_ENTITY_DROPS("doEntityDrops", Value.of(true)),
     /**
      * Whether fire should spread and naturally extinguish
      */
-    DO_FIRE_TICK("doFireTick", Value.newBoolean(true)),
+    DO_FIRE_TICK("doFireTick", Value.of(true)),
     /**
      * Whether mobs should drop items
      */
-    DO_MOB_LOOT("doMobLoot", Value.newBoolean(true)),
+    DO_MOB_LOOT("doMobLoot", Value.of(true)),
     /**
      * Whether mobs should naturally spawn
      */
-    DO_MOB_SPAWNING("doMobSpawning", Value.newBoolean(true)),
+    DO_MOB_SPAWNING("doMobSpawning", Value.of(true)),
     /**
      * Whether blocks should have drops
      */
-    DO_TILE_DROPS("doTileDrops", Value.newBoolean(true)),
+    DO_TILE_DROPS("doTileDrops", Value.of(true)),
     /**
      * Whether the player should keep items in their inventory after death
      */
-    KEEP_INVENTORY("keepInventory", Value.newBoolean(false)),
+    KEEP_INVENTORY("keepInventory", Value.of(false)),
     /**
      * Whether to log admin commands to server log
      */
-    LOG_ADMIN_COMMANDS("logAdminCommands", Value.newBoolean(true)),
+    LOG_ADMIN_COMMANDS("logAdminCommands", Value.of(true)),
     /**
      * Whether creepers, zombies, endermen, ghasts, withers, ender dragons, rabbits, sheep,
      * and villagers should be able to change blocks and whether villagers, zombies, skeletons,
      * and zombie pigmen can pick up items
      */
-    MOB_GRIEFING("mobGriefing", Value.newBoolean(true)),
+    MOB_GRIEFING("mobGriefing", Value.of(true)),
     /**
      * Whether the player can regenerate health naturally if their hunger is full enough (doesn't affect external
      * healing, such as golden apples, the Regeneration effect, etc.)
      */
-    NATURAL_REGENERATION("naturalRegeneration", Value.newBoolean(true)),
+    NATURAL_REGENERATION("naturalRegeneration", Value.of(true)),
     /**
      * How often a random block tick occurs (such as plant growth, leaf decay, etc.) per chunk section per game tick.
      *
@@ -84,24 +85,24 @@ public enum GameRule {
      *
      * <p>0 will disable random ticks, higher numbers will increase random ticks</p>
      */
-    RANDOM_TICK_SPEED("randomTickSpeed", Value.newInteger(3)),
+    RANDOM_TICK_SPEED("randomTickSpeed", Value.of(3)),
     /**
      * Whether the debug screen shows all or reduced information
      */
-    REDUCED_DEBUG_INFO("reducedDebugInfo", Value.newBoolean(false)),
+    REDUCED_DEBUG_INFO("reducedDebugInfo", Value.of(false)),
     /**
      * Whether the feedback from commands executed by a player should show up in chat. Also affects the default behavior
      * of whether command blocks store their output text
      */
-    SEND_COMMAND_FEEDBACK("sendCommandFeedback", Value.newBoolean(true)),
+    SEND_COMMAND_FEEDBACK("sendCommandFeedback", Value.of(true)),
     /**
      * Whether a message appears in chat when a player dies
      */
-    SHOW_DEATH_MESSAGES("showDeathMessages", Value.newBoolean(true)),
+    SHOW_DEATH_MESSAGES("showDeathMessages", Value.of(true)),
     /**
      * Whether players in spectator mode can generate chunks
      */
-    SPECTATORS_GENERATE_CHUNKS("spectatorsGenerateChunks", Value.newBoolean(true));
+    SPECTATORS_GENERATE_CHUNKS("spectatorsGenerateChunks", Value.of(true));
 
     private final Value defValue;
     private final String raw;
@@ -181,7 +182,7 @@ public enum GameRule {
          * @param integer the game rule parameter
          * @return the wrapped value
          */
-        public static Value newInteger(int integer) {
+        public static Value of(int integer) {
             return new Value(integer);
         }
 
@@ -191,7 +192,7 @@ public enum GameRule {
          * @param bool the game rule parameter
          * @return the wrapped value
          */
-        public static Value newBoolean(boolean bool) {
+        public static Value of(boolean bool) {
             return new Value(bool);
         }
 
