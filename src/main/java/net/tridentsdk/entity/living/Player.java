@@ -25,7 +25,7 @@ import net.tridentsdk.inventory.Item;
 import net.tridentsdk.meta.MessageBuilder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
 import net.tridentsdk.service.PermissionOwner;
-import net.tridentsdk.title.TitleReciever;
+import net.tridentsdk.title.TitleReceiver;
 import net.tridentsdk.world.settings.GameMode;
 
 import java.util.Locale;
@@ -36,7 +36,7 @@ import java.util.Locale;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner, TitleReciever {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner, TitleReceiver {
     // TODO: Use word settings?
 
     /**

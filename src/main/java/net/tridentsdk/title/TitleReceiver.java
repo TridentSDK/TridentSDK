@@ -4,7 +4,7 @@ package net.tridentsdk.title;
  * A player entity or something that can receive titles.
  * @author PizzaCrust
  */
-public interface TitleReciever {
+public interface TitleReceiver {
     /**
      * Sends a regular title
      * @param title the title message
