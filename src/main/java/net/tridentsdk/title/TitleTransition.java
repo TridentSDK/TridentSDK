@@ -18,7 +18,7 @@ package net.tridentsdk.title;
 
 /**
  * Represents a title's transition.
- * @author PizzaCrust
+ * @author The TridentSDK Team
  */
 public class TitleTransition {
     /**

@@ -18,7 +18,7 @@ package net.tridentsdk.title;
 
 /**
  * A player entity or something that can receive titles.
- * @author PizzaCrust
+ * @author The TridentSDK Team
  */
 public interface TitleReceiver {
     /**
