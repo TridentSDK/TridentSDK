@@ -33,7 +33,6 @@ public interface TitleReceiver {
      * Sends a title with a subtitle
      *
      * @param title the title message
-     *
      * @param subtitle the subtitle message
      */
     void sendTitle(String title, String subtitle);
@@ -42,7 +41,6 @@ public interface TitleReceiver {
      * Sends a regular time with a transition
      *
      * @param title the title message
-     *
      * @param transition the transition object for the title
      */
     void sendTitle(String title, TitleTransition transition);
@@ -51,9 +49,7 @@ public interface TitleReceiver {
      * Sends a title with a subtitle and a transition
      *
      * @param title the title message
-     *
      * @param subtitle the subtitle message
-     *
      * @param transition the transition object for the title
      */
     void sendTitle(String title, String subtitle, TitleTransition transition);

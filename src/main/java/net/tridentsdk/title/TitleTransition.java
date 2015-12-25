@@ -41,9 +41,7 @@ public class TitleTransition {
      * Creates a title transition object
      *
      * @param fadeIn the fade in time
-     *
      * @param time the time of the title
-     *
      * @param fadeOut the fade out time
      */
     public TitleTransition(int fadeIn, int time, int fadeOut){
