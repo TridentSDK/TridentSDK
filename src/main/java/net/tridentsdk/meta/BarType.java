@@ -6,7 +6,14 @@ package net.tridentsdk.meta;
  * @author The TridentSDK Team
  */
 public enum BarType {
+    /**
+     * The action bar.
+     */
     ACTION_BAR(0),
+
+    /**
+     * The boss bar.
+     */
     BOSS_BAR(1);
 
     private int id;
