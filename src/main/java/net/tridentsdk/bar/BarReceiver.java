@@ -1,5 +1,7 @@
 package net.tridentsdk.bar;
 
+import net.tridentsdk.meta.BarType;
+
 /**
  * A player entity or something that can recieve bars.
  *

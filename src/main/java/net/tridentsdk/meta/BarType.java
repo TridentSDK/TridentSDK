@@ -1,4 +1,4 @@
-package net.tridentsdk.bar;
+package net.tridentsdk.meta;
 
 /**
  * Enum of all bar types.
