@@ -5,7 +5,7 @@ package net.tridentsdk.bar;
  *
  * @author The TridentSDK Team
  */
-public interface BarReciever {
+public interface BarReceiver {
     /**
      * Sends a bar accordingly to the type and the message.
      *

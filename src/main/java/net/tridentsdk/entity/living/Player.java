@@ -18,7 +18,7 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.Messagable;
-import net.tridentsdk.bar.BarReciever;
+import net.tridentsdk.bar.BarReceiver;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
 import net.tridentsdk.entity.traits.WindowHolder;
@@ -37,7 +37,7 @@ import java.util.Locale;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner, TitleReceiver, BarReciever {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner, TitleReceiver, BarReceiver {
     // TODO: Use word settings?
 
     /**
