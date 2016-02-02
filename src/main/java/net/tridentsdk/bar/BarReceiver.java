@@ -31,12 +31,4 @@ public interface BarReceiver {
      * @param message the message on the bar
      */
     void sendBar(BarType barType, String message);
-
-    /**
-     * Sends a bar accordingly to the type id and the message.
-     *
-     * @param typeId the type id of the bar
-     * @param message the message on the bar
-     */
-    void sendBar(int typeId, String message);
 }
