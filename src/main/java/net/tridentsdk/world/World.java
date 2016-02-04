@@ -199,9 +199,9 @@ public interface World extends Cloneable {
      * Strikes lightning at the given location.
      *
      * @param location the location where lightning will be striked at
-     * @param fake if the lightning is just a effect or not
+     * @param isEffect determines if the lightning is just a effect or damages
      */
-    void lightning(Position location, boolean fake);
+    void lightning(Position location, boolean isEffect);
 
     /**
      * Sets the time of the world
