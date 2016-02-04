@@ -194,4 +194,19 @@ public interface World extends Cloneable {
      * @return A new instance of VisualEffect
      */
     SoundEffect playSound(SoundEffectType sound);
+
+    /**
+     * Strikes lightning at the given location.
+     *
+     * @param location the location where lightning will be striked at
+     * @param fake if the lightning is just a effect or not
+     */
+    void lightning(Position location, boolean fake);
+
+    /**
+     * Sets the time of the world
+     *
+     * @param time the new time of the world
+     */
+    void setTime(long time);
 }
