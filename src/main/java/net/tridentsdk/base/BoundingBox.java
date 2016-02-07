@@ -62,6 +62,99 @@ public class BoundingBox implements Cloneable {
         return new BoundingBox(this.minX() + x, this.minY() + y, this.minZ() + z, this.maxX() - x, this.maxY() - y, this.maxZ() - z);
     }
 
+    public BoundingBox shift(double x, double y, double z) {
+        return new BoundingBox(this.minX() + x, this.minY() + y, this.minZ() + z, this.maxX() + x, this.maxY() + y, this.maxZ() + z);
+    }
+
+    public BoundingBox weirdGrow(double x, double y, double z) {
+        double newMinX = this.minX;
+        double newMinY = this.minY;
+        double newMinZ = this.minZ;
+        double newMaxX = this.maxX;
+        double newMaxY = this.maxY;
+        double newMaxZ = this.maxZ;
+
+        if (x < 0.0) {
+            newMinX += x;
+        } else if (x > 0.0) {
+            newMaxX += x;
+        }
+
+        if (y < 0.0) {
+            newMinY += y;
+        } else if (y > 0.0) {
+            newMaxY += y;
+        }
+
+        if (z < 0.0) {
+            newMinZ += z;
+        } else if (z > 0.0) {
+            newMaxZ += z;
+        }
+
+        return new BoundingBox(newMinX, newMinY, newMinZ, newMaxX, newMaxY, newMaxZ);
+    }
+
+    public double somethingToDoWithX(BoundingBox boundingBox, double motionX) {
+        if (boundingBox.maxY <= this.minY || boundingBox.minY >= this.maxY || boundingBox.maxZ <= this.minZ || boundingBox.minZ >= this.maxZ) {
+            return motionX;
+        }
+
+        if (motionX > 0.0 && boundingBox.maxX <= this.minX) {
+            double newMotionX = this.minX - boundingBox.maxX;
+            if (newMotionX < motionX) {
+                return newMotionX;
+            }
+        } else if (motionX < 0.0 && boundingBox.minX >= this.maxX) {
+            double newMotionX = this.maxX - boundingBox.minX;
+            if(newMotionX > motionX){
+                return newMotionX;
+            }
+        }
+
+        return motionX;
+    }
+
+    public double somethingToDoWithY(BoundingBox boundingBox, double motionY) {
+        if (boundingBox.maxX <= this.minX || boundingBox.minX >= this.maxX || boundingBox.maxZ <= this.minZ || boundingBox.minZ >= this.maxZ) {
+            return motionY;
+        }
+
+        if (motionY > 0.0 && boundingBox.maxY <= this.minY) {
+            double newMotionY = this.minY - boundingBox.maxY;
+            if (newMotionY < motionY) {
+                return newMotionY;
+            }
+        } else if (motionY < 0.0 && boundingBox.minY >= this.maxY) {
+            double newMotionY = this.maxY - boundingBox.minY;
+            if(newMotionY > motionY){
+                return newMotionY;
+            }
+        }
+
+        return motionY;
+    }
+
+    public double somethingToDoWithZ(BoundingBox boundingBox, double motionZ) {
+        if (boundingBox.maxX <= this.minX || boundingBox.minX >= this.maxX || boundingBox.maxY <= this.minY || boundingBox.minY >= this.maxY) {
+            return motionZ;
+        }
+
+        if (motionZ > 0.0 && boundingBox.maxZ <= this.minZ) {
+            double newMotionZ = this.minZ - boundingBox.maxZ;
+            if (newMotionZ < motionZ) {
+                return newMotionZ;
+            }
+        } else if (motionZ < 0.0 && boundingBox.minZ >= this.maxZ) {
+            double newMotionZ = this.maxZ - boundingBox.minZ;
+            if(newMotionZ > motionZ){
+                return newMotionZ;
+            }
+        }
+
+        return motionZ;
+    }
+
     public boolean collidesWith(BoundingBox box){
         return !(this.maxX() < box.minX() || this.minX() > box.maxX()) && !(this.maxY() < box.minY() || this.minY() > box.maxY()) && !(this.maxZ() < box.minZ() || this.minZ() > box.maxZ());
     }
