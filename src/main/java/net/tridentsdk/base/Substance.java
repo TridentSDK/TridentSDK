@@ -417,7 +417,8 @@ public enum Substance {
     RECORD_9("2264", 1),
     RECORD_10("2265", 1),
     RECORD_11("2266", 1),
-    RECORD_12("2267", 1);
+    RECORD_12("2267", 1),
+    SHIELD("minecraft:shield", 1);
 
     private final Pattern PATTERN = Pattern.compile("_");
     private final String id;
