@@ -33,14 +33,14 @@ import java.io.IOException;
  * @since 0.3-alpha-DP
  */
 @Immutable
-public class DisplayInfo {
+public class PingInfo {
     private final Config config = new Config(Trident.fileContainer().resolve("server.json")); // Init code
     private final String motd = config.getString("motd", Defaults.MOTD);
     private final File file = new File(config.getString("image-position", Defaults.MOTD_IMAGE_LOCATION));
     private final int maxPlayers = config.getInt("max-players", Defaults.MAX_PLAYERS);
     private final boolean canChangeImage = config.getBoolean("image-changing-allowed", Defaults.IMAGE_CHANGING_ALLOWED);
 
-    public DisplayInfo() {
+    public PingInfo() {
     }
 
     /**
@@ -86,7 +86,7 @@ public class DisplayInfo {
      * @return the minecraft server version
      */
     public String version() {
-        return "1.8.8";
+        return "1.9";
     }
 
     /**

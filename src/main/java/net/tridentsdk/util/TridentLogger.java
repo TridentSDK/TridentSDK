@@ -19,7 +19,7 @@ package net.tridentsdk.util;
 
 import com.google.common.collect.ForwardingCollection;
 import com.google.common.collect.ImmutableList;
-import net.tridentsdk.ServerConsole;
+import net.tridentsdk.Console;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.docs.Policy;
@@ -214,7 +214,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      * @param item the item to log
      */
     public void log(String item) {
-        internal().info(item + ServerConsole.RESET);
+        internal().info(item + Console.RESET);
     }
 
     /**
@@ -232,7 +232,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      * @param message the message to log
      */
     public void error(String message) {
-        internal().error(ServerConsole.RED + message + ServerConsole.RESET);
+        internal().error(Console.RED + message + Console.RESET);
     }
 
     /**
@@ -241,7 +241,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      * @param item the item to log
      */
     public void warn(String item) {
-        internal().warn(ServerConsole.YELLOW + item + ServerConsole.RESET);
+        internal().warn(Console.YELLOW + item + Console.RESET);
     }
 
     /**
@@ -250,7 +250,7 @@ public final class TridentLogger extends ForwardingCollection<TridentLogger> imp
      * @param item the item to log
      */
     public void success(String item) {
-        log(ServerConsole.GREEN + item);
+        log(Console.GREEN + item);
     }
 
     /**

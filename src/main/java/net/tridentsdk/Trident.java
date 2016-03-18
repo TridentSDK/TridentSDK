@@ -94,7 +94,7 @@ public final class Trident {
      *
      * @return the display information
      */
-    public static DisplayInfo info() {
+    public static PingInfo info() {
         return server.info();
     }
 
@@ -137,7 +137,7 @@ public final class Trident {
      *
      * @return the console
      */
-    public static ServerConsole console() {
+    public static Console console() {
         return server.console();
     }
 

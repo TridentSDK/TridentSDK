@@ -28,7 +28,7 @@ import net.tridentsdk.plugin.cmd.PlatformColor;
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
-public interface ServerConsole extends Messagable, CommandIssuer {
+public interface Console extends Messagable, CommandIssuer {
     String RESET = PlatformColor.forColor("reset");
     String BLACK = PlatformColor.forColor("black");
     String RED = PlatformColor.forColor("red");
