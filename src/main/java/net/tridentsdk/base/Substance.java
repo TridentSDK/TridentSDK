@@ -406,6 +406,7 @@ public enum Substance {
     JUNGLE_DOOR("429"),             // Can place
     ACACIA_DOOR("430"),             // Can place
     DARK_OAK_DOOR("431"),           // Can place
+    SHIELD("442", 1),
     GOLD_RECORD("2256", 1),
     GREEN_RECORD("2257", 1),
     RECORD_3("2258", 1),
@@ -417,8 +418,7 @@ public enum Substance {
     RECORD_9("2264", 1),
     RECORD_10("2265", 1),
     RECORD_11("2266", 1),
-    RECORD_12("2267", 1),
-    SHIELD("minecraft:shield", 1);
+    RECORD_12("2267", 1);
 
     private final Pattern PATTERN = Pattern.compile("_");
     private final String id;
