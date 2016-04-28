@@ -16,13 +16,11 @@
  */
 
 /**
- * This package contains documentation pertaining to the
- * documentation of properties and policies pertaining to
- * both the API and how the implementation is supposed to
- * work.
+ * This is the top-level package for all API classes.
  *
- * <p>The usage of these annotations do not produce any
- * semantic effects. Their use is for informational purposes
- * only.</p>
+ * <p>Only one class is directly contained in this package
+ * for simplicity reasons.</p>
+ *
+ * @see net.tridentsdk.Server
  */
-package com.tridentsdk.doc;
+package net.tridentsdk;

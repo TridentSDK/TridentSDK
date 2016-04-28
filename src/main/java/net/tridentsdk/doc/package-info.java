@@ -16,10 +16,13 @@
  */
 
 /**
- * This package contains "base" representation of Minecraft
- * objects such as blocks and specific data types associated
- * with base classes.
+ * This package contains documentation pertaining to the
+ * documentation of properties and policies pertaining to
+ * both the API and how the implementation is supposed to
+ * work.
  *
- * @see com.tridentsdk.base.Block
+ * <p>The usage of these annotations do not produce any
+ * semantic effects. Their use is for informational purposes
+ * only.</p>
  */
-package com.tridentsdk.base;
+package net.tridentsdk.doc;

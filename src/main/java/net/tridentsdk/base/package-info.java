@@ -15,18 +15,11 @@
  * limitations under the License.
  */
 
-package com.tridentsdk.base;
-
-import javax.annotation.concurrent.ThreadSafe;
-
 /**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
+ * This package contains "base" representation of Minecraft
+ * objects such as blocks and specific data types associated
+ * with base classes.
  *
- * @author TridentSDK
- * @since 0.3-alpha-DP
+ * @see net.tridentsdk.base.Block
  */
-@ThreadSafe
-public interface Block {
-    
-}
+package net.tridentsdk.base;

@@ -15,12 +15,18 @@
  * limitations under the License.
  */
 
+package net.tridentsdk.base;
+
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
- * This is the top-level package for all API classes.
+ * This class represents a Minecraft voxel unit that players
+ * may manipulate.
  *
- * <p>Only one class is directly contained in this package
- * for simplicity reasons.</p>
- *
- * @see com.tridentsdk.Server
+ * @author TridentSDK
+ * @since 0.3-alpha-DP
  */
-package com.tridentsdk;
+@ThreadSafe
+public interface Block {
+    
+}

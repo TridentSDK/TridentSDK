@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.tridentsdk;
+package net.tridentsdk;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.Console;
