@@ -28,5 +28,10 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @ThreadSafe
 public interface Block {
-    
+    /**
+     * Obtains the position at which this block is located
+     *
+     * @return the block position
+     */
+    Position pos();
 }

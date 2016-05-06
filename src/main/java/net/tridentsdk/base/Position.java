@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Position is a container class that represents a three-
- * dimensional coordinate within a volume grid.
+ * dimensional coordinate within a specific world.
  *
  * <p>This container also may hold a yaw and pitch values
  * for use with rotatable objects such as entities.</p>
@@ -32,22 +32,13 @@ import java.util.concurrent.atomic.LongAdder;
  */
 @ThreadSafe
 public final class Position extends Vector {
-    // Unpadded 3 coordinate values
-    private volatile double x;
-    private volatile double y;
-    private volatile double z;
+    private static final long serialVersionUID = 5910507790866074403L;
 
-    // private volatile long
-
+    // private final World world;
     private volatile double pitch;
     private volatile double yaw;
 
     private final LongAdder stamp = new LongAdder();
-
-    public double x() {
-        return x;
-    }
-
 
     // TODO
 }

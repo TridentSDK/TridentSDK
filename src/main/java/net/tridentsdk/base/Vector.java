@@ -17,8 +17,11 @@
 
 package net.tridentsdk.base;
 
+import sun.management.counter.LongCounter;
+
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.Serializable;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * A vector is a container of 3 number values that can be
@@ -44,6 +47,8 @@ public class Vector implements Serializable {
     private volatile double x;
     private volatile double y;
     private volatile double z;
+
+    protected final LongAdder writeStamp = new LongAdder();
 
     /**
      * Creates a new Vector object with all 3 values set to
