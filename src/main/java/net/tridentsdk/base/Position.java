@@ -38,7 +38,5 @@ public final class Position extends Vector {
     private volatile double pitch;
     private volatile double yaw;
 
-    private final LongAdder stamp = new LongAdder();
-
     // TODO
 }
