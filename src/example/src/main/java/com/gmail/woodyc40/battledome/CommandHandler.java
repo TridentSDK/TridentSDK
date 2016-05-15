@@ -1,6 +1,6 @@
 package com.gmail.woodyc40.battledome;
 
-import net.tridentsdk.ServerConsole;
+import net.tridentsdk.Console;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.inventory.Item;
@@ -80,7 +80,7 @@ public class CommandHandler extends Command {
     }
 
     @Override
-    public void handleConsole(ServerConsole sender, String arguments, String alias) {
+    public void handleConsole(Console sender, String arguments, String alias) {
         sender.sendRaw(ERROR + "You cannot execute BattleDome commands via the console");
     }
 

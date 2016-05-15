@@ -17,7 +17,7 @@
 
 package net.tridentsdk.meta;
 
-import net.tridentsdk.ServerConsole;
+import net.tridentsdk.Console;
 import net.tridentsdk.plugin.cmd.PlatformColor;
 
 import javax.annotation.Nullable;
@@ -198,10 +198,10 @@ public enum ChatColor {
      * <ul>
      * <li>{@link net.tridentsdk.meta.ChatColor#BLACK}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#DARK_PURPLE} -
-     * {@link ServerConsole#PURPLE}</li>
+     * {@link Console#PURPLE}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#BLUE}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#GREEN}</li>
-     * <li>{@link net.tridentsdk.meta.ChatColor#AQUA} - {@link ServerConsole#CYAN}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#AQUA} - {@link Console#CYAN}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#RED}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#YELLOW}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#WHITE}</li>
@@ -214,23 +214,23 @@ public enum ChatColor {
     public static String consoleFormat(ChatColor color) {
         switch (color) {
             case BLACK:
-                return ServerConsole.BLACK;
+                return Console.BLACK;
             case DARK_PURPLE:
-                return ServerConsole.PURPLE;
+                return Console.PURPLE;
             case BLUE:
-                return ServerConsole.BLUE;
+                return Console.BLUE;
             case GREEN:
-                return ServerConsole.GREEN;
+                return Console.GREEN;
             case AQUA:
-                return ServerConsole.CYAN;
+                return Console.CYAN;
             case RED:
-                return ServerConsole.RED;
+                return Console.RED;
             case YELLOW:
-                return ServerConsole.YELLOW;
+                return Console.YELLOW;
             case WHITE:
-                return ServerConsole.WHITE;
+                return Console.WHITE;
             case RESET:
-                return ServerConsole.RESET;
+                return Console.RESET;
             default:
                 return PlatformColor.EMPTY;
         }

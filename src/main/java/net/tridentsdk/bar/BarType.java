@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.meta;
+package net.tridentsdk.bar;
 
 /**
  * Enum of all bar types.
@@ -30,5 +30,5 @@ public enum BarType {
     /**
      * The boss bar.
      */
-    BOSS_BAR;
+    BOSS_BAR
 }

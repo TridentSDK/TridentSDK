@@ -18,12 +18,12 @@
 package net.tridentsdk.plugin.cmd;
 
 import jdk.nashorn.internal.ir.annotations.Immutable;
-import net.tridentsdk.ServerConsole;
+import net.tridentsdk.Console;
 
 /**
  * ANSI codes for coloring the console
  *
- * <p>Don't use this class if you need console colors. Use {@link ServerConsole}</p>
+ * <p>Don't use this class if you need console colors. Use {@link Console}</p>
  *
  * @author The TridentSDK Team
  * @since 0.3-alpha-DP

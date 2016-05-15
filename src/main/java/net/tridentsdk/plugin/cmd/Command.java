@@ -17,7 +17,7 @@
 
 package net.tridentsdk.plugin.cmd;
 
-import net.tridentsdk.ServerConsole;
+import net.tridentsdk.Console;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.plugin.annotation.CommandDesc;
 
@@ -47,7 +47,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias     the alias for the command
      */
-    public void handleConsole(ServerConsole sender, String arguments, String alias) {
+    public void handleConsole(Console sender, String arguments, String alias) {
         // Method intentionally left blank
     }
 

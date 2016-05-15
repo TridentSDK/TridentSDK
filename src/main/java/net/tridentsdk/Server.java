@@ -50,7 +50,7 @@ public interface Server {
      *
      * @return the server console
      */
-    ServerConsole console();
+    Console console();
 
     /**
      * Gets the server's console logger for the this class
@@ -71,7 +71,7 @@ public interface Server {
      *
      * @return the display information manager
      */
-    DisplayInfo info();
+    PingInfo info();
 
     /**
      * Gets the version of Trident that the server is currently running
