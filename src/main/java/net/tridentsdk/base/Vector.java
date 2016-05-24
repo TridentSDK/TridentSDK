@@ -25,7 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * A vector is a container of 3 number values that can be
- * arbitrarily used or as a directional construct
+ * arbitrarily used or as a directional construct.
  *
  * <p>The three arbitrary values are represented internally
  * as doubles.</p>
@@ -39,13 +39,13 @@ public class Vector implements Serializable {
 
     /** The Vector states holding arbitrary values */
     @GuardedBy("super.lock")
-    private volatile double x;
+    private double x;
     @GuardedBy("super.lock")
-    private volatile double y;
+    private double y;
     @GuardedBy("super.lock")
-    private volatile double z;
+    private double z;
 
-    /** The lock used to protect compound read/writes */
+    /** The lock used to protect compound read/writes. */
     protected final Object lock = new Object();
 
     /**
@@ -57,7 +57,7 @@ public class Vector implements Serializable {
     }
 
     /**
-     * Creates a new Vector object using {@code int}egers
+     * Creates a new Vector object using {@code int}egers.
      *
      * @param x the x value
      * @param y the y value
@@ -68,7 +68,7 @@ public class Vector implements Serializable {
     }
 
     /**
-     * Creates a new Vector object using {@code double}s
+     * Creates a new Vector object using {@code double}s.
      *
      * @param x the x value
      * @param y the y value
@@ -82,31 +82,37 @@ public class Vector implements Serializable {
 
     /**
      * Obtains the {@code double} representation of this
-     * vector's x value
+     * vector's x value.
      *
      * @return the x value
      */
     public double x() {
-        return this.x;
+        synchronized (lock) {
+            return this.x;
+        }
     }
 
     /**
      * Obtains the {@code double} representation of this
-     * vector's y value
+     * vector's y value.
      *
      * @return the y value
      */
     public double y() {
-        return this.y;
+        synchronized (lock) {
+            return this.y;
+        }
     }
 
     /**
      * Obtains the {@code double} representation of this
-     * vector's z value
+     * vector's z value.
      *
      * @return the z value
      */
     public double z() {
-        return this.z;
+        synchronized (lock) {
+            return this.z;
+        }
     }
 }

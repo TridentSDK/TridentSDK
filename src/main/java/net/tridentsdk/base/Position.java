@@ -39,12 +39,9 @@ public final class Position extends Vector {
 
     /** Additional fields representing the state of the
      * position */
-    @GuardedBy("super.lock")
-    private final World world;
-    @GuardedBy("super.lock")
-    private volatile float pitch;
-    @GuardedBy("super.lock")
-    private volatile float yaw;
+    private final World world;    // These fields MAY NOT
+    private volatile float pitch; // be updated along with
+    private volatile float yaw;   // a compound modification
 
     /**
      * Creates a Position in a given world with all
@@ -87,7 +84,7 @@ public final class Position extends Vector {
 
     /**
      * Creates a Position in a given world, {@code double}
-     * Cartesian coordinates, and directional values
+     * Cartesian coordinates, and directional values.
      *
      * @param world the world that this position is set to
      *              reside in
@@ -105,8 +102,8 @@ public final class Position extends Vector {
     }
 
     /**
-     * Obtains the World which this Position is set to
-     * reside in
+     * Obtains the World in which this Position is set to
+     * reside in.
      *
      * @return the world containing this Position
      */
@@ -115,7 +112,7 @@ public final class Position extends Vector {
     }
 
     /**
-     * Obtains the yaw at which this position is pointed at
+     * Obtains the yaw at which this position is pointed to.
      *
      * <p>Yaw = horizontal rotation</p>
      *
@@ -126,7 +123,7 @@ public final class Position extends Vector {
     }
 
     /**
-     * Obtains the pitch at which this position is pointed at
+     * Obtains the pitch at which this position is pointed to.
      *
      * <p>Pitch = vertical rotation</p>
      *
