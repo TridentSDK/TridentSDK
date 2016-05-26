@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2014 The TridentSDK Team
+ * Copyright 2016 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package net.tridentsdk;
 
-package net.tridentsdk.meta.nbt;
-
-import org.junit.Assert;
 import org.junit.Test;
 
-public class ByteTagTest {
-
+public class ServerTest {
     @Test
-    public void testSetValue() throws Exception {
-        ByteTag tag = new ByteTag("tag");
-        Assert.assertEquals(tag.value(), 0);
-
-        tag.setValue((byte) 5);
-        Assert.assertEquals(tag.value(), 5);
-    }
-
-    @Test
-    public void testGetType() throws Exception {
-        ByteTag tag = new ByteTag("tag");
-        Assert.assertEquals(tag.type(), TagType.BYTE);
+    public void testObtainServer() {
     }
 }

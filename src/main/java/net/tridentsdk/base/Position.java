@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2014 The TridentSDK Team
+ * Copyright 2016 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.tridentsdk.base;
 
 import net.tridentsdk.world.World;
@@ -86,8 +85,8 @@ public final class Position extends Vector {
      * Creates a Position in a given world, {@code double}
      * Cartesian coordinates, and directional values.
      *
-     * @param world the world that this position is set to
-     *              reside in
+     * @param world the world in which this position is set
+     *              to reside
      * @param x the x coordinate
      * @param y the y coordinate
      * @param z the z coordinate
@@ -103,7 +102,7 @@ public final class Position extends Vector {
 
     /**
      * Obtains the World in which this Position is set to
-     * reside in.
+     * reside.
      *
      * @return the world containing this Position
      */
@@ -112,7 +111,7 @@ public final class Position extends Vector {
     }
 
     /**
-     * Obtains the yaw at which this position is pointed to.
+     * Obtains the yaw at which this position is pointed.
      *
      * <p>Yaw = horizontal rotation</p>
      *
@@ -123,7 +122,7 @@ public final class Position extends Vector {
     }
 
     /**
-     * Obtains the pitch at which this position is pointed to.
+     * Obtains the pitch at which this position is pointed.
      *
      * <p>Pitch = vertical rotation</p>
      *

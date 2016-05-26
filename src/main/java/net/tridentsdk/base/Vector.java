@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2014 The TridentSDK Team
+ * Copyright 2016 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.tridentsdk.base;
 
 import javax.annotation.concurrent.GuardedBy;
@@ -80,6 +79,37 @@ public class Vector implements Serializable {
         this.z = z;
     }
 
+    /*
+     * WARNING: This section should be written with extreme
+     * care
+     *
+     * "Sequential consistency is a very strong guarantee
+     * that is made about visibility and ordering in an
+     * execution of a program. Within a sequentially
+     * consistent execution, there is a total order over all
+     * individual actions (such as reads and writes) which
+     * is consistent with the order of the program, and each
+     * individual action is atomic and is immediately
+     * visible to every thread.
+     *
+     * If a program has no data races, then all executions
+     * of the program will appear to be sequentially
+     * consistent." (Gosling et al. 17.4.3)
+     *
+     * Gosling, James, Bill Joy, Guy Steele, Gilad Bracha,
+     * and Alex Buckley. "Chapter 17. Threads and Locks."
+     * Chapter 17. Threads and Locks. Oracle, 13 Feb. 2015.
+     * Web. 26 May 2016.
+     * <http://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html#jls-17.4.3>.
+     *
+     * Individual reads done relative to mutations of the
+     * same state value are thus guaranteed to be atomic.
+     * This only works because a single read will occur
+     * before or after a write of the read state, thus it
+     * does not matter whether this observation is
+     * interleaved with a compound write.
+     */
+
     /**
      * Obtains the {@code double} representation of this
      * vector's x value.
@@ -87,9 +117,7 @@ public class Vector implements Serializable {
      * @return the x value
      */
     public double x() {
-        synchronized (lock) {
-            return this.x;
-        }
+        return this.x;
     }
 
     /**
@@ -99,9 +127,7 @@ public class Vector implements Serializable {
      * @return the y value
      */
     public double y() {
-        synchronized (lock) {
-            return this.y;
-        }
+        return this.y;
     }
 
     /**
@@ -111,8 +137,63 @@ public class Vector implements Serializable {
      * @return the z value
      */
     public double z() {
+        return this.z;
+    }
+
+
+    /**
+     * Adds the values defined in the given vector to the
+     * values contained in this vector.
+     *
+     * @param vector the vector to add
+     */
+    public void add(Vector vector) {
         synchronized (lock) {
-            return this.z;
+            this.x = this.x + vector.x;
+            this.y = this.y + vector.y;
+            this.z = this.z + vector.z;
+        }
+    }
+
+    /**
+     * Subtracts the values defined in the given vector to the
+     * values contained in this vector.
+     *
+     * @param vector the vector to subtract
+     */
+    public void subtract(Vector vector) {
+        synchronized (lock) {
+            this.x = this.x - vector.x;
+            this.y = this.y - vector.y;
+            this.z = this.z - vector.z;
+        }
+    }
+
+    /**
+     * Multiplies the values defined in the given vector to
+     * the values contained in this vector.
+     *
+     * @param vector the vector to multiply
+     */
+    public void multiply(Vector vector) {
+        synchronized (lock) {
+            this.x = this.x * vector.x;
+            this.y = this.y * vector.y;
+            this.z = this.z * vector.z;
+        }
+    }
+
+    /**
+     * Dividess the values defined in the given vector to
+     * the values contained in this vector.
+     *
+     * @param vector the vector to divide
+     */
+    public void divide(Vector vector) {
+        synchronized (lock) {
+            this.x = this.x / vector.x;
+            this.y = this.y / vector.y;
+            this.z = this.z / vector.z;
         }
     }
 }
