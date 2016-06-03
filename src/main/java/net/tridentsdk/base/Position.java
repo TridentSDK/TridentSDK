@@ -18,9 +18,7 @@ package net.tridentsdk.base;
 
 import net.tridentsdk.world.World;
 
-import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Position is a container class that represents a three-
@@ -33,7 +31,7 @@ import java.util.concurrent.atomic.LongAdder;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public final class Position extends Vector {
+public final class Position extends AbstractVector<Position> {
     private static final long serialVersionUID = 5910507790866074403L;
 
     /** Additional fields representing the state of the
