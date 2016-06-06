@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.base;
 
+import net.tridentsdk.doc.Internal;
+
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.Serializable;
@@ -28,12 +30,15 @@ import java.io.Serializable;
  * as doubles.</p>
  *
  * @author TridentSDK
+ * @param <T> this must be the subclass type in order to
+ *            provide the proper functionality
  * @since 0.3-alpha-DP
  */
-@ThreadSafe
+@ThreadSafe @Internal("public access for convenience only")
 public class AbstractVector<T extends AbstractVector<T>> implements Serializable {
     private static final long serialVersionUID = 218773668333902972L;
-
+    /** The lock used to protect compound read/writes. */
+    protected final Object lock = new Object();
     /** The AbstractVector states holding arbitrary values */
     @GuardedBy("lock")
     private volatile double x;
@@ -41,9 +46,6 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     private volatile double y;
     @GuardedBy("lock")
     private volatile double z;
-
-    /** The lock used to protect compound read/writes. */
-    protected final Object lock = new Object();
 
     /**
      * Creates a new AbstractVector object with all 3 values set to

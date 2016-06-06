@@ -129,6 +129,4 @@ public final class Position extends AbstractVector<Position> {
     public float pitch() {
         return this.pitch;
     }
-
-    // TODO
 }

@@ -21,5 +21,6 @@ import org.junit.Test;
 public class ServerTest {
     @Test
     public void testObtainServer() {
+        Server server = Impl.get().svr();
     }
 }
