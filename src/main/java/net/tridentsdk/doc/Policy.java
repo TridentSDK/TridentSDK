@@ -14,12 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.doc;
+package net.tridentsdk;
 
-/**
- *
- * @author TridentSDK
- */
-public @interface Policy {
-    String value();
+import org.junit.Assert;
+import org.junit.Test;
+
+public class ServerTest {
+    static {
+
+    }
+
+    @Test
+    public void testObtainServer() {
+        Server server = Impl.get().svr();
+        Assert.assertNotNull(server);
+    }
+
+    @Test
+    public void testServer() {
+        Server server = Impl.get().svr();
+        server.address();
+        server.reload();
+    }
 }

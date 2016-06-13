@@ -29,6 +29,10 @@ import java.net.InetSocketAddress;
  */
 @ThreadSafe
 public interface Server {
+    static Server instance() {
+        return Impl.get().svr();
+    }
+
     /**
      * This method obtains the address + port number of the
      * server's socket.
