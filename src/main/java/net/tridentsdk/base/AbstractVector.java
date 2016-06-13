@@ -17,6 +17,7 @@
 package net.tridentsdk.base;
 
 import net.tridentsdk.doc.Internal;
+import net.tridentsdk.doc.Policy;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
@@ -41,11 +42,11 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     protected final Object lock = new Object();
     /** The AbstractVector states holding arbitrary values */
     @GuardedBy("lock")
-    private volatile double x;
+    protected volatile double x;
     @GuardedBy("lock")
-    private volatile double y;
+    protected volatile double y;
     @GuardedBy("lock")
-    private volatile double z;
+    protected volatile double z;
 
     /**
      * Creates a new AbstractVector object with all 3 values set to
@@ -80,6 +81,12 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /*
+     * This class must be designed extremely carefully, it
+     * is a high-contention class that is core to entity
+     * movement. That means lots and lots and lots of
+     * updates, so it pays to measure and test in order to
+     * reduce contention on this class as much as possible.
+     *
      * WARNING: This section should be written with extreme
      * care
      *
@@ -139,8 +146,44 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * actual mutation to produce inconsistent results
      * depending on which thread comes between the check and
      * the act.
+     *
+     * Nevertheless, caution must be taken on a compound
+     * write because they must require compound reads as
+     * well in order to load the current value, load the
+     * values to add, add them together, and then push to
+     * the current vector. If a concurrent compound write
+     * occurs on the vector to be added, then the added
+     * value may potentially be stale because the current
+     * vector now knows that one or two of the values could
+     * be out of date due to the separate reads. This
+     * scenario is illustrated by the diagram:
+     *
+     * ADD (0, 0, 0) to (1, 1, 1)
+     * T1 -> [GETX 0 --------------> GETY 1 GETZ 1]
+     * T2 ---------> [SETX 1 -- SETY 1 --- SETZ 1]
+     *
+     * Because the two are only synchronized in relation
+     * to themselves, they are NOT ordered such that T1
+     * sees T2's write is atomic. Although when X is
+     * observed, it has an old value meaning that the write
+     * should not have occured or is waiting, the other two
+     * values are new and appear to occur after T2's write.
+     * This data conflict is a thread-safety violation, and
+     * thus compound operations on two vectors must be
+     * synchronized with each other. We must also take time
+     * to discuss the fact that the current vector must be
+     * synchronized first because although the caller can
+     * wait for the current vector to update, the vector
+     * that represents the operation cannot wait for the
+     * current vector's lock to become available - that is
+     * a waste of cycles that could be used to maintain
+     * better concurrency.
+     *
+     * Finally a small note regarding micro-optimization:
+     *
      */
 
+    // /-- DO NOT SYNCHRONIZE --\
     /**
      * Obtains the {@code double} representation of this
      * vector's x value.
@@ -224,30 +267,80 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     public void setZ(double z) {
         this.z = z;
     }
-
+    // \-- DO NOT SYNCHRONIZE --/
 
     /**
      * Adds the values defined in the given vector to the
      * values contained in this vector.
      *
+     * <p>Please avoid using this method. It was designed to
+     * be completely correct and thus requires the use of
+     * two acquires of the monitor of both this and the
+     * vector on which to operate. Often more corrent and
+     * better performing idioms may be used (for example if
+     * you'd like to add a single constant) instead of this
+     * one is recommended.</p>
+     *
+     * <p>The monitor of the current vector must always be
+     * acquired first in compound read and writes.</p>
+     *
      * @param vector the vector values to add
      */
     public void add(T vector) {
-        synchronized (lock) {
-            this.x = this.x + vector.x();
-            this.y = this.y + vector.y();
-            this.z = this.z + vector.z();
+        synchronized (this.lock) {
+            synchronized (vector.lock) {
+                this.add(vector.x, vector.y, vector.z);
+            }
         }
+    }
+
+    public void add(int x, int y, int z) {
+        synchronized (this.lock) {
+            this.addImpl((double) x, (double) y, (double) z);
+        }
+    }
+
+    /**
+     * Adds the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to add
+     * @param y the y to add
+     * @param z the z to add
+     */
+    public void add(double x, double y, double z) {
+        synchronized (this.lock) {
+
+        }
+    }
+
+    /** JIT Compiler inlining hint */
+    @Internal @Policy("GuardedBy this.lock")
+    private void addImpl(double x, double y, double z) {
+        this.x += x;
+        this.y += y;
+        this.z += z;
     }
 
     /**
      * Subtracts the values defined in the given vector to the
      * values contained in this vector.
      *
+     * <p>Please avoid using this method. It was designed to
+     * be completely correct and thus requires the use of
+     * two acquires of the monitor of both this and the
+     * vector on which to operate. Often more corrent and
+     * better performing idioms may be used (for example if
+     * you'd like to add a single constant) instead of this
+     * one is recommended.</p>
+     *
+     * <p>The monitor of the current vector must always be
+     * acquired first in compound read and writes.</p>
+     *
      * @param vector the vector values to subtract
      */
     public void subtract(T vector) {
-        synchronized (lock) {
+        synchronized (this.lock) {
             this.x = this.x - vector.x();
             this.y = this.y - vector.y();
             this.z = this.z - vector.z();
@@ -258,10 +351,21 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * Multiplies the values defined in the given vector to
      * the values contained in this vector.
      *
+     * <p>Please avoid using this method. It was designed to
+     * be completely correct and thus requires the use of
+     * two acquires of the monitor of both this and the
+     * vector on which to operate. Often more corrent and
+     * better performing idioms may be used (for example if
+     * you'd like to add a single constant) instead of this
+     * one is recommended.</p>
+     *
+     * <p>The monitor of the current vector must always be
+     * acquired first in compound read and writes.</p>
+     *
      * @param vector the vector values to multiply
      */
     public void multiply(T vector) {
-        synchronized (lock) {
+        synchronized (this.lock) {
             this.x = this.x * vector.x();
             this.y = this.y * vector.y();
             this.z = this.z * vector.z();
@@ -272,10 +376,21 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * Dividess the values defined in the given vector to
      * the values contained in this vector.
      *
+     * <p>Please avoid using this method. It was designed to
+     * be completely correct and thus requires the use of
+     * two acquires of the monitor of both this and the
+     * vector on which to operate. Often more corrent and
+     * better performing idioms may be used (for example if
+     * you'd like to add a single constant) instead of this
+     * one is recommended.</p>
+     *
+     * <p>The monitor of the current vector must always be
+     * acquired first in compound read and writes.</p>
+     *
      * @param vector the vector values to divide
      */
     public void divide(T vector) {
-        synchronized (lock) {
+        synchronized (this.lock) {
             this.x = this.x / vector.x();
             this.y = this.y / vector.y();
             this.z = this.z / vector.z();
@@ -286,7 +401,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     public boolean equals(Object obj) {
         if (obj instanceof AbstractVector) {
             AbstractVector v = (AbstractVector) obj;
-            return (x == v.x) && (y == v.y) && (z == v.z);
+            return this.x == v.x && this.y == v.y && this.z == v.z;
         }
 
         return false;
@@ -295,14 +410,14 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     @Override
     public int hashCode() {
         int hash = 1;
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(x));
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(y));
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(z));
+        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
+        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
+        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
         return hash;
     }
 
     @Override
     public String toString() {
-        return "Vector{" + x + "," + y + "," + z + "}";
+        return "Vector{" + this.x + ',' + this.y + "," + this.z + "}";
     }
 }

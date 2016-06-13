@@ -14,13 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk;
+package net.tridentsdk.doc;
 
-import org.junit.Test;
-
-public class ServerTest {
-    @Test
-    public void testObtainServer() {
-        Server server = Impl.get().svr();
-    }
+/**
+ *
+ * @author TridentSDK
+ */
+public @interface Policy {
+    String value();
 }

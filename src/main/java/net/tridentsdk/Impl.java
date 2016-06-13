@@ -18,6 +18,7 @@ package net.tridentsdk;
 
 import net.tridentsdk.doc.Internal;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.CountDownLatch;
 
@@ -33,6 +34,12 @@ import java.util.concurrent.CountDownLatch;
 public final class Impl {
     private static final CountDownLatch IMPL_LATCH = new CountDownLatch(1);
     private static IImpl impl;
+
+    private static final Object lock = new Object();
+
+    // Utility class; do not allow instantiation
+    private Impl() {
+    }
 
     // READ: AGAIN ANOTHER PLACE TO PAY CLOSE ATTENTION
     // We expect that implementation designers start
@@ -60,7 +67,11 @@ public final class Impl {
     // later TODO
 
     public static void setImpl(IImpl i) {
-        synchronized (Impl.class) {
+        // Ignore static synchronization warning
+        // Static method synchronization must use a static
+        // synchronizer, period. There is no way around this
+        // thus you must take the performance hit
+        synchronized (lock) {
             if (Impl.impl == null) {
                 Impl.impl = i;
                 IMPL_LATCH.countDown();
@@ -68,13 +79,13 @@ public final class Impl {
         }
     }
 
+    @Nonnull
     public static IImpl get() {
         try {
             IMPL_LATCH.await();
             return impl;
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
