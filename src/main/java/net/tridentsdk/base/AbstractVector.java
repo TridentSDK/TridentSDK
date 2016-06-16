@@ -178,9 +178,6 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * current vector's lock to become available - that is
      * a waste of cycles that could be used to maintain
      * better concurrency.
-     *
-     * Finally a small note regarding micro-optimization:
-     *
      */
 
     // /-- DO NOT SYNCHRONIZE --\
