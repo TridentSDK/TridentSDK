@@ -14,26 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk;
+package net.tridentsdk.doc;
 
-import org.junit.Assert;
-import org.junit.Test;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public class ServerTest {
-    static {
-
-    }
-
-    @Test
-    public void testObtainServer() {
-        Server server = Impl.get().svr();
-        Assert.assertNotNull(server);
-    }
-
-    @Test
-    public void testServer() {
-        Server server = Impl.get().svr();
-        server.address();
-        server.reload();
-    }
+/**
+ * This annotation may be used to document obscure policies
+ * or call attention to certain technical requirements of
+ * members such as synchronization guarantees or notices
+ * regarding performance.
+ *
+ * <p>This class provides no additional semantic effects
+ * and is not present at runtime.</p>
+ *
+ * @author TridentSDK
+ */
+@Documented
+@Retention(RetentionPolicy.SOURCE)
+public @interface Policy {
+    /**
+     * The message that describes the purpose of this
+     * annotation being labeled on a member.
+     */
+    String value();
 }
