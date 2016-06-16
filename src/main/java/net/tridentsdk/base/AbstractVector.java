@@ -195,6 +195,16 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
+     * Obtains the {@code int} representation of this
+     * vector's x value.
+     *
+     * @return the x value
+     */
+    public int intX() {
+        return (int) this.x;
+    }
+
+    /**
      * Obtains the {@code double} representation of this
      * vector's y value.
      *
@@ -205,6 +215,16 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
+     * Obtains the {@code int} representation of this
+     * vector's y value.
+     *
+     * @return the y value
+     */
+    public int intY() {
+        return (int) this.y;
+    }
+
+    /**
      * Obtains the {@code double} representation of this
      * vector's z value.
      *
@@ -212,6 +232,16 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public double z() {
         return this.z;
+    }
+
+    /**
+     * Obtains the {@code int} representation of this
+     * vector's z value.
+     *
+     * @return the z value
+     */
+    public int intZ() {
+        return (int) this.z;
     }
 
     /**
@@ -294,6 +324,14 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         }
     }
 
+    /**
+     * Adds the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to add
+     * @param y the y to add
+     * @param z the z to add
+     */
     public void add(int x, int y, int z) {
         synchronized (this.lock) {
             this.addImpl((double) x, (double) y, (double) z);
@@ -310,11 +348,23 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public void add(double x, double y, double z) {
         synchronized (this.lock) {
-
+            this.addImpl(x, y, z);
         }
     }
 
     /** JIT Compiler inlining hint */
+    // The most useful part of this method is avoiding the
+    // invokevirtual opcode which produces an albiet minor
+    // speedup in methods that delegate down the chain
+    // the same model is used with all other compound adds
+    // for vector
+    //
+    // This method is only 31 byte in opcodes and 32 bytes
+    // as detected by the JVM (this is why you must do real
+    // world tests!) so it is inlined on the second pass
+    // by the JIT compiler on my machine. The default
+    // MaxInlineSize is 35 bytes, therefore this method fits
+    // it quite well, actually.
     @Internal @Policy("GuardedBy this.lock")
     private void addImpl(double x, double y, double z) {
         this.x += x;
@@ -341,10 +391,45 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public void subtract(T vector) {
         synchronized (this.lock) {
-            this.x = this.x - vector.x();
-            this.y = this.y - vector.y();
-            this.z = this.z - vector.z();
+            synchronized (vector.lock) {
+                this.subImpl(vector.x, vector.y, vector.z);
+            }
         }
+    }
+
+    /**
+     * Subtracts the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to subtract
+     * @param y the y to subtract
+     * @param z the z to subtract
+     */
+    public void subtract(int x, int y, int z) {
+        synchronized (this.lock) {
+            this.subImpl((double) x, (double) y, (double) z);
+        }
+    }
+
+    /**
+     * Subtracts the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to subtract
+     * @param y the y to subtract
+     * @param z the z to subtract
+     */
+    public void subtract(double x, double y, double z) {
+        synchronized (this.lock) {
+            this.subImpl(x, y, z);
+        }
+    }
+
+    @Internal @Policy("GuardedBy this.lock")
+    private void subImpl(double x, double y, double z) {
+        this.x -= x;
+        this.y -= y;
+        this.z -= z;
     }
 
     /**
@@ -366,10 +451,45 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public void multiply(T vector) {
         synchronized (this.lock) {
-            this.x = this.x * vector.x();
-            this.y = this.y * vector.y();
-            this.z = this.z * vector.z();
+            synchronized (vector.lock) {
+                this.mulImpl(vector.x, vector.y, vector.z);
+            }
         }
+    }
+
+    /**
+     * Multiplies the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to multiply
+     * @param y the y to multiply
+     * @param z the z to multiply
+     */
+    public void multiply(int x, int y, int z) {
+        synchronized (this.lock) {
+            this.mulImpl((double) x, (double) y, (double) z);
+        }
+    }
+
+    /**
+     * Multiplies the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to multiply
+     * @param y the y to multiply
+     * @param z the z to multiply
+     */
+    public void multiply(double x, double y, double z) {
+        synchronized (this.lock) {
+            this.mulImpl(x, y, z);
+        }
+    }
+
+    @Internal @Policy("GuardedBy this.lock")
+    private void mulImpl(double x, double y, double z) {
+        this.x *= x;
+        this.y *= y;
+        this.z *= z;
     }
 
     /**
@@ -391,10 +511,45 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public void divide(T vector) {
         synchronized (this.lock) {
-            this.x = this.x / vector.x();
-            this.y = this.y / vector.y();
-            this.z = this.z / vector.z();
+            synchronized (vector.lock) {
+                this.divImpl(vector.x, vector.y, vector.z);
+            }
         }
+    }
+
+    /**
+     * Divides the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to divide
+     * @param y the y to divide
+     * @param z the z to divide
+     */
+    public void divide(int x, int y, int z) {
+        synchronized (this.lock) {
+            this.divImpl((double) x, (double) y, (double) z);
+        }
+    }
+
+    /**
+     * Divides the values given by the parameters to those
+     * associated values contained in this vector.
+     *
+     * @param x the x to divide
+     * @param y the y to divide
+     * @param z the z to divide
+     */
+    public void divide(double x, double y, double z) {
+        synchronized (this.lock) {
+            this.divImpl(x, y, z);
+        }
+    }
+
+    @Internal @Policy("GuardedBy this.lock")
+    private void divImpl(double x, double y, double z) {
+        this.x /= x;
+        this.y /= y;
+        this.z /= z;
     }
 
     @Override
@@ -409,6 +564,9 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
 
     @Override
     public int hashCode() {
+        // Ignore IntelliJ warning for final field not in hashcode
+        // anyone who uses a vector or position object as a
+        // key is probably mentally retarded
         int hash = 1;
         hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
         hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
