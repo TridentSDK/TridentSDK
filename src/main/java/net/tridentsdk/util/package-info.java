@@ -14,24 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package net.tridentsdk.base;
-
-import javax.annotation.concurrent.ThreadSafe;
-
 /**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
- *
- * @author TridentSDK
- * @since 0.3-alpha-DP
+ * This package contains miscellaneous utilities to be
+ * provided for plugins and implementations to use.
  */
-@ThreadSafe
-public interface Block {
-    /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
-     */
-    Position pos();
-}
+package net.tridentsdk.util;

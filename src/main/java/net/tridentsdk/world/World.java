@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.world;
 
+import net.tridentsdk.world.settings.WorldSettings;
+
 /**
  * This class is a representation of a world
  *
@@ -47,4 +49,12 @@ public interface World {
      * @return the world seed
      */
     long seed();
+
+    /**
+     * Obtains the settings that this world has been created
+     * to use.
+     *
+     * @return the world settings
+     */
+    WorldSettings settings();
 }

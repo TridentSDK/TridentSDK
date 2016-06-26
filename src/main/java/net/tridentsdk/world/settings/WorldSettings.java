@@ -14,9 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * This package contains properties and options pertaining
- * to the way that worlds are generated and produced with
- * surface features.
- */
-package net.tridentsdk.world.opt;
+package net.tridentsdk.world.settings;
+
+public interface WorldSettings {
+}

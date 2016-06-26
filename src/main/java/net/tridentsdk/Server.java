@@ -24,11 +24,24 @@ import java.net.InetSocketAddress;
  * This is the representation of the server process' main
  * class.
  *
+ * <p>The instance of the server may be obtained through
+ * the {@link #instance()} method.</p>
+ *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public interface Server {
+    /**
+     * Obtains the singleton instance of the server provided
+     * by the implementation.
+     *
+     * @return the server
+     */
+    static Server instance() {
+        return Impl.get().svr();
+    }
+
     /**
      * This method obtains the address + port number of the
      * server's socket.

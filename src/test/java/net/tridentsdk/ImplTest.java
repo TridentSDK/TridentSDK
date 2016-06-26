@@ -16,19 +16,16 @@
  */
 package net.tridentsdk;
 
-import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 public class ImplTest {
-    @Rule
-    public final ExpectedException ex = ExpectedException.none();
-
     @Test
     public void testSetGet() {
         Impl.setImpl(new IImplImpl());
-        Assert.assertNotNull(Impl.get());
+        assertNotNull(Impl.get());
     }
 
     @Test(expected = RuntimeException.class)
@@ -39,14 +36,14 @@ public class ImplTest {
                 Thread.sleep(1000L);
                 current.interrupt();
             } catch (InterruptedException e) {
-                Assert.fail("This is not supposed to happen");
+                fail("This is not supposed to happen");
             }
         }).start();
 
         Impl.get();
     }
 
-    public static class IImplImpl implements Impl.IImpl {
+    public static class IImplImpl implements Impl.ImplementationProvider {
         @Override
         public Server svr() {
             return null;
