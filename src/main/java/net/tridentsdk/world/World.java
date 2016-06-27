@@ -16,7 +16,12 @@
  */
 package net.tridentsdk.world;
 
-import net.tridentsdk.world.settings.WorldSettings;
+import net.tridentsdk.world.opts.GenOpts;
+import net.tridentsdk.world.opts.Weather;
+import net.tridentsdk.world.opts.WorldBorder;
+import net.tridentsdk.world.opts.WorldOpts;
+
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * This class is a representation of a world
@@ -28,6 +33,7 @@ import net.tridentsdk.world.settings.WorldSettings;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface World {
     /**
      * Obtains the name of the world that is represented
@@ -39,22 +45,32 @@ public interface World {
     String name();
 
     /**
-     * Obtains the seed used to generate the terrain and
-     * features on the world.
-     *
-     * <p>Technical information on how this method is
-     * supposed to be implemented may be found
-     * <a href="http://minecraft.gamepedia.com/Seed_(level_generation)>here</a>.</p>
-     *
-     * @return the world seed
-     */
-    long seed();
-
-    /**
-     * Obtains the settings that this world has been created
+     * Obtains the options that this world has been created
      * to use.
      *
-     * @return the world settings
+     * @return the world options
      */
-    WorldSettings settings();
+    WorldOpts opts();
+
+    /**
+     * Obtains the weather conditions currently taking place
+     * in the world.
+     *
+     * @return the weather options
+     */
+    Weather weather();
+
+    /**
+     * Obtains the options for the generator of this world.
+     *
+     * @return the generator options
+     */
+    GenOpts genOpts();
+
+    /**
+     * Obtains the world border
+     *
+     * @return the world border options
+     */
+    WorldBorder border();
 }

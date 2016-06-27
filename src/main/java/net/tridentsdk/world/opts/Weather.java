@@ -14,7 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world.settings;
+package net.tridentsdk.world.opts;
 
-public interface WorldSettings {
+import javax.annotation.concurrent.ThreadSafe;
+
+@ThreadSafe
+public interface Weather {
 }

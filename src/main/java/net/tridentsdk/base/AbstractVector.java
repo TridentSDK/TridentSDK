@@ -36,7 +36,7 @@ import java.io.Serializable;
  * @param <T> this must be the subclass type in order to
  *            provide the proper functionality
  * @author TridentSDK
- * @since 0.5-alpha-DP
+ * @since 0.5-alpha
  */
 @ThreadSafe
 @Internal("public access for convenience only")

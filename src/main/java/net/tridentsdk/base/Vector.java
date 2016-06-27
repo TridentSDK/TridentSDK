@@ -61,4 +61,6 @@ public final class Vector extends AbstractVector<Vector> {
     public Vector(double x, double y, double z) {
         super(x, y, z);
     }
+
+    // TODO vector manipulation methods
 }

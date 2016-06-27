@@ -14,9 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package net.tridentsdk.util;
+
+import javax.annotation.concurrent.Immutable;
+
 /**
- * This package contains properties and options pertaining
- * to the way that worlds are generated and produced with
- * surface features.
+ * Miscellaneous functions that only serve to shorten code.
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
  */
-package net.tridentsdk.world.settings;
+@Immutable
+public final class Misc {
+    public static final String NBT_BOUND_FAIL = "NBT value out of range for class %s";
+
+    // Prevent instantiation
+    private Misc() {
+    }
+}
