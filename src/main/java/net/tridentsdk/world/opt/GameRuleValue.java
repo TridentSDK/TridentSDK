@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world.opts;
+package net.tridentsdk.world.opt;
 
 import com.google.common.base.Preconditions;
 

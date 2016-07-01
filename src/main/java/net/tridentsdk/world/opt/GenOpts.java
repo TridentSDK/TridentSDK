@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world.opts;
+package net.tridentsdk.world.opt;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -59,7 +59,7 @@ public interface GenOpts {
 
     /**
      * Determine whether world features such as villages,
-     * strongholds, and mineshafts should be generated
+     * strongholds, and mineshafts should be generated.
      *
      * @return {@code true} to indicate that features should
      *         be generated, {@code false} if not

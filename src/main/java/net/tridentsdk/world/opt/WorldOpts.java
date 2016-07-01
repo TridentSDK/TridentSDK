@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world.opts;
+package net.tridentsdk.world.opt;
 
 import net.tridentsdk.base.Vector;
 
@@ -67,6 +67,15 @@ public interface WorldOpts {
     boolean allowFlight();
 
     /**
+     * Changes whether flight is allowed using client-side
+     * mods.
+     *
+     * @param allow {@code true} to allow flying,
+     *              {@code false} to disallow
+     */
+    void setAllowFlight(boolean allow);
+
+    /**
      * Checks the world in order to determine whether player
      * versus player damage is allowed.
      *
@@ -76,6 +85,14 @@ public interface WorldOpts {
     boolean allowPvp();
 
     /**
+     * Changes whether or not PvP is allowed in the world.
+     *
+     * @param allow {@code true} to allow, {@code false} to
+     *              disallow
+     */
+    void setAllowPvp(boolean allow);
+
+    /**
      * Checks the world in order to determine if travel to
      * the nether via portals is allowed.
      *
@@ -83,6 +100,15 @@ public interface WorldOpts {
      *         {@code false} if not
      */
     boolean allowNether();
+
+    /**
+     * Sets whether or not nether portals are allowed in the
+     * world.
+     *
+     * @param allow {@code true} to allow, {@code false} to
+     *              disallow
+     */
+    void setAllowNether(boolean allow);
 
     /**
      * Checks the world in order to determine if joining
@@ -96,6 +122,15 @@ public interface WorldOpts {
     boolean forceGameMode();
 
     /**
+     * Sets whether the player will join with their last
+     * game mode, or will be set to the world default.
+     *
+     * @param force {@code true} to force, {@code false} to
+     *              use the last player game mode
+     */
+    void setForceGameMode(boolean force);
+
+    /**
      * Obtains the game type to which players in the world
      * are set.
      *
@@ -104,12 +139,28 @@ public interface WorldOpts {
     GameMode gameMode();
 
     /**
+     * Sets the game type to which players in the world are
+     * set.
+     *
+     * @param mode the new game mode which to set players
+     */
+    void setGameMode(GameMode mode);
+
+    /**
      * Obtains the difficult to which the world will spawn
      * monsters and animals.
      *
      * @return the world difficulty
      */
     Difficulty difficulty();
+
+    /**
+     * Sets the world difficulty to the given difficulty.
+     *
+     * @param difficulty the new difficulty which to set the
+     *                   world
+     */
+    void setDifficulty(Difficulty difficulty);
 
     /**
      * Checks the world in order to determine whether the
@@ -121,21 +172,50 @@ public interface WorldOpts {
     boolean difficultyLocked();
 
     /**
+     * Sets whether the world difficulty is locked or not.
+     *
+     * @param locked {@code true} to lock, {@code false} to
+     *               unlock
+     */
+    void setDifficultyLocked(boolean locked);
+
+    /**
      * The radius of spawn protection, {@code 0} does not
-     * mean no spawn protection
+     * mean no spawn protection.
      *
      * @return the spawn protection radius
      */
     int spawnProtectionRadius();
 
+    /**
+     * Sets the new spawn protection radius to the given
+     * value.
+     *
+     * @param radius the new protection radius
+     * @see #spawnProtectionRadius()
+     */
+    void setSpawnProtectionRadius(int radius);
+
     // int viewDistance(); ???
     // URL resourcePack(); ???
     // int maxWorldSize();
-    // int maxHeight(
+    // int maxHeight();
     // boolean spawnNpcs(); boolean spawnMonsters(); boolean spawnAnimals();
 
-    // LevelType levelType();
-    // Dimension dimension();
+    /**
+     * Obtains the level type of the world, which also
+     * defines what generator the world uses.
+     *
+     * @return the world's level type
+     */
+    LevelType levelType();
+
+    /**
+     * Obtains the dimension of the world.
+     *
+     * @return the world's dimension
+     */
+    Dimension dimension();
 
     // long time();
     // TODO return non resetting time or 24000 time?
@@ -149,7 +229,18 @@ public interface WorldOpts {
     Vector spawn();
 
     /**
-     * Obtains the collection of modified game rules
+     * Sets the spawn XYZ coordinates to the given vector.
+     *
+     * @param vector the new spawn position
+     */
+    void setSpawn(Vector vector);
+
+    /**
+     * Obtains the collection of modified game rules.
+     *
+     * <p>Values may be updated or polled by using the map
+     * operations {@link Map#put(Object, Object)} and
+     * {@link Map#get(Object)}.</p>
      *
      * @return the game rules applying to the world
      */

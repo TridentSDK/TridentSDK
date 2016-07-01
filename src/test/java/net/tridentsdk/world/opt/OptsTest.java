@@ -16,12 +16,9 @@
  */
 package net.tridentsdk.world.opt;
 
-import net.tridentsdk.world.opts.Difficulty;
-import net.tridentsdk.world.opts.GameMode;
-import net.tridentsdk.world.opts.GameRuleValue;
 import org.junit.Test;
 
-import static net.tridentsdk.world.opts.GameRule.*;
+import static net.tridentsdk.world.opt.GameRule.*;
 import static org.junit.Assert.*;
 
 public class OptsTest {
@@ -46,6 +43,15 @@ public class OptsTest {
         GameMode.from(30);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void dimensionTest() {
+        assertEquals(-1, Dimension.NETHER.asInt());
+        assertEquals(0, Dimension.OVERWORLD.asByte());
+        assertEquals(1, Dimension.END.asByte());
+        assertEquals(Dimension.OVERWORLD, Dimension.from(0));
+        Dimension.from(30);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void gameRuleTest() {
         assertTrue(CMD_BLOCK_OUTPUT.defValue().asBool());
@@ -66,7 +72,18 @@ public class OptsTest {
         from("tridentsdk");
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
+    public void levelTypeTest() {
+        assertEquals("default", LevelType.DEFAULT.toString());
+        assertEquals("flat", LevelType.FLAT.toString());
+        assertEquals("largeBiomes", LevelType.LARGE_BIOMES.toString());
+        assertEquals("amplified", LevelType.AMPLIFIED.toString());
+        assertEquals("default_1_1", LevelType.DEBUG.toString());
+        assertEquals(LevelType.DEFAULT, LevelType.from("default"));
+        LevelType.from("tridentsdk");
+    }
+
+        @Test
     public void gameRuleValueTest() {
         GameRuleValue bool = GameRuleValue.bool(true);
         assertTrue(bool.isBool());

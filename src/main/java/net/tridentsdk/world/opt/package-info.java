@@ -14,10 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world.opts;
-
-import javax.annotation.concurrent.ThreadSafe;
-
-@ThreadSafe
-public interface Weather {
-}
+/**
+ * This package contains properties and options pertaining
+ * to the way that worlds are generated and produced with
+ * surface features.
+ */
+package net.tridentsdk.world.opt;

@@ -16,10 +16,10 @@
  */
 package net.tridentsdk.world;
 
-import net.tridentsdk.world.opts.GenOpts;
-import net.tridentsdk.world.opts.Weather;
-import net.tridentsdk.world.opts.WorldBorder;
-import net.tridentsdk.world.opts.WorldOpts;
+import net.tridentsdk.world.opt.GenOpts;
+import net.tridentsdk.world.opt.Weather;
+import net.tridentsdk.world.opt.WorldBorder;
+import net.tridentsdk.world.opt.WorldOpts;
 
 import javax.annotation.concurrent.ThreadSafe;
 
