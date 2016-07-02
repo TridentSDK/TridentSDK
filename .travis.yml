@@ -22,4 +22,4 @@ matrix:
 #     - secure: "H8HTOwCBB2Aq02zgC4VfF8rcLjLciGiAfjlEylH6M5hnNuO9E842d+1Pu4K5DhwME3olyF0WFDXrTPkZulQBbYYXhVA7eiqCznACORiRYokYQ8eTsiYTQsHgexK8o1pugrOqNyiQJu0MnHMXQxCyYM8xDHEL5NwKMERqweivOr8="
 after_success:
 #   - mvn cobertura:cobertura coveralls:report
-  - mvn clean install deploy test jacoco:report coveralls:report
+  - mvn clean install test jacoco:report coveralls:report
