@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.world.opt;
 
+import net.tridentsdk.world.gen.AbstractGeneratorFactory;
+
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -29,12 +31,14 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public interface GenOpts {
     /**
-     * Obtains the name of the generator that provides the
-     * facilities for creating chunks in the world.
+     * Obtains the generator factory which provided the
+     * world with the facilities necessary for world
+     * generation.
      *
-     * @return the name of the generator
+     * @return the factory responsible for providing
+     *         generation facilitiesd
      */
-    String name();
+    AbstractGeneratorFactory provider();
 
     /**
      * Obtains the seed used to generate the terrain and
@@ -56,6 +60,14 @@ public interface GenOpts {
      */
     @Nonnull
     String seedInput();
+
+    /**
+     * Obtains the level type of the world, which also
+     * defines what generator the world uses.
+     *
+     * @return the world's level type
+     */
+    LevelType levelType();
 
     /**
      * Determine whether world features such as villages,

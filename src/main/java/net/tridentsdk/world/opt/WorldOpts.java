@@ -200,15 +200,6 @@ public interface WorldOpts {
     // URL resourcePack(); ???
     // int maxWorldSize();
     // int maxHeight();
-    // boolean spawnNpcs(); boolean spawnMonsters(); boolean spawnAnimals();
-
-    /**
-     * Obtains the level type of the world, which also
-     * defines what generator the world uses.
-     *
-     * @return the world's level type
-     */
-    LevelType levelType();
 
     /**
      * Obtains the dimension of the world.
@@ -216,9 +207,6 @@ public interface WorldOpts {
      * @return the world's dimension
      */
     Dimension dimension();
-
-    // long time();
-    // TODO return non resetting time or 24000 time?
 
     /**
      * Obtains the XYZ coordinates of this world's spawn
