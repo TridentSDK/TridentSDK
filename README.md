@@ -1,4 +1,6 @@
-TridentSDK [![Build Status](https://travis-ci.org/TridentSDK/TridentSDK.svg?branch=bleeding-edge)](https://travis-ci.org/TridentSDK/TridentSDK) [![Coverage Status](https://coveralls.io/repos/TridentSDK/TridentSDK/badge.png?branch=bleeding-edge)](https://coveralls.io/r/TridentSDK/TridentSDK?branch=bleeding-edge)
+TridentSDK 
+[![Build Status](https://travis-ci.org/AgentTroll/TridentSDK-Revamp.svg?branch=bleeding-edge)](https://travis-ci.org/AgentTroll/TridentSDK-Revamp)
+[![Coverage Status](https://coveralls.io/repos/github/AgentTroll/TridentSDK-Revamp/badge.svg)](https://coveralls.io/github/AgentTroll/TridentSDK-Revamp)
 =========
 
 The TridentSDK project. The API for the new generation of multithreaded, high-performance, cleanroom Minecraft servers.
