@@ -17,6 +17,7 @@
 package net.tridentsdk.util;
 
 import javax.annotation.concurrent.Immutable;
+import java.io.File;
 
 /**
  * Miscellaneous functions that only serve to shorten code.
@@ -27,6 +28,7 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public final class Misc {
     public static final String NBT_BOUND_FAIL = "NBT value out of range for class %s";
+    public static final File HOME = new File(".");
 
     // Prevent instantiation
     private Misc() {

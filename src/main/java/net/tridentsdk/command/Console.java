@@ -14,18 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.world;
+package net.tridentsdk.command;
 
-import org.junit.Test;
+/**
+ * Represents the server console, whether or not there is
+ * a physical console on the working machine.
+ *
+ * @author TridentSDK
+ * @since 0.3-alpha-DP
+ */
+public interface Console {
+    void write(String s);
 
-import static org.junit.Assert.assertEquals;
+    void writeLine(String s);
 
-public class IntPairTest {
-    private final IntPair pair = IntPair.make(100, 200);
+    void log(String s);
 
-    @Test
-    public void testGets() {
-        assertEquals(100, this.pair.x());
-        assertEquals(200, this.pair.z());
-    }
+    void success(String s);
+
+    void warn(String s);
+
+    void error(String s);
+
+    void debug(String s);
 }
