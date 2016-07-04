@@ -16,13 +16,17 @@
  */
 package net.tridentsdk;
 
+import net.tridentsdk.command.Console;
+
 import javax.annotation.concurrent.ThreadSafe;
-import java.io.Console;
 import java.net.InetSocketAddress;
 
 /**
  * This is the representation of the server process' main
  * class.
+ *
+ * <p>The instance of the server may be obtained through
+ * the {@link #instance()} method.</p>
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
@@ -34,7 +38,17 @@ public interface Server {
     }
 
     /**
-     * This method obtains the address + port number of the
+     * Obtains the singleton instance of the server provided
+     * by the implementation.
+     *
+     * @return the server
+     */
+    static Server instance() {
+        return Impl.get().svr();
+    }
+
+    /**
+     * This method obtains the address and port of the
      * server's socket.
      *
      * @return the socket address

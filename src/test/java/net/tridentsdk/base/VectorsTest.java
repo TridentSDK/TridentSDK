@@ -33,12 +33,17 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertNotNull;
 
 @State(Scope.Benchmark)
-public class AbstractVectorTest {
+public class VectorsTest {
     // close eyes, put hand on numpad to get these values
     // numbers selected from "fair dice roll"
     private static final double CHANGE_TO = -1.382;
     private static final int CHANGE_TO_I = 2919;
-    private final AbstractVector vec = new AbstractVector<>();
+    private final Vector vec = new Vector();
+
+    public static Vector rand() {
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        return new Vector(r.nextDouble(), r.nextDouble(), r.nextDouble());
+    }
 
     @Test
     public void testSetsEqualsHash() {
@@ -46,7 +51,7 @@ public class AbstractVectorTest {
         this.vec.setY(CHANGE_TO);
         this.vec.setZ(CHANGE_TO);
 
-        AbstractVector<?> v2 = new AbstractVector<>(CHANGE_TO, CHANGE_TO, CHANGE_TO);
+        Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         Assert.assertEquals(v2, this.vec);
         Assert.assertEquals(v2.hashCode(), this.vec.hashCode());
         Assert.assertFalse(this.vec.equals(new Object()));
@@ -76,7 +81,7 @@ public class AbstractVectorTest {
 
     @Test
     public void testOps() {
-        AbstractVector<?> v2 = new AbstractVector<>(CHANGE_TO, CHANGE_TO, CHANGE_TO);
+        Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
 
         this.vec.add(v2);
         this.vec.add(CHANGE_TO, CHANGE_TO, CHANGE_TO);
@@ -100,6 +105,16 @@ public class AbstractVectorTest {
     @Test
     public void testIntConstructor() {
         Assert.assertEquals(new AbstractVector(0, 0, 0), this.vec);
+        Assert.assertEquals(new Vector(0, 0, 0), this.vec);
+    }
+
+    @Test
+    public void testWrite() {
+        Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
+        v2.vecWrite(this.vec);
+        v2.fullWrite(this.vec);
+
+        Assert.assertEquals(this.vec, v2);
     }
 
     @Test
@@ -114,7 +129,7 @@ public class AbstractVectorTest {
     // Runtime params
     // -server -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
     public static void m1() {
-        AbstractVector<?> vec = new AbstractVector<>(0, 0, 0);
+        Vector vec = new Vector(0, 0, 0);
         int recursions = 600_000_000;
         long modulo = 100;
 
@@ -140,7 +155,7 @@ public class AbstractVectorTest {
     ////////////////////////////////////////////////////////
 
     public static void m2() {
-        Options opt = new OptionsBuilder().include(".*" + AbstractVectorTest.class.getSimpleName() + ".*")
+        Options opt = new OptionsBuilder().include(".*" + VectorsTest.class.getSimpleName() + ".*")
                 .timeUnit(TimeUnit.SECONDS)
                 .mode(Mode.Throughput)
                 .operationsPerInvocation(1)
@@ -166,12 +181,12 @@ public class AbstractVectorTest {
     }
 
     private int modifier;
-    private AbstractVector adder;
+    private Vector adder;
 
     @Setup(Level.Iteration)
     public void setup() {
         this.modifier = ThreadLocalRandom.current().nextInt();
-        this.adder = new AbstractVector<>(this.modifier, this.modifier, this.modifier);
+        this.adder = new Vector(this.modifier, this.modifier, this.modifier);
     }
 
     // @Benchmark

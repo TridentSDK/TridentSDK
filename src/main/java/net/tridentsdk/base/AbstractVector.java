@@ -30,23 +30,60 @@ import java.io.Serializable;
  * <p>The three arbitrary values are represented internally
  * as doubles.</p>
  *
- * @author TridentSDK
+ * <p>Subclasses need to implement their own hashcode,
+ * equals, and toString methods.</p>
+ *
  * @param <T> this must be the subclass type in order to
  *            provide the proper functionality
- * @since 0.3-alpha-DP
+ * @author TridentSDK
+ * @since 0.5-alpha
  */
-@ThreadSafe @Internal("public access for convenience only")
+@ThreadSafe
+@Internal("public access for convenience only")
 public class AbstractVector<T extends AbstractVector<T>> implements Serializable {
     private static final long serialVersionUID = 218773668333902972L;
-    /** The lock used to protect compound read/writes. */
-    protected final Object lock = new Object();
-    /** The AbstractVector states holding arbitrary values */
+
+    /**
+     * Hook method used to implement equals for comparing
+     * two {@code doubles}.
+     *
+     * <p>This is the most correct way at the current
+     * moment.</p>
+     *
+     * @param d0 the first double
+     * @param d1 the second double
+     * @return {@code true} if the two {@code doubles} are
+     * equal to each other
+     */
+    // Set to static - compiler inline hint
+    protected static boolean eq(double d0, double d1) {
+        return Double.compare(d0, d1) == 0;
+    }
+
+    /**
+     * The AbstractVector states holding arbitrary values
+     */
     @GuardedBy("lock")
     protected volatile double x;
     @GuardedBy("lock")
     protected volatile double y;
     @GuardedBy("lock")
     protected volatile double z;
+
+    /**
+     * The lock used to protect compound read/writes.
+     */
+    protected final Object lock = new Object();
+
+    /**
+     * Hook method used to append additional fields in
+     * subclasses for the writeTo method.
+     *
+     * @param vector the vector to which this vector will
+     *               write its fields
+     */
+    protected void writeFields(T vector) {
+    }
 
     /**
      * Creates a new AbstractVector object with all 3 values set to
@@ -181,6 +218,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
 
     // /-- DO NOT SYNCHRONIZE --\
+
     /**
      * Obtains the {@code double} representation of this
      * vector's x value.
@@ -299,7 +337,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     /**
      * Adds the values defined in the given vector to the
      * values contained in this vector.
-     *
+     * <p>
      * <p>Please avoid using this method. It was designed to
      * be completely correct and thus requires the use of
      * two acquires of the monitor of both this and the
@@ -307,7 +345,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * better performing idioms may be used (for example if
      * you'd like to add a single constant) instead of this
      * one is recommended.</p>
-     *
+     * <p>
      * <p>The monitor of the current vector must always be
      * acquired first in compound read and writes.</p>
      *
@@ -349,7 +387,9 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         }
     }
 
-    /** JIT Compiler inlining hint */
+    /**
+     * JIT Compiler inlining hint
+     */
     // The most useful part of this method is avoiding the
     // invokevirtual opcode which produces an albiet minor
     // speedup in methods that delegate down the chain
@@ -362,7 +402,8 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     // by the JIT compiler on my machine. The default
     // MaxInlineSize is 35 bytes, therefore this method fits
     // it quite well, actually.
-    @Internal @Policy("GuardedBy this.lock")
+    @Internal
+    @Policy("GuardedBy this.lock")
     private void addImpl(double x, double y, double z) {
         this.x += x;
         this.y += y;
@@ -372,7 +413,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     /**
      * Subtracts the values defined in the given vector to the
      * values contained in this vector.
-     *
+     * <p>
      * <p>Please avoid using this method. It was designed to
      * be completely correct and thus requires the use of
      * two acquires of the monitor of both this and the
@@ -380,7 +421,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * better performing idioms may be used (for example if
      * you'd like to add a single constant) instead of this
      * one is recommended.</p>
-     *
+     * <p>
      * <p>The monitor of the current vector must always be
      * acquired first in compound read and writes.</p>
      *
@@ -422,7 +463,8 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         }
     }
 
-    @Internal @Policy("GuardedBy this.lock")
+    @Internal
+    @Policy("GuardedBy this.lock")
     private void subImpl(double x, double y, double z) {
         this.x -= x;
         this.y -= y;
@@ -432,7 +474,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     /**
      * Multiplies the values defined in the given vector to
      * the values contained in this vector.
-     *
+     * <p>
      * <p>Please avoid using this method. It was designed to
      * be completely correct and thus requires the use of
      * two acquires of the monitor of both this and the
@@ -440,7 +482,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * better performing idioms may be used (for example if
      * you'd like to add a single constant) instead of this
      * one is recommended.</p>
-     *
+     * <p>
      * <p>The monitor of the current vector must always be
      * acquired first in compound read and writes.</p>
      *
@@ -482,7 +524,8 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         }
     }
 
-    @Internal @Policy("GuardedBy this.lock")
+    @Internal
+    @Policy("GuardedBy this.lock")
     private void mulImpl(double x, double y, double z) {
         this.x *= x;
         this.y *= y;
@@ -500,7 +543,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * better performing idioms may be used (for example if
      * you'd like to add a single constant) instead of this
      * one is recommended.</p>
-     *
+     * <p>
      * <p>The monitor of the current vector must always be
      * acquired first in compound read and writes.</p>
      *
@@ -542,18 +585,51 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         }
     }
 
-    @Internal @Policy("GuardedBy this.lock")
+    @Internal
+    @Policy("GuardedBy this.lock")
     private void divImpl(double x, double y, double z) {
         this.x /= x;
         this.y /= y;
         this.z /= z;
     }
 
+    /**
+     * Writes the 3 vector fields to the given one.
+     *
+     * @param vector the vector to which this vector will
+     *               write its fields
+     */
+    public void vecWrite(AbstractVector<?> vector) {
+        synchronized (this.lock) {
+            vector.x = this.x;
+            vector.y = this.y;
+            vector.z = this.z;
+        }
+    }
+
+    /**
+     * Writes the fields of this vector to the fields of the
+     * given vector, along with the additional fields that
+     * may be present in the subclass.
+     *
+     * @param vector the vector to which this vector will
+     *               write its fields
+     */
+    public void fullWrite(T vector) {
+        synchronized (this.lock) {
+            vector.x = this.x;
+            vector.y = this.y;
+            vector.z = this.z;
+
+            this.writeFields(vector);
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof AbstractVector) {
             AbstractVector v = (AbstractVector) obj;
-            return this.x == v.x && this.y == v.y && this.z == v.z;
+            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
         }
 
         return false;
@@ -573,6 +649,6 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
 
     @Override
     public String toString() {
-        return "Vector{" + this.x + ',' + this.y + "," + this.z + "}";
+        return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
     }
 }
