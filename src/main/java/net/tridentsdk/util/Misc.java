@@ -14,7 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
+package net.tridentsdk.util;
 
-public class Config {
+import javax.annotation.concurrent.Immutable;
+import java.io.File;
+
+/**
+ * Miscellaneous functions that only serve to shorten code.
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
+ */
+@Immutable
+public final class Misc {
+    public static final String NBT_BOUND_FAIL = "NBT value out of range for class %s";
+    public static final File HOME = new File(".");
+
+    // Prevent instantiation
+    private Misc() {
+    }
 }

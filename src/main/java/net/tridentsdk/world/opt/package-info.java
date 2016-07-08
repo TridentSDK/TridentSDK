@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
-
-public class Config {
-}
+/**
+ * This package contains properties and options pertaining
+ * to the way that worlds are generated and produced with
+ * surface features.
+ */
+package net.tridentsdk.world.opt;

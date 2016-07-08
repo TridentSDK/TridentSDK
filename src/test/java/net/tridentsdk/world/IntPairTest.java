@@ -14,7 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
+package net.tridentsdk.world;
 
-public class Config {
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+public class IntPairTest {
+    private final IntPair pair = IntPair.make(100, 200);
+
+    @Test
+    public void testGets() {
+        assertEquals(100, this.pair.x());
+        assertEquals(200, this.pair.z());
+    }
 }

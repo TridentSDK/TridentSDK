@@ -14,7 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
+package net.tridentsdk.world.gen;
 
-public class Config {
+/**
+ * This generator produces the chunk data pertaining to
+ * the general terrain, i.e. hills and valleys.
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
+ */
+public interface TerrainGenerator {
 }

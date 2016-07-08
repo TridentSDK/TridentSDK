@@ -14,23 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.doc;
 
-import javax.annotation.concurrent.ThreadSafe;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
+ * This annotation may be used to document obscure policies
+ * or call attention to certain technical requirements of
+ * members such as synchronization guarantees or notices
+ * regarding performance.
+ *
+ * <p>This class provides no additional semantic effects
+ * and is not present at runtime.</p>
  *
  * @author TridentSDK
- * @since 0.3-alpha-DP
  */
-@ThreadSafe
-public interface Block {
+@Documented
+@Retention(RetentionPolicy.SOURCE)
+public @interface Policy {
     /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
+     * The message that describes the purpose of this
+     * annotation being labeled on a member.
      */
-    Position pos();
+    String value();
 }

@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2014 The TridentSDK Team
+ * Copyright 2016 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 /**
- * Minecraft metadata builders and access to the underlying properties of NBT and chat
+ * This package contains classes pertaining to the
+ * modification and manipulation of metadata for entities,
+ * NBT-applicable objects, blocks, and players.
  */
-
 package net.tridentsdk.meta;

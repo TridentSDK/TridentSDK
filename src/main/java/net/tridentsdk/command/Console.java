@@ -14,7 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
+package net.tridentsdk.command;
 
-public class Config {
+/**
+ * Represents the server console, whether or not there is
+ * a physical console on the working machine.
+ *
+ * @author TridentSDK
+ * @since 0.3-alpha-DP
+ */
+public interface Console {
+    void write(String s);
+
+    void writeLine(String s);
+
+    void log(String s);
+
+    void success(String s);
+
+    void warn(String s);
+
+    void error(String s);
+
+    void debug(String s);
 }

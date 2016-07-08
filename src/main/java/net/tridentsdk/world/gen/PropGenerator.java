@@ -14,7 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
+package net.tridentsdk.world.gen;
 
-public class Config {
+/**
+ * This class generates props in the world such as trees,
+ * flowers, tall grass, etc...
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
+ */
+public interface PropGenerator {
 }

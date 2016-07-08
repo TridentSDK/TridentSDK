@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2014 The TridentSDK Team
+ * Copyright 2016 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,199 +14,73 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.tridentsdk.world;
 
-import net.tridentsdk.base.Block;
-import net.tridentsdk.base.BoundingBox;
-import net.tridentsdk.base.Position;
-import net.tridentsdk.effect.particle.ParticleEffect;
-import net.tridentsdk.effect.particle.ParticleEffectType;
-import net.tridentsdk.effect.sound.SoundEffect;
-import net.tridentsdk.effect.sound.SoundEffectType;
-import net.tridentsdk.effect.visual.VisualEffect;
-import net.tridentsdk.effect.visual.VisualEffectType;
-import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.types.EntityType;
-import net.tridentsdk.registry.Registered;
-import net.tridentsdk.world.settings.WorldSettings;
+import net.tridentsdk.world.opt.GenOpts;
+import net.tridentsdk.world.opt.Weather;
+import net.tridentsdk.world.opt.WorldBorder;
+import net.tridentsdk.world.opt.WorldOpts;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
-import java.util.function.Predicate;
 
 /**
- * A Minecraft world
+ * This class is a representation of a world
  *
- * <p>Worlds can be created using the following code:
- * <pre>{@code
- *      WorldLoader loader = WorldLoader.newLoader();
- *      // Set world settings
- *      loader.createWorld("New world");
- * }</pre>
- * You can use your own generator using {@link WorldLoader#newLoader(Class)}</p>
+ * <p>A world is defined as a folder containing compressed
+ * chunk data and may be accessed using this class both
+ * whilst loaded and unloaded.</p>
  *
- * <p>A collection of the worlds on the server can be obtained using {@link Registered#worlds()}</p>
- *
- * @author The TridentSDK Team
+ * @author TridentSDK
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface World extends Cloneable {
+public interface World {
     /**
-     * Gets the name of the world
+     * Obtains the name of the world that is represented
+     * with the name of the file folder containing the
+     * region files.
      *
      * @return the name of the world
      */
     String name();
 
     /**
-     * Obtains the loaded chunks in the world
+     * Obtains the current world time in ticks.
      *
-     * @return the loaded chunks
+     * <p>Each day-night cycle takes 23999 ticks to complete
+     * where 0 is sunrise and 24000 is the next day's 0.</p>
+     *
+     * @return the current 24000 tick time cycle time
      */
-    Collection<Chunk> chunks();
+    int time();
 
     /**
-     * Gets the chunk on the given position, and generates the chunk if it does not exist.
+     * Obtains the options that this world has been created
+     * to use.
      *
-     * @return The chunk on the given position
+     * @return the world options
      */
-    Chunk chunkAt(ChunkLocation loc, boolean generateIfNotFound);
+    WorldOpts opts();
 
     /**
-     * Gets the chunk on the given x and z , and generates the chunk if it does not exist
+     * Obtains the weather conditions currently taking place
+     * in the world.
      *
-     * @return The chunk on the given position
+     * @return the weather options
      */
-    Chunk chunkAt(int x, int z, boolean generateIfNotFound);
+    Weather weather();
 
     /**
-     * Generates the chunk on the given position
+     * Obtains the options for the generator of this world.
      *
-     * @return The generated chunk
+     * @return the generator options
      */
-    Chunk generateChunk(int x, int z);
+    GenOpts genOpts();
 
     /**
-     * Generates the chunk on the given position
+     * Obtains the world border
      *
-     * @return The generated chunk
-     */
-    Chunk generateChunk(ChunkLocation position);
-
-    /**
-     * Gets the block on the given position
-     *
-     * @return The block on the given position
-     */
-    Block blockAt(Position position);
-
-    /**
-     * Obtains the loading handler which created this object, passed in from the constructor
-     *
-     * @return the world loader for this world
-     */
-    WorldLoader loader();
-
-    /**
-     * Gets the time in the world
-     *
-     * @return The time in the world
-     */
-    long time();
-
-    /**
-     * Gets the spawn position of the world
-     *
-     * @return The spawn position in the world
-     */
-    Position spawnPosition();
-
-    /**
-     * Obtains the weather controller for the world
-     *
-     * @return the weather controller
-     */
-    WeatherConditions weather();
-
-    /**
-     * Obtains the settings which modify the behavior of the world
-     *
-     * @return the world settigs
-     */
-    WorldSettings settings();
-
-    /**
-     * Obtains the world border properties of this world
-     *
-     * @return the border properties
+     * @return the world border options
      */
     WorldBorder border();
-
-    /**
-     * Spawns an entity in the world
-     *
-     * @param type the type of entity to spawn
-     * @return the entity spawn
-     */
-    Entity spawn(EntityType type, Position spawnPosition);
-
-    /**
-     * Get the entities currently in this world
-     *
-     * @return the entities in the world
-     */
-    Set<Entity> entities();
-
-    /**
-     * Find all entities that are colliding with the bounding box
-     *
-     * @param exclude the entity to exclude from searching
-     * @param boundingBox The bounding box to search in
-     * @param predicate Predicate to filter results
-     * @return List of entities inside the bounding box
-     */
-    ArrayList<Entity> getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
-
-    /**
-     * Creates a new particle effect
-     *
-     * @param particle The particle to spawn
-     * @return A new instance of ParticleEffect
-     */
-    ParticleEffect spawnParticle(ParticleEffectType particle);
-
-    /**
-     * Creates a new visual effect
-     *
-     * @param visual The visual to spawn
-     * @return A new instance of VisualEffect
-     */
-    VisualEffect spawnVisual(VisualEffectType visual);
-
-    /**
-     * Creates a new sound effect
-     *
-     * @param sound The sound to play
-     * @return A new instance of VisualEffect
-     */
-    SoundEffect playSound(SoundEffectType sound);
-
-    /**
-     * Strikes lightning at the given location.
-     *
-     * @param location the location that the lightning will hit
-     * @param isEffect determines if the lightning is just a effect or can cause damage
-     */
-    void lightning(Position location, boolean isEffect);
-
-    /**
-     * Sets the time of the world
-     *
-     * @param time the new time of the world
-     */
-    void setTime(long time);
 }

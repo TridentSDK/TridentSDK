@@ -14,7 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
-
-public class Config {
-}
+/**
+ * This package contains classes pertaining to the handling
+ * of commands both by the server and by plugins.
+ */
+package net.tridentsdk.command;

@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2014 The TridentSDK Team
+ * Copyright 2016 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,74 +14,84 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package net.tridentsdk;
 
-import net.tridentsdk.config.Config;
-import net.tridentsdk.util.TridentLogger;
+import net.tridentsdk.command.Console;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
 
 /**
- * The access point to the server information
+ * This is the representation of the server process' main
+ * class.
  *
- * @author The TridentSDK Team
+ * <p>The instance of the server may be obtained through
+ * the {@link #instance()} method.</p>
+ *
+ * @author TridentSDK
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public interface Server {
     /**
-     * Gets the port the server currently runs on
+     * Obtains the singleton instance of the server provided
+     * by the implementation.
      *
-     * @return the port the server runs on
+     * @return the server
      */
-    int port();
+    static Server instance() {
+        return Impl.get().svr();
+    }
 
     /**
-     * Gets the Internet Address of this server
+     * This method obtains the address and port of the
+     * server's socket.
      *
-     * @return the address of this server
+     * @return the socket address
      */
-    InetAddress ip();
+    InetSocketAddress address();
 
     /**
-     * The server's console
+     * This method obtains the console as defined by the
+     * server.
      *
-     * @return the server console
+     * <p>This may be a virtual console, an OS console, or
+     * other, including but not limited to the listed
+     * options above.</p>
+     *
+     * @return the server representation of the console
      */
     Console console();
 
     /**
-     * Gets the server's console logger for the this class
+     * This method obtains an arbitrary String that
+     * signifies the current server version.
      *
-     * @return the server's logger
-     */
-    TridentLogger logger();
-
-    /**
-     * The server configuration file
-     *
-     * @return the server config
-     */
-    Config config();
-
-    /**
-     * Gets the server's display information on the server list
-     *
-     * @return the display information manager
-     */
-    PingInfo info();
-
-    /**
-     * Gets the version of Trident that the server is currently running
-     *
-     * @return a String representing the current version of the Trident server that the server is running
+     * @return the server's version String
      */
     String version();
 
     /**
-     * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
+     * This method causes the server to save the current
+     * state, unload all server objects such as worlds and
+     * plugins, and load them again, while keeping existing
+     * connections to the socket alive.
+     *
+     * <p>This can be thought of as a restart, but due to
+     * players remaining on the server, certain procedures
+     * implemented by plugins may not expect players to
+     * be existing already. It is up to plugin authors to
+     * correctly implement their plugins to handle teardowns
+     * appropriately.</p>
+     */
+    void reload();
+
+    /**
+     * This method causes the server to shutdown.
+     *
+     * <p>"Shutdown" means that the server should properly
+     * handle unsaved states and unload those assets before
+     * completely stopping the server process.</p>
      */
     void shutdown();
 }
