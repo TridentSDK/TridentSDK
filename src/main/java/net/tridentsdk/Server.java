@@ -33,10 +33,6 @@ import java.net.InetSocketAddress;
  */
 @ThreadSafe
 public interface Server {
-    static Server instance() {
-        return Impl.get().svr();
-    }
-
     /**
      * Obtains the singleton instance of the server provided
      * by the implementation.
