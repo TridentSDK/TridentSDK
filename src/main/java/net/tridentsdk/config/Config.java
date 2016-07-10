@@ -16,5 +16,15 @@
  */
 package net.tridentsdk.config;
 
-public class Config {
+/**
+ * This class represents the configuration file loaded into
+ * memory.
+ *
+ * <p>TridentSDK strongly assumes that the implementation
+ * uses RFC 7159 JSON files as the configuration format.</p>
+ *
+ * @author TridentSDK
+ * @since 0.3-alpha-DP
+ */
+public interface Config {
 }
