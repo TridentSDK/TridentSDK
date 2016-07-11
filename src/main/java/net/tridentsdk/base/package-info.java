@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2014 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * This package contains "base" representation of Minecraft
- * objects such as blocks and specific data types associated
- * with base classes.
- *
- * @see net.tridentsdk.base.Block
+ * This package contains basic elements in Minecraft, such as blocks, orientation, directions, instruments, and sounds
  */
 package net.tridentsdk.base;

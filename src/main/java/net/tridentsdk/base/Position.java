@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2014 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,197 +14,276 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package net.tridentsdk.base;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import net.tridentsdk.util.Vector;
+import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Position is a container class that represents a three-
- * dimensional coordinate within a specific world.
+ * Represents a point on the coordinate grid of the world, including pitch and yaw
  *
- * <p>This container also may hold a yaw and pitch values
- * for use with rotatable objects such as entities.</p>
- *
- * @author TridentSDK
+ * @author The TridentSDK Team
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public final class Position extends AbstractVector<Position> {
-    private static final long serialVersionUID = 5910507790866074403L;
+public final class Position extends Vector implements Cloneable {
+    private volatile World world;
+    private volatile float yaw;
+    private volatile float pitch;
 
-    /**
-     * Additional fields representing the state of the
-     * position
-     */
-    private final World world;    // These fields MAY NOT
-    private volatile float pitch; // be updated along with
-    private volatile float yaw;   // a compound modification
-
-    @Override
-    protected void writeFields(Position vector) {
-        this.pitch = vector.pitch;
-        this.yaw = vector.yaw;
-    }
-
-    /**
-     * Creates a Position in a given world with all
-     * coordinates and directions set to 0.
-     *
-     * <p>While it is recommended for the given world to be
-     * nonnull, certain situations such as those where the
-     * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
-     * {@link #add(double, double, double)} methods
-     * can be used in addition to this</p>
-     *
-     * @param world the world that this position is set to
-     *              reside in
-     */
-    public Position(@Nonnull World world) {
-        this(world, 0D, 0D, 0D, 0F, 0F);
-    }
-
-    /**
-     * Creates a Position in a given world and integer
-     * Cartesian coordinates with all directions set to 0.
-     *
-     * <p>While it is recommended for the given world to be
-     * nonnull, certain situations such as those where the
-     * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
-     * {@link #add(double, double, double)} methods
-     * can be used in addition to this</p>
-     *
-     * @param world the world that this position is set to
-     *              reside in
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
-     */
-    public Position(@Nonnull World world, int x, int y, int z) {
-        this(world, (double) x, (double) y, (double) z, 0F, 0F);
-    }
-
-    /**
-     * Creates a Position in a given world and {@code double}
-     * Cartesian coordinates with all directions set to 0.
-     *
-     * <p>While it is recommended for the given world to be
-     * nonnull, certain situations such as those where the
-     * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
-     * {@link #add(double, double, double)} methods
-     * can be used in addition to this</p>
-     *
-     * @param world the world that this position is set to
-     *              reside in
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
-     */
-    public Position(@Nonnull World world, double x, double y, double z) {
-        this(world, x, y, z, 0F, 0F);
-    }
-
-    /**
-     * Creates a Position in a given world, {@code double}
-     * Cartesian coordinates, and directional values.
-     *
-     * <p>While it is recommended for the given world to be
-     * nonnull, certain situations such as those where the
-     * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
-     * {@link #add(double, double, double)} methods
-     * can be used in addition to this</p>
-     *
-     * @param world the world in which this position is set
-     *              to reside
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
-     * @param yaw   the yaw directional
-     * @param pitch the pitch directional
-     */
-    public Position(@Nonnull World world, double x, double y, double z, float yaw, float pitch) {
-        super(x, y, z);
+    private Position(World world, double x, double y, double z, float yaw, float pitch) {
         this.world = world;
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+
         this.yaw = yaw;
         this.pitch = pitch;
     }
 
+    public Position(World world, double x, double y, double z) {
+        this(world, x, y, z, 0.0F, 0.0F);
+    }
+
+    private static double square(double d) {
+        return d * d;
+    }
+
     /**
-     * Obtains the World in which this Position is set to
-     * reside.
+     * References the point on the world as a position that wraps the coordinates
      *
-     * @return the world containing this Position
+     * @param world the world which the point resides in
+     * @param x     the x coordinate
+     * @param y     the y coordinate
+     * @param z     the z coordinate
+     * @param yaw   goes side to side, in degrees
+     * @param pitch goes up and down, in degrees
+     */
+    public static Position create(World world, double x, double y, double z, float yaw, float pitch) {
+        return new Position(world, x, y, z, yaw, pitch);
+    }
+
+    /**
+     * Wraps the point without specific yaw and pitch (set to 0)
+     *
+     * @param world the world which the point resides in
+     * @param x     the x coordinate
+     * @param y     the y coordinate
+     * @param z     the z coordinate
+     */
+    public static Position create(World world, double x, double y, double z) {
+        return new Position(world, x, y, z);
+    }
+
+    /**
+     * The world the position is in
+     *
+     * @return the world where the position is
      */
     public World world() {
         return this.world;
     }
 
     /**
-     * Obtains the yaw at which this position is pointed.
+     * Chunk of the current position
      *
-     * <p>Yaw = horizontal rotation</p>
+     * @return Chunk of the position
+     */
+    public Chunk chunk() {
+        return world.chunkAt((int) x >> 4, (int) z >> 4, true);
+    }
+
+    /**
+     * Sets the position's world
      *
-     * @return this position's yaw
+     * @param world the world to set the position to
+     */
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    /**
+     * The yaw of the position
+     *
+     * @return the yaw of this position
      */
     public float yaw() {
         return this.yaw;
     }
 
     /**
-     * Obtains the pitch at which this position is pointed.
+     * Sets the yaw of the position
      *
-     * <p>Pitch = vertical rotation</p>
+     * @param yaw the yaw of the position to set
+     */
+    public void setYaw(float yaw) {
+        this.yaw = yaw;
+    }
+
+    /**
+     * The pitch of the position
      *
-     * @return this position's pitch
+     * @return the pitch value of this position
      */
     public float pitch() {
         return this.pitch;
     }
 
     /**
-     * This is the most correct way I've found to compare
-     * {@code floats}.
+     * Sets the pitch of the position
      *
-     * @param f0 the first float
-     * @param f1 the second float
-     * @return {@code true} if they are equal
+     * @param pitch the pitch of the position to set
      */
-    // Private static - compiler inline hint
-    private static boolean eq(float f0, float f1) {
-        return Float.compare(f0, f1) == 0;
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
+    }
+
+    /**
+     * Adds the x, y, and z from the vector to the coordinates of this position
+     *
+     * @param vector the vector containing the relative data
+     * @return the relative position
+     */
+    public Position add(Vector vector) {
+        this.setX(x() + vector.x());
+        this.setY(y() + vector.y());
+        this.setZ(z() + vector.z());
+
+        return this;
+    }
+
+    /**
+     * Acquires the relative position to this set of coordinates
+     *
+     * @param vector the vector that has the x, y, and z of the position relative to this
+     * @return the relative position
+     */
+    public Position relative(Vector vector) {
+        return new Position(this.world(), vector.x() + this.x(), vector.y() + this.y(),
+                vector.z() + this.z(), this.yaw(), this.pitch());
+    }
+
+    /**
+     * Acquires the tile at this position
+     *
+     * @return the tile occupying the coordinates of this position
+     */
+    public Block block() {
+        return world().blockAt(this);
+    }
+
+    /**
+     * Creates new Vector with Location's coordinates
+     *
+     * @return New Vector containing this Location's coordinates
+     */
+    public Vector asVector() {
+        return new Vector(this.x(), this.y(), this.z());
+    }
+
+    /**
+     * Obtains the unit vector pointing in the direction of the pitch and yaw
+     *
+     * @return the direction vector
+     */
+    public Vector asUnitVector() {
+        // queerest calculations ever, apparently x goes towards 3pi/2 and z to 0...?
+        double x = -Math.cos(pitch) * Math.sin(yaw);
+        double y = -Math.sin(pitch);
+        double z = Math.cos(pitch) * Math.cos(yaw);
+
+        return new Vector(x, y, z);
+    }
+
+    /**
+     * The distance this from position to another. Math.sqrt is costly, ergo calling this method a lot is not advised.
+     *
+     * @param position the position to measure distance with
+     * @return distance from this position to another
+     */
+    public double distance(Position position) {
+        return Math.sqrt(this.distanceSquared(position));
+    }
+
+    /**
+     * The distance squared from this position to another
+     *
+     * @param position the position to measure distance with
+     * @return distance squared from this position to another
+     */
+    public double distanceSquared(Position position) {
+        Preconditions.checkNotNull(position, "Location cannot be null.");
+        if (!this.world().equals(position.world()))
+            return 0.0;
+        return square(this.x() - position.x()) + square(this.y() - position.y()) +
+                square(this.z() - position.z());
+    }
+
+    /**
+     * Convert the Pitch and Yaw to a Vectorized direction
+     *
+     * @return Vector of the direction of the position
+     */
+    public Vector toDirection(){
+        Vector vector = new Vector();
+        double rotX = yaw;
+        double rotY = pitch;
+        double xz = Math.cos(Math.toRadians(rotY));
+        vector.setY(-Math.sin(Math.toRadians(rotY)));
+        vector.setX(-xz * Math.sin(Math.toRadians(rotX)));
+        vector.setZ(xz * Math.cos(Math.toRadians(rotX)));
+        return vector;
+    }
+
+    @Override
+    public Position clone() {
+        return new Position(world, x, y, z(), yaw, pitch);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Position) {
-            Position v = (Position) obj;
-            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
-                    this.world.equals(v.world) &&
-                    eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+        if (!(obj instanceof Position))
+            return false;
+        if (obj.hashCode() != this.hashCode())
+            return false;
+        if (x != ((Position) obj).x) {
+            return false;
+        } else if (y != ((Position) obj).y) {
+            return false;
+        } else if (z != ((Position) obj).z) {
+            return false;
+        } else if (world != ((Position) obj).world) {
+            return false;
+        } else if (pitch != ((Position) obj).pitch) {
+            return false;
+        } else if (yaw != ((Position) obj).yaw) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash = 31 * hash + this.world.hashCode();
-        hash = 31 * hash + Float.floatToIntBits(this.pitch);
-        hash = 31 * hash + Float.floatToIntBits(this.yaw);
-        return hash;
+        return Objects.hashCode(world, x, y, z, pitch, yaw);
     }
 
     @Override
-    public String toString() {
-        return String.format(
-                "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
-                this.world.name(), this.x, this.y, this.z, this.pitch, this.yaw);
+    public String toString(){
+        return "Position{" +
+                "world=" + world +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ", yaw=" + yaw +
+                ", pitch=" + pitch +
+                '}';
     }
 }

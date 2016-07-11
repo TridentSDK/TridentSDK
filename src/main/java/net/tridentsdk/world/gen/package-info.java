@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2014 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * This package contains classes pertaining to the
- * generation and creation of world chunks. Generators,
- * whether they be chunk generators, feature generators, or
- * prop generators are set and should not be changed once a
- * world is created.
- *
- * <p>Terrain generators generate the terrain, like hills,
- * the ground, valleys, perhaps rivers, etc...</p>
- *
- * <p>Feature generators generate strongholds, mineshafts,
- * villages, caves, end portal rooms, etc...</p>
- *
- * <p>Prop generators generate flowers, trees, mooshrooms,
- * tall grass, etc...</p>
+ * World generation API, used to set block positions for the chunk
  */
 package net.tridentsdk.world.gen;

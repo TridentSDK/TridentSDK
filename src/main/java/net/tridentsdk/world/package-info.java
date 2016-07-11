@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2014 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
- * This package deals with high-level management of worlds
- * such as loading and unloading, as well as accessors to
- * world properties.
+ * World access: Chunks, dimensions, and loading, and world generation
  */
 package net.tridentsdk.world;
