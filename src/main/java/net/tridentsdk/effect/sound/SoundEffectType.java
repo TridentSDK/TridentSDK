@@ -24,1283 +24,2089 @@ package net.tridentsdk.effect.sound;
  * @since 0.4-alpha
  */
 public enum SoundEffectType {
+
+    /**
+     * Eerie noise
+     */
+    AMBIENT_CAVE("ambient.cave", 0, SoundCategory.AMBIENT),
+
+    /**
+     * Block broken
+     */
+    BLOCK_ANVIL_BREAK("block.anvil.break", 1, SoundCategory.BLOCK),
+
+    /**
+     * Anvil destroyed
+     */
+    BLOCK_ANVIL_DESTROY("block.anvil.destroy", 2, SoundCategory.BLOCK),
+
+    BLOCK_ANVIL_FALL("block.anvil.fall", 3, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_ANVIL_HIT("block.anvil.hit", 4, SoundCategory.BLOCK),
+
+    /**
+     * Anvil landed
+     */
+    BLOCK_ANVIL_LAND("block.anvil.land", 5, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_ANVIL_PLACE("block.anvil.place", 6, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_ANVIL_STEP("block.anvil.step", 7, SoundCategory.BLOCK),
+
+    /**
+     * Anvil used
+     */
+    BLOCK_ANVIL_USE("block.anvil.use", 8, SoundCategory.BLOCK),
+
+    /**
+     * Brewing Stand bubbles
+     */
+    BLOCK_BREWING_STAND_BREW("block.brewing_stand.brew", 9, SoundCategory.BLOCK),
+
+    /**
+     * Chest closes
+     */
+    BLOCK_CHEST_CLOSE("block.chest.close", 10, SoundCategory.BLOCK),
+
+    /**
+     * Chest locked
+     */
+    BLOCK_CHEST_LOCKED("block.chest.locked", 11, SoundCategory.BLOCK),
+
+    /**
+     * Chest opens
+     */
+    BLOCK_CHEST_OPEN("block.chest.open", 12, SoundCategory.BLOCK),
+
+    /**
+     * Chorus Flower withers
+     */
+    BLOCK_CHORUS_FLOWER_DEATH("block.chorus_flower.death", 13, SoundCategory.BLOCK),
+
+    /**
+     * Chorus Flower grows
+     */
+    BLOCK_CHORUS_FLOWER_GROW("block.chorus_flower.grow", 14, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_CLOTH_BREAK("block.cloth.break", 15, SoundCategory.BLOCK),
+
+    BLOCK_CLOTH_FALL("block.cloth.fall", 16, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_CLOTH_HIT("block.cloth.hit", 17, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_CLOTH_PLACE("block.cloth.place", 18, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_CLOTH_STEP("block.cloth.step", 19, SoundCategory.BLOCK),
+
+    /**
+     * Comparator clicks
+     */
+    BLOCK_COMPARATOR_CLICK("block.comparator.click", 20, SoundCategory.BLOCK),
+
+    /**
+     * Dispensed item
+     */
+    BLOCK_DISPENSER_DISPENSE("block.dispenser.dispense", 21, SoundCategory.BLOCK),
+
+    /**
+     * Dispenser failed
+     */
+    BLOCK_DISPENSER_FAIL("block.dispenser.fail", 22, SoundCategory.BLOCK),
+
+    /**
+     * Dispensed item
+     */
+    BLOCK_DISPENSER_LAUNCH("block.dispenser.launch", 23, SoundCategory.BLOCK),
+
+    /**
+     * Explosion
+     */
+    BLOCK_END_GATEWAY_SPAWN("block.end_gateway.spawn", 24, SoundCategory.BLOCK),
+
+    /**
+     * Chest closes
+     */
+    BLOCK_ENDERCHEST_CLOSE("block.enderchest.close", 25, SoundCategory.BLOCK),
+
+    /**
+     * Chest opens
+     */
+    BLOCK_ENDERCHEST_OPEN("block.enderchest.open", 26, SoundCategory.BLOCK),
+
+    /**
+     * Fence Gate creaks
+     */
+    BLOCK_FENCE_GATE_CLOSE("block.fence_gate.close", 27, SoundCategory.BLOCK),
+
+    /**
+     * Fence Gate creaks
+     */
+    BLOCK_FENCE_GATE_OPEN("block.fence_gate.open", 28, SoundCategory.BLOCK),
+
+    /**
+     * Fire crackles
+     */
+    BLOCK_FIRE_AMBIENT("block.fire.ambient", 29, SoundCategory.BLOCK),
+
+    /**
+     * Fire extinguished
+     */
+    BLOCK_FIRE_EXTINGUISH("block.fire.extinguish", 30, SoundCategory.BLOCK),
+
+    /**
+     * Furnace crackles
+     */
+    BLOCK_FURNACE_FIRE_CRACKLE("block.furnace.fire_crackle", 31, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_GLASS_BREAK("block.glass.break", 32, SoundCategory.BLOCK),
+
+    BLOCK_GLASS_FALL("block.glass.fall", 33, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_GLASS_HIT("block.glass.hit", 34, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_GLASS_PLACE("block.glass.place", 35, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_GLASS_STEP("block.glass.step", 36, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_GRASS_BREAK("block.grass.break", 37, SoundCategory.BLOCK),
+
+    BLOCK_GRASS_FALL("block.grass.fall", 38, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_GRASS_HIT("block.grass.hit", 39, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_GRASS_PLACE("block.grass.place", 40, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_GRASS_STEP("block.grass.step", 41, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_GRAVEL_BREAK("block.gravel.break", 42, SoundCategory.BLOCK),
+
+    BLOCK_GRAVEL_FALL("block.gravel.fall", 43, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_GRAVEL_HIT("block.gravel.hit", 44, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_GRAVEL_PLACE("block.gravel.place", 45, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_GRAVEL_STEP("block.gravel.step", 46, SoundCategory.BLOCK),
+
+    /**
+     * Door creaks
+     */
+    BLOCK_IRON_DOOR_CLOSE("block.iron_door.close", 47, SoundCategory.BLOCK),
+
+    /**
+     * Door creaks
+     */
+    BLOCK_IRON_DOOR_OPEN("block.iron_door.open", 48, SoundCategory.BLOCK),
+
+    /**
+     * Trapdoor opens
+     */
+    BLOCK_IRON_TRAPDOOR_CLOSE("block.iron_trapdoor.close", 49, SoundCategory.BLOCK),
+
+    /**
+     * Trapdoor closes
+     */
+    BLOCK_IRON_TRAPDOOR_OPEN("block.iron_trapdoor.open", 50, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_LADDER_BREAK("block.ladder.break", 51, SoundCategory.BLOCK),
+
+    BLOCK_LADDER_FALL("block.ladder.fall", 52, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_LADDER_HIT("block.ladder.hit", 53, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_LADDER_PLACE("block.ladder.place", 54, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_LADDER_STEP("block.ladder.step", 55, SoundCategory.BLOCK),
+
+    /**
+     * Lava pops
+     */
+    BLOCK_LAVA_AMBIENT("block.lava.ambient", 56, SoundCategory.BLOCK),
+
+    /**
+     * Lava hisses
+     */
+    BLOCK_LAVA_EXTINGUISH("block.lava.extinguish", 57, SoundCategory.BLOCK),
+
+    /**
+     * Lava pops
+     */
+    BLOCK_LAVA_POP("block.lava.pop", 58, SoundCategory.BLOCK),
+
+    /**
+     * Lever clicks
+     */
+    BLOCK_LEVER_CLICK("block.lever.click", 59, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_METAL_BREAK("block.metal.break", 60, SoundCategory.BLOCK),
+
+    BLOCK_METAL_FALL("block.metal.fall", 61, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_METAL_HIT("block.metal.hit", 62, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_METAL_PLACE("block.metal.place", 63, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_METAL_STEP("block.metal.step", 64, SoundCategory.BLOCK),
+
+    /**
+     * Pressure Plate clicks
+     */
+    BLOCK_METAL_PRESSUREPLATE_CLICK_OFF("block.metal_pressureplate.click_off", 65, SoundCategory.BLOCK),
+
+    /**
+     * Pressure Plate clicks
+     */
+    BLOCK_METAL_PRESSUREPLATE_CLICK_ON("block.metal_pressureplate.click_on", 66, SoundCategory.BLOCK),
+
+    /**
+     * Noteblock plays
+     */
+    BLOCK_NOTE_BASEDRUM("block.note.basedrum", 67, SoundCategory.BLOCK),
+
+    /**
+     * Noteblock plays
+     */
+    BLOCK_NOTE_BASS("block.note.bass", 68, SoundCategory.BLOCK),
+
+    /**
+     * Noteblock plays
+     */
+    BLOCK_NOTE_HARP("block.note.harp", 69, SoundCategory.BLOCK),
+
+    /**
+     * Noteblock plays
+     */
+    BLOCK_NOTE_HAT("block.note.hat", 70, SoundCategory.BLOCK),
+
+    BLOCK_NOTE_PLING("block.note.pling", 71, SoundCategory.BLOCK),
+
+    /**
+     * Noteblock plays
+     */
+    BLOCK_NOTE_SNARE("block.note.snare", 72, SoundCategory.BLOCK),
+
+    /**
+     * Piston moves
+     */
+    BLOCK_PISTON_CONTRACT("block.piston.contract", 73, SoundCategory.BLOCK),
+
+    /**
+     * Piston moves
+     */
+    BLOCK_PISTON_EXTEND("block.piston.extend", 74, SoundCategory.BLOCK),
+
+    /**
+     * Portal whooshes
+     */
+    BLOCK_PORTAL_AMBIENT("block.portal.ambient", 75, SoundCategory.BLOCK),
+
+    BLOCK_PORTAL_TRAVEL("block.portal.travel", 76, SoundCategory.BLOCK),
+
+    BLOCK_PORTAL_TRIGGER("block.portal.trigger", 77, SoundCategory.BLOCK),
+
+    /**
+     * Torch fizzes
+     */
+    BLOCK_REDSTONE_TORCH_BURNOUT("block.redstone_torch.burnout", 78, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_SAND_BREAK("block.sand.break", 79, SoundCategory.BLOCK),
+
+    BLOCK_SAND_FALL("block.sand.fall", 80, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_SAND_HIT("block.sand.hit", 81, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_SAND_PLACE("block.sand.place", 82, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_SAND_STEP("block.sand.step", 83, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_SLIME_BREAK("block.slime.break", 84, SoundCategory.BLOCK),
+
+    BLOCK_SLIME_FALL("block.slime.fall", 85, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_SLIME_HIT("block.slime.hit", 86, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_SLIME_PLACE("block.slime.place", 87, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_SLIME_STEP("block.slime.step", 88, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_SNOW_BREAK("block.snow.break", 89, SoundCategory.BLOCK),
+
+    BLOCK_SNOW_FALL("block.snow.fall", 90, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_SNOW_HIT("block.snow.hit", 91, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_SNOW_PLACE("block.snow.place", 92, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_SNOW_STEP("block.snow.step", 93, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_STONE_BREAK("block.stone.break", 94, SoundCategory.BLOCK),
+
+    BLOCK_STONE_FALL("block.stone.fall", 95, SoundCategory.BLOCK),
+
+    /**
+     * Block breaking
+     */
+    BLOCK_STONE_HIT("block.stone.hit", 96, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_STONE_PLACE("block.stone.place", 97, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_STONE_STEP("block.stone.step", 98, SoundCategory.BLOCK),
+
+    /**
+     * Button clicks
+     */
+    BLOCK_STONE_BUTTON_CLICK_OFF("block.stone_button.click_off", 99, SoundCategory.BLOCK),
+
+    /**
+     * Button clicks
+     */
+    BLOCK_STONE_BUTTON_CLICK_ON("block.stone_button.click_on", 100, SoundCategory.BLOCK),
+
+    /**
+     * Pressure Plate clicks
+     */
+    BLOCK_STONE_PRESSUREPLATE_CLICK_OFF("block.stone_pressureplate.click_off", 101, SoundCategory.BLOCK),
+
+    /**
+     * Pressure Plate clicks
+     */
+    BLOCK_STONE_PRESSUREPLATE_CLICK_ON("block.stone_pressureplate.click_on", 102, SoundCategory.BLOCK),
+
+    /**
+     * Tripwire attaches
+     */
+    BLOCK_TRIPWIRE_ATTACH("block.tripwire.attach", 103, SoundCategory.BLOCK),
+
+    /**
+     * Tripwire clicks
+     */
+    BLOCK_TRIPWIRE_CLICK_OFF("block.tripwire.click_off", 104, SoundCategory.BLOCK),
+
+    /**
+     * Tripwire clicks
+     */
+    BLOCK_TRIPWIRE_CLICK_ON("block.tripwire.click_on", 105, SoundCategory.BLOCK),
+
+    /**
+     * Tripwire detaches
+     */
+    BLOCK_TRIPWIRE_DETACH("block.tripwire.detach", 106, SoundCategory.BLOCK),
+
+    /**
+     * Water flows
+     */
+    BLOCK_WATER_AMBIENT("block.water.ambient", 107, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_WATERLILY_PLACE("block.waterlily.place", 108, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_WOOD_BREAK("block.wood.break", 109, SoundCategory.BLOCK),
+
+    BLOCK_WOOD_FALL("block.wood.fall", 110, SoundCategory.BLOCK),
+
+    /**
+     * Block broken
+     */
+    BLOCK_WOOD_HIT("block.wood.hit", 111, SoundCategory.BLOCK),
+
+    /**
+     * Block placed
+     */
+    BLOCK_WOOD_PLACE("block.wood.place", 112, SoundCategory.BLOCK),
+
+    /**
+     * Footsteps
+     */
+    BLOCK_WOOD_STEP("block.wood.step", 113, SoundCategory.BLOCK),
+
+    /**
+     * Button clicks
+     */
+    BLOCK_WOOD_BUTTON_CLICK_OFF("block.wood_button.click_off", 114, SoundCategory.BLOCK),
+
+    /**
+     * Button clicks
+     */
+    BLOCK_WOOD_BUTTON_CLICK_ON("block.wood_button.click_on", 115, SoundCategory.BLOCK),
+
+    /**
+     * Button clicks
+     */
+    BLOCK_WOOD_PRESSUREPLATE_CLICK_OFF("block.wood_pressureplate.click_off", 116, SoundCategory.BLOCK),
+
+    /**
+     * Pressure Plate clicks
+     */
+    BLOCK_WOOD_PRESSUREPLATE_CLICK_ON("block.wood_pressureplate.click_on", 117, SoundCategory.BLOCK),
+
+    /**
+     * Door creaks
+     */
+    BLOCK_WOODEN_DOOR_CLOSE("block.wooden_door.close", 118, SoundCategory.BLOCK),
+
+    /**
+     * Door creaks
+     */
+    BLOCK_WOODEN_DOOR_OPEN("block.wooden_door.open", 119, SoundCategory.BLOCK),
+
+    /**
+     * Trapdoor creaks
+     */
+    BLOCK_WOODEN_TRAPDOOR_CLOSE("block.wooden_trapdoor.close", 120, SoundCategory.BLOCK),
+
+    /**
+     * Trapdoor creaks
+     */
+    BLOCK_WOODEN_TRAPDOOR_OPEN("block.wooden_trapdoor.open", 121, SoundCategory.BLOCK),
+
+    /**
+     * Thorns prick
+     */
+    ENCHANT_THORNS_HIT("enchant.thorns.hit", 122, SoundCategory.MASTER),
+
+    /**
+     * Block broken
+     */
+    ENTITY_ARMORSTAND_BREAK("entity.armorstand.break", 123, SoundCategory.MASTER),
+
+    /**
+     * Something fell
+     */
+    ENTITY_ARMORSTAND_FALL("entity.armorstand.fall", 124, SoundCategory.MASTER),
+
+    /**
+     * Block breaking
+     */
+    ENTITY_ARMORSTAND_HIT("entity.armorstand.hit", 125, SoundCategory.MASTER),
+
+    /**
+     * Block placed
+     */
+    ENTITY_ARMORSTAND_PLACE("entity.armorstand.place", 126, SoundCategory.MASTER),
+
+    /**
+     * Arrow hits
+     */
+    ENTITY_ARROW_HIT("entity.arrow.hit", 127, SoundCategory.MASTER),
+
+    /**
+     * Player hit
+     */
+    ENTITY_ARROW_HIT_PLAYER("entity.arrow.hit_player", 128, SoundCategory.MASTER),
+
+    /**
+     * Arrow fired
+     */
+    ENTITY_ARROW_SHOOT("entity.arrow.shoot", 129, SoundCategory.MASTER),
+
+    /**
+     * Bat screeches
+     */
+    ENTITY_BAT_AMBIENT("entity.bat.ambient", 130, SoundCategory.MASTER),
+
+    /**
+     * Bat dies
+     */
+    ENTITY_BAT_DEATH("entity.bat.death", 131, SoundCategory.MASTER),
+
     /**
-     * Being within 10 to 20 blocks of an area not exposed to the sky with a light level of less than eight
+     * Bat hurts
      */
-    AMBIENT_CAVE("ambient.cave.cave"),
+    ENTITY_BAT_HURT("entity.bat.hurt", 132, SoundCategory.MASTER),
 
+    ENTITY_BAT_LOOP("entity.bat.loop", 133, SoundCategory.MASTER),
+
+    /**
+     * Bat takes off
+     */
+    ENTITY_BAT_TAKEOFF("entity.bat.takeoff", 134, SoundCategory.MASTER),
+
+    /**
+     * Blaze breathes
+     */
+    ENTITY_BLAZE_AMBIENT("entity.blaze.ambient", 135, SoundCategory.MASTER),
+
+    /**
+     * Blaze crackles
+     */
+    ENTITY_BLAZE_BURN("entity.blaze.burn", 136, SoundCategory.MASTER),
+
+    /**
+     * Blaze dies
+     */
+    ENTITY_BLAZE_DEATH("entity.blaze.death", 137, SoundCategory.MASTER),
+
+    /**
+     * Blaze hurts
+     */
+    ENTITY_BLAZE_HURT("entity.blaze.hurt", 138, SoundCategory.MASTER),
+
+    /**
+     * Blaze shoots
+     */
+    ENTITY_BLAZE_SHOOT("entity.blaze.shoot", 139, SoundCategory.MASTER),
+
+    /**
+     * Fishing hook splashes
+     */
+    ENTITY_BOBBER_SPLASH("entity.bobber.splash", 140, SoundCategory.MASTER),
+
+    /**
+     * Bobber thrown
+     */
+    ENTITY_BOBBER_THROW("entity.bobber.throw", 141, SoundCategory.MASTER),
+
+    /**
+     * Cat meows
+     */
+    ENTITY_CAT_AMBIENT("entity.cat.ambient", 142, SoundCategory.MASTER),
+
+    /**
+     * Cat dies
+     */
+    ENTITY_CAT_DEATH("entity.cat.death", 143, SoundCategory.MASTER),
+
+    ENTITY_CAT_HISS("entity.cat.hiss", 144, SoundCategory.MASTER),
+
+    /**
+     * Cat hurts
+     */
+    ENTITY_CAT_HURT("entity.cat.hurt", 145, SoundCategory.MASTER),
+
+    /**
+     * Cat meows
+     */
+    ENTITY_CAT_PURR("entity.cat.purr", 146, SoundCategory.MASTER),
+
+    /**
+     * Cat meows
+     */
+    ENTITY_CAT_PURREOW("entity.cat.purreow", 147, SoundCategory.MASTER),
+
+    /**
+     * Chicken clucks
+     */
+    ENTITY_CHICKEN_AMBIENT("entity.chicken.ambient", 148, SoundCategory.MASTER),
+
+    /**
+     * Chicken dies
+     */
+    ENTITY_CHICKEN_DEATH("entity.chicken.death", 149, SoundCategory.MASTER),
+
+    /**
+     * Chicken plops
+     */
+    ENTITY_CHICKEN_EGG("entity.chicken.egg", 150, SoundCategory.MASTER),
+
+    /**
+     * Chicken hurts
+     */
+    ENTITY_CHICKEN_HURT("entity.chicken.hurt", 151, SoundCategory.MASTER),
+
+    /**
+     * Footsteps
+     */
+    ENTITY_CHICKEN_STEP("entity.chicken.step", 152, SoundCategory.MASTER),
+
+    /**
+     * Cow moos
+     */
+    ENTITY_COW_AMBIENT("entity.cow.ambient", 153, SoundCategory.MASTER),
+
+    /**
+     * Cow dies
+     */
+    ENTITY_COW_DEATH("entity.cow.death", 154, SoundCategory.MASTER),
+
+    /**
+     * Cow hurts
+     */
+    ENTITY_COW_HURT("entity.cow.hurt", 155, SoundCategory.MASTER),
+
+    /**
+     * Cow gets milked
+     */
+    ENTITY_COW_MILK("entity.cow.milk", 156, SoundCategory.MASTER),
+
+    /**
+     * Footsteps
+     */
+    ENTITY_COW_STEP("entity.cow.step", 157, SoundCategory.MASTER),
+
+    /**
+     * Creeper dies
+     */
+    ENTITY_CREEPER_DEATH("entity.creeper.death", 158, SoundCategory.MASTER),
+
+    /**
+     * Creeper hurts
+     */
+    ENTITY_CREEPER_HURT("entity.creeper.hurt", 159, SoundCategory.MASTER),
+
+    /**
+     * Creeper hisses
+     */
+    ENTITY_CREEPER_PRIMED("entity.creeper.primed", 160, SoundCategory.MASTER),
+
+    /**
+     * Donkey hee-haws
+     */
+    ENTITY_DONKEY_AMBIENT("entity.donkey.ambient", 161, SoundCategory.MASTER),
+
+    /**
+     * Donkey neighs
+     */
+    ENTITY_DONKEY_ANGRY("entity.donkey.angry", 162, SoundCategory.MASTER),
+
+    /**
+     * Donkey Chest equips
+     */
+    ENTITY_DONKEY_CHEST("entity.donkey.chest", 163, SoundCategory.MASTER),
+
     /**
-     * Being close to the surface of a block open to the sky when it is raining
+     * Donkey dies
      */
-    AMBIENT_RAIN("ambient.weather.rain"),
+    ENTITY_DONKEY_DEATH("entity.donkey.death", 164, SoundCategory.MASTER),
 
     /**
-     * Lightning strikes
+     * Donkey hurts
      */
-    AMBIENT_THUNDER("ambient.weather.thunder"),
+    ENTITY_DONKEY_HURT("entity.donkey.hurt", 165, SoundCategory.MASTER),
 
     /**
-     * A player contacting the surface of a block after falling from a tall height
+     * Egg flies
      */
-    PLAYER_FALL_BIG("game.player.hurt.fall.big"),
+    ENTITY_EGG_THROW("entity.egg.throw", 166, SoundCategory.MASTER),
 
     /**
-     * A passive mob contacting the surface of a block after falling from a tall height
+     * Guardian moans
      */
-    NEUTRAL_FALL_BIG("game.neutral.hurt.fall.big"),
+    ENTITY_ELDER_GUARDIAN_AMBIENT("entity.elder_guardian.ambient", 167, SoundCategory.MASTER),
 
     /**
-     * A hostile mob contacting the surface of a block after falling from a tall height
+     * Guardian flaps
      */
-    HOSTILE_FALL_BIG("game.hostile.hurt.fall.big"),
+    ENTITY_ELDER_GUARDIAN_AMBIENT_LAND("entity.elder_guardian.ambient_land", 168, SoundCategory.MASTER),
 
     /**
-     * A player contacting the surface of a block after falling from a short height
+     * Guardian curses
      */
-    PLAYER_FALL_SMALL("game.player.hurt.fall.small"),
+    ENTITY_ELDER_GUARDIAN_CURSE("entity.elder_guardian.curse", 169, SoundCategory.MASTER),
 
     /**
-     * A passive mob contacting the surface of a block after falling from a short height
+     * Guardian dies
      */
-    NEUTRAL_FALL_SMALL("game.neutral.hurt.fall.small"),
+    ENTITY_ELDER_GUARDIAN_DEATH("entity.elder_guardian.death", 170, SoundCategory.MASTER),
 
     /**
-     * A hostile mob contacting the surface of a block after falling from a short height
+     * Guardian dies
      */
-    HOSTILE_FALL_SMALL("game.hostile.hurt.fall.small"),
+    ENTITY_ELDER_GUARDIAN_DEATH_LAND("entity.elder_guardian.death_land", 171, SoundCategory.MASTER),
 
     /**
-     * A player taking damage
+     * Guardian hurts
      */
-    PLAYER_HURT("game.player.hurt"),
+    ENTITY_ELDER_GUARDIAN_HURT("entity.elder_guardian.hurt", 172, SoundCategory.MASTER),
 
     /**
-     * A passive mob taking damage.<br>
-     * Always overridden by the damage sound specific to each mob
+     * Guardian hurts
      */
-    NEUTRAL_HURT("game.neutral.hurt"),
+    ENTITY_ELDER_GUARDIAN_HURT_LAND("entity.elder_guardian.hurt_land", 173, SoundCategory.MASTER),
 
     /**
-     * A hostile mob taking damage. Used only by Giants.<br>
-     * Overridden by the damage sound specific to each mob in any other case
+     * Dragon roars
      */
-    HOSTILE_HURT("game.hostile.hurt"),
+    ENTITY_ENDERDRAGON_AMBIENT("entity.enderdragon.ambient", 174, SoundCategory.MASTER),
 
     /**
-     * A player dies
+     * Dragon dies
      */
-    PLAYER_DIE("game.player.die"),
+    ENTITY_ENDERDRAGON_DEATH("entity.enderdragon.death", 175, SoundCategory.MASTER),
 
     /**
-     * A passive mob dies. <br>
-     * Always overridden by the death sound specific to each mob
+     * Dragon flaps
      */
-    NEUTRAL_DIE("game.neutral.die"),
+    ENTITY_ENDERDRAGON_FLAP("entity.enderdragon.flap", 176, SoundCategory.MASTER),
 
     /**
-     * A hostile mob dies. Used only by Giants.<br>
-     * Overridden by the death sound specific to each mob in any other case
+     * Dragon growls
      */
-    HOSTILE_DIE("game.hostile.die"),
+    ENTITY_ENDERDRAGON_GROWL("entity.enderdragon.growl", 177, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "cloth"
+     * Dragon hurts
      */
-    DIG_CLOTH("dig.cloth"),
+    ENTITY_ENDERDRAGON_HURT("entity.enderdragon.hurt", 178, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "glass"
+     * Dragon shoots
      */
-    DIG_GLASS("dig.glass"),
+    ENTITY_ENDERDRAGON_SHOOT("entity.enderdragon.shoot", 179, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "grass" or a Sheep eats Grass
+     * Explosion
      */
-    DIG_GRASS("dig.grass"),
+    ENTITY_ENDERDRAGON_FIREBALL_EXPLODE("entity.enderdragon_fireball.explode", 180, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "gravel"
+     * Endereye shoots
      */
-    DIG_GRAVEL("dig.gravel"),
+    ENTITY_ENDEREYE_LAUNCH("entity.endereye.launch", 181, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "sand"
+     * Enderman vwoops
      */
-    DIG_SAND("dig.sand"),
+    ENTITY_ENDERMEN_AMBIENT("entity.endermen.ambient", 182, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "snow"
+     * Enderman dies
      */
-    DIG_SNOW("dig.snow"),
+    ENTITY_ENDERMEN_DEATH("entity.endermen.death", 183, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "stone"
+     * Enderman hurts
      */
-    DIG_STONE("dig.stone"),
+    ENTITY_ENDERMEN_HURT("entity.endermen.hurt", 184, SoundCategory.MASTER),
 
     /**
-     * Placing or breaking blocks classified as "wood"
+     * Enderman vwoops
      */
-    DIG_WOOD("dig.wood"),
+    ENTITY_ENDERMEN_SCREAM("entity.endermen.scream", 185, SoundCategory.MASTER),
 
     /**
-     * A thrown Splash Potion breaks
+     * Enderman cries out
      */
-    POTION_SMASH("game.potion.smash"),
+    ENTITY_ENDERMEN_STARE("entity.endermen.stare", 186, SoundCategory.MASTER),
 
     /**
-     * Being near Fire or a Blaze
+     * Enderman teleports
      */
-    FIRE_ACTIVE("fire.fire"),
+    ENTITY_ENDERMEN_TELEPORT("entity.endermen.teleport", 187, SoundCategory.MASTER),
 
     /**
-     * Setting Fire or igniting a Creeper using a Flint and Steel
+     * Endermite scuttles
      */
-    FIRE_IGNITE("fire.ignite"),
+    ENTITY_ENDERMITE_AMBIENT("entity.endermite.ambient", 188, SoundCategory.MASTER),
 
     /**
-     * Setting Fire using a Fire Charge
+     * Endermite dies
      */
-    FIRECHARGE_USE("item.fireCharge.use"),
+    ENTITY_ENDERMITE_DEATH("entity.endermite.death", 189, SoundCategory.MASTER),
 
     /**
-     * A small, close firework explosion
+     * Endermite hurts
      */
-    FIREWORKS_BLAST("fireworks.blast"),
+    ENTITY_ENDERMITE_HURT("entity.endermite.hurt", 190, SoundCategory.MASTER),
 
     /**
-     * A small, far firework explosion
+     * Footsteps
      */
-    FIREWORKS_BLAST_FAR("fireworks.blast_far"),
+    ENTITY_ENDERMITE_STEP("entity.endermite.step", 191, SoundCategory.MASTER),
 
     /**
-     * A large, close firework explosion
+     * Ender Pearl flies
      */
-    FIREWORKS_LARGE_BLAST("fireworks.largeBlast"),
+    ENTITY_ENDERPEARL_THROW("entity.enderpearl.throw", 192, SoundCategory.MASTER),
 
     /**
-     * A large, far firework explosion
+     * Bottle thrown
      */
-    FIREWORKS_LARGE_BLAST_FAR("fireworks.largeBlast_far"),
+    ENTITY_EXPERIENCE_BOTTLE_THROW("entity.experience_bottle.throw", 193, SoundCategory.MASTER),
 
     /**
-     * A firework being launched by a player or a dispenser
+     * Experience gained
      */
-    FIREWORKS_LAUNCH("fireworks.launch"),
+    ENTITY_EXPERIENCE_ORB_PICKUP("entity.experience_orb.pickup", 194, SoundCategory.MASTER),
 
     /**
-     * A close firework twinkles
+     * Experience gained
      */
-    FIREWORKS_TWINKLE("fireworks.twinkle"),
+    ENTITY_EXPERIENCE_ORB_TOUCH("entity.experience_orb.touch", 195, SoundCategory.MASTER),
 
     /**
-     * A faraway firework twinkles
+     * Firework blasts
      */
-    FIREWORKS_TWINKLE_FAR("fireworks.twinkle_far"),
+    ENTITY_FIREWORK_BLAST("entity.firework.blast", 196, SoundCategory.MASTER),
 
     /**
-     * A player is swimming
+     * Firework blasts
      */
-    PLAYER_SWIM("game.player.swim"),
+    ENTITY_FIREWORK_BLAST_FAR("entity.firework.blast_far", 197, SoundCategory.MASTER),
 
     /**
-     * A passive mob is swimming
+     * Firework blasts
      */
-    NEUTRAL_SWIM("game.neutral.swim"),
+    ENTITY_FIREWORK_LARGE_BLAST("entity.firework.large_blast", 198, SoundCategory.MASTER),
 
     /**
-     * A hostile mob is swimming
+     * Firework blasts
      */
-    HOSTILE_SWIM("game.hostile.swim"),
+    ENTITY_FIREWORK_LARGE_BLAST_FAR("entity.firework.large_blast_far", 199, SoundCategory.MASTER),
 
     /**
-     * A player falls into water
+     * Firework launches
      */
-    PLAYER_SWIM_SPLASH("game.player.swim.splash"),
+    ENTITY_FIREWORK_LAUNCH("entity.firework.launch", 200, SoundCategory.MASTER),
 
     /**
-     * A passive mob falls into water or a Fishing Rod Bobber is cast into Water
+     * Firework launches
      */
-    NEUTRAL_SWIM_SPLASH("game.neutral.swim.splash"),
+    ENTITY_FIREWORK_SHOOT("entity.firework.shoot", 201, SoundCategory.MASTER),
 
     /**
-     * A hostile mob falls into water
+     * Firework twinkles
      */
-    HOSTILE_SWIM_SPLASH("game.hostile.swim.splash"),
+    ENTITY_FIREWORK_TWINKLE("entity.firework.twinkle", 202, SoundCategory.MASTER),
 
     /**
-     * Being near Lava
+     * Firework twinkles
      */
-    LAVA("liquid.lava"),
+    ENTITY_FIREWORK_TWINKLE_FAR("entity.firework.twinkle_far", 203, SoundCategory.MASTER),
 
     /**
-     * Randomly when being near Lava. <br>
-     * Accompanied by a lava fireball particle effect
+     * Something fell
      */
-    LAVAPOP("liquid.lavapop"),
+    ENTITY_GENERIC_BIG_FALL("entity.generic.big_fall", 204, SoundCategory.MASTER),
 
     /**
-     * Being near flowing Water
+     * Burning
      */
-    WATER("liquid.water"),
+    ENTITY_GENERIC_BURN("entity.generic.burn", 205, SoundCategory.MASTER),
 
     /**
-     * A minecart moving
+     * Dying
      */
-    MINECART_BASE("minecart.base"),
+    ENTITY_GENERIC_DEATH("entity.generic.death", 206, SoundCategory.MASTER),
 
     /**
-     * Being inside a moving minecart
+     * Sipping
      */
-    MINECART_INSIDE("minecart.inside"),
+    ENTITY_GENERIC_DRINK("entity.generic.drink", 207, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Eating
      */
-    NOTE_BASS("note.bass"),
+    ENTITY_GENERIC_EAT("entity.generic.eat", 208, SoundCategory.MASTER),
 
     /**
-     * A Note Block that is on top of a "wood" block is clicked or powered by redstone
+     * Explosion
      */
-    NOTE_BASSATTACK("note.bassattack"),
+    ENTITY_GENERIC_EXPLODE("entity.generic.explode", 209, SoundCategory.MASTER),
 
     /**
-     * A Note Block that is on top of a "stone" block is clicked or powered by redstone
+     * Fire extinguishes
      */
-    NOTE_BD("note.bd"),
+    ENTITY_GENERIC_EXTINGUISH_FIRE("entity.generic.extinguish_fire", 210, SoundCategory.MASTER),
 
     /**
-     * A Note Block that is on top of an "other" block is clicked or powered by redstone
+     * Something hurts
      */
-    NOTE_HARP("note.harp"),
+    ENTITY_GENERIC_HURT("entity.generic.hurt", 211, SoundCategory.MASTER),
 
     /**
-     * A Note Block that is on top of a "glass" block is clicked or powered by redstone
+     * Something tripped
      */
-    NOTE_HAT("note.hat"),
+    ENTITY_GENERIC_SMALL_FALL("entity.generic.small_fall", 212, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Splashing
      */
-    NOTE_PLING("note.pling"),
+    ENTITY_GENERIC_SPLASH("entity.generic.splash", 213, SoundCategory.MASTER),
 
     /**
-     * A Note Block that is on top of a "sand" block is clicked or powered by redstone
+     * Swimming
      */
-    NOTE_SNARE("note.snare"),
+    ENTITY_GENERIC_SWIM("entity.generic.swim", 214, SoundCategory.MASTER),
 
     /**
-     * Being near a Nether portal block
+     * Ghast cries
      */
-    PORTAL("portal.portal"),
+    ENTITY_GHAST_AMBIENT("entity.ghast.ambient", 215, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Ghast dies
      */
-    PORTAL_TRAVEL("portal.travel"),
+    ENTITY_GHAST_DEATH("entity.ghast.death", 216, SoundCategory.MASTER),
 
     /**
-     * A player travels through or steps out of a Nether portal
+     * Ghast hurts
      */
-    PORTAL_TRIGGER("portal.trigger"),
+    ENTITY_GHAST_HURT("entity.ghast.hurt", 217, SoundCategory.MASTER),
+
+    ENTITY_GHAST_SCREAM("entity.ghast.scream", 218, SoundCategory.MASTER),
 
     /**
-     * An Anvil breaks
+     * Ghast shoots
      */
-    RANDOM_ANVIL_BREAK("random.anvil_break"),
+    ENTITY_GHAST_SHOOT("entity.ghast.shoot", 219, SoundCategory.MASTER),
 
     /**
-     * An Anvil is placed or lands after falling
+     * Ghast shoots
      */
-    RANDOM_ANVIL_LAND("random.anvil_land"),
+    ENTITY_GHAST_WARN("entity.ghast.warn", 220, SoundCategory.MASTER),
 
     /**
-     * A player removes an item from the output slot in the Anvil GUI
+     * Guardian moans
      */
-    RANDOM_ANVIL_USE("random.anvil_use"),
+    ENTITY_GUARDIAN_AMBIENT("entity.guardian.ambient", 221, SoundCategory.MASTER),
 
     /**
-     * A player or Skeleton shoots an Arrow.<br>
-     * A player casts a Fishing Rod.<br>
-     * A player throws a Snowball, Egg, Splash Potion, Bottle O' Enchanting, Ender Pearl, or Eye of Ender.<br>
-     * A Snow Golem throws a snowball at a mob.<br>
-     * A Dispenser shoots an Arrow, Snowball, Egg, Splash Potion, or Bottle O' Enchanting
+     * Guardian flaps
      */
-    RANDOM_BOW("random.bow"),
+    ENTITY_GUARDIAN_AMBIENT_LAND("entity.guardian.ambient_land", 222, SoundCategory.MASTER),
 
     /**
-     * An Arrow gets stuck in a block, an arrow hits an entity.<br>
-     * An active Tripwire (connected to Tripwire Hooks) is broken with Shears.<br>
-     * An active Tripwire Hook is broken
+     * Guardian shoots
      */
-    RANDOM_BOW_HIT("random.bowhit"),
+    ENTITY_GUARDIAN_ATTACK("entity.guardian.attack", 223, SoundCategory.MASTER),
 
     /**
-     * A player breaks a Pickaxe, Sword, Axe, Shovel, Bow, Flint and Steel, Shears, or Fishing Rod.<br>
-     * A piece of armor a mob (excluding players) is wearing breaks
+     * Guardian dies
      */
-    RANDOM_BREAK("random.break"),
+    ENTITY_GUARDIAN_DEATH("entity.guardian.death", 224, SoundCategory.MASTER),
 
     /**
-     * A player consumes a piece of food
+     * Guardian dies
      */
-    RANDOM_BURP("random.burp"),
+    ENTITY_GUARDIAN_DEATH_LAND("entity.guardian.death_land", 225, SoundCategory.MASTER),
 
     /**
-     * A Chest is closed
+     * Guardian flops
      */
-    RANDOM_CHEST_CLOSE("random.chestclosed"),
+    ENTITY_GUARDIAN_FLOP("entity.guardian.flop", 226, SoundCategory.MASTER),
 
     /**
-     * A Chest is opened
+     * Guardian hurts
      */
-    RANDOM_CHEST_OPEN("random.chestopen"),
+    ENTITY_GUARDIAN_HURT("entity.guardian.hurt", 227, SoundCategory.MASTER),
 
     /**
-     * Any kind of switch changes its power state (on or off)<br>
-     * A Dispenser or Dropper is powered<br>
-     * A Redstone Comparator's mode is changed<br>
-     * Two Tripwire Hooks are connected with String
+     * Guardian hurts
      */
-    RANDOM_CLICK("random.click"),
+    ENTITY_GUARDIAN_HURT_LAND("entity.guardian.hurt_land", 228, SoundCategory.MASTER),
 
     /**
-     * A Door, Trapdoor, or Fence Gate is opened or closed<br>
-     * A player attempts to open a locked container and is not holding the correct key item
+     * Horse neighs
      */
-    RANDOM_DOOR_OPEN("random.door_open"),
+    ENTITY_HORSE_AMBIENT("entity.horse.ambient", 229, SoundCategory.MASTER),
 
     /**
-     * A Door, Trapdoor, or Fence Gate is opened or closed<br>
-     * A player attempts to open a locked container and is not holding the correct key item
+     * Horse neighs
      */
-    RANDOM_DOOR_CLOSE("random.door_close"),
+    ENTITY_HORSE_ANGRY("entity.horse.angry", 230, SoundCategory.MASTER),
 
     /**
-     * A player is drinking a Potion or Milk
+     * Horse armor equips
      */
-    RANDOM_DRINK("random.drink"),
+    ENTITY_HORSE_ARMOR("entity.horse.armor", 231, SoundCategory.MASTER),
 
     /**
-     * A player is eating food
+     * Horse breathes
      */
-    RANDOM_EAT("random.eat"),
+    ENTITY_HORSE_BREATHE("entity.horse.breathe", 232, SoundCategory.MASTER),
 
     /**
-     * TNT, a Creeper, a Ghast's fireball, a Wither Skull, an Ender Crystal, or a Bed (in the Nether or the End) explodes<br>
-     * Lightning strikes at close range
+     * Horse dies
      */
-    RANDOM_EXPLODE("random.explode"),
+    ENTITY_HORSE_DEATH("entity.horse.death", 233, SoundCategory.MASTER),
 
     /**
-     * Fire is extinguished<br>
-     * An Item or Experience Orb is destroyed by Lava<br>
-     * Lava touches Water<br>
-     * Lava destroys a non-solid block in its path<br>
-     * A Redstone Torch burns out
+     * Horse eats
      */
-    RANDOM_FIZZ("random.fizz"),
+    ENTITY_HORSE_EAT("entity.horse.eat", 234, SoundCategory.MASTER),
 
     /**
-     * A player reaches an experience level that is a multiple of 5
+     * Horse gallops
      */
-    RANDOM_LEVEL_UP("random.levelup"),
+    ENTITY_HORSE_GALLOP("entity.horse.gallop", 235, SoundCategory.MASTER),
 
     /**
-     * A player gains experience points
+     * Horse hurts
      */
-    RANDOM_ORB("random.orb"),
+    ENTITY_HORSE_HURT("entity.horse.hurt", 236, SoundCategory.MASTER),
 
     /**
-     * A player picks up an Item
+     * Horse jumps
      */
-    RANDOM_POP("random.pop"),
+    ENTITY_HORSE_JUMP("entity.horse.jump", 237, SoundCategory.MASTER),
 
+    ENTITY_HORSE_LAND("entity.horse.land", 238, SoundCategory.MASTER),
+
     /**
-     * A fish is caught on a fishing rod bobber
+     * Saddle equips
      */
-    RANDOM_SPLASH("random.splash"),
+    ENTITY_HORSE_SADDLE("entity.horse.saddle", 239, SoundCategory.MASTER),
 
     /**
-     * A player shoots an armored player with an Arrow
+     * Footsteps
      */
-    RANDOM_SUCCESSFUL_HIT("random.successful_hit"),
+    ENTITY_HORSE_STEP("entity.horse.step", 240, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Footsteps
      */
-    RANDOM_WOOD_CLICK("random.wood_click"),
+    ENTITY_HORSE_STEP_WOOD("entity.horse.step_wood", 241, SoundCategory.MASTER),
 
     /**
-     * A button in the menu or a GUI is clicked
+     * Something fell
      */
-    GUI_BUTTON_PRESS("gui.button.press"),
+    ENTITY_HOSTILE_BIG_FALL("entity.hostile.big_fall", 242, SoundCategory.MASTER),
 
     /**
-     * TNT is ignited
+     * Dying
      */
-    TNT_PRIME("game.tnt.primed"),
+    ENTITY_HOSTILE_DEATH("entity.hostile.death", 243, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "cloth"<br>
-     * A player is breaking a block classified as "cloth" (during the cracking animation)
+     * Something hurts
      */
-    STEP_CLOTH("step.cloth"),
+    ENTITY_HOSTILE_HURT("entity.hostile.hurt", 244, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "grass"<br>
-     * A player is breaking a block classified as "grass" (during the cracking animation)
+     * Something tripped
      */
-    STEP_GRASS("step.grass"),
+    ENTITY_HOSTILE_SMALL_FALL("entity.hostile.small_fall", 245, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "gravel"<br>
-     * Dirt/Grass/Mycelium is tilled with a Hoe (creating Farmland)<br>
-     * A player is breaking a block classified as "gravel" (during the cracking animation)
+     * Splashing
      */
-    STEP_GRAVEL("step.gravel"),
+    ENTITY_HOSTILE_SPLASH("entity.hostile.splash", 246, SoundCategory.MASTER),
 
     /**
-     * An entity climbs or descends a Ladder<br>
-     * A player is breaking a Ladder (during the cracking animation)
+     * Swimming
      */
-    STEP_LADDER("step.ladder"),
+    ENTITY_HOSTILE_SWIM("entity.hostile.swim", 247, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "sand"<br>
-     * A player is breaking a block classified as "sand" (during the cracking animation)
+     * Iron Golem attacks
      */
-    STEP_SAND("step.sand"),
+    ENTITY_IRONGOLEM_ATTACK("entity.irongolem.attack", 248, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "snow"<br>
-     * A player is breaking a block classified as "snow" (during the cracking animation)
+     * Iron Golem dies
      */
-    STEP_SNOW("step.snow"),
+    ENTITY_IRONGOLEM_DEATH("entity.irongolem.death", 249, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "stone" or "glass"<br>
-     * A player is breaking a block classified as "stone" or "glass" (during the cracking animation)<br>
-     * A player places a block classified as "glass"
+     * Iron Golem hurts
      */
-    STEP_STONE("step.stone"),
+    ENTITY_IRONGOLEM_HURT("entity.irongolem.hurt", 250, SoundCategory.MASTER),
 
     /**
-     * An entity walks on a block classified as "wood"<br>
-     * A player is breaking a block classified as "wood" (during the cracking animation)
+     * Footsteps
      */
-    STEP_WOOD("step.wood"),
+    ENTITY_IRONGOLEM_STEP("entity.irongolem.step", 251, SoundCategory.MASTER),
 
     /**
-     * A Piston retracts
+     * Item breaks
      */
-    PISTON_IN("tile.piston.in"),
+    ENTITY_ITEM_BREAK("entity.item.break", 252, SoundCategory.MASTER),
 
     /**
-     * A Piston extends
+     * Item plops
      */
-    PISTON_OUT("tile.piston.out"),
+    ENTITY_ITEM_PICKUP("entity.item.pickup", 253, SoundCategory.MASTER),
 
     /**
-     * A Bat dies
+     * Item Frame fills
      */
-    BAT_DEATH("mob.bat.death"),
+    ENTITY_ITEMFRAME_ADD_ITEM("entity.itemframe.add_item", 254, SoundCategory.MASTER),
 
     /**
-     * A Bat taking damage
+     * Item Frame breaks
      */
-    BAT_HURT("mob.bat.hurt"),
+    ENTITY_ITEMFRAME_BREAK("entity.itemframe.break", 255, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Bat is within 16 blocks
+     * Item Frame placed
      */
-    BAT_IDLE("mob.bat.idle"),
+    ENTITY_ITEMFRAME_PLACE("entity.itemframe.place", 256, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Item Frame empties
      */
-    BAT_LOOP("mob.bat.loop"),
+    ENTITY_ITEMFRAME_REMOVE_ITEM("entity.itemframe.remove_item", 257, SoundCategory.MASTER),
 
     /**
-     * A Bat takes off/begins to fly
+     * Item Frame clicks
      */
-    BAT_TAKEOFF("mob.bat.takeoff"),
+    ENTITY_ITEMFRAME_ROTATE_ITEM("entity.itemframe.rotate_item", 258, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Blaze is within 16 blocks
+     * Leash knot breaks
      */
-    BLAZE_BREATHE("mob.blaze.breathe"),
+    ENTITY_LEASHKNOT_BREAK("entity.leashknot.break", 259, SoundCategory.MASTER),
 
     /**
-     * A Blaze dies
+     * Leash knot tied
      */
-    BLAZE_DEATH("mob.blaze.death"),
+    ENTITY_LEASHKNOT_PLACE("entity.leashknot.place", 260, SoundCategory.MASTER),
 
     /**
-     * A Blaze takes damage
+     * Lighting strikes
      */
-    BLAZE_HIT("mob.blaze.hit"),
+    ENTITY_LIGHTNING_IMPACT("entity.lightning.impact", 261, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Thunder roars
      */
-    CAT_HISS("mob.cat.hiss"),
+    ENTITY_LIGHTNING_THUNDER("entity.lightning.thunder", 262, SoundCategory.MASTER),
 
     /**
-     * A Cat or Ocelot takes damage or dies
+     * Bottle thrown
      */
-    CAT_HITT("mob.cat.hitt"),
+    ENTITY_LINGERINGPOTION_THROW("entity.lingeringpotion.throw", 263, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Tamed Cat is within 16 blocks
+     * Magma Cube dies
      */
-    CAT_MEOW("mob.cat.meow"),
+    ENTITY_MAGMACUBE_DEATH("entity.magmacube.death", 264, SoundCategory.MASTER),
 
     /**
-     * When Tamed Cats mate after being fed Raw Fish
+     * Magma Cube hurts
      */
-    CAT_PURR("mob.cat.purr"),
+    ENTITY_MAGMACUBE_HURT("entity.magmacube.hurt", 265, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Tamed Cat is within 16 blocks
+     * Magma Cube squishes
      */
-    CAT_PURREOW("mob.cat.purreow"),
+    ENTITY_MAGMACUBE_JUMP("entity.magmacube.jump", 266, SoundCategory.MASTER),
 
     /**
-     * A Chicken takes damage or dies
+     * Magma Cube squishes
      */
-    CHICKEN_HURT("mob.chicken.hurt"),
+    ENTITY_MAGMACUBE_SQUISH("entity.magmacube.squish", 267, SoundCategory.MASTER),
+
+    ENTITY_MINECART_INSIDE("entity.minecart.inside", 268, SoundCategory.MASTER),
 
     /**
-     * A Chicken lays an Egg
+     * Minecart rolls
      */
-    CHICKEN_PLOP("mob.chicken.plop"),
+    ENTITY_MINECART_RIDING("entity.minecart.riding", 269, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Chicken is within 16 blocks
+     * Shears click
      */
-    CHICKEN_SAY("mob.chicken.say"),
+    ENTITY_MOOSHROOM_SHEAR("entity.mooshroom.shear", 270, SoundCategory.MASTER),
 
     /**
-     * A Chicken is walking
+     * Mule hee-haws
      */
-    CHICKEN_STEP("mob.chicken.step"),
+    ENTITY_MULE_AMBIENT("entity.mule.ambient", 271, SoundCategory.MASTER),
 
     /**
-     * A Cow or Mooshroom takes damage or dies
+     * Mule dies
      */
-    COW_HURT("mob.cow.hurt"),
+    ENTITY_MULE_DEATH("entity.mule.death", 272, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Cow or Mooshroom is within 16 blocks
+     * Mule hurts
      */
-    COW_SAY("mob.cow.say"),
+    ENTITY_MULE_HURT("entity.mule.hurt", 273, SoundCategory.MASTER),
 
     /**
-     * A Cow or Mooshroom is walking
+     * Painting breaks
      */
-    COW_STEP("mob.cow.step"),
+    ENTITY_PAINTING_BREAK("entity.painting.break", 274, SoundCategory.MASTER),
 
     /**
-     * A Creeper just about to explode
+     * Painting placed
      */
-    CREEPER_PRIME("creeper.primed"),
+    ENTITY_PAINTING_PLACE("entity.painting.place", 275, SoundCategory.MASTER),
 
     /**
-     * A Creeper dies
+     * Pig oinks
      */
-    CREEPER_DEATH("mob.creeper.death"),
+    ENTITY_PIG_AMBIENT("entity.pig.ambient", 276, SoundCategory.MASTER),
 
     /**
-     * A Creeper takes damage
+     * Pig dies
      */
-    CREEPER_SAY("mob.creeper.say"),
+    ENTITY_PIG_DEATH("entity.pig.death", 277, SoundCategory.MASTER),
 
     /**
-     * An Ender Dragon dies
+     * Pig hurts
      */
-    ENDERDRAGON_END("mob.enderdragon.end"),
+    ENTITY_PIG_HURT("entity.pig.hurt", 278, SoundCategory.MASTER),
 
     /**
-     * Randomly when an Ender Dragon is within 50 blocks of the Player
+     * Saddle equips
      */
-    ENDERDRAGON_GROWL("mob.enderdragon.growl"),
+    ENTITY_PIG_SADDLE("entity.pig.saddle", 279, SoundCategory.MASTER),
 
     /**
-     * An Ender Dragon takes damage
+     * Footsteps
      */
-    ENDERDRAGON_HIT("mob.enderdragon.hit"),
+    ENTITY_PIG_STEP("entity.pig.step", 280, SoundCategory.MASTER),
 
+    ENTITY_PLAYER_ATTACK_CRIT("entity.player.attack.crit", 281, SoundCategory.MASTER),
+
+    ENTITY_PLAYER_ATTACK_KNOCKBACK("entity.player.attack.knockback", 282, SoundCategory.MASTER),
+
+    ENTITY_PLAYER_ATTACK_NODAMAGE("entity.player.attack.nodamage", 283, SoundCategory.MASTER),
+
+    ENTITY_PLAYER_ATTACK_STRONG("entity.player.attack.strong", 284, SoundCategory.MASTER),
+
+    ENTITY_PLAYER_ATTACK_SWEEP("entity.player.attack.sweep", 285, SoundCategory.MASTER),
+
+    ENTITY_PLAYER_ATTACK_WEAK("entity.player.attack.weak", 286, SoundCategory.MASTER),
+
     /**
-     * An Ender Dragon flaps its wings
+     * Something fell
      */
-    ENDERDRAGON_WINGS("mob.enderdragon.wings"),
+    ENTITY_PLAYER_BIG_FALL("entity.player.big_fall", 287, SoundCategory.MASTER),
+
+    ENTITY_PLAYER_BREATH("entity.player.breath", 288, SoundCategory.MASTER),
 
     /**
-     * An Enderman dies
+     * Burp
      */
-    ENDERMEN_DEATH("mob.endermen.death"),
+    ENTITY_PLAYER_BURP("entity.player.burp", 289, SoundCategory.MASTER),
 
     /**
-     * An Enderman takes damage
+     * Player dies
      */
-    ENDERMEN_HIT("mob.endermen.hit"),
+    ENTITY_PLAYER_DEATH("entity.player.death", 290, SoundCategory.MASTER),
 
     /**
-     * Randomly when an Enderman is within 16 blocks and not angry
+     * Player hurts
      */
-    ENDERMEN_IDLE("mob.endermen.idle"),
+    ENTITY_PLAYER_HURT("entity.player.hurt", 291, SoundCategory.MASTER),
 
     /**
-     * An Enderman teleports
+     * Player dings
      */
-    ENDERMEN_PORTAL("mob.endermen.portal"),
+    ENTITY_PLAYER_LEVELUP("entity.player.levelup", 292, SoundCategory.MASTER),
 
     /**
-     * Randomly when an Endermen is within 16 blocks and angry
+     * Something tripped
      */
-    ENDERMEN_SCREAM("mob.endermen.scream"),
+    ENTITY_PLAYER_SMALL_FALL("entity.player.small_fall", 293, SoundCategory.MASTER),
 
     /**
-     * A player looks at an Enderman, angering it
+     * Splashing
      */
-    ENDERMEN_STARE("mob.endermen.stare"),
+    ENTITY_PLAYER_SPLASH("entity.player.splash", 294, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Swimming
      */
-    GHAST_AFFECTIONATE_SCREAM("mob.ghast.affectionate_scream"),
+    ENTITY_PLAYER_SWIM("entity.player.swim", 295, SoundCategory.MASTER),
 
     /**
-     * Right before a Ghast shoots a fireball
+     * Rabbit squeaks
      */
-    GHAST_CHARGE("mob.ghast.charge"),
+    ENTITY_RABBIT_AMBIENT("entity.rabbit.ambient", 296, SoundCategory.MASTER),
 
     /**
-     * A Ghast dies
+     * Rabbit attacks
      */
-    GHAST_DEATH("mob.ghast.death"),
+    ENTITY_RABBIT_ATTACK("entity.rabbit.attack", 297, SoundCategory.MASTER),
 
     /**
-     * A Ghast, Blaze, or Dispenser shoots a fireball
+     * Rabbit dies
      */
-    GHAST_FIREBALL("mob.ghast.fireball"),
+    ENTITY_RABBIT_DEATH("entity.rabbit.death", 298, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Ghast is within 100 blocks
+     * Rabbit hurts
      */
-    GHAST_MOAN("mob.ghast.moan"),
+    ENTITY_RABBIT_HURT("entity.rabbit.hurt", 299, SoundCategory.MASTER),
 
     /**
-     * A Ghast takes damage
+     * Rabbit hops
      */
-    GHAST_SCREAM("mob.ghast.scream"),
+    ENTITY_RABBIT_JUMP("entity.rabbit.jump", 300, SoundCategory.MASTER),
 
     /**
-     * A regular Guardian takes damage while in water
+     * Sheep baahs
      */
-    GUARDIAN_HIT("mob.guardian.hit"),
+    ENTITY_SHEEP_AMBIENT("entity.sheep.ambient", 301, SoundCategory.MASTER),
 
     /**
-     * Randomly when a regular Guardian is within 16 blocks and is in water
+     * Sheep dies
      */
-    GUARDIAN_IDLE("mob.guardian.idle"),
+    ENTITY_SHEEP_DEATH("entity.sheep.death", 302, SoundCategory.MASTER),
 
     /**
-     * A regular Guardian dies while in water
+     * Sheep hurts
      */
-    GUARDIAN_DEATH("mob.guardian.death"),
+    ENTITY_SHEEP_HURT("entity.sheep.hurt", 303, SoundCategory.MASTER),
 
     /**
-     * An Elder Guardian takes damage while in water
+     * Shears click
      */
-    GUARDIAN_ELDER_HIT("mob.guardian.elder.hit"),
+    ENTITY_SHEEP_SHEAR("entity.sheep.shear", 304, SoundCategory.MASTER),
 
     /**
-     * Randomly when an Elder Guardian is within 16 blocks and is in water
+     * Footsteps
      */
-    GUARDIAN_ELDER_IDLE("mob.guardian.elder.idle"),
+    ENTITY_SHEEP_STEP("entity.sheep.step", 305, SoundCategory.MASTER),
 
     /**
-     * An Elder Guardian dies while in water
+     * Shulker lurks
      */
-    GUARDIAN_ELDER_DEATH("mob.guardian.elder.death"),
+    ENTITY_SHULKER_AMBIENT("entity.shulker.ambient", 306, SoundCategory.MASTER),
 
     /**
-     * A Guardian takes damage while not in water
+     * Shulker closes
      */
-    GUARDIAN_LAND_HIT("mob.guardian.land.hit"),
+    ENTITY_SHULKER_CLOSE("entity.shulker.close", 307, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Guardian is within 16 blocks and not in water
+     * Shulker dies
      */
-    GUARDIAN_LAND_IDLE("mob.guardian.land.idle"),
+    ENTITY_SHULKER_DEATH("entity.shulker.death", 308, SoundCategory.MASTER),
 
     /**
-     * A Guardian dies while not in water
+     * Shulker hurts
      */
-    GUARDIAN_LAND_DEATH("mob.guardian.land.death"),
+    ENTITY_SHULKER_HURT("entity.shulker.hurt", 309, SoundCategory.MASTER),
 
     /**
-     * A player is within 50 blocks of an Elder Guardian and does not have the Mining Fatigue effect,<br>
-     * has Mining Fatigue II or lower, or has less than a minute left of Mining Fatigue III.<br>
-     * <br>
-     * Accompanied by a ghostly image of an Elder Guardian and Mining Fatigue III for five minutes
+     * Shulker hurts
      */
-    GUARDIAN_CURSE("mob.guardian.curse"),
+    ENTITY_SHULKER_HURT_CLOSED("entity.shulker.hurt_closed", 310, SoundCategory.MASTER),
 
     /**
-     * A Guardian's attack beam is aimed at a player or a squid. Can be heard up to 50 blocks away
+     * Shulker opens
      */
-    GUARDIAN_ATTACK("mob.guardian.attack"),
+    ENTITY_SHULKER_OPEN("entity.shulker.open", 311, SoundCategory.MASTER),
 
     /**
-     * A Guardian is hopping around out of water
+     * Shulker shoots
      */
-    GUARDIAN_FLOP("mob.guardian.flop"),
+    ENTITY_SHULKER_SHOOT("entity.shulker.shoot", 312, SoundCategory.MASTER),
 
     /**
-     * A player is thrown off of an untamed Horse
+     * Shulker teleports
      */
-    HORSE_ANGRY("mob.horse.angry"),
+    ENTITY_SHULKER_TELEPORT("entity.shulker.teleport", 313, SoundCategory.MASTER),
 
     /**
-     * A player puts Horse Armor onto a Horse
+     * Shulker bullet explodes
      */
-    HORSE_ARMOR("mob.horse.armor"),
+    ENTITY_SHULKER_BULLET_HIT("entity.shulker_bullet.hit", 314, SoundCategory.MASTER),
 
     /**
-     * Randomly when a tamed Horse is galloping
+     * Shulker bullet breaks
      */
-    HORSE_BREATHE("mob.horse.breathe"),
+    ENTITY_SHULKER_BULLET_HURT("entity.shulker_bullet.hurt", 315, SoundCategory.MASTER),
 
     /**
-     * A Horse dies
+     * Silverfish hisses
      */
-    HORSE_DEATH("mob.horse.death"),
+    ENTITY_SILVERFISH_AMBIENT("entity.silverfish.ambient", 316, SoundCategory.MASTER),
 
     /**
-     * A player is thrown off an untamed Donkey or Mule
+     * Silverfish dies
      */
-    HORSE_DONKEY_ANGRY("mob.horse.donkey.angry"),
+    ENTITY_SILVERFISH_DEATH("entity.silverfish.death", 317, SoundCategory.MASTER),
 
     /**
-     * A Donkey or Mule dies
+     * Silverfish hurts
      */
-    HORSE_DONKEY_DEATH("mob.horse.donkey.death"),
+    ENTITY_SILVERFISH_HURT("entity.silverfish.hurt", 318, SoundCategory.MASTER),
 
     /**
-     * A Donkey or Mule takes damage
+     * Footsteps
      */
-    HORSE_DONKEY_HIT("mob.horse.donkey.hit"),
+    ENTITY_SILVERFISH_STEP("entity.silverfish.step", 319, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Donkey or Mule is within 16 blocks
+     * Skeleton rattles
      */
-    HORSE_DONKEY_IDLE("mob.horse.donkey.idle"),
+    ENTITY_SKELETON_AMBIENT("entity.skeleton.ambient", 320, SoundCategory.MASTER),
 
     /**
-     * A ridden Horse is galloping
+     * Skeleton dies
      */
-    HORSE_GALLOP("mob.horse.gallop"),
+    ENTITY_SKELETON_DEATH("entity.skeleton.death", 321, SoundCategory.MASTER),
 
     /**
-     * A Horse takes damage
+     * Skeleton hurts
      */
-    HORSE_HIT("mob.horse.hit"),
+    ENTITY_SKELETON_HURT("entity.skeleton.hurt", 322, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Horse is within 16 blocks
+     * Skeleton shoots
      */
-    HORSE_IDLE("mob.horse.idle"),
+    ENTITY_SKELETON_SHOOT("entity.skeleton.shoot", 323, SoundCategory.MASTER),
 
     /**
-     * A Horse jumps while galloping
+     * Footsteps
      */
-    HORSE_JUMP("mob.horse.jmp"),
+    ENTITY_SKELETON_STEP("entity.skeleton.step", 324, SoundCategory.MASTER),
 
     /**
-     * A Horse lands after jumping
+     * Skeleton Horse cries
      */
-    HORSE_LAND("mob.horse.land"),
+    ENTITY_SKELETON_HORSE_AMBIENT("entity.skeleton_horse.ambient", 325, SoundCategory.MASTER),
 
     /**
-     * A player puts a Saddle on a Horse or Pig
+     * Skeleton Horse dies
      */
-    HORSE_LEATHER("mob.horse.leather"),
+    ENTITY_SKELETON_HORSE_DEATH("entity.skeleton_horse.death", 326, SoundCategory.MASTER),
 
     /**
-     * A Skeleton Horse dies
+     * Skeleton Horse hurts
      */
-    HORSE_SKELETON_DEATH("mob.horse.skeleton.death"),
+    ENTITY_SKELETON_HORSE_HURT("entity.skeleton_horse.hurt", 327, SoundCategory.MASTER),
 
     /**
-     * A Skeleton Horse takes damage
+     * Slime attacks
      */
-    HORSE_SKELETON_HIT("mob.horse.skeleton.hit"),
+    ENTITY_SLIME_ATTACK("entity.slime.attack", 328, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Skeleton Horse is within 16 blocks
+     * Slime dies
      */
-    HORSE_SKELETON_IDLE("mob.horse.skeleton.idle"),
+    ENTITY_SLIME_DEATH("entity.slime.death", 329, SoundCategory.MASTER),
 
     /**
-     * A Horse (not being ridden) is walking
+     * Slime hurts
      */
-    HORSE_SOFT("mob.horse.soft"),
+    ENTITY_SLIME_HURT("entity.slime.hurt", 330, SoundCategory.MASTER),
 
     /**
-     * A ridden Horse is walking
+     * Slime squishes
      */
-    HORSE_WOOD("mob.horse.wood"),
+    ENTITY_SLIME_JUMP("entity.slime.jump", 331, SoundCategory.MASTER),
 
     /**
-     * A Zombie Horse dies
+     * Slime squishes
      */
-    HORSE_ZOMBIE_DEATH("mob.horse.zombie.death"),
+    ENTITY_SLIME_SQUISH("entity.slime.squish", 332, SoundCategory.MASTER),
 
     /**
-     * A Zombie Horse takes damage
+     * Magma Cube dies
      */
-    HORSE_ZOMBIE_HIT("mob.horse.zombie.hit"),
+    ENTITY_SMALL_MAGMACUBE_DEATH("entity.small_magmacube.death", 333, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Zombie Horse is within 16 blocks
+     * Magma Cube hurts
      */
-    HORSE_ZOMBIE_IDLE("mob.horse.zombie.idle"),
+    ENTITY_SMALL_MAGMACUBE_HURT("entity.small_magmacube.hurt", 334, SoundCategory.MASTER),
 
     /**
-     * An Iron Golem dies
+     * Magma Cube squishes
      */
-    IRON_GOLEM_DEATH("mob.irongolem.death"),
+    ENTITY_SMALL_MAGMACUBE_SQUISH("entity.small_magmacube.squish", 335, SoundCategory.MASTER),
 
     /**
-     * An Iron Golem takes damage
+     * Slime dies
      */
-    IRON_GOLEM_HIT("mob.irongolem.hit"),
+    ENTITY_SMALL_SLIME_DEATH("entity.small_slime.death", 336, SoundCategory.MASTER),
 
     /**
-     * An Iron Golem attacks a mob
+     * Slime hurts
      */
-    IRON_GOLEM_THROW("mob.irongolem.throw"),
+    ENTITY_SMALL_SLIME_HURT("entity.small_slime.hurt", 337, SoundCategory.MASTER),
 
+    ENTITY_SMALL_SLIME_JUMP("entity.small_slime.jump", 338, SoundCategory.MASTER),
+
+    ENTITY_SMALL_SLIME_SQUISH("entity.small_slime.squish", 339, SoundCategory.MASTER),
+
     /**
-     * An Iron Golem is walking
+     * Snowball flies
      */
-    IRON_GOLEM_WALK("mob.irongolem.walk"),
+    ENTITY_SNOWBALL_THROW("entity.snowball.throw", 340, SoundCategory.MASTER),
 
+    ENTITY_SNOWMAN_AMBIENT("entity.snowman.ambient", 341, SoundCategory.MASTER),
+
     /**
-     * A big or small Magma Cube jumps, takes damage, or dies
+     * Snow Golem dies
      */
-    MAGMA_CUBE_BIG("mob.magmacube.big"),
+    ENTITY_SNOWMAN_DEATH("entity.snowman.death", 342, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Snow Golem hurts
      */
-    MAGMA_CUBE_JUMP("mob.magmacube.jump"),
+    ENTITY_SNOWMAN_HURT("entity.snowman.hurt", 343, SoundCategory.MASTER),
 
     /**
-     * A tiny Magma Cube jumps, takes damage, or dies
+     * Snowball flies
      */
-    MAGMA_CUBE_SMALL("mob.magmacube.small"),
+    ENTITY_SNOWMAN_SHOOT("entity.snowman.shoot", 344, SoundCategory.MASTER),
 
     /**
-     * A Pig dies
+     * Spider hisses
      */
-    PIG_DEATH("mob.pig.death"),
+    ENTITY_SPIDER_AMBIENT("entity.spider.ambient", 345, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Pig is within 16 blocks or when a Pig takes damage
+     * Spider dies
      */
-    PIG_SAY("mob.pig.say"),
+    ENTITY_SPIDER_DEATH("entity.spider.death", 346, SoundCategory.MASTER),
 
     /**
-     * A Pig is walking
+     * Spider hurts
      */
-    PIG_STEP("mob.pig.step"),
+    ENTITY_SPIDER_HURT("entity.spider.hurt", 347, SoundCategory.MASTER),
 
     /**
-     * A Rabbit takes damage
+     * Footsteps
      */
-    RABBIT_HURT("mob.rabbit.hurt"),
+    ENTITY_SPIDER_STEP("entity.spider.step", 348, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Rabbit is within 16 blocks
+     * Bottle smashes
      */
-    RABBIT_IDLE("mob.rabbit.idle"),
+    ENTITY_SPLASH_POTION_BREAK("entity.splash_potion.break", 349, SoundCategory.MASTER),
 
     /**
-     * A Rabbit hops
+     * Bottle thrown
      */
-    RABBIT_HOP("mob.rabbit.hop"),
+    ENTITY_SPLASH_POTION_THROW("entity.splash_potion.throw", 350, SoundCategory.MASTER),
 
     /**
-     * A Rabbit dies
+     * Squid swims
      */
-    RABBIT_DEATH("mob.rabbit.death"),
+    ENTITY_SQUID_AMBIENT("entity.squid.ambient", 351, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Sheep is within 16 blocks or when a Sheep takes damage or dies
+     * Squid dies
      */
-    SHEEP_SAY("mob.sheep.say"),
+    ENTITY_SQUID_DEATH("entity.squid.death", 352, SoundCategory.MASTER),
 
     /**
-     * A Sheep or Mooshroom is sheared
+     * Squid hurts
      */
-    SHEEP_SHEAR("mob.sheep.shear"),
+    ENTITY_SQUID_HURT("entity.squid.hurt", 353, SoundCategory.MASTER),
 
     /**
-     * A Sheep is walking
+     * TNT fizzes
      */
-    SHEEP_STEP("mob.sheep.step"),
+    ENTITY_TNT_PRIMED("entity.tnt.primed", 354, SoundCategory.MASTER),
 
     /**
-     * A Silverfish takes damage
+     * Villager mumbles
      */
-    SILVERFISH_HIT("mob.silverfish.hit"),
+    ENTITY_VILLAGER_AMBIENT("entity.villager.ambient", 355, SoundCategory.MASTER),
 
     /**
-     * A Silverfish dies
+     * Villager dies
      */
-    SILVERFISH_KILL("mob.silverfish.kill"),
+    ENTITY_VILLAGER_DEATH("entity.villager.death", 356, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Silverfish is within 16 blocks
+     * Villager hurts
      */
-    SILVERFISH_SAY("mob.silverfish.say"),
+    ENTITY_VILLAGER_HURT("entity.villager.hurt", 357, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Villager disagrees
      */
-    SILVERFISH_STEP("mob.silverfish.step"),
+    ENTITY_VILLAGER_NO("entity.villager.no", 358, SoundCategory.MASTER),
 
     /**
-     * A Skeleton or a Wither Skeleton dies
+     * Villager trades
      */
-    SKELETON_DEATH("mob.skeleton.death"),
+    ENTITY_VILLAGER_TRADING("entity.villager.trading", 359, SoundCategory.MASTER),
 
     /**
-     * A Skeleton or a Wither Skeleton takes damage
+     * Villager agrees
      */
-    SKELETON_HURT("mob.skeleton.hurt"),
+    ENTITY_VILLAGER_YES("entity.villager.yes", 360, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Skeleton or a Wither Skeleton is within 16 blocks
+     * Witch giggles
      */
-    SKELETON_SAY("mob.skeleton.say"),
+    ENTITY_WITCH_AMBIENT("entity.witch.ambient", 361, SoundCategory.MASTER),
 
     /**
-     * A Skeleton or a Wither Skeleton is walking
+     * Witch dies
      */
-    SKELETON_STEP("mob.skeleton.step"),
+    ENTITY_WITCH_DEATH("entity.witch.death", 362, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Witch drinks
      */
-    SLIME_ATTACK("mob.slime.attack"),
+    ENTITY_WITCH_DRINK("entity.witch.drink", 363, SoundCategory.MASTER),
 
     /**
-     * A big or small Slime jumps, takes damage, or dies; or a Slime Block is placed
+     * Witch hurts
      */
-    SLIME_BIG("mob.slime.big"),
+    ENTITY_WITCH_HURT("entity.witch.hurt", 364, SoundCategory.MASTER),
 
     /**
-     * A tiny Slime jumps, takes damage, or dies; or a mob walks on a Slime Block
+     * Witch throws
      */
-    SLIME_SMALL("mob.slime.small"),
+    ENTITY_WITCH_THROW("entity.witch.throw", 365, SoundCategory.MASTER),
 
     /**
-     * A Spider dies
+     * Wither angers
      */
-    SPIDER_DEATH("mob.spider.death"),
+    ENTITY_WITHER_AMBIENT("entity.wither.ambient", 366, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Spider is within 16 blocks or when a Spider takes damage
+     * Wither attacks
      */
-    SPIDER_SAY("mob.spider.say"),
+    ENTITY_WITHER_BREAK_BLOCK("entity.wither.break_block", 367, SoundCategory.MASTER),
 
     /**
-     * A Spider is walking
+     * Wither dies
      */
-    SPIDER_STEP("mob.spider.step"),
+    ENTITY_WITHER_DEATH("entity.wither.death", 368, SoundCategory.MASTER),
 
     /**
-     * A Villager dies
+     * Wither hurts
      */
-    VILLAGER_DEATH("mob.villager.death"),
+    ENTITY_WITHER_HURT("entity.wither.hurt", 369, SoundCategory.MASTER),
 
     /**
-     * A player right-clicks on a Villager, opening the trading GUI
+     * Wither attacks
      */
-    VILLAGER_HAGGLE("mob.villager.haggle"),
+    ENTITY_WITHER_SHOOT("entity.wither.shoot", 370, SoundCategory.MASTER),
 
     /**
-     * A Villager takes damage
+     * Wither released
      */
-    VILLAGER_HIT("mob.villager.hit"),
+    ENTITY_WITHER_SPAWN("entity.wither.spawn", 371, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Villager is within 16 blocks
+     * Wolf pants
      */
-    VILLAGER_IDLE("mob.villager.idle"),
+    ENTITY_WOLF_AMBIENT("entity.wolf.ambient", 372, SoundCategory.MASTER),
 
     /**
-     * A player exits a trading option
+     * Wolf dies
      */
-    VILLAGER_NO("mob.villager.no"),
+    ENTITY_WOLF_DEATH("entity.wolf.death", 373, SoundCategory.MASTER),
 
     /**
-     * A player trades with a Villager (removes an item from the right slot in the trading GUI)
+     * Wolf growls
      */
-    VILLAGER_YES("mob.villager.yes"),
+    ENTITY_WOLF_GROWL("entity.wolf.growl", 374, SoundCategory.MASTER),
+
+    ENTITY_WOLF_HOWL("entity.wolf.howl", 375, SoundCategory.MASTER),
 
     /**
-     * A Wither dies
+     * Wolf hurts
      */
-    WITHER_DEATH("mob.wither.death"),
+    ENTITY_WOLF_HURT("entity.wolf.hurt", 376, SoundCategory.MASTER),
 
     /**
-     * A Wither takes damage
+     * Wolf pants
      */
-    WITHER_HURT("mob.wither.hurt"),
+    ENTITY_WOLF_PANT("entity.wolf.pant", 377, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Wither is within 16 blocks
+     * Wolf shakes
      */
-    WITHER_IDLE("mob.wither.idle"),
+    ENTITY_WOLF_SHAKE("entity.wolf.shake", 378, SoundCategory.MASTER),
 
     /**
-     * A Wither shoots a Wither Skull
+     * Footsteps
      */
-    WITHER_SHOOT("mob.wither.shoot"),
+    ENTITY_WOLF_STEP("entity.wolf.step", 379, SoundCategory.MASTER),
 
     /**
-     * A Wither is spawned
+     * Wolf pants
      */
-    WITHER_SPAWN("mob.wither.spawn"),
+    ENTITY_WOLF_WHINE("entity.wolf.whine", 380, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Wolf is within 16 blocks and is not angry
+     * Zombie groans
      */
-    WOLF_BARK("mob.wolf.bark"),
+    ENTITY_ZOMBIE_AMBIENT("entity.zombie.ambient", 381, SoundCategory.MASTER),
 
     /**
-     * A Wolf dies
+     * Block broken
      */
-    WOLF_DEATH("mob.wolf.death"),
+    ENTITY_ZOMBIE_ATTACK_DOOR_WOOD("entity.zombie.attack_door_wood", 382, SoundCategory.MASTER),
 
     /**
-     * Randomly when an angry Wolf is within 16 blocks
+     * Block broken
      */
-    WOLF_GROWL("mob.wolf.growl"),
+    ENTITY_ZOMBIE_ATTACK_IRON_DOOR("entity.zombie.attack_iron_door", 383, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Block broken
      */
-    WOLF_HOWL("mob.wolf.howl"),
+    ENTITY_ZOMBIE_BREAK_DOOR_WOOD("entity.zombie.break_door_wood", 384, SoundCategory.MASTER),
 
     /**
-     * A Wolf takes damage
+     * Zombie dies
      */
-    WOLF_HURT("mob.wolf.hurt"),
+    ENTITY_ZOMBIE_DEATH("entity.zombie.death", 385, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Wolf is within 16 blocks and not angry
+     * Zombie hurts
      */
-    WOLF_PANTING("mob.wolf.panting"),
+    ENTITY_ZOMBIE_HURT("entity.zombie.hurt", 386, SoundCategory.MASTER),
 
     /**
-     * A Wolf shakes itself dry after exiting water
+     * Zombie infects
      */
-    WOLF_SHAKE("mob.wolf.shake"),
+    ENTITY_ZOMBIE_INFECT("entity.zombie.infect", 387, SoundCategory.MASTER),
 
     /**
-     * A Wolf is walking
+     * Footsteps
      */
-    WOLF_STEP("mob.wolf.step"),
+    ENTITY_ZOMBIE_STEP("entity.zombie.step", 388, SoundCategory.MASTER),
 
     /**
-     * Randomly when a tamed Wolf has low health
+     * Zombie Horse cries
      */
-    WOLF_WHINE("mob.wolf.whine"),
+    ENTITY_ZOMBIE_HORSE_AMBIENT("entity.zombie_horse.ambient", 389, SoundCategory.MASTER),
 
     /**
-     * A Zombie dies
+     * Zombie Horse dies
      */
-    ZOMBIE_DEATH("mob.zombie.death"),
+    ENTITY_ZOMBIE_HORSE_DEATH("entity.zombie_horse.death", 390, SoundCategory.MASTER),
 
     /**
-     * A Zombie takes damage
+     * Zombie Horse hurts
      */
-    ZOMBIE_HURT("mob.zombie.hurt"),
+    ENTITY_ZOMBIE_HORSE_HURT("entity.zombie_horse.hurt", 391, SoundCategory.MASTER),
 
     /**
-     * A villager is turned into a Zombie Villager
+     * Zombie Pigman grunts
      */
-    ZOMBIE_INFECT("mob.zombie.infect"),
+    ENTITY_ZOMBIE_PIG_AMBIENT("entity.zombie_pig.ambient", 392, SoundCategory.MASTER),
 
     /**
-     * ...?
+     * Zombie Pigman angers
      */
-    ZOMBIE_METAL("mob.zombie.metal"),
+    ENTITY_ZOMBIE_PIG_ANGRY("entity.zombie_pig.angry", 393, SoundCategory.MASTER),
 
     /**
-     * A Zombie Villager is fed a Golden Apple while having the Weakness effect
+     * Zombie Pigman dies
      */
-    ZOMBIE_REMEDY("mob.zombie.remedy"),
+    ENTITY_ZOMBIE_PIG_DEATH("entity.zombie_pig.death", 394, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Zombie is within 16 blocks
+     * Zombie Pigman hurts
      */
-    ZOMBIE_SAY("mob.zombie.say"),
+    ENTITY_ZOMBIE_PIG_HURT("entity.zombie_pig.hurt", 395, SoundCategory.MASTER),
 
     /**
-     * A Zombie or Zombie Pigman is walking
+     * Zombie groans
      */
-    ZOMBIE_STEP("mob.zombie.step"),
+    ENTITY_ZOMBIE_VILLAGER_AMBIENT("entity.zombie_villager.ambient", 396, SoundCategory.MASTER),
 
     /**
-     * A Zombie Villager is turned into a Villager
+     * Zombie vociferates
      */
-    ZOMBIE_UNFECT("mob.zombie.unfect"),
+    ENTITY_ZOMBIE_VILLAGER_CONVERTED("entity.zombie_villager.converted", 397, SoundCategory.MASTER),
 
     /**
-     * A Zombie pounds on a Wooden Door
+     * Zombie snuffles
      */
-    ZOMBIE_WOOD("mob.zombie.wood"),
+    ENTITY_ZOMBIE_VILLAGER_CURE("entity.zombie_villager.cure", 398, SoundCategory.MASTER),
 
     /**
-     * A Zombie breaks a Wooden Door or a Wither breaks blocks around it
+     * Zombie dies
      */
-    ZOMBIE_WOOD_BREAK("mob.zombie.woodbreak"),
+    ENTITY_ZOMBIE_VILLAGER_DEATH("entity.zombie_villager.death", 399, SoundCategory.MASTER),
 
     /**
-     * Randomly when a Zombie Pigman is within 16 blocks
+     * Zombie hurts
      */
-    ZOMBIE_PIGMAN_SAY("mob.zombiepig.zpig"),
+    ENTITY_ZOMBIE_VILLAGER_HURT("entity.zombie_villager.hurt", 400, SoundCategory.MASTER),
 
     /**
-     * When Zombie Pigmen become hostile to a Player
+     * Footsteps
      */
-    ZOMBIE_PIGMAN_ANGRY("mob.zombiepig.zpigangry"),
+    ENTITY_ZOMBIE_VILLAGER_STEP("entity.zombie_villager.step", 401, SoundCategory.MASTER),
 
     /**
-     * A Zombie Pigman dies
+     * Chain armor jingles
      */
-    ZOMBIE_PIGMAN_DEATH("mob.zombiepig.zpigdeath"),
+    ITEM_ARMOR_EQUIP_CHAIN("item.armor.equip_chain", 402, SoundCategory.MASTER),
 
     /**
-     * A Zombie Pigman takes damage
+     * Diamond armor clangs
      */
-    ZOMBIE_PIGMAN_HURT("mob.zombiepig.zpighurt"),
+    ITEM_ARMOR_EQUIP_DIAMOND("item.armor.equip_diamond", 403, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "11" Music Disc into a Jukebox
+     * Gear equipped
      */
-    RECORD_11("records.11"),
+    ITEM_ARMOR_EQUIP_GENERIC("item.armor.equip_generic", 404, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "13" Music Disc into a Jukebox
+     * Gold armor clinks
      */
-    RECORD_13("records.13"),
+    ITEM_ARMOR_EQUIP_GOLD("item.armor.equip_gold", 405, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "blocks" Music Disc into a Jukebox
+     * Iron armor clanks
      */
-    RECORD_BLOCKS("records.blocks"),
+    ITEM_ARMOR_EQUIP_IRON("item.armor.equip_iron", 406, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "cat" Music Disc into a Jukebox
+     * Leather armor rustles
      */
-    RECORD_CAT("records.cat"),
+    ITEM_ARMOR_EQUIP_LEATHER("item.armor.equip_leather", 407, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "chirp" Music Disc into a Jukebox
+     * Bottle fills
      */
-    RECORD_CHIRP("records.chirp"),
+    ITEM_BOTTLE_FILL("item.bottle.fill", 408, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "far" Music Disc into a Jukebox
+     * Bottle fills
      */
-    RECORD_FAR("records.far"),
+    ITEM_BOTTLE_FILL_DRAGONBREATH("item.bottle.fill_dragonbreath", 409, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "mall" Music Disc into a Jukebox
+     * Bucket empties
      */
-    RECORD_MALL("records.mall"),
+    ITEM_BUCKET_EMPTY("item.bucket.empty", 410, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "mellohi" Music Disc into a Jukebox
+     * Bucket empties
      */
-    RECORD_MELLOHI("records.mellohi"),
+    ITEM_BUCKET_EMPTY_LAVA("item.bucket.empty_lava", 411, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "stal" Music Disc into a Jukebox
+     * Bucket fills
      */
-    RECORD_STAL("records.stal"),
+    ITEM_BUCKET_FILL("item.bucket.fill", 412, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "strad" Music Disc into a Jukebox
+     * Bucket fills
      */
-    RECORD_STRAD("records.strad"),
+    ITEM_BUCKET_FILL_LAVA("item.bucket.fill_lava", 413, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "wait" Music Disc into a Jukebox
+     * Player teleports
      */
-    RECORD_WAIT("records.wait"),
+    ITEM_CHORUS_FRUIT_TELEPORT("item.chorus_fruit.teleport", 414, SoundCategory.MASTER),
 
     /**
-     * A player inserts a "ward" Music Disc into a Jukebox
+     * Fireball whooshes
      */
-    RECORD_WARD("records.ward"),
+    ITEM_FIRECHARGE_USE("item.firecharge.use", 415, SoundCategory.MASTER),
 
     /**
-     * Every 5 minutes when a menu screen is open (not playing the game)
+     * Flint and Steel click
      */
-    MUSIC_MENU("music.menu"),
+    ITEM_FLINTANDSTEEL_USE("item.flintandsteel.use", 416, SoundCategory.MASTER),
 
     /**
-     * During sunrise, noon, sunset, and midnight.<br>
-     * <br>
-     * If the day cycle is turned off, the music plays every 5 minutes
+     * Hoe tills
      */
-    MUSIC_GAME("music.game"),
+    ITEM_HOE_TILL("item.hoe.till", 417, SoundCategory.MASTER),
 
     /**
-     * During sunrise, noon, sunset, and midnight (player must be in Creative mode).<br>
-     * <br>
-     * If the day cycle is turned off, the music plays every 5 minutes
+     * Shield blocks
      */
-    MUSIC_GAME_CREATIVE("music.game.creative"),
+    ITEM_SHIELD_BLOCK("item.shield.block", 418, SoundCategory.MASTER),
 
     /**
-     * Being in the End
+     * Item breaks
      */
-    MUSIC_GAME_END("music.game.end"),
+    ITEM_SHIELD_BREAK("item.shield.break", 419, SoundCategory.MASTER),
 
     /**
-     * Being near the Ender Dragon
+     * Shovel flattens
      */
-    MUSIC_GAME_END_DRAGON("music.game.end.dragon"),
+    ITEM_SHOVEL_FLATTEN("item.shovel.flatten", 420, SoundCategory.MASTER),
+
+    MUSIC_CREATIVE("music.creative", 421, SoundCategory.MUSIC),
+
+    MUSIC_CREDITS("music.credits", 422, SoundCategory.MUSIC),
+
+    MUSIC_DRAGON("music.dragon", 423, SoundCategory.MUSIC),
+
+    MUSIC_END("music.end", 424, SoundCategory.MUSIC),
+
+    MUSIC_GAME("music.game", 425, SoundCategory.MUSIC),
+
+    MUSIC_MENU("music.menu", 426, SoundCategory.MUSIC),
+
+    MUSIC_NETHER("music.nether", 427, SoundCategory.MUSIC),
+
+    RECORD_11("record.11", 428, SoundCategory.RECORD),
+
+    RECORD_13("record.13", 429, SoundCategory.RECORD),
+
+    RECORD_BLOCKS("record.blocks", 430, SoundCategory.RECORD),
+
+    RECORD_CAT("record.cat", 431, SoundCategory.RECORD),
+
+    RECORD_CHIRP("record.chirp", 432, SoundCategory.RECORD),
+
+    RECORD_FAR("record.far", 433, SoundCategory.RECORD),
+
+    RECORD_MALL("record.mall", 434, SoundCategory.RECORD),
+
+    RECORD_MELLOHI("record.mellohi", 435, SoundCategory.RECORD),
+
+    RECORD_STAL("record.stal", 436, SoundCategory.RECORD),
+
+    RECORD_STRAD("record.strad", 437, SoundCategory.RECORD),
+
+    RECORD_WAIT("record.wait", 438, SoundCategory.RECORD),
+
+    RECORD_WARD("record.ward", 439, SoundCategory.RECORD),
+
+    UI_BUTTON_CLICK("ui.button.click", 440, SoundCategory.MASTER),
 
     /**
-     * Entering the exit portal in the End
+     * Rain falls
      */
-    MUSIC_GAME_END_CREDITS("music.game. end.credits"),
+    WEATHER_RAIN("weather.rain", 441, SoundCategory.WEATHER),
 
     /**
-     * Being in the Nether
+     * Rain falls
      */
-    MUSIC_GAME_NETHER("music.game.nether");
+    WEATHER_RAIN_ABOVE("weather.rain.above", 442, SoundCategory.WEATHER);
 
-    private final String s;
+    private final String name;
+    private final int id;
+    private final SoundCategory category;
 
-    SoundEffectType(String s) {
-        this.s = s;
+    SoundEffectType(String name, int id, SoundCategory category) {
+        this.name = name;
+        this.id = id;
+        this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return this.s;
+    public String getName() {
+        return name;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public SoundCategory getCategory() {
+        return category;
+    }
+
 }

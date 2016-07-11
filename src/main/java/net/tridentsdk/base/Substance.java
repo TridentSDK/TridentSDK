@@ -842,7 +842,7 @@ public enum Substance {
             case CACTUS:
             case CAKE_BLOCK:
             case CARPET:
-                return SoundEffectType.DIG_CLOTH;
+                return SoundEffectType.BLOCK_CLOTH_BREAK;
             case GRASS:
             case SPONGE:
             case LEAVES:
@@ -862,18 +862,18 @@ public enum Substance {
             case MYCEL:
             case WATER_LILY:
             case HAY_BLOCK:
-                return SoundEffectType.DIG_GRASS;
+                return SoundEffectType.BLOCK_GRASS_BREAK;
             case DIRT:
             case GRAVEL:
             case SOIL:
             case CLAY:
-                return SoundEffectType.DIG_GRAVEL;
+                return SoundEffectType.BLOCK_GRAVEL_BREAK;
             case SAND:
             case SOUL_SAND:
-                return SoundEffectType.DIG_SAND;
+                return SoundEffectType.BLOCK_SAND_BREAK;
             case SNOW:
             case SNOW_BLOCK:
-                return SoundEffectType.DIG_SNOW;
+                return SoundEffectType.BLOCK_SNOW_BREAK;
             case WOOD:
             case LOG:
             case LOG_2:
@@ -938,7 +938,7 @@ public enum Substance {
             case SPRUCE_DOOR:
             case WOOD_DOOR:
             case WOODEN_DOOR:
-                return SoundEffectType.DIG_WOOD;
+                return SoundEffectType.BLOCK_WOOD_BREAK;
             case GLASS:
             case ICE:
             case PACKED_ICE:
@@ -948,9 +948,9 @@ public enum Substance {
             case THIN_GLASS:
             case STAINED_GLASS_PANE:
             case SEA_LANTERN:
-                return SoundEffectType.DIG_GLASS;
+                return SoundEffectType.BLOCK_GLASS_BREAK;
             default:
-                return SoundEffectType.DIG_STONE;
+                return SoundEffectType.BLOCK_STONE_BREAK;
         }
     }
 
@@ -992,7 +992,7 @@ public enum Substance {
             case CACTUS:
             case CAKE_BLOCK:
             case CARPET:
-                return SoundEffectType.DIG_CLOTH;
+                return SoundEffectType.BLOCK_CLOTH_PLACE;
             case GRASS:
             case SPONGE:
             case LEAVES:
@@ -1010,18 +1010,18 @@ public enum Substance {
             case VINE:
             case MYCEL:
             case HAY_BLOCK:
-                return SoundEffectType.DIG_GRASS;
+                return SoundEffectType.BLOCK_GRASS_PLACE;
             case DIRT:
             case GRAVEL:
             case SOIL:
             case CLAY:
-                return SoundEffectType.DIG_GRAVEL;
+                return SoundEffectType.BLOCK_GRAVEL_PLACE;
             case SAND:
             case SOUL_SAND:
-                return SoundEffectType.DIG_SAND;
+                return SoundEffectType.BLOCK_SAND_PLACE;
             case SNOW:
             case SNOW_BLOCK:
-                return SoundEffectType.DIG_SNOW;
+                return SoundEffectType.BLOCK_SNOW_PLACE;
             case WOOD:
             case LOG:
             case LOG_2:
@@ -1073,7 +1073,7 @@ public enum Substance {
             case REDSTONE_COMPARATOR_ON:
             case DAYLIGHT_DETECTOR:
             case DAYLIGHT_DETECTOR_INVERTED:
-                return SoundEffectType.DIG_WOOD;
+                return SoundEffectType.BLOCK_WOOD_PLACE;
             case GLASS:
             case ICE:
             case PACKED_ICE:
@@ -1083,11 +1083,11 @@ public enum Substance {
             case THIN_GLASS:
             case STAINED_GLASS_PANE:
             case SEA_LANTERN:
-                return SoundEffectType.STEP_STONE;
+                return SoundEffectType.BLOCK_STONE_PLACE;
             case ANVIL:
-                return SoundEffectType.RANDOM_ANVIL_LAND;
+                return SoundEffectType.BLOCK_ANVIL_PLACE;
             default:
-                return SoundEffectType.DIG_STONE;
+                return SoundEffectType.BLOCK_STONE_PLACE;
         }
     }
 

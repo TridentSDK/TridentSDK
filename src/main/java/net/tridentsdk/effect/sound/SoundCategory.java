@@ -14,12 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.living;
-
-import net.tridentsdk.entity.traits.Hostile;
+package net.tridentsdk.effect.sound;
 
 /**
- * Represents a shulker mob.
+ * Enum of all possible sound categories
+ *
+ * @author The TridentSDK Team
+ * @since 0.4-alpha
  */
-public interface Shulker extends Hostile {
+public enum SoundCategory {
+
+    MASTER("master"),
+    MUSIC("music"),
+    RECORD("record"),
+    WEATHER("weather"),
+    BLOCK("block"),
+    HOSTILE("hostile"),
+    NEUTRAL("neutral"),
+    PLAYER("player"),
+    AMBIENT("ambient"),
+    VOICE("voice");
+
+    private final String s;
+
+    SoundCategory(String s) {
+        this.s = s;
+    }
+
+    @Override
+    public String toString() {
+        return s;
+    }
+
 }
