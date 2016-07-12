@@ -17,7 +17,6 @@
 package net.tridentsdk.util;
 
 import javax.annotation.concurrent.Immutable;
-import java.io.File;
 
 /**
  * Miscellaneous functions that only serve to shorten code.
@@ -27,8 +26,15 @@ import java.io.File;
  */
 @Immutable
 public final class Misc {
+    /**
+     * String constant for NBT values in world option enums
+     * where the value to be found does not exist
+     */
     public static final String NBT_BOUND_FAIL = "NBT value out of range for class %s";
-    public static final File HOME = new File(".");
+    /**
+     * The working directory as a string
+     */
+    public static final String HOME = System.getProperty("user.dir");
 
     // Prevent instantiation
     private Misc() {

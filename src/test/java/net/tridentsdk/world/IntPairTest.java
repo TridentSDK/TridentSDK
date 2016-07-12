@@ -28,4 +28,12 @@ public class IntPairTest {
         assertEquals(100, this.pair.x());
         assertEquals(200, this.pair.z());
     }
+
+    @Test
+    public void equalsHashString() {
+        IntPair dup = IntPair.make(100, 200);
+        assertEquals(dup.hashCode(), pair.hashCode());
+        assertEquals(dup, pair);
+        assertEquals(dup.toString(), pair.toString());
+    }
 }

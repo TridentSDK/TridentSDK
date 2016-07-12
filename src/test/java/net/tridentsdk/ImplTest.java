@@ -17,6 +17,7 @@
 package net.tridentsdk;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -24,7 +25,7 @@ import static org.junit.Assert.fail;
 public class ImplTest {
     @Test
     public void testSetGet() {
-        Impl.setImpl(new IImplImpl());
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
         assertNotNull(Impl.get());
     }
 
@@ -41,12 +42,5 @@ public class ImplTest {
         }).start();
 
         Impl.get();
-    }
-
-    public static class IImplImpl implements Impl.ImplementationProvider {
-        @Override
-        public Server svr() {
-            return null;
-        }
     }
 }

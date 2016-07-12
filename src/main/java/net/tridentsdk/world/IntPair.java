@@ -77,4 +77,27 @@ public final class IntPair {
     public int z() {
         return this.z;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof IntPair) {
+            IntPair pair = (IntPair) obj;
+            return pair.x == this.x && pair.z == this.z;
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = 31 * hash + this.x;
+        hash = 31 * hash + this.z;
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("IntPair{%d,%d}", this.x, this.z);
+    }
 }

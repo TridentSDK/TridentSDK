@@ -16,10 +16,12 @@
  */
 package net.tridentsdk;
 
+import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
+import java.nio.file.Path;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -94,5 +96,9 @@ public final class Impl {
         // Obtains the implementation of the server object
         // that represents the API side version
         Server svr();
+
+        // Create a new config; since the implementation
+        // should use a path anyways, there is only one way
+        Config newCfg(Path p);
     }
 }
