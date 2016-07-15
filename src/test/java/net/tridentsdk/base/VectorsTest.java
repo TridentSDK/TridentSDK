@@ -194,9 +194,6 @@ public class VectorsTest {
         this.vec.add(this.modifier, this.modifier, this.modifier);
     }
 
-    // TODO benchmark on different platforms, lol
-    // TODO insert "works on my machine" seal of approval
-
     // Code duplication - addT - 2.5937485694194634E7
 
     // invokespecial opcode - addT - 2.4965829257029913E7

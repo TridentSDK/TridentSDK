@@ -29,5 +29,15 @@
  *
  * <p>Prop generators generate flowers, trees, mooshrooms,
  * tall grass, etc...</p>
+ *
+ * <p>None of the classes returned by and the
+ * {@link net.tridentsdk.world.gen.AbstractGeneratorFactory}
+ * itself can be guaranteed to be thread-safe, due to the
+ * fact that this is designed to be implemented by the
+ * client.</p>
+ *
+ * // TODO threading considerations
+ *
+ * @see net.tridentsdk.world.gen.AbstractGeneratorFactory
  */
 package net.tridentsdk.world.gen;

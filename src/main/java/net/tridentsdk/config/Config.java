@@ -18,6 +18,7 @@ package net.tridentsdk.config;
 
 import net.tridentsdk.Impl;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -33,6 +34,7 @@ import java.nio.file.Paths;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Config extends ConfigSection {
     // TODO throw exceptions?
 
@@ -75,7 +77,7 @@ public interface Config extends ConfigSection {
      *
      * @return the config as a file
      */
-    File asFile();
+    File file();
 
     /**
      * Obtains the path object which stores the data held in
@@ -83,7 +85,7 @@ public interface Config extends ConfigSection {
      *
      * @return the config as a path
      */
-    Path asPath();
+    Path path();
 
     /**
      * Obtains the folder which contains this configuration
@@ -101,14 +103,14 @@ public interface Config extends ConfigSection {
      *                          {@link IoResponse#SUCCESS} is
      *                          returned
      */
-    IoResponse load();
+    void load() throws IOException;
 
     /**
      * Saves the data in memory to file.
      *
-     * @return RuntimeException if any response other than
-     * {@link IoResponse#SUCCESS} is
-     * returned
+     * @throws RuntimeException if any response other than
+     *                          {@link IoResponse#SUCCESS} is
+     *                          returned
      */
-    IoResponse save() throws IOException;
+    void save() throws IOException;
 }

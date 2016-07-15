@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.command;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents the server console, whether or not there is
  * a physical console on the working machine.
@@ -28,6 +30,7 @@ package net.tridentsdk.command;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Console {
     /**
      * Logs the given string to the console without any

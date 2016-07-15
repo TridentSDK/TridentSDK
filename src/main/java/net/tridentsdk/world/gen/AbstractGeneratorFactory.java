@@ -28,6 +28,8 @@ import java.util.Set;
  * @since 0.5-alpha
  */
 public interface AbstractGeneratorFactory {
+    // TODO how to force client to make this thread-safe?
+
     /**
      * Obtains the terrain generator for the world
      * possessing this generator provider, given the options

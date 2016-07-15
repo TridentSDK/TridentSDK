@@ -14,16 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.util;
+package net.tridentsdk.config;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class MiscTest {
+public class IoResponseTest {
     @Test
-    public void testConstants() {
-        assertEquals("NBT value out of range for class %s", Misc.NBT_BOUND_FAIL);
-        assertEquals(System.getProperty("user.dir"), Misc.HOME);
+    public void test() {
+        IoResponse[] values = IoResponse.values();
+        for (int i = 0; i < values.length; i++) {
+            assertEquals(i, values[i].ordinal());
+        }
     }
 }
