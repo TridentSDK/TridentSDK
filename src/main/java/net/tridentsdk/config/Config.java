@@ -28,6 +28,12 @@ import java.nio.file.Paths;
  * This class represents the configuration file loaded into
  * memory.
  *
+ * <p>Config files may be created using the static load
+ * factories. These methods have no exception thrown because
+ * exceptions occurring during this time are a sign of a
+ * serious underlying problem and thus should not be
+ * swallowed.</p>
+ *
  * <p>TridentSDK strongly assumes that the implementation
  * uses RFC 7159 JSON files as the configuration format.</p>
  *
@@ -36,14 +42,13 @@ import java.nio.file.Paths;
  */
 @ThreadSafe
 public interface Config extends ConfigSection {
-    // TODO throw exceptions?
-
     /**
      * Loads the given config into memory, given the path
      * as a String.
      *
      * @param path the path from which to laod the config
      * @return the loaded config memory representation
+     * @throws RuntimeException if anything went wrong
      */
     static Config load(String path) {
         return Impl.get().newCfg(Paths.get(path));
@@ -98,19 +103,14 @@ public interface Config extends ConfigSection {
     /**
      * Loads (or reloads) data from the file into memory.
      *
-     * @return the response to loading the data
-     * @throws RuntimeException if any response other than
-     *                          {@link IoResponse#SUCCESS} is
-     *                          returned
+     * @throws IOException if something went wrong
      */
     void load() throws IOException;
 
     /**
      * Saves the data in memory to file.
      *
-     * @throws RuntimeException if any response other than
-     *                          {@link IoResponse#SUCCESS} is
-     *                          returned
+     * @throws IOException if something went wrong
      */
     void save() throws IOException;
 }

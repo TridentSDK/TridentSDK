@@ -28,8 +28,6 @@ import java.util.Set;
  * @since 0.5-alpha
  */
 public interface AbstractGeneratorFactory {
-    // TODO how to force client to make this thread-safe?
-
     /**
      * Obtains the terrain generator for the world
      * possessing this generator provider, given the options
@@ -59,4 +57,24 @@ public interface AbstractGeneratorFactory {
      * @return the prop generators for the world
      */
     Set<PropGenerator> propSet(GenOpts opts);
+
+    // TODO ensure implementation generators override this
+    // method!
+
+    /**
+     * Obtains the container that is used for running the
+     * generator classes.
+     *
+     * <p>This method should never ever be overridden unless
+     * the following circumstances are true:
+     * 1) You are an implementation developer
+     * 2) You are well versed in the threading consequences
+     * that can come as a result of changing this method
+     * 3) You are stupid</p>
+     *
+     * @return the container that runs teh generator
+     */
+    default GenContainer container() {
+        return GenContainer.DEFAULT;
+    }
 }

@@ -74,6 +74,13 @@ import java.util.Set;
 @ThreadSafe
 public interface ConfigSection {
     /**
+     * Obtains the name of this config section
+     *
+     * @return the name used to locate keys in this section
+     */
+    String name();
+
+    /**
      * Obtains the root config section which contains all of
      * the children sections, including this one.
      *
@@ -81,7 +88,7 @@ public interface ConfigSection {
      *
      * @return the config that holds this section
      */
-    ConfigSection rootSection();
+    ConfigSection root();
 
     /**
      * Obtains the config section that contains this config
@@ -97,7 +104,7 @@ public interface ConfigSection {
      *
      * @param name the name of the new config section
      */
-    void createChild(String name);
+    ConfigSection createChild(String name);
 
     /**
      * Obtains a child config section with the given name.
@@ -118,6 +125,16 @@ public interface ConfigSection {
      * @return the children config sections
      */
     Collection<ConfigSection> children(boolean deep);
+
+    /**
+     * Removes the child config section that has the given
+     * name.
+     *
+     * @param name the name of the child to remove
+     * @return {@code true} if the operation produced any
+     *         change, {@code false} if it didn't
+     */
+    boolean removeChild(String name);
 
     /**
      * Obtains all the keys contained in the config section.
@@ -205,6 +222,30 @@ public interface ConfigSection {
      * @param value the value to associate with the key
      */
     void set(String key, Object value);
+
+    /**
+     * Removes the config entry at the given key, including
+     * the key itself.
+     *
+     * @param key the key to remove
+     * @return {@code true} if this operation changed the
+     * config, {@code false} if it did not do
+     * anything
+     */
+    boolean remove(String key);
+
+    /**
+     * Checks whether or not the given key exists in the
+     * config.
+     *
+     * <p>This method disregards any (or lack of any) value
+     * set at the given key.</p>
+     *
+     * @param key the key to check for existance
+     * @return {@code true} if the key exists, {@code false}
+     * if not
+     */
+    boolean has(String key);
 
     /**
      * Obtains an integer at the given key.

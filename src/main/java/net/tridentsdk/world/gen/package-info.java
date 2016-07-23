@@ -36,8 +36,6 @@
  * fact that this is designed to be implemented by the
  * client.</p>
  *
- * // TODO threading considerations
- *
  * @see net.tridentsdk.world.gen.AbstractGeneratorFactory
  */
 package net.tridentsdk.world.gen;
