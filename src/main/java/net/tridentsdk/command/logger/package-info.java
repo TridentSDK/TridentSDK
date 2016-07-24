@@ -14,18 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
-public class IoResponseTest {
-    @Test
-    public void test() {
-        IoResponse[] values = IoResponse.values();
-        for (int i = 0; i < values.length; i++) {
-            assertEquals(i, values[i].ordinal());
-        }
-    }
-}
+/**
+ * This package contains classes pertaining to logging
+ * messages to the system console.
+ */
+package net.tridentsdk.command.logger;

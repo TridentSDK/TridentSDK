@@ -16,10 +16,9 @@
  */
 package net.tridentsdk;
 
-import net.tridentsdk.command.Console;
+import net.tridentsdk.command.logger.Logger;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.net.InetSocketAddress;
 
 /**
  * This is the representation of the server process' main
@@ -44,12 +43,20 @@ public interface Server {
     }
 
     /**
-     * This method obtains the address and port of the
-     * server's socket.
+     * Obtains the internal address to which the server
+     * opens its socket.
      *
-     * @return the socket address
+     * @return the internal IP
      */
-    InetSocketAddress address();
+    String ip();
+
+    /**
+     * Obtains the port which the server selects to open its
+     * socket.
+     *
+     * @return the port
+     */
+    int port();
 
     /**
      * This method obtains the console as defined by the
@@ -61,7 +68,7 @@ public interface Server {
      *
      * @return the server representation of the console
      */
-    Console console();
+    Logger console();
 
     /**
      * This method obtains an arbitrary String that

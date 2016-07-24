@@ -14,9 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.logger;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.io.OutputStream;
 
 /**
  * Represents the server console, whether or not there is
@@ -31,7 +32,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Console {
+public interface Logger {
     /**
      * Logs the given string to the console without any
      * color formatting.
@@ -39,6 +40,15 @@ public interface Console {
      * @param s the string to log
      */
     void log(String s);
+
+    /**
+     * Log partial. Same as {@link #log(String)}, but does
+     * not terminate the line, and thus can be used with
+     * following writes in order to print to the same line.
+     *
+     * @param s the string to log
+     */
+    void logp(String s);
 
     /**
      * Logs the given string to the console indicative of a
@@ -50,6 +60,16 @@ public interface Console {
     void success(String s);
 
     /**
+     * Log partial. Same as {@link #success(String)}, but
+     * does not terminate the line, and thus can be used
+     * with following writes in order to print to the same
+     * line.
+     *
+     * @param s the string to log
+     */
+    void successp(String s);
+
+    /**
      * Logs the given string to the console indicative of a
      * warning (usually a yellow color, however it is up to
      * the implementation to decide).
@@ -59,6 +79,16 @@ public interface Console {
     void warn(String s);
 
     /**
+     * Log partial. Same as {@link #warn(String)}, but
+     * does not terminate the line, and thus can be used
+     * with following writes in order to print to the same
+     * line.
+     *
+     * @param s the string to log
+     */
+    void warnp(String s);
+
+    /**
      * Logs the given string to the console indicative of an
      * error (usually a red color, however it is up to the
      * implementation to decide).
@@ -66,6 +96,16 @@ public interface Console {
      * @param s the string to log
      */
     void error(String s);
+
+    /**
+     * Log partial. Same as {@link #success(String)}, but
+     * does not terminate the line, and thus can be used
+     * with following writes in order to print to the same
+     * line.
+     *
+     * @param s the string to log
+     */
+    void errorp(String s);
 
     /**
      * Logs the given string as a debug message to the
@@ -79,4 +119,18 @@ public interface Console {
      * @param s the string to log
      */
     void debug(String s);
+
+    // No debugp (really?) no good reason to make pretty
+    // debug messages
+
+    /**
+     * Obtains the raw output that the underlying console
+     * logs messages.
+     *
+     * <p>This is useful for wrapping with the
+     * {@link java.io} API classes.</p>
+     *
+     * @return the outputstream
+     */
+    OutputStream out();
 }

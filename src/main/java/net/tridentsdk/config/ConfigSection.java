@@ -17,7 +17,6 @@
 package net.tridentsdk.config;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.Map;
@@ -49,10 +48,9 @@ import java.util.Set;
  * }</pre></p>
  *
  * <p><strong>Get value:</strong> Obtains the value at the
- * given key. A key that does not exist does not return
+ * given key. A key that does not exist <b>NEVER</b> returns
  * {@code null} or a default value, but throws a
- * {@link RuntimeException}. This can also happen if the
- * type cannot be casted.</p>
+ * {@link RuntimeException}.</p>
  *
  * <p><strong>Set value:</strong> Sets the value at the key.
  * This ignores any previous value and simply replaces the
@@ -102,19 +100,29 @@ public interface ConfigSection {
      * Creates a new child config section within this config
      * section.
      *
-     * @param name the name of the new config section
+     * @param key the key of the new config section
      */
-    ConfigSection createChild(String name);
+    ConfigSection createChild(String key);
 
     /**
      * Obtains a child config section with the given name.
      *
-     * @param name the name of the child to get
+     * @param key the name of the child to get
      * @return the child, or {@code null} if it doesn't
      * exist
      */
-    @Nullable
-    ConfigSection getChild(String name);
+    @Nonnull
+    ConfigSection getChild(String key);
+
+    /**
+     * Removes the child config section that has the given
+     * key.
+     *
+     * @param key the key of the child to remove
+     * @return {@code true} if the operation produced any
+     *         change, {@code false} if it didn't
+     */
+    boolean removeChild(String key);
 
     /**
      * Obtains the children sections of this config section.
@@ -124,17 +132,7 @@ public interface ConfigSection {
      *             of this config section
      * @return the children config sections
      */
-    Collection<ConfigSection> children(boolean deep);
-
-    /**
-     * Removes the child config section that has the given
-     * name.
-     *
-     * @param name the name of the child to remove
-     * @return {@code true} if the operation produced any
-     *         change, {@code false} if it didn't
-     */
-    boolean removeChild(String name);
+    Set<ConfigSection> children(boolean deep);
 
     /**
      * Obtains all the keys contained in the config section.
@@ -155,13 +153,12 @@ public interface ConfigSection {
      * as an indicator of how it is actually ordered in the
      * file.</p>
      *
-     * {@code true} to obtain all the values in
-     * the child sections as well, or
-     * {@code false} to get values only in this
-     * config section
-     *
+     * @param deep {@code true} to obtain all the values in
+     *             the child sections as well, or
+     *             {@code false} to get values only in this
+     *             config section
      * @return the collection of values stored in the config
-     * section
+     *         section
      */
     Collection<Object> values(boolean deep);
 
@@ -174,11 +171,9 @@ public interface ConfigSection {
      * as an indicator of how it is actually ordered in the
      * file.</p>
      *
-     * {@code true} to obtain all the entries in
-     * the child sections as well, or
-     * {@code false} to get entries only in this
-     * config section
-     *
+     * @param deep {@code true} to obtain all the entries in
+     * the child sections as well, or {@code false} to get
+     * entries only in this config section
      * @return the set of key-value entries
      */
     Set<Map.Entry<String, Object>> entries(boolean deep);
@@ -450,6 +445,7 @@ public interface ConfigSection {
      * @throws RuntimeException if the value is not a
      *         String, or if it doesn't exist
      */
+    @Nonnull
     String getString(String key);
 
     /**

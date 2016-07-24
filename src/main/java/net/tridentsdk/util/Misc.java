@@ -39,4 +39,15 @@ public final class Misc {
     // Prevent instantiation
     private Misc() {
     }
+
+    /**
+     * Wraps the given exception with
+     * {@link RuntimeException} in order to throw an
+     * unchecked exception, and throws it.
+     *
+     * @param e the exception to throw
+     */
+    public static void ex(Exception e) {
+        throw new RuntimeException(e);
+    }
 }
