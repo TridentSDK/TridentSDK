@@ -59,16 +59,16 @@ public interface Server {
     int port();
 
     /**
-     * This method obtains the console as defined by the
+     * This method obtains the logger as defined by the
      * server.
      *
-     * <p>This may be a virtual console, an OS console, or
+     * <p>This may be a virtual logger, an OS logger, or
      * other, including but not limited to the listed
      * options above.</p>
      *
-     * @return the server representation of the console
+     * @return the server representation of the logger
      */
-    Logger console();
+    Logger logger();
 
     /**
      * This method obtains an arbitrary String that

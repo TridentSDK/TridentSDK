@@ -16,6 +16,7 @@
  */
 package net.tridentsdk;
 
+import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
 
@@ -100,5 +101,8 @@ public final class Impl {
         // Create a new config; since the implementation
         // should use a path anyways, there is only one way
         Config newCfg(Path p);
+
+        // Create a new logger
+        Logger newLogger(String s);
     }
 }

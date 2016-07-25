@@ -16,16 +16,18 @@
  */
 package net.tridentsdk.command.logger;
 
+import net.tridentsdk.Impl;
+
 import javax.annotation.concurrent.ThreadSafe;
 import java.io.OutputStream;
 
 /**
- * Represents the server console, whether or not there is
- * a physical console on the working machine.
+ * Represents the server logger, whether or not there is
+ * a physical logger on the working machine.
  *
  * <p>Chat colors may be used in conjunction with the
  * following string in order to add color to the message on
- * the console (dependant on the OS and the implementation).
+ * the logger (dependant on the OS and the implementation).
  * </p>
  *
  * @author TridentSDK
@@ -34,7 +36,27 @@ import java.io.OutputStream;
 @ThreadSafe
 public interface Logger {
     /**
-     * Logs the given string to the console without any
+     * Obtains a new logger by the given name.
+     *
+     * @param name the name to call the new logger
+     * @return the logger
+     */
+    static Logger get(String name) {
+        return Impl.get().newLogger(name);
+    }
+
+    /**
+     * Obtains a new logger for the given {@code class}.
+     *
+     * @param cls the {@code class} to get the new logger
+     * @return the logger
+     */
+    static Logger get(Class<?> cls) {
+        return Impl.get().newLogger(cls.getSimpleName());
+    }
+
+    /**
+     * Logs the given string to the logger without any
      * color formatting.
      *
      * @param s the string to log
@@ -51,7 +73,7 @@ public interface Logger {
     void logp(String s);
 
     /**
-     * Logs the given string to the console indicative of a
+     * Logs the given string to the logger indicative of a
      * successful operation (usually a green color, however
      * it is up to the implementation to decide).
      *
@@ -70,7 +92,7 @@ public interface Logger {
     void successp(String s);
 
     /**
-     * Logs the given string to the console indicative of a
+     * Logs the given string to the logger indicative of a
      * warning (usually a yellow color, however it is up to
      * the implementation to decide).
      *
@@ -89,7 +111,7 @@ public interface Logger {
     void warnp(String s);
 
     /**
-     * Logs the given string to the console indicative of an
+     * Logs the given string to the logger indicative of an
      * error (usually a red color, however it is up to the
      * implementation to decide).
      *
@@ -109,7 +131,7 @@ public interface Logger {
 
     /**
      * Logs the given string as a debug message to the
-     * console.
+     * logger.
      *
      * <p>The implementation may decide to hide debug
      * messages to be logged only in the logfile, or to
@@ -124,7 +146,7 @@ public interface Logger {
     // debug messages
 
     /**
-     * Obtains the raw output that the underlying console
+     * Obtains the raw output that the underlying logger
      * logs messages.
      *
      * <p>This is useful for wrapping with the

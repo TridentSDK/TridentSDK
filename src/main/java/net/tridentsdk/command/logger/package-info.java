@@ -16,6 +16,6 @@
  */
 /**
  * This package contains classes pertaining to logging
- * messages to the system console.
+ * messages to the system logger.
  */
 package net.tridentsdk.command.logger;
