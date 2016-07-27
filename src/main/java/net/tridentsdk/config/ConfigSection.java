@@ -72,7 +72,8 @@ import java.util.Set;
 @ThreadSafe
 public interface ConfigSection {
     /**
-     * Obtains the name of this config section
+     * Obtains the name of this config section, or an empty
+     * String if this section is a root section.
      *
      * @return the name used to locate keys in this section
      */
@@ -459,8 +460,19 @@ public interface ConfigSection {
      */
     void setString(String key, String value);
 
+    // Not only does requiring the client to provide the
+    // collection to fill help write patterns that prevent
+    // the client from believing that the collections are
+    // watched, it also prevents unexpected behavior when
+    // the client believes that the returned collection
+    // maintains a particular order dictated by a particular
+    // implementation of the collection classes as well.
+    // The collection also provides the raw types that will
+    // be casted instead of using a class type.
+
     /**
-     * Obtains a Collection at the given key.
+     * Obtains a Collection at the given key and fills the
+     * given collection with its elements.
      *
      * <p>Keys within children sections may be period
      * {@code .} separated with the child name.</p>
@@ -471,33 +483,9 @@ public interface ConfigSection {
      * order for the collection to update.</p>
      *
      * @param key the key at which to find the value
-     * @return the value
+     * @param collection the collection to fill
      * @throws RuntimeException if the value is not a
      *         Collection, or if it doesn't exist
      */
-    @Nonnull
-    Collection<?> getCollection(String key);
-
-    /**
-     * Obtains a Collection at the given key and casted
-     * to a particular type.
-     *
-     * <p>Keys within children sections may be period
-     * {@code .} separated with the child name.</p>
-     *
-     * <p>Be sure to note that collections are not watched,
-     * which means that in order for changes to take effect,
-     * the client must use {@link #set(String, Object)} in
-     * order for the collection to update.</p>
-     *
-     * @param key the key at which to find the value
-     * @param type the type of values in the collection
-     * @param <T> the type of values in the collection
-     * @return the value
-     * @throws RuntimeException if the value is not a
-     *         Collection of the specified type, or if it
-     *         doesn't exist
-     */
-    @Nonnull
-    <T> Collection<T> getCollection(String key, Class<T> type);
+    <T, C extends Collection<T>> void getCollection(String key, C collection);
 }
