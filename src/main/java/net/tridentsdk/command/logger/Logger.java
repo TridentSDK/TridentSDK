@@ -56,6 +56,14 @@ public interface Logger {
     }
 
     /**
+     * Obtains the name of this logger as it was registered
+     * by the {@link #get(String)} or {@link #get(Class)}.
+     *
+     * @return the name
+     */
+    String name();
+
+    /**
      * Logs the given string to the logger without any
      * color formatting.
      *

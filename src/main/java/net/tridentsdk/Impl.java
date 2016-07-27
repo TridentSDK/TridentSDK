@@ -16,6 +16,7 @@
  */
 package net.tridentsdk;
 
+import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
@@ -36,7 +37,14 @@ import java.util.concurrent.CountDownLatch;
 @Internal
 @ThreadSafe
 public final class Impl {
+    /**
+     * The latch that is used to guard the thread-safety of
+     * the implementation provider
+     */
     private static final CountDownLatch IMPL_LATCH = new CountDownLatch(1);
+    /**
+     * The instance of the implementation provider
+     */
     private static ImplementationProvider impl;
 
     private static final Object lock = new Object();
@@ -104,5 +112,11 @@ public final class Impl {
 
         // Create a new logger
         Logger newLogger(String s);
+
+        // attaches the handler to the logger
+        void attachHandler(Logger logger, LogHandler handler);
+
+        // removes handlers from the logger
+        boolean removeHandler(Logger logger, LogHandler handler);
     }
 }
