@@ -54,20 +54,20 @@ public class OptsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void gameRuleTest() {
-        assertTrue(CMD_BLOCK_OUTPUT.defValue().asBool());
-        assertTrue(MOVE_CHECK.defValue().asBool());
-        assertTrue(DAYLIGHT_CYCLE.defValue().asBool());
-        assertTrue(FIRE_TICK.defValue().asBool());
-        assertTrue(MOB_LOOT.defValue().asBool());
-        assertTrue(MOB_SPAWN.defValue().asBool());
-        assertTrue(TILE_DROP.defValue().asBool());
-        assertFalse(KEEP_INVENTORY.defValue().asBool());
-        assertTrue(LOG_ADMIN_CMDS.defValue().asBool());
-        assertTrue(MOB_GRIEF.defValue().asBool());
-        assertTrue(NATURAL_REGEN.defValue().asBool());
-        assertEquals(3, RANDOM_TICK_SPEED.defValue().asNumber());
-        assertTrue(SEND_CMD_FEEDBACK.defValue().asBool());
-        assertTrue(SHOW_DEATH_MSG.defValue().asBool());
+        assertTrue(CMD_BLOCK_OUTPUT.defValue());
+        assertTrue(MOVE_CHECK.defValue());
+        assertTrue(DAYLIGHT_CYCLE.defValue());
+        assertTrue(FIRE_TICK.defValue());
+        assertTrue(MOB_LOOT.defValue());
+        assertTrue(MOB_SPAWN.defValue());
+        assertTrue(TILE_DROP.defValue());
+        assertFalse(KEEP_INVENTORY.defValue());
+        assertTrue(LOG_ADMIN_CMDS.defValue());
+        assertTrue(MOB_GRIEF.defValue());
+        assertTrue(NATURAL_REGEN.defValue());
+        assertEquals(3, RANDOM_TICK_SPEED.defValue().intValue());
+        assertTrue(SEND_CMD_FEEDBACK.defValue());
+        assertTrue(SHOW_DEATH_MSG.defValue());
         assertEquals(CMD_BLOCK_OUTPUT, from(CMD_BLOCK_OUTPUT.toString()));
         from("tridentsdk");
     }
@@ -83,14 +83,25 @@ public class OptsTest {
         LevelType.from("tridentsdk");
     }
 
-        @Test
+    @Test
     public void gameRuleValueTest() {
-        GameRuleValue bool = GameRuleValue.bool(true);
-        assertTrue(bool.isBool());
-        assertTrue(bool.asBool());
+        GameRuleMap map = new GameRuleMap();
+        map.set(DAYLIGHT_CYCLE, false);
+        map.set(SEND_CMD_FEEDBACK, false);
+        assertTrue(map.isSet(DAYLIGHT_CYCLE));
+        assertTrue(map.isSet(SEND_CMD_FEEDBACK));
+        assertFalse(map.get(DAYLIGHT_CYCLE));
+        map.reset(DAYLIGHT_CYCLE);
+        assertTrue(map.get(DAYLIGHT_CYCLE));
+        assertFalse(map.get(SEND_CMD_FEEDBACK));
+        map.resetAll();
+        assertTrue(map.get(SEND_CMD_FEEDBACK));
 
-        GameRuleValue num = GameRuleValue.number(3);
-        assertTrue(num.isNumber());
-        assertEquals(3, num.asNumber());
+        GameRuleMap map2 = new GameRuleMap();
+        map2.set(DAYLIGHT_CYCLE, false);
+        map2.set(SEND_CMD_FEEDBACK, false);
+        map.copy(map2);
+        assertFalse(map.get(DAYLIGHT_CYCLE));
+        assertFalse(map.get(SEND_CMD_FEEDBACK));
     }
 }

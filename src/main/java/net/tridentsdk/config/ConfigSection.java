@@ -33,7 +33,6 @@ import java.util.Set;
  * periods if the value is stored inside of a child config
  * section. For example, the key {@code sec1.sec2.key} leads
  * to:
- *
  * <pre>{@code
  *  {
  *      "comment": "The key for this is simply comment",
@@ -102,6 +101,7 @@ public interface ConfigSection {
      * section.
      *
      * @param key the key of the new config section
+     * @return the newly created child of this section
      */
     ConfigSection createChild(String key);
 
@@ -484,6 +484,8 @@ public interface ConfigSection {
      *
      * @param key the key at which to find the value
      * @param collection the collection to fill
+     * @param <T> the type of elements in the collection
+     * @param <C> the type of collection
      * @throws RuntimeException if the value is not a
      *         Collection, or if it doesn't exist
      */

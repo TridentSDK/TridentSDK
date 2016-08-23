@@ -62,5 +62,55 @@ public final class Vector extends AbstractVector<Vector> {
         super(x, y, z);
     }
 
-    // TODO vector manipulation methods
+    /**
+     * Obtains the square of the magnitude of this Vector.
+     *
+     * <p>This method should always be considered, if
+     * possible, over {@link #magnitude()}.</p>
+     *
+     * @return the magnitude squared
+     */
+    public double magnitudeSquared() {
+        double x;
+        double y;
+        double z;
+        synchronized (this.lock) {
+            x = this.x;
+            y = this.y;
+            z = this.z;
+        }
+
+        return square(x) + square(y) + square(z);
+    }
+
+    /**
+     * Obtains the magnitude of this Vector.
+     *
+     * <p>The method {@link #magnitudeSquared()} should
+     * always be considered over this method because usage
+     * of the square root function is very performance
+     * intensive.</p>
+     *
+     * @return the magnitude
+     */
+    public double magnitude() {
+        return Math.sqrt(this.magnitudeSquared());
+    }
+
+    /**
+     * Obtains this vector converted to a unit vector, with
+     * a magnitude of {@code 1} but retaining the same
+     * direction.
+     *
+     * <p>The usage of {@link #magnitude()} in this
+     * operation means that it should be avoided if
+     * possible
+     * due to performance concerns.</p>
+     *
+     * @return the normalized vector
+     */
+    public Vector normalize() {
+        double mag = this.magnitude();
+        return this.divide(mag, mag, mag);
+    }
 }

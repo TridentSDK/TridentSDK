@@ -18,6 +18,9 @@ package net.tridentsdk.world.opt;
 
 import net.tridentsdk.util.Misc;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+
 /**
  * The set of dimensions (not size but world type) that a
  * world can be set to.
@@ -25,7 +28,8 @@ import net.tridentsdk.util.Misc;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-public enum  Dimension {
+@Immutable
+public enum Dimension {
     /**
      * Represents the Nether dimension
      *
@@ -89,6 +93,7 @@ public enum  Dimension {
      * @throws IndexOutOfBoundsException if the Dimension is
      *         not found
      */
+    @Nonnull
     public static Dimension from(int i) {
         for (Dimension dim : values()) {
             if (dim.b == i) return dim;

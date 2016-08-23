@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.world;
 
+import net.tridentsdk.base.Block;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.world.opt.GenOpts;
 import net.tridentsdk.world.opt.Weather;
 import net.tridentsdk.world.opt.WorldBorder;
@@ -83,4 +85,29 @@ public interface World {
      * @return the world border options
      */
     WorldBorder border();
+
+    /**
+     * Obtains the chunk that is located at the given X/Z
+     * horizontal plane coordinates.
+     *
+     * @param x the x coordinate which to find the chunk
+     * @param z the z coordinate which to find the chunk
+     * @return the chunk at the given coordinates
+     */
+    Chunk chunkAt(int x, int z);
+
+    /**
+     * Obtains the block that is located at the given XYZ
+     * coordinates.
+     *
+     * <p>This method should be preferred over
+     * {@link Position#block()} if you do not already have
+     * a Position object.</p>
+     *
+     * @param x the x coordinate which to find the block
+     * @param y the y coordinate which to find the block
+     * @param z the z coordinate which to find the block
+     * @return the block located at the given position
+     */
+    Block blockAt(int x, int y, int z);
 }

@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world.opt;
 
-import net.tridentsdk.world.gen.AbstractGeneratorFactory;
+import net.tridentsdk.world.gen.GeneratorProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -36,9 +36,9 @@ public interface GenOpts {
      * generation.
      *
      * @return the factory responsible for providing
-     *         generation facilitiesd
+     *         generation facilitated
      */
-    AbstractGeneratorFactory provider();
+    GeneratorProvider provider();
 
     /**
      * Obtains the seed used to generate the terrain and
@@ -46,7 +46,7 @@ public interface GenOpts {
      *
      * <p>Technical information on how this method is
      * supposed to be implemented may be found
-     * <a href="http://minecraft.gamepedia.com/Seed_(level_generation)>here</a>.</p>
+     * <a href="http://minecraft.gamepedia.com/Seed_(level_generation)">here</a>.</p>
      *
      * @return the world seed
      */

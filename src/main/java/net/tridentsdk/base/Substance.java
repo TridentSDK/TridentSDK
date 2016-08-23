@@ -16,28 +16,16 @@
  */
 package net.tridentsdk.base;
 
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
+ * This class represents the set of all substances of which
+ * a block may be composed.
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@ThreadSafe
-public interface Block {
-    /**
-     * Obtains the substance of which this block is made.
-     *
-     * @return the block substance
-     */
-    Substance substance();
-
-    /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
-     */
-    Position pos();
+@Immutable
+public enum Substance {
+    // TODO add
 }

@@ -72,15 +72,6 @@ public interface Logger {
     void log(String s);
 
     /**
-     * Log partial. Same as {@link #log(String)}, but does
-     * not terminate the line, and thus can be used with
-     * following writes in order to print to the same line.
-     *
-     * @param s the string to log
-     */
-    void logp(String s);
-
-    /**
      * Logs the given string to the logger indicative of a
      * successful operation (usually a green color, however
      * it is up to the implementation to decide).
@@ -88,16 +79,6 @@ public interface Logger {
      * @param s the string to log
      */
     void success(String s);
-
-    /**
-     * Log partial. Same as {@link #success(String)}, but
-     * does not terminate the line, and thus can be used
-     * with following writes in order to print to the same
-     * line.
-     *
-     * @param s the string to log
-     */
-    void successp(String s);
 
     /**
      * Logs the given string to the logger indicative of a
@@ -109,16 +90,6 @@ public interface Logger {
     void warn(String s);
 
     /**
-     * Log partial. Same as {@link #warn(String)}, but
-     * does not terminate the line, and thus can be used
-     * with following writes in order to print to the same
-     * line.
-     *
-     * @param s the string to log
-     */
-    void warnp(String s);
-
-    /**
      * Logs the given string to the logger indicative of an
      * error (usually a red color, however it is up to the
      * implementation to decide).
@@ -126,16 +97,6 @@ public interface Logger {
      * @param s the string to log
      */
     void error(String s);
-
-    /**
-     * Log partial. Same as {@link #success(String)}, but
-     * does not terminate the line, and thus can be used
-     * with following writes in order to print to the same
-     * line.
-     *
-     * @param s the string to log
-     */
-    void errorp(String s);
 
     /**
      * Logs the given string as a debug message to the

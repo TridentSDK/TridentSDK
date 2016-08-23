@@ -56,7 +56,7 @@ public final class Position extends AbstractVector<Position> {
      * <p>While it is recommended for the given world to be
      * nonnull, certain situations such as those where the
      * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
+     * {@link #write(AbstractVector)} or
      * {@link #add(double, double, double)} methods
      * can be used in addition to this</p>
      *
@@ -74,7 +74,7 @@ public final class Position extends AbstractVector<Position> {
      * <p>While it is recommended for the given world to be
      * nonnull, certain situations such as those where the
      * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
+     * {@link #write(AbstractVector)} or
      * {@link #add(double, double, double)} methods
      * can be used in addition to this</p>
      *
@@ -95,7 +95,7 @@ public final class Position extends AbstractVector<Position> {
      * <p>While it is recommended for the given world to be
      * nonnull, certain situations such as those where the
      * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
+     * {@link #write(AbstractVector)} or
      * {@link #add(double, double, double)} methods
      * can be used in addition to this</p>
      *
@@ -116,7 +116,7 @@ public final class Position extends AbstractVector<Position> {
      * <p>While it is recommended for the given world to be
      * nonnull, certain situations such as those where the
      * world will be found after its coordinates, the
-     * {@link #fullWrite(AbstractVector)} or
+     * {@link #write(AbstractVector)} or
      * {@link #add(double, double, double)} methods
      * can be used in addition to this</p>
      *
@@ -165,6 +165,76 @@ public final class Position extends AbstractVector<Position> {
      */
     public float pitch() {
         return this.pitch;
+    }
+
+    /**
+     * Obtains the block that is located at this position.
+     *
+     * <p>If you do not already have a {@link Position}
+     * object, then use {@link World#blockAt(int, int,
+     * int)}
+     * instead, as it is not necessary to create a
+     * throwaway
+     * object.</p>
+     *
+     * @return the block
+     */
+    public Block block() {
+        double x;
+        double y;
+        double z;
+        synchronized (this.lock) {
+            x = this.x;
+            y = this.y;
+            z = this.z;
+        }
+
+        return this.world.blockAt((int) x, (int) y, (int) z);
+    }
+
+    /**
+     * Obtains the square of the distance between this
+     * position and the given position.
+     *
+     * <p>Despite having to use heavy synchronization due
+     * to compound reads on both positions, this method is
+     * preferable to use, if possible, over
+     * {@link #distance(Position)}.</p>
+     *
+     * @param position the position from which to find the
+     * square of the distance
+     * @return the distance squared
+     */
+    public double distanceSquared(Position position) {
+        double dX;
+        double dY;
+        double dZ;
+        synchronized (this.lock) {
+            synchronized (position.lock) {
+                dX = this.x - position.x;
+                dY = this.y - position.y;
+                dZ = this.z - position.z;
+            }
+        }
+
+        return square(dX) + square(dY) + square(dZ);
+    }
+
+    /**
+     * Obtains the distance between this position and the
+     * given position.
+     *
+     * <p>If possible, use
+     * {@link #distanceSquared(Position)} in performance
+     * sensitive applications due to the overhead of using
+     * {@link Math#sqrt(double)}.</p>
+     *
+     * @param position the position from which to find the
+     * distance
+     * @return the distance
+     */
+    public double distance(Position position) {
+        return Math.sqrt(this.distanceSquared(position));
     }
 
     /**

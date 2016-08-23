@@ -26,4 +26,14 @@ import net.tridentsdk.world.opt.GenOpts;
  * @since 0.4-alpha
  */
 public interface FeatureGenerator {
+    /**
+     * A feature generator is implemented by overriding
+     * this
+     * method and writing the changes to the context.
+     *
+     * @param chunkX the x coordinate of the chunk
+     * @param chunkZ the z coordinate of the chunk
+     * @param context the context
+     */
+    void generate(int chunkX, int chunkZ, GeneratorContext context);
 }

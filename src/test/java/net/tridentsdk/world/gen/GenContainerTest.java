@@ -14,30 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.world.gen;
 
-import javax.annotation.concurrent.ThreadSafe;
+import org.junit.Test;
 
-/**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
- *
- * @author TridentSDK
- * @since 0.3-alpha-DP
- */
-@ThreadSafe
-public interface Block {
-    /**
-     * Obtains the substance of which this block is made.
-     *
-     * @return the block substance
-     */
-    Substance substance();
-
-    /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
-     */
-    Position pos();
+public class GenContainerTest {
+    @Test(expected = RuntimeException.class)
+    public void testNone() {
+        GenContainer.none().run(null);
+    }
 }

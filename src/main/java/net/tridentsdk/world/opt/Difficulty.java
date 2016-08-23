@@ -19,6 +19,9 @@ package net.tridentsdk.world.opt;
 import com.google.common.base.Preconditions;
 import net.tridentsdk.util.Misc;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+
 /**
  * This is a set of the possible difficulties that can be
  * applied to a world in order to determine the
@@ -27,6 +30,7 @@ import net.tridentsdk.util.Misc;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@Immutable
 public enum Difficulty {
     /**
      * Peaceful
@@ -89,6 +93,7 @@ public enum Difficulty {
      * @return the difficulty, if found
      * @throws IndexOutOfBoundsException if it is not found
      */
+    @Nonnull
     public static Difficulty from(int i) {
         Preconditions.checkArgument(i != -1, "Hardcore is not a valid difficulty");
         for (Difficulty difficulty : values()) {

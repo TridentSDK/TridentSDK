@@ -57,11 +57,4 @@ public interface LogMessage {
      * @return the time
      */
     ZonedDateTime time();
-
-    /**
-     * Whether this message should be printed without info.
-     *
-     * @return {@code true} if it should not have info
-     */
-    boolean noInfo();
 }

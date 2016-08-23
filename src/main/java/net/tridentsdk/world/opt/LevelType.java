@@ -18,6 +18,8 @@ package net.tridentsdk.world.opt;
 
 import net.tridentsdk.util.Misc;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * This class contains the set of all the possible level
  * types that a world can generate as.
@@ -25,6 +27,7 @@ import net.tridentsdk.util.Misc;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@Immutable
 public enum LevelType {
     /**
      * The default level type

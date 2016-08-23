@@ -53,8 +53,22 @@ public class PositionTest {
         Vector vector = VectorsTest.rand();
         vector.vecWrite(p0);
 
-        p0.fullWrite(p1);
+        p0.write(p1);
         assertEquals(p0, p1);
+    }
+
+    @Test
+    public void testBlock() {
+        Position position = new Position(this.world);
+        Block block = position.block();
+        assertEquals(this.world.blockAt(position.intX(), position.intY(), position.intZ()), block);
+    }
+
+    @Test
+    public void distance() {
+        Position p0 = new Position(this.world);
+        Position p1 = new Position(this.world, 0, 1, 0);
+        assertEquals(1, p0.distance(p1), 0);
     }
 
     @Test

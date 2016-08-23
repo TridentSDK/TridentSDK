@@ -18,6 +18,9 @@ package net.tridentsdk.world.opt;
 
 import net.tridentsdk.util.Misc;
 
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+
 /**
  * The set of game types that may be applied to a world in
  * order to enforce upon players.
@@ -25,6 +28,7 @@ import net.tridentsdk.util.Misc;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@Immutable
 public enum GameMode {
     /**
      * Survival mode
@@ -99,6 +103,7 @@ public enum GameMode {
      * @throws IndexOutOfBoundsException if there is no game
      *         mode for the given NBT value
      */
+    @Nonnull
     public static GameMode from(int i) {
         for (GameMode mode : values()) {
             if (mode.b == i) return mode;

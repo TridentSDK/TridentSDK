@@ -24,4 +24,18 @@ package net.tridentsdk.world.gen;
  * @since 0.5-alpha
  */
 public interface TerrainGenerator {
+    /**
+     * A terrain generator is implemented by overriding
+     * this
+     * method and writing the chunk data to the generator
+     * context.
+     *
+     * @param chunkX the x coordinate of the chunk to be
+     * generated
+     * @param chunkZ the z coordinate of the chunk to be
+     * generated
+     * @param context the context which to generate the
+     * chunk
+     */
+    void generate(int chunkX, int chunkZ, GeneratorContext context);
 }

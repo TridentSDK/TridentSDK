@@ -31,32 +31,6 @@ import java.util.Map;
  */
 @ThreadSafe
 public interface WorldOpts {
-    // Level format
-    // http://minecraft.gamepedia.com/Level_format
-
-    // dimension data
-    // version - x
-    // initialized - x
-    // LevelName - (world.name())
-    // generatorName,generatorVersion,generatorOptions,seed,
-    // features (world.genOpts())
-
-    // LastPlayed - x
-    // SizeOnDisk - x
-
-    // hardcore - x (this.difficulty())
-
-    // Time - x
-
-    // borders - (world.border())
-    // weather - (world.weather())
-    // Player - MISC
-
-    // Version - x
-
-    // boolean allowCheats();
-    // TODO single-player only?
-
     /**
      * Checks the world in order to determine whether
      * players with client-side flight mods can fly.
@@ -196,11 +170,6 @@ public interface WorldOpts {
      */
     void setSpawnProtectionRadius(int radius);
 
-    // int viewDistance(); ???
-    // URL resourcePack(); ???
-    // int maxWorldSize();
-    // int maxHeight();
-
     /**
      * Obtains the dimension of the world.
      *
@@ -232,7 +201,7 @@ public interface WorldOpts {
      *
      * @return the game rules applying to the world
      */
-    Map<GameRule, GameRuleValue> gameRules();
+    Map<GameRule, GameRuleMap> gameRules();
 
     /*
      * Work(s) cited

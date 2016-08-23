@@ -16,8 +16,9 @@
  */
 package net.tridentsdk.world.gen;
 
-import net.tridentsdk.world.opt.GenOpts;
+import net.tridentsdk.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 
 /**
@@ -27,39 +28,41 @@ import java.util.Set;
  * @author TridentSDK
  * @since 0.5-alpha
  */
-public interface AbstractGeneratorFactory {
+public interface GeneratorProvider {
     /**
      * Obtains the terrain generator for the world
      * possessing this generator provider, given the options
      * for generation.
      *
-     * @param opts the generation options
+     * @param world the world which to provide generators,
+     *        used for gathering options for generation
      * @return the terrain generator for the world
      */
-    TerrainGenerator terrain(GenOpts opts);
+    TerrainGenerator terrain(World world);
 
     /**
      * Obtains the set of feature generators for the world
      * possessing this generator provider, given the options
      * for generation.
      *
-     * @param opts the generation options
+     * @param world the world which to provide generators,
+     *        used for gathering options for generation
      * @return the feature generators for the world
      */
-    Set<FeatureGenerator> featureSet(GenOpts opts);
+    @Nonnull
+    Set<FeatureGenerator> featureSet(World world);
 
     /**
      * Obtains the set of prop generators for the world
      * possessing this generator provider, given the options
      * for generation.
      *
-     * @param opts the generation options
+     * @param world the world which to provide generators,
+     *        used for gathering options for generation
      * @return the prop generators for the world
      */
-    Set<PropGenerator> propSet(GenOpts opts);
-
-    // TODO ensure implementation generators override this
-    // method!
+    @Nonnull
+    Set<PropGenerator> propSet(World world);
 
     /**
      * Obtains the container that is used for running the

@@ -31,11 +31,11 @@
  * tall grass, etc...</p>
  *
  * <p>None of the classes returned by and the
- * {@link net.tridentsdk.world.gen.AbstractGeneratorFactory}
+ * {@link net.tridentsdk.world.gen.GeneratorProvider}
  * itself can be guaranteed to be thread-safe, due to the
  * fact that this is designed to be implemented by the
  * client.</p>
  *
- * @see net.tridentsdk.world.gen.AbstractGeneratorFactory
+ * @see net.tridentsdk.world.gen.GeneratorProvider
  */
 package net.tridentsdk.world.gen;

@@ -30,6 +30,7 @@ import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @State(Scope.Benchmark)
@@ -52,8 +53,8 @@ public class VectorsTest {
         this.vec.setZ(CHANGE_TO);
 
         Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
-        Assert.assertEquals(v2, this.vec);
-        Assert.assertEquals(v2.hashCode(), this.vec.hashCode());
+        assertEquals(v2, this.vec);
+        assertEquals(v2.hashCode(), this.vec.hashCode());
         Assert.assertFalse(this.vec.equals(new Object()));
     }
 
@@ -63,9 +64,9 @@ public class VectorsTest {
         this.vec.setY(CHANGE_TO);
         this.vec.setZ(CHANGE_TO);
 
-        Assert.assertEquals(CHANGE_TO, this.vec.x(), 0);
-        Assert.assertEquals(CHANGE_TO, this.vec.y(), 0);
-        Assert.assertEquals(CHANGE_TO, this.vec.z(), 0);
+        assertEquals(CHANGE_TO, this.vec.x(), 0);
+        assertEquals(CHANGE_TO, this.vec.y(), 0);
+        assertEquals(CHANGE_TO, this.vec.z(), 0);
     }
 
     @Test
@@ -74,9 +75,9 @@ public class VectorsTest {
         this.vec.setY(CHANGE_TO_I);
         this.vec.setZ(CHANGE_TO_I);
 
-        Assert.assertEquals(CHANGE_TO_I, this.vec.intX());
-        Assert.assertEquals(CHANGE_TO_I, this.vec.intY());
-        Assert.assertEquals(CHANGE_TO_I, this.vec.intZ());
+        assertEquals(CHANGE_TO_I, this.vec.intX());
+        assertEquals(CHANGE_TO_I, this.vec.intY());
+        assertEquals(CHANGE_TO_I, this.vec.intZ());
     }
 
     @Test
@@ -99,22 +100,30 @@ public class VectorsTest {
         this.vec.divide(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         this.vec.divide(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I);
 
-        Assert.assertEquals(new AbstractVector(), this.vec);
+        assertEquals(new AbstractVector(), this.vec);
     }
 
     @Test
     public void testIntConstructor() {
-        Assert.assertEquals(new AbstractVector(0, 0, 0), this.vec);
-        Assert.assertEquals(new Vector(0, 0, 0), this.vec);
+        assertEquals(new AbstractVector(0, 0, 0), this.vec);
+        assertEquals(new Vector(0, 0, 0), this.vec);
     }
 
     @Test
     public void testWrite() {
         Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         v2.vecWrite(this.vec);
-        v2.fullWrite(this.vec);
+        v2.write(this.vec);
 
-        Assert.assertEquals(this.vec, v2);
+        assertEquals(this.vec, v2);
+    }
+
+    @Test
+    public void testNormalize() {
+        Vector v2 = new Vector(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I);
+        v2.normalize();
+
+        assertEquals(1, v2.magnitude(), 0);
     }
 
     @Test

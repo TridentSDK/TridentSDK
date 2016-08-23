@@ -14,30 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.world;
 
-import javax.annotation.concurrent.ThreadSafe;
+import net.tridentsdk.base.Block;
+
+import javax.annotation.Nonnull;
 
 /**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
+ * This class represents a Minecraft world chunk, a 16x16
+ * section of the world which is individually loaded as
+ * needed.
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@ThreadSafe
-public interface Block {
+public interface Chunk {
     /**
-     * Obtains the substance of which this block is made.
+     * Obtains the block at the given relative coordinates
+     * inside of this chunk.
      *
-     * @return the block substance
+     * @param x the relative x coordinate
+     * @param y the relative y coordinate
+     * @param z the relative z coordinate
+     * @return the block at the given coordinates
      */
-    Substance substance();
-
-    /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
-     */
-    Position pos();
+    @Nonnull
+    Block blockAt(int x, int y, int z);
 }

@@ -17,6 +17,7 @@
 package net.tridentsdk;
 
 import net.tridentsdk.command.logger.Logger;
+import net.tridentsdk.config.Config;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -69,6 +70,14 @@ public interface Server {
      * @return the server representation of the logger
      */
     Logger logger();
+
+    /**
+     * Obtains the configuration file that is used to set
+     * options regarding how the server is to be run.
+     *
+     * @return the server config
+     */
+    Config config();
 
     /**
      * This method obtains an arbitrary String that
