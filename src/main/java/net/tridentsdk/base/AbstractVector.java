@@ -80,11 +80,11 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * The AbstractVector states holding arbitrary values
      */
     @GuardedBy("lock")
-    protected volatile double x;
+    protected double x;
     @GuardedBy("lock")
-    protected volatile double y;
+    protected double y;
     @GuardedBy("lock")
-    protected volatile double z;
+    protected double z;
 
     /**
      * The lock used to protect compound read/writes.

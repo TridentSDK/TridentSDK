@@ -14,30 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity;
+
+import net.tridentsdk.base.Position;
 
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
+ * The superinterface of all entities and provides basic
+ * traits possessed by all above said entities such as
+ * position, world, etc...
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Block {
+public interface Entity {
     /**
-     * Obtains the substance of which this block is made.
+     * Obtains the position in the world where this entity
+     * is located.
      *
-     * @return the block substance
-     */
-    Substance substance();
-
-    /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
+     * @return the entity's position
      */
     Position position();
+
+    /**
+     * Removes this entity from the world.
+     */
+    void remove();
 }

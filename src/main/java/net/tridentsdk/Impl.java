@@ -20,6 +20,7 @@ import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
+import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -118,5 +119,8 @@ public final class Impl {
 
         // removes handlers from the logger
         boolean removeHandler(Logger logger, LogHandler handler);
+
+        // get the world handler
+        WorldLoader wrlds();
     }
 }

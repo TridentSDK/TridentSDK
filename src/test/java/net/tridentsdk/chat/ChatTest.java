@@ -14,30 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.chat;
 
-import javax.annotation.concurrent.ThreadSafe;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
-/**
- * This class represents a Minecraft voxel unit that players
- * may manipulate.
- *
- * @author TridentSDK
- * @since 0.3-alpha-DP
- */
-@ThreadSafe
-public interface Block {
-    /**
-     * Obtains the substance of which this block is made.
-     *
-     * @return the block substance
-     */
-    Substance substance();
+import static org.junit.Assert.assertEquals;
 
-    /**
-     * Obtains the position at which this block is located
-     *
-     * @return the block position
-     */
-    Position position();
+public class ChatTest {
+    public void testPlain() {
+        assertEquals(Chat.plain("test").asJson(), this.getJson("test"));
+    }
+
+    public void testEmpty() {
+        assertEquals(Chat.empty().asJson(), this.getJson(""));
+    }
+
+    public String getJson(String base) {
+        JsonObject msg = new JsonObject();
+        msg.addProperty("text", base);
+
+        return new Gson().toJson(msg);
+    }
 }

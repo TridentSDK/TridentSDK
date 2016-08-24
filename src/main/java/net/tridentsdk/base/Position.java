@@ -39,9 +39,9 @@ public final class Position extends AbstractVector<Position> {
      * Additional fields representing the state of the
      * position
      */
-    private final World world;    // These fields MAY NOT
-    private volatile float pitch; // be updated along with
-    private volatile float yaw;   // a compound modification
+    private final World world;
+    private float pitch;
+    private float yaw;
 
     @Override
     protected void writeFields(Position vector) {
@@ -146,6 +146,17 @@ public final class Position extends AbstractVector<Position> {
     }
 
     /**
+     * Sets the yaw of this position.
+     *
+     * @param yaw the yaw to set
+     */
+    public void setYaw(float yaw) {
+        synchronized (this.lock) {
+            this.yaw = yaw;
+        }
+    }
+
+    /**
      * Obtains the yaw at which this position is pointed.
      *
      * <p>Yaw = horizontal rotation</p>
@@ -153,7 +164,20 @@ public final class Position extends AbstractVector<Position> {
      * @return this position's yaw
      */
     public float yaw() {
-        return this.yaw;
+        synchronized (this.lock) {
+            return this.yaw;
+        }
+    }
+
+    /**
+     * Sets the pitch of this position.
+     *
+     * @param pitch the pitch to set
+     */
+    public void setPitch(float pitch) {
+        synchronized (this.lock) {
+            this.pitch = pitch;
+        }
     }
 
     /**
@@ -164,7 +188,9 @@ public final class Position extends AbstractVector<Position> {
      * @return this position's pitch
      */
     public float pitch() {
-        return this.pitch;
+        synchronized (this.lock) {
+            return this.pitch;
+        }
     }
 
     /**

@@ -24,6 +24,7 @@ import net.tridentsdk.world.opt.WorldBorder;
 import net.tridentsdk.world.opt.WorldOpts;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.nio.file.Path;
 
 /**
  * This class is a representation of a world
@@ -110,4 +111,18 @@ public interface World {
      * @return the block located at the given position
      */
     Block blockAt(int x, int y, int z);
+
+    /**
+     * Obtains the enclosing directory which contains the
+     * region and data files of this worlds's chunks.
+     *
+     * @return the world's directory
+     */
+    Path dir();
+
+    /**
+     * Saves this world to the region files in the world
+     * directory.
+     */
+    void save();
 }

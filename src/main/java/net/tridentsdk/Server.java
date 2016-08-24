@@ -18,8 +18,10 @@ package net.tridentsdk;
 
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
+import net.tridentsdk.entity.living.Player;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.Collection;
 
 /**
  * This is the representation of the server process' main
@@ -86,6 +88,14 @@ public interface Server {
      * @return the server's version String
      */
     String version();
+
+    /**
+     * Obtains a collection of players which are currently
+     * connected to this server.
+     *
+     * @return the current online players
+     */
+    Collection<Player> players();
 
     /**
      * This method causes the server to save the current

@@ -19,7 +19,6 @@ package net.tridentsdk.world.opt;
 import net.tridentsdk.base.Vector;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Map;
 
 /**
  * This class represents the data contained in the level.dat
@@ -73,7 +72,7 @@ public interface WorldOpts {
      * @return {@code true} if nether travel is allowed,
      *         {@code false} if not
      */
-    boolean allowNether();
+    boolean allowPortals();
 
     /**
      * Sets whether or not nether portals are allowed in the
@@ -82,7 +81,7 @@ public interface WorldOpts {
      * @param allow {@code true} to allow, {@code false} to
      *              disallow
      */
-    void setAllowNether(boolean allow);
+    void setAllowPortals(boolean allow);
 
     /**
      * Checks the world in order to determine if joining
@@ -195,13 +194,9 @@ public interface WorldOpts {
     /**
      * Obtains the collection of modified game rules.
      *
-     * <p>Values may be updated or polled by using the map
-     * operations {@link Map#put(Object, Object)} and
-     * {@link Map#get(Object)}.</p>
-     *
      * @return the game rules applying to the world
      */
-    Map<GameRule, GameRuleMap> gameRules();
+    GameRuleMap gameRules();
 
     /*
      * Work(s) cited

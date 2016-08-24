@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.world.opt;
 
-import com.google.common.base.Preconditions;
 import net.tridentsdk.util.Misc;
 
 import javax.annotation.Nonnull;
@@ -63,7 +62,7 @@ public enum Difficulty {
      * does not have an NBT value, but rather uses the
      * {@code hardcore boolean} tag in level.dat</p>
      */
-    HARDCORE(-1);
+    HARDCORE(3);
 
     /** The NBT value of the current difficulty */
     private final byte b;
@@ -95,7 +94,6 @@ public enum Difficulty {
      */
     @Nonnull
     public static Difficulty from(int i) {
-        Preconditions.checkArgument(i != -1, "Hardcore is not a valid difficulty");
         for (Difficulty difficulty : values()) {
             if (difficulty.b == i) return difficulty;
         }

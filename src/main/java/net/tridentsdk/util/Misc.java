@@ -17,6 +17,8 @@
 package net.tridentsdk.util;
 
 import javax.annotation.concurrent.Immutable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Miscellaneous functions that only serve to shorten code.
@@ -35,6 +37,10 @@ public final class Misc {
      * The working directory as a string
      */
     public static final String HOME = System.getProperty("user.dir");
+    /**
+     * The Path directory to the working dir
+     */
+    public static final Path HOME_PATH = Paths.get(HOME);
 
     // Prevent instantiation
     private Misc() {
