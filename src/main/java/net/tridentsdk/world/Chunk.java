@@ -30,6 +30,22 @@ import javax.annotation.Nonnull;
  */
 public interface Chunk {
     /**
+     * Obtains the x coordinate at which this chunk is
+     * located.
+     *
+     * @return the x coordinate
+     */
+    int x();
+
+    /**
+     * Obtains the z coordinate at which this chunk is
+     * located.
+     *
+     * @return the z coordinate
+     */
+    int z();
+
+    /**
      * Obtains the block at the given relative coordinates
      * inside of this chunk.
      *
@@ -40,4 +56,11 @@ public interface Chunk {
      */
     @Nonnull
     Block blockAt(int x, int y, int z);
+
+    /**
+     * Obtains the world which contains this chunk.
+     *
+     * @return the container world
+     */
+    World world();
 }

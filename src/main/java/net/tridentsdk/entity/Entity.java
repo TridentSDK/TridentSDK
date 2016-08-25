@@ -17,6 +17,7 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.base.Position;
+import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -31,12 +32,26 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public interface Entity {
     /**
+     * Obtains the identifying number of this entity.
+     *
+     * @return the ID assigned by the server
+     */
+    int id();
+
+    /**
      * Obtains the position in the world where this entity
      * is located.
      *
      * @return the entity's position
      */
     Position position();
+
+    /**
+     * The world which this entity is located.
+     *
+     * @return the world containing this entity
+     */
+    World world();
 
     /**
      * Removes this entity from the world.

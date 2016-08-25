@@ -23,8 +23,11 @@ import net.tridentsdk.world.opt.Weather;
 import net.tridentsdk.world.opt.WorldBorder;
 import net.tridentsdk.world.opt.WorldOpts;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.nio.file.Path;
+import java.util.Collection;
 
 /**
  * This class is a representation of a world
@@ -95,7 +98,30 @@ public interface World {
      * @param z the z coordinate which to find the chunk
      * @return the chunk at the given coordinates
      */
+    @Nonnull
     Chunk chunkAt(int x, int z);
+
+    /**
+     * Obtains a chunk at the given coordinates with an
+     * option to not generate the chunk.
+     *
+     * @param x the x coordinate
+     * @param z the z coordinate
+     * @param gen {@code true} to generate the chunk if it
+     * doesn't exist, {@code false} to return null
+     * @return the chunk, or {@code null} if {@code gen} is
+     * {@code false} and no chunk is found
+     */
+    @Nullable
+    Chunk chunkAt(int x, int z, boolean gen);
+
+    /**
+     * Obtains the collection of chunks that are currently
+     * loaded on this world.
+     *
+     * @return the collection of loaded chunks
+     */
+    Collection<? extends Chunk> loadedChunks();
 
     /**
      * Obtains the block that is located at the given XYZ
