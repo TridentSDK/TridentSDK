@@ -276,6 +276,14 @@ public final class Position extends AbstractVector<Position> {
         return Float.compare(f0, f1) == 0;
     }
 
+    public int getChunkX(){
+        return intX() / 16;
+    }
+
+    public int getChunkZ(){
+        return intZ() / 16;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Position) {
