@@ -111,13 +111,4 @@ public interface GeneratorContext {
      * {@link #build(int, byte)}
      */
     void set(int x, int y, int z, BlockState state);
-
-    /**
-     * Obtains the raw data that will be passed to the
-     * chunk
-     * once it has finished generating.
-     *
-     * @return the data array
-     */
-    char[][] data();
 }

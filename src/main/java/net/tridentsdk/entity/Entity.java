@@ -42,9 +42,29 @@ public interface Entity {
      * Obtains the position in the world where this entity
      * is located.
      *
+     * <p>Note: nothing will happen by setting the values of
+     * the position returned by this method, you MUST use
+     * {@link #setPosition(Position)}!</p>
+     *
      * @return the entity's position
      */
     Position position();
+
+    /**
+     * Sets the position of this entity.
+     *
+     * @param position the position which to move the
+     * entity
+     */
+    void setPosition(Position position);
+
+    /**
+     * Determines whether this entity is currently on the
+     * ground.
+     *
+     * @return {@code true} if on ground
+     */
+    boolean onGround();
 
     /**
      * The world which this entity is located.
