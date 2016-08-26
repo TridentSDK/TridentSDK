@@ -16,8 +16,6 @@
  */
 package net.tridentsdk.world.gen;
 
-import net.tridentsdk.world.opt.BlockState;
-
 /**
  * This class represents the generation context in which a
  * world generator creates chunks and features.
@@ -76,7 +74,7 @@ public interface GeneratorContext {
      * @param meta the block metadata
      * @return the block's value to be stored
      */
-    BlockState build(int id, byte meta);
+    short build(int id, byte meta);
 
     /**
      * Obtains the index of the nibble array which a block
@@ -110,5 +108,5 @@ public interface GeneratorContext {
      * @param state the block value given by
      * {@link #build(int, byte)}
      */
-    void set(int x, int y, int z, BlockState state);
+    void set(int x, int y, int z, short state);
 }
