@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.world.gen;
 
+import net.tridentsdk.base.Substance;
+
 /**
  * This class represents the generation context in which a
  * world generator creates chunks and features.
@@ -67,46 +69,39 @@ public interface GeneratorContext {
     long seed();
 
     /**
-     * Obtains the value that the block is given when
-     * compressed in memory.
-     *
-     * @param id the block ID
-     * @param meta the block metadata
-     * @return the block's value to be stored
-     */
-    short build(int id, byte meta);
-
-    /**
-     * Obtains the index of the nibble array which a block
-     * is placed relative to the chunk (x/z 0-15, y 0-255).
+     * Sets the block at the coordinates relative to the
+     * chunk (0-15) to the given block substance and
+     * metadata.
      *
      * @param x the x value
      * @param y the y value
      * @param z the z value
-     * @return the nibble index
+     * @param substance the substance of the block
+     * @param meta the block meta
      */
-    int idx(int x, int y, int z);
-
-    /**
-     * Obtains the chunk section that contains the given
-     * Y value.
-     *
-     * @param y the y value.
-     * @return the section index
-     */
-    int section(int y);
+    void set(int x, int y, int z, Substance substance, byte meta);
 
     /**
      * Sets the block at the coordinates relative to the
-     * chunk (as explained in {@link #idx(int, int, int)}
-     * to
-     * the given value.
+     * chunk (0-15) to the given block substance and
+     * no metadata.
      *
      * @param x the x value
      * @param y the y value
      * @param z the z value
-     * @param state the block value given by
-     * {@link #build(int, byte)}
+     * @param substance the substance of the block
      */
-    void set(int x, int y, int z, short state);
+    void set(int x, int y, int z, Substance substance);
+
+    /**
+     * Sets the block at the coordinates relative to the
+     * chunk (0-15) to the given block ID and metadata.
+     *
+     * @param x the x value
+     * @param y the y value
+     * @param z the z value
+     * @param id the block ID
+     * @param meta the block meta
+     */
+    void set(int x, int y, int z, int id, byte meta);
 }

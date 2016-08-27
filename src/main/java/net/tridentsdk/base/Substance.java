@@ -27,5 +27,34 @@ import javax.annotation.concurrent.Immutable;
  */
 @Immutable
 public enum Substance {
-    // TODO add
+    // TODO add more substances
+    AIR(0),
+    GRASS(2),
+    DIRT(3),
+    BEDROCK(7);
+
+    /**
+     * The ID number that is used for identifying the
+     * substance.
+     */
+    private final int id;
+
+    /**
+     * Creates a new substance entry with the given
+     * substance ID value.
+     *
+     * @param id the substance ID
+     */
+    Substance(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Obtains the ID number value for the this substance.
+     *
+     * @return the ID number
+     */
+    public int id() {
+        return this.id;
+    }
 }

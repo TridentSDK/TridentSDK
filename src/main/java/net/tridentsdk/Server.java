@@ -36,6 +36,11 @@ import java.util.Collection;
 @ThreadSafe
 public interface Server {
     /**
+     * The current version of the server
+     */
+    String VERSION = "0.5-alpha";
+
+    /**
      * Obtains the singleton instance of the server provided
      * by the implementation.
      *
@@ -80,14 +85,6 @@ public interface Server {
      * @return the server config
      */
     Config config();
-
-    /**
-     * This method obtains an arbitrary String that
-     * signifies the current server version.
-     *
-     * @return the server's version String
-     */
-    String version();
 
     /**
      * Obtains a collection of players which are currently

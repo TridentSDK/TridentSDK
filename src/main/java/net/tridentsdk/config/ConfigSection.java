@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * This class represents a section within a configuration
@@ -133,7 +133,7 @@ public interface ConfigSection {
      *             of this config section
      * @return the children config sections
      */
-    Set<ConfigSection> children(boolean deep);
+    Stream<ConfigSection> children(boolean deep);
 
     /**
      * Obtains all the keys contained in the config section.
@@ -144,7 +144,7 @@ public interface ConfigSection {
      *             config section
      * @return the keys in this config section
      */
-    Set<String> keys(boolean deep);
+    Stream<String> keys(boolean deep);
 
     /**
      * Obtains all the values contained within this config
@@ -161,7 +161,7 @@ public interface ConfigSection {
      * @return the collection of values stored in the config
      *         section
      */
-    Collection<Object> values(boolean deep);
+    Stream<Object> values(boolean deep);
 
     /**
      * Obtains the set of entries representing the keys
@@ -177,7 +177,7 @@ public interface ConfigSection {
      * entries only in this config section
      * @return the set of key-value entries
      */
-    Set<Map.Entry<String, Object>> entries(boolean deep);
+    Stream<Map.Entry<String, Object>> entries(boolean deep);
 
     /**
      * Obtains the value associated with the given key in
