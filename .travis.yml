@@ -1,5 +1,5 @@
 before_install:
-  - "git clone -b travis `git config --get remote.origin.url` target/travis"
+#  - "git clone -b travis `git config --get remote.origin.url` target/travis"
 #  - chmod 777 ./scripts/*.sh
 # script: ./scripts/build.sh
 # after_script: ./scripts/javadoc.sh
@@ -22,5 +22,6 @@ matrix:
 #     - secure: "H8HTOwCBB2Aq02zgC4VfF8rcLjLciGiAfjlEylH6M5hnNuO9E842d+1Pu4K5DhwME3olyF0WFDXrTPkZulQBbYYXhVA7eiqCznACORiRYokYQ8eTsiYTQsHgexK8o1pugrOqNyiQJu0MnHMXQxCyYM8xDHEL5NwKMERqweivOr8="
 after_success:
 #   - mvn cobertura:cobertura coveralls:report
-  - mvn clean install test deploy jacoco:report coveralls:report
+  - "git clone -b travis `git config --get remote.origin.url` travis"
+  - mvn clean install test deploy jacoco:report coveralls:report --settings ./travis/settings.xml
   - ls -lah target/
