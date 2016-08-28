@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.chat;
 
+import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -24,9 +25,10 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -45,17 +47,20 @@ public class ChatComponent {
     @Getter @Setter
     private HoverEvent hoverEvent;
 
-    private List<JsonElement> with = new LinkedList<>();
-    private List<ChatComponent> extra = new LinkedList<>();
-    private List<String> extraStrings = new LinkedList<>();
+    private List<JsonElement> with = Lists.newCopyOnWriteArrayList();
+    private List<ChatComponent> extra = Lists.newCopyOnWriteArrayList();
     private AtomicBoolean bold, italic, underlined, strikethrough, obfuscated;
+
+    private ReadWriteLock $lock = new ReentrantReadWriteLock();
 
     public List<JsonElement> getWith() {
         return Collections.unmodifiableList(with);
     }
 
     public ChatComponent addWith(JsonElement element) {
+        $lock.writeLock().lock();
         with.add(element);
+        $lock.writeLock().unlock();
         return this;
     }
 
@@ -69,7 +74,9 @@ public class ChatComponent {
 
     public ChatComponent addExtra(ChatComponent component) {
         if (!hasExtra(component, true)) {
+            $lock.writeLock().lock();
             this.extra.add(component);
+            $lock.writeLock().unlock();
         }
         return this;
     }
@@ -79,17 +86,22 @@ public class ChatComponent {
     }
 
     public boolean hasExtra(ChatComponent component, boolean recursive) {
+        $lock.readLock().lock();
         if (extra.contains(component)) {
+            $lock.readLock().unlock();
             return true;
         }
         if (!recursive) {
+            $lock.readLock().unlock();
             return false;
         }
         for (ChatComponent child : extra) {
             if (child.hasExtra(component, true)) {
+                $lock.readLock().unlock();
                 return true;
             }
         }
+        $lock.readLock().unlock();
         return false;
     }
 
@@ -98,10 +110,12 @@ public class ChatComponent {
     }
 
     public ChatComponent setBold(boolean bold) {
+        $lock.writeLock().lock();
         if (this.bold == null)
             this.bold = new AtomicBoolean(bold);
         else
             this.bold.set(bold);
+        $lock.writeLock().unlock();
         return this;
     }
 
@@ -110,10 +124,12 @@ public class ChatComponent {
     }
 
     public ChatComponent setItalic(boolean italic) {
+        $lock.writeLock().lock();
         if (this.italic == null)
             this.italic = new AtomicBoolean(italic);
         else
             this.italic.set(italic);
+        $lock.writeLock().unlock();
         return this;
     }
 
@@ -122,10 +138,12 @@ public class ChatComponent {
     }
 
     public ChatComponent setUnderlined(boolean underlined) {
+        $lock.writeLock().lock();
         if (this.underlined == null)
             this.underlined = new AtomicBoolean(underlined);
         else
             this.underlined.set(underlined);
+        $lock.writeLock().unlock();
         return this;
     }
 
@@ -134,10 +152,12 @@ public class ChatComponent {
     }
 
     public ChatComponent setStrikethrough(boolean strikethrough) {
+        $lock.writeLock().lock();
         if (this.strikethrough == null)
             this.strikethrough = new AtomicBoolean(strikethrough);
         else
             this.strikethrough.set(strikethrough);
+        $lock.writeLock().unlock();
         return this;
     }
 
@@ -146,14 +166,17 @@ public class ChatComponent {
     }
 
     public ChatComponent setObfuscated(boolean obfuscated) {
+        $lock.writeLock().lock();
         if (this.obfuscated == null)
             this.obfuscated = new AtomicBoolean(obfuscated);
         else
             this.obfuscated.set(obfuscated);
+        $lock.writeLock().unlock();
         return this;
     }
 
     public JsonObject asJson() {
+        $lock.readLock().lock();
         JsonObject json = new JsonObject();
         if (text != null) {
             json.addProperty("text", text);
@@ -205,6 +228,7 @@ public class ChatComponent {
         if (insertion != null) {
             json.addProperty("insertion", insertion);
         }
+        $lock.readLock().unlock();
         return json;
     }
 
