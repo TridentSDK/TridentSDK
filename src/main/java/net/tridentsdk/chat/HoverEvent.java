@@ -23,9 +23,19 @@ import com.google.gson.JsonPrimitive;
 public class HoverEvent {
 
     private Event event;
+    private HoverAction action;
 
     private HoverEvent(HoverAction action, JsonElement value) {
         this.event = new Event(action.name().toLowerCase(), value);
+        this.action = action;
+    }
+
+    public HoverAction getAction() {
+        return action;
+    }
+
+    public JsonElement getValue() {
+        return event.getValue();
     }
 
     public JsonObject asJson() {

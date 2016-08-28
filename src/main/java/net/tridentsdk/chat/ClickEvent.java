@@ -22,9 +22,19 @@ import com.google.gson.JsonPrimitive;
 public class ClickEvent {
 
     private Event event;
+    private ClickAction action;
 
     private ClickEvent(ClickAction action, String text) {
         this.event = new Event(action.name().toLowerCase(), new JsonPrimitive(text));
+        this.action = action;
+    }
+
+    public ClickAction getAction() {
+        return action;
+    }
+
+    public String getValue() {
+        return event.getValue().getAsString();
     }
 
     public JsonObject asJson() {
