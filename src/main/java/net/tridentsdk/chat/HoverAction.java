@@ -16,24 +16,8 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+public enum HoverAction {
 
-import static org.junit.Assert.assertEquals;
+    SHOW_TEXT, SHOW_ACHIEVEMENT, SHOW_ITEM
 
-public class ChatTest {
-
-    public void testPlain() {
-        assertEquals(ChatComponent.text("test").toString(), this.getJson("test"));
-    }
-
-    public void testEmpty() {
-        assertEquals(ChatComponent.empty().toString(), this.getJson(""));
-    }
-
-    public String getJson(String base) {
-        JsonObject msg = new JsonObject();
-        msg.addProperty("text", base);
-        return new Gson().toJson(msg);
-    }
 }

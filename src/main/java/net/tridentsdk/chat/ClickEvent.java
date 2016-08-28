@@ -16,24 +16,23 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
-import static org.junit.Assert.assertEquals;
+public class ClickEvent {
 
-public class ChatTest {
+    private Event event;
 
-    public void testPlain() {
-        assertEquals(ChatComponent.text("test").toString(), this.getJson("test"));
+    private ClickEvent(ClickAction action, String text) {
+        this.event = new Event(action.name().toLowerCase(), new JsonPrimitive(text));
     }
 
-    public void testEmpty() {
-        assertEquals(ChatComponent.empty().toString(), this.getJson(""));
+    public JsonObject asJson() {
+        return event.asJson();
     }
 
-    public String getJson(String base) {
-        JsonObject msg = new JsonObject();
-        msg.addProperty("text", base);
-        return new Gson().toJson(msg);
+    public static ClickEvent of(ClickAction action, String text) {
+        return new ClickEvent(action, text);
     }
+
 }

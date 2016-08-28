@@ -17,23 +17,26 @@
 package net.tridentsdk.chat;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import static org.junit.Assert.assertEquals;
+@Getter
+@AllArgsConstructor
+class Event {
 
-public class ChatTest {
+    private static Gson gson = new GsonBuilder().setLenient().create();
 
-    public void testPlain() {
-        assertEquals(ChatComponent.text("test").toString(), this.getJson("test"));
+    private String action;
+    private JsonElement value;
+
+    JsonObject asJson() {
+        JsonObject obj = new JsonObject();
+        obj.addProperty("action", action);
+        obj.add("value", value);
+        return obj;
     }
 
-    public void testEmpty() {
-        assertEquals(ChatComponent.empty().toString(), this.getJson(""));
-    }
-
-    public String getJson(String base) {
-        JsonObject msg = new JsonObject();
-        msg.addProperty("text", base);
-        return new Gson().toJson(msg);
-    }
 }

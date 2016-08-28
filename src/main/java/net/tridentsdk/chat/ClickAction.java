@@ -16,24 +16,8 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+public enum ClickAction {
 
-import static org.junit.Assert.assertEquals;
+    OPEN_URL, OPEN_FILE, RUN_COMMAND, SUGGEST_COMMAND
 
-public class ChatTest {
-
-    public void testPlain() {
-        assertEquals(ChatComponent.text("test").toString(), this.getJson("test"));
-    }
-
-    public void testEmpty() {
-        assertEquals(ChatComponent.empty().toString(), this.getJson(""));
-    }
-
-    public String getJson(String base) {
-        JsonObject msg = new JsonObject();
-        msg.addProperty("text", base);
-        return new Gson().toJson(msg);
-    }
 }
