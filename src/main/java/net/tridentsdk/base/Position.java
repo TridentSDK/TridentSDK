@@ -61,7 +61,7 @@ public final class Position extends AbstractVector<Position> {
      * can be used in addition to this</p>
      *
      * @param world the world that this position is set to
-     *              reside in
+     * reside in
      */
     public Position(@Nonnull World world) {
         this(world, 0D, 0D, 0D, 0F, 0F);
@@ -79,17 +79,18 @@ public final class Position extends AbstractVector<Position> {
      * can be used in addition to this</p>
      *
      * @param world the world that this position is set to
-     *              reside in
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
+     * reside in
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param z the z coordinate
      */
     public Position(@Nonnull World world, int x, int y, int z) {
         this(world, (double) x, (double) y, (double) z, 0F, 0F);
     }
 
     /**
-     * Creates a Position in a given world and {@code double}
+     * Creates a Position in a given world and {@code
+     * double}
      * Cartesian coordinates with all directions set to 0.
      *
      * <p>While it is recommended for the given world to be
@@ -100,10 +101,10 @@ public final class Position extends AbstractVector<Position> {
      * can be used in addition to this</p>
      *
      * @param world the world that this position is set to
-     *              reside in
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
+     * reside in
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param z the z coordinate
      */
     public Position(@Nonnull World world, double x, double y, double z) {
         this(world, x, y, z, 0F, 0F);
@@ -121,11 +122,11 @@ public final class Position extends AbstractVector<Position> {
      * can be used in addition to this</p>
      *
      * @param world the world in which this position is set
-     *              to reside
-     * @param x     the x coordinate
-     * @param y     the y coordinate
-     * @param z     the z coordinate
-     * @param yaw   the yaw directional
+     * to reside
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param z the z coordinate
+     * @param yaw the yaw directional
      * @param pitch the pitch directional
      */
     public Position(@Nonnull World world, double x, double y, double z, float yaw, float pitch) {
@@ -276,12 +277,24 @@ public final class Position extends AbstractVector<Position> {
         return Float.compare(f0, f1) == 0;
     }
 
-    public int getChunkX(){
-        return intX() / 16;
+    /**
+     * Obtains the X coordinate of the chunk in which this
+     * position is located.
+     *
+     * @return the chunk xx
+     */
+    public int getChunkX() {
+        return this.intX() >> 4;
     }
 
-    public int getChunkZ(){
-        return intZ() / 16;
+    /**
+     * Obtains the Z coordinate of the chunk in which this
+     * position is located.
+     *
+     * @return the chunk z
+     */
+    public int getChunkZ() {
+        return this.intZ() >> 4;
     }
 
     @Override
