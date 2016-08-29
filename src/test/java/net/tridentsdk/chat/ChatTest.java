@@ -26,12 +26,12 @@ public class ChatTest {
 
     @Test
     public void testPlain() {
-        assertEquals(ChatComponent.text("test").toString(), this.getJson("test"));
+        assertEquals(this.getJson("test"), ChatComponent.text("test").toString());
     }
 
     @Test
     public void testEmpty() {
-        assertEquals(ChatComponent.empty().toString(), this.getJson(""));
+        assertEquals(this.getJson(""), ChatComponent.empty().toString());
     }
 
     @Test
