@@ -16,7 +16,8 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.chat.Chat;
+import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -50,11 +51,30 @@ public interface Player extends Entity {
     UUID uuid();
 
     /**
+     * Sends this player a message.
+     *
+     * @param message The message.
+     * @param type The type of message.
+     */
+    void sendMessage(ChatComponent message, ChatType type);
+
+    /**
+     * Sends this player a system message.
+     *
+     * Equivalent to {@code sendMessage(message, ChatType.SYSTEM)}.
+     *
+     * @param message The message.
+     */
+    default void sendMessage(ChatComponent message) {
+        sendMessage(message, ChatType.SYSTEM);
+    }
+
+    /**
      * Disconnects this player from the server, displaying
      * the given message on screen as to why they may have
      * been disconnected.
      *
      * @param reason the reason for kicking the player
      */
-    void kick(Chat reason);
+    void kick(ChatComponent reason);
 }

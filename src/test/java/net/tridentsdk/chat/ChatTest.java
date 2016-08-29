@@ -18,22 +18,31 @@ package net.tridentsdk.chat;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class ChatTest {
+
+    @Test
     public void testPlain() {
-        assertEquals(Chat.plain("test").asJson(), this.getJson("test"));
+        assertEquals(this.getJson("test"), ChatComponent.text("test").toString());
     }
 
+    @Test
     public void testEmpty() {
-        assertEquals(Chat.empty().asJson(), this.getJson(""));
+        assertEquals(this.getJson(""), ChatComponent.empty().toString());
+    }
+
+    @Test
+    public void testFormat() {
+        ChatComponent cc = ChatComponent.fromFormat("\u00A7k\u00A7eHello! \u00A7r\u00A7cNice to meet you! :)");
+        assertEquals("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", cc.toString());
     }
 
     public String getJson(String base) {
         JsonObject msg = new JsonObject();
         msg.addProperty("text", base);
-
         return new Gson().toJson(msg);
     }
 }
