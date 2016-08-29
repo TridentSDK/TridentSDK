@@ -16,128 +16,131 @@
  */
 package net.tridentsdk.chat;
 
+import com.google.common.collect.Maps;
 import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Represents the different colors that can be sent in chat.
+ *
+ * @author Nick Robson
+ * @since 0.5-alpha
  */
 public enum ChatColor {
 
     /**
-     * Black, §0
+     * Black, &#167;0
      */
     BLACK('0'),
 
     /**
-     * Dark Blue, §1
+     * Dark Blue, &#167;1
      */
     DARK_BLUE('1'),
 
     /**
-     * Dark Green, §2
+     * Dark Green, &#167;2
      */
     DARK_GREEN('2'),
 
     /**
-     * Dark Aqua, §3
+     * Dark Aqua, &#167;3
      */
     DARK_AQUA('3'),
 
     /**
-     * Dark Red, §4
+     * Dark Red, &#167;4
      */
     DARK_RED('4'),
 
     /**
-     * Dark Purple, §5
+     * Dark Purple, &#167;5
      */
     DARK_PURPLE('5'),
 
     /**
-     * Gold, §6
+     * Gold, &#167;6
      */
     GOLD('6'),
 
     /**
-     * Gray, §7
+     * Gray, &#167;7
      */
     GRAY('7'),
 
     /**
-     * Gray, §8
+     * Gray, &#167;8
      */
     DARK_GRAY('8'),
 
     /**
-     * Blue, §9
+     * Blue, &#167;9
      */
     BLUE('9'),
 
     /**
-     * Green, §a
+     * Green, &#167;a
      */
     GREEN('a'),
 
     /**
-     * Aqua, §b
+     * Aqua, &#167;b
      */
     AQUA('b'),
 
     /**
-     * Red, §c
+     * Red, &#167;c
      */
     RED('c'),
 
     /**
-     * Light Purple, §d
+     * Light Purple, &#167;d
      */
     LIGHT_PURPLE('d'),
 
     /**
-     * Yellow, §e
+     * Yellow, &#167;e
      */
     YELLOW('e'),
 
     /**
-     * White, §f
+     * White, &#167;f
      */
     WHITE('f'),
 
     /**
-     * Obfuscated, §k
+     * Obfuscated, &#167;k
      */
     OBFUSCATED('k'),
 
     /**
-     * Bold, §l
+     * Bold, &#167;l
      */
     BOLD('l'),
 
     /**
-     * Strikethrough, §m
+     * Strikethrough, &#167;m
      */
     STRIKETHROUGH('m'),
 
     /**
-     * Underline, §n
+     * Underline, &#167;n
      */
     UNDERLINE('n'),
 
     /**
-     * Italic, §o
+     * Italic, &#167;o
      */
     ITALIC('o'),
 
     /**
-     * Reset, §r
+     * Reset, &#167;r
      */
     RESET('r');
 
     @Getter
-    private char colorChar;
+    private final char colorChar;
 
     private ChatColor(char colorChar) {
         this.colorChar = colorChar;
@@ -162,19 +165,20 @@ public enum ChatColor {
     }
 
     /**
-     * Gets a string representation of this color, in the form §{@code x}, where x is the color's character.
+     * Gets a string representation of this color, in the form &#167;{@code x}, where x is the color's character.
      *
      * @return The color.
      */
+    @Override
     public String toString() {
         return "\u00A7" + colorChar;
     }
 
-    private static Map<Character, ChatColor> charToColor = new HashMap<Character, ChatColor>() {
-        {
-            for (ChatColor c : ChatColor.values()) {
-                put(c.colorChar, c);
-            }
+    private static final Map<Character, ChatColor> charToColor = Maps.newConcurrentMap();
+
+    static {
+        for (ChatColor c : ChatColor.values()) {
+            charToColor.put(c.colorChar, c);
         }
     };
 
@@ -182,11 +186,13 @@ public enum ChatColor {
      * Gets a chat color from a given character.
      *
      * @param colorChar The color's character.
-     *
      * @return The color, or null if not found.
      */
     public static ChatColor getColor(char colorChar) {
-        return charToColor.get(colorChar);
+        ChatColor c = charToColor.get(colorChar);
+        if (c == null)
+            throw new IllegalArgumentException("no color with character " + colorChar);
+        return c;
     }
 
 }

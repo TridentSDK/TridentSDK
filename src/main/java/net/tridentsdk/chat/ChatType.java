@@ -18,6 +18,9 @@ package net.tridentsdk.chat;
 
 /**
  * Represents the different types of messages sent to a client.
+ *
+ * @author Nick Robson
+ * @since 0.5-alpha
  */
 public enum ChatType {
 

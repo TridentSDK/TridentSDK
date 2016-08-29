@@ -18,6 +18,9 @@ package net.tridentsdk.chat;
 
 /**
  * Represents an action done upon hovering over text.
+ *
+ * @author Nick Robson
+ * @since 0.5-alpha
  */
 public enum HoverAction {
 

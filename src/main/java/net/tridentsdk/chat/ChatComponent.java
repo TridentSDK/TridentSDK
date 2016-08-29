@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -24,14 +23,16 @@ import com.google.gson.JsonPrimitive;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Represents a component in a Minecraft chat format.
+ *
+ * @author Nick Robson
+ * @since 0.5-alpha
  */
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -39,22 +40,20 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class ChatComponent {
 
     @Getter @Setter
-    private String text, translate, selector, insertion, scoreUsername, scoreObjective;
+    private volatile String text, translate, selector, insertion, scoreUsername, scoreObjective;
 
     @Getter @Setter
-    private ChatColor color;
+    private volatile ChatColor color;
 
     @Getter @Setter
-    private ClickEvent clickEvent;
+    private volatile ClickEvent clickEvent;
 
     @Getter @Setter
-    private HoverEvent hoverEvent;
+    private volatile HoverEvent hoverEvent;
 
-    private List<JsonElement> with = Lists.newCopyOnWriteArrayList();
-    private List<ChatComponent> extra = Lists.newCopyOnWriteArrayList();
-    private AtomicBoolean bold, italic, underlined, strikethrough, obfuscated;
-
-    private ReadWriteLock $lock = new ReentrantReadWriteLock();
+    private List<JsonElement> with = Collections.synchronizedList(new ArrayList<>());
+    private List<ChatComponent> extra = Collections.synchronizedList(new ArrayList<>());
+    private volatile AtomicBoolean bold, italic, underlined, strikethrough, obfuscated;
 
     /**
      * Gets all elements attached to the 'with' array.
@@ -71,13 +70,10 @@ public class ChatComponent {
      * Adds an element to the 'with' array.
      *
      * @param element The JSON element.
-     *
      * @return This object.
      */
     public ChatComponent addWith(JsonElement element) {
-        $lock.writeLock().lock();
         with.add(element);
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -85,7 +81,6 @@ public class ChatComponent {
      * Adds an string to the 'with' array.
      *
      * @param element The string.
-     *
      * @return This object.
      */
     public ChatComponent addWith(String element) {
@@ -107,14 +102,11 @@ public class ChatComponent {
      * Adds a component to the 'extra' array.
      *
      * @param component The component.
-     *
      * @return This component.
      */
     public ChatComponent addExtra(ChatComponent component) {
         if (!hasExtra(component, true)) {
-            $lock.writeLock().lock();
             this.extra.add(component);
-            $lock.writeLock().unlock();
         }
         return this;
     }
@@ -123,13 +115,10 @@ public class ChatComponent {
      * Adds a string to the 'extra' array.
      *
      * @param string The string.
-     *
      * @return This component.
      */
     public ChatComponent addExtra(String string) {
-        $lock.writeLock().lock();
         this.extra.add(ChatComponent.create().setText(string));
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -138,26 +127,20 @@ public class ChatComponent {
      *
      * @param component The component
      * @param recursive Whether to check children as well.
-     *
      * @return True iff the given component exists in this component's heirarchy.
      */
     public boolean hasExtra(ChatComponent component, boolean recursive) {
-        $lock.readLock().lock();
         if (extra.contains(component)) {
-            $lock.readLock().unlock();
             return true;
         }
         if (!recursive) {
-            $lock.readLock().unlock();
             return false;
         }
         for (ChatComponent child : extra) {
             if (child.hasExtra(component, true)) {
-                $lock.readLock().unlock();
                 return true;
             }
         }
-        $lock.readLock().unlock();
         return false;
     }
 
@@ -174,16 +157,13 @@ public class ChatComponent {
      * Sets this component's boldness.
      *
      * @param bold The boldness.
-     *
      * @return This component.
      */
     public ChatComponent setBold(boolean bold) {
-        $lock.writeLock().lock();
         if (this.bold == null)
             this.bold = new AtomicBoolean(bold);
         else
             this.bold.set(bold);
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -200,16 +180,13 @@ public class ChatComponent {
      * Sets this component's italic.
      *
      * @param italic The italic.
-     *
      * @return This component.
      */
     public ChatComponent setItalic(boolean italic) {
-        $lock.writeLock().lock();
         if (this.italic == null)
             this.italic = new AtomicBoolean(italic);
         else
             this.italic.set(italic);
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -226,16 +203,13 @@ public class ChatComponent {
      * Sets this component's underlined.
      *
      * @param underlined The underline.
-     *
      * @return This component.
      */
     public ChatComponent setUnderlined(boolean underlined) {
-        $lock.writeLock().lock();
         if (this.underlined == null)
             this.underlined = new AtomicBoolean(underlined);
         else
             this.underlined.set(underlined);
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -252,16 +226,13 @@ public class ChatComponent {
      * Sets this component's strikethrough.
      *
      * @param strikethrough The strikethrough.
-     *
      * @return This component.
      */
     public ChatComponent setStrikethrough(boolean strikethrough) {
-        $lock.writeLock().lock();
         if (this.strikethrough == null)
             this.strikethrough = new AtomicBoolean(strikethrough);
         else
             this.strikethrough.set(strikethrough);
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -278,16 +249,13 @@ public class ChatComponent {
      * Sets this component's obfuscation.
      *
      * @param obfuscated The new obfuscated state.
-     *
      * @return This component.
      */
     public ChatComponent setObfuscated(boolean obfuscated) {
-        $lock.writeLock().lock();
         if (this.obfuscated == null)
             this.obfuscated = new AtomicBoolean(obfuscated);
         else
             this.obfuscated.set(obfuscated);
-        $lock.writeLock().unlock();
         return this;
     }
 
@@ -297,7 +265,6 @@ public class ChatComponent {
      * @return The JSON object.
      */
     public JsonObject asJson() {
-        $lock.readLock().lock();
         JsonObject json = new JsonObject();
         if (text != null) {
             json.addProperty("text", text);
@@ -349,7 +316,6 @@ public class ChatComponent {
         if (insertion != null) {
             json.addProperty("insertion", insertion);
         }
-        $lock.readLock().unlock();
         return json;
     }
 
@@ -384,7 +350,6 @@ public class ChatComponent {
      * Creates a component with a given string for text.
      *
      * @param text The text.
-     *
      * @return The component.
      */
     public static ChatComponent text(String text) {
@@ -395,7 +360,6 @@ public class ChatComponent {
      * Builds a component from a format string containing color codes.
      *
      * @param format The format string.
-     *
      * @return The component.
      */
     public static ChatComponent fromFormat(String format) {

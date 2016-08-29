@@ -20,15 +20,29 @@ import com.google.gson.JsonObject;
 
 /**
  * Represents an action done upon clicking text.
+ *
+ * @author Nick Robson
+ * @since 0.5-alpha
  */
 public class ClickEvent {
 
-    private ClickAction action;
-    private String value;
+    private final ClickAction action;
+    private final String value;
 
     private ClickEvent(ClickAction action, String value) {
         this.action = action;
         this.value = value;
+    }
+
+    /**
+     * Creates a click action with the given action and text.
+     *
+     * @param action The action.
+     * @param text The text.
+     * @return The click action event.
+     */
+    public static ClickEvent of(ClickAction action, String text) {
+        return new ClickEvent(action, text);
     }
 
     /**
@@ -59,18 +73,6 @@ public class ClickEvent {
         obj.addProperty("action", action.name().toLowerCase());
         obj.addProperty("value", value);
         return obj;
-    }
-
-    /**
-     * Creates a click action with the given action and text.
-     *
-     * @param action The action.
-     * @param text The text.
-     *
-     * @return The click action event.
-     */
-    public static ClickEvent of(ClickAction action, String text) {
-        return new ClickEvent(action, text);
     }
 
 }
