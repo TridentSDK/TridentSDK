@@ -23,37 +23,105 @@ import com.google.gson.JsonPrimitive;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Represents a component in a Minecraft chat format.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@ThreadSafe
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChatComponent {
-
+    /**
+     * The text that this chat component represents
+     */
     @Getter @Setter
-    private volatile String text, translate, selector, insertion, scoreUsername, scoreObjective;
+    private volatile String text;
+    /**
+     * The translate modifier for the chat message
+     */
+    @Getter
+    @Setter
+    private volatile String translate;
+    /**
+     * The chat selector
+     */
+    @Getter
+    @Setter
+    private volatile String selector;
+    /**
+     * The insertion modifier for the chat message
+     */
+    @Getter
+    @Setter
+    private volatile String insertion;
+    /**
+     * The scoreboard username
+     */
+    @Getter
+    @Setter
+    private volatile String scoreUsername;
+    /**
+     * The scoreboard objective
+     */
+    @Getter
+    @Setter
+    private volatile String scoreObjective;
 
+    /**
+     * The color of the chat message
+     */
     @Getter @Setter
     private volatile ChatColor color;
-
+    /**
+     * A click event that this message may contain
+     */
     @Getter @Setter
     private volatile ClickEvent clickEvent;
-
+    /**
+     * A hover event that this message may contain
+     */
     @Getter @Setter
     private volatile HoverEvent hoverEvent;
 
-    private List<JsonElement> with = Collections.synchronizedList(new ArrayList<>());
-    private List<ChatComponent> extra = Collections.synchronizedList(new ArrayList<>());
-    private volatile AtomicBoolean bold, italic, underlined, strikethrough, obfuscated;
+    /**
+     * The list of other JSON formatted components
+     */
+    private final List<JsonElement> with = Collections.synchronizedList(new ArrayList<>());
+    /**
+     * The list of other extra components added to this
+     * message
+     */
+    private final List<ChatComponent> extra = Collections.synchronizedList(new ArrayList<>());
+
+    /**
+     * Whether or not this message is bolded
+     */
+    private final AtomicReference<Boolean> bold = new AtomicReference<>();
+    /**
+     * Whether or not this message is italicized
+     */
+    private final AtomicReference<Boolean> italic = new AtomicReference<>();
+    /**
+     * Whether or not this message is underlined
+     */
+    private final AtomicReference<Boolean> underlined = new AtomicReference<>();
+    /**
+     * Whether or not this message is crossed out
+     */
+    private final AtomicReference<Boolean> strikethrough = new AtomicReference<>();
+    /**
+     * Whether or not this message is obfuscated
+     */
+    private final AtomicReference<Boolean> obfuscated = new AtomicReference<>();
 
     /**
      * Gets all elements attached to the 'with' array.
@@ -63,7 +131,7 @@ public class ChatComponent {
      * @return The with elements.
      */
     public List<JsonElement> getWith() {
-        return Collections.unmodifiableList(with);
+        return Collections.unmodifiableList(this.with);
     }
 
     /**
@@ -73,7 +141,7 @@ public class ChatComponent {
      * @return This object.
      */
     public ChatComponent addWith(JsonElement element) {
-        with.add(element);
+        this.with.add(element);
         return this;
     }
 
@@ -84,18 +152,19 @@ public class ChatComponent {
      * @return This object.
      */
     public ChatComponent addWith(String element) {
-        return addWith(new JsonPrimitive(element));
+        return this.addWith(new JsonPrimitive(element));
     }
 
     /**
      * Gets all components attached to the 'extra' array.
      *
-     * Components in this array are appended to this component.
+     * <p>Components in this array are appended to this
+     * component.</p>
      *
      * @return The extra components.
      */
     public List<ChatComponent> getExtra() {
-        return Collections.unmodifiableList(extra);
+        return Collections.unmodifiableList(this.extra);
     }
 
     /**
@@ -105,7 +174,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent addExtra(ChatComponent component) {
-        if (!hasExtra(component, true)) {
+        if (!this.hasExtra(component, true)) {
             this.extra.add(component);
         }
         return this;
@@ -123,19 +192,22 @@ public class ChatComponent {
     }
 
     /**
-     * Checks if this component contains the given component, optionally recursively.
+     * Checks if this component contains the given
+     * component, optionally recursively.
      *
      * @param component The component
      * @param recursive Whether to check children as well.
-     * @return True iff the given component exists in this component's heirarchy.
+     * @return True iff the given component exists in this
+     * component's hierarchy.
      */
     public boolean hasExtra(ChatComponent component, boolean recursive) {
+        List<ChatComponent> extra = this.extra;
         if (extra.contains(component)) {
             return true;
-        }
-        if (!recursive) {
+        } else if (!recursive) {
             return false;
         }
+
         for (ChatComponent child : extra) {
             if (child.hasExtra(component, true)) {
                 return true;
@@ -150,7 +222,8 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isBold() {
-        return bold != null && bold.get();
+        Boolean flag = this.bold.get();
+        return flag != null && flag;
     }
 
     /**
@@ -160,10 +233,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setBold(boolean bold) {
-        if (this.bold == null)
-            this.bold = new AtomicBoolean(bold);
-        else
-            this.bold.set(bold);
+        this.bold.set(bold);
         return this;
     }
 
@@ -173,7 +243,8 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isItalic() {
-        return italic != null && italic.get();
+        Boolean flag = this.italic.get();
+        return flag != null && flag;
     }
 
     /**
@@ -183,10 +254,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setItalic(boolean italic) {
-        if (this.italic == null)
-            this.italic = new AtomicBoolean(italic);
-        else
-            this.italic.set(italic);
+        this.italic.set(italic);
         return this;
     }
 
@@ -196,7 +264,8 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isUnderlined() {
-        return underlined != null && underlined.get();
+        Boolean flag = this.underlined.get();
+        return flag != null && flag;
     }
 
     /**
@@ -206,10 +275,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setUnderlined(boolean underlined) {
-        if (this.underlined == null)
-            this.underlined = new AtomicBoolean(underlined);
-        else
-            this.underlined.set(underlined);
+        this.underlined.set(underlined);
         return this;
     }
 
@@ -219,7 +285,7 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isStrikethrough() {
-        return strikethrough != null && strikethrough.get();
+        return this.strikethrough != null && this.strikethrough.get();
     }
 
     /**
@@ -229,10 +295,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setStrikethrough(boolean strikethrough) {
-        if (this.strikethrough == null)
-            this.strikethrough = new AtomicBoolean(strikethrough);
-        else
-            this.strikethrough.set(strikethrough);
+        this.strikethrough.set(strikethrough);
         return this;
     }
 
@@ -242,7 +305,8 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isObfuscated() {
-        return obfuscated != null && obfuscated.get();
+        Boolean flag = this.obfuscated.get();
+        return flag != null && flag;
     }
 
     /**
@@ -252,10 +316,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setObfuscated(boolean obfuscated) {
-        if (this.obfuscated == null)
-            this.obfuscated = new AtomicBoolean(obfuscated);
-        else
-            this.obfuscated.set(obfuscated);
+        this.obfuscated.set(obfuscated);
         return this;
     }
 
@@ -266,53 +327,82 @@ public class ChatComponent {
      */
     public JsonObject asJson() {
         JsonObject json = new JsonObject();
+
+        String text = this.text;
         if (text != null) {
             json.addProperty("text", text);
         }
+
+        String translate = this.translate;
         if (translate != null) {
             json.addProperty("translate", translate);
             JsonArray array = new JsonArray();
-            with.forEach(array::add);
+            this.with.forEach(array::add);
             json.add("with", array);
         }
+
+        String scoreUsername = this.scoreUsername;
+        String scoreObjective = this.scoreObjective;
         if (scoreUsername != null && scoreObjective != null) {
             JsonObject score = new JsonObject();
             score.addProperty("name", scoreUsername);
             score.addProperty("objective", scoreObjective);
             json.add("score", score);
         }
+
+        String selector = this.selector;
         if (selector != null) {
             json.addProperty("selector", selector);
         }
+
+        List<ChatComponent> extra = this.extra;
         if (!extra.isEmpty()) {
-            JsonArray extra = new JsonArray();
-            this.extra.forEach(e -> extra.add(e.asJson()));
-            json.add("extra", extra);
+            JsonArray extraArray = new JsonArray();
+            extra.forEach(e -> extraArray.add(e.asJson()));
+            json.add("extra", extraArray);
         }
-        if (bold != null) {
-            json.addProperty("bold", bold.get());
+
+        Boolean isBold = this.bold.get();
+        if (isBold != null) {
+            json.addProperty("bold", isBold);
         }
-        if (italic != null) {
-            json.addProperty("italic", italic.get());
+
+        Boolean isItalic = this.italic.get();
+        if (isItalic != null) {
+            json.addProperty("italic", isItalic);
         }
-        if (underlined != null) {
-            json.addProperty("underlined", underlined.get());
+
+        Boolean isUnderlined = this.underlined.get();
+        if (isUnderlined != null) {
+            json.addProperty("underlined", isUnderlined);
         }
-        if (strikethrough != null) {
-            json.addProperty("strikethrough", strikethrough.get());
+
+        Boolean isStrikethrough = this.strikethrough.get();
+        if (isStrikethrough != null) {
+            json.addProperty("strikethrough", isStrikethrough);
         }
-        if (obfuscated != null) {
-            json.addProperty("obfuscated", obfuscated.get());
+
+        Boolean isObfuscated = this.obfuscated.get();
+        if (isObfuscated != null) {
+            json.addProperty("obfuscated", isObfuscated);
         }
-        if (color != null) {
+
+        ChatColor color = this.color;
+        if (this.color != null) {
             json.addProperty("color", color.name().toLowerCase());
         }
+
+        ClickEvent clickEvent = this.clickEvent;
         if (clickEvent != null) {
-            json.add("clickEvent", this.clickEvent.asJson());
+            json.add("clickEvent", clickEvent.asJson());
         }
+
+        HoverEvent hoverEvent = this.hoverEvent;
         if (hoverEvent != null) {
-            json.add("hoverEvent", this.hoverEvent.asJson());
+            json.add("hoverEvent", hoverEvent.asJson());
         }
+
+        String insertion = this.insertion;
         if (insertion != null) {
             json.addProperty("insertion", insertion);
         }
@@ -325,7 +415,7 @@ public class ChatComponent {
      * @return The JSON string.
      */
     public String toString() {
-        return asJson().toString();
+        return this.asJson().toString();
     }
 
     /**
@@ -442,5 +532,4 @@ public class ChatComponent {
         }
         return component;
     }
-
 }

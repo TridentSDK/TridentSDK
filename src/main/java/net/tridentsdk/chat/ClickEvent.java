@@ -18,17 +18,32 @@ package net.tridentsdk.chat;
 
 import com.google.gson.JsonObject;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Represents an action done upon clicking text.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public class ClickEvent {
-
+    /**
+     * The action that triggers this click event
+     */
     private final ClickAction action;
+    /**
+     * The value of the click
+     */
     private final String value;
 
+    /**
+     * Creates a new click event with the given action and
+     * value.
+     *
+     * @param action the action that triggered the event
+     * @param value the text value
+     */
     private ClickEvent(ClickAction action, String value) {
         this.action = action;
         this.value = value;
@@ -51,7 +66,7 @@ public class ClickEvent {
      * @return The action.
      */
     public ClickAction getAction() {
-        return action;
+        return this.action;
     }
 
     /**
@@ -60,7 +75,7 @@ public class ClickEvent {
      * @return The value.
      */
     public String getValue() {
-        return value;
+        return this.value;
     }
 
     /**
@@ -70,9 +85,8 @@ public class ClickEvent {
      */
     public JsonObject asJson() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("action", action.name().toLowerCase());
-        obj.addProperty("value", value);
+        obj.addProperty("action", this.action.name().toLowerCase());
+        obj.addProperty("value", this.value);
         return obj;
     }
-
 }

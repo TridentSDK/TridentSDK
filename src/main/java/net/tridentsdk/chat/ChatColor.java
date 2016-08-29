@@ -16,19 +16,19 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.common.collect.Maps;
+import it.unimi.dsi.fastutil.chars.Char2ObjectOpenHashMap;
 import lombok.Getter;
 
-import java.util.Map;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different colors that can be sent in chat.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum ChatColor {
-
     /**
      * Black, &#167;0
      */
@@ -142,7 +142,14 @@ public enum ChatColor {
     @Getter
     private final char colorChar;
 
-    private ChatColor(char colorChar) {
+    /**
+     * Creates a new chatcolor based on the given character
+     * which represents the canonical control sequence
+     * for that particular color.
+     *
+     * @param colorChar the color character
+     */
+    ChatColor(char colorChar) {
         this.colorChar = colorChar;
     }
 
@@ -152,7 +159,7 @@ public enum ChatColor {
      * @return True iff it is.
      */
     public boolean isFormat() {
-        return 'k' <= colorChar && colorChar <= 'r';
+        return 'k' <= this.colorChar && this.colorChar <= 'r';
     }
 
     /**
@@ -161,26 +168,33 @@ public enum ChatColor {
      * @return The color.
      */
     public boolean isColor() {
-        return !isFormat();
+        return !this.isFormat();
     }
 
     /**
-     * Gets a string representation of this color, in the form &#167;{@code x}, where x is the color's character.
+     * Gets a string representation of this color, in the
+     * form &#167;{@code x}, where x is the color's
+     * character.
      *
      * @return The color.
      */
     @Override
     public String toString() {
-        return "\u00A7" + colorChar;
+        return "\u00A7" + this.colorChar;
     }
 
-    private static final Map<Character, ChatColor> charToColor = Maps.newConcurrentMap();
+    /**
+     * The mapping of the character to the associated
+     * chat color.
+     */
+    private static final Char2ObjectOpenHashMap<ChatColor> charToColor =
+            new Char2ObjectOpenHashMap<>();
 
     static {
         for (ChatColor c : ChatColor.values()) {
             charToColor.put(c.colorChar, c);
         }
-    };
+    }
 
     /**
      * Gets a chat color from a given character.
@@ -190,9 +204,9 @@ public enum ChatColor {
      */
     public static ChatColor getColor(char colorChar) {
         ChatColor c = charToColor.get(colorChar);
-        if (c == null)
+        if (c == null) {
             throw new IllegalArgumentException("no color with character " + colorChar);
+        }
         return c;
     }
-
 }

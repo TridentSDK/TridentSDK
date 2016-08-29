@@ -61,12 +61,13 @@ public interface Player extends Entity {
     /**
      * Sends this player a system message.
      *
-     * Equivalent to {@code sendMessage(message, ChatType.SYSTEM)}.
+     * <p>Equivalent to
+     * {@code sendMessage(message, ChatType.SYSTEM)}.</p>
      *
      * @param message The message.
      */
     default void sendMessage(ChatComponent message) {
-        sendMessage(message, ChatType.SYSTEM);
+        this.sendMessage(message, ChatType.SYSTEM);
     }
 
     /**

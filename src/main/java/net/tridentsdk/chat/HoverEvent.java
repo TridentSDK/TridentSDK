@@ -20,17 +20,32 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Represents an action done upon hovering over text.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public class HoverEvent {
-
+    /**
+     * The action that triggered this hover event
+     */
     private final HoverAction action;
+    /**
+     * The text that triggerd this event
+     */
     private final JsonElement value;
 
+    /**
+     * Creates a new hover event with the given action
+     * and the given text that triggered it.
+     *
+     * @param action the triggering action
+     * @param value the triggering text value
+     */
     private HoverEvent(HoverAction action, JsonElement value) {
         this.action = action;
         this.value = value;
@@ -47,7 +62,8 @@ public class HoverEvent {
     }
 
     /**
-     * Creates a show text hover action with a chat component.
+     * Creates a show text hover action with a chat
+     * component.
      *
      * @param chat The chat component.
      * @return The hover action event.
@@ -57,7 +73,8 @@ public class HoverEvent {
     }
 
     /**
-     * Creates a show achievement hover action with an achievement.
+     * Creates a show achievement hover action with an
+     * achievement.
      *
      * @param achievement The achievement.
      * @return The hover action event.
@@ -78,7 +95,7 @@ public class HoverEvent {
      * @return The action.
      */
     public HoverAction getAction() {
-        return action;
+        return this.action;
     }
 
     /**
@@ -87,19 +104,19 @@ public class HoverEvent {
      * @return The value.
      */
     public JsonElement getValue() {
-        return value;
+        return this.value;
     }
 
     /**
-     * Gets this action performance as JSON, for transmission.
+     * Gets this action performance as JSON, for
+     * transmission.
      *
      * @return The JSON.
      */
     public JsonObject asJson() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("action", action.name().toLowerCase());
-        obj.add("value", value);
+        obj.addProperty("action", this.action.name().toLowerCase());
+        obj.add("value", this.value);
         return obj;
     }
-
 }

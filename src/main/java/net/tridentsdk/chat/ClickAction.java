@@ -16,14 +16,16 @@
  */
 package net.tridentsdk.chat;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Represents an action done upon clicking on text.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum ClickAction {
-
     /**
      * Opens a URL
      */
@@ -43,5 +45,4 @@ public enum ClickAction {
      * Suggests a command (places text in chatbox)
      */
     SUGGEST_COMMAND
-
 }

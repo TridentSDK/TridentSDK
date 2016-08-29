@@ -16,14 +16,16 @@
  */
 package net.tridentsdk.chat;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Represents the different types of messages sent to a client.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum ChatType {
-
     /**
      * A chat message (such as notifications or player chat)
      */
@@ -38,5 +40,4 @@ public enum ChatType {
      * A message above the hotbar
      */
     ABOVE_HOTBAR
-
 }

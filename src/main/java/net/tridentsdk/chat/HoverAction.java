@@ -16,14 +16,16 @@
  */
 package net.tridentsdk.chat;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Represents an action done upon hovering over text.
  *
- * @author Nick Robson
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum HoverAction {
-
     /**
      * Shows text, or a ChatComponent
      */
@@ -38,5 +40,4 @@ public enum HoverAction {
      * Shows an item's metadata
      */
     SHOW_ITEM
-
 }
