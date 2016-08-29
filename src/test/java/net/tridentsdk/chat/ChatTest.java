@@ -37,9 +37,7 @@ public class ChatTest {
     @Test
     public void testFormat() {
         ChatComponent cc = ChatComponent.fromFormat("\u00A7k\u00A7eHello! \u00A7r\u00A7cNice to meet you! :)");
-        cc.setHoverEvent(HoverEvent.text("Hey there!"));
-        cc.setClickEvent(ClickEvent.of(ClickAction.SUGGEST_COMMAND, "/yolo"));
-        System.out.println(cc);
+        assertEquals("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", cc.toString());
     }
 
     public String getJson(String base) {
