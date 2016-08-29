@@ -20,36 +20,78 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
+/**
+ * Represents an action done upon hovering over text.
+ */
 public class HoverEvent {
 
-    private Event event;
     private HoverAction action;
+    private JsonElement value;
 
     private HoverEvent(HoverAction action, JsonElement value) {
-        this.event = new Event(action.name().toLowerCase(), value);
         this.action = action;
+        this.value = value;
     }
 
+    /**
+     * Gets the action to be performed.
+     *
+     * @return The action.
+     */
     public HoverAction getAction() {
         return action;
     }
 
+    /**
+     * Gets what value the action is applied to.
+     *
+     * @return The value.
+     */
     public JsonElement getValue() {
-        return event.getValue();
+        return value;
     }
 
+    /**
+     * Gets this action performance as JSON, for transmission.
+     *
+     * @return The JSON.
+     */
     public JsonObject asJson() {
-        return event.asJson();
+        JsonObject obj = new JsonObject();
+        obj.addProperty("action", action.name().toLowerCase());
+        obj.add("value", value);
+        return obj;
     }
 
+    /**
+     * Creates a show text hover action with text.
+     *
+     * @param text The text.
+     *
+     * @return The hover action event.
+     */
     public static HoverEvent text(String text) {
-        return new HoverEvent(HoverAction.SHOW_TEXT, new JsonPrimitive(text));
+        return text(ChatComponent.text(text));
     }
 
-    public static HoverEvent text(JsonObject text) {
-        return new HoverEvent(HoverAction.SHOW_TEXT, text);
+    /**
+     * Creates a show text hover action with a chat component.
+     *
+     * @param chat The chat component.
+     *
+     * @return The hover action event.
+     */
+    public static HoverEvent text(ChatComponent chat) {
+        return new HoverEvent(HoverAction.SHOW_TEXT, chat.asJson());
     }
 
+    /**
+     * Creates a show achievement hover action with an achievement.
+     *
+     * @param achievement The achievement.
+     *
+     * @return The hover action event.
+     */
     public static HoverEvent achievement(String achievement) {
         return new HoverEvent(HoverAction.SHOW_ACHIEVEMENT, new JsonPrimitive(achievement));
     }

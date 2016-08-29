@@ -30,6 +30,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Represents a component in a Minecraft chat format.
+ */
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -53,10 +56,24 @@ public class ChatComponent {
 
     private ReadWriteLock $lock = new ReentrantReadWriteLock();
 
+    /**
+     * Gets all elements attached to the 'with' array.
+     *
+     * The 'with' array is used in conjunction with the 'translate' component.
+     *
+     * @return The with elements.
+     */
     public List<JsonElement> getWith() {
         return Collections.unmodifiableList(with);
     }
 
+    /**
+     * Adds an element to the 'with' array.
+     *
+     * @param element The JSON element.
+     *
+     * @return This object.
+     */
     public ChatComponent addWith(JsonElement element) {
         $lock.writeLock().lock();
         with.add(element);
@@ -64,14 +81,35 @@ public class ChatComponent {
         return this;
     }
 
-    public ChatComponent addWith(String with) {
-        return addWith(new JsonPrimitive(with));
+    /**
+     * Adds an string to the 'with' array.
+     *
+     * @param element The string.
+     *
+     * @return This object.
+     */
+    public ChatComponent addWith(String element) {
+        return addWith(new JsonPrimitive(element));
     }
 
+    /**
+     * Gets all components attached to the 'extra' array.
+     *
+     * Components in this array are appended to this component.
+     *
+     * @return The extra components.
+     */
     public List<ChatComponent> getExtra() {
         return Collections.unmodifiableList(extra);
     }
 
+    /**
+     * Adds a component to the 'extra' array.
+     *
+     * @param component The component.
+     *
+     * @return This component.
+     */
     public ChatComponent addExtra(ChatComponent component) {
         if (!hasExtra(component, true)) {
             $lock.writeLock().lock();
@@ -81,10 +119,28 @@ public class ChatComponent {
         return this;
     }
 
-    public ChatComponent addExtra(String extra) {
-        return addExtra(ChatComponent.create().setText(extra));
+    /**
+     * Adds a string to the 'extra' array.
+     *
+     * @param string The string.
+     *
+     * @return This component.
+     */
+    public ChatComponent addExtra(String string) {
+        $lock.writeLock().lock();
+        this.extra.add(ChatComponent.create().setText(string));
+        $lock.writeLock().unlock();
+        return this;
     }
 
+    /**
+     * Checks if this component contains the given component, optionally recursively.
+     *
+     * @param component The component
+     * @param recursive Whether to check children as well.
+     *
+     * @return True iff the given component exists in this component's heirarchy.
+     */
     public boolean hasExtra(ChatComponent component, boolean recursive) {
         $lock.readLock().lock();
         if (extra.contains(component)) {
@@ -105,10 +161,22 @@ public class ChatComponent {
         return false;
     }
 
+    /**
+     * Gets whether or not this component is bold.
+     *
+     * @return True iff it is.
+     */
     public boolean isBold() {
         return bold != null && bold.get();
     }
 
+    /**
+     * Sets this component's boldness.
+     *
+     * @param bold The boldness.
+     *
+     * @return This component.
+     */
     public ChatComponent setBold(boolean bold) {
         $lock.writeLock().lock();
         if (this.bold == null)
@@ -119,10 +187,22 @@ public class ChatComponent {
         return this;
     }
 
+    /**
+     * Gets whether or not this component is in italics.
+     *
+     * @return True iff it is.
+     */
     public boolean isItalic() {
         return italic != null && italic.get();
     }
 
+    /**
+     * Sets this component's italic.
+     *
+     * @param italic The italic.
+     *
+     * @return This component.
+     */
     public ChatComponent setItalic(boolean italic) {
         $lock.writeLock().lock();
         if (this.italic == null)
@@ -133,10 +213,22 @@ public class ChatComponent {
         return this;
     }
 
+    /**
+     * Gets whether or not this component is underlined.
+     *
+     * @return True iff it is.
+     */
     public boolean isUnderlined() {
         return underlined != null && underlined.get();
     }
 
+    /**
+     * Sets this component's underlined.
+     *
+     * @param underlined The underline.
+     *
+     * @return This component.
+     */
     public ChatComponent setUnderlined(boolean underlined) {
         $lock.writeLock().lock();
         if (this.underlined == null)
@@ -147,10 +239,22 @@ public class ChatComponent {
         return this;
     }
 
+    /**
+     * Gets whether or not this component is striked through.
+     *
+     * @return True iff it is.
+     */
     public boolean isStrikethrough() {
         return strikethrough != null && strikethrough.get();
     }
 
+    /**
+     * Sets this component's strikethrough.
+     *
+     * @param strikethrough The strikethrough.
+     *
+     * @return This component.
+     */
     public ChatComponent setStrikethrough(boolean strikethrough) {
         $lock.writeLock().lock();
         if (this.strikethrough == null)
@@ -161,10 +265,22 @@ public class ChatComponent {
         return this;
     }
 
+    /**
+     * Gets whether or not this component is in obfuscation.
+     *
+     * @return True iff it is.
+     */
     public boolean isObfuscated() {
         return obfuscated != null && obfuscated.get();
     }
 
+    /**
+     * Sets this component's obfuscation.
+     *
+     * @param obfuscated The new obfuscated state.
+     *
+     * @return This component.
+     */
     public ChatComponent setObfuscated(boolean obfuscated) {
         $lock.writeLock().lock();
         if (this.obfuscated == null)
@@ -175,6 +291,11 @@ public class ChatComponent {
         return this;
     }
 
+    /**
+     * Gets this component as a JSON object, ready to be sent to a client.
+     *
+     * @return The JSON object.
+     */
     public JsonObject asJson() {
         $lock.readLock().lock();
         JsonObject json = new JsonObject();
@@ -232,20 +353,130 @@ public class ChatComponent {
         return json;
     }
 
+    /**
+     * Gets this component as a JSON string.
+     *
+     * @return The JSON string.
+     */
     public String toString() {
         return asJson().toString();
     }
 
+    /**
+     * Creates a new empty component.
+     *
+     * @return The new component.
+     */
     public static ChatComponent create() {
         return new ChatComponent();
     }
 
+    /**
+     * Creates a component with an empty string for text.
+     *
+     * @return The component.
+     */
     public static ChatComponent empty() {
         return create().setText("");
     }
 
+    /**
+     * Creates a component with a given string for text.
+     *
+     * @param text The text.
+     *
+     * @return The component.
+     */
     public static ChatComponent text(String text) {
         return create().setText(text);
+    }
+
+    /**
+     * Builds a component from a format string containing color codes.
+     *
+     * @param format The format string.
+     *
+     * @return The component.
+     */
+    public static ChatComponent fromFormat(String format) {
+        ChatComponent component = ChatComponent.create();
+        char[] chars = format.toCharArray();
+        String currentText = "";
+        ChatColor currentColor = null;
+        ChatComponent currentComponent = create();
+        boolean sub = false;
+        for (int i = 0, j = chars.length; i < j; i++) {
+            boolean prevSection = i != 0 && chars[i - 1] == '\u00A7';
+            char c = chars[i];
+            if (prevSection) {
+                ChatColor color = ChatColor.getColor(c);
+                if (color != null) {
+                    if (color.isColor()) {
+                        if (!currentText.isEmpty()) {
+                            if (sub) {
+                                component.addExtra(currentComponent.setText(currentText).setColor(currentColor));
+                            } else {
+                                component.setText(currentText).setColor(currentColor);
+                                sub = true;
+                            }
+                            currentComponent = create();
+                        }
+                        currentColor = color;
+                        currentText = "";
+                    } else {
+                        ChatComponent curr = sub ? currentComponent : component;
+                        switch (color) {
+                            case OBFUSCATED:
+                                curr.setObfuscated(true);
+                                break;
+                            case BOLD:
+                                curr.setBold(true);
+                                break;
+                            case STRIKETHROUGH:
+                                curr.setStrikethrough(true);
+                                break;
+                            case UNDERLINE:
+                                curr.setUnderlined(true);
+                                break;
+                            case ITALIC:
+                                curr.setItalic(true);
+                                break;
+                            case RESET:
+                                ChatComponent next = create();
+                                if (curr.isBold())
+                                    next.setBold(false);
+                                if (curr.isItalic())
+                                    next.setItalic(false);
+                                if (curr.isUnderlined())
+                                    next.setUnderlined(false);
+                                if (curr.isStrikethrough())
+                                    next.setStrikethrough(false);
+                                if (curr.isObfuscated())
+                                    next.setObfuscated(false);
+                                if (!currentText.isEmpty()) {
+                                    if (sub) {
+                                        component.addExtra(curr.setText(currentText).setColor(currentColor));
+                                    } else {
+                                        component.setText(currentText).setColor(currentColor);
+                                        sub = true;
+                                    }
+                                }
+                                currentText = "";
+                                currentComponent = next;
+                                currentColor = null;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            } else if (c != '\u00A7') {
+                currentText += c;
+            }
+        }
+        if (!currentText.isEmpty()) {
+            component.addExtra(currentComponent.setText(currentText).setColor(currentColor));
+        }
+        return component;
     }
 
 }

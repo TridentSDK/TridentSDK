@@ -16,8 +16,24 @@
  */
 package net.tridentsdk.chat;
 
+/**
+ * Represents an action done upon hovering over text.
+ */
 public enum HoverAction {
 
-    SHOW_TEXT, SHOW_ACHIEVEMENT, SHOW_ITEM
+    /**
+     * Shows text, or a ChatComponent
+     */
+    SHOW_TEXT,
+
+    /**
+     * Shows an achievement
+     */
+    SHOW_ACHIEVEMENT,
+
+    /**
+     * Shows an item's metadata
+     */
+    SHOW_ITEM
 
 }

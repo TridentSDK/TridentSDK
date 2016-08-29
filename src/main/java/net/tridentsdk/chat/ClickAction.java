@@ -16,8 +16,29 @@
  */
 package net.tridentsdk.chat;
 
+/**
+ * Represents an action done upon clicking on text.
+ */
 public enum ClickAction {
 
-    OPEN_URL, OPEN_FILE, RUN_COMMAND, SUGGEST_COMMAND
+    /**
+     * Opens a URL
+     */
+    OPEN_URL,
+
+    /**
+     * Opens a file
+     */
+    OPEN_FILE,
+
+    /**
+     * Runs a command
+     */
+    RUN_COMMAND,
+
+    /**
+     * Suggests a command (places text in chatbox)
+     */
+    SUGGEST_COMMAND
 
 }

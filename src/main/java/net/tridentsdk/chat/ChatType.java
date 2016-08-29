@@ -16,8 +16,24 @@
  */
 package net.tridentsdk.chat;
 
+/**
+ * Represents the different types of messages sent to a client.
+ */
 public enum ChatType {
 
-    CHAT, SYSTEM, ABOVE_HOTBAR
+    /**
+     * A chat message (such as notifications or player chat)
+     */
+    CHAT,
+
+    /**
+     * A system message (such as command output)
+     */
+    SYSTEM,
+
+    /**
+     * A message above the hotbar
+     */
+    ABOVE_HOTBAR
 
 }

@@ -17,30 +17,58 @@
 package net.tridentsdk.chat;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
+/**
+ * Represents an action done upon clicking text.
+ */
 public class ClickEvent {
 
-    private Event event;
     private ClickAction action;
+    private String value;
 
-    private ClickEvent(ClickAction action, String text) {
-        this.event = new Event(action.name().toLowerCase(), new JsonPrimitive(text));
+    private ClickEvent(ClickAction action, String value) {
         this.action = action;
+        this.value = value;
     }
 
+    /**
+     * Gets the action to be performed.
+     *
+     * @return The action.
+     */
     public ClickAction getAction() {
         return action;
     }
 
+    /**
+     * Gets what value the action is applied to.
+     *
+     * @return The value.
+     */
     public String getValue() {
-        return event.getValue().getAsString();
+        return value;
     }
 
+    /**
+     * Gets this action performance as JSON, for transmission.
+     *
+     * @return The JSON.
+     */
     public JsonObject asJson() {
-        return event.asJson();
+        JsonObject obj = new JsonObject();
+        obj.addProperty("action", action.name().toLowerCase());
+        obj.addProperty("value", value);
+        return obj;
     }
 
+    /**
+     * Creates a click action with the given action and text.
+     *
+     * @param action The action.
+     * @param text The text.
+     *
+     * @return The click action event.
+     */
     public static ClickEvent of(ClickAction action, String text) {
         return new ClickEvent(action, text);
     }
