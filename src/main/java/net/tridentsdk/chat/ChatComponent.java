@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.chat;
 
+import com.google.common.collect.Sets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,19 +24,19 @@ import com.google.gson.JsonPrimitive;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import javax.annotation.concurrent.ThreadSafe;
-import java.util.ArrayList;
+import javax.annotation.concurrent.NotThreadSafe;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Represents a component in a Minecraft chat format.
  *
+ * <p>This class is <strong>NOT</strong> thread-safe!</p>
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@ThreadSafe
+@NotThreadSafe
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -44,88 +45,88 @@ public class ChatComponent {
      * The text that this chat component represents
      */
     @Getter @Setter
-    private volatile String text;
+    private String text;
     /**
      * The translate modifier for the chat message
      */
     @Getter
     @Setter
-    private volatile String translate;
+    private String translate;
     /**
      * The chat selector
      */
     @Getter
     @Setter
-    private volatile String selector;
+    private String selector;
     /**
      * The insertion modifier for the chat message
      */
     @Getter
     @Setter
-    private volatile String insertion;
+    private String insertion;
     /**
      * The scoreboard username
      */
     @Getter
     @Setter
-    private volatile String scoreUsername;
+    private String scoreUsername;
     /**
      * The scoreboard objective
      */
     @Getter
     @Setter
-    private volatile String scoreObjective;
+    private String scoreObjective;
 
     /**
      * The color of the chat message
      */
     @Getter @Setter
-    private volatile ChatColor color;
+    private ChatColor color;
     /**
      * A click event that this message may contain
      */
     @Getter @Setter
-    private volatile ClickEvent clickEvent;
+    private ClickEvent clickEvent;
     /**
      * A hover event that this message may contain
      */
     @Getter @Setter
-    private volatile HoverEvent hoverEvent;
+    private HoverEvent hoverEvent;
 
     /**
      * The list of chat components added to the 'with' array.
      */
-    private final List<ChatComponent> with = Collections.synchronizedList(new ArrayList<>());
+    private final Collection<ChatComponent> with = Sets.newHashSet();
 
     /**
      * The list of chat components added to the 'extra' array.
      */
-    private final List<ChatComponent> extra = Collections.synchronizedList(new ArrayList<>());
+    private final Collection<ChatComponent> extra = Sets.newHashSet();
 
     /**
      * Whether or not this message is bolded
      */
-    private final AtomicReference<Boolean> bold = new AtomicReference<>();
+    private Boolean bold;
 
     /**
      * Whether or not this message is italicized
      */
-    private final AtomicReference<Boolean> italic = new AtomicReference<>();
+    private Boolean italic;
 
     /**
      * Whether or not this message is underlined
      */
-    private final AtomicReference<Boolean> underlined = new AtomicReference<>();
+    private Boolean underlined;
 
     /**
      * Whether or not this message is crossed out
      */
-    private final AtomicReference<Boolean> strikethrough = new AtomicReference<>();
+    private Boolean strikethrough;
 
     /**
      * Whether or not this message is obfuscated
      */
-    private final AtomicReference<Boolean> obfuscated = new AtomicReference<>();
+    private Boolean obfuscated;
 
     /**
      * Gets all elements attached to the 'with' array.
@@ -134,8 +135,8 @@ public class ChatComponent {
      *
      * @return The with elements.
      */
-    public List<ChatComponent> getWith() {
-        return Collections.unmodifiableList(this.with);
+    public Collection<ChatComponent> getWith() {
+        return Collections.unmodifiableCollection(this.with);
     }
 
     /**
@@ -145,7 +146,7 @@ public class ChatComponent {
      * @return This object.
      */
     public ChatComponent addWith(ChatComponent component) {
-        if (!hasWith(component, true)) {
+        if (!this.hasWith(component, true)) {
             this.with.add(component);
         }
         return this;
@@ -171,14 +172,13 @@ public class ChatComponent {
      * component's hierarchy.
      */
     public boolean hasWith(ChatComponent component, boolean recursive) {
-        List<ChatComponent> with = this.with;
-        if (extra.contains(component)) {
+        if (this.extra.contains(component)) {
             return true;
         } else if (!recursive) {
             return false;
         }
 
-        for (ChatComponent child : with) {
+        for (ChatComponent child : this.with) {
             if (child.hasWith(component, true)) {
                 return true;
             }
@@ -194,8 +194,8 @@ public class ChatComponent {
      *
      * @return The extra components.
      */
-    public List<ChatComponent> getExtra() {
-        return Collections.unmodifiableList(this.extra);
+    public Collection<ChatComponent> getExtra() {
+        return Collections.unmodifiableCollection(this.extra);
     }
 
     /**
@@ -232,7 +232,7 @@ public class ChatComponent {
      * component's hierarchy.
      */
     public boolean hasExtra(ChatComponent component, boolean recursive) {
-        List<ChatComponent> extra = this.extra;
+        Collection<ChatComponent> extra = this.extra;
         if (extra.contains(component)) {
             return true;
         } else if (!recursive) {
@@ -253,7 +253,7 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isBold() {
-        Boolean flag = this.bold.get();
+        Boolean flag = this.bold;
         return flag != null && flag;
     }
 
@@ -264,7 +264,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setBold(boolean bold) {
-        this.bold.set(bold);
+        this.bold = bold;
         return this;
     }
 
@@ -274,7 +274,7 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isItalic() {
-        Boolean flag = this.italic.get();
+        Boolean flag = this.italic;
         return flag != null && flag;
     }
 
@@ -285,7 +285,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setItalic(boolean italic) {
-        this.italic.set(italic);
+        this.italic = italic;
         return this;
     }
 
@@ -295,7 +295,7 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isUnderlined() {
-        Boolean flag = this.underlined.get();
+        Boolean flag = this.underlined;
         return flag != null && flag;
     }
 
@@ -306,7 +306,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setUnderlined(boolean underlined) {
-        this.underlined.set(underlined);
+        this.underlined = underlined;
         return this;
     }
 
@@ -316,7 +316,7 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isStrikethrough() {
-        Boolean flag = this.strikethrough.get();
+        Boolean flag = this.strikethrough;
         return flag != null && flag;
     }
 
@@ -327,7 +327,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setStrikethrough(boolean strikethrough) {
-        this.strikethrough.set(strikethrough);
+        this.strikethrough = strikethrough;
         return this;
     }
 
@@ -337,7 +337,7 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isObfuscated() {
-        Boolean flag = this.obfuscated.get();
+        Boolean flag = this.obfuscated;
         return flag != null && flag;
     }
 
@@ -348,7 +348,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent setObfuscated(boolean obfuscated) {
-        this.obfuscated.set(obfuscated);
+        this.obfuscated = obfuscated;
         return this;
     }
 
@@ -387,34 +387,34 @@ public class ChatComponent {
             json.addProperty("selector", selector);
         }
 
-        List<ChatComponent> extra = this.extra;
+        Collection<ChatComponent> extra = this.extra;
         if (!extra.isEmpty()) {
             JsonArray extraArray = new JsonArray();
             extra.forEach(e -> extraArray.add(e.asJson()));
             json.add("extra", extraArray);
         }
 
-        Boolean isBold = this.bold.get();
+        Boolean isBold = this.bold;
         if (isBold != null) {
             json.addProperty("bold", isBold);
         }
 
-        Boolean isItalic = this.italic.get();
+        Boolean isItalic = this.italic;
         if (isItalic != null) {
             json.addProperty("italic", isItalic);
         }
 
-        Boolean isUnderlined = this.underlined.get();
+        Boolean isUnderlined = this.underlined;
         if (isUnderlined != null) {
             json.addProperty("underlined", isUnderlined);
         }
 
-        Boolean isStrikethrough = this.strikethrough.get();
+        Boolean isStrikethrough = this.strikethrough;
         if (isStrikethrough != null) {
             json.addProperty("strikethrough", isStrikethrough);
         }
 
-        Boolean isObfuscated = this.obfuscated.get();
+        Boolean isObfuscated = this.obfuscated;
         if (isObfuscated != null) {
             json.addProperty("obfuscated", isObfuscated);
         }
@@ -568,14 +568,11 @@ public class ChatComponent {
     @Getter
     @AllArgsConstructor
     private final class StringChatComponent extends ChatComponent {
-
         private String string;
 
         @Override
         public JsonElement asJson() {
-            return new JsonPrimitive(string);
+            return new JsonPrimitive(this.string);
         }
-
     }
-
 }
