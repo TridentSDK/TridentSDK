@@ -93,12 +93,12 @@ public class ChatComponent {
     private volatile HoverEvent hoverEvent;
 
     /**
-     * The list of other JSON formatted components
+     * The list of chat components added to the 'with' array.
      */
-    private final List<JsonElement> with = Collections.synchronizedList(new ArrayList<>());
+    private final List<ChatComponent> with = Collections.synchronizedList(new ArrayList<>());
+
     /**
-     * The list of other extra components added to this
-     * message
+     * The list of chat components added to the 'extra' array.
      */
     private final List<ChatComponent> extra = Collections.synchronizedList(new ArrayList<>());
 
@@ -106,18 +106,22 @@ public class ChatComponent {
      * Whether or not this message is bolded
      */
     private final AtomicReference<Boolean> bold = new AtomicReference<>();
+
     /**
      * Whether or not this message is italicized
      */
     private final AtomicReference<Boolean> italic = new AtomicReference<>();
+
     /**
      * Whether or not this message is underlined
      */
     private final AtomicReference<Boolean> underlined = new AtomicReference<>();
+
     /**
      * Whether or not this message is crossed out
      */
     private final AtomicReference<Boolean> strikethrough = new AtomicReference<>();
+
     /**
      * Whether or not this message is obfuscated
      */
@@ -130,29 +134,29 @@ public class ChatComponent {
      *
      * @return The with elements.
      */
-    public List<JsonElement> getWith() {
+    public List<ChatComponent> getWith() {
         return Collections.unmodifiableList(this.with);
     }
 
     /**
-     * Adds an element to the 'with' array.
+     * Adds a component to the 'with' array.
      *
-     * @param element The JSON element.
+     * @param component The component.
      * @return This object.
      */
-    public ChatComponent addWith(JsonElement element) {
-        this.with.add(element);
+    public ChatComponent addWith(ChatComponent component) {
+        this.with.add(component);
         return this;
     }
 
     /**
-     * Adds an string to the 'with' array.
+     * Adds a string to the 'with' array.
      *
-     * @param element The string.
+     * @param string The string.
      * @return This object.
      */
-    public ChatComponent addWith(String element) {
-        return this.addWith(new JsonPrimitive(element));
+    public ChatComponent addWith(String string) {
+        return this.addWith(new StringChatComponent(string));
     }
 
     /**
@@ -187,7 +191,7 @@ public class ChatComponent {
      * @return This component.
      */
     public ChatComponent addExtra(String string) {
-        this.extra.add(ChatComponent.create().setText(string));
+        this.extra.add(new StringChatComponent(string));
         return this;
     }
 
@@ -285,7 +289,8 @@ public class ChatComponent {
      * @return True iff it is.
      */
     public boolean isStrikethrough() {
-        return this.strikethrough != null && this.strikethrough.get();
+        Boolean flag = this.strikethrough.get();
+        return flag != null && flag;
     }
 
     /**
@@ -321,11 +326,11 @@ public class ChatComponent {
     }
 
     /**
-     * Gets this component as a JSON object, ready to be sent to a client.
+     * Gets this component as a JSON element, ready to be sent to a client.
      *
-     * @return The JSON object.
+     * @return The JSON element.
      */
-    public JsonObject asJson() {
+    public JsonElement asJson() {
         JsonObject json = new JsonObject();
 
         String text = this.text;
@@ -337,7 +342,7 @@ public class ChatComponent {
         if (translate != null) {
             json.addProperty("translate", translate);
             JsonArray array = new JsonArray();
-            this.with.forEach(array::add);
+            this.with.forEach(e -> array.add(e.asJson()));
             json.add("with", array);
         }
 
@@ -532,4 +537,18 @@ public class ChatComponent {
         }
         return component;
     }
+
+    @Getter
+    @AllArgsConstructor
+    private final class StringChatComponent extends ChatComponent {
+
+        private String string;
+
+        @Override
+        public JsonElement asJson() {
+            return new JsonPrimitive(string);
+        }
+
+    }
+
 }
