@@ -20,6 +20,7 @@ import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
+import net.tridentsdk.ui.tablist.TabListManager;
 import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.Nonnull;
@@ -122,5 +123,8 @@ public final class Impl {
 
         // get the world handler
         WorldLoader wrlds();
+
+        // Get the TabList Manager
+        TabListManager tabListManager();
     }
 }

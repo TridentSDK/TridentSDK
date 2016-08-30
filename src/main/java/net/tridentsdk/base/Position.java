@@ -32,7 +32,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public final class Position extends AbstractVector<Position> {
+public final class Position extends AbstractVector<Position> implements Cloneable {
     private static final long serialVersionUID = 5910507790866074403L;
 
     /**
@@ -323,5 +323,10 @@ public final class Position extends AbstractVector<Position> {
         return String.format(
                 "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
                 this.world.name(), this.x, this.y, this.z, this.pitch, this.yaw);
+    }
+
+    @Override
+    public Position clone() {
+        return new Position(world, x, y, z, pitch, yaw);
     }
 }

@@ -19,6 +19,7 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.ui.tablist.TabList;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.UUID;
@@ -78,4 +79,21 @@ public interface Player extends Entity {
      * @param reason the reason for kicking the player
      */
     void kick(ChatComponent reason);
+
+    /**
+     * Obtains the current tablist of the player.
+     * If the player doesn't have its own tablist, then
+     * the global tablist is returned.
+     *
+     * @return the current tablist
+     */
+    TabList getTabList();
+
+    /**
+     * Set the tablist of the player to a custom one.
+     *
+     * @param tabList the new tablist
+     */
+    void setTabList(TabList tabList);
+
 }
