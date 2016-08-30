@@ -145,7 +145,9 @@ public class ChatComponent {
      * @return This object.
      */
     public ChatComponent addWith(ChatComponent component) {
-        this.with.add(component);
+        if (!hasWith(component, true)) {
+            this.with.add(component);
+        }
         return this;
     }
 
@@ -157,6 +159,31 @@ public class ChatComponent {
      */
     public ChatComponent addWith(String string) {
         return this.addWith(new StringChatComponent(string));
+    }
+
+    /**
+     * Checks if this component contains the given
+     * component in the 'with' array, optionally recursively.
+     *
+     * @param component The component
+     * @param recursive Whether to check children as well.
+     * @return True iff the given component exists in this
+     * component's hierarchy.
+     */
+    public boolean hasWith(ChatComponent component, boolean recursive) {
+        List<ChatComponent> with = this.with;
+        if (extra.contains(component)) {
+            return true;
+        } else if (!recursive) {
+            return false;
+        }
+
+        for (ChatComponent child : with) {
+            if (child.hasWith(component, true)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -197,7 +224,7 @@ public class ChatComponent {
 
     /**
      * Checks if this component contains the given
-     * component, optionally recursively.
+     * component in the 'extra' array, optionally recursively.
      *
      * @param component The component
      * @param recursive Whether to check children as well.
