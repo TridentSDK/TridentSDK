@@ -61,6 +61,16 @@ public class ClickEvent {
     }
 
     /**
+     * Parses a click event from the given JSON.
+     *
+     * @param json The JSON.
+     * @return The click event.
+     */
+    public static ClickEvent fromJson(JsonObject json) {
+        return of(ClickAction.valueOf(json.get("action").getAsString().toUpperCase()), json.get("value").getAsString());
+    }
+
+    /**
      * Gets the action to be performed.
      *
      * @return The action.
@@ -89,4 +99,5 @@ public class ClickEvent {
         obj.addProperty("value", this.value);
         return obj;
     }
+
 }
