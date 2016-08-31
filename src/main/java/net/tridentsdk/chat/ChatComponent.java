@@ -27,6 +27,7 @@ import lombok.experimental.Accessors;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents a component in a Minecraft chat format.
@@ -135,7 +136,7 @@ public class ChatComponent {
      *
      * @return The with elements.
      */
-    public Collection<ChatComponent> getWith() {
+    public List<ChatComponent> getWith() {
         return Collections.unmodifiableCollection(this.with);
     }
 
@@ -194,7 +195,7 @@ public class ChatComponent {
      *
      * @return The extra components.
      */
-    public Collection<ChatComponent> getExtra() {
+    public List<ChatComponent> getExtra() {
         return Collections.unmodifiableCollection(this.extra);
     }
 
