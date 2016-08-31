@@ -1,12 +1,44 @@
+/*
+ * Trident - A Multithreaded Server Alternative
+ * Copyright 2016 The TridentSDK Team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package net.tridentsdk.ui.tablist;
 
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.entity.living.Player;
 
-import java.util.List;
+import java.util.Collection;
 
+/**
+ * The tab list.
+ *
+ * <p>A tab list is a wall of entries that are displayed
+ * when a player polls for a list of players, but doesn't
+ * necessarily have to reply with a list of players. It
+ * can,
+ * for example, display information isntead of player
+ * names.
+ * </p>
+ *
+ * <p>Tab lists can be obtained using the
+ * {@link TabListManager}.</p>
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
+ */
 public interface TabList {
-
     /**
      * Set an element of the tablist to a specific value.
      * If value is null, the element will be removed
@@ -60,7 +92,7 @@ public interface TabList {
      *
      * @return list of tablist users
      */
-    List<Player> getUserList();
+    Collection<Player> getUserList();
 
     /**
      * Add a player as a user of this tablist

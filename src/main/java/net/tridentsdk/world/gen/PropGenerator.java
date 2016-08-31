@@ -29,15 +29,10 @@ public interface PropGenerator {
      * method and writing the generated blocks to the
      * context.
      *
-     * <p>This method is called for each of the horizontal
-     * 16 blocks in a chunk, with the height representing
-     * the highest block at the relative X/Z coordinates.
-     * </p>
-     *
-     * @param relX the relative x
-     * @param relZ the relative z
+     * @param chunkX the chunk x
+     * @param chunkZ the chunk z
      * @param height the highest block at the X/Z
      * @param context the context
      */
-    void generate(int relX, int relZ, int height, GeneratorContext context);
+    void generate(int chunkX, int chunkZ, int height, GeneratorContext context);
 }

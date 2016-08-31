@@ -20,6 +20,7 @@ import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.ui.tablist.TabList;
+import net.tridentsdk.world.opt.GameMode;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.UUID;
@@ -79,6 +80,22 @@ public interface Player extends Entity {
      * @param reason the reason for kicking the player
      */
     void kick(ChatComponent reason);
+
+    /**
+     * Obtains the game mode which the player is currently
+     * using.
+     *
+     * @return the player's game mode
+     */
+    GameMode getGameMode();
+
+    /**
+     * Transitions the player from the current game mode to
+     * the new given game mode.
+     *
+     * @param gameMode the new game mode
+     */
+    void setGameMode(GameMode gameMode);
 
     /**
      * Obtains the current tablist of the player.
