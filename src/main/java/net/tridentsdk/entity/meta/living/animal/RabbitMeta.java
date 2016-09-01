@@ -6,6 +6,7 @@ import net.tridentsdk.base.RabbitType;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface RabbitMeta extends AnimalMeta {
 
     RabbitType getRabbitType();

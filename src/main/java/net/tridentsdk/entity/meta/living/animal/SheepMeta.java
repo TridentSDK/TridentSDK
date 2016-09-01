@@ -6,6 +6,7 @@ import net.tridentsdk.base.DyeColor;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface SheepMeta extends AnimalMeta {
 
     DyeColor getSheepColor();

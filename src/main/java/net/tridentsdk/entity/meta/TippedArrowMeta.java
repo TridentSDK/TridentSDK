@@ -6,6 +6,7 @@ import java.awt.*;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface TippedArrowMeta extends ArrowMeta {
 
     Color getColor();

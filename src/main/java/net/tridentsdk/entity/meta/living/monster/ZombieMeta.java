@@ -6,6 +6,7 @@ import net.tridentsdk.base.ZombieType;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface ZombieMeta extends MonsterMeta {
 
     boolean isBaby();

@@ -11,6 +11,7 @@ import java.util.UUID;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface HorseMeta extends AnimalMeta {
 
     boolean isTame();

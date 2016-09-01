@@ -7,6 +7,7 @@ import net.tridentsdk.entity.meta.living.LivingEntityMeta;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface ArmorStandMeta extends LivingEntityMeta {
 
     boolean isSmall();

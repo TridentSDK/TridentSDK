@@ -6,6 +6,7 @@ import net.tridentsdk.entity.meta.EntityMeta;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO - documentation
 public interface MinecartMeta extends EntityMeta {
 
     int getShakingPower();
