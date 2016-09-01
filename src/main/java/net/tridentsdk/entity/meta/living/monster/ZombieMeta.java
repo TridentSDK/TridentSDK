@@ -50,6 +50,14 @@ public interface ZombieMeta extends MonsterMeta {
 
         private static final Map<Integer, ZombieType> dataToType = new HashMap<>();
 
+        public static ZombieType of(int data) {
+            ZombieType type = dataToType.get(data);
+            if (type == null) {
+                throw new IllegalArgumentException("no zombie type with id = " + data);
+            }
+            return type;
+        }
+
         static {
             for (ZombieType type : values()) {
                 dataToType.put(type.data, type);

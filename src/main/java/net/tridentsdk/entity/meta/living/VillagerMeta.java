@@ -32,6 +32,14 @@ public interface VillagerMeta extends AgeableMeta{
 
         private static final Map<Integer, VillagerProfession> dataToType = new HashMap<>();
 
+        public static VillagerProfession of(int data) {
+            VillagerProfession profession = dataToType.get(data);
+            if (profession == null) {
+                throw new IllegalArgumentException("no villager profession with id = " + data);
+            }
+            return profession;
+        }
+
         static {
             for (VillagerProfession type : values()) {
                 dataToType.put(type.data, type);

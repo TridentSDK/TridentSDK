@@ -34,6 +34,14 @@ public interface SkeletonMeta extends MonsterMeta {
 
         private static final Map<Integer, SkeletonType> dataToType = new HashMap<>();
 
+        public static SkeletonType of(int data) {
+            SkeletonType type = dataToType.get(data);
+            if (type == null) {
+                throw new IllegalArgumentException("no skeleton type with id = " + data);
+            }
+            return type;
+        }
+
         static {
             for (SkeletonType type : values()) {
                 dataToType.put(type.data, type);

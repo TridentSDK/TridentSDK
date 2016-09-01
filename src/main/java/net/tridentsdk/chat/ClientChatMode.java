@@ -26,8 +26,9 @@ public enum ClientChatMode {
 
     public static ClientChatMode of(int data) {
         ClientChatMode mode = dataToMode.get(data);
-        if (mode == null)
+        if (mode == null) {
             throw new IllegalArgumentException("no client chat mode with id=" + data);
+        }
         return mode;
     }
 
