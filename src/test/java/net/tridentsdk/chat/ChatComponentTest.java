@@ -16,34 +16,33 @@
  */
 package net.tridentsdk.chat;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ChatComponentTest {
 
     @Test
     public void testPlain() {
-        assertEquals("{\"text\":\"test\"}", ChatComponent.text("test").toString());
+        assertEquals(new Gson().fromJson("{\"text\":\"test\"}", JsonObject.class), ChatComponent.text("test").asJson());
     }
 
     @Test
     public void testEmpty() {
-        assertEquals("{\"text\":\"\"}", ChatComponent.empty().toString());
+        assertEquals(new Gson().fromJson("{\"text\":\"\"}", JsonObject.class), ChatComponent.empty().asJson());
     }
 
     @Test
     public void testFromFormatString() {
         ChatComponent cc = ChatComponent.fromFormat("\u00A7k\u00A7eHello! \u00A7r\u00A7cNice to meet you! :)");
-        assertEquals("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", cc.toString());
+        assertEquals(new Gson().fromJson("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", JsonObject.class), cc.asJson());
     }
 
     @Test
     public void testTranslateWith() {
-        assertEquals("{\"translate\":\"chat.type.text\",\"with\":[\"my awesome message\"]}", ChatComponent.create().setTranslate("chat.type.text").addWith("my awesome message").toString());
+        assertEquals(new Gson().fromJson("{\"translate\":\"chat.type.text\",\"with\":[\"my awesome message\"]}", JsonObject.class), ChatComponent.create().setTranslate("chat.type.text").addWith("my awesome message").asJson());
     }
 
     @Test
@@ -58,7 +57,7 @@ public class ChatComponentTest {
         assertTrue(json.get("bold").getAsBoolean());
         assertTrue(json.get("italic").getAsBoolean());
         assertFalse(json.get("underlined").getAsBoolean());
-        assertEquals("{\"bold\":true,\"italic\":true,\"underlined\":false,\"color\":\"blue\"}", json.toString());
+        assertEquals(new Gson().fromJson("{\"bold\":true,\"italic\":true,\"underlined\":false,\"color\":\"blue\"}", JsonObject.class), json);
     }
 
 }
