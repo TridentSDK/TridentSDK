@@ -16,9 +16,12 @@
  */
 package net.tridentsdk.chat;
 
+import com.google.gson.JsonObject;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ChatComponentTest {
 
@@ -36,6 +39,26 @@ public class ChatComponentTest {
     public void testFromFormatString() {
         ChatComponent cc = ChatComponent.fromFormat("\u00A7k\u00A7eHello! \u00A7r\u00A7cNice to meet you! :)");
         assertEquals("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", cc.toString());
+    }
+
+    @Test
+    public void testTranslateWith() {
+        assertEquals("{\"translate\":\"chat.type.text\",\"with\":[\"my awesome message\"]}", ChatComponent.create().setTranslate("chat.type.text").addWith("my awesome message").toString());
+    }
+
+    @Test
+    public void testColors() {
+        JsonObject json = ChatComponent.create().setColor(ChatColor.BLUE).setBold(true).setItalic(true).setUnderlined(false).asJson().getAsJsonObject();
+        assertTrue(json.has("color"));
+        assertTrue(json.has("bold"));
+        assertTrue(json.has("italic"));
+        assertTrue(json.has("underlined"));
+        assertFalse(json.has("obfuscated"));
+        assertEquals("blue", json.get("color").getAsString());
+        assertTrue(json.get("bold").getAsBoolean());
+        assertTrue(json.get("italic").getAsBoolean());
+        assertFalse(json.get("underlined").getAsBoolean());
+        assertEquals("{\"bold\":true,\"italic\":true,\"underlined\":false,\"color\":\"blue\"}", json.toString());
     }
 
 }
