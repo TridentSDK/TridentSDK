@@ -17,6 +17,7 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.base.Position;
+import net.tridentsdk.entity.meta.EntityMeta;
 import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -77,4 +78,17 @@ public interface Entity {
      * Removes this entity from the world.
      */
     void remove();
+
+    /**
+     * Obtains this entity's metadata.
+     *
+     * @return The metadata.
+     */
+    EntityMeta getMetadata();
+
+    /**
+     * Updates this entity's metadata according to changes
+     * set through {@link #getMetadata()}.
+     */
+    void updateMetadata();
 }

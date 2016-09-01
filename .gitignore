@@ -104,6 +104,7 @@ Thumbs.db
 
 ### Trident files ###
 /world/
+/logs/
 bans.txt
 ops.txt
 server.json

@@ -90,6 +90,16 @@ public class HoverEvent {
     */
 
     /**
+     * Parses a click event from the given JSON.
+     *
+     * @param json The JSON.
+     * @return The click event.
+     */
+    public static HoverEvent fromJson(JsonObject json) {
+        return new HoverEvent(HoverAction.valueOf(json.get("action").getAsString().toUpperCase()), json.get("value"));
+    }
+
+    /**
      * Gets the action to be performed.
      *
      * @return The action.

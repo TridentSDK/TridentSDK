@@ -172,7 +172,7 @@ public class ChatComponent {
      * component's hierarchy.
      */
     public boolean hasWith(ChatComponent component, boolean recursive) {
-        if (this.extra.contains(component)) {
+        if (this.with.contains(component)) {
             return true;
         } else if (!recursive) {
             return false;
@@ -476,6 +476,78 @@ public class ChatComponent {
      */
     public static ChatComponent text(String text) {
         return create().setText(text);
+    }
+
+    /**
+     * Creates a component based on a given JSON object.
+     *
+     * @param json The JSON.
+     * @return The component.
+     */
+    public static ChatComponent fromJson(JsonObject json) {
+        ChatComponent cc = create();
+        if (json.has("text")) {
+            cc.setText(json.get("text").getAsString());
+        }
+        if (json.has("translate")) {
+            cc.setTranslate(json.get("translate").getAsString());
+        }
+        if (json.has("with")) {
+            JsonArray array = json.getAsJsonArray("with");
+            for (int i = 0, j = array.size(); i < j; i++) {
+                JsonElement el = array.get(i);
+                if (el.isJsonPrimitive())
+                    cc.addWith(el.getAsString());
+                else if (el.isJsonObject())
+                    cc.addWith(fromJson(el.getAsJsonObject()));
+            }
+        }
+        if (json.has("score")) {
+            JsonObject score = json.getAsJsonObject("score");
+            cc.setScoreUsername(score.get("name").getAsString());
+            cc.setScoreObjective(score.get("objective").getAsString());
+        }
+        if (json.has("selector")) {
+            cc.setSelector(json.get("selector").getAsString());
+        }
+        if (json.has("extra")) {
+            JsonArray array = json.getAsJsonArray("extra");
+            for (int i = 0, j = array.size(); i < j; i++) {
+                JsonElement el = array.get(i);
+                if (el.isJsonPrimitive())
+                    cc.addExtra(el.getAsString());
+                else if (el.isJsonObject())
+                    cc.addExtra(fromJson(el.getAsJsonObject()));
+            }
+        }
+        if (json.has("bold")) {
+            cc.setBold(json.get("bold").getAsBoolean());
+        }
+        if (json.has("italic")) {
+            cc.setItalic(json.get("italic").getAsBoolean());
+        }
+        if (json.has("underlined")) {
+            cc.setUnderlined(json.get("underlined").getAsBoolean());
+        }
+        if (json.has("strikethrough")) {
+            cc.setStrikethrough(json.get("strikethrough").getAsBoolean());
+        }
+        if (json.has("obfuscated")) {
+            cc.setObfuscated(json.get("obfuscated").getAsBoolean());
+        }
+        if (json.has("color")) {
+            cc.setColor(ChatColor.valueOf(json.get("color").getAsString().toUpperCase()));
+        }
+        if (json.has("clickEvent")) {
+            cc.setClickEvent(ClickEvent.fromJson(json.getAsJsonObject("clickEvent")));
+        }
+        if (json.has("hoverEvent")) {
+            cc.setHoverEvent(HoverEvent.fromJson(json.getAsJsonObject("hoverEvent")));
+        }
+        if (json.has("insertion")) {
+            cc.setInsertion(json.get("insertion").getAsString());
+        }
+        return cc;
     }
 
     /**
