@@ -34,7 +34,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @State(Scope.Benchmark)
-public class VectorsTest {
+public class VectorTest {
     // close eyes, put hand on numpad to get these values
     // numbers selected from "fair dice roll"
     private static final double CHANGE_TO = -1.382;
@@ -164,7 +164,7 @@ public class VectorsTest {
     ////////////////////////////////////////////////////////
 
     public static void m2() {
-        Options opt = new OptionsBuilder().include(".*" + VectorsTest.class.getSimpleName() + ".*")
+        Options opt = new OptionsBuilder().include(".*" + VectorTest.class.getSimpleName() + ".*")
                 .timeUnit(TimeUnit.SECONDS)
                 .mode(Mode.Throughput)
                 .operationsPerInvocation(1)
