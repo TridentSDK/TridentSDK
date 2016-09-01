@@ -1,5 +1,9 @@
 package net.tridentsdk.entity.meta.living.animal;
 
+import net.tridentsdk.base.HorseArmor;
+import net.tridentsdk.base.HorseType;
+import net.tridentsdk.base.HorseVariant;
+
 import java.util.UUID;
 
 /**
@@ -51,17 +55,5 @@ public interface HorseMeta extends AnimalMeta {
     HorseArmor getHorseArmor();
 
     void setHorseArmor(HorseArmor armor);
-
-    enum HorseType {
-        // TODO
-    }
-
-    enum HorseVariant {
-        // TODO
-    }
-
-    enum HorseArmor {
-        // TODO
-    }
 
 }
