@@ -1,10 +1,9 @@
 package net.tridentsdk.base;
 
+import lombok.Getter;
+
 /**
  * Represents a direction.
- *
- * <p>Please note, the order of the elements in this class IS IMPORTANT.</p>
- *
  *
  * @author TridentSDK
  * @since 0.5-alpha
@@ -14,31 +13,38 @@ public enum Direction {
     /**
      * Downwards
      */
-    DOWN,
+    DOWN(0),
 
     /**
      * Upwards
      */
-    UP,
+    UP(1),
 
     /**
      * North
      */
-    NORTH,
+    NORTH(2),
 
     /**
      * South
      */
-    SOUTH,
+    SOUTH(3),
 
     /**
      * West
      */
-    WEST,
+    WEST(4),
 
     /**
      * East
      */
-    EAST
+    EAST(5);
+
+    @Getter
+    private final int data;
+
+    private Direction(int data) {
+        this.data = data;
+    }
 
 }

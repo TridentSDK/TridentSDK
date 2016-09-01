@@ -19,6 +19,7 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.meta.living.PlayerMeta;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.opt.GameMode;
 
@@ -112,5 +113,10 @@ public interface Player extends Entity {
      * @param tabList the new tablist
      */
     void setTabList(TabList tabList);
+
+    /**
+     * @inheritDoc
+     */
+    PlayerMeta getMetadata();
 
 }
