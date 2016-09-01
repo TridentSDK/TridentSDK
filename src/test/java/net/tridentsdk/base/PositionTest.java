@@ -50,7 +50,7 @@ public class PositionTest {
         Position p0 = new Position(this.world);
         Position p1 = new Position(this.world);
 
-        Vector vector = VectorTest.rand();
+        Vector vector = VectorsTest.rand();
         vector.vecWrite(p0);
 
         p0.write(p1);
@@ -76,12 +76,12 @@ public class PositionTest {
         Position p0 = new Position(this.world);
         Position p1 = new Position(this.world);
 
-        Vector vector = VectorTest.rand();
+        Vector vector = VectorsTest.rand();
         vector.vecWrite(p0);
         vector.vecWrite(p1);
 
         assertEquals(p0, p1);
-        assertNotEquals(p0, VectorTest.rand());
+        assertNotEquals(p0, VectorsTest.rand());
         assertEquals(p0.hashCode(), p1.hashCode());
         assertEquals(p0.toString(), p1.toString());
     }
