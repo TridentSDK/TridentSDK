@@ -1,8 +1,9 @@
 package net.tridentsdk.entity.meta.living.animal;
 
 import net.tridentsdk.base.HorseArmor;
+import net.tridentsdk.base.HorseColor;
+import net.tridentsdk.base.HorseMarkings;
 import net.tridentsdk.base.HorseType;
-import net.tridentsdk.base.HorseVariant;
 
 import java.util.UUID;
 
@@ -44,9 +45,13 @@ public interface HorseMeta extends AnimalMeta {
 
     void setHorseType(HorseType type);
 
-    HorseVariant getHorseVariant();
+    HorseColor getHorseColor();
 
-    void setHorseVariant(HorseVariant variant);
+    void setHorseColor(HorseColor color);
+
+    HorseMarkings getHorseMarkings();
+
+    void setHorseMarkings(HorseMarkings markings);
 
     UUID getOwner();
 
