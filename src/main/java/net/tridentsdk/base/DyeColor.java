@@ -43,4 +43,12 @@ public enum DyeColor {
         }
     }
 
+    public static DyeColor of(int data) {
+        DyeColor color = dataToColor.get(data);
+        if (color == null) {
+            throw new IllegalArgumentException("no dye color with id = " + data);
+        }
+        return color;
+    }
+
 }
