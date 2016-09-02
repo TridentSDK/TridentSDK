@@ -49,32 +49,27 @@ public class ChatComponent {
     /**
      * The translate modifier for the chat message
      */
-    @Getter
-    @Setter
+    @Getter @Setter
     private String translate;
     /**
      * The chat selector
      */
-    @Getter
-    @Setter
+    @Getter @Setter
     private String selector;
     /**
      * The insertion modifier for the chat message
      */
-    @Getter
-    @Setter
+    @Getter @Setter
     private String insertion;
     /**
      * The scoreboard username
      */
-    @Getter
-    @Setter
+    @Getter @Setter
     private String scoreUsername;
     /**
      * The scoreboard objective
      */
-    @Getter
-    @Setter
+    @Getter @Setter
     private String scoreObjective;
 
     /**
@@ -635,6 +630,14 @@ public class ChatComponent {
             component.addExtra(currentComponent.setText(currentText).setColor(currentColor));
         }
         return component;
+    }
+
+    public boolean equals(Object o) {
+        if (o == null || o == this || o.getClass() != getClass()) {
+            return o == this;
+        }
+        ChatComponent cc = (ChatComponent) o;
+        return asJson().equals(cc.asJson());
     }
 
     @Getter

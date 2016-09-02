@@ -24,4 +24,11 @@ public class HoverEventTest {
         assertEquals(new Gson().fromJson("{\"action\":\"show_achievement\",\"value\":\"the achievement\"}", JsonObject.class), HoverEvent.achievement("the achievement").asJson());
     }
 
+    @Test
+    public void testJsonValidity() {
+        HoverEvent event = HoverEvent.text("hi there");
+        assertEquals(event.getAction(), HoverEvent.fromJson(event.asJson()).getAction());
+        assertEquals(event.getValue(), HoverEvent.fromJson(event.asJson()).getValue());
+    }
+
 }
