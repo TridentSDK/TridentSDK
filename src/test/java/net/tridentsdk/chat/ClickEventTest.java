@@ -31,4 +31,11 @@ public class ClickEventTest {
         assertEquals(new Gson().fromJson("{\"action\":\"open_file\",\"value\":\"nope\"}", JsonObject.class), ClickEvent.of(ClickAction.OPEN_FILE, "nope").asJson());
     }
 
+    @Test
+    public void testJsonValidity() {
+        ClickEvent event = ClickEvent.of(ClickAction.RUN_COMMAND, "/say hi there");
+        assertEquals(event.getAction(), ClickEvent.fromJson(event.asJson()).getAction());
+        assertEquals(event.getValue(), ClickEvent.fromJson(event.asJson()).getValue());
+    }
+
 }

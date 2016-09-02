@@ -17,6 +17,7 @@
 package net.tridentsdk.chat;
 
 import com.google.gson.JsonObject;
+import lombok.Data;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -26,6 +27,7 @@ import javax.annotation.concurrent.Immutable;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Data
 @Immutable
 public class ClickEvent {
     /**

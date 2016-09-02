@@ -60,4 +60,78 @@ public class ChatComponentTest {
         assertEquals(new Gson().fromJson("{\"bold\":true,\"italic\":true,\"underlined\":false,\"color\":\"blue\"}", JsonObject.class), json);
     }
 
+    @Test
+    public void testGettersAndSetters() {
+        ChatComponent cc = ChatComponent.create();
+        assertEquals("my text", cc.setText("my text").getText());
+        assertEquals("my translate", cc.setTranslate("my translate").getTranslate());
+
+        ChatComponent childExtra = ChatComponent.create().setText("childExtra");
+        ChatComponent childWith = ChatComponent.create().setText("childWith");
+        ChatComponent subExtra = ChatComponent.create().setText("subExtra").addExtra(childExtra);
+        ChatComponent subWith = ChatComponent.create().setText("subWith").addWith(childWith);
+        cc.addExtra(subExtra).addWith(subWith);
+        assertTrue(cc.hasWith(subWith, false));
+        assertTrue(cc.hasExtra(subExtra, false));
+        assertFalse(cc.hasExtra(subWith, false));
+        assertFalse(cc.hasWith(subExtra, false));
+
+        assertTrue(cc.hasWith(subWith, true));
+        assertTrue(cc.hasExtra(subExtra, true));
+        assertFalse(cc.hasExtra(subWith, true));
+        assertFalse(cc.hasWith(subExtra, true));
+
+        assertFalse(cc.hasWith(childWith, false));
+        assertFalse(cc.hasExtra(childExtra, false));
+        assertFalse(cc.hasExtra(childWith, true));
+        assertFalse(cc.hasWith(childExtra, true));
+
+        assertTrue(cc.hasWith(childWith, true));
+        assertTrue(cc.hasExtra(childExtra, true));
+        assertFalse(cc.hasExtra(childWith, true));
+        assertFalse(cc.hasWith(childExtra, true));
+
+        assertEquals(1, cc.getWith().size());
+        assertEquals(1, cc.getExtra().size());
+        assertTrue(cc.getWith().contains(subWith));
+        assertTrue(cc.getExtra().contains(subExtra));
+
+        assertEquals(1, subWith.getWith().size());
+        assertEquals(1, subExtra.getExtra().size());
+        assertTrue(subWith.getWith().contains(childWith));
+        assertTrue(subExtra.getExtra().contains(childExtra));
+
+        subWith.addWith("yo").addExtra("yo");
+
+        assertEquals("my score username", cc.setScoreUsername("my score username").getScoreUsername());
+        assertEquals("my score objective", cc.setScoreObjective("my score objective").getScoreObjective());
+        assertEquals("my insertion", cc.setInsertion("my insertion").getInsertion());
+
+        assertTrue(cc.setBold(true).isBold());
+        assertTrue(cc.setItalic(true).isItalic());
+        assertTrue(cc.setUnderlined(true).isUnderlined());
+        assertTrue(cc.setStrikethrough(true).isStrikethrough());
+        assertTrue(cc.setObfuscated(true).isObfuscated());
+        assertFalse(cc.setBold(false).isBold());
+        assertFalse(cc.setItalic(false).isItalic());
+        assertFalse(cc.setUnderlined(false).isUnderlined());
+        assertFalse(cc.setStrikethrough(false).isStrikethrough());
+        assertFalse(cc.setObfuscated(false).isObfuscated());
+
+        for (ChatColor c : ChatColor.values()) {
+            assertEquals(c, cc.setColor(c).getColor());
+        }
+
+        assertEquals("my selector", cc.setSelector("my selector").getSelector());
+
+        ClickEvent clickEvent = ClickEvent.of(ClickAction.RUN_COMMAND, "/say hello");
+        HoverEvent hoverEvent = HoverEvent.text("hello!");
+
+        assertEquals(clickEvent, cc.setClickEvent(clickEvent).getClickEvent());
+        assertEquals(hoverEvent, cc.setHoverEvent(hoverEvent).getHoverEvent());
+
+        assertEquals(cc, ChatComponent.fromJson(cc.asJson().getAsJsonObject()));
+        assertEquals(cc.asJson(), new Gson().fromJson(cc.toString(), JsonObject.class));
+    }
+
 }
