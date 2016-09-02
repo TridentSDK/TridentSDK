@@ -37,7 +37,7 @@ public interface Entity {
      *
      * @return the ID assigned by the server
      */
-    int id();
+    int getId();
 
     /**
      * Obtains the position in the world where this entity
@@ -49,7 +49,7 @@ public interface Entity {
      *
      * @return the entity's position
      */
-    Position position();
+    Position getPosition();
 
     /**
      * Sets the position of this entity.
@@ -65,14 +65,14 @@ public interface Entity {
      *
      * @return {@code true} if on ground
      */
-    boolean onGround();
+    boolean isOnGround();
 
     /**
      * The world which this entity is located.
      *
      * @return the world containing this entity
      */
-    World world();
+    World getWorld();
 
     /**
      * Removes this entity from the world.
