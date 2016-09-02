@@ -2,6 +2,9 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author TridentSDK
  * @since 0.5-alpha
@@ -19,6 +22,22 @@ public enum HorseColor {
 
     private HorseColor(int data) {
         this.data = data;
+    }
+
+    private static final Map<Integer, HorseColor> dataToColor = new HashMap<>();
+
+    static {
+        for (HorseColor color : values()) {
+            dataToColor.put(color.data, color);
+        }
+    }
+
+    public static HorseColor of(int data) {
+        HorseColor color = dataToColor.get(data);
+        if (color == null) {
+            throw new IllegalArgumentException("no horse color with id = " + data);
+        }
+        return color;
     }
 
 }

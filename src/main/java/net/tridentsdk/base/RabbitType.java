@@ -2,6 +2,9 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author TridentSDK
  * @since 0.5-alpha
@@ -21,6 +24,22 @@ public enum RabbitType {
 
     private RabbitType(int data) {
         this.data = data;
+    }
+
+    private static final Map<Integer, RabbitType> dataToType = new HashMap<>();
+
+    static {
+        for (RabbitType type : values()) {
+            dataToType.put(type.data, type);
+        }
+    }
+
+    public static RabbitType of(int data) {
+        RabbitType type = dataToType.get(data);
+        if (type == null) {
+            throw new IllegalArgumentException("no rabbit type with id = " + data);
+        }
+        return type;
     }
 
 }
