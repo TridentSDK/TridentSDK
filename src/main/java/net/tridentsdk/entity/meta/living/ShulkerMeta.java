@@ -1,6 +1,6 @@
 package net.tridentsdk.entity.meta.living;
 
-import net.tridentsdk.base.Direction;
+import net.tridentsdk.base.BlockDirection;
 import net.tridentsdk.base.Vector;
 
 /**
@@ -10,9 +10,9 @@ import net.tridentsdk.base.Vector;
 // TODO - documentation
 public interface ShulkerMeta {
 
-    Direction getFacingDirection();
+    BlockDirection getFacingDirection();
 
-    void setFacingDirection(Direction direction);
+    void setFacingDirection(BlockDirection direction);
 
     Vector getAttachmentPosition();
 
