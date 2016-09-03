@@ -30,11 +30,14 @@ public class PlayerTest {
         ChatComponent component = ChatComponent.text("hi there");
         player.sendMessage(component, ChatType.CHAT);
         player.sendMessage(component, ChatType.SYSTEM);
+        player.sendMessage(component);
 
         assertEquals(messages.get(0).getMessage(), component);
         assertEquals(messages.get(0).getType(), ChatType.CHAT);
         assertEquals(messages.get(1).getMessage(), component);
         assertEquals(messages.get(1).getType(), ChatType.SYSTEM);
+        assertEquals(messages.get(2).getMessage(), component);
+        assertEquals(messages.get(2).getType(), ChatType.SYSTEM);
     }
 
     @Data
