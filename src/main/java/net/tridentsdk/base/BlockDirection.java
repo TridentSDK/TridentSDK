@@ -29,25 +29,27 @@ public enum BlockDirection {
         this.zDiff = zDiff;
     }
 
-    public BlockDirection left() {
-        return left(false);
+    public boolean hasMinecraftDirection() {
+        return minecraftDirection != -1;
     }
 
-    public BlockDirection left(boolean includeDiagonals) {
-        int direction = ordinal() + (includeDiagonals ? 1 : 2);
-
-        if(direction < 0){
-            direction += 8;
-        }
-
-        return values()[direction];
+    public BlockDirection anticlockwise() {
+        return anticlockwise(false);
     }
 
-    public BlockDirection right() {
-        return right(false);
+    public BlockDirection anticlockwise(boolean includeDiagonals) {
+        if (ordinal() >= 8)
+            return this;
+        return values()[(ordinal() + (includeDiagonals ? 7 : 6)) % 8];
     }
 
-    public BlockDirection right(boolean includeDiagonals) {
+    public BlockDirection clockwise() {
+        return clockwise(false);
+    }
+
+    public BlockDirection clockwise(boolean includeDiagonals) {
+        if (ordinal() >= 8)
+            return this;
         return values()[(ordinal() + (includeDiagonals ? 1 : 2)) % 8];
     }
 
@@ -57,8 +59,13 @@ public enum BlockDirection {
                 return d;
             }
         }
-
         return null;
+    }
+
+    public BlockDirection getOpposite() {
+        if (ordinal() < 8)
+            return BlockDirection.values()[(ordinal() + 4) % 8];
+        return this == UP ? DOWN : UP;
     }
 
 }
