@@ -85,4 +85,27 @@ public class PositionTest {
         assertEquals(p0.hashCode(), p1.hashCode());
         assertEquals(p0.toString(), p1.toString());
     }
+
+    @Test
+    public void testSettersAndGetters() {
+        Position p0 = new Position(this.world);
+        p0.set(1, 2, 3);
+        p0.setYaw(4);
+        p0.setPitch(5);
+        assertEquals(1, p0.x(), 0);
+        assertEquals(2, p0.y(), 0);
+        assertEquals(3, p0.z(), 0);
+        assertEquals(4, p0.yaw(), 0);
+        assertEquals(5, p0.pitch(), 0);
+
+        assertEquals(p0.intX() / 16, p0.getChunkX());
+        assertEquals(p0.intZ() / 16, p0.getChunkZ());
+    }
+
+    @Test
+    public void testClone() {
+        Position p0 = new Position(this.world);
+        assertEquals(p0, p0.clone());
+    }
+
 }

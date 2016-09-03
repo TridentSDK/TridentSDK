@@ -48,6 +48,9 @@ public class BlockDirectionTest {
                 assertEquals(opps.inverse().get(dir), dir.getOpposite());
             }
         }
+
+        assertEquals(BlockDirection.DOWN, BlockDirection.UP.getOpposite());
+        assertEquals(BlockDirection.UP, BlockDirection.DOWN.getOpposite());
     }
 
     @Test
@@ -61,6 +64,17 @@ public class BlockDirectionTest {
         for (int i = 0; i < dirs.length; i++) {
             assertEquals(dirs[(i + 6) % 8], dirs[i].anticlockwise(false));
         }
+
+        for (int i = 0; i < dirs.length; i++) {
+            assertEquals(dirs[(i + 6) % 8], dirs[i].anticlockwise());
+        }
+
+        assertEquals(BlockDirection.UP, BlockDirection.UP.anticlockwise(false));
+        assertEquals(BlockDirection.DOWN, BlockDirection.DOWN.anticlockwise(false));
+        assertEquals(BlockDirection.UP, BlockDirection.UP.anticlockwise(true));
+        assertEquals(BlockDirection.DOWN, BlockDirection.DOWN.anticlockwise(true));
+        assertEquals(BlockDirection.UP, BlockDirection.UP.anticlockwise());
+        assertEquals(BlockDirection.DOWN, BlockDirection.DOWN.anticlockwise());
     }
 
     @Test
@@ -74,6 +88,17 @@ public class BlockDirectionTest {
         for (int i = 0; i < dirs.length; i++) {
             assertEquals(dirs[(i + 2) % 8], dirs[i].clockwise(false));
         }
+
+        for (int i = 0; i < dirs.length; i++) {
+            assertEquals(dirs[(i + 2) % 8], dirs[i].clockwise());
+        }
+
+        assertEquals(BlockDirection.UP, BlockDirection.UP.clockwise(false));
+        assertEquals(BlockDirection.DOWN, BlockDirection.DOWN.clockwise(false));
+        assertEquals(BlockDirection.UP, BlockDirection.UP.clockwise(true));
+        assertEquals(BlockDirection.DOWN, BlockDirection.DOWN.clockwise(true));
+        assertEquals(BlockDirection.UP, BlockDirection.UP.clockwise());
+        assertEquals(BlockDirection.DOWN, BlockDirection.DOWN.clockwise());
     }
 
 }
