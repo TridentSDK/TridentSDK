@@ -14,17 +14,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta.minecart;
+package net.tridentsdk.base;
+
+import lombok.Getter;
 
 /**
+ * Represents a direction.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-// TODO - documentation
-public interface FurnaceMinecartMeta extends MinecartMeta {
+public enum Direction {
 
-    boolean isPowered();
+    /**
+     * Downwards
+     */
+    DOWN(0),
 
-    void setPowered(boolean powered);
+    /**
+     * Upwards
+     */
+    UP(1),
+
+    /**
+     * North
+     */
+    NORTH(2),
+
+    /**
+     * South
+     */
+    SOUTH(3),
+
+    /**
+     * West
+     */
+    WEST(4),
+
+    /**
+     * East
+     */
+    EAST(5);
+
+    @Getter
+    private final int data;
+
+    private Direction(int data) {
+        this.data = data;
+    }
 
 }
