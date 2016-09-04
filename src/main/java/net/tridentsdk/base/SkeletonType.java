@@ -34,7 +34,7 @@ public enum SkeletonType {
     @Getter
     private final int data;
 
-    private SkeletonType(int data) {
+    SkeletonType(int data) {
         this.data = data;
     }
 

@@ -32,7 +32,7 @@ public enum HorseArmor {
     @Getter
     private final int armor;
 
-    private HorseArmor(int armor) {
+    HorseArmor(int armor) {
         this.armor = armor;
     }
 

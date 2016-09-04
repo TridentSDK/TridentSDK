@@ -35,7 +35,7 @@ public enum OcelotType {
     @Getter
     private final int data;
 
-    private OcelotType(int data) {
+    OcelotType(int data) {
         this.data = data;
     }
 

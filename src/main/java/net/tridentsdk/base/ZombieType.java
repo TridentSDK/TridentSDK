@@ -41,7 +41,7 @@ public enum ZombieType {
     @Getter
     private final boolean villager;
 
-    private ZombieType(int data) {
+    ZombieType(int data) {
         this.data = data;
         this.villager = data >= 1 && data <= 5;
     }

@@ -47,7 +47,7 @@ public enum DyeColor {
     @Getter
     private final int data;
 
-    private DyeColor(int data) {
+    DyeColor(int data) {
         this.data = data;
     }
 

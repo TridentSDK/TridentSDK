@@ -46,27 +46,27 @@ public enum BlockDirection {
     }
 
     public boolean hasMinecraftDirection() {
-        return minecraftDirection != -1;
+        return this.minecraftDirection != -1;
     }
 
     public BlockDirection anticlockwise() {
-        return anticlockwise(false);
+        return this.anticlockwise(false);
     }
 
     public BlockDirection anticlockwise(boolean includeDiagonals) {
-        if (ordinal() >= 8)
+        if (this.ordinal() >= 8)
             return this;
-        return values()[(ordinal() + (includeDiagonals ? 7 : 6)) % 8];
+        return values()[(this.ordinal() + (includeDiagonals ? 7 : 6)) % 8];
     }
 
     public BlockDirection clockwise() {
-        return clockwise(false);
+        return this.clockwise(false);
     }
 
     public BlockDirection clockwise(boolean includeDiagonals) {
-        if (ordinal() >= 8)
+        if (this.ordinal() >= 8)
             return this;
-        return values()[(ordinal() + (includeDiagonals ? 1 : 2)) % 8];
+        return values()[(this.ordinal() + (includeDiagonals ? 1 : 2)) % 8];
     }
 
     public static BlockDirection fromMinecraftDirection(int direction) {
@@ -79,8 +79,8 @@ public enum BlockDirection {
     }
 
     public BlockDirection getOpposite() {
-        if (ordinal() < 8)
-            return BlockDirection.values()[(ordinal() + 4) % 8];
+        if (this.ordinal() < 8)
+            return BlockDirection.values()[(this.ordinal() + 4) % 8];
         return this == UP ? DOWN : UP;
     }
 

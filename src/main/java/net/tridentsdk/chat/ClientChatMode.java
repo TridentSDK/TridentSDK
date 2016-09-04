@@ -34,7 +34,7 @@ public enum ClientChatMode {
     @Getter
     private final int data;
 
-    private ClientChatMode(int data) {
+    ClientChatMode(int data) {
         this.data = data;
     }
 
