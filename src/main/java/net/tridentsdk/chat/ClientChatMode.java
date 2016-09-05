@@ -18,40 +18,57 @@ package net.tridentsdk.chat;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
+ * Chat modes which a player may set by navigating to the
+ * "Multiplayer settings" and toggling the chat modes to
+ * the states listed below.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum ClientChatMode {
-
+    /**
+     * Allows both chat messages and commands to be
+     * displayed on the chat bar.
+     */
     CHAT_AND_COMMANDS(0),
+    /**
+     * Allows only command feedback to be displayed on the
+     * chat bar.
+     */
     COMMANDS_ONLY(1),
+    /**
+     * Do not use the chat bar.
+     */
     NONE(2);
 
     @Getter
     private final int data;
 
+    /**
+     * Creates a new chat mode with the given data value.
+     *
+     * @param data the identifyer used in the protocol to
+     * signify a particular chat mode
+     */
     ClientChatMode(int data) {
         this.data = data;
     }
 
-    private static final Map<Integer, ClientChatMode> dataToMode = new HashMap<>();
-
+    /**
+     * Obtains the chat mode of the client given the data
+     * that was sent using the client settings packet.
+     *
+     * @param data the chat mode identifing number
+     * @return the chat mode
+     */
     public static ClientChatMode of(int data) {
-        ClientChatMode mode = dataToMode.get(data);
-        if (mode == null) {
-            throw new IllegalArgumentException("no client chat mode with id=" + data);
+        for (ClientChatMode chatMode : values()) {
+            if (chatMode.getData() == data) {
+                return chatMode;
+            }
         }
-        return mode;
-    }
 
-    static {
-        for (ClientChatMode mode : values()) {
-            dataToMode.put(mode.data, mode);
-        }
+        throw new IllegalArgumentException("no client chat mode with id=" + data);
     }
-
 }
