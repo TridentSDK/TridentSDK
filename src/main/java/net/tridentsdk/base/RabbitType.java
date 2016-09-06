@@ -38,7 +38,7 @@ public enum RabbitType {
     @Getter
     private final int data;
 
-    private RabbitType(int data) {
+    RabbitType(int data) {
         this.data = data;
     }
 

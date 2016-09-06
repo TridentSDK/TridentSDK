@@ -36,7 +36,7 @@ public enum HorseColor {
     @Getter
     private final int data;
 
-    private HorseColor(int data) {
+    HorseColor(int data) {
         this.data = data;
     }
 

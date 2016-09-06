@@ -116,7 +116,7 @@ public class PlayerTest {
 
         @Override
         public void sendMessage(ChatComponent message, ChatType type) {
-            sentMessages.add(new SentMessage(message, type));
+            this.sentMessages.add(new SentMessage(message, type));
         }
 
         @Override

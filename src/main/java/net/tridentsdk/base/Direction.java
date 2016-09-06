@@ -18,41 +18,49 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
+ * Represents a direction.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-public enum OcelotType {
+public enum Direction {
 
-    WILD(0),
-    TUXEDO(1),
-    TABBY(2),
-    SIAMESE(3);
+    /**
+     * Downwards
+     */
+    DOWN(0),
+
+    /**
+     * Upwards
+     */
+    UP(1),
+
+    /**
+     * North
+     */
+    NORTH(2),
+
+    /**
+     * South
+     */
+    SOUTH(3),
+
+    /**
+     * West
+     */
+    WEST(4),
+
+    /**
+     * East
+     */
+    EAST(5);
 
     @Getter
     private final int data;
 
-    OcelotType(int data) {
+    private Direction(int data) {
         this.data = data;
-    }
-
-    private static final Map<Integer, OcelotType> dataToType = new HashMap<>();
-
-    static {
-        for (OcelotType type : values()) {
-            dataToType.put(type.data, type);
-        }
-    }
-
-    public static OcelotType of(int data) {
-        OcelotType type = dataToType.get(data);
-        if (type == null) {
-            throw new IllegalArgumentException("no ocelot type with id = " + data);
-        }
-        return type;
     }
 
 }

@@ -36,7 +36,7 @@ public enum VillagerProfession {
     @Getter
     private final int data;
 
-    private VillagerProfession(int data) {
+    VillagerProfession(int data) {
         this.data = data;
     }
 

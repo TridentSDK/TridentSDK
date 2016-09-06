@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.meta.living.golem;
 
-import net.tridentsdk.base.BlockDirection;
+import net.tridentsdk.base.Direction;
 import net.tridentsdk.base.Vector;
 
 /**
@@ -24,11 +24,11 @@ import net.tridentsdk.base.Vector;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface ShulkerMeta extends GolemMeta {
+public interface ShulkerMeta {
 
-    BlockDirection getFacingDirection();
+    Direction getFacingDirection();
 
-    void setFacingDirection(BlockDirection direction);
+    void setFacingDirection(Direction direction);
 
     Vector getAttachmentPosition();
 
