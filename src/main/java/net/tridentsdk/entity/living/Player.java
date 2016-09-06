@@ -20,10 +20,12 @@ import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.meta.living.PlayerMeta;
+import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.opt.GameMode;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -118,5 +120,31 @@ public interface Player extends Entity {
      * @inheritDoc
      */
     PlayerMeta getMetadata();
+
+    /**
+     * Gets this player's boss bars.
+     *
+     * @return The boss bars.
+     */
+    Collection<BossBar> getBossBars();
+
+    /**
+     * Adds a boss bar to this player.
+     *
+     * @param bar The boss bar.
+     */
+    void addBossBar(BossBar bar);
+
+    /**
+     * Removes a boss bar from this player.
+     *
+     * @param bar The boss bar to be removed.
+     */
+    void removeBossBar(BossBar bar);
+
+    /**
+     * Updates this player's boss bars, sending any required packets.
+     */
+    void updateBossBars();
 
 }

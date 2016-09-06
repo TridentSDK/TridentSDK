@@ -6,11 +6,13 @@ import net.tridentsdk.base.Position;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.meta.living.PlayerMeta;
+import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.opt.GameMode;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -129,6 +131,26 @@ public class PlayerTest {
         @Override
         public PlayerMeta getMetadata() {
             return null;
+        }
+
+        @Override
+        public Collection<BossBar> getBossBars() {
+            return null;
+        }
+
+        @Override
+        public void addBossBar(BossBar bar) {
+
+        }
+
+        @Override
+        public void removeBossBar(BossBar bar) {
+
+        }
+
+        @Override
+        public void updateBossBars() {
+
         }
 
     }
