@@ -14,6 +14,10 @@ sudo: false
 matrix:
   include:
   - jdk: oraclejdk8
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
 # env:
 #   global:
 #     - secure: "ewpnnG41+tNBDWHcU69RlQlqItVHQcCso+Dc+gEJdEUSXTHowj18lQR7DpOIsZmnOrg9yP35dXQnoTgnsduvBCZWoUToqoHyiIXBswBmv+s3zwoJ1gBl6l4Wt7uVEW+W8+eCJxxU1NXs43KcCyjx/vL6PHOaDSGBuZYLRdF/3fM="
