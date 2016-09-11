@@ -33,9 +33,24 @@ public enum BlockDirection {
     UP(1, 0, 1, 0),
     DOWN(0, 0, -1, 0);
 
+    /**
+     * The internal direction used by Minecraft itself.
+     */
     private int minecraftDirection;
+
+    /**
+     * The vector offset in the X direction.
+     */
     private int xDiff;
+
+    /**
+     * The vector offset in the Y direction.
+     */
+
     private int yDiff;
+    /**
+     * The vector offset in the Z direction.
+     */
     private int zDiff;
 
     BlockDirection(int minecraftDirection, int xDiff, int yDiff, int zDiff) {
@@ -45,30 +60,73 @@ public enum BlockDirection {
         this.zDiff = zDiff;
     }
 
+    /**
+     * Gets whether or not this direction has a corresponding Minecraft direction.
+     *
+     * @return True iff it does.
+     */
     public boolean hasMinecraftDirection() {
         return this.minecraftDirection != -1;
     }
 
+    /**
+     * Gets the first block direction in the anticlockwise direction, ignoring diagonals.
+     *
+     * @return The direction.
+     */
     public BlockDirection anticlockwise() {
         return this.anticlockwise(false);
     }
 
+    /**
+     * Gets the first block direction in the anticlockwise direction, optionally ignoring diagonals.
+     *
+     * @return The direction.
+     */
     public BlockDirection anticlockwise(boolean includeDiagonals) {
         if (this.ordinal() >= 8)
             return this;
         return values()[(this.ordinal() + (includeDiagonals ? 7 : 6)) % 8];
     }
 
+    /**
+     * Gets the first block direction in the clockwise direction, ignoring diagonals.
+     *
+     * @return The direction.
+     */
     public BlockDirection clockwise() {
         return this.clockwise(false);
     }
 
+    /**
+     * Gets the first block direction in the clockwise direction, optionally ignoring diagonals.
+     *
+     * @return The direction.
+     */
     public BlockDirection clockwise(boolean includeDiagonals) {
         if (this.ordinal() >= 8)
             return this;
         return values()[(this.ordinal() + (includeDiagonals ? 1 : 2)) % 8];
     }
 
+    /**
+     * Gets the block direction opposite to this one.
+     *
+     * @return The block direction.
+     */
+    public BlockDirection getOpposite() {
+        if (this.ordinal() < 8)
+            return BlockDirection.values()[(this.ordinal() + 4) % 8];
+        return this == UP ? DOWN : UP;
+    }
+
+    /**
+     * Gets the block direction corresponding to the given Minecraft direction.
+     *
+     * @param direction The Minecraft direction.
+     *
+     * @return The block direction.
+     */
     public static BlockDirection fromMinecraftDirection(int direction) {
         for (BlockDirection d : values()) {
             if(d.minecraftDirection == direction){
@@ -76,12 +134,6 @@ public enum BlockDirection {
             }
         }
         return null;
-    }
-
-    public BlockDirection getOpposite() {
-        if (this.ordinal() < 8)
-            return BlockDirection.values()[(this.ordinal() + 4) % 8];
-        return this == UP ? DOWN : UP;
     }
 
 }

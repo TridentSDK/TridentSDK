@@ -19,14 +19,31 @@ package net.tridentsdk.base;
 import lombok.Getter;
 
 /**
+ * Represents the different types of Horse armor.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum HorseArmor {
 
+    /**
+     * Leather horse armor.
+     */
     LEATHER(3),
+
+    /**
+     * Iron horse armor.
+     */
     IRON(5),
+
+    /**
+     * Gold horse armor.
+     */
     GOLD(7),
+
+    /**
+     * Diamond horse armor.
+     */
     DIAMOND(11);
 
     @Getter

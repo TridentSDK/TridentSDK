@@ -22,15 +22,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Horses.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum HorseType {
 
+    /**
+     * A horse.
+     */
     HORSE(0),
+
+    /**
+     * A donkey.
+     */
     DONKEY(1),
+
+    /**
+     * A mule.
+     */
     MULE(2),
+
+    /**
+     * A zombie.
+     */
     ZOMBIE(3),
+
+    /**
+     * A skeleton.
+     */
     SKELETON(4);
 
     @Getter
@@ -48,10 +69,19 @@ public enum HorseType {
         }
     }
 
-    public static HorseType of(int data) {
-        HorseType type = dataToType.get(data);
+    /**
+     * Gets the horse type corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The horse type.
+     */
+    public static HorseType of(int id) {
+        HorseType type = dataToType.get(id);
         if (type == null) {
-            throw new IllegalArgumentException("no horse type with id = " + data);
+            throw new IllegalArgumentException("no horse type with id = " + id);
         }
         return type;
     }

@@ -22,13 +22,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Skeletons.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum SkeletonType {
 
+    /**
+     * A normal skeleton.
+     */
     NORMAL(0),
+
+    /**
+     * A wither skeleton.
+     */
     WITHER(1),
+
+    /**
+     * A stray skeleton.
+     */
     STRAY(2);
 
     @Getter
@@ -40,10 +53,19 @@ public enum SkeletonType {
 
     private static final Map<Integer, SkeletonType> dataToType = new HashMap<>();
 
-    public static SkeletonType of(int data) {
-        SkeletonType type = dataToType.get(data);
+    /**
+     * Gets the skeleton type corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The skeleton type.
+     */
+    public static SkeletonType of(int id) {
+        SkeletonType type = dataToType.get(id);
         if (type == null) {
-            throw new IllegalArgumentException("no skeleton type with id = " + data);
+            throw new IllegalArgumentException("no skeleton type with id = " + id);
         }
         return type;
     }

@@ -22,17 +22,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Zombies.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum ZombieType {
 
+    /**
+     * A normal zombie.
+     */
     NORMAL(0),
+
+    /**
+     * A zombie that looks like a villager of type {@link VillagerProfession#FARMER}.
+     */
     VILLAGER_FARMER(1),
+
+    /**
+     * A zombie that looks like a villager of type {@link VillagerProfession#LIBRARIAN}.
+     */
     VILLAGER_LIBRARIAN(2),
+
+    /**
+     * A zombie that looks like a villager of type {@link VillagerProfession#PRIEST}.
+     */
     VILLAGER_PRIEST(3),
+
+    /**
+     * A zombie that looks like a villager of type {@link VillagerProfession#BLACKSMITH}.
+     */
     VILLAGER_BLACKSMITH(4),
+
+    /**
+     * A zombie that looks like a villager of type {@link VillagerProfession#BUTCHER}.
+     */
     VILLAGER_BUTCHER(5),
+
+    /**
+     * A husk Zombie.
+     */
     HUSK(6);
 
     @Getter
@@ -48,10 +77,19 @@ public enum ZombieType {
 
     private static final Map<Integer, ZombieType> dataToType = new HashMap<>();
 
-    public static ZombieType of(int data) {
-        ZombieType type = dataToType.get(data);
+    /**
+     * Gets the zombie type corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The zombie type.
+     */
+    public static ZombieType of(int id) {
+        ZombieType type = dataToType.get(id);
         if (type == null) {
-            throw new IllegalArgumentException("no zombie type with id = " + data);
+            throw new IllegalArgumentException("no zombie type with id = " + id);
         }
         return type;
     }

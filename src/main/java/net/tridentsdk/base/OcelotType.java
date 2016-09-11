@@ -22,14 +22,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Ocelots.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum OcelotType {
 
+    /**
+     * A wild ocelot.
+     */
     WILD(0),
+
+    /**
+     * A tuxedo ocelot.
+     */
     TUXEDO(1),
+
+    /**
+     * A tabby ocelot.
+     */
     TABBY(2),
+
+    /**
+     * A siamese ocelot.
+     */
     SIAMESE(3);
 
     @Getter
@@ -47,10 +64,19 @@ public enum OcelotType {
         }
     }
 
-    public static OcelotType of(int data) {
-        OcelotType type = dataToType.get(data);
+    /**
+     * Gets the ocelot type corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The ocelot type.
+     */
+    public static OcelotType of(int id) {
+        OcelotType type = dataToType.get(id);
         if (type == null) {
-            throw new IllegalArgumentException("no ocelot type with id = " + data);
+            throw new IllegalArgumentException("no ocelot type with id = " + id);
         }
         return type;
     }

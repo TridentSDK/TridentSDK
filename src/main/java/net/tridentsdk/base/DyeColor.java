@@ -22,26 +22,91 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different colors of Dye, Wool, and Sheep.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum DyeColor {
 
+    /**
+     * Black dye.
+     */
     BLACK(0),
+
+    /**
+     * Red dye.
+     */
     RED(1),
+
+    /**
+     * Dark green dye.
+     */
     DARK_GREEN(2),
+
+    /**
+     * Brown dye.
+     */
     BROWN(3),
+
+    /**
+     * Dark blue dye.
+     */
     DARK_BLUE(4),
+
+    /**
+     * Dark purple dye.
+     */
     DARK_PURPLE(5),
+
+    /**
+     * Cyan dye.
+     */
     CYAN(6),
+
+    /**
+     * Light gray dye.
+     */
     LIGHT_GRAY(7),
+
+    /**
+     * Dark gray dye.
+     */
     DARK_GRAY(8),
+
+    /**
+     * Pink dye.
+     */
     PINK(9),
+
+    /**
+     * Light green dye.
+     */
     LIGHT_GREEN(10),
+
+    /**
+     * Yellow dye.
+     */
     YELLOW(11),
+
+    /**
+     * Light blue dye.
+     */
     LIGHT_BLUE(12),
+
+    /**
+     * Magenta dye.
+     */
     MAGENTA(13),
+
+    /**
+     * Orange dye.
+     */
     ORANGE(14),
+
+    /**
+     * White dye.
+     */
     WHITE(15);
 
     @Getter
@@ -59,10 +124,19 @@ public enum DyeColor {
         }
     }
 
-    public static DyeColor of(int data) {
-        DyeColor color = dataToColor.get(data);
+    /**
+     * Gets the dye color corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The dye color.
+     */
+    public static DyeColor of(int id) {
+        DyeColor color = dataToColor.get(id);
         if (color == null) {
-            throw new IllegalArgumentException("no dye color with id = " + data);
+            throw new IllegalArgumentException("no dye color with id = " + id);
         }
         return color;
     }

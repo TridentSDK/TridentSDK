@@ -22,17 +22,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Horse markings.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum HorseMarkings {
 
+    /**
+     * White markings.
+     */
     WHITE(0),
+
+    /**
+     * Creamy markings.
+     */
     CREAMY(1),
+
+    /**
+     * Chestnut markings.
+     */
     CHESTNUT(2),
+
+    /**
+     * Brown markings.
+     */
     BROWN(3),
+
+    /**
+     * Black markings.
+     */
     BLACK(4),
+
+    /**
+     * Gray markings.
+     */
     GRAY(5),
+
+    /**
+     * Dark brown markings.
+     */
     DARK_BROWN(6);
 
     @Getter
@@ -50,10 +79,19 @@ public enum HorseMarkings {
         }
     }
 
-    public static HorseMarkings of(int data) {
-        HorseMarkings markings = dataToMarkings.get(data);
+    /**
+     * Gets the horse markings corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The horse markings.
+     */
+    public static HorseMarkings of(int id) {
+        HorseMarkings markings = dataToMarkings.get(id);
         if (markings == null) {
-            throw new IllegalArgumentException("no horse markings with id = " + data);
+            throw new IllegalArgumentException("no horse markings with id = " + id);
         }
         return markings;
     }

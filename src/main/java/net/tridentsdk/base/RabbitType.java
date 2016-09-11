@@ -22,17 +22,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Rabbits.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum RabbitType {
 
+    /**
+     * A brown rabbit.
+     */
     BROWN(0),
+
+    /**
+     * A white rabbit.
+     */
     WHITE(1),
+
+    /**
+     * A black rabbit.
+     */
     BLACK(2),
+
+    /**
+     * A black and white rabbit.
+     */
     BLACK_AND_WHITE(3),
+
+    /**
+     * A golden rabbit.
+     */
     GOLD(4),
+
+    /**
+     * A salt and pepper rabbit.
+     */
     SALT_AND_PEPPER(5),
+
+    /**
+     * A killer bunny.
+     */
     KILLER_BUNNY(99);
 
     @Getter
@@ -50,10 +79,19 @@ public enum RabbitType {
         }
     }
 
-    public static RabbitType of(int data) {
-        RabbitType type = dataToType.get(data);
+    /**
+     * Gets the rabbit type corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The rabbit type.
+     */
+    public static RabbitType of(int id) {
+        RabbitType type = dataToType.get(id);
         if (type == null) {
-            throw new IllegalArgumentException("no rabbit type with id = " + data);
+            throw new IllegalArgumentException("no rabbit type with id = " + id);
         }
         return type;
     }

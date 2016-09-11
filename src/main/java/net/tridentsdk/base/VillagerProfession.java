@@ -22,15 +22,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different types of Villagers.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum VillagerProfession {
 
+    /**
+     * A farmer villager.
+     */
     FARMER(0),
+
+    /**
+     * A librarian villager.
+     */
     LIBRARIAN(1),
+
+    /**
+     * A priest villager.
+     */
     PRIEST(2),
+
+    /**
+     * A blacksmith villager.
+     */
     BLACKSMITH(3),
+
+    /**
+     * A butcher villager.
+     */
     BUTCHER(4);
 
     @Getter
@@ -42,10 +63,19 @@ public enum VillagerProfession {
 
     private static final Map<Integer, VillagerProfession> dataToType = new HashMap<>();
 
-    public static VillagerProfession of(int data) {
-        VillagerProfession profession = dataToType.get(data);
+    /**
+     * Gets the villager profession corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The villager profession.
+     */
+    public static VillagerProfession of(int id) {
+        VillagerProfession profession = dataToType.get(id);
         if (profession == null) {
-            throw new IllegalArgumentException("no villager profession with id = " + data);
+            throw new IllegalArgumentException("no villager profession with id = " + id);
         }
         return profession;
     }

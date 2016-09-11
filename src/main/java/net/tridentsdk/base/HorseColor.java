@@ -22,15 +22,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Represents the different colors of Horses.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public enum HorseColor {
 
+    /**
+     * No extra colour (brown).
+     */
     NONE(0),
+
+    /**
+     * White.
+     */
     WHITE(1),
+
+    /**
+     * White field.
+     */
     WHITE_FIELD(2),
+
+    /**
+     * White dots.
+     */
     WHITE_DOTS(3),
+
+    /**
+     * Black dots.
+     */
     BLACK_DOTS(4);
 
     @Getter
@@ -48,10 +69,19 @@ public enum HorseColor {
         }
     }
 
-    public static HorseColor of(int data) {
-        HorseColor color = dataToColor.get(data);
+    /**
+     * Gets the horse color corresponding to the given internal identification number.
+     * <br>
+     * If none are found, an {@link IllegalArgumentException} will be thrown.
+     *
+     * @param id The identification number.
+     *
+     * @return The horse color.
+     */
+    public static HorseColor of(int id) {
+        HorseColor color = dataToColor.get(id);
         if (color == null) {
-            throw new IllegalArgumentException("no horse color with id = " + data);
+            throw new IllegalArgumentException("no horse color with id = " + id);
         }
         return color;
     }
