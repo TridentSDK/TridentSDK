@@ -19,6 +19,11 @@ package net.tridentsdk.ui.bossbar;
 import net.tridentsdk.Impl;
 
 /**
+ * This class manages boss bars.
+ *
+ * <p>The instance of this manager can be obtained using
+ * the static factory {@link #getInstance()}.</p>
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */

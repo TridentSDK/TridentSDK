@@ -19,20 +19,52 @@ package net.tridentsdk.ui.bossbar;
 import lombok.Getter;
 
 /**
+ * Represents the different colours that a boss bar can be.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Getter
 public enum BossBarColor {
 
+    /**
+     * A pink boss bar.
+     */
     PINK(0),
+
+    /**
+     * A blue boss bar.
+     */
     BLUE(1),
+
+    /**
+     * A red boss bar.
+     */
     RED(2),
+
+    /**
+     * A green boss bar.
+     */
     GREEN(3),
+
+    /**
+     * A yellow boss bar.
+     */
     YELLOW(4),
+
+    /**
+     * A purple boss bar.
+     */
     PURPLE(5),
+
+    /**
+     * A white boss bar.
+     */
     WHITE(6);
 
+    /**
+     * The internal ID used by net data.
+     */
     private final int id;
 
     BossBarColor(int id) {

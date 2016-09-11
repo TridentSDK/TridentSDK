@@ -19,19 +19,48 @@ package net.tridentsdk.ui.bossbar;
 import lombok.Getter;
 
 /**
+ * Represents the amount of dividing lines on the
+ * boss bar (the amount of lines overlayed onto it).
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Getter
 public enum BossBarDivision {
 
+    /**
+     * No dividing lines
+     */
     NO_DIVISION(0, 0),
+
+    /**
+     * 6 dividing lines
+     */
     NOTCHES_6(1, 6),
+
+    /**
+     * 10 dividing lines
+     */
     NOTCHES_10(2, 10),
+
+    /**
+     * 12 dividing lines
+     */
     NOTCHES_12(3, 12),
+
+    /**
+     * 20 dividing lines
+     */
     NOTCHES_20(4, 20);
 
+    /**
+     * The internal ID used by net data.
+     */
     private final int id;
+
+    /**
+     * The number of dividing lines.
+     */
     private final int notches;
 
     BossBarDivision(int id, int notches) {

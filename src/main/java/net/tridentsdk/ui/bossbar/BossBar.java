@@ -21,6 +21,14 @@ import net.tridentsdk.chat.ChatComponent;
 import java.util.UUID;
 
 /**
+ * Represents a boss bar displayed at the top
+ * of a client's game window, containing text,
+ * health, a color and dividing lines.
+ * <br>
+ * There are optional graphical and audio effects
+ * associated with the boss bar that can be enabled
+ * if desired.
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
