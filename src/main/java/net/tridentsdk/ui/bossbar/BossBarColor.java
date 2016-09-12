@@ -71,4 +71,18 @@ public enum BossBarColor {
         this.id = id;
     }
 
+    /**
+     * Gets the boss bar color with the given ID.
+     * An {@link IllegalArgumentException} is thrown if no color found.
+     *
+     * @param id The ID, the identification number.
+     * @return The boss bar color.
+     */
+    public static BossBarColor of(int id) {
+        for (BossBarColor c : values())
+            if (c.id == id)
+                return c;
+        throw new IllegalArgumentException("no boss bar color with id = " + id);
+    }
+
 }

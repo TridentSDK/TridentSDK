@@ -23,6 +23,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author TridentSDK
@@ -35,6 +36,8 @@ public class BlockDirectionTest {
         for (BlockDirection dir : BlockDirection.values()) {
             if (dir.hasMinecraftDirection()) {
                 assertEquals(dir, BlockDirection.fromMinecraftDirection(dir.getMinecraftDirection()));
+            } else {
+                assertNull(BlockDirection.fromMinecraftDirection(dir.getMinecraftDirection()));
             }
         }
     }

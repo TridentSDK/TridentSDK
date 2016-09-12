@@ -129,7 +129,7 @@ public enum BlockDirection {
      */
     public static BlockDirection fromMinecraftDirection(int direction) {
         for (BlockDirection d : values()) {
-            if(d.minecraftDirection == direction){
+            if(d.hasMinecraftDirection() && d.minecraftDirection == direction){
                 return d;
             }
         }

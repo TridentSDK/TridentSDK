@@ -68,4 +68,18 @@ public enum BossBarDivision {
         this.notches = notches;
     }
 
+    /**
+     * Gets the boss bar division with the given ID.
+     * An {@link IllegalArgumentException} is thrown if no division found.
+     *
+     * @param id The ID, the identification number.
+     * @return The boss bar color.
+     */
+    public static BossBarDivision of(int id) {
+        for (BossBarDivision c : values())
+            if (c.id == id)
+                return c;
+        throw new IllegalArgumentException("no boss bar division with id = " + id);
+    }
+
 }
