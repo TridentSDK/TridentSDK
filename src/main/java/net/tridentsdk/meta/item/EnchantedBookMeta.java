@@ -22,15 +22,35 @@ import net.tridentsdk.base.Enchantment;
 
 public interface EnchantedBookMeta {
     /**
-     * Gets a mapping of all enchantments stored in this Enchanted Book.
+     * Gets a mapping of all enchantments to their levels stored in this
+     * Enchanted Book.
      *
-     * @return The enchantments.
+     * @return The enchantments stored in this Enchanted Book.
      */
     Map<Enchantment, Short> storedEnchantments();
 
     /**
+     * Adds the specified enchantment to the stored enchantment with a specific
+     * level.
+     *
+     * @param enchantment
+     *            The enchantment.
+     * @param level
+     *            The level.
+     */
+    void addStoredEnchantment(Enchantment enchantment, int level);
+
+    /**
+     * Removes the specified enchantment from the item if it exists on it.
+     *
+     * @param enchantment
+     *            The enchantment.
+     */
+    void removeStoredEnchantment(Enchantment enchantment);
+
+    /**
      * Gets this EnchantedBook's cost to apply in an anvil in experience levels.
-     * 
+     *
      * @return The cost to apply this enchanted book to an item.
      */
     int repairCost();

@@ -1,10 +1,10 @@
 package com.gmail.woodyc40.battledome;
 
+import java.util.UUID;
+
 import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.inventory.Inventory;
-
-import java.util.UUID;
 
 /**
  * Stores the current state of the player to be restored later
