@@ -38,7 +38,9 @@ public interface GenContainer {
      */
     @Internal
     static GenContainer none() {
-        return run -> {};
+        return run -> {
+            throw new RuntimeException();
+        };
     }
 
     /**
