@@ -19,7 +19,6 @@ package net.tridentsdk.world.gen;
 import net.tridentsdk.doc.Internal;
 
 import javax.annotation.concurrent.Immutable;
-import java.util.function.Supplier;
 
 /**
  * A gen container is a context which specifies what
@@ -39,12 +38,7 @@ public interface GenContainer {
      */
     @Internal
     static GenContainer none() {
-        return new GenContainer() {
-            @Override
-            public <R> R run(Supplier<R> supplier) {
-                throw new RuntimeException("Do not use this method");
-            }
-        };
+        return run -> {};
     }
 
     /**
@@ -62,10 +56,8 @@ public interface GenContainer {
      * Runs the given function that supplies the result of
      * performing the operation.
      *
-     * @param supplier the function which is run by this
-     *                 container
-     * @param <R>      the type of result that is produced
-     * @return the result
+     * @param run the command which to run in the given
+     *            generator container
      */
-    <R> R run(Supplier<R> supplier);
+    void run(Runnable run);
 }

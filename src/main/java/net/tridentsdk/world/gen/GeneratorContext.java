@@ -104,4 +104,12 @@ public interface GeneratorContext {
      * @param meta the block meta
      */
     void set(int x, int y, int z, int id, byte meta);
+
+    /**
+     * Runs the given generator command in this context's
+     * thread pool.
+     *
+     * @param r the task to run
+     */
+    void run(Runnable r);
 }
