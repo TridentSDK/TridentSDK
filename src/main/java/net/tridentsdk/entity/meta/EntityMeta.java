@@ -70,5 +70,4 @@ public interface EntityMeta {
     boolean isNoGravity();
 
     void setNoGravity(boolean noGravity);
-
 }

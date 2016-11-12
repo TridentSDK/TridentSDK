@@ -19,7 +19,6 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.meta.living.PlayerMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.opt.GameMode;
@@ -117,11 +116,6 @@ public interface Player extends Entity {
     void setTabList(TabList tabList);
 
     /**
-     * @inheritDoc
-     */
-    PlayerMeta getMetadata();
-
-    /**
      * Gets this player's boss bars.
      *
      * @return The boss bars.
@@ -146,5 +140,4 @@ public interface Player extends Entity {
      * Updates this player's boss bars, sending any required packets.
      */
     void updateBossBars();
-
 }
