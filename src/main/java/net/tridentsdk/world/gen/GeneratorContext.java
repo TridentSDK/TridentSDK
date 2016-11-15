@@ -106,8 +106,8 @@ public interface GeneratorContext {
     void set(int x, int y, int z, int id, byte meta);
 
     /**
-     * Runs the given generator command in this context's
-     * thread pool.
+     * Schedules the given generation task to be run when
+     * the command is given for the generator to proceed.
      *
      * @param r the task to run
      */

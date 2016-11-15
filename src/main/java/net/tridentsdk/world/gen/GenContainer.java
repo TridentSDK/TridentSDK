@@ -28,7 +28,7 @@ import javax.annotation.concurrent.Immutable;
  * @since 0.5-alpha
  */
 @Immutable
-public interface GenContainer {
+public abstract class GenContainer {
     /**
      * Create a new gen container that doesn't do anything.
      *
@@ -37,22 +37,25 @@ public interface GenContainer {
      * @return a useless gen container
      */
     @Internal
-    static GenContainer none() {
-        return run -> {
-            throw new RuntimeException();
+    public static GenContainer none() {
+        return new GenContainer() {
+            @Override
+            public void run(Runnable run) {
+                throw new IllegalArgumentException();
+            }
         };
     }
 
     /**
      * The default container
      */
-    GenContainer DEFAULT = none();
+    public static final GenContainer DEFAULT = none();
     /**
      * An arbitrary container, useful for developers who are
      * familiar with multithreaded code and would like their
      * world generation code offloaded to the world handler
      */
-    GenContainer ARBITRARY = none();
+    public static final GenContainer ARBITRARY = none();
 
     /**
      * Runs the given function that supplies the result of
@@ -61,5 +64,5 @@ public interface GenContainer {
      * @param run the command which to run in the given
      *            generator container
      */
-    void run(Runnable run);
+    public abstract void run(Runnable run);
 }
