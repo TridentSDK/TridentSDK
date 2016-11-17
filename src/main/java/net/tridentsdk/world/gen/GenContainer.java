@@ -16,9 +16,8 @@
  */
 package net.tridentsdk.world.gen;
 
-import net.tridentsdk.doc.Internal;
-
 import javax.annotation.concurrent.Immutable;
+import java.util.concurrent.Executor;
 
 /**
  * A gen container is a context which specifies what
@@ -28,41 +27,20 @@ import javax.annotation.concurrent.Immutable;
  * @since 0.5-alpha
  */
 @Immutable
-public abstract class GenContainer {
-    /**
-     * Create a new gen container that doesn't do anything.
-     *
-     * <p>For internal use only.</p>
-     *
-     * @return a useless gen container
-     */
-    @Internal
-    public static GenContainer none() {
-        return new GenContainer() {
-            @Override
-            public void run(Runnable run) {
-                throw new IllegalArgumentException();
-            }
-        };
-    }
-
+public interface GenContainer extends Executor {
     /**
      * The default container
      */
-    public static final GenContainer DEFAULT = none();
+    GenContainer DEFAULT = (c) -> {
+        throw new RuntimeException();
+    };
+
     /**
      * An arbitrary container, useful for developers who are
      * familiar with multithreaded code and would like their
      * world generation code offloaded to the world handler
      */
-    public static final GenContainer ARBITRARY = none();
-
-    /**
-     * Runs the given function that supplies the result of
-     * performing the operation.
-     *
-     * @param run the command which to run in the given
-     *            generator container
-     */
-    public abstract void run(Runnable run);
+    GenContainer ARBITRARY = (c) -> {
+        throw new RuntimeException();
+    };
 }
