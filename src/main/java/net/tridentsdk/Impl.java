@@ -20,7 +20,7 @@ import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
-import net.tridentsdk.ui.bossbar.BossBarManager;
+import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabListManager;
 import net.tridentsdk.world.WorldLoader;
 
@@ -128,6 +128,7 @@ public final class Impl {
         // Get the TabList Manager
         TabListManager tabListManager();
 
-        BossBarManager getBossBarManager();
+        // Create a new bossbar
+        BossBar newBossBar();
     }
 }

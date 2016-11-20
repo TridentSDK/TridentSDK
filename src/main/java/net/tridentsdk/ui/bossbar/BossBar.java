@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.ui.bossbar;
 
+import net.tridentsdk.Impl;
 import net.tridentsdk.chat.ChatComponent;
 
 import java.util.UUID;
@@ -33,13 +34,32 @@ import java.util.UUID;
  * @since 0.5-alpha
  */
 public interface BossBar {
+    /**
+     * Creates a new boss bar instance which can be
+     * modified
+     * by the caller to customize the interface.
+     *
+     * @return the new boss bar
+     */
+    static BossBar newBossBar() {
+        return Impl.get().newBossBar();
+    }
 
     /**
      * Gets this boss bar's unique ID.
      *
      * @return The unique ID.
      */
-    UUID getUniqueId();
+    UUID getUuid();
+
+    /**
+     * Checks to see whether the current boss bar is the
+     * default.
+     *
+     * @return {@code true} if the current bar is default,
+     * {@code false} otherwise
+     */
+    boolean isDefault();
 
     /**
      * Gets the title of this boss bar.
@@ -138,5 +158,4 @@ public interface BossBar {
      * @return A cloned copy of this boss bar.
      */
     BossBar clone();
-
 }
