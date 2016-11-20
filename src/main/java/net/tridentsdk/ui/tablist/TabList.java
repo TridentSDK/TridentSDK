@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.ui.tablist;
 
+import net.tridentsdk.Impl;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.entity.living.Player;
 
@@ -32,13 +33,34 @@ import java.util.Collection;
  * names.
  * </p>
  *
- * <p>Tab lists can be obtained using the
- * {@link TabListManager}.</p>
+ * <p>Tab lists can be obtained using the two static factory
+ * methods provided, {@link #getGlobal()} to obtain
+ * the global tab list, or {@link #newTabList()} to obtain
+ * a new instance that is suitable for customizing.</p>
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public interface TabList {
+    /**
+     * Obtain the global tablist shared between all
+     * players.
+     *
+     * @return the global tablist
+     */
+    static TabList getGlobal() {
+        return Impl.get().globalTabList();
+    }
+
+    /**
+     * Obtain a new tablist instance.
+     *
+     * @return a new tablist instance.
+     */
+    static TabList newTabList() {
+        return Impl.get().newTabList();
+    }
+
     /**
      * Set an element of the tablist to a specific value.
      * If value is null, the element will be removed

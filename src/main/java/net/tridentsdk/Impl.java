@@ -21,7 +21,7 @@ import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.ui.bossbar.BossBar;
-import net.tridentsdk.ui.tablist.TabListManager;
+import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.Nonnull;
@@ -104,6 +104,7 @@ public final class Impl {
     }
 
     // Functions implementation
+    @Internal
     public interface ImplementationProvider {
         // Obtains the implementation of the server object
         // that represents the API side version
@@ -125,10 +126,10 @@ public final class Impl {
         // get the world handler
         WorldLoader wrlds();
 
-        // Get the TabList Manager
-        TabListManager tabListManager();
+        // UI
+        TabList globalTabList();
 
-        // Create a new bossbar
+        TabList newTabList();
         BossBar newBossBar();
     }
 }

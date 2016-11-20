@@ -16,6 +16,6 @@
  */
 
 /**
- * Boss bar API.
+ * Tab list API.
  */
-package net.tridentsdk.ui.bossbar;
+package net.tridentsdk.ui.tablist;
