@@ -69,6 +69,14 @@ public interface GeneratorContext {
     long seed();
 
     /**
+     * Obtains the height of the max Y value at the given
+     * x and z coordinates.
+     *
+     * @return the max generated Y value
+     */
+    int maxHeight(int x, int z);
+
+    /**
      * Sets the block at the coordinates relative to the
      * chunk (0-15) to the given block substance and
      * metadata.

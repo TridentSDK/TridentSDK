@@ -31,8 +31,7 @@ public interface PropGenerator {
      *
      * @param chunkX the chunk x
      * @param chunkZ the chunk z
-     * @param height the highest block at the X/Z
      * @param context the context
      */
-    void generate(int chunkX, int chunkZ, int height, GeneratorContext context);
+    void generate(int chunkX, int chunkZ, GeneratorContext context);
 }
