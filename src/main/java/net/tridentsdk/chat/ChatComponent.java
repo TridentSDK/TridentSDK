@@ -415,7 +415,7 @@ public class ChatComponent {
         }
 
         ChatColor color = this.color;
-        if (this.color != null) {
+        if (color != null) {
             json.addProperty("color", color.name().toLowerCase());
         }
 
@@ -633,11 +633,11 @@ public class ChatComponent {
     }
 
     public boolean equals(Object o) {
-        if (o == null || o == this || o.getClass() != getClass()) {
+        if (o == null || o == this || o.getClass() != this.getClass()) {
             return o == this;
         }
         ChatComponent cc = (ChatComponent) o;
-        return asJson().equals(cc.asJson());
+        return this.asJson().equals(cc.asJson());
     }
 
     @Getter

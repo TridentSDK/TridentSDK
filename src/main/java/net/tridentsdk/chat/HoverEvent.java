@@ -20,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import lombok.Data;
+import net.tridentsdk.inventory.Item;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -85,11 +86,13 @@ public class HoverEvent {
         return new HoverEvent(HoverAction.SHOW_ACHIEVEMENT, new JsonPrimitive(achievement));
     }
 
-    /* TODO :: once items are implemented
-    public static HoverEvent item(ItemStack item) {
+    public static HoverEvent item(Item item) {
+        JsonObject json = new JsonObject();
+        json.addProperty("id", item.getSubstance().toString());
 
+        return new HoverEvent(HoverAction.SHOW_ITEM,
+                json);
     }
-    */
 
     /**
      * Parses a click event from the given JSON.

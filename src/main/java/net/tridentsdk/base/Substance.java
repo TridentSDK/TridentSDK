@@ -38,6 +38,10 @@ public enum Substance {
      * substance.
      */
     private final int id;
+    /**
+     * The substance name
+     */
+    private final String name;
 
     /**
      * Creates a new substance entry with the given
@@ -47,6 +51,7 @@ public enum Substance {
      */
     Substance(int id) {
         this.id = id;
+        this.name = "minecraft:" + this.name().toLowerCase();
     }
 
     /**
@@ -56,5 +61,10 @@ public enum Substance {
      */
     public int id() {
         return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
