@@ -347,6 +347,66 @@ public class ChatComponent {
     }
 
     /**
+     * Parses this chat component without adding
+     * formatting codes.
+     *
+     * @return colorless and text formatting-free json
+     */
+    public JsonElement stripColor() {
+        JsonObject json = new JsonObject();
+
+        String text = this.text;
+        if (text != null) {
+            json.addProperty("text", text);
+        }
+
+        String translate = this.translate;
+        if (translate != null) {
+            json.addProperty("translate", translate);
+            JsonArray array = new JsonArray();
+            this.with.forEach(e -> array.add(e.stripColor()));
+            json.add("with", array);
+        }
+
+        String scoreUsername = this.scoreUsername;
+        String scoreObjective = this.scoreObjective;
+        if (scoreUsername != null && scoreObjective != null) {
+            JsonObject score = new JsonObject();
+            score.addProperty("name", scoreUsername);
+            score.addProperty("objective", scoreObjective);
+            json.add("score", score);
+        }
+
+        String selector = this.selector;
+        if (selector != null) {
+            json.addProperty("selector", selector);
+        }
+
+        Collection<ChatComponent> extra = this.extra;
+        if (!extra.isEmpty()) {
+            JsonArray extraArray = new JsonArray();
+            extra.forEach(e -> extraArray.add(e.stripColor()));
+            json.add("extra", extraArray);
+        }
+
+        ClickEvent clickEvent = this.clickEvent;
+        if (clickEvent != null) {
+            json.add("clickEvent", clickEvent.asJson());
+        }
+
+        HoverEvent hoverEvent = this.hoverEvent;
+        if (hoverEvent != null) {
+            json.add("hoverEvent", hoverEvent.asJson());
+        }
+
+        String insertion = this.insertion;
+        if (insertion != null) {
+            json.addProperty("insertion", insertion);
+        }
+        return json;
+    }
+
+    /**
      * Gets this component as a JSON element, ready to be sent to a client.
      *
      * @return The JSON element.
@@ -643,6 +703,11 @@ public class ChatComponent {
     @AllArgsConstructor
     private final class StringChatComponent extends ChatComponent {
         private String string;
+
+        @Override
+        public JsonElement stripColor() {
+            return this.asJson();
+        }
 
         @Override
         public JsonElement asJson() {
