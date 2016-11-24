@@ -75,6 +75,18 @@ public interface Player extends Entity {
     }
 
     /**
+     * Sends this player a system message.
+     *
+     * <p>Equivalent to
+     * {@code sendMessage(ChatComponent.text(message))}.</p>
+     *
+     * @param message The message.
+     */
+    default void sendMessage(String message) {
+        this.sendMessage(ChatComponent.text(message));
+    }
+
+    /**
      * Disconnects this player from the server, displaying
      * the given message on screen as to why they may have
      * been disconnected.
