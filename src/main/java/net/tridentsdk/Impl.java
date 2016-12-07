@@ -16,10 +16,13 @@
  */
 package net.tridentsdk;
 
+import net.tridentsdk.base.Substance;
 import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
+import net.tridentsdk.inventory.Item;
+import net.tridentsdk.meta.ItemMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.WorldLoader;
@@ -114,13 +117,9 @@ public final class Impl {
         // should use a path anyways, there is only one way
         Config newCfg(Path p);
 
-        // Create a new logger
+        // Logging
         Logger newLogger(String s);
-
-        // attaches the handler to the logger
         void attachHandler(Logger logger, LogHandler handler);
-
-        // removes handlers from the logger
         boolean removeHandler(Logger logger, LogHandler handler);
 
         // get the world handler
@@ -131,5 +130,8 @@ public final class Impl {
 
         TabList newTabList();
         BossBar newBossBar();
+
+        // Inventory
+        Item newItem(Substance substance, int count, byte damage, ItemMeta meta);
     }
 }

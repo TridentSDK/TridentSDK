@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.inventory;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import net.tridentsdk.Impl;
 import net.tridentsdk.base.Substance;
+import net.tridentsdk.meta.ItemMeta;
 
 /**
  * Represents an item or a stack of items that is held in
@@ -27,9 +27,28 @@ import net.tridentsdk.base.Substance;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@RequiredArgsConstructor
-public class Item {
-    @Getter
-    private final Substance substance;
-    private volatile byte data;
+public interface Item {
+    static Item newItem(Substance substance) {
+        return newItem(substance, 0);
+    }
+
+    static Item newItem(Substance substance, int count) {
+        return newItem(substance, count, (byte) 0);
+    }
+
+    static Item newItem(Substance substance, int count, byte dmg) {
+        return newItem(substance, count, dmg, null);
+    }
+
+    static Item newItem(Substance substance, int count, byte damage, ItemMeta meta) {
+        return Impl.get().newItem(substance, count, damage, meta);
+    }
+
+    Substance getSubstance();
+
+    int getCount();
+
+    int getDamage();
+
+    ItemMeta getMeta();
 }
