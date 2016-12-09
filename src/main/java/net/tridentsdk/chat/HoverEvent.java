@@ -90,8 +90,7 @@ public class HoverEvent {
         JsonObject json = new JsonObject();
         json.addProperty("id", item.getSubstance().toString());
 
-        return new HoverEvent(HoverAction.SHOW_ITEM,
-                json);
+        return new HoverEvent(HoverAction.SHOW_ITEM, json);
     }
 
     /**

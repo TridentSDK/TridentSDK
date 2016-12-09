@@ -49,6 +49,4 @@ public interface Item {
     int getCount();
 
     int getDamage();
-
-    ItemMeta getMeta();
 }
