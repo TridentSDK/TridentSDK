@@ -47,6 +47,23 @@ public final class StringUtil {
     }
 
     /**
+     * A for-loop efficient method for concating strings (or in some cases objects)
+     *
+     * @param objects Objects you wish to concat into a String
+     * @param extenstion A object you would like after each object
+     * @return Built string
+     */
+    public static String concat(Object... objects, Object extenstion) {
+        StringBuilder builder = new StringBuilder();
+
+        for (Object o : objects) {
+            builder.append(o).append(extenstion);
+        }
+
+        return builder.toString();
+    }
+
+    /**
      * Checks if a string is a number
      *
      * @param str the string to check
