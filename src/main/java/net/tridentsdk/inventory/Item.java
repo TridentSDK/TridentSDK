@@ -28,25 +28,77 @@ import net.tridentsdk.meta.ItemMeta;
  * @since 0.3-alpha-DP
  */
 public interface Item {
+    /**
+     * Creates a new item with the given substance
+     * parameter.
+     *
+     * @param substance the item's substance
+     * @return the new item
+     */
     static Item newItem(Substance substance) {
         return newItem(substance, 0);
     }
 
+    /**
+     * Creates a new item with the given substance
+     * parameter.
+     *
+     * @param substance the item's substance
+     * @return the new item
+     */
     static Item newItem(Substance substance, int count) {
         return newItem(substance, count, (byte) 0);
     }
 
+    /**
+     * Creates a new item with the given substance
+     * parameter.
+     *
+     * @param substance the item's substance
+     * @return the new item
+     */
     static Item newItem(Substance substance, int count, byte dmg) {
         return newItem(substance, count, dmg, null);
     }
 
+    /**
+     * Creates a new item with the given substance
+     * parameter.
+     *
+     * @param substance the item's substance
+     * @return the new item
+     */
     static Item newItem(Substance substance, int count, byte damage, ItemMeta meta) {
         return Impl.get().newItem(substance, count, damage, meta);
     }
 
+    /**
+     * Obtains the substance type of the item.
+     *
+     * @return the item's substance
+     */
     Substance getSubstance();
 
+    /**
+     * Obtains the amount of items that are in this stack.
+     *
+     * @return the item count
+     */
     int getCount();
 
-    int getDamage();
+    /**
+     * Obtains the 4-bit extra item data contained by this
+     * item.
+     *
+     * @return the item damage
+     */
+    byte getDamage();
+
+    /**
+     * Obtains extra item metadata such as enchantments and
+     * potion variations (if applicable).
+     *
+     * @return the item metadata
+     */
+    ItemMeta getMeta();
 }
