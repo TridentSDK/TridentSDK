@@ -20,6 +20,8 @@ import net.tridentsdk.Impl;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.meta.ItemMeta;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Represents an item or a stack of items that is held in
  * the inventory.
@@ -27,6 +29,7 @@ import net.tridentsdk.meta.ItemMeta;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@Immutable
 public interface Item {
     /**
      * Creates a new item with the given substance

@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Horse markings.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum HorseMarkings {
-
     /**
      * White markings.
      */
@@ -71,14 +71,6 @@ public enum HorseMarkings {
         this.data = data;
     }
 
-    private static final Map<Integer, HorseMarkings> dataToMarkings = new HashMap<>();
-
-    static {
-        for (HorseMarkings markings : values()) {
-            dataToMarkings.put(markings.data, markings);
-        }
-    }
-
     /**
      * Gets the horse markings corresponding to the given internal identification number.
      * <br>
@@ -88,13 +80,14 @@ public enum HorseMarkings {
      *
      * @return The horse markings.
      */
+    @Nonnull
     public static HorseMarkings of(int id) {
-        HorseMarkings markings = dataToMarkings.get(id);
-        if (markings == null) {
-            throw new IllegalArgumentException("no horse markings with id = " + id);
+        for (HorseMarkings markings : values()) {
+            if (markings.data == id) {
+                return markings;
+            }
         }
-        return markings;
+
+        throw new IllegalArgumentException("no horse markings with id = " + id);
     }
-
 }
-

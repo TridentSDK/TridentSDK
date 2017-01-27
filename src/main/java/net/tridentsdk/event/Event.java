@@ -14,44 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.event;
 
-import lombok.Getter;
-
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
- * Represents the different types of Horse armor.
+ * This class represents the superinterface of all classes
+ * that are events that may be dispatched by the
+ * {@link EventController}.
  *
  * @author TridentSDK
- * @since 0.5-alpha
+ * @since 0.3-alpha-DP
  */
-@Immutable
-public enum HorseArmor {
-    /**
-     * Leather horse armor.
-     */
-    LEATHER(3),
-
-    /**
-     * Iron horse armor.
-     */
-    IRON(5),
-
-    /**
-     * Gold horse armor.
-     */
-    GOLD(7),
-
-    /**
-     * Diamond horse armor.
-     */
-    DIAMOND(11);
-
-    @Getter
-    private final int armor;
-
-    HorseArmor(int armor) {
-        this.armor = armor;
-    }
+@ThreadSafe
+public interface Event {
 }

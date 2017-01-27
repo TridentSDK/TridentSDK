@@ -21,6 +21,8 @@ import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
+import net.tridentsdk.inventory.Inventory;
+import net.tridentsdk.inventory.InventoryType;
 import net.tridentsdk.inventory.Item;
 import net.tridentsdk.meta.ItemMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
@@ -132,6 +134,7 @@ public final class Impl {
         BossBar newBossBar();
 
         // Inventory
+        Inventory newInv(InventoryType type, int slots);
         Item newItem(Substance substance, int count, byte damage, ItemMeta meta);
     }
 }

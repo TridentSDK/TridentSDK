@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Horses.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum HorseType {
-
     /**
      * A horse.
      */
@@ -61,14 +61,6 @@ public enum HorseType {
         this.data = data;
     }
 
-    private static final Map<Integer, HorseType> dataToType = new HashMap<>();
-
-    static {
-        for (HorseType type : values()) {
-            dataToType.put(type.data, type);
-        }
-    }
-
     /**
      * Gets the horse type corresponding to the given internal identification number.
      * <br>
@@ -78,12 +70,14 @@ public enum HorseType {
      *
      * @return The horse type.
      */
+    @Nonnull
     public static HorseType of(int id) {
-        HorseType type = dataToType.get(id);
-        if (type == null) {
-            throw new IllegalArgumentException("no horse type with id = " + id);
+        for (HorseType type : values()) {
+            if (type.data == id) {
+                return type;
+            }
         }
-        return type;
-    }
 
+        throw new IllegalArgumentException("no horse type with id = " + id);
+    }
 }

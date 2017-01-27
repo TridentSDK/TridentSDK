@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Rabbits.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum RabbitType {
-
     /**
      * A brown rabbit.
      */
@@ -71,14 +71,6 @@ public enum RabbitType {
         this.data = data;
     }
 
-    private static final Map<Integer, RabbitType> dataToType = new HashMap<>();
-
-    static {
-        for (RabbitType type : values()) {
-            dataToType.put(type.data, type);
-        }
-    }
-
     /**
      * Gets the rabbit type corresponding to the given internal identification number.
      * <br>
@@ -88,12 +80,14 @@ public enum RabbitType {
      *
      * @return The rabbit type.
      */
+    @Nonnull
     public static RabbitType of(int id) {
-        RabbitType type = dataToType.get(id);
-        if (type == null) {
-            throw new IllegalArgumentException("no rabbit type with id = " + id);
+        for (RabbitType type : values()) {
+            if (type.data == id) {
+                return type;
+            }
         }
-        return type;
-    }
 
+        throw new IllegalArgumentException("no rabbit type with id = " + id);
+    }
 }

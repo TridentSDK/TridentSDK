@@ -23,5 +23,5 @@ package net.tridentsdk.plugin;
  * @since 0.3-alpha-DP
  */
 public class Plugin {
-
+    // TODO
 }

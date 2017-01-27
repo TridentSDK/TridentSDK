@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Villagers.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum VillagerProfession {
-
     /**
      * A farmer villager.
      */
@@ -61,8 +61,6 @@ public enum VillagerProfession {
         this.data = data;
     }
 
-    private static final Map<Integer, VillagerProfession> dataToType = new HashMap<>();
-
     /**
      * Gets the villager profession corresponding to the given internal identification number.
      * <br>
@@ -72,18 +70,14 @@ public enum VillagerProfession {
      *
      * @return The villager profession.
      */
+    @Nonnull
     public static VillagerProfession of(int id) {
-        VillagerProfession profession = dataToType.get(id);
-        if (profession == null) {
-            throw new IllegalArgumentException("no villager profession with id = " + id);
+        for (VillagerProfession prof : values()) {
+            if (prof.data == id) {
+                return prof;
+            }
         }
-        return profession;
-    }
 
-    static {
-        for (VillagerProfession type : values()) {
-            dataToType.put(type.data, type);
-        }
+        throw new IllegalArgumentException("no villager profession with id = " + id);
     }
-
 }

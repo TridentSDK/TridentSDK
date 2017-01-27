@@ -14,44 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
-
-import lombok.Getter;
+package net.tridentsdk.inventory;
 
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different types of Horse armor.
+ * Represents the types of inventories that are accessible
+ * in the Minecraft world.
  *
  * @author TridentSDK
- * @since 0.5-alpha
+ * @since 0.3-alpha-DP
  */
-@Immutable
-public enum HorseArmor {
-    /**
-     * Leather horse armor.
-     */
-    LEATHER(3),
-
-    /**
-     * Iron horse armor.
-     */
-    IRON(5),
-
-    /**
-     * Gold horse armor.
-     */
-    GOLD(7),
-
-    /**
-     * Diamond horse armor.
-     */
-    DIAMOND(11);
-
-    @Getter
-    private final int armor;
-
-    HorseArmor(int armor) {
-        this.armor = armor;
-    }
+@Immutable // TODO
+public enum InventoryType {
 }

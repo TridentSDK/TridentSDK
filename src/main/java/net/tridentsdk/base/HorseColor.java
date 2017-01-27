@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different colors of Horses.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum HorseColor {
-
     /**
      * No extra colour (brown).
      */
@@ -61,14 +61,6 @@ public enum HorseColor {
         this.data = data;
     }
 
-    private static final Map<Integer, HorseColor> dataToColor = new HashMap<>();
-
-    static {
-        for (HorseColor color : values()) {
-            dataToColor.put(color.data, color);
-        }
-    }
-
     /**
      * Gets the horse color corresponding to the given internal identification number.
      * <br>
@@ -78,12 +70,14 @@ public enum HorseColor {
      *
      * @return The horse color.
      */
+    @Nonnull
     public static HorseColor of(int id) {
-        HorseColor color = dataToColor.get(id);
-        if (color == null) {
-            throw new IllegalArgumentException("no horse color with id = " + id);
+        for (HorseColor color : values()) {
+            if (color.data == id) {
+                return color;
+            }
         }
-        return color;
-    }
 
+        throw new IllegalArgumentException("no horse color with id = " + id);
+    }
 }

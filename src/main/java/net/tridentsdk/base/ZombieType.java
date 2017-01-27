@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Zombies.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum ZombieType {
-
     /**
      * A normal zombie.
      */
@@ -75,8 +75,6 @@ public enum ZombieType {
         this.villager = data >= 1 && data <= 5;
     }
 
-    private static final Map<Integer, ZombieType> dataToType = new HashMap<>();
-
     /**
      * Gets the zombie type corresponding to the given internal identification number.
      * <br>
@@ -86,18 +84,14 @@ public enum ZombieType {
      *
      * @return The zombie type.
      */
+    @Nonnull
     public static ZombieType of(int id) {
-        ZombieType type = dataToType.get(id);
-        if (type == null) {
-            throw new IllegalArgumentException("no zombie type with id = " + id);
-        }
-        return type;
-    }
-
-    static {
         for (ZombieType type : values()) {
-            dataToType.put(type.data, type);
+            if (type.data == id) {
+                return type;
+            }
         }
-    }
 
+        throw new IllegalArgumentException("no zombie type with id = " + id);
+    }
 }
