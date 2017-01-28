@@ -134,7 +134,6 @@ public enum BlockDirection {
      * Gets the block direction corresponding to the given Minecraft direction.
      *
      * @param direction The Minecraft direction.
-     *
      * @return The block direction.
      */
     @Nonnull
