@@ -19,6 +19,8 @@ package net.tridentsdk;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.event.EventController;
+import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
@@ -28,7 +30,7 @@ import java.util.Collection;
  * class.
  *
  * <p>The instance of the server may be obtained through
- * the {@link #instance()} method.</p>
+ * the {@link #getInstance()} method.</p>
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
@@ -46,7 +48,7 @@ public interface Server {
      *
      * @return the server
      */
-    static Server instance() {
+    static Server getInstance() {
         return Impl.get().svr();
     }
 
@@ -56,7 +58,7 @@ public interface Server {
      *
      * @return the internal IP
      */
-    String ip();
+    String getIp();
 
     /**
      * Obtains the port which the server selects to open its
@@ -64,7 +66,7 @@ public interface Server {
      *
      * @return the port
      */
-    int port();
+    int getPort();
 
     /**
      * This method obtains the logger as defined by the
@@ -76,7 +78,7 @@ public interface Server {
      *
      * @return the server representation of the logger
      */
-    Logger logger();
+    Logger getLogger();
 
     /**
      * Obtains the configuration file that is used to set
@@ -84,7 +86,7 @@ public interface Server {
      *
      * @return the server config
      */
-    Config config();
+    Config getConfig();
 
     /**
      * Obtains a collection of players which are currently
@@ -92,7 +94,22 @@ public interface Server {
      *
      * @return the current online players
      */
-    Collection<Player> players();
+    Collection<Player> getPlayers();
+
+    /**
+     * Obtains the singleton instance of the global world
+     * handler.
+     *
+     * @return the instance of the server world loader
+     */
+    WorldLoader getWorldLoader();
+
+    /**
+     * Obtains the event controller for the server.
+     *
+     * @return the server's event controller
+     */
+    EventController getEventController();
 
     /**
      * This method causes the server to save the current

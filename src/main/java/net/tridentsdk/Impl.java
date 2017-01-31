@@ -27,7 +27,6 @@ import net.tridentsdk.inventory.Item;
 import net.tridentsdk.meta.ItemMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
-import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -123,9 +122,6 @@ public final class Impl {
         Logger newLogger(String s);
         void attachHandler(Logger logger, LogHandler handler);
         boolean removeHandler(Logger logger, LogHandler handler);
-
-        // get the world handler
-        WorldLoader wrlds();
 
         // UI
         TabList globalTabList();
