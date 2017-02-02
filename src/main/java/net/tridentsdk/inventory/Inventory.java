@@ -125,6 +125,14 @@ public interface Inventory {
     int getSize();
 
     /**
+     * Obtains the type of inventory represented by this
+     * particular instance.
+     *
+     * @return the inventory type
+     */
+    InventoryType getType();
+
+    /**
      * Obtains the title of the inventory, which may use
      * chat formatting specifications to add effects.
      *
