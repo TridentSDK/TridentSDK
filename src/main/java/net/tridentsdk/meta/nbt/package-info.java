@@ -14,44 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
-
-import lombok.Getter;
-
-import javax.annotation.concurrent.Immutable;
-
 /**
- * Represents the different types of Horse armor.
- *
- * @author TridentSDK
- * @since 0.5-alpha
+ * This package contains classes pertaing to NBT data which
+ * is used by Minecraft to persist and store metadata such
+ * as enchantments, item values, and world data.
  */
-@Immutable
-public enum HorseArmor {
-    /**
-     * Leather horse armor.
-     */
-    LEATHER(3),
-
-    /**
-     * Iron horse armor.
-     */
-    IRON(5),
-
-    /**
-     * Gold horse armor.
-     */
-    GOLD(7),
-
-    /**
-     * Diamond horse armor.
-     */
-    DIAMOND(11);
-
-    @Getter
-    private final int armor;
-
-    HorseArmor(int armor) {
-        this.armor = armor;
-    }
-}
+package net.tridentsdk.meta.nbt;

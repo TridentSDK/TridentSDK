@@ -17,31 +17,37 @@
 package net.tridentsdk.event;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.lang.annotation.*;
 
 /**
- * This annotation may be added to an event listener method
- * to indicate that it is able to handle async calls.
- *
- * <p>When in doubt, <strong>DO NOT</strong> use this
- * annotation!</p>
- *
- * <p>Multithreaded servers may wish to call valid event
- * listeners that are registered as async from the target
- * thread without needing to pass to the plugin thread. If
- * your code is self-contained and thread-safe, then using
- * this annotation <em>may</em> allow the server to run
- * more efficiently.</p>
- *
- * <p>This annotation has no effect on members that are not
- * registered listeners.</p>
+ * An event controller manages and handles dispatched
+ * events and their corresponding listeners
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@Documented
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
 @ThreadSafe
-public @interface Async {
+public interface EventController {
+    /**
+     * Registers the given listener object to receive
+     * events dispatched by the controller.
+     *
+     * @param listener the listener to register
+     */
+    void register(Object listener);
+
+    /**
+     * Removes the given listener from being handling
+     * events dispatched by the event controller.
+     *
+     * @param listener the listener to remove
+     */
+    void unregister(Object listener);
+
+    /**
+     * Dispatches the event to the event listener/handlers
+     * that are registered under the event controller.
+     *
+     * @param event the event to dispatch
+     */
+    void dispatch(Event event);
 }

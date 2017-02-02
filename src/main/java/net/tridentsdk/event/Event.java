@@ -16,11 +16,16 @@
  */
 package net.tridentsdk.event;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
- * The superinterface for an event class.
+ * This class represents the superinterface of all classes
+ * that are events that may be dispatched by the
+ * {@link EventController}.
  *
  * @author TridentSDK
- * @since 0.5-alpha
+ * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Event {
 }

@@ -18,9 +18,19 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-@Getter
-public enum BlockDirection {
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
+/**
+ * Represents the compass direction which a block may be
+ * facing, or in reference to the faces of a block.
+ *
+ * @author TridentSDK
+ * @since 0.3-alpha-DP
+ */
+@Getter
+@Immutable
+public enum BlockDirection {
     NORTH(2, 0, 0, -1),
     NORTH_EAST(-1, 1, 0, -1),
     EAST(5, 1, 0, 0),
@@ -36,22 +46,22 @@ public enum BlockDirection {
     /**
      * The internal direction used by Minecraft itself.
      */
-    private int minecraftDirection;
+    private final int minecraftDirection;
 
     /**
      * The vector offset in the X direction.
      */
-    private int xDiff;
+    private final int xDiff;
 
     /**
      * The vector offset in the Y direction.
      */
 
-    private int yDiff;
+    private final int yDiff;
     /**
      * The vector offset in the Z direction.
      */
-    private int zDiff;
+    private final int zDiff;
 
     BlockDirection(int minecraftDirection, int xDiff, int yDiff, int zDiff) {
         this.minecraftDirection = minecraftDirection;
@@ -124,16 +134,16 @@ public enum BlockDirection {
      * Gets the block direction corresponding to the given Minecraft direction.
      *
      * @param direction The Minecraft direction.
-     *
      * @return The block direction.
      */
+    @Nonnull
     public static BlockDirection fromMinecraftDirection(int direction) {
         for (BlockDirection d : values()) {
             if(d.hasMinecraftDirection() && d.minecraftDirection == direction){
                 return d;
             }
         }
-        return null;
-    }
 
+        throw new IllegalArgumentException("no block direction with direction=" + direction);
+    }
 }

@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Ocelots.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum OcelotType {
-
     /**
      * A wild ocelot.
      */
@@ -56,14 +56,6 @@ public enum OcelotType {
         this.data = data;
     }
 
-    private static final Map<Integer, OcelotType> dataToType = new HashMap<>();
-
-    static {
-        for (OcelotType type : values()) {
-            dataToType.put(type.data, type);
-        }
-    }
-
     /**
      * Gets the ocelot type corresponding to the given internal identification number.
      * <br>
@@ -73,12 +65,14 @@ public enum OcelotType {
      *
      * @return The ocelot type.
      */
+    @Nonnull
     public static OcelotType of(int id) {
-        OcelotType type = dataToType.get(id);
-        if (type == null) {
-            throw new IllegalArgumentException("no ocelot type with id = " + id);
+        for (OcelotType type : values()) {
+            if (type.data == id) {
+                return type;
+            }
         }
-        return type;
-    }
 
+        throw new IllegalArgumentException("no ocelot type with id = " + id);
+    }
 }

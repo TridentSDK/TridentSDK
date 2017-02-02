@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different types of Skeletons.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum SkeletonType {
-
     /**
      * A normal skeleton.
      */
@@ -51,8 +51,6 @@ public enum SkeletonType {
         this.data = data;
     }
 
-    private static final Map<Integer, SkeletonType> dataToType = new HashMap<>();
-
     /**
      * Gets the skeleton type corresponding to the given internal identification number.
      * <br>
@@ -62,18 +60,14 @@ public enum SkeletonType {
      *
      * @return The skeleton type.
      */
+    @Nonnull
     public static SkeletonType of(int id) {
-        SkeletonType type = dataToType.get(id);
-        if (type == null) {
-            throw new IllegalArgumentException("no skeleton type with id = " + id);
-        }
-        return type;
-    }
-
-    static {
         for (SkeletonType type : values()) {
-            dataToType.put(type.data, type);
+            if (type.data == id) {
+                return type;
+            }
         }
-    }
 
+        throw new IllegalArgumentException("no skeleton type with id = " + id);
+    }
 }

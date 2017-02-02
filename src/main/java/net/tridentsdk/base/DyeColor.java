@@ -18,8 +18,8 @@ package net.tridentsdk.base;
 
 import lombok.Getter;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Represents the different colors of Dye, Wool, and Sheep.
@@ -27,8 +27,8 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum DyeColor {
-
     /**
      * Black dye.
      */
@@ -116,13 +116,6 @@ public enum DyeColor {
         this.data = data;
     }
 
-    private static final Map<Integer, DyeColor> dataToColor = new HashMap<>();
-
-    static {
-        for (DyeColor color : values()) {
-            dataToColor.put(color.data, color);
-        }
-    }
 
     /**
      * Gets the dye color corresponding to the given internal identification number.
@@ -133,12 +126,14 @@ public enum DyeColor {
      *
      * @return The dye color.
      */
+    @Nonnull
     public static DyeColor of(int id) {
-        DyeColor color = dataToColor.get(id);
-        if (color == null) {
-            throw new IllegalArgumentException("no dye color with id = " + id);
+        for (DyeColor color : values()) {
+            if (color.data == id) {
+                return color;
+            }
         }
-        return color;
-    }
 
+        throw new IllegalArgumentException("no dye color with id = " + id);
+    }
 }

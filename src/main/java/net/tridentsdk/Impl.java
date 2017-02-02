@@ -21,11 +21,12 @@ import net.tridentsdk.command.logger.LogHandler;
 import net.tridentsdk.command.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
+import net.tridentsdk.inventory.Inventory;
+import net.tridentsdk.inventory.InventoryType;
 import net.tridentsdk.inventory.Item;
 import net.tridentsdk.meta.ItemMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
-import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -122,9 +123,6 @@ public final class Impl {
         void attachHandler(Logger logger, LogHandler handler);
         boolean removeHandler(Logger logger, LogHandler handler);
 
-        // get the world handler
-        WorldLoader wrlds();
-
         // UI
         TabList globalTabList();
 
@@ -132,6 +130,7 @@ public final class Impl {
         BossBar newBossBar();
 
         // Inventory
+        Inventory newInv(InventoryType type, int slots);
         Item newItem(Substance substance, int count, byte damage, ItemMeta meta);
     }
 }

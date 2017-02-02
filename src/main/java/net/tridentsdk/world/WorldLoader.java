@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world;
 
-import net.tridentsdk.Impl;
+import net.tridentsdk.Server;
 import net.tridentsdk.world.opt.WorldCreateSpec;
 
 import javax.annotation.Nonnull;
@@ -28,27 +28,20 @@ import java.util.Map;
  *
  * <p>This is basically a world registry.</p>
  *
+ * <p>The instance of this class may be obtained using
+ * {@link Server#getWorldLoader()}.</p>
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 public interface WorldLoader {
-    /**
-     * Obtains the singleton instance of this world handler
-     * that this server contains.
-     *
-     * @return the instance of this class
-     */
-    static WorldLoader instance() {
-        return Impl.get().wrlds();
-    }
-
     /**
      * Obtains all of the worlds that are currently loaded
      * on the server.
      *
      * @return all of the loaded worlds
      */
-    Map<String, World> all();
+    Map<String, World> getWorlds();
 
     /**
      * Obtains the default world that new players will join
