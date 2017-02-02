@@ -16,12 +16,24 @@
  */
 package net.tridentsdk.event;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
- * The superinterface for an event class that is capable of
+ * The superclass for an event class that is capable of
  * being cancelled by listeners.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-public interface CancellableEvent extends Event {
+@ThreadSafe
+public class CancellableEvent implements Event {
+    /**
+     * The cancellation state for this event.
+     */
+    @Getter
+    @Setter
+    private volatile boolean cancelled;
 }
