@@ -46,6 +46,10 @@ public interface Config extends ConfigSection {
      * Loads the given config into memory, given the path
      * as a String.
      *
+     * <p>It is recommended to call {@link #save()} after
+     * loading a config in order to create a file if it does
+     * not already exist.</p>
+     *
      * @param path the path from which to laod the config
      * @return the loaded config memory representation
      * @throws RuntimeException if anything went wrong
@@ -58,6 +62,10 @@ public interface Config extends ConfigSection {
      * Loads the given config into memory, given the path
      * as a Path object.
      *
+     * <p>It is recommended to call {@link #save()} after
+     * loading a config in order to create a file if it does
+     * not already exist.</p>
+     *
      * @param path the path from which to laod the config
      * @return the loaded config memory representation
      */
@@ -68,6 +76,10 @@ public interface Config extends ConfigSection {
     /**
      * Loads the given config into memory, given the path
      * as a File object.
+     *
+     * <p>It is recommended to call {@link #save()} after
+     * loading a config in order to create a file if it does
+     * not already exist.</p>
      *
      * @param file the file from which to laod the config
      * @return the loaded config memory representation
