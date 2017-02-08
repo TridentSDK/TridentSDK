@@ -327,6 +327,6 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
 
     @Override
     public Position clone() {
-        return new Position(world, x, y, z, pitch, yaw);
+        return new Position(this.world, this.x, this.y, this.z, this.pitch, this.yaw);
     }
 }
