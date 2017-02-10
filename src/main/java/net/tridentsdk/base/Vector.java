@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.base;
 
+import net.tridentsdk.world.World;
+
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
@@ -113,4 +115,16 @@ public final class Vector extends AbstractVector<Vector> {
         double mag = this.magnitude();
         return this.divide(mag, mag, mag);
     }
+    
+    /**
+     * Create a position based from this vector with
+     * a provided world
+     *
+     * @param world The world of the position
+     * @return A Position representation of this vector
+     */
+    public Position toPosition(World world){
+        return new Position(world, x, y, z);
+    }
+    
 }

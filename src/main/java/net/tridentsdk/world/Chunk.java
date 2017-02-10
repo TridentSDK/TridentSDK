@@ -44,7 +44,7 @@ public interface Chunk {
      * @return the z coordinate
      */
     int z();
-
+    
     /**
      * Obtains the block at the given relative coordinates
      * inside of this chunk.

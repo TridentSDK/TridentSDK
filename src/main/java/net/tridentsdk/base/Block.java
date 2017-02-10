@@ -40,4 +40,11 @@ public interface Block {
      * @return the block position
      */
     Position position();
+    
+    /**
+     * Set the substance of the block
+     *
+     * @param substance The new substance
+     */
+    void setSubstance(Substance substance);
 }

@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.base;
 
+import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
 
 import javax.annotation.Nonnull;
@@ -329,4 +330,16 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
     public Position clone() {
         return new Position(this.world, this.x, this.y, this.z, this.pitch, this.yaw);
     }
+    
+    public Chunk chunk(){
+        return this.world().chunkAt(getChunkX(), getChunkZ());
+    }
+    
+    /**
+     * @return Vector of the position relative inside the chunk
+     */
+    public Vector chunkRelative(){
+        return new Vector((int) x & 15, y, (int) z & 15);
+    }
+    
 }

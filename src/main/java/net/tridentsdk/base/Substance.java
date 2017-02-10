@@ -17,6 +17,8 @@
 package net.tridentsdk.base;
 
 import javax.annotation.concurrent.Immutable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents the set of all substances of which
@@ -52,6 +54,8 @@ public enum Substance {
     Substance(int id) {
         this.id = id;
         this.name = "minecraft:" + this.name().toLowerCase();
+    
+        Cache.cache.put(id, this);
     }
 
     /**
@@ -67,4 +71,15 @@ public enum Substance {
     public String toString() {
         return this.name;
     }
+    
+    public static Substance of(int id){
+        return Cache.cache.getOrDefault(id, AIR);
+    }
+    
+    private static class Cache {
+        
+        public static final Map<Integer, Substance> cache = new HashMap<>();
+        
+    }
+    
 }
