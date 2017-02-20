@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.base;
 
+import it.unimi.dsi.fastutil.ints.Int2ReferenceOpenHashMap;
+
 import javax.annotation.concurrent.Immutable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class represents the set of all substances of which
@@ -54,8 +54,20 @@ public enum Substance {
     Substance(int id) {
         this.id = id;
         this.name = "minecraft:" + this.name().toLowerCase();
-    
-        Cache.cache.put(id, this);
+    }
+
+    /**
+     * Mapping of ID values to their respective substance,
+     * substances can contain 400+ entries and that is not
+     * worth using O(n) iteration.
+     */
+    private static final Int2ReferenceOpenHashMap<Substance> SUBSTANCE_MAP =
+            new Int2ReferenceOpenHashMap<>();
+    static {
+        for (Substance s : values()) {
+            SUBSTANCE_MAP.put(s.id, s);
+        }
+        SUBSTANCE_MAP.trim();
     }
 
     /**
@@ -71,15 +83,20 @@ public enum Substance {
     public String toString() {
         return this.name;
     }
-    
+
+    /**
+     * Obtains the substance that is represented by the
+     * given ID value.
+     *
+     * @param id the ID value of the substance to find
+     * @return the substance
+     */
     public static Substance of(int id){
-        return Cache.cache.getOrDefault(id, AIR);
+        Substance substance = SUBSTANCE_MAP.get(id);
+        if (substance == null) {
+            throw new IndexOutOfBoundsException("Provided Substance ID (" + id + ") is out of bounds");
+        }
+
+        return substance;
     }
-    
-    private static class Cache {
-        
-        public static final Map<Integer, Substance> cache = new HashMap<>();
-        
-    }
-    
 }

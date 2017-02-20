@@ -139,6 +139,16 @@ public interface World {
     Block blockAt(int x, int y, int z);
 
     /**
+     * Obtains the block that is located at the given
+     * position.
+     *
+     * @param pos the position which to find the block in
+     * this world
+     * @return the block located at the given position
+     */
+    Block blockAt(Position pos);
+
+    /**
      * Obtains the enclosing directory which contains the
      * region and data files of this worlds's chunks.
      *

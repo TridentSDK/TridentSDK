@@ -46,9 +46,11 @@ public interface Config extends ConfigSection {
      * Loads the given config into memory, given the path
      * as a String.
      *
-     * <p>It is recommended to call {@link #save()} after
-     * loading a config in order to create a file if it does
-     * not already exist.</p>
+     * <p>Implementations are recommended to cache configs
+     * loaded by this method in order to keep copies
+     * sane and consistent. You can expect that configs
+     * loaded from the same path will be {@code ==} to each
+     * other.</p>
      *
      * @param path the path from which to laod the config
      * @return the loaded config memory representation
@@ -62,9 +64,11 @@ public interface Config extends ConfigSection {
      * Loads the given config into memory, given the path
      * as a Path object.
      *
-     * <p>It is recommended to call {@link #save()} after
-     * loading a config in order to create a file if it does
-     * not already exist.</p>
+     * <p>Implementations are recommended to cache configs
+     * loaded by this method in order to keep copies
+     * sane and consistent. You can expect that configs
+     * loaded from the same path will be {@code ==} to each
+     * other.</p>
      *
      * @param path the path from which to laod the config
      * @return the loaded config memory representation
@@ -77,9 +81,11 @@ public interface Config extends ConfigSection {
      * Loads the given config into memory, given the path
      * as a File object.
      *
-     * <p>It is recommended to call {@link #save()} after
-     * loading a config in order to create a file if it does
-     * not already exist.</p>
+     * <p>Implementations are recommended to cache configs
+     * loaded by this method in order to keep copies
+     * sane and consistent. You can expect that configs
+     * loaded from the same path will be {@code ==} to each
+     * other.</p>
      *
      * @param file the file from which to laod the config
      * @return the loaded config memory representation

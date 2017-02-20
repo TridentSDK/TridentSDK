@@ -18,6 +18,7 @@ package net.tridentsdk.base;
 
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.doc.Policy;
+import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
@@ -609,6 +610,19 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
             vector.x = this.x;
             vector.y = this.y;
             vector.z = this.z;
+        }
+    }
+
+    /**
+     * Create a position based from this vector with
+     * a provided world
+     *
+     * @param world The world of the position
+     * @return A Position representation of this vector
+     */
+    public Position toPosition(World world){
+        synchronized (this.lock) {
+            return new Position(world, this.x, this.y, this.z);
         }
     }
 

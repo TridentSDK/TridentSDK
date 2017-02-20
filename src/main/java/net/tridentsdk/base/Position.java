@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.base;
 
-import net.tridentsdk.world.Chunk;
 import net.tridentsdk.world.World;
 
 import javax.annotation.Nonnull;
@@ -41,8 +40,8 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * position
      */
     private final World world;
-    private float pitch;
     private float yaw;
+    private float pitch;
 
     @Override
     protected void writeFields(Position vector) {
@@ -200,24 +199,24 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      *
      * <p>If you do not already have a {@link Position}
      * object, then use {@link World#blockAt(int, int,
-     * int)}
-     * instead, as it is not necessary to create a
-     * throwaway
-     * object.</p>
+     * int)} instead, as it is not necessary to create a
+     * throwaway object.</p>
      *
      * @return the block
      */
     public Block block() {
-        double x;
-        double y;
-        double z;
-        synchronized (this.lock) {
-            x = this.x;
-            y = this.y;
-            z = this.z;
-        }
+        return this.world.blockAt(this);
+    }
 
-        return this.world.blockAt((int) x, (int) y, (int) z);
+    /**
+     * Obtains an immutable copy of this vector.
+     *
+     * @return the copy of the current state of this vector
+     */
+    public ImmutableWorldVector toWorldVector() {
+        synchronized (this.lock) {
+            return new ImmutableWorldVector(this.world, this.intX(), this.intY(), this.intZ());
+        }
     }
 
     /**
@@ -328,18 +327,8 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
 
     @Override
     public Position clone() {
-        return new Position(this.world, this.x, this.y, this.z, this.pitch, this.yaw);
+        synchronized (this.lock) {
+            return new Position(this.world, this.x, this.y, this.z, this.pitch, this.yaw);
+        }
     }
-    
-    public Chunk chunk(){
-        return this.world().chunkAt(getChunkX(), getChunkZ());
-    }
-    
-    /**
-     * @return Vector of the position relative inside the chunk
-     */
-    public Vector chunkRelative(){
-        return new Vector((int) x & 15, y, (int) z & 15);
-    }
-    
 }

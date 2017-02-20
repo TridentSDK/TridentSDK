@@ -17,6 +17,7 @@
 package net.tridentsdk.event;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.function.Consumer;
 
 /**
  * An event controller manages and handles dispatched
@@ -48,6 +49,8 @@ public interface EventController {
      * that are registered under the event controller.
      *
      * @param event the event to dispatch
+     * @param callback the callback to execute when the
+     * controller finishes processing all listeners
      */
-    void dispatch(Event event);
+    <T extends Event> void dispatch(T event, Consumer<T> callback);
 }
