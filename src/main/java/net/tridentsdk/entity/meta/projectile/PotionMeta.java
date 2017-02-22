@@ -14,17 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.projectile;
+
+import net.tridentsdk.entity.meta.EntityMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface FishingHookMeta extends EntityMeta {
+public interface PotionMeta extends EntityMeta {
 
-    int getHookedEntityID();
+    // Slot getPotion(); // TODO
 
-    void setHookedEntityID(int entityID);
+    // void setPotion(Slot slot); // TODO
 
 }

@@ -14,12 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.inanimate;
+
+import net.tridentsdk.entity.meta.EntityMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface HangingMeta extends EntityMeta {
+public interface TNTPrimedMeta extends EntityMeta {
+
+    int getFuseTime();
+
+    void setFuseTime(int fuseTime);
+
 }

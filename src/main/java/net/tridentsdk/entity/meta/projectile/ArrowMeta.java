@@ -14,37 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.projectile;
+
+import net.tridentsdk.entity.meta.EntityMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface BoatMeta extends EntityMeta {
+public interface ArrowMeta extends EntityMeta {
 
-    int getTimeSinceLastHit();
+    boolean isCritical();
 
-    void setTimeSinceLastHit(int timeSinceLastHit);
-
-    int getForwardDirection();
-
-    void setForwardDirection(int forwardDirection);
-
-    float getDamageTaken();
-
-    void setDamageTaken(float damageTaken);
-
-    int getBoatType();
-
-    void setBoatType(int boatType);
-
-    boolean isLeftPaddleTurning();
-
-    void setLeftPaddleTurning(boolean leftPaddleTurning);
-
-    boolean isRightPaddleTurning();
-
-    void setRightPaddleTurning(boolean rightPaddleTurning);
+    void setCritical(boolean critical);
 
 }

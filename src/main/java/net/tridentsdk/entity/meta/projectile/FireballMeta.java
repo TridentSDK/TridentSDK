@@ -14,17 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta.minecart;
+package net.tridentsdk.entity.meta.projectile;
+
+import net.tridentsdk.entity.meta.EntityMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface FurnaceMinecartMeta extends MinecartMeta {
-
-    boolean isPowered();
-
-    void setPowered(boolean powered);
-
+public interface FireballMeta extends EntityMeta {
 }
