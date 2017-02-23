@@ -23,7 +23,7 @@ public class SubstanceTest {
     @Test
     public void testId() throws Exception {
         for (Substance substance : Substance.values()) {
-            Assert.assertEquals(substance.id(), substance.ordinal());
+            Assert.assertEquals(substance.getId(), substance.ordinal());
         }
     }
 
@@ -37,7 +37,7 @@ public class SubstanceTest {
     @Test
     public void testOf() throws Exception {
         for (Substance substance : Substance.values()) {
-            Assert.assertEquals(substance, Substance.of(substance.id()));
+            Assert.assertEquals(substance, Substance.of(substance.getId()));
         }
     }
 

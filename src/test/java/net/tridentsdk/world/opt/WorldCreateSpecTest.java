@@ -22,7 +22,7 @@ import org.junit.Test;
 public class WorldCreateSpecTest {
     @Test
     public void defaultOpts() throws Exception {
-        WorldCreateSpec spec = WorldCreateSpec.defaultOpts();
+        WorldCreateSpec spec = WorldCreateSpec.getDefaultOptions();
         Assert.assertTrue(spec.isDefault());
     }
 

@@ -25,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
 public class TabListTest {
     static {
         Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
-        Mockito.when(Impl.get().globalTabList()).
+        Mockito.when(Impl.get().getGlobalTabList()).
                 thenReturn(Mockito.mock(TabList.class));
         Mockito.when(Impl.get().newTabList()).
                 thenReturn(Mockito.mock(TabList.class));
@@ -33,7 +33,7 @@ public class TabListTest {
 
     @Test
     public void getGlobal() throws Exception {
-        assertNotNull(TabList.getGlobal());
+        assertNotNull(TabList.getGlobalTabList());
     }
 
     @Test

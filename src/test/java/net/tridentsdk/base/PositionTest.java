@@ -100,6 +100,16 @@ public class PositionTest {
 
         assertEquals(p0.getIntX() / 16, p0.getChunkX());
         assertEquals(p0.getIntZ() / 16, p0.getChunkZ());
+
+        p0.set(1D, 2D, 3D);
+        assertEquals(1, p0.getX(), 0);
+        assertEquals(2, p0.getY(), 0);
+        assertEquals(3, p0.getZ(), 0);
+        assertEquals(4, p0.getYaw(), 0);
+        assertEquals(5, p0.getPitch(), 0);
+
+        assertEquals(p0.getIntX() / 16, p0.getChunkX());
+        assertEquals(p0.getIntZ() / 16, p0.getChunkZ());
     }
 
     @Test
@@ -114,8 +124,8 @@ public class PositionTest {
         ImmutableWorldVector vec = p.toWorldVector();
 
         assertEquals(vec.getWorld(), p.world());
-        assertEquals(vec.getX(), p.intX());
-        assertEquals(vec.getY(), p.intY());
-        assertEquals(vec.getZ(), p.intZ());
+        assertEquals(vec.getX(), p.getIntX());
+        assertEquals(vec.getY(), p.getIntY());
+        assertEquals(vec.getZ(), p.getIntZ());
     }
 }

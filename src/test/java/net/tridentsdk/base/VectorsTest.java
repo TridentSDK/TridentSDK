@@ -17,7 +17,6 @@
 package net.tridentsdk.base;
 
 import net.tridentsdk.world.World;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.openjdk.jmh.annotations.*;
@@ -32,8 +31,7 @@ import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @State(Scope.Benchmark)
 public class VectorsTest {
@@ -57,7 +55,7 @@ public class VectorsTest {
         Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         assertEquals(v2, this.vec);
         assertEquals(v2.hashCode(), this.vec.hashCode());
-        Assert.assertFalse(this.vec.equals(new Object()));
+        assertFalse(this.vec.equals(new Object()));
     }
 
     @Test
@@ -138,9 +136,9 @@ public class VectorsTest {
         World world = Mockito.mock(World.class);
         Position position = this.vec.toPosition(world);
         assertEquals(world, position.world());
-        assertEquals(position.x(), this.vec.x(), 0);
-        assertEquals(position.y(), this.vec.y(), 0);
-        assertEquals(position.z(), this.vec.z(), 0);
+        assertEquals(position.getX(), this.vec.getX(), 0);
+        assertEquals(position.getY(), this.vec.getY(), 0);
+        assertEquals(position.getZ(), this.vec.getZ(), 0);
     }
 
     public static void main(String[] args) {
