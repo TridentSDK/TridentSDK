@@ -16,8 +16,10 @@
  */
 package net.tridentsdk.base;
 
+import net.tridentsdk.world.World;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.results.RunResult;
@@ -129,6 +131,16 @@ public class VectorsTest {
     @Test
     public void testToString() {
         assertNotNull(this.vec.toString());
+    }
+
+    @Test
+    public void testToPosition() {
+        World world = Mockito.mock(World.class);
+        Position position = this.vec.toPosition(world);
+        assertEquals(world, position.world());
+        assertEquals(position.x(), this.vec.x(), 0);
+        assertEquals(position.y(), this.vec.y(), 0);
+        assertEquals(position.z(), this.vec.z(), 0);
     }
 
     public static void main(String[] args) {

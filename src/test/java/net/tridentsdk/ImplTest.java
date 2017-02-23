@@ -17,41 +17,14 @@
 package net.tridentsdk;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.concurrent.CountDownLatch;
-
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
 public class ImplTest {
     @Test
     public void testSetGet() {
-        Impl.setImpl(null);
-        assertNull(Impl.get());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void testError() throws NoSuchFieldException, IllegalAccessException {
-        // hack
-        Field field = Impl.class.getDeclaredField("IMPL_LATCH");
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        field.setAccessible(true);
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-        field.set(null, new CountDownLatch(1));
-
-        Thread current = Thread.currentThread();
-        new Thread(() -> {
-            try {
-                Thread.sleep(1000L);
-                current.interrupt();
-            } catch (InterruptedException e) {
-                fail("This is not supposed to happen");
-            }
-        }).start();
-
-        Impl.get();
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        assertNotNull(Impl.get());
     }
 }

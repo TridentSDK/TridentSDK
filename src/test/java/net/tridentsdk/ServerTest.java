@@ -14,28 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import net.tridentsdk.world.World;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mockito.Mockito;
 
-import javax.annotation.concurrent.Immutable;
+public class ServerTest {
+    static {
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().svr()).thenReturn(Mockito.mock(Server.class));
+    }
 
-/**
- * This class represents an immutable copy of a Vector
- * object which is used to contain a constant set of values
- * that shouldn't change (i.e. the location of a block).
- *
- * @author TridentSDK
- * @since 0.5-alpha
- */
-@Getter
-@Immutable
-@AllArgsConstructor
-public class ImmutableWorldVector {
-    private final World world;
-    private final int x;
-    private final int y;
-    private final int z;
+    @Test
+    public void testGetInstance() {
+        Assert.assertNotNull(Server.getInstance());
+    }
 }

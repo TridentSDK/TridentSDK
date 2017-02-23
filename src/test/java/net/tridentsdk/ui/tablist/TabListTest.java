@@ -14,35 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.chat;
+package net.tridentsdk.ui.tablist;
 
+import net.tridentsdk.Impl;
 import org.junit.Test;
+import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * @author Nick Robson
- */
-public class ChatColorTest {
-
-    @Test
-    public void testColorRegistration() {
-        for (ChatColor c : ChatColor.values()) {
-            assertEquals(c, ChatColor.of(c.getColorChar()));
-        }
+public class TabListTest {
+    static {
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().globalTabList()).
+                thenReturn(Mockito.mock(TabList.class));
+        Mockito.when(Impl.get().newTabList()).
+                thenReturn(Mockito.mock(TabList.class));
     }
 
     @Test
-    public void testColorStrings() {
-        String colorChar = "\u00A7";
-        for (ChatColor c : ChatColor.values()) {
-            assertEquals(colorChar + c.getColorChar(), c.toString());
-        }
+    public void getGlobal() throws Exception {
+        assertNotNull(TabList.getGlobal());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testError() {
-        ChatColor.of('g');
+    @Test
+    public void newTabList() throws Exception {
+        assertNotNull(TabList.newTabList());
     }
-
 }

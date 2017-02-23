@@ -14,28 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.ui.bossbar;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import net.tridentsdk.world.World;
+import net.tridentsdk.Impl;
+import org.junit.Test;
+import org.mockito.Mockito;
 
-import javax.annotation.concurrent.Immutable;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * This class represents an immutable copy of a Vector
- * object which is used to contain a constant set of values
- * that shouldn't change (i.e. the location of a block).
- *
- * @author TridentSDK
- * @since 0.5-alpha
- */
-@Getter
-@Immutable
-@AllArgsConstructor
-public class ImmutableWorldVector {
-    private final World world;
-    private final int x;
-    private final int y;
-    private final int z;
+public class BossBarTest {
+    static {
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().newBossBar()).thenReturn(Mockito.mock(BossBar.class));
+    }
+
+    @Test
+    public void newBossBar() throws Exception {
+        assertNotNull(BossBar.newBossBar());
+    }
 }

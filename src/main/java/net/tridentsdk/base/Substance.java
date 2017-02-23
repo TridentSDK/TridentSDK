@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.base;
 
-import it.unimi.dsi.fastutil.ints.Int2ReferenceOpenHashMap;
+import net.tridentsdk.util.Int2ReferenceOpenHashMap;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -31,8 +31,12 @@ import javax.annotation.concurrent.Immutable;
 public enum Substance {
     // TODO add more substances
     AIR(0),
+    STONE(1),
     GRASS(2),
     DIRT(3),
+    COBBLESTONE(4),
+    PLANKS(5),
+    SAPLING(6),
     BEDROCK(7);
 
     /**

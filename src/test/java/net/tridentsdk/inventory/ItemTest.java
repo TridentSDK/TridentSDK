@@ -14,45 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.config;
+package net.tridentsdk.inventory;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.util.Misc;
+import net.tridentsdk.base.Substance;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import static org.junit.Assert.assertNotNull;
 
-public class ConfigTest {
-    private static final String TEST_PATH = Misc.HOME + "/kek/cfg.json";
-
+public class ItemTest {
     static {
         Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
-        Mockito.when(Impl.get().newCfg(Paths.get(TEST_PATH))).thenReturn(Mockito.mock(Config.class));
+        Mockito.when(Impl.get().newItem(Substance.AIR, 1, (byte) 0, null)).
+                thenReturn(Mockito.mock(Item.class));
     }
 
     @Test
-    public void testPathString() {
-        Config cfg = Config.load(TEST_PATH);
-        assertNotNull(cfg);
+    public void newItem() throws Exception {
+        assertNotNull(Item.newItem(Substance.AIR));
     }
 
     @Test
-    public void testPath() {
-        // This is stupid
-        Path path = Paths.get(TEST_PATH);
-        Config cfg = Config.load(path);
-        assertNotNull(cfg);
+    public void newItem1() throws Exception {
+        assertNotNull(Item.newItem(Substance.AIR, 1));
     }
 
     @Test
-    public void testFile() {
-        File file = new File(TEST_PATH);
-        Config cfg = Config.load(file);
-        assertNotNull(cfg);
+    public void newItem2() throws Exception {
+        assertNotNull(Item.newItem(Substance.AIR, 1, (byte) 0));
+    }
+
+    @Test
+    public void newItem3() throws Exception {
+        assertNotNull(Item.newItem(Substance.AIR, 1, (byte) 0, null));
     }
 }

@@ -39,7 +39,7 @@ public interface Item {
      * @return the new item
      */
     static Item newItem(Substance substance) {
-        return newItem(substance, 0);
+        return newItem(substance, 1);
     }
 
     /**

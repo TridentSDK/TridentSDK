@@ -648,7 +648,9 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     public boolean equals(Object obj) {
         if (obj instanceof AbstractVector) {
             AbstractVector v = (AbstractVector) obj;
-            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
+            synchronized (this.lock) {
+                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
+            }
         }
 
         return false;
@@ -659,15 +661,19 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         // Ignore IntelliJ warning for final field not in hashcode
         // anyone who uses a vector or position object as a
         // key is probably mentally retarded
-        int hash = 1;
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
-        return hash;
+        synchronized (this.lock) {
+            int hash = 1;
+            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
+            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
+            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
+            return hash;
+        }
     }
 
     @Override
     public String toString() {
-        return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
+        synchronized (this.lock) {
+            return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
+        }
     }
 }

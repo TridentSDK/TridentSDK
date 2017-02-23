@@ -47,8 +47,8 @@ public class PlayerTest {
         Player player = new DummyPlayer(messages);
         ChatComponent component = ChatComponent.text("hi there");
         player.sendMessage(component, ChatType.CHAT);
-        player.sendMessage(component, ChatType.SYSTEM);
         player.sendMessage(component);
+        player.sendMessage("hi there");
 
         assertEquals(messages.get(0).getMessage(), component);
         assertEquals(messages.get(0).getType(), ChatType.CHAT);

@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 
 public class PositionTest {
     private final World world = Mockito.mock(World.class);
-    
+
     @Test
     public void testWorld() {
         assertNotNull(new Position(this.world).world());
@@ -100,6 +100,16 @@ public class PositionTest {
 
         assertEquals(p0.intX() / 16, p0.getChunkX());
         assertEquals(p0.intZ() / 16, p0.getChunkZ());
+
+        p0.set(1D, 2D, 3D);
+        assertEquals(1, p0.x(), 0);
+        assertEquals(2, p0.y(), 0);
+        assertEquals(3, p0.z(), 0);
+        assertEquals(4, p0.yaw(), 0);
+        assertEquals(5, p0.pitch(), 0);
+
+        assertEquals(p0.intX() / 16, p0.getChunkX());
+        assertEquals(p0.intZ() / 16, p0.getChunkZ());
     }
 
     @Test
@@ -108,4 +118,14 @@ public class PositionTest {
         assertEquals(p0, p0.clone());
     }
 
+    @Test
+    public void testToWorldVec() {
+        Position p = new Position(this.world);
+        ImmutableWorldVector vec = p.toWorldVector();
+
+        assertEquals(vec.getWorld(), p.world());
+        assertEquals(vec.getX(), p.intX());
+        assertEquals(vec.getY(), p.intY());
+        assertEquals(vec.getZ(), p.intZ());
+    }
 }

@@ -301,9 +301,11 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
     public boolean equals(Object obj) {
         if (obj instanceof Position) {
             Position v = (Position) obj;
-            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
-                    this.world.equals(v.world) &&
-                    eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+            synchronized (this.lock) {
+                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
+                        this.world.equals(v.world) &&
+                        eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+            }
         }
 
         return false;
@@ -311,18 +313,22 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash = 31 * hash + this.world.hashCode();
-        hash = 31 * hash + Float.floatToIntBits(this.pitch);
-        hash = 31 * hash + Float.floatToIntBits(this.yaw);
-        return hash;
+        synchronized (this.lock) {
+            int hash = super.hashCode();
+            hash = 31 * hash + this.world.hashCode();
+            hash = 31 * hash + Float.floatToIntBits(this.pitch);
+            hash = 31 * hash + Float.floatToIntBits(this.yaw);
+            return hash;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
-                this.world.name(), this.x, this.y, this.z, this.pitch, this.yaw);
+        synchronized (this.lock) {
+            return String.format(
+                    "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
+                    this.world.name(), this.x, this.y, this.z, this.pitch, this.yaw);
+        }
     }
 
     @Override

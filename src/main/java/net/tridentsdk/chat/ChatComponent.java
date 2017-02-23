@@ -621,7 +621,7 @@ public class ChatComponent {
             boolean prevSection = i != 0 && chars[i - 1] == '\u00A7';
             char c = chars[i];
             if (prevSection) {
-                ChatColor color = ChatColor.getColor(c);
+                ChatColor color = ChatColor.of(c);
                 if (color != null) {
                     ChatComponent curr = currentComponent == null ? component : currentComponent;
                     // splice off current component

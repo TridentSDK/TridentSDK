@@ -14,35 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.chat;
+package net.tridentsdk.command.logger;
 
+import net.tridentsdk.Impl;
 import org.junit.Test;
+import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * @author Nick Robson
- */
-public class ChatColorTest {
+public class LoggerTest {
+    private static final String NAME = LoggerTest.class.getSimpleName();
 
-    @Test
-    public void testColorRegistration() {
-        for (ChatColor c : ChatColor.values()) {
-            assertEquals(c, ChatColor.of(c.getColorChar()));
-        }
+    static {
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().newLogger(NAME)).thenReturn(Mockito.mock(Logger.class));
     }
 
     @Test
-    public void testColorStrings() {
-        String colorChar = "\u00A7";
-        for (ChatColor c : ChatColor.values()) {
-            assertEquals(colorChar + c.getColorChar(), c.toString());
-        }
+    public void get() throws Exception {
+        assertNotNull(Logger.get(NAME));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testError() {
-        ChatColor.of('g');
+    @Test
+    public void get1() throws Exception {
+        assertNotNull(Logger.get(this.getClass()));
     }
-
 }
