@@ -65,7 +65,7 @@ public final class IntPair {
      *
      * @return the beginning {@code int}
      */
-    public int x() {
+    public int getX() {
         return this.x;
     }
 
@@ -74,7 +74,7 @@ public final class IntPair {
      *
      * @return the last {@code int}
      */
-    public int z() {
+    public int getZ() {
         return this.z;
     }
 

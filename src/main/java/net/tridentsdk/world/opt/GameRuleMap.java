@@ -54,7 +54,7 @@ public final class GameRuleMap {
     public <T> T get(GameRule<T> key) {
         T t = (T) this.changes.get(key);
         if (t == null) {
-            return key.defValue();
+            return key.getDefault();
         }
 
         return t;
@@ -68,7 +68,7 @@ public final class GameRuleMap {
      * @param <T> the type of value
      */
     public <T> void set(GameRule<T> key, T value) {
-        if (!key.defValue().equals(value)) {
+        if (!key.getDefault().equals(value)) {
             this.changes.put(key, value);
         }
     }

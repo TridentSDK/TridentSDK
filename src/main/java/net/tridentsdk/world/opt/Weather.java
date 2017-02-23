@@ -33,14 +33,14 @@ import javax.annotation.concurrent.ThreadSafe;
  *     (in jurisdiction of the implementation).</li>
  *     <li>Whatever weather condition already set cannot
  *     be overridden. That means that if it is raining,
- *     then if {@link #clearTime()} reaches 0, it will be
+ *     then if {@link #getClearTime()} reaches 0, it will be
  *     "reset" with no effect on the weather, and vice
  *     versa. Raining or clear weather can only occur once
  *     the other weather event is toggled.</li>
  *     <li>Thundering is a special case because it may only
  *     happen if the weather is raining as well. However, if
  *     raining is toggled, then thundering is also toggled
- *     as well, with the effect that {@link #thunderTime()}
+ *     as well, with the effect that {@link #getThunderTime()}
  *     has reached {@code 0} and is reset. Thunder time will
  *     be reset without any weather effect if it is not
  *     raining.</li>
@@ -62,7 +62,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * </ul></p>
  *
  * <p>Summary for non-implementation developers: if is clear
- * and {@link #rainTime()} reaches {@code 0}, nothing
+ * and {@link #getRainTime()} reaches {@code 0}, nothing
  * happens. It will only rain if clear weather is toggled.
  *
  * If it is raining and clear weather is toggled, then
@@ -94,7 +94,7 @@ public interface Weather {
      * @return {@code true} if it is raining, {@code false}
      *         if it is not
      */
-    boolean raining();
+    boolean isRaining();
 
     /**
      * Sets the current rain state in the world to the given
@@ -111,7 +111,7 @@ public interface Weather {
      *
      * @return the ticks until raining is toggled
      */
-    int rainTime();
+    int getRainTime();
 
     /**
      * Sets the amount of ticks until raining is toggled in
@@ -128,7 +128,7 @@ public interface Weather {
      * @return {@code true} if it is thundering,
      *         {@code false} otherwise
      */
-    boolean thundering();
+    boolean isThundering();
 
     /**
      * Sets whether the world is currently thundering to the
@@ -145,7 +145,7 @@ public interface Weather {
      *
      * @return the amount of ticks until it is toggled
      */
-    int thunderTime();
+    int getThunderTime();
 
     /**
      * Sets the amount of ticks until thundering is toggled
@@ -162,7 +162,7 @@ public interface Weather {
      *         {@code false} if it isn't
      */
     default boolean isClear() {
-        return !(this.thundering() && this.raining());
+        return !(this.isThundering() && this.isRaining());
     }
 
     /**
@@ -171,7 +171,7 @@ public interface Weather {
      * <p>This method causes raining and thundering to stop,
      * resetting both of their times.</p>
      */
-    void clear();
+    void setClear();
 
     /**
      * Obtains the amount of ticks until clear weather is
@@ -180,7 +180,7 @@ public interface Weather {
      *
      * @return the amount of ticks until it is toggled
      */
-    int clearTime();
+    int getClearTime();
 
     /**
      * Sets the amount of ticks until clear weather is

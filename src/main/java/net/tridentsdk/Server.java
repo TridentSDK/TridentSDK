@@ -49,7 +49,7 @@ public interface Server {
      * @return the server
      */
     static Server getInstance() {
-        return Impl.get().svr();
+        return Impl.get().getServer();
     }
 
     /**

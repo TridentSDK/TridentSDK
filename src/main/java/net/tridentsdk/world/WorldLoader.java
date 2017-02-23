@@ -49,7 +49,7 @@ public interface WorldLoader {
      *
      * @return the default world
      */
-    World getDefault();
+    World getDefaultWorld();
 
     /**
      * Obtains the world from the set of loaded worlds, or

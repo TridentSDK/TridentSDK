@@ -61,7 +61,7 @@ public interface Logger {
      *
      * @return the name
      */
-    String name();
+    String getName();
 
     /**
      * Logs the given string to the logger without any
@@ -123,5 +123,5 @@ public interface Logger {
      *
      * @return the outputstream
      */
-    OutputStream out();
+    OutputStream getOutputStream();
 }

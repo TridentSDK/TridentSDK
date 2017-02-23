@@ -60,7 +60,7 @@ public interface WorldBorder {
      *
      * @return the center of the border
      */
-    IntPair center();
+    IntPair getCenter();
 
     /**
      * Sets the center of the world border.
@@ -80,7 +80,7 @@ public interface WorldBorder {
      *
      * @return the border size
      */
-    int size();
+    int getSize();
 
     /**
      * Sets the size of the world border.
@@ -114,7 +114,7 @@ public interface WorldBorder {
      * @return the damage per second, where 0.5 is half a
      *         heart
      */
-    double damage();
+    double getDamage();
 
     /**
      * Sets the damage dealt per second to players outside
@@ -124,7 +124,7 @@ public interface WorldBorder {
      * in order to reset the damage dealt per second.</p>
      *
      * @param damage the damage, where 0.5 is half a heart
-     * @see #damage()
+     * @see #getDamage()
      */
     void setDamage(double damage);
 
@@ -136,7 +136,7 @@ public interface WorldBorder {
      * @return the amount of blocks players are safe before
      *         being dealt damage
      */
-    int safeZoneDist();
+    int getSafeZoneDistance();
 
     /**
      * Sets the amount of blocks on the other side of the
@@ -149,7 +149,7 @@ public interface WorldBorder {
      *
      * @param size the amount of blocks away from the border
      */
-    void setSafeZoneDist(int size);
+    void setSafeZoneDistance(int size);
 
     /**
      * Obtains the distance away from the other side of the
@@ -159,7 +159,7 @@ public interface WorldBorder {
      * @return the blocks away from the border that players
      *         will be warned
      */
-    int warnDist();
+    int getWarnDistance();
 
     /**
      * Sets the distance away from the border which players
@@ -172,7 +172,7 @@ public interface WorldBorder {
      * @param dist the blocks away from the border which to
      *             warn players
      */
-    void setWarnDist(int dist);
+    void setWarnDistance(int dist);
 
     /**
      * Obtains the time which a shrinking border will reach
@@ -182,7 +182,7 @@ public interface WorldBorder {
      * @return the time in seconds before the border will
      *         reach the player until they are warned
      */
-    int warnTime();
+    int getWarnTime();
 
     /**
      * Sets the time before the world border will reach the

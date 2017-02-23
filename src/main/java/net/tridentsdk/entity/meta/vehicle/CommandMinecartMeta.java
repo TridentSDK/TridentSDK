@@ -14,17 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.vehicle;
+
+import net.tridentsdk.chat.ChatComponent;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface DroppedItemMeta extends EntityMeta {
+public interface CommandMinecartMeta extends MinecartMeta {
 
-    // Slot getItem(); TODO
+    String getCommand();
 
-    // void setItem(Slot item); TODO
+    void setCommand(String command);
+
+    ChatComponent getLastOutput();
+
+    void setLastOutput(ChatComponent component);
 
 }

@@ -28,7 +28,6 @@ import net.tridentsdk.world.World;
 import net.tridentsdk.world.opt.GameMode;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -105,12 +104,12 @@ public class PlayerTest {
         }
 
         @Override
-        public String name() {
+        public String getName() {
             return null;
         }
 
         @Override
-        public UUID uuid() {
+        public UUID getUuid() {
             return null;
         }
 
@@ -150,7 +149,7 @@ public class PlayerTest {
         }
 
         @Override
-        public Collection<BossBar> getBossBars() {
+        public List<BossBar> getBossBars() {
             return null;
         }
 

@@ -14,17 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.projectile;
+
+import java.awt.*;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface WitherSkullMeta extends FireballMeta {
+public interface TippedArrowMeta extends ArrowMeta {
 
-    boolean isInvulnerable();
+    Color getColor();
 
-    void setInvulnerable(boolean invulnerable);
+    void setColor(Color color);
 
 }

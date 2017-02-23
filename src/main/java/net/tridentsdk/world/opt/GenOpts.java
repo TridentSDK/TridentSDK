@@ -38,7 +38,7 @@ public interface GenOpts {
      * @return the factory responsible for providing
      *         generation facilitated
      */
-    GeneratorProvider provider();
+    GeneratorProvider getProvider();
 
     /**
      * Obtains the seed used to generate the terrain and
@@ -50,7 +50,7 @@ public interface GenOpts {
      *
      * @return the world seed
      */
-    long seed();
+    long getSeed();
 
     /**
      * The input used to create the seed for the generator,
@@ -59,7 +59,7 @@ public interface GenOpts {
      * @return the input that created the seed
      */
     @Nonnull
-    String seedInput();
+    String getSeedInput();
 
     /**
      * Obtains the level type of the world, which also
@@ -67,7 +67,7 @@ public interface GenOpts {
      *
      * @return the world's level type
      */
-    LevelType levelType();
+    LevelType getLevelType();
 
     /**
      * Determine whether world features such as villages,
@@ -76,5 +76,5 @@ public interface GenOpts {
      * @return {@code true} to indicate that features should
      *         be generated, {@code false} if not
      */
-    boolean allowFeatures();
+    boolean isAllowFeatures();
 }

@@ -76,7 +76,7 @@ public interface ConfigSection {
      *
      * @return the name used to locate keys in this section
      */
-    String name();
+    String getName();
 
     /**
      * Obtains the root config section which contains all of
@@ -86,7 +86,7 @@ public interface ConfigSection {
      *
      * @return the config that holds this section
      */
-    ConfigSection root();
+    ConfigSection getRoot();
 
     /**
      * Obtains the config section that contains this config
@@ -94,7 +94,7 @@ public interface ConfigSection {
      *
      * @return the parent config section
      */
-    ConfigSection parent();
+    ConfigSection getParent();
 
     /**
      * Creates a new child config section within this config
@@ -133,7 +133,7 @@ public interface ConfigSection {
      *             of this config section
      * @return the children config sections
      */
-    Stream<ConfigSection> children(boolean deep);
+    Stream<ConfigSection> getChildren(boolean deep);
 
     /**
      * Obtains all the keys contained in the config section.
@@ -144,7 +144,7 @@ public interface ConfigSection {
      *             config section
      * @return the keys in this config section
      */
-    Stream<String> keys(boolean deep);
+    Stream<String> getKeys(boolean deep);
 
     /**
      * Obtains all the values contained within this config
@@ -161,7 +161,7 @@ public interface ConfigSection {
      * @return the collection of values stored in the config
      *         section
      */
-    Stream<Object> values(boolean deep);
+    Stream<Object> getValues(boolean deep);
 
     /**
      * Obtains the set of entries representing the keys
@@ -177,7 +177,7 @@ public interface ConfigSection {
      * entries only in this config section
      * @return the set of key-value entries
      */
-    Stream<Map.Entry<String, Object>> entries(boolean deep);
+    Stream<Map.Entry<String, Object>> getEntries(boolean deep);
 
     /**
      * Obtains the value associated with the given key in
@@ -241,7 +241,7 @@ public interface ConfigSection {
      * @return {@code true} if the key exists, {@code false}
      * if not
      */
-    boolean has(String key);
+    boolean hasKey(String key);
 
     /**
      * Obtains an integer at the given key.

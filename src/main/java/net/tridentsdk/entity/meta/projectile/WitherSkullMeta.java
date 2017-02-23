@@ -14,23 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta.minecart;
-
-import net.tridentsdk.chat.ChatComponent;
+package net.tridentsdk.entity.meta.projectile;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface CommandMinecartMeta extends MinecartMeta {
+public interface WitherSkullMeta extends FireballMeta {
 
-    String getCommand();
+    boolean isInvulnerable();
 
-    void setCommand(String command);
-
-    ChatComponent getLastOutput();
-
-    void setLastOutput(ChatComponent component);
+    void setInvulnerable(boolean invulnerable);
 
 }

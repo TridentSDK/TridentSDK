@@ -14,23 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.inanimate;
 
-import net.tridentsdk.base.Vector;
+import java.awt.*;
+import net.tridentsdk.entity.meta.EntityMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface EnderCrystalMeta extends EntityMeta {
+public interface AreaEffectCloudMeta extends EntityMeta {
 
-    Vector getBeamTarget();
+    float getRadius();
 
-    void setBeamTarget(Vector beamTarget);
+    void setRadius(float radius);
 
-    boolean isShowBottom();
+    Color getColor();
 
-    void setShowBottom(boolean showBottom);
+    void setColor(Color color);
+
+    boolean isSinglePoint();
+
+    void setSinglePoint(boolean singlePoint);
+
+    int getParticleID();
+
+    void setParticleID(int id);
+
+    int getParticleParameter1();
+
+    void setParticleParameter1(int par);
+
+    int getParticleParameter2();
+
+    void setParticleParameter2(int par);
 
 }
