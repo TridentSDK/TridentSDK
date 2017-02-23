@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 public class ConstantsTest {
     private final Weather weather = new Weather() {
         @Override
-        public boolean raining() {
+        public boolean isRaining() {
             return false;
         }
 
@@ -33,7 +33,7 @@ public class ConstantsTest {
         }
 
         @Override
-        public int rainTime() {
+        public int getRainTime() {
             return 0;
         }
 
@@ -42,7 +42,7 @@ public class ConstantsTest {
         }
 
         @Override
-        public boolean thundering() {
+        public boolean isThundering() {
             return false;
         }
 
@@ -51,7 +51,7 @@ public class ConstantsTest {
         }
 
         @Override
-        public int thunderTime() {
+        public int getThunderTime() {
             return 0;
         }
 
@@ -60,11 +60,11 @@ public class ConstantsTest {
         }
 
         @Override
-        public void clear() {
+        public void setClear() {
         }
 
         @Override
-        public int clearTime() {
+        public int getClearTime() {
             return 0;
         }
 
@@ -80,7 +80,7 @@ public class ConstantsTest {
 
     @Test
     public void testWorldBorder() {
-        assertEquals(0, WorldBorder.DEFAULT_CENTER.x());
-        assertEquals(0, WorldBorder.DEFAULT_CENTER.z());
+        assertEquals(0, WorldBorder.DEFAULT_CENTER.getX());
+        assertEquals(0, WorldBorder.DEFAULT_CENTER.getZ());
     }
 }

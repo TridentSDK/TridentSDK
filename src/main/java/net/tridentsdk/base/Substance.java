@@ -75,7 +75,7 @@ public enum Substance {
      *
      * @return the ID number
      */
-    public int id() {
+    public int getId() {
         return this.id;
     }
 

@@ -66,11 +66,11 @@ public final class Vector extends AbstractVector<Vector> {
      * Obtains the square of the magnitude of this Vector.
      *
      * <p>This method should always be considered, if
-     * possible, over {@link #magnitude()}.</p>
+     * possible, over {@link #getMagnitude()}.</p>
      *
      * @return the magnitude squared
      */
-    public double magnitudeSquared() {
+    public double getMagnitudeSquared() {
         double x;
         double y;
         double z;
@@ -86,15 +86,15 @@ public final class Vector extends AbstractVector<Vector> {
     /**
      * Obtains the magnitude of this Vector.
      *
-     * <p>The method {@link #magnitudeSquared()} should
+     * <p>The method {@link #getMagnitudeSquared()} should
      * always be considered over this method because usage
      * of the square root function is very performance
      * intensive.</p>
      *
      * @return the magnitude
      */
-    public double magnitude() {
-        return Math.sqrt(this.magnitudeSquared());
+    public double getMagnitude() {
+        return Math.sqrt(this.getMagnitudeSquared());
     }
 
     /**
@@ -102,7 +102,7 @@ public final class Vector extends AbstractVector<Vector> {
      * a magnitude of {@code 1} but retaining the same
      * direction.
      *
-     * <p>The usage of {@link #magnitude()} in this
+     * <p>The usage of {@link #getMagnitude()} in this
      * operation means that it should be avoided if
      * possible
      * due to performance concerns.</p>
@@ -110,7 +110,7 @@ public final class Vector extends AbstractVector<Vector> {
      * @return the normalized vector
      */
     public Vector normalize() {
-        double mag = this.magnitude();
+        double mag = this.getMagnitude();
         return this.divide(mag, mag, mag);
     }
 }

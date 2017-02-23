@@ -34,7 +34,7 @@ public interface LogMessage {
      *
      * @return the source logger
      */
-    Logger source();
+    Logger getLogger();
 
     /**
      * Additional info pertaining to the log message that
@@ -42,19 +42,19 @@ public interface LogMessage {
      *
      * @return the additional info
      */
-    String[] components();
+    String[] getComponents();
 
     /**
      * The actual message to be logged.
      *
      * @return the message
      */
-    String message();
+    String getMessage();
 
     /**
      * Obtains the time at which this message was created.
      *
      * @return the time
      */
-    ZonedDateTime time();
+    ZonedDateTime getTime();
 }

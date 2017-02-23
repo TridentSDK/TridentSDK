@@ -181,7 +181,7 @@ public class GameRule<T> {
      *
      * @return the vanilla default value
      */
-    public T defValue() {
+    public T getDefault() {
         return this.defValue;
     }
 

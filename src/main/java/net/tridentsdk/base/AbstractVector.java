@@ -111,7 +111,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
-     * Creates a new AbstractVector object using {@code int}egers.
+     * Creates a new AbstractVector object using {@code int}s.
      *
      * @param x the x value
      * @param y the y value
@@ -140,7 +140,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the x value
      */
-    public double x() {
+    public double getX() {
         synchronized (this.lock) {
             return this.x;
         }
@@ -152,7 +152,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the x value
      */
-    public int intX() {
+    public int getIntX() {
         synchronized (this.lock) {
             return (int) this.x;
         }
@@ -164,7 +164,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the y value
      */
-    public double y() {
+    public double getY() {
         synchronized (this.lock) {
             return this.y;
         }
@@ -176,7 +176,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the y value
      */
-    public int intY() {
+    public int getIntY() {
         synchronized (this.lock) {
             return (int) this.y;
         }
@@ -188,7 +188,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the z value
      */
-    public double z() {
+    public double getZ() {
         synchronized (this.lock) {
             return this.z;
         }
@@ -200,7 +200,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the z value
      */
-    public int intZ() {
+    public int getIntZ() {
         synchronized (this.lock) {
             return (int) this.z;
         }

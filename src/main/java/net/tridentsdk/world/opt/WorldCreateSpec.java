@@ -44,7 +44,7 @@ public class WorldCreateSpec {
      *
      * @return the default world specification
      */
-    public static WorldCreateSpec defaultOpts() {
+    public static WorldCreateSpec getDefaultOptions() {
         return DEFAULT;
     }
 

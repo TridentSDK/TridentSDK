@@ -100,7 +100,7 @@ public interface Config extends ConfigSection {
      *
      * @return the config as a file
      */
-    File file();
+    File getFile();
 
     /**
      * Obtains the path object which stores the data held in
@@ -108,7 +108,7 @@ public interface Config extends ConfigSection {
      *
      * @return the config as a path
      */
-    Path path();
+    Path getPath();
 
     /**
      * Obtains the folder which contains this configuration
@@ -116,7 +116,7 @@ public interface Config extends ConfigSection {
      *
      * @return the container folder
      */
-    File directory();
+    File getDirectory();
 
     /**
      * Loads (or reloads) data from the file into memory.

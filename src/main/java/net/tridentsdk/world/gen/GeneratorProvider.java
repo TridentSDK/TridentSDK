@@ -38,7 +38,7 @@ public interface GeneratorProvider {
      *        used for gathering options for generation
      * @return the terrain generator for the world
      */
-    TerrainGenerator terrain(World world);
+    TerrainGenerator getTerrainGenerator(World world);
 
     /**
      * Obtains the set of feature generators for the world
@@ -50,7 +50,7 @@ public interface GeneratorProvider {
      * @return the feature generators for the world
      */
     @Nonnull
-    Set<FeatureGenerator> featureSet(World world);
+    Set<FeatureGenerator> getFeatureGenerators(World world);
 
     /**
      * Obtains the set of prop generators for the world
@@ -62,7 +62,7 @@ public interface GeneratorProvider {
      * @return the prop generators for the world
      */
     @Nonnull
-    Set<PropGenerator> propSet(World world);
+    Set<PropGenerator> getPropGenerators(World world);
 
     /**
      * Obtains the container that is used for running the
@@ -77,7 +77,7 @@ public interface GeneratorProvider {
      *
      * @return the container that runs teh generator
      */
-    default GenContainer container() {
+    default GenContainer getGenerationContainer() {
         return GenContainer.DEFAULT;
     }
 }

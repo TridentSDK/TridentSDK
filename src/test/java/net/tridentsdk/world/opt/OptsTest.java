@@ -54,20 +54,20 @@ public class OptsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void gameRuleTest() {
-        assertTrue(CMD_BLOCK_OUTPUT.defValue());
-        assertTrue(MOVE_CHECK.defValue());
-        assertTrue(DAYLIGHT_CYCLE.defValue());
-        assertTrue(FIRE_TICK.defValue());
-        assertTrue(MOB_LOOT.defValue());
-        assertTrue(MOB_SPAWN.defValue());
-        assertTrue(TILE_DROP.defValue());
-        assertFalse(KEEP_INVENTORY.defValue());
-        assertTrue(LOG_ADMIN_CMDS.defValue());
-        assertTrue(MOB_GRIEF.defValue());
-        assertTrue(NATURAL_REGEN.defValue());
-        assertEquals(3, RANDOM_TICK_SPEED.defValue().intValue());
-        assertTrue(SEND_CMD_FEEDBACK.defValue());
-        assertTrue(SHOW_DEATH_MSG.defValue());
+        assertTrue(CMD_BLOCK_OUTPUT.getDefault());
+        assertTrue(MOVE_CHECK.getDefault());
+        assertTrue(DAYLIGHT_CYCLE.getDefault());
+        assertTrue(FIRE_TICK.getDefault());
+        assertTrue(MOB_LOOT.getDefault());
+        assertTrue(MOB_SPAWN.getDefault());
+        assertTrue(TILE_DROP.getDefault());
+        assertFalse(KEEP_INVENTORY.getDefault());
+        assertTrue(LOG_ADMIN_CMDS.getDefault());
+        assertTrue(MOB_GRIEF.getDefault());
+        assertTrue(NATURAL_REGEN.getDefault());
+        assertEquals(3, RANDOM_TICK_SPEED.getDefault().intValue());
+        assertTrue(SEND_CMD_FEEDBACK.getDefault());
+        assertTrue(SHOW_DEATH_MSG.getDefault());
         assertEquals(CMD_BLOCK_OUTPUT, from(CMD_BLOCK_OUTPUT.toString()));
         from("tridentsdk");
     }

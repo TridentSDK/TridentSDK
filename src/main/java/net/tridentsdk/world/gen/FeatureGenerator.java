@@ -20,7 +20,7 @@ import net.tridentsdk.world.opt.GenOpts;
 
 /**
  * This class generates world features that are enabled by
- * {@link GenOpts#allowFeatures()}.
+ * {@link GenOpts#isAllowFeatures()}.
  *
  * @author TridentSDK
  * @since 0.4-alpha

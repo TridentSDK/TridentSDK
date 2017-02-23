@@ -34,7 +34,7 @@ import java.util.Collection;
  * </p>
  *
  * <p>Tab lists can be obtained using the two static factory
- * methods provided, {@link #getGlobal()} to obtain
+ * methods provided, {@link #getGlobalTabList()} to obtain
  * the global tab list, or {@link #newTabList()} to obtain
  * a new instance that is suitable for customizing.</p>
  *
@@ -48,8 +48,8 @@ public interface TabList {
      *
      * @return the global tablist
      */
-    static TabList getGlobal() {
-        return Impl.get().globalTabList();
+    static TabList getGlobalTabList() {
+        return Impl.get().getGlobalTabList();
     }
 
     /**

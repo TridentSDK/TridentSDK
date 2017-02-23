@@ -164,7 +164,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      *
      * @return this position's yaw
      */
-    public float yaw() {
+    public float getYaw() {
         synchronized (this.lock) {
             return this.yaw;
         }
@@ -188,7 +188,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      *
      * @return this position's pitch
      */
-    public float pitch() {
+    public float getPitch() {
         synchronized (this.lock) {
             return this.pitch;
         }
@@ -198,14 +198,13 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * Obtains the block that is located at this position.
      *
      * <p>If you do not already have a {@link Position}
-     * object, then use {@link World#blockAt(int, int,
-     * int)} instead, as it is not necessary to create a
+     * object, then use {@link World#getBlockAt(int, int, int)} instead, as it is not necessary to create a
      * throwaway object.</p>
      *
      * @return the block
      */
-    public Block block() {
-        return this.world.blockAt(this);
+    public Block getBlock() {
+        return this.world.getBlockAt(this);
     }
 
     /**
@@ -215,7 +214,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      */
     public ImmutableWorldVector toWorldVector() {
         synchronized (this.lock) {
-            return new ImmutableWorldVector(this.world, this.intX(), this.intY(), this.intZ());
+            return new ImmutableWorldVector(this.world, this.getIntX(), this.getIntY(), this.getIntZ());
         }
     }
 
@@ -284,7 +283,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * @return the chunk xx
      */
     public int getChunkX() {
-        return this.intX() >> 4;
+        return this.getIntX() >> 4;
     }
 
     /**
@@ -294,7 +293,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * @return the chunk z
      */
     public int getChunkZ() {
-        return this.intZ() >> 4;
+        return this.getIntZ() >> 4;
     }
 
     @Override
@@ -322,7 +321,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
     public String toString() {
         return String.format(
                 "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
-                this.world.name(), this.x, this.y, this.z, this.pitch, this.yaw);
+                this.world.getName(), this.x, this.y, this.z, this.pitch, this.yaw);
     }
 
     @Override

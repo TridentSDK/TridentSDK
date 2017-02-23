@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
+import java.util.List;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
@@ -24,7 +25,6 @@ import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.opt.GameMode;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -41,7 +41,7 @@ public interface Player extends Entity {
      *
      * @return the player's name
      */
-    String name();
+    String getName();
 
     /**
      * Obtains the UUID of this player.
@@ -52,7 +52,7 @@ public interface Player extends Entity {
      *
      * @return the player's UUID
      */
-    UUID uuid();
+    UUID getUuid();
 
     /**
      * Sends this player a message.
@@ -129,10 +129,12 @@ public interface Player extends Entity {
 
     /**
      * Gets this player's boss bars.
+     * <br><br>
+     * <i>Note: the list order is top-to-bottom of a player's screen space</i>
      *
      * @return The boss bars.
      */
-    Collection<BossBar> getBossBars();
+    List<BossBar> getBossBars();
 
     /**
      * Adds a boss bar to this player.

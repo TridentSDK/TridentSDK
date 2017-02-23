@@ -112,7 +112,7 @@ public final class Impl {
     public interface ImplementationProvider {
         // Obtains the implementation of the server object
         // that represents the API side version
-        Server svr();
+        Server getServer();
 
         // Create a new config; since the implementation
         // should use a path anyways, there is only one way
@@ -124,13 +124,13 @@ public final class Impl {
         boolean removeHandler(Logger logger, LogHandler handler);
 
         // UI
-        TabList globalTabList();
+        TabList getGlobalTabList();
 
         TabList newTabList();
         BossBar newBossBar();
 
         // Inventory
-        Inventory newInv(InventoryType type, int slots);
+        Inventory newInventory(InventoryType type, int slots);
         Item newItem(Substance substance, int count, byte damage, ItemMeta meta);
     }
 }

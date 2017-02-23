@@ -36,7 +36,7 @@ public class ConfigTest {
     @Test(expected = NullPointerException.class)
     public void testPathString() {
         Config cfg = Config.load(TEST_PATH);
-        assertEquals(TEST_PATH, cfg.path().toString());
+        assertEquals(TEST_PATH, cfg.getPath().toString());
     }
 
     @Test(expected = NullPointerException.class)
@@ -44,13 +44,13 @@ public class ConfigTest {
         // This is stupid
         Path path = Paths.get(TEST_PATH);
         Config cfg = Config.load(path);
-        assertEquals(path, cfg.path());
+        assertEquals(path, cfg.getPath());
     }
 
     @Test(expected = NullPointerException.class)
     public void testFile() {
         File file = new File(TEST_PATH);
         Config cfg = Config.load(file);
-        assertEquals(file, cfg.file());
+        assertEquals(file, cfg.getFile());
     }
 }

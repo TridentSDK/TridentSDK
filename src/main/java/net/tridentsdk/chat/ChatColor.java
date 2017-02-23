@@ -143,7 +143,7 @@ public enum ChatColor {
     private final char colorChar;
 
     /**
-     * Creates a new chatcolor based on the given character
+     * Creates a new char color based on the given character
      * which represents the canonical control sequence
      * for that particular color.
      *

@@ -64,9 +64,9 @@ public class VectorsTest {
         this.vec.setY(CHANGE_TO);
         this.vec.setZ(CHANGE_TO);
 
-        assertEquals(CHANGE_TO, this.vec.x(), 0);
-        assertEquals(CHANGE_TO, this.vec.y(), 0);
-        assertEquals(CHANGE_TO, this.vec.z(), 0);
+        assertEquals(CHANGE_TO, this.vec.getX(), 0);
+        assertEquals(CHANGE_TO, this.vec.getY(), 0);
+        assertEquals(CHANGE_TO, this.vec.getZ(), 0);
     }
 
     @Test
@@ -75,9 +75,9 @@ public class VectorsTest {
         this.vec.setY(CHANGE_TO_I);
         this.vec.setZ(CHANGE_TO_I);
 
-        assertEquals(CHANGE_TO_I, this.vec.intX());
-        assertEquals(CHANGE_TO_I, this.vec.intY());
-        assertEquals(CHANGE_TO_I, this.vec.intZ());
+        assertEquals(CHANGE_TO_I, this.vec.getIntX());
+        assertEquals(CHANGE_TO_I, this.vec.getIntY());
+        assertEquals(CHANGE_TO_I, this.vec.getIntZ());
     }
 
     @Test
@@ -123,7 +123,7 @@ public class VectorsTest {
         Vector v2 = new Vector(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I);
         v2.normalize();
 
-        assertEquals(1, v2.magnitude(), 0);
+        assertEquals(1, v2.getMagnitude(), 0);
     }
 
     @Test
@@ -152,7 +152,7 @@ public class VectorsTest {
             vec.add(curMod, curMod, curMod);
         }
 
-        p("Finished attempt at " + (vec.x() + vec.y() + vec.z()));
+        p("Finished attempt at " + (vec.getX() + vec.getY() + vec.getZ()));
     }
 
     private static void p(String s) {
@@ -250,7 +250,7 @@ public class VectorsTest {
 
     @TearDown(Level.Trial)
     public void teardown(Blackhole bh) {
-        bh.consume(this.vec.x() + this.vec.y() + this.vec.z());
+        bh.consume(this.vec.getX() + this.vec.getY() + this.vec.getZ());
     }
 
     // JVM tuning test dummy
