@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -91,12 +90,12 @@ public class ChatComponent {
     /**
      * The list of chat components added to the 'with' array.
      */
-    private final Collection<ChatComponent> with = Lists.newArrayList();
+    private final Collection<ChatComponent> with = new ArrayList<>();
 
     /**
      * The list of chat components added to the 'extra' array.
      */
-    private final Collection<ChatComponent> extra = Lists.newArrayList();
+    private final Collection<ChatComponent> extra = new ArrayList<>();
 
     /**
      * Whether or not this message is bolded
