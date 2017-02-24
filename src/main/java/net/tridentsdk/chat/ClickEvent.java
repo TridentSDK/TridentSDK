@@ -16,10 +16,10 @@
  */
 package net.tridentsdk.chat;
 
+import com.google.gson.JsonObject;
 import lombok.Data;
 
 import javax.annotation.concurrent.Immutable;
-import org.json.JSONObject;
 
 /**
  * Represents an action done upon clicking text.
@@ -68,8 +68,8 @@ public class ClickEvent {
      * @param json The JSON.
      * @return The click event.
      */
-    public static ClickEvent fromJson(JSONObject json) {
-        return of(ClickAction.valueOf(json.getString("action").toUpperCase()), json.getString("value"));
+    public static ClickEvent fromJson(JsonObject json) {
+        return of(ClickAction.valueOf(json.get("action").getAsString().toUpperCase()), json.get("value").getAsString());
     }
 
     /**
@@ -95,10 +95,10 @@ public class ClickEvent {
      *
      * @return The JSON.
      */
-    public JSONObject asJson() {
-        JSONObject obj = new JSONObject();
-        obj.put("action", this.action.name().toLowerCase());
-        obj.put("value", this.value);
+    public JsonObject asJson() {
+        JsonObject obj = new JsonObject();
+        obj.addProperty("action", this.action.name().toLowerCase());
+        obj.addProperty("value", this.value);
         return obj;
     }
 
