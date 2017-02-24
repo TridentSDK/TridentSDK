@@ -36,6 +36,17 @@ import java.util.UUID;
  */
 @ThreadSafe
 public interface Player extends Entity {
+
+    /**
+     * The default flying speed for a player
+     */
+    float DEFAULT_FLYING_SPEED = 0.159F;
+
+    /**
+     * The default walking speed for a player
+     */
+    float DEFAULT_WALKING_SPEED = 0.699999988079071F;
+
     /**
      * Obtains the name that this player had logged in.
      *
@@ -154,4 +165,74 @@ public interface Player extends Entity {
      * Updates this player's boss bars, sending any required packets.
      */
     void updateBossBars();
+
+    /**
+     * Gets whether or not this player is in god mode.
+     *
+     * @return True iff the player is in god mode.
+     */
+    boolean isGodMode();
+
+    /**
+     * Sets whether or not this player is in god mode.
+     *
+     * @param godMode Whether this player is in god mode.
+     */
+    void setGodMode(boolean godMode);
+
+    /**
+     * Gets whether or not this player can fly.
+     *
+     * @return True iff the player can fly.
+     */
+    boolean canFly();
+
+    /**
+     * Sets whether or not this player can fly.
+     *
+     * @param canFly Whether this player can fly.
+     */
+    void setCanFly(boolean canFly);
+
+    /**
+     * Gets whether or not this player is flying.
+     *
+     * @return True iff the player is flying.
+     */
+    boolean isFlying();
+
+    /**
+     * Sets whether or not this player is flying.
+     *
+     * @param flying Whether this player is flying.
+     */
+    void setFlying(boolean flying);
+
+    /**
+     * Gets this player's flying speed.
+     *
+     * @return The flying speed.
+     */
+    float getFlyingSpeed();
+
+    /**
+     * Sets this player's flying speed.
+     *
+     * @param flyingSpeed The flying speed.
+     */
+    void setFlyingSpeed(float flyingSpeed);
+
+    /**
+     * Gets this player's walking speed.
+     *
+     * @return The walking speed.
+     */
+    float getWalkingSpeed();
+
+    /**
+     * Sets this player's walking speed.
+     *
+     * @param walkingSpeed The walking speed.
+     */
+    void setWalkingSpeed(float walkingSpeed);
 }

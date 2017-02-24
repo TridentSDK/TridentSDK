@@ -168,6 +168,56 @@ public class PlayerTest {
 
         }
 
+        @Override
+        public boolean isGodMode() {
+            return false;
+        }
+
+        @Override
+        public void setGodMode(boolean godMode) {
+
+        }
+
+        @Override
+        public boolean canFly() {
+            return false;
+        }
+
+        @Override
+        public void setCanFly(boolean canFly) {
+
+        }
+
+        @Override
+        public boolean isFlying() {
+            return false;
+        }
+
+        @Override
+        public void setFlying(boolean flying) {
+
+        }
+
+        @Override
+        public float getFlyingSpeed() {
+            return 0;
+        }
+
+        @Override
+        public void setFlyingSpeed(float flyingSpeed) {
+
+        }
+
+        @Override
+        public float getWalkingSpeed() {
+            return 0;
+        }
+
+        @Override
+        public void setWalkingSpeed(float walkingSpeed) {
+
+        }
+
     }
 
 }
