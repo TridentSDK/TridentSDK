@@ -94,7 +94,7 @@ public interface Server {
      *
      * @return the current online players
      */
-    Collection<Player> getPlayers();
+    Collection<? extends Player> getPlayers();
 
     /**
      * Obtains the singleton instance of the global world

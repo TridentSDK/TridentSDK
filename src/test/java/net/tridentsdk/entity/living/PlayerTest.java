@@ -114,6 +114,16 @@ public class PlayerTest {
         }
 
         @Override
+        public ChatComponent getDisplayName() {
+            return null;
+        }
+
+        @Override
+        public void setDisplayName(ChatComponent displayName) {
+
+        }
+
+        @Override
         public void sendMessage(ChatComponent message, ChatType type) {
             this.sentMessages.add(new SentMessage(message, type));
         }

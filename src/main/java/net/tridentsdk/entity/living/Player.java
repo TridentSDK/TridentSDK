@@ -66,6 +66,20 @@ public interface Player extends Entity {
     UUID getUuid();
 
     /**
+     * Gets this player's display name.
+     *
+     * @return The display name.
+     */
+    ChatComponent getDisplayName();
+
+    /**
+     * Sets this player's display name.
+     *
+     * @param displayName The display name.
+     */
+    void setDisplayName(ChatComponent displayName);
+
+    /**
      * Sends this player a message.
      *
      * @param message The message.
