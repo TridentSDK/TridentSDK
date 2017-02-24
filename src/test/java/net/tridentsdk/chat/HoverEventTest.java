@@ -16,10 +16,9 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.inventory.Item;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -31,15 +30,15 @@ import static org.junit.Assert.assertEquals;
 public class HoverEventTest {
     @Test
     public void testTextJson() {
-        assertEquals(new Gson().fromJson("{\"action\":\"show_text\",\"value\":{\"text\":\"hello!\"}}", JsonObject.class), HoverEvent.text("hello!").asJson());
+        assertEquals(new JSONObject("{\"action\":\"show_text\",\"value\":{\"text\":\"hello!\"}}").toMap(), HoverEvent.text("hello!").asJson().toMap());
 
         ChatComponent cc = ChatComponent.text("hi there").setColor(ChatColor.AQUA);
-        assertEquals(new Gson().fromJson("{\"action\":\"show_text\",\"value\":{\"text\":\"hi there\",\"color\":\"aqua\"}}", JsonObject.class), HoverEvent.text(cc).asJson());
+        assertEquals(new JSONObject("{\"action\":\"show_text\",\"value\":{\"text\":\"hi there\",\"color\":\"aqua\"}}").toMap(), HoverEvent.text(cc).asJson().toMap());
     }
 
     @Test
     public void testAchievementJson() {
-        assertEquals(new Gson().fromJson("{\"action\":\"show_achievement\",\"value\":\"the achievement\"}", JsonObject.class), HoverEvent.achievement("the achievement").asJson());
+        assertEquals(new JSONObject("{\"action\":\"show_achievement\",\"value\":\"the achievement\"}").toMap(), HoverEvent.achievement("the achievement").asJson().toMap());
     }
 
     @Test

@@ -16,16 +16,15 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.common.collect.Lists;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import java.util.ArrayList;
+import java.util.Objects;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Collection;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Represents a component in a Minecraft chat format.
@@ -90,12 +89,12 @@ public class ChatComponent {
     /**
      * The list of chat components added to the 'with' array.
      */
-    private final Collection<ChatComponent> with = Lists.newArrayList();
+    private final Collection<ChatComponent> with = new ArrayList<>();
 
     /**
      * The list of chat components added to the 'extra' array.
      */
-    private final Collection<ChatComponent> extra = Lists.newArrayList();
+    private final Collection<ChatComponent> extra = new ArrayList<>();
 
     /**
      * Whether or not this message is bolded
@@ -352,56 +351,56 @@ public class ChatComponent {
      *
      * @return colorless and text formatting-free json
      */
-    public JsonElement stripColor() {
-        JsonObject json = new JsonObject();
+    public Object stripColor() {
+        JSONObject json = new JSONObject();
 
         String text = this.text;
         if (text != null) {
-            json.addProperty("text", text);
+            json.put("text", text);
         }
 
         String translate = this.translate;
         if (translate != null) {
-            json.addProperty("translate", translate);
-            JsonArray array = new JsonArray();
-            this.with.forEach(e -> array.add(e.stripColor()));
-            json.add("with", array);
+            json.put("translate", translate);
+            JSONArray array = new JSONArray();
+            this.with.forEach(e -> array.put(e.stripColor()));
+            json.put("with", array);
         }
 
         String scoreUsername = this.scoreUsername;
         String scoreObjective = this.scoreObjective;
         if (scoreUsername != null && scoreObjective != null) {
-            JsonObject score = new JsonObject();
-            score.addProperty("name", scoreUsername);
-            score.addProperty("objective", scoreObjective);
-            json.add("score", score);
+            JSONObject score = new JSONObject();
+            score.put("name", scoreUsername);
+            score.put("objective", scoreObjective);
+            json.put("score", score);
         }
 
         String selector = this.selector;
         if (selector != null) {
-            json.addProperty("selector", selector);
+            json.put("selector", selector);
         }
 
         Collection<ChatComponent> extra = this.extra;
         if (!extra.isEmpty()) {
-            JsonArray extraArray = new JsonArray();
-            extra.forEach(e -> extraArray.add(e.stripColor()));
-            json.add("extra", extraArray);
+            JSONArray extraArray = new JSONArray();
+            extra.forEach(e -> extraArray.put(e.stripColor()));
+            json.put("extra", extraArray);
         }
 
         ClickEvent clickEvent = this.clickEvent;
         if (clickEvent != null) {
-            json.add("clickEvent", clickEvent.asJson());
+            json.put("clickEvent", clickEvent.asJson());
         }
 
         HoverEvent hoverEvent = this.hoverEvent;
         if (hoverEvent != null) {
-            json.add("hoverEvent", hoverEvent.asJson());
+            json.put("hoverEvent", hoverEvent.asJson());
         }
 
         String insertion = this.insertion;
         if (insertion != null) {
-            json.addProperty("insertion", insertion);
+            json.put("insertion", insertion);
         }
         return json;
     }
@@ -411,86 +410,86 @@ public class ChatComponent {
      *
      * @return The JSON element.
      */
-    public JsonElement asJson() {
-        JsonObject json = new JsonObject();
+    public Object asJson() {
+        JSONObject json = new JSONObject();
 
         String text = this.text;
         if (text != null) {
-            json.addProperty("text", text);
+            json.put("text", text);
         }
 
         String translate = this.translate;
         if (translate != null) {
-            json.addProperty("translate", translate);
-            JsonArray array = new JsonArray();
-            this.with.forEach(e -> array.add(e.asJson()));
-            json.add("with", array);
+            json.put("translate", translate);
+            JSONArray array = new JSONArray();
+            this.with.forEach(e -> array.put(e.asJson()));
+            json.put("with", array);
         }
 
         String scoreUsername = this.scoreUsername;
         String scoreObjective = this.scoreObjective;
         if (scoreUsername != null && scoreObjective != null) {
-            JsonObject score = new JsonObject();
-            score.addProperty("name", scoreUsername);
-            score.addProperty("objective", scoreObjective);
-            json.add("score", score);
+            JSONObject score = new JSONObject();
+            score.put("name", scoreUsername);
+            score.put("objective", scoreObjective);
+            json.put("score", score);
         }
 
         String selector = this.selector;
         if (selector != null) {
-            json.addProperty("selector", selector);
+            json.put("selector", selector);
         }
 
         Collection<ChatComponent> extra = this.extra;
         if (!extra.isEmpty()) {
-            JsonArray extraArray = new JsonArray();
-            extra.forEach(e -> extraArray.add(e.asJson()));
-            json.add("extra", extraArray);
+            JSONArray extraArray = new JSONArray();
+            extra.forEach(e -> extraArray.put(e.asJson()));
+            json.put("extra", extraArray);
         }
 
         Boolean isBold = this.bold;
         if (isBold != null) {
-            json.addProperty("bold", isBold);
+            json.put("bold", isBold);
         }
 
         Boolean isItalic = this.italic;
         if (isItalic != null) {
-            json.addProperty("italic", isItalic);
+            json.put("italic", isItalic);
         }
 
         Boolean isUnderlined = this.underlined;
         if (isUnderlined != null) {
-            json.addProperty("underlined", isUnderlined);
+            json.put("underlined", isUnderlined);
         }
 
         Boolean isStrikethrough = this.strikethrough;
         if (isStrikethrough != null) {
-            json.addProperty("strikethrough", isStrikethrough);
+            json.put("strikethrough", isStrikethrough);
         }
 
         Boolean isObfuscated = this.obfuscated;
         if (isObfuscated != null) {
-            json.addProperty("obfuscated", isObfuscated);
+            json.put("obfuscated", isObfuscated);
         }
 
         ChatColor color = this.color;
         if (color != null && !color.isFormat()) {
-            json.addProperty("color", color.name().toLowerCase());
+            json.put("color", color.name().toLowerCase());
         }
 
         ClickEvent clickEvent = this.clickEvent;
         if (clickEvent != null) {
-            json.add("clickEvent", clickEvent.asJson());
+            json.put("clickEvent", clickEvent.asJson());
         }
 
         HoverEvent hoverEvent = this.hoverEvent;
         if (hoverEvent != null) {
-            json.add("hoverEvent", hoverEvent.asJson());
+            json.put("hoverEvent", hoverEvent.asJson());
         }
 
         String insertion = this.insertion;
         if (insertion != null) {
-            json.addProperty("insertion", insertion);
+            json.put("insertion", insertion);
         }
         return json;
     }
@@ -538,68 +537,69 @@ public class ChatComponent {
      * @param json The JSON.
      * @return The component.
      */
-    public static ChatComponent fromJson(JsonObject json) {
+    public static ChatComponent fromJson(JSONObject json) {
         ChatComponent cc = create();
         if (json.has("text")) {
-            cc.setText(json.get("text").getAsString());
+            cc.setText(json.getString("text"));
         }
         if (json.has("translate")) {
-            cc.setTranslate(json.get("translate").getAsString());
+            cc.setTranslate(json.getString("translate"));
         }
         if (json.has("with")) {
-            JsonArray array = json.getAsJsonArray("with");
-            for (int i = 0, j = array.size(); i < j; i++) {
-                JsonElement el = array.get(i);
-                if (el.isJsonPrimitive())
-                    cc.addWith(el.getAsString());
-                else if (el.isJsonObject())
-                    cc.addWith(fromJson(el.getAsJsonObject()));
+            JSONArray array = json.getJSONArray("with");
+            for (int i = 0, j = array.length(); i < j; i++) {
+                Object el = array.get(i);
+                if (el instanceof JSONObject) {
+                    cc.addWith(fromJson((JSONObject) el));
+                } else {
+                    cc.addWith(el.toString());
+                }
             }
         }
         if (json.has("score")) {
-            JsonObject score = json.getAsJsonObject("score");
-            cc.setScoreUsername(score.get("name").getAsString());
-            cc.setScoreObjective(score.get("objective").getAsString());
+            JSONObject score = json.getJSONObject("score");
+            cc.setScoreUsername(score.getString("name"));
+            cc.setScoreObjective(score.getString("objective"));
         }
         if (json.has("selector")) {
-            cc.setSelector(json.get("selector").getAsString());
+            cc.setSelector(json.getString("selector"));
         }
         if (json.has("extra")) {
-            JsonArray array = json.getAsJsonArray("extra");
-            for (int i = 0, j = array.size(); i < j; i++) {
-                JsonElement el = array.get(i);
-                if (el.isJsonPrimitive())
-                    cc.addExtra(el.getAsString());
-                else if (el.isJsonObject())
-                    cc.addExtra(fromJson(el.getAsJsonObject()));
+            JSONArray array = json.getJSONArray("extra");
+            for (int i = 0, j = array.length(); i < j; i++) {
+                Object el = array.get(i);
+                if (el instanceof JSONObject)
+                    cc.addExtra(fromJson((JSONObject) el));
+                else
+                    cc.addExtra(el.toString());
             }
         }
         if (json.has("bold")) {
-            cc.setBold(json.get("bold").getAsBoolean());
+            cc.setBold(json.getBoolean("bold"));
         }
         if (json.has("italic")) {
-            cc.setItalic(json.get("italic").getAsBoolean());
+            cc.setItalic(json.getBoolean("italic"));
         }
         if (json.has("underlined")) {
-            cc.setUnderlined(json.get("underlined").getAsBoolean());
+            cc.setUnderlined(json.getBoolean("underlined"));
         }
         if (json.has("strikethrough")) {
-            cc.setStrikethrough(json.get("strikethrough").getAsBoolean());
+            cc.setStrikethrough(json.getBoolean("strikethrough"));
         }
         if (json.has("obfuscated")) {
-            cc.setObfuscated(json.get("obfuscated").getAsBoolean());
+            cc.setObfuscated(json.getBoolean("obfuscated"));
         }
         if (json.has("color")) {
-            cc.setColor(ChatColor.valueOf(json.get("color").getAsString().toUpperCase()));
+            cc.setColor(ChatColor.valueOf(json.getString("color").toUpperCase()));
         }
         if (json.has("clickEvent")) {
-            cc.setClickEvent(ClickEvent.fromJson(json.getAsJsonObject("clickEvent")));
+            cc.setClickEvent(ClickEvent.fromJson(json.getJSONObject("clickEvent")));
         }
         if (json.has("hoverEvent")) {
-            cc.setHoverEvent(HoverEvent.fromJson(json.getAsJsonObject("hoverEvent")));
+            cc.setHoverEvent(HoverEvent.fromJson(json.getJSONObject("hoverEvent")));
         }
         if (json.has("insertion")) {
-            cc.setInsertion(json.get("insertion").getAsString());
+            cc.setInsertion(json.getString("insertion"));
         }
         return cc;
     }
@@ -712,7 +712,12 @@ public class ChatComponent {
             return o == this;
         }
         ChatComponent cc = (ChatComponent) o;
-        return this.asJson().equals(cc.asJson());
+        Object a = this.asJson();
+        Object b = cc.asJson();
+        if (a instanceof JSONObject && b instanceof JSONObject) {
+            return ((JSONObject) a).toMap().equals(((JSONObject) b).toMap());
+        }
+        return Objects.equals(a, b);
     }
 
     @Getter
@@ -721,13 +726,13 @@ public class ChatComponent {
         private String string;
 
         @Override
-        public JsonElement stripColor() {
+        public Object stripColor() {
             return this.asJson();
         }
 
         @Override
-        public JsonElement asJson() {
-            return new JsonPrimitive(this.string);
+        public Object asJson() {
+            return this.string;
         }
     }
 }
