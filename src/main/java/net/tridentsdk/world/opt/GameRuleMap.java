@@ -16,11 +16,10 @@
  */
 package net.tridentsdk.world.opt;
 
-import com.google.common.collect.Maps;
-
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A game rule map is needed because game rules behave
@@ -37,7 +36,7 @@ public final class GameRuleMap {
      * The internal map representing the changes made to the
      * default value of the game rule.
      */
-    private final Map<GameRule<?>, Object> changes = Maps.newConcurrentMap();
+    private final Map<GameRule<?>, Object> changes = new ConcurrentHashMap<>();
 
     /**
      * Gets the value of the given game rule that is set in

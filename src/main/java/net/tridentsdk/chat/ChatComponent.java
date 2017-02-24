@@ -22,6 +22,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONObject;
