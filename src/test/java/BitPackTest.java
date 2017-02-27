@@ -14,8 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.google.common.collect.Lists;
-
+import java.util.Arrays;
 import java.util.List;
 
 public class BitPackTest {
@@ -33,7 +32,7 @@ public class BitPackTest {
 
     public static void main(String[] args) {
         BitPackTest test = new BitPackTest();
-        List<Boolean> bools = Lists.newArrayList(
+        List<Boolean> bools = Arrays.asList(
                 true, false,
                 true, false,
                 true, false,

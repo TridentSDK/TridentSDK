@@ -42,20 +42,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>18.0-rc1</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>it.unimi.dsi</groupId>
-            <artifactId>fastutil</artifactId>
-            <version>7.0.12</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.7</version>
@@ -87,12 +73,14 @@
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
             <version>1.12</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
             <version>1.12</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -110,16 +98,10 @@
         </dependency>
 
         <dependency>
-            <groupId>com.esotericsoftware</groupId>
-            <artifactId>reflectasm</artifactId>
-            <version>1.10.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
             <version>2.0.3</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -162,6 +144,9 @@
                             <keywords>
                                 <keyword>license</keyword>
                             </keywords>
+                            <excludes>
+                                <exclude>src/main/java/net/tridentsdk/util/Int2ReferenceOpenHashMap.java</exclude>
+                            </excludes>
                             <includes>
                                 <include>src/main/java/**</include>
                                 <include>src/test/java/**</include>

@@ -14,39 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.ui.bossbar;
 
-import java.awt.*;
+import net.tridentsdk.Impl;
+import org.junit.Test;
+import org.mockito.Mockito;
 
-/**
- * @author TridentSDK
- * @since 0.5-alpha
- */
-// TODO - documentation
-public interface AreaEffectCloudMeta extends EntityMeta {
+import static org.junit.Assert.assertNotNull;
 
-    float getRadius();
+public class BossBarTest {
+    static {
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().newBossBar()).thenReturn(Mockito.mock(BossBar.class));
+    }
 
-    void setRadius(float radius);
-
-    Color getColor();
-
-    void setColor(Color color);
-
-    boolean isSinglePoint();
-
-    void setSinglePoint(boolean singlePoint);
-
-    int getParticleID();
-
-    void setParticleID(int id);
-
-    int getParticleParameter1();
-
-    void setParticleParameter1(int par);
-
-    int getParticleParameter2();
-
-    void setParticleParameter2(int par);
-
+    @Test
+    public void newBossBar() throws Exception {
+        assertNotNull(BossBar.newBossBar());
+    }
 }

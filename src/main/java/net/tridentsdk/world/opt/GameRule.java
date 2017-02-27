@@ -16,13 +16,13 @@
  */
 package net.tridentsdk.world.opt;
 
-import com.google.common.collect.Maps;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.util.Misc;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This is a set of possible game rules that may be applied
@@ -46,7 +46,7 @@ public class GameRule<T> {
     // Do not move this field
     // Doing so risks ExceptionInInitializerError
     @Policy("do not move")
-    private static final Map<String, GameRule<?>> GAME_RULES = Maps.newHashMap();
+    private static final Map<String, GameRule<?>> GAME_RULES = new ConcurrentHashMap<>();
 
     /**
      * Whether or not actions performed by command blocks
@@ -181,7 +181,7 @@ public class GameRule<T> {
      *
      * @return the vanilla default value
      */
-    public T defValue() {
+    public T getDefault() {
         return this.defValue;
     }
 

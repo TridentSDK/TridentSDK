@@ -40,8 +40,8 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * position
      */
     private final World world;
-    private float pitch;
     private float yaw;
+    private float pitch;
 
     @Override
     protected void writeFields(Position vector) {
@@ -164,7 +164,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      *
      * @return this position's yaw
      */
-    public float yaw() {
+    public float getYaw() {
         synchronized (this.lock) {
             return this.yaw;
         }
@@ -188,7 +188,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      *
      * @return this position's pitch
      */
-    public float pitch() {
+    public float getPitch() {
         synchronized (this.lock) {
             return this.pitch;
         }
@@ -198,25 +198,24 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * Obtains the block that is located at this position.
      *
      * <p>If you do not already have a {@link Position}
-     * object, then use {@link World#blockAt(int, int,
-     * int)}
-     * instead, as it is not necessary to create a
-     * throwaway
-     * object.</p>
+     * object, then use {@link World#getBlockAt(int, int, int)} instead, as it is not necessary to create a
+     * throwaway object.</p>
      *
      * @return the block
      */
-    public Block block() {
-        double x;
-        double y;
-        double z;
-        synchronized (this.lock) {
-            x = this.x;
-            y = this.y;
-            z = this.z;
-        }
+    public Block getBlock() {
+        return this.world.getBlockAt(this);
+    }
 
-        return this.world.blockAt((int) x, (int) y, (int) z);
+    /**
+     * Obtains an immutable copy of this vector.
+     *
+     * @return the copy of the current state of this vector
+     */
+    public ImmutableWorldVector toWorldVector() {
+        synchronized (this.lock) {
+            return new ImmutableWorldVector(this.world, this.getIntX(), this.getIntY(), this.getIntZ());
+        }
     }
 
     /**
@@ -284,7 +283,7 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * @return the chunk xx
      */
     public int getChunkX() {
-        return this.intX() >> 4;
+        return this.getIntX() >> 4;
     }
 
     /**
@@ -294,16 +293,18 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * @return the chunk z
      */
     public int getChunkZ() {
-        return this.intZ() >> 4;
+        return this.getIntZ() >> 4;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Position) {
             Position v = (Position) obj;
-            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
-                    this.world.equals(v.world) &&
-                    eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+            synchronized (this.lock) {
+                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
+                        this.world.equals(v.world) &&
+                        eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+            }
         }
 
         return false;
@@ -311,22 +312,28 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash = 31 * hash + this.world.hashCode();
-        hash = 31 * hash + Float.floatToIntBits(this.pitch);
-        hash = 31 * hash + Float.floatToIntBits(this.yaw);
-        return hash;
+        synchronized (this.lock) {
+            int hash = super.hashCode();
+            hash = 31 * hash + this.world.hashCode();
+            hash = 31 * hash + Float.floatToIntBits(this.pitch);
+            hash = 31 * hash + Float.floatToIntBits(this.yaw);
+            return hash;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
-                this.world.name(), this.x, this.y, this.z, this.pitch, this.yaw);
+        synchronized (this.lock) {
+            return String.format(
+                    "Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
+                    this.world.getName(), this.x, this.y, this.z, this.pitch, this.yaw);
+        }
     }
 
     @Override
     public Position clone() {
-        return new Position(this.world, this.x, this.y, this.z, this.pitch, this.yaw);
+        synchronized (this.lock) {
+            return new Position(this.world, this.x, this.y, this.z, this.yaw, this.pitch);
+        }
     }
 }

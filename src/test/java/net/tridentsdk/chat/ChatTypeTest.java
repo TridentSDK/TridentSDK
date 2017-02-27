@@ -35,8 +35,7 @@ public class ChatTypeTest {
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testError() {
-        ChatType type = ChatType.values()[3];
-        type.toString();
+        ChatType.values()[3].toString();
     }
 
 }

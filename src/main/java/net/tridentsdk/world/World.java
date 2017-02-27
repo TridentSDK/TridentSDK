@@ -48,7 +48,7 @@ public interface World {
      *
      * @return the name of the world
      */
-    String name();
+    String getName();
 
     /**
      * Obtains the current world time in ticks.
@@ -58,7 +58,7 @@ public interface World {
      *
      * @return the current 24000 tick time cycle time
      */
-    int time();
+    int getTime();
 
     /**
      * Obtains the options that this world has been created
@@ -66,7 +66,7 @@ public interface World {
      *
      * @return the world options
      */
-    WorldOpts opts();
+    WorldOpts getWorldOptions();
 
     /**
      * Obtains the weather conditions currently taking place
@@ -74,21 +74,21 @@ public interface World {
      *
      * @return the weather options
      */
-    Weather weather();
+    Weather getWeather();
 
     /**
      * Obtains the options for the generator of this world.
      *
      * @return the generator options
      */
-    GenOpts genOpts();
+    GenOpts getGeneratorOptions();
 
     /**
      * Obtains the world border
      *
      * @return the world border options
      */
-    WorldBorder border();
+    WorldBorder getBorder();
 
     /**
      * Obtains the chunk that is located at the given X/Z
@@ -99,7 +99,7 @@ public interface World {
      * @return the chunk at the given coordinates
      */
     @Nonnull
-    Chunk chunkAt(int x, int z);
+    Chunk getChunkAt(int x, int z);
 
     /**
      * Obtains a chunk at the given coordinates with an
@@ -113,7 +113,7 @@ public interface World {
      * {@code false} and no chunk is found
      */
     @Nullable
-    Chunk chunkAt(int x, int z, boolean gen);
+    Chunk getChunkAt(int x, int z, boolean gen);
 
     /**
      * Obtains the collection of chunks that are currently
@@ -121,14 +121,14 @@ public interface World {
      *
      * @return the collection of loaded chunks
      */
-    Collection<? extends Chunk> loadedChunks();
+    Collection<? extends Chunk> getLoadedChunks();
 
     /**
      * Obtains the block that is located at the given XYZ
      * coordinates.
      *
      * <p>This method should be preferred over
-     * {@link Position#block()} if you do not already have
+     * {@link Position#getBlock()} if you do not already have
      * a Position object.</p>
      *
      * @param x the x coordinate which to find the block
@@ -136,7 +136,17 @@ public interface World {
      * @param z the z coordinate which to find the block
      * @return the block located at the given position
      */
-    Block blockAt(int x, int y, int z);
+    Block getBlockAt(int x, int y, int z);
+
+    /**
+     * Obtains the block that is located at the given
+     * position.
+     *
+     * @param pos the position which to find the block in
+     * this world
+     * @return the block located at the given position
+     */
+    Block getBlockAt(Position pos);
 
     /**
      * Obtains the enclosing directory which contains the
@@ -144,7 +154,7 @@ public interface World {
      *
      * @return the world's directory
      */
-    Path dir();
+    Path getWorldDirectory();
 
     /**
      * Saves this world to the region files in the world

@@ -14,17 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.util;
 
-/**
- * @author TridentSDK
- * @since 0.5-alpha
- */
-// TODO - documentation
-public interface FishingHookMeta extends EntityMeta {
-
-    int getHookedEntityID();
-
-    void setHookedEntityID(int entityID);
-
+public class Tuple<T, M> {
+    
+    private T a;
+    private M b;
+    
+    public Tuple(T a, M b){
+        this.a = a;
+        this.b = b;
+    }
+    
+    public T getA(){
+        return a;
+    }
+    
+    public void setA(T a){
+        this.a = a;
+    }
+    
+    public M getB(){
+        return b;
+    }
+    
+    public void setB(M b){
+        this.b = b;
+    }
+    
 }

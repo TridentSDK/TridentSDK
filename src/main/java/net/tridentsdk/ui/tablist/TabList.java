@@ -34,7 +34,7 @@ import java.util.Collection;
  * </p>
  *
  * <p>Tab lists can be obtained using the two static factory
- * methods provided, {@link #getGlobal()} to obtain
+ * methods provided, {@link #getGlobalTabList()} to obtain
  * the global tab list, or {@link #newTabList()} to obtain
  * a new instance that is suitable for customizing.</p>
  *
@@ -48,8 +48,8 @@ public interface TabList {
      *
      * @return the global tablist
      */
-    static TabList getGlobal() {
-        return Impl.get().globalTabList();
+    static TabList getGlobalTabList() {
+        return Impl.get().getGlobalTabList();
     }
 
     /**
@@ -117,16 +117,21 @@ public interface TabList {
     Collection<Player> getUserList();
 
     /**
-     * Add a player as a user of this tablist
+     * Subscribes a player as a user of this tablist
      *
-     * @param player the player to add
+     * @param player the player to subscribe
      */
-    void addUser(Player player);
+    void subscribe(Player player);
 
     /**
-     * Remove a player as a user of this tablist
+     * Unsubscribes a player as a user of this tablist
      *
-     * @param player the player to remove
+     * @param player the player to unsubscribe
      */
-    void removeUser(Player player);
+    void unsubscribe(Player player);
+
+    /**
+     * Updates this tablist, sending it to all subscribed players.
+     */
+    void update();
 }

@@ -18,7 +18,10 @@ package net.tridentsdk.chat;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import net.tridentsdk.base.Substance;
+import net.tridentsdk.inventory.Item;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,7 +29,6 @@ import static org.junit.Assert.assertEquals;
  * @author Nick Robson
  */
 public class HoverEventTest {
-
     @Test
     public void testTextJson() {
         assertEquals(new Gson().fromJson("{\"action\":\"show_text\",\"value\":{\"text\":\"hello!\"}}", JsonObject.class), HoverEvent.text("hello!").asJson());
@@ -47,4 +49,12 @@ public class HoverEventTest {
         assertEquals(event.getValue(), HoverEvent.fromJson(event.asJson()).getValue());
     }
 
+    @Test
+    public void testItem() {
+        Item item = Mockito.mock(Item.class);
+        Mockito.when(item.getSubstance()).thenReturn(Substance.AIR);
+
+        HoverEvent event = HoverEvent.item(item);
+        assertEquals(event.getValue(), HoverEvent.fromJson(event.asJson()).getValue());
+    }
 }

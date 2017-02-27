@@ -19,38 +19,40 @@ package net.tridentsdk.config;
 import net.tridentsdk.Impl;
 import net.tridentsdk.util.Misc;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ConfigTest {
     private static final String TEST_PATH = Misc.HOME + "/kek/cfg.json";
 
     static {
-        Impl.setImpl(null);
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().newCfg(Paths.get(TEST_PATH))).thenReturn(Mockito.mock(Config.class));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testPathString() {
         Config cfg = Config.load(TEST_PATH);
-        assertEquals(TEST_PATH, cfg.path().toString());
+        assertNotNull(cfg);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testPath() {
         // This is stupid
         Path path = Paths.get(TEST_PATH);
         Config cfg = Config.load(path);
-        assertEquals(path, cfg.path());
+        assertNotNull(cfg);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testFile() {
         File file = new File(TEST_PATH);
         Config cfg = Config.load(file);
-        assertEquals(file, cfg.file());
+        assertNotNull(cfg);
     }
 }

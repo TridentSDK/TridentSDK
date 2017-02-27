@@ -14,21 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.inventory;
 
-/**
- * @author TridentSDK
- * @since 0.5-alpha
- */
-// TODO - documentation
-public interface ItemFrameMeta extends HangingMeta {
+import org.junit.Test;
 
-    // Slot getItem(); TODO
+import static org.junit.Assert.assertNotNull;
 
-    // void setItem(Slot item); TODO
-
-    int getRotation();
-
-    void setRotation(int rotation);
-
+public class InventoryTypeTest {
+    @Test
+    public void testTypes() {
+        // TODO
+        for (InventoryType type : InventoryType.values()) {
+            assertNotNull(type);
+        }
+    }
 }

@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.chat;
 
-import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -25,6 +24,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -90,12 +90,12 @@ public class ChatComponent {
     /**
      * The list of chat components added to the 'with' array.
      */
-    private final Collection<ChatComponent> with = Lists.newArrayList();
+    private final Collection<ChatComponent> with = new ArrayList<>();
 
     /**
      * The list of chat components added to the 'extra' array.
      */
-    private final Collection<ChatComponent> extra = Lists.newArrayList();
+    private final Collection<ChatComponent> extra = new ArrayList<>();
 
     /**
      * Whether or not this message is bolded
@@ -474,7 +474,7 @@ public class ChatComponent {
         }
 
         ChatColor color = this.color;
-        if (color != null) {
+        if (color != null && !color.isFormat()) {
             json.addProperty("color", color.name().toLowerCase());
         }
 
@@ -611,73 +611,89 @@ public class ChatComponent {
      * @return The component.
      */
     public static ChatComponent fromFormat(String format) {
-        ChatComponent component = ChatComponent.create();
         char[] chars = format.toCharArray();
         String currentText = "";
         ChatColor currentColor = null;
-        ChatComponent currentComponent = create();
-        boolean sub = false;
+        ChatComponent component = ChatComponent.create(), currentComponent = null;
+        boolean bold, italic, underline, strikethrough, obfuscate;
+        bold = italic = underline = strikethrough = obfuscate = false;
         for (int i = 0, j = chars.length; i < j; i++) {
             boolean prevSection = i != 0 && chars[i - 1] == '\u00A7';
             char c = chars[i];
             if (prevSection) {
-                ChatColor color = ChatColor.getColor(c);
+                ChatColor color = ChatColor.of(c);
                 if (color != null) {
-                    if (color.isColor()) {
-                        if (!currentText.isEmpty()) {
-                            if (sub) {
-                                component.addExtra(currentComponent.setText(currentText).setColor(currentColor));
-                            } else {
-                                component.setText(currentText).setColor(currentColor);
-                                sub = true;
-                            }
-                            currentComponent = create();
-                        }
-                        currentColor = color;
+                    ChatComponent curr = currentComponent == null ? component : currentComponent;
+                    // splice off current component
+                    if (!currentText.isEmpty()) {
+                        curr.setText(currentText).setColor(currentColor);
+                        if (currentComponent != null)
+                            component.addExtra(currentComponent);
+                        curr = currentComponent = create();
                         currentText = "";
+                    }
+                    if (color.isColor()) {
+                        currentColor = color;
+                        // disable all formatting
+                        if (bold)
+                            curr.setBold(bold = false);
+                        if (italic)
+                            curr.setItalic(italic = false);
+                        if (underline)
+                            curr.setUnderlined(underline = false);
+                        if (strikethrough)
+                            curr.setStrikethrough(strikethrough = false);
+                        if (obfuscate)
+                            curr.setObfuscated(obfuscate = false);
                     } else {
-                        ChatComponent curr = sub ? currentComponent : component;
+                        // formatting code
                         switch (color) {
-                            case OBFUSCATED:
-                                curr.setObfuscated(true);
-                                break;
-                            case BOLD:
-                                curr.setBold(true);
-                                break;
-                            case STRIKETHROUGH:
-                                curr.setStrikethrough(true);
-                                break;
-                            case UNDERLINE:
-                                curr.setUnderlined(true);
-                                break;
-                            case ITALIC:
-                                curr.setItalic(true);
-                                break;
-                            case RESET:
-                                ChatComponent next = create();
-                                if (curr.isBold())
-                                    next.setBold(false);
-                                if (curr.isItalic())
-                                    next.setItalic(false);
-                                if (curr.isUnderlined())
-                                    next.setUnderlined(false);
-                                if (curr.isStrikethrough())
-                                    next.setStrikethrough(false);
-                                if (curr.isObfuscated())
-                                    next.setObfuscated(false);
-                                if (!currentText.isEmpty()) {
-                                    if (sub) {
-                                        component.addExtra(curr.setText(currentText).setColor(currentColor));
-                                    } else {
-                                        component.setText(currentText).setColor(currentColor);
-                                        sub = true;
-                                    }
+                            case BOLD: {
+                                if (!bold) {
+                                    curr.setBold(bold = true);
                                 }
-                                currentText = "";
-                                currentComponent = next;
-                                currentColor = null;
-                            default:
                                 break;
+                            }
+                            case ITALIC: {
+                                if (!italic) {
+                                    curr.setItalic(italic = true);
+                                }
+                                break;
+                            }
+                            case UNDERLINE: {
+                                if (!underline) {
+                                    curr.setUnderlined(underline = true);
+                                }
+                                break;
+                            }
+                            case STRIKETHROUGH: {
+                                if (!strikethrough) {
+                                    curr.setStrikethrough(strikethrough = true);
+                                }
+                                break;
+                            }
+                            case OBFUSCATED: {
+                                if (!obfuscate) {
+                                    curr.setObfuscated(obfuscate = true);
+                                }
+                                break;
+                            }
+                            case RESET: {
+                                // remove current color
+                                currentColor = null;
+                                // disable all formatting
+                                if (bold)
+                                    curr.setBold(bold = false);
+                                if (italic)
+                                    curr.setItalic(italic = false);
+                                if (underline)
+                                    curr.setUnderlined(underline = false);
+                                if (strikethrough)
+                                    curr.setStrikethrough(strikethrough = false);
+                                if (obfuscate)
+                                    curr.setObfuscated(obfuscate = false);
+                                break;
+                            }
                         }
                     }
                 }

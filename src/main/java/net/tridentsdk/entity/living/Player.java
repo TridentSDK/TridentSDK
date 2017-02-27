@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
+import java.util.List;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
@@ -24,7 +25,6 @@ import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.world.opt.GameMode;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -36,12 +36,23 @@ import java.util.UUID;
  */
 @ThreadSafe
 public interface Player extends Entity {
+
+    /**
+     * The default flying speed for a player
+     */
+    float DEFAULT_FLYING_SPEED = 0.159F;
+
+    /**
+     * The default walking speed for a player
+     */
+    float DEFAULT_WALKING_SPEED = 0.699999988079071F;
+
     /**
      * Obtains the name that this player had logged in.
      *
      * @return the player's name
      */
-    String name();
+    String getName();
 
     /**
      * Obtains the UUID of this player.
@@ -52,7 +63,21 @@ public interface Player extends Entity {
      *
      * @return the player's UUID
      */
-    UUID uuid();
+    UUID getUuid();
+
+    /**
+     * Gets this player's display name.
+     *
+     * @return The display name.
+     */
+    ChatComponent getDisplayName();
+
+    /**
+     * Sets this player's display name.
+     *
+     * @param displayName The display name.
+     */
+    void setDisplayName(ChatComponent displayName);
 
     /**
      * Sends this player a message.
@@ -129,10 +154,12 @@ public interface Player extends Entity {
 
     /**
      * Gets this player's boss bars.
+     * <br><br>
+     * <i>Note: the list order is top-to-bottom of a player's screen space</i>
      *
      * @return The boss bars.
      */
-    Collection<BossBar> getBossBars();
+    List<BossBar> getBossBars();
 
     /**
      * Adds a boss bar to this player.
@@ -152,4 +179,74 @@ public interface Player extends Entity {
      * Updates this player's boss bars, sending any required packets.
      */
     void updateBossBars();
+
+    /**
+     * Gets whether or not this player is in god mode.
+     *
+     * @return True iff the player is in god mode.
+     */
+    boolean isGodMode();
+
+    /**
+     * Sets whether or not this player is in god mode.
+     *
+     * @param godMode Whether this player is in god mode.
+     */
+    void setGodMode(boolean godMode);
+
+    /**
+     * Gets whether or not this player can fly.
+     *
+     * @return True iff the player can fly.
+     */
+    boolean canFly();
+
+    /**
+     * Sets whether or not this player can fly.
+     *
+     * @param canFly Whether this player can fly.
+     */
+    void setCanFly(boolean canFly);
+
+    /**
+     * Gets whether or not this player is flying.
+     *
+     * @return True iff the player is flying.
+     */
+    boolean isFlying();
+
+    /**
+     * Sets whether or not this player is flying.
+     *
+     * @param flying Whether this player is flying.
+     */
+    void setFlying(boolean flying);
+
+    /**
+     * Gets this player's flying speed.
+     *
+     * @return The flying speed.
+     */
+    float getFlyingSpeed();
+
+    /**
+     * Sets this player's flying speed.
+     *
+     * @param flyingSpeed The flying speed.
+     */
+    void setFlyingSpeed(float flyingSpeed);
+
+    /**
+     * Gets this player's walking speed.
+     *
+     * @return The walking speed.
+     */
+    float getWalkingSpeed();
+
+    /**
+     * Sets this player's walking speed.
+     *
+     * @param walkingSpeed The walking speed.
+     */
+    void setWalkingSpeed(float walkingSpeed);
 }

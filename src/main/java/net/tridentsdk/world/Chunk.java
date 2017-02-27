@@ -35,7 +35,7 @@ public interface Chunk {
      *
      * @return the x coordinate
      */
-    int x();
+    int getX();
 
     /**
      * Obtains the z coordinate at which this chunk is
@@ -43,8 +43,8 @@ public interface Chunk {
      *
      * @return the z coordinate
      */
-    int z();
-
+    int getZ();
+    
     /**
      * Obtains the block at the given relative coordinates
      * inside of this chunk.
@@ -55,12 +55,12 @@ public interface Chunk {
      * @return the block at the given coordinates
      */
     @Nonnull
-    Block blockAt(int x, int y, int z);
+    Block getBlockAt(int x, int y, int z);
 
     /**
      * Obtains the world which contains this chunk.
      *
      * @return the container world
      */
-    World world();
+    World getWorld();
 }

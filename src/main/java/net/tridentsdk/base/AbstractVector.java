@@ -18,6 +18,7 @@ package net.tridentsdk.base;
 
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.doc.Policy;
+import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
@@ -110,7 +111,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
-     * Creates a new AbstractVector object using {@code int}egers.
+     * Creates a new AbstractVector object using {@code int}s.
      *
      * @param x the x value
      * @param y the y value
@@ -139,7 +140,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the x value
      */
-    public double x() {
+    public double getX() {
         synchronized (this.lock) {
             return this.x;
         }
@@ -151,7 +152,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the x value
      */
-    public int intX() {
+    public int getIntX() {
         synchronized (this.lock) {
             return (int) this.x;
         }
@@ -163,7 +164,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the y value
      */
-    public double y() {
+    public double getY() {
         synchronized (this.lock) {
             return this.y;
         }
@@ -175,7 +176,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the y value
      */
-    public int intY() {
+    public int getIntY() {
         synchronized (this.lock) {
             return (int) this.y;
         }
@@ -187,7 +188,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the z value
      */
-    public double z() {
+    public double getZ() {
         synchronized (this.lock) {
             return this.z;
         }
@@ -199,7 +200,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      *
      * @return the z value
      */
-    public int intZ() {
+    public int getIntZ() {
         synchronized (this.lock) {
             return (int) this.z;
         }
@@ -613,6 +614,19 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
+     * Create a position based from this vector with
+     * a provided world
+     *
+     * @param world The world of the position
+     * @return A Position representation of this vector
+     */
+    public Position toPosition(World world){
+        synchronized (this.lock) {
+            return new Position(world, this.x, this.y, this.z);
+        }
+    }
+
+    /**
      * Writes the fields of this vector to the fields of the
      * given vector, along with the additional fields that
      * may be present in the subclass.
@@ -634,7 +648,9 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     public boolean equals(Object obj) {
         if (obj instanceof AbstractVector) {
             AbstractVector v = (AbstractVector) obj;
-            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
+            synchronized (this.lock) {
+                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
+            }
         }
 
         return false;
@@ -645,15 +661,19 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         // Ignore IntelliJ warning for final field not in hashcode
         // anyone who uses a vector or position object as a
         // key is probably mentally retarded
-        int hash = 1;
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
-        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
-        return hash;
+        synchronized (this.lock) {
+            int hash = 1;
+            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
+            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
+            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
+            return hash;
+        }
     }
 
     @Override
     public String toString() {
-        return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
+        synchronized (this.lock) {
+            return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
+        }
     }
 }

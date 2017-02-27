@@ -16,8 +16,9 @@
  */
 package net.tridentsdk.base;
 
-import org.junit.Assert;
+import net.tridentsdk.world.World;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.results.RunResult;
@@ -30,8 +31,7 @@ import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @State(Scope.Benchmark)
 public class VectorsTest {
@@ -55,7 +55,7 @@ public class VectorsTest {
         Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         assertEquals(v2, this.vec);
         assertEquals(v2.hashCode(), this.vec.hashCode());
-        Assert.assertFalse(this.vec.equals(new Object()));
+        assertFalse(this.vec.equals(new Object()));
     }
 
     @Test
@@ -64,9 +64,9 @@ public class VectorsTest {
         this.vec.setY(CHANGE_TO);
         this.vec.setZ(CHANGE_TO);
 
-        assertEquals(CHANGE_TO, this.vec.x(), 0);
-        assertEquals(CHANGE_TO, this.vec.y(), 0);
-        assertEquals(CHANGE_TO, this.vec.z(), 0);
+        assertEquals(CHANGE_TO, this.vec.getX(), 0);
+        assertEquals(CHANGE_TO, this.vec.getY(), 0);
+        assertEquals(CHANGE_TO, this.vec.getZ(), 0);
     }
 
     @Test
@@ -75,9 +75,9 @@ public class VectorsTest {
         this.vec.setY(CHANGE_TO_I);
         this.vec.setZ(CHANGE_TO_I);
 
-        assertEquals(CHANGE_TO_I, this.vec.intX());
-        assertEquals(CHANGE_TO_I, this.vec.intY());
-        assertEquals(CHANGE_TO_I, this.vec.intZ());
+        assertEquals(CHANGE_TO_I, this.vec.getIntX());
+        assertEquals(CHANGE_TO_I, this.vec.getIntY());
+        assertEquals(CHANGE_TO_I, this.vec.getIntZ());
     }
 
     @Test
@@ -123,12 +123,22 @@ public class VectorsTest {
         Vector v2 = new Vector(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I);
         v2.normalize();
 
-        assertEquals(1, v2.magnitude(), 0);
+        assertEquals(1, v2.getMagnitude(), 0);
     }
 
     @Test
     public void testToString() {
         assertNotNull(this.vec.toString());
+    }
+
+    @Test
+    public void testToPosition() {
+        World world = Mockito.mock(World.class);
+        Position position = this.vec.toPosition(world);
+        assertEquals(world, position.world());
+        assertEquals(position.getX(), this.vec.getX(), 0);
+        assertEquals(position.getY(), this.vec.getY(), 0);
+        assertEquals(position.getZ(), this.vec.getZ(), 0);
     }
 
     public static void main(String[] args) {
@@ -152,7 +162,7 @@ public class VectorsTest {
             vec.add(curMod, curMod, curMod);
         }
 
-        p("Finished attempt at " + (vec.x() + vec.y() + vec.z()));
+        p("Finished attempt at " + (vec.getX() + vec.getY() + vec.getZ()));
     }
 
     private static void p(String s) {
@@ -250,7 +260,7 @@ public class VectorsTest {
 
     @TearDown(Level.Trial)
     public void teardown(Blackhole bh) {
-        bh.consume(this.vec.x() + this.vec.y() + this.vec.z());
+        bh.consume(this.vec.getX() + this.vec.getY() + this.vec.getZ());
     }
 
     // JVM tuning test dummy

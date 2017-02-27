@@ -14,8 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.google.common.collect.Sets;
-
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
@@ -28,7 +27,7 @@ public class MemoryModelTest {
     public static void main(String[] args) throws InterruptedException {
         MemoryModelTest test = new MemoryModelTest();
 
-        Set<Thread> threadList = Sets.newHashSet();
+        Set<Thread> threadList = new HashSet<>();
         for (int i = 0; i < threads; i++) {
             Thread thread = new Thread(test.newT1Runnable());
             threadList.add(thread);

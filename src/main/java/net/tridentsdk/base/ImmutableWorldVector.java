@@ -14,23 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta.minecart;
+package net.tridentsdk.base;
 
-import net.tridentsdk.chat.ChatComponent;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import net.tridentsdk.world.World;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
+ * This class represents an immutable copy of a Vector
+ * object which is used to contain a constant set of values
+ * that shouldn't change (i.e. the location of a block).
+ *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-// TODO - documentation
-public interface CommandMinecartMeta extends MinecartMeta {
-
-    String getCommand();
-
-    void setCommand(String command);
-
-    ChatComponent getLastOutput();
-
-    void setLastOutput(ChatComponent component);
-
+@Getter
+@Immutable
+@AllArgsConstructor
+public class ImmutableWorldVector {
+    private final World world;
+    private final int x;
+    private final int y;
+    private final int z;
 }

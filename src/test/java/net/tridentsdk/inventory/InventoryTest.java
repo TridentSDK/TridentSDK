@@ -14,12 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.inventory;
 
-/**
- * @author TridentSDK
- * @since 0.5-alpha
- */
-// TODO - documentation
-public interface HangingMeta extends EntityMeta {
+import net.tridentsdk.Impl;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import static org.junit.Assert.assertNotNull;
+
+public class InventoryTest {
+    static {
+        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Mockito.when(Impl.get().newInventory(InventoryType.PLAYER, 49)).
+                thenReturn(Mockito.mock(Inventory.class));
+    }
+
+    @Test
+    public void newInventory() throws Exception {
+        assertNotNull(Inventory.newInventory(InventoryType.PLAYER, 49));
+    }
 }

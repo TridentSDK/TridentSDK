@@ -32,12 +32,33 @@ public interface Block {
      *
      * @return the block substance
      */
-    Substance substance();
+    Substance getSubstance();
+
+    /**
+     * Set the substance of the block
+     *
+     * @param substance The new substance
+     */
+    void setSubstance(Substance substance);
+
+    /**
+     * Obtains the block damage data value.
+     *
+     * @return the damage value for the block
+     */
+    byte getData();
+
+    /**
+     * Sets the block damage data value.
+     *
+     * @param data the damage value which to set the block
+     */
+    void setData(byte data);
 
     /**
      * Obtains the position at which this block is located
      *
      * @return the block position
      */
-    Position position();
+    Position getPosition();
 }

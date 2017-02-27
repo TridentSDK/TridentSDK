@@ -14,17 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.vehicle;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface DroppedItemMeta extends EntityMeta {
+public interface FurnaceMinecartMeta extends MinecartMeta {
 
-    // Slot getItem(); TODO
+    boolean isPowered();
 
-    // void setItem(Slot item); TODO
+    void setPowered(boolean powered);
 
 }

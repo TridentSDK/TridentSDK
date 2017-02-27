@@ -28,7 +28,7 @@ public class ChatColorTest {
     @Test
     public void testColorRegistration() {
         for (ChatColor c : ChatColor.values()) {
-            assertEquals(c, ChatColor.getColor(c.getColorChar()));
+            assertEquals(c, ChatColor.of(c.getColorChar()));
         }
     }
 
@@ -42,7 +42,7 @@ public class ChatColorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testError() {
-        ChatColor.getColor('g');
+        ChatColor.of('g');
     }
 
 }

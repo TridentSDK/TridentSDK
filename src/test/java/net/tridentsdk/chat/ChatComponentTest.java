@@ -36,8 +36,20 @@ public class ChatComponentTest {
 
     @Test
     public void testFromFormatString() {
-        ChatComponent cc = ChatComponent.fromFormat("\u00A7k\u00A7eHello! \u00A7r\u00A7cNice to meet you! :)");
+        ChatComponent cc = ChatComponent.fromFormat("\u00A7e\u00A7kHello! \u00A7r\u00A7cNice to meet you! :)");
         assertEquals(new Gson().fromJson("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", JsonObject.class), cc.asJson());
+    }
+
+    @Test
+    public void testFromFormatString2() {
+        ChatComponent cc = ChatComponent.fromFormat("\u00A7la\u00A7mb\u00A7nc\u00A7od\u00A7re");
+        ChatComponent cc2 = ChatComponent.create()
+                .setBold(true).setText("a")
+                .addExtra(ChatComponent.create().setStrikethrough(true).setText("b"))
+                .addExtra(ChatComponent.create().setUnderlined(true).setText("c"))
+                .addExtra(ChatComponent.create().setItalic(true).setText("d"))
+                .addExtra(ChatComponent.create().setBold(false).setItalic(false).setStrikethrough(false).setUnderlined(false).setText("e"));
+        assertEquals(cc2, cc);
     }
 
     @Test
@@ -70,7 +82,7 @@ public class ChatComponentTest {
         ChatComponent childWith = ChatComponent.create().setText("childWith");
         ChatComponent subExtra = ChatComponent.create().setText("subExtra").addExtra(childExtra);
         ChatComponent subWith = ChatComponent.create().setText("subWith").addWith(childWith);
-        cc.addExtra(subExtra).addWith(subWith);
+        cc.addExtra(subExtra).addWith(subWith).addWith("yo");
         assertTrue(cc.hasWith(subWith, false));
         assertTrue(cc.hasExtra(subExtra, false));
         assertFalse(cc.hasExtra(subWith, false));
@@ -91,7 +103,7 @@ public class ChatComponentTest {
         assertFalse(cc.hasExtra(childWith, true));
         assertFalse(cc.hasWith(childExtra, true));
 
-        assertEquals(1, cc.getWith().size());
+        assertEquals(2, cc.getWith().size());
         assertEquals(1, cc.getExtra().size());
         assertTrue(cc.getWith().contains(subWith));
         assertTrue(cc.getExtra().contains(subExtra));

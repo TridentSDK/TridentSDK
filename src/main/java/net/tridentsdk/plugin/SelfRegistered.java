@@ -14,17 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.plugin;
+
+import java.lang.annotation.*;
 
 /**
+ * This annotation should be added to handler methods that
+ * should be skipped by the automatic registrar during
+ * plugin load.
+ *
  * @author TridentSDK
- * @since 0.5-alpha
+ * @since 0.3-alpha-DP
  */
-// TODO - documentation
-public interface WitherSkullMeta extends FireballMeta {
-
-    boolean isInvulnerable();
-
-    void setInvulnerable(boolean invulnerable);
-
+@Documented
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface SelfRegistered {
 }

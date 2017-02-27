@@ -16,9 +16,9 @@
  */
 package net.tridentsdk.chat;
 
-import it.unimi.dsi.fastutil.chars.Char2ObjectOpenHashMap;
 import lombok.Getter;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
@@ -143,7 +143,7 @@ public enum ChatColor {
     private final char colorChar;
 
     /**
-     * Creates a new chatcolor based on the given character
+     * Creates a new char color based on the given character
      * which represents the canonical control sequence
      * for that particular color.
      *
@@ -184,29 +184,19 @@ public enum ChatColor {
     }
 
     /**
-     * The mapping of the character to the associated
-     * chat color.
-     */
-    private static final Char2ObjectOpenHashMap<ChatColor> charToColor =
-            new Char2ObjectOpenHashMap<>();
-
-    static {
-        for (ChatColor c : ChatColor.values()) {
-            charToColor.put(c.colorChar, c);
-        }
-    }
-
-    /**
      * Gets a chat color from a given character.
      *
      * @param colorChar The color's character.
      * @return The color, or null if not found.
      */
-    public static ChatColor getColor(char colorChar) {
-        ChatColor c = charToColor.get(colorChar);
-        if (c == null) {
-            throw new IllegalArgumentException("no color with character " + colorChar);
+    @Nonnull
+    public static ChatColor of(char colorChar) {
+        for (ChatColor color : values()) {
+            if (color.colorChar == colorChar) {
+                return color;
+            }
         }
-        return c;
+
+        throw new IllegalArgumentException("no color with character " + colorChar);
     }
 }

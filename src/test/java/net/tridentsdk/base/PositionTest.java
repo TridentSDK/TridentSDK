@@ -20,6 +20,8 @@ import net.tridentsdk.world.World;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import static org.junit.Assert.*;
 
 public class PositionTest {
@@ -32,17 +34,33 @@ public class PositionTest {
 
     @Test
     public void testYaw() {
-        assertEquals(0, new Position(this.world, 0D, 0D, 0D, 0F, 0F).yaw(), 0);
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        float yaw = r.nextFloat();
+        assertEquals(yaw, new Position(this.world,
+                r.nextDouble(),
+                r.nextDouble(),
+                r.nextDouble(),
+                yaw, r.nextFloat()).getYaw(), 0);
     }
 
     @Test
     public void testPitch() {
-        assertEquals(0, new Position(this.world, 0, 0, 0).pitch(), 0);
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        float pitch = r.nextFloat();
+        assertEquals(pitch, new Position(this.world,
+                r.nextDouble(),
+                r.nextDouble(),
+                r.nextDouble(),
+                r.nextFloat(), pitch).getPitch(), 0);
     }
 
     @Test
     public void testTheOtherConstructor() {
-        assertEquals(new Position(this.world, 0D, 0D, 0D), new Position(this.world, 0D, 0D, 0D));
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        double x = r.nextDouble();
+        double y = r.nextDouble();
+        double z = r.nextDouble();
+        assertEquals(new Position(this.world, x, y, z), new Position(this.world, x, y, z, 0F, 0F));
     }
 
     @Test
@@ -52,23 +70,23 @@ public class PositionTest {
 
         Vector vector = VectorsTest.rand();
         vector.vecWrite(p0);
-
         p0.write(p1);
+
         assertEquals(p0, p1);
     }
 
     @Test
     public void testBlock() {
         Position position = new Position(this.world);
-        Block block = position.block();
-        assertEquals(this.world.blockAt(position.intX(), position.intY(), position.intZ()), block);
+        Block block = position.getBlock();
+        assertEquals(this.world.getBlockAt(position.getIntX(), position.getIntY(), position.getIntZ()), block);
     }
 
     @Test
     public void distance() {
         Position p0 = new Position(this.world);
-        Position p1 = new Position(this.world, 0, 1, 0);
-        assertEquals(1, p0.distance(p1), 0);
+        Position p1 = new Position(this.world, 0, 10, 0);
+        assertEquals(10, p0.distance(p1), 0);
     }
 
     @Test
@@ -92,20 +110,52 @@ public class PositionTest {
         p0.set(1, 2, 3);
         p0.setYaw(4);
         p0.setPitch(5);
-        assertEquals(1, p0.x(), 0);
-        assertEquals(2, p0.y(), 0);
-        assertEquals(3, p0.z(), 0);
-        assertEquals(4, p0.yaw(), 0);
-        assertEquals(5, p0.pitch(), 0);
+        assertEquals(1, p0.getX(), 0);
+        assertEquals(2, p0.getY(), 0);
+        assertEquals(3, p0.getZ(), 0);
+        assertEquals(4, p0.getYaw(), 0);
+        assertEquals(5, p0.getPitch(), 0);
 
-        assertEquals(p0.intX() / 16, p0.getChunkX());
-        assertEquals(p0.intZ() / 16, p0.getChunkZ());
+        assertEquals(p0.getIntX() / 16, p0.getChunkX());
+        assertEquals(p0.getIntZ() / 16, p0.getChunkZ());
+
+        p0.set(1D, 2D, 3D);
+        assertEquals(1, p0.getX(), 0);
+        assertEquals(2, p0.getY(), 0);
+        assertEquals(3, p0.getZ(), 0);
+        assertEquals(4, p0.getYaw(), 0);
+        assertEquals(5, p0.getPitch(), 0);
+
+        assertEquals(p0.getIntX() / 16, p0.getChunkX());
+        assertEquals(p0.getIntZ() / 16, p0.getChunkZ());
     }
 
     @Test
     public void testClone() {
-        Position p0 = new Position(this.world);
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        double x = r.nextDouble();
+        double y = r.nextDouble();
+        double z = r.nextDouble();
+        float yaw = r.nextFloat();
+        float pitch = r.nextFloat();
+        Position p0 = new Position(this.world, x, y, z, yaw, pitch);
+
         assertEquals(p0, p0.clone());
     }
 
+    @Test
+    public void testToWorldVec() {
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        double x = r.nextDouble();
+        double y = r.nextDouble();
+        double z = r.nextDouble();
+
+        Position p = new Position(this.world, x, y, z);
+        ImmutableWorldVector vec = p.toWorldVector();
+
+        assertEquals(vec.getWorld(), p.world());
+        assertEquals(vec.getX(), p.getIntX());
+        assertEquals(vec.getY(), p.getIntY());
+        assertEquals(vec.getZ(), p.getIntZ());
+    }
 }

@@ -16,11 +16,10 @@
  */
 package net.tridentsdk.base;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -55,7 +54,7 @@ public class BlockDirectionTest {
 
     @Test
     public void testOpposites() {
-        BiMap<BlockDirection, BlockDirection> opps = HashBiMap.create();
+        HashMap<BlockDirection, BlockDirection> opps = new HashMap<>();
         opps.put(BlockDirection.UP, BlockDirection.DOWN);
         opps.put(BlockDirection.SOUTH, BlockDirection.NORTH);
         opps.put(BlockDirection.EAST, BlockDirection.WEST);
@@ -65,8 +64,6 @@ public class BlockDirectionTest {
         for (BlockDirection dir : BlockDirection.values()) {
             if (opps.containsKey(dir)) {
                 assertEquals(opps.get(dir), dir.getOpposite());
-            } else {
-                assertEquals(opps.inverse().get(dir), dir.getOpposite());
             }
         }
 

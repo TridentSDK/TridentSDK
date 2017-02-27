@@ -14,17 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.entity.meta;
+package net.tridentsdk.entity.meta.inanimate;
+
+import java.awt.*;
+import net.tridentsdk.entity.meta.EntityMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface TNTPrimedMeta extends EntityMeta {
+public interface AreaEffectCloudMeta extends EntityMeta {
 
-    int getFuseTime();
+    float getRadius();
 
-    void setFuseTime(int fuseTime);
+    void setRadius(float radius);
+
+    Color getColor();
+
+    void setColor(Color color);
+
+    boolean isSinglePoint();
+
+    void setSinglePoint(boolean singlePoint);
+
+    int getParticleID();
+
+    void setParticleID(int id);
+
+    int getParticleParameter1();
+
+    void setParticleParameter1(int par);
+
+    int getParticleParameter2();
+
+    void setParticleParameter2(int par);
 
 }

@@ -28,7 +28,6 @@ import net.tridentsdk.world.World;
 import net.tridentsdk.world.opt.GameMode;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -47,8 +46,8 @@ public class PlayerTest {
         Player player = new DummyPlayer(messages);
         ChatComponent component = ChatComponent.text("hi there");
         player.sendMessage(component, ChatType.CHAT);
-        player.sendMessage(component, ChatType.SYSTEM);
         player.sendMessage(component);
+        player.sendMessage("hi there");
 
         assertEquals(messages.get(0).getMessage(), component);
         assertEquals(messages.get(0).getType(), ChatType.CHAT);
@@ -105,13 +104,23 @@ public class PlayerTest {
         }
 
         @Override
-        public String name() {
+        public String getName() {
             return null;
         }
 
         @Override
-        public UUID uuid() {
+        public UUID getUuid() {
             return null;
+        }
+
+        @Override
+        public ChatComponent getDisplayName() {
+            return null;
+        }
+
+        @Override
+        public void setDisplayName(ChatComponent displayName) {
+
         }
 
         @Override
@@ -150,7 +159,7 @@ public class PlayerTest {
         }
 
         @Override
-        public Collection<BossBar> getBossBars() {
+        public List<BossBar> getBossBars() {
             return null;
         }
 
@@ -166,6 +175,56 @@ public class PlayerTest {
 
         @Override
         public void updateBossBars() {
+
+        }
+
+        @Override
+        public boolean isGodMode() {
+            return false;
+        }
+
+        @Override
+        public void setGodMode(boolean godMode) {
+
+        }
+
+        @Override
+        public boolean canFly() {
+            return false;
+        }
+
+        @Override
+        public void setCanFly(boolean canFly) {
+
+        }
+
+        @Override
+        public boolean isFlying() {
+            return false;
+        }
+
+        @Override
+        public void setFlying(boolean flying) {
+
+        }
+
+        @Override
+        public float getFlyingSpeed() {
+            return 0;
+        }
+
+        @Override
+        public void setFlyingSpeed(float flyingSpeed) {
+
+        }
+
+        @Override
+        public float getWalkingSpeed() {
+            return 0;
+        }
+
+        @Override
+        public void setWalkingSpeed(float walkingSpeed) {
 
         }
 

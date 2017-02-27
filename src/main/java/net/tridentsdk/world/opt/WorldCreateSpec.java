@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.world.opt;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * The options for creating a new world.
  *
@@ -23,11 +25,30 @@ package net.tridentsdk.world.opt;
  * appropriate opt classes when the world has finished
  * generating.</p>
  *
+ * <p>Although this class is not thread safe, it should be
+ * safely published by passing it to the world loader.</p>
+ *
  * @author TridentSDK
  * @since 0.4-alpha
  */
+@NotThreadSafe // TODO help
+// TODO implement, this should be a builder
 public class WorldCreateSpec {
-    private static final WorldCreateSpec DEFAULT = new WorldCreateSpec(true);
+    /**
+     * The default instance of the world creator
+     * specification, which sets all of the settings to
+     * their default in a vanilla world.
+     */
+    private static final WorldCreateSpec DEFAULT = new DefaultSpec();
+
+    /**
+     * Custom class used to deny changes to the world spec
+     */
+    private static class DefaultSpec extends WorldCreateSpec {
+        private DefaultSpec() {
+            super(true);
+        }
+    }
 
     /**
      * Whether this spec uses the default world options
@@ -44,8 +65,19 @@ public class WorldCreateSpec {
      *
      * @return the default world specification
      */
-    public static WorldCreateSpec defaultOpts() {
+    public static WorldCreateSpec getDefaultOptions() {
         return DEFAULT;
+    }
+
+    /**
+     * Create a new custom world options specification that
+     * can be passed to the server world loader to create
+     * a custom world.
+     *
+     * @return a new custom world specification
+     */
+    public static WorldCreateSpec custom() {
+        return new WorldCreateSpec(false);
     }
 
     /**

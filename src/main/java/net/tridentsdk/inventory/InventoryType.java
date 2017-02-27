@@ -27,4 +27,5 @@ import javax.annotation.concurrent.Immutable;
  */
 @Immutable // TODO
 public enum InventoryType {
+    PLAYER, CHEST
 }

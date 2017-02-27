@@ -25,8 +25,8 @@ public class IntPairTest {
 
     @Test
     public void testGets() {
-        assertEquals(100, this.pair.x());
-        assertEquals(200, this.pair.z());
+        assertEquals(100, this.pair.getX());
+        assertEquals(200, this.pair.getZ());
     }
 
     @Test

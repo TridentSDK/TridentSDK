@@ -49,7 +49,7 @@ public interface Inventory {
      * @return the new inventory
      */
     static Inventory newInventory(InventoryType type, int slots) {
-        return Impl.get().newInv(type, slots);
+        return Impl.get().newInventory(type, slots);
     }
 
     /**

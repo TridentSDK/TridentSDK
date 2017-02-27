@@ -37,7 +37,7 @@ public interface WorldOpts {
      * @return {@code true} if those players can fly,
      *         {@code false} to kick players who are flying
      */
-    boolean allowFlight();
+    boolean isAllowFlight();
 
     /**
      * Changes whether flight is allowed using client-side
@@ -55,7 +55,7 @@ public interface WorldOpts {
      * @return {@code true} if pvp is allowed, {@code false}
      *         if not
      */
-    boolean allowPvp();
+    boolean isAllowPvp();
 
     /**
      * Changes whether or not PvP is allowed in the world.
@@ -72,7 +72,7 @@ public interface WorldOpts {
      * @return {@code true} if nether travel is allowed,
      *         {@code false} if not
      */
-    boolean allowPortals();
+    boolean isAllowPortals();
 
     /**
      * Sets whether or not nether portals are allowed in the
@@ -92,7 +92,7 @@ public interface WorldOpts {
      *         {@code false} to use the player's last game
      *         mode
      */
-    boolean forceGameMode();
+    boolean isForceGameMode();
 
     /**
      * Sets whether the player will join with their last
@@ -109,7 +109,7 @@ public interface WorldOpts {
      *
      * @return the gamemode
      */
-    GameMode gameMode();
+    GameMode getGameMode();
 
     /**
      * Sets the game type to which players in the world are
@@ -125,7 +125,7 @@ public interface WorldOpts {
      *
      * @return the world difficulty
      */
-    Difficulty difficulty();
+    Difficulty getDifficulty();
 
     /**
      * Sets the world difficulty to the given difficulty.
@@ -142,7 +142,7 @@ public interface WorldOpts {
      * @return {@code true} to indicate that the difficulty
      *         is locked, {@code false} if it is not
      */
-    boolean difficultyLocked();
+    boolean isDifficultyLocked();
 
     /**
      * Sets whether the world difficulty is locked or not.
@@ -158,14 +158,14 @@ public interface WorldOpts {
      *
      * @return the spawn protection radius
      */
-    int spawnProtectionRadius();
+    int getSpawnProtectionRadius();
 
     /**
      * Sets the new spawn protection radius to the given
      * value.
      *
      * @param radius the new protection radius
-     * @see #spawnProtectionRadius()
+     * @see #getSpawnProtectionRadius()
      */
     void setSpawnProtectionRadius(int radius);
 
@@ -174,7 +174,7 @@ public interface WorldOpts {
      *
      * @return the world's dimension
      */
-    Dimension dimension();
+    Dimension getDimension();
 
     /**
      * Obtains the XYZ coordinates of this world's spawn
@@ -182,7 +182,7 @@ public interface WorldOpts {
      *
      * @return the spawn position
      */
-    Vector spawn();
+    Vector getSpawn();
 
     /**
      * Sets the spawn XYZ coordinates to the given vector.
@@ -196,7 +196,7 @@ public interface WorldOpts {
      *
      * @return the game rules applying to the world
      */
-    GameRuleMap gameRules();
+    GameRuleMap getGameRules();
 
     /*
      * Work(s) cited
