@@ -21,6 +21,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 
+/**
+ * A cache that expires stored instances after specified timeframe
+ *
+ * @param <T> The key type of the cache
+ * @param <M> The value type of the cache
+ */
 public class Cache<T, M> {
 
     private final Map<T, Tuple<M, Long>> cache = new ConcurrentHashMap<>();
@@ -37,16 +43,27 @@ public class Cache<T, M> {
     }
     
     public M get(T key, Callable<? extends M> loader){
-        boolean expired = cache.containsKey(key) && System.currentTimeMillis() - cache.get(key).getB() > timeout;
-        if(!cache.containsKey(key) || expired){
+        boolean contains = cache.containsKey(key);
+        boolean expired = contains && System.currentTimeMillis() - cache.get(key).getB() > timeout;
+        
+        if(!contains || expired){
             if(expired){
                 if(expire != null){
                     expire.accept(key, cache.get(key).getA());
+                    cache.remove(key);
                 }
             }
             
             try{
-                cache.put(key, new Tuple<>(loader.call(), System.currentTimeMillis()));
+                return cache.computeIfAbsent(key, t -> {
+                    try{
+                        return new Tuple<>(loader.call(), System.currentTimeMillis());
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    
+                    return null;
+                }).getA();
             }catch(Exception e){
                 throw new RuntimeException(e);
             }
@@ -56,20 +73,21 @@ public class Cache<T, M> {
     }
     
     public M getIfPresent(T key){
-        if(!cache.containsKey(key)){
+        Tuple<M, Long> instance = cache.get(key);
+        if(instance == null){
             return null;
         }
         
-        if(System.currentTimeMillis() - cache.get(key).getB() > timeout){
+        if(System.currentTimeMillis() - instance.getB() > timeout){
             if(expire != null){
-                expire.accept(key, cache.get(key).getA());
+                expire.accept(key, instance.getA());
             }
             
             cache.remove(key);
             return null;
         }
         
-        return cache.get(key).getA();
+        return instance.getA();
     }
     
     public void put(T key, M value){

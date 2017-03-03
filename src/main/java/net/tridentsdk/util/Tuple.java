@@ -16,10 +16,17 @@
  */
 package net.tridentsdk.util;
 
+/**
+ * A class containing two separate data values
+ * Usually used in return statements or as values in maps
+ *
+ * @param <T> The first (A) instance type
+ * @param <M> The second (B) instance type
+ */
 public class Tuple<T, M> {
     
-    private T a;
-    private M b;
+    private final T a;
+    private final M b;
     
     public Tuple(T a, M b){
         this.a = a;
@@ -30,16 +37,8 @@ public class Tuple<T, M> {
         return a;
     }
     
-    public void setA(T a){
-        this.a = a;
-    }
-    
     public M getB(){
         return b;
-    }
-    
-    public void setB(M b){
-        this.b = b;
     }
     
 }
