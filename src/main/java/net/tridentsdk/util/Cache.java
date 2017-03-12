@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,19 +43,19 @@ public class Cache<T, M> {
     }
     
     public M get(T key, Callable<? extends M> loader){
-        boolean contains = cache.containsKey(key);
-        boolean expired = contains && System.currentTimeMillis() - cache.get(key).getB() > timeout;
+        boolean contains = this.cache.containsKey(key);
+        boolean expired = contains && System.currentTimeMillis() - this.cache.get(key).getB() > this.timeout;
         
         if(!contains || expired){
             if(expired){
-                if(expire != null){
-                    expire.accept(key, cache.get(key).getA());
-                    cache.remove(key);
+                if(this.expire != null){
+                    this.expire.accept(key, this.cache.get(key).getA());
+                    this.cache.remove(key);
                 }
             }
             
             try{
-                return cache.computeIfAbsent(key, t -> {
+                return this.cache.computeIfAbsent(key, t -> {
                     try{
                         return new Tuple<>(loader.call(), System.currentTimeMillis());
                     }catch(Exception e){
@@ -69,21 +69,21 @@ public class Cache<T, M> {
             }
         }
         
-        return cache.get(key).getA();
+        return this.cache.get(key).getA();
     }
     
     public M getIfPresent(T key){
-        Tuple<M, Long> instance = cache.get(key);
+        Tuple<M, Long> instance = this.cache.get(key);
         if(instance == null){
             return null;
         }
         
-        if(System.currentTimeMillis() - instance.getB() > timeout){
-            if(expire != null){
-                expire.accept(key, instance.getA());
+        if(System.currentTimeMillis() - instance.getB() > this.timeout){
+            if(this.expire != null){
+                this.expire.accept(key, instance.getA());
             }
-            
-            cache.remove(key);
+
+            this.cache.remove(key);
             return null;
         }
         
@@ -91,7 +91,7 @@ public class Cache<T, M> {
     }
     
     public void put(T key, M value){
-        cache.put(key, new Tuple<>(value, System.currentTimeMillis()));
+        this.cache.put(key, new Tuple<>(value, System.currentTimeMillis()));
     }
 
 }

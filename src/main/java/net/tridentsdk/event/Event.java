@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,19 @@
  */
 package net.tridentsdk.event;
 
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * This class represents the superinterface of all classes
  * that are events that may be dispatched by the
  * {@link EventController}.
  *
+ * <p>Events need not be thread safe.</p>
+ *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@ThreadSafe
+@Supertype
+@NotThreadSafe
 public interface Event {
 }
