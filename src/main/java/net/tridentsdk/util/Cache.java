@@ -17,9 +17,9 @@
 package net.tridentsdk.util;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 /**
  * A cache that expires stored instances after specified timeframe
@@ -28,61 +28,34 @@ import java.util.function.BiConsumer;
  * @param <M> The value type of the cache
  */
 public class Cache<T, M> {
-
+    private static final BiConsumer<?, ?> NOP = (t, m) -> {};
     private final Map<T, Tuple<M, Long>> cache = new ConcurrentHashMap<>();
     private final long timeout;
     private final BiConsumer<T, M> expire;
     
     public Cache(long timeout){
-        this(timeout, null);
+        this(timeout, (BiConsumer<T, M>) NOP);
     }
     
     public Cache(long timeout, BiConsumer<T, M> expire){
         this.timeout = timeout;
         this.expire = expire;
     }
-    
-    public M get(T key, Callable<? extends M> loader){
-        boolean contains = this.cache.containsKey(key);
-        boolean expired = contains && System.currentTimeMillis() - this.cache.get(key).getB() > this.timeout;
-        
-        if(!contains || expired){
-            if(expired){
-                if(this.expire != null){
-                    this.expire.accept(key, this.cache.get(key).getA());
-                    this.cache.remove(key);
-                }
-            }
-            
-            try{
-                return this.cache.computeIfAbsent(key, t -> {
-                    try{
-                        return new Tuple<>(loader.call(), System.currentTimeMillis());
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                    
-                    return null;
-                }).getA();
-            }catch(Exception e){
-                throw new RuntimeException(e);
-            }
-        }
-        
-        return this.cache.get(key).getA();
+
+    public M get(T key, Supplier<M> loader){
+        // TODO
+        return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
     }
     
-    public M getIfPresent(T key){
+    public M get(T key){
         Tuple<M, Long> instance = this.cache.get(key);
         if(instance == null){
             return null;
         }
         
         if(System.currentTimeMillis() - instance.getB() > this.timeout){
-            if(this.expire != null){
-                this.expire.accept(key, instance.getA());
-            }
-
+            // TODO
+            this.expire.accept(key, instance.getA());
             this.cache.remove(key);
             return null;
         }
@@ -93,5 +66,4 @@ public class Cache<T, M> {
     public void put(T key, M value){
         this.cache.put(key, new Tuple<>(value, System.currentTimeMillis()));
     }
-
 }

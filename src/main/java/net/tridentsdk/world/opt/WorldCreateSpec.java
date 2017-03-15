@@ -31,7 +31,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  * @author TridentSDK
  * @since 0.4-alpha
  */
-@NotThreadSafe // TODO help
+@NotThreadSafe
 // TODO implement, this should be a builder
 public class WorldCreateSpec {
     /**
