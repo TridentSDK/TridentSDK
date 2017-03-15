@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package net.tridentsdk.plugin;
 import java.lang.annotation.*;
 
 /**
- * This annotation should be added to handler methods that
+ * This annotation should be added to handler classes that
  * should be skipped by the automatic registrar during
  * plugin load.
  *
@@ -27,7 +27,7 @@ import java.lang.annotation.*;
  * @since 0.3-alpha-DP
  */
 @Documented
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SelfRegistered {
 }

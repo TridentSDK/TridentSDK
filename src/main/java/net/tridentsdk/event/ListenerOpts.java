@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,32 +16,26 @@
  */
 package net.tridentsdk.event;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.lang.annotation.*;
 
 /**
- * This annotation may be added to an event listener method
- * to indicate that it is able to handle async calls.
- *
- * <p>When in doubt, <strong>DO NOT</strong> use this
- * annotation!</p>
- *
- * <p>Multithreaded servers may wish to call valid event
- * listeners that are registered as async from the target
- * thread without needing to pass to the plugin thread. If
- * your code is self-contained and thread-safe, then using
- * this annotation <em>may</em> allow the server to run
- * more efficiently.</p>
- *
- * <p>This annotation has no effect on members that are not
- * registered listeners.</p>
+ * This annotation should be marked on methods that should
+ * be modified in some way such as by changing the order in
+ * which an event handler or a listener method should handle
+ * dispatched events.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@Documented
 @Target(ElementType.METHOD)
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
-@ThreadSafe
-public @interface Async {
+public @interface ListenerOpts {
+    /**
+     * The position of the listener in the dispatch sequence
+     * once the event has been fired.
+     *
+     * @return the event's {@link DispatchOrder}
+     */
+    DispatchOrder order() default DispatchOrder.MIDDLE;
 }

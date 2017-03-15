@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,15 +42,32 @@ public interface EventController {
      *
      * @param listener the listener to remove
      */
-    void unregister(Object listener);
+    void unregister(Class<?> listener);
 
     /**
      * Dispatches the event to the event listener/handlers
      * that are registered under the event controller.
      *
+     * <p>This method passes events to their respective
+     * listeners without responding to them.</p>
+     *
+     * @param event the event to dispatch
+     * @param <T> the event type
+     */
+    <T extends Event> void dispatch(T event);
+
+    /**
+     * Dispatches the event to the event listener/handlers
+     * that are registered under the event controller.
+     *
+     * <p>This method dispatches events to their listeners
+     * and processes the event when done in the plugin
+     * thread.</p>
+     *
      * @param event the event to dispatch
      * @param callback the callback to execute when the
      * controller finishes processing all listeners
+     * @param <T> the event type
      */
     <T extends Event> void dispatch(T event, Consumer<T> callback);
 }

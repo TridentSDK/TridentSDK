@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ public class Tuple<T, M> {
     }
     
     public T getA(){
-        return a;
+        return this.a;
     }
     
     public M getB(){
-        return b;
+        return this.b;
     }
     
 }

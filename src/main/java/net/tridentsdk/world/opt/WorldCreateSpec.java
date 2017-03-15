@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  * @author TridentSDK
  * @since 0.4-alpha
  */
-@NotThreadSafe // TODO help
+@NotThreadSafe
 // TODO implement, this should be a builder
 public class WorldCreateSpec {
     /**

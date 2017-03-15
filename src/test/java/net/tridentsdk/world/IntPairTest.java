@@ -1,6 +1,6 @@
 /*
  * Trident - A Multithreaded Server Alternative
- * Copyright 2016 The TridentSDK Team
+ * Copyright 2017 The TridentSDK Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ public class IntPairTest {
     @Test
     public void equalsHashString() {
         IntPair dup = IntPair.make(100, 200);
-        assertEquals(dup.hashCode(), pair.hashCode());
-        assertEquals(dup, pair);
-        assertEquals(dup.toString(), pair.toString());
+        assertEquals(dup.hashCode(), this.pair.hashCode());
+        assertEquals(dup, this.pair);
+        assertEquals(dup.toString(), this.pair.toString());
     }
 }
