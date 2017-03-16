@@ -16,54 +16,179 @@
  */
 package net.tridentsdk.util;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
- * A cache that expires stored instances after specified timeframe
+ * A cache that expires stored instances after specified
+ * timeout.
  *
  * @param <T> The key type of the cache
  * @param <M> The value type of the cache
  */
 public class Cache<T, M> {
-    private static final BiConsumer<?, ?> NOP = (t, m) -> {};
+    /**
+     * Limiting value used to prevent eviction from taking
+     * FOREVER.
+     */
+    private static final int MAX_EVICTION_ITERATIONS = 100;
+    /**
+     * A no-op removal listener used for evictions that
+     * require no further action
+     */
+    private static final BiConsumer NOP = (a, b) -> {};
+
+    /**
+     * The internal mapping of the cache entries
+     */
     private final Map<T, Tuple<M, Long>> cache = new ConcurrentHashMap<>();
+    /**
+     * The amount of time, in millis, in which a cache entry
+     * will timeout
+     */
     private final long timeout;
+    /**
+     * The the expiry listener, which is notified whenever
+     * an entry is evicted do to a timeout
+     */
     private final BiConsumer<T, M> expire;
-    
-    public Cache(long timeout){
-        this(timeout, (BiConsumer<T, M>) NOP);
+
+    /**
+     * Builds a cache with the given number of milliseconds
+     * before its entries timeout, performing no further
+     * action upon entry eviction.
+     *
+     * @param timeout the amount of time in which cache
+     * entries will timeout
+     */
+    public Cache(long timeout) {
+        this(timeout, NOP);
     }
-    
-    public Cache(long timeout, BiConsumer<T, M> expire){
+
+    /**
+     * Constructs a cache in which entries expire within the
+     * given timeout and perform the action given by the
+     * expiry listener when evicted.
+     *
+     * @param timeout the amount of time in which the cache
+     * entries will timeout
+     * @param expire the expiry listener
+     */
+    public Cache(long timeout, BiConsumer<T, M> expire) {
         this.timeout = timeout;
         this.expire = expire;
     }
 
-    public M get(T key, Supplier<M> loader){
-        // TODO
-        return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
-    }
-    
-    public M get(T key){
+    /**
+     * Obtains the value associated with the entry that has
+     * the given key, or else inserts a new cache entry
+     * with the given key and the value supplied by the
+     * loader.
+     *
+     * @param key the key with which to find the cache entry
+     * @param loader the computation which is run in order
+     * to find the value if the entry does not exist
+     * @return the cached or computed value
+     */
+    @Nonnull
+    public M get(T key, Supplier<M> loader) {
+        this.scan();
         Tuple<M, Long> instance = this.cache.get(key);
-        if(instance == null){
+
+        // If the given value does not exist,
+        // Perform computation (do not use raw insert
+        // because computeIfAbsent will recover from races)
+        // If the given value DOES exist,
+        // If timed out, notify the listener and compute
+        // (again using compute to recover from races)
+        // Otherwise, value exists and is valid, return it
+
+        if (instance == null) {
+            return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
+        } else {
+            if (System.currentTimeMillis() - instance.getB() > this.timeout) {
+                this.expire.accept(key, instance.getA()); // TODO nullcheck
+                return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
+            }
+
+            return instance.getA();
+        }
+    }
+
+    /**
+     * Obtains the value of the cache entry with the given
+     * key, or {@code null} if it does not exist, or if the
+     * cache entry has already expired.
+     *
+     * @param key the key with which to find the value
+     * @return the value associated with the given key, or
+     * {@code null} if not present or expired
+     */
+    @Nullable
+    public M get(T key) {
+        this.scan();
+        Tuple<M, Long> instance = this.cache.get(key);
+
+        // If null, no entry contained. Return null.
+        // Otherwise, check if expired
+        // Notify listener, and use remove(key, value) to
+        // recover from races (relies on all Tuples being
+        // unique)
+        // Then return null to indicate no non-expired value
+        // If valid and non-expired, all return the value
+
+        if (instance == null) {
             return null;
         }
-        
-        if(System.currentTimeMillis() - instance.getB() > this.timeout){
-            // TODO
+
+        if (System.currentTimeMillis() - instance.getB() > this.timeout) {
             this.expire.accept(key, instance.getA());
-            this.cache.remove(key);
+            this.cache.remove(key, instance);
             return null;
         }
-        
+
         return instance.getA();
     }
-    
-    public void put(T key, M value){
+
+    /**
+     * Inserts the given key and value pair into a cache
+     * entry, regardless of whether the entry already
+     * exists.
+     *
+     * @param key the key which to associate with the value
+     * @param value the value which to associate with the
+     * key
+     */
+    public void put(T key, M value) {
+        this.scan();
         this.cache.put(key, new Tuple<>(value, System.currentTimeMillis()));
+    }
+
+    /**
+     * Attempt to scan and remove cache entries that have
+     * already expired.
+     */
+    private void scan() {
+        long time = System.currentTimeMillis();
+
+        int rounds = 0;
+        for (Iterator<Map.Entry<T, Tuple<M, Long>>> it =
+             this.cache.entrySet().
+                stream().
+                sorted(Comparator.comparingLong(o -> o.getValue().getB())).
+                filter(e -> e.getValue().getB() - time > this.timeout).
+                iterator();
+             it.hasNext() && rounds < MAX_EVICTION_ITERATIONS;
+             rounds++) {
+            Map.Entry<T, Tuple<M, Long>> e = it.next();
+            this.expire.accept(e.getKey(), e.getValue().getA());
+            this.cache.remove(e.getKey(), e.getValue());
+        }
     }
 }
