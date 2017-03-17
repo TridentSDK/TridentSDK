@@ -14,21 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.meta;
-
-import net.tridentsdk.meta.nbt.TagCompound;
+package net.tridentsdk.meta.nbt;
 
 /**
- * A class representing an item's extra metadata such as
- * enchantments, attributes, item-specific data such as
- * potion and skull metas, etc...
+ * A wrapper class used to access netty's ByteBuf in order
+ * for the NBT stream to write bytes to the buffer.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-// TODO
-public class ItemMeta {
-    public TagCompound toNbt() {
-        return null;
-    }
+public interface ByteOutput {
 }

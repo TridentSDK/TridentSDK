@@ -25,7 +25,55 @@ import javax.annotation.concurrent.Immutable;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@Immutable // TODO
+@Immutable
 public enum InventoryType {
-    PLAYER, CHEST
+    /**
+     * Misc types, also used for ender chests.
+     */
+    CONTAINER,
+    CHEST,
+    CRAFTING_TABLE,
+    FURNACE,
+    DISPENSER,
+    ENCHANTING_TABLE,
+    BREWING_STAND,
+    VILLAGER,
+    BEACON,
+    ANVIL,
+    HOPPER,
+    DROPPER,
+    SHULKER_BOX,
+    ENTITY_HORSE("EntityHorse"),
+    /**
+     * Player inventory, not instantiable
+     */
+    PLAYER("player");
+
+    /**
+     * The raw name of the inventory as represented by the
+     * protocol.
+     */
+    private final String raw;
+
+    /**
+     * Creates a new inventory type based on the enum name.
+     */
+    InventoryType() {
+        this.raw = "minecraft:" + this.name().toLowerCase();
+    }
+
+    /**
+     * Creates a new inventory type based on the given raw
+     * inventory name.
+     *
+     * @param raw the raw inventory name
+     */
+    InventoryType(String raw) {
+        this.raw = raw;
+    }
+
+    @Override
+    public String toString() {
+        return this.raw;
+    }
 }

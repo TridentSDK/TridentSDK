@@ -14,21 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.meta;
-
-import net.tridentsdk.meta.nbt.TagCompound;
+package net.tridentsdk.meta.nbt;
 
 /**
- * A class representing an item's extra metadata such as
- * enchantments, attributes, item-specific data such as
- * potion and skull metas, etc...
+ * A tag compound that contains lower children nodes of NBT
+ * tags.
  *
  * @author TridentSDK
- * @since 0.5-alpha
+ * @since 0.3-alpha
  */
 // TODO
-public class ItemMeta {
-    public TagCompound toNbt() {
-        return null;
+public class TagCompound {
+    public void write(ByteOutput output) {
     }
 }
