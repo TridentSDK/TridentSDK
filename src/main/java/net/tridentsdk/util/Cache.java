@@ -18,6 +18,7 @@ package net.tridentsdk.util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,6 +33,7 @@ import java.util.function.Supplier;
  * @param <T> The key type of the cache
  * @param <M> The value type of the cache
  */
+@ThreadSafe
 public class Cache<T, M> {
     /**
      * Limiting value used to prevent eviction from taking
@@ -105,7 +107,9 @@ public class Cache<T, M> {
         // Perform computation (do not use raw insert
         // because computeIfAbsent will recover from races)
         // If the given value DOES exist,
-        // If timed out, notify the listener and compute
+        // If timed out, notify the listener (ensuring that
+        // a remove works in order to prevent prescan races)
+        // and compute
         // (again using compute to recover from races)
         // Otherwise, value exists and is valid, return it
 
@@ -113,7 +117,9 @@ public class Cache<T, M> {
             return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
         } else {
             if (System.currentTimeMillis() - instance.getB() > this.timeout) {
-                this.expire.accept(key, instance.getA()); // TODO nullcheck
+                if (this.cache.remove(key, instance)) {
+                    this.expire.accept(key, instance.getA());
+                }
                 return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
             }
 
@@ -139,7 +145,8 @@ public class Cache<T, M> {
         // Otherwise, check if expired
         // Notify listener, and use remove(key, value) to
         // recover from races (relies on all Tuples being
-        // unique)
+        // unique), ensure removal works before notifying
+        // in case other threads prescan
         // Then return null to indicate no non-expired value
         // If valid and non-expired, all return the value
 
@@ -148,8 +155,9 @@ public class Cache<T, M> {
         }
 
         if (System.currentTimeMillis() - instance.getB() > this.timeout) {
-            this.expire.accept(key, instance.getA());
-            this.cache.remove(key, instance);
+            if (this.cache.remove(key, instance)) {
+                this.expire.accept(key, instance.getA());
+            }
             return null;
         }
 
@@ -182,13 +190,15 @@ public class Cache<T, M> {
              this.cache.entrySet().
                 stream().
                 sorted(Comparator.comparingLong(o -> o.getValue().getB())).
-                filter(e -> e.getValue().getB() - time > this.timeout).
+                filter(e -> time - e.getValue().getB() > this.timeout).
                 iterator();
              it.hasNext() && rounds < MAX_EVICTION_ITERATIONS;
              rounds++) {
             Map.Entry<T, Tuple<M, Long>> e = it.next();
-            this.expire.accept(e.getKey(), e.getValue().getA());
-            this.cache.remove(e.getKey(), e.getValue());
+
+            if (this.cache.remove(e.getKey(), e.getValue())) {
+                this.expire.accept(e.getKey(), e.getValue().getA());
+            }
         }
     }
 }
