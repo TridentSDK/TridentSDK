@@ -18,6 +18,7 @@ package net.tridentsdk.inventory;
 
 import net.tridentsdk.Impl;
 import net.tridentsdk.base.Substance;
+import net.tridentsdk.meta.ItemMeta;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -47,6 +48,6 @@ public class ItemTest {
 
     @Test
     public void newItem3() throws Exception {
-        assertNotNull(Item.newItem(Substance.AIR, 1, (byte) 0, null));
+        assertNotNull(Item.newItem(Substance.AIR, 1, (byte) 0, new ItemMeta()));
     }
 }

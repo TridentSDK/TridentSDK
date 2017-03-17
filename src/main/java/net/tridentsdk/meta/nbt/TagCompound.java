@@ -14,41 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.meta;
+package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.meta.nbt.TagCompound;
+import io.netty.buffer.ByteBuf;
 
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * A class representing an item's extra metadata such as
- * enchantments, attributes, item-specific data such as
- * potion and skull metas, etc...
+ * Represents a {@code TAG_Compound} in the NBT format.
  *
  * @author TridentSDK
- * @since 0.5-alpha
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public class ItemMeta {
+public class TagCompound {
     /**
-     * The NBT data which contains modifications made to
-     * this item.
+     * The list of tags contaed by this compound
      */
-    private final TagCompound nbt = new TagCompound();
+    private final Queue<NbtTag> tags = new ConcurrentLinkedQueue<>();
 
     /**
-     * Obtains the NBT data of this particular item.
+     * Checks to see whether the given compound contains
+     * any elements.
      *
-     * @return the NBT data, or {@code null} if the item was
-     * not modified
+     * @return {@code true} if there are no child tags
      */
-    @Nullable
-    public TagCompound toNbt() {
-        if (this.nbt.isEmpty()) {
-            return null;
-        }
+    public boolean isEmpty() {
+        return this.tags.isEmpty();
+    }
 
-        return this.nbt;
+    /**
+     * Writes the data from this tag compound to the given
+     * network byte buffer.
+     *
+     * @param buf the buffer which to write
+     */
+    public void write(ByteBuf buf) {
+        // TODO
     }
 }
