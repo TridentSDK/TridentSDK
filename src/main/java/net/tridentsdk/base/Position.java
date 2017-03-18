@@ -306,9 +306,11 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
         if (obj instanceof Position) {
             Position v = (Position) obj;
             synchronized (this.lock) {
-                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
-                        this.world.equals(v.world) &&
-                        eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+                synchronized (v.lock) {
+                    return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
+                            this.world.equals(v.world) &&
+                            eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+                }
             }
         }
 
