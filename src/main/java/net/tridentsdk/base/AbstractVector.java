@@ -99,6 +99,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * @param vector the vector to which this vector will
      *               write its fields
      */
+    @GuardedBy("lock")
     protected void writeFields(T vector) {
     }
 
