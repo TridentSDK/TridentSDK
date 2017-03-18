@@ -27,7 +27,10 @@ import static org.junit.Assert.assertNotNull;
 public class ItemTest {
     static {
         Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
-        Mockito.when(Impl.get().newItem(Substance.AIR, 1, (byte) 0, null)).
+        Mockito.when(Impl.get().newItem(Mockito.eq(Substance.AIR),
+                Mockito.eq(1),
+                Mockito.eq((byte) 0),
+                Mockito.any(ItemMeta.class))).
                 thenReturn(Mockito.mock(Item.class));
     }
 
