@@ -28,8 +28,11 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public enum InventoryType {
     /**
-     * Misc types, also used for ender chests.
+     * Represents a player inventory. This exists in code
+     * only, no explicit type for an inventory of this type
+     * may be created sent by the server.
      */
+    PLAYER("Player"),
     CONTAINER,
     CHEST,
     CRAFTING_TABLE,
@@ -43,37 +46,34 @@ public enum InventoryType {
     HOPPER,
     DROPPER,
     SHULKER_BOX,
-    ENTITY_HORSE("EntityHorse"),
-    /**
-     * Player inventory, not instantiable
-     */
-    PLAYER("player");
+    HORSE("EntityHorse");
 
     /**
-     * The raw name of the inventory as represented by the
-     * protocol.
+     * The raw string form of the inventory type
      */
-    private final String raw;
+    private final String name;
 
     /**
-     * Creates a new inventory type based on the enum name.
+     * Creates an inventory type that is the default
+     * prefixed by {@code minecraft:} and the enum name in
+     * lowercase.
      */
     InventoryType() {
-        this.raw = "minecraft:" + this.name().toLowerCase();
+        this.name = "minecraft:" + this.name().toLowerCase();
     }
 
     /**
-     * Creates a new inventory type based on the given raw
-     * inventory name.
+     * Creates a new inventory with the given custom name
+     * as an irregularity.
      *
-     * @param raw the raw inventory name
+     * @param name the name of the inventory
      */
-    InventoryType(String raw) {
-        this.raw = raw;
+    InventoryType(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return this.raw;
+        return this.name;
     }
 }

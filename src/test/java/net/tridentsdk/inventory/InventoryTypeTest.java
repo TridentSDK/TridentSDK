@@ -23,7 +23,8 @@ import static org.junit.Assert.assertEquals;
 public class InventoryTypeTest {
     @Test
     public void testTypes() {
-        String types = "minecraft:container\n" +
+        String types = "Player\n" +
+                "minecraft:container\n" +
                 "minecraft:chest\n" +
                 "minecraft:crafting_table\n" +
                 "minecraft:furnace\n" +
@@ -36,12 +37,9 @@ public class InventoryTypeTest {
                 "minecraft:hopper\n" +
                 "minecraft:dropper\n" +
                 "minecraft:shulker_box\n" +
-                "EntityHorse\n" +
-                "player";
-
+                "EntityHorse";
         for (InventoryType type : InventoryType.values()) {
-            assertEquals(types.split("\n")[type.ordinal()],
-                    type.toString());
+            assertEquals(types.split("\n")[type.ordinal()], type.toString());
         }
     }
 }

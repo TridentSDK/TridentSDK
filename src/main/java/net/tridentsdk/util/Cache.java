@@ -30,6 +30,8 @@ import java.util.function.Supplier;
  * A cache that expires stored instances after specified
  * timeout.
  *
+ * @author TridentSDK
+ * @since 0.5-alpha
  * @param <T> The key type of the cache
  * @param <M> The value type of the cache
  */

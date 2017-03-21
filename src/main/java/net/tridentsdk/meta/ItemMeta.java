@@ -18,6 +18,9 @@ package net.tridentsdk.meta;
 
 import net.tridentsdk.meta.nbt.TagCompound;
 
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * A class representing an item's extra metadata such as
  * enchantments, attributes, item-specific data such as
@@ -26,9 +29,26 @@ import net.tridentsdk.meta.nbt.TagCompound;
  * @author TridentSDK
  * @since 0.5-alpha
  */
-// TODO
+@ThreadSafe
 public class ItemMeta {
+    /**
+     * The NBT data which contains modifications made to
+     * this item.
+     */
+    private final TagCompound nbt = new TagCompound();
+
+    /**
+     * Obtains the NBT data of this particular item.
+     *
+     * @return the NBT data, or {@code null} if the item was
+     * not modified
+     */
+    @Nullable
     public TagCompound toNbt() {
-        return null;
+        if (this.nbt.isEmpty()) {
+            return null;
+        }
+
+        return this.nbt;
     }
 }

@@ -17,7 +17,6 @@
 package net.tridentsdk.base;
 
 import net.tridentsdk.doc.Internal;
-import net.tridentsdk.doc.Policy;
 import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.GuardedBy;
@@ -99,6 +98,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * @param vector the vector to which this vector will
      *               write its fields
      */
+    @GuardedBy("lock")
     protected void writeFields(T vector) {
     }
 
@@ -382,7 +382,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     // MaxInlineSize is 35 bytes, therefore this method fits
     // it quite well, actually.
     @Internal
-    @Policy("GuardedBy this.lock")
+    @GuardedBy("lock")
     private void addImpl(double x, double y, double z) {
         this.x += x;
         this.y += y;
@@ -452,7 +452,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     @Internal
-    @Policy("GuardedBy this.lock")
+    @GuardedBy("lock")
     private void subImpl(double x, double y, double z) {
         this.x -= x;
         this.y -= y;
@@ -522,7 +522,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     @Internal
-    @Policy("GuardedBy this.lock")
+    @GuardedBy("lock")
     private void mulImpl(double x, double y, double z) {
         this.x *= x;
         this.y *= y;
@@ -592,7 +592,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     @Internal
-    @Policy("GuardedBy this.lock")
+    @GuardedBy("lock")
     private void divImpl(double x, double y, double z) {
         this.x /= x;
         this.y /= y;
@@ -607,9 +607,11 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public void vecWrite(AbstractVector<?> vector) {
         synchronized (this.lock) {
-            vector.x = this.x;
-            vector.y = this.y;
-            vector.z = this.z;
+            synchronized (vector.lock) {
+                vector.x = this.x;
+                vector.y = this.y;
+                vector.z = this.z;
+            }
         }
     }
 
@@ -636,11 +638,13 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      */
     public void write(T vector) {
         synchronized (this.lock) {
-            vector.x = this.x;
-            vector.y = this.y;
-            vector.z = this.z;
+            synchronized (vector.lock) {
+                vector.x = this.x;
+                vector.y = this.y;
+                vector.z = this.z;
 
-            this.writeFields(vector);
+                this.writeFields(vector);
+            }
         }
     }
 
@@ -649,7 +653,9 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
         if (obj instanceof AbstractVector) {
             AbstractVector v = (AbstractVector) obj;
             synchronized (this.lock) {
-                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
+                synchronized (v.lock) {
+                    return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
+                }
             }
         }
 

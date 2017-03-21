@@ -16,42 +16,15 @@
  */
 package net.tridentsdk.meta.nbt;
 
-import io.netty.buffer.ByteBuf;
-
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Represents a {@code TAG_Compound} in the NBT format.
+ * The superclass of NBT tags which are contained by or are
+ * tag compounds.
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public class TagCompound {
-    /**
-     * The list of tags contaed by this compound
-     */
-    private final Queue<NbtTag> tags = new ConcurrentLinkedQueue<>();
-
-    /**
-     * Checks to see whether the given compound contains
-     * any elements.
-     *
-     * @return {@code true} if there are no child tags
-     */
-    public boolean isEmpty() {
-        return this.tags.isEmpty();
-    }
-
-    /**
-     * Writes the data from this tag compound to the given
-     * network byte buffer.
-     *
-     * @param buf the buffer which to write
-     */
-    public void write(ByteBuf buf) {
-        // TODO
-    }
+public class NbtTag {
 }

@@ -61,7 +61,7 @@ public interface Item {
      * @return the new item
      */
     static Item newItem(Substance substance, int count, byte dmg) {
-        return newItem(substance, count, dmg, null);
+        return newItem(substance, count, dmg, new ItemMeta());
     }
 
     /**

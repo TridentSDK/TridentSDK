@@ -18,40 +18,23 @@ package net.tridentsdk.meta.nbt;
 
 import io.netty.buffer.ByteBuf;
 
-import javax.annotation.concurrent.ThreadSafe;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents a {@code TAG_Compound} in the NBT format.
+ * An NBT decoder receives raw bytes from a stream or file
+ * and decodes it into an object wrapper that represents
+ * the tag compound containing that NBT data.
  *
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@ThreadSafe
-public class TagCompound {
-    /**
-     * The list of tags contaed by this compound
-     */
-    private final Queue<NbtTag> tags = new ConcurrentLinkedQueue<>();
-
-    /**
-     * Checks to see whether the given compound contains
-     * any elements.
-     *
-     * @return {@code true} if there are no child tags
-     */
-    public boolean isEmpty() {
-        return this.tags.isEmpty();
+@Immutable
+public final class NbtDecoder {
+    // Prevent instantiation
+    private NbtDecoder() {
     }
 
-    /**
-     * Writes the data from this tag compound to the given
-     * network byte buffer.
-     *
-     * @param buf the buffer which to write
-     */
-    public void write(ByteBuf buf) {
-        // TODO
+    public static TagCompound decode(ByteBuf source) {
+        return new TagCompound(); // TODO
     }
 }

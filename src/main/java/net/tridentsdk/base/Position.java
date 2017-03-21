@@ -19,6 +19,7 @@ package net.tridentsdk.base;
 import net.tridentsdk.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
@@ -40,10 +41,14 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
      * position
      */
     private final World world;
+
+    @GuardedBy("lock")
     private float yaw;
+    @GuardedBy("lock")
     private float pitch;
 
     @Override
+    @GuardedBy("lock")
     protected void writeFields(Position vector) {
         this.pitch = vector.pitch;
         this.yaw = vector.yaw;
@@ -301,9 +306,11 @@ public final class Position extends AbstractVector<Position> implements Cloneabl
         if (obj instanceof Position) {
             Position v = (Position) obj;
             synchronized (this.lock) {
-                return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
-                        this.world.equals(v.world) &&
-                        eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+                synchronized (v.lock) {
+                    return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z) &&
+                            this.world.equals(v.world) &&
+                            eq(this.pitch, v.pitch) && eq(this.yaw, v.yaw);
+                }
             }
         }
 
