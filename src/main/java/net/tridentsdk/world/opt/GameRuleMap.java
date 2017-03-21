@@ -66,7 +66,7 @@ public final class GameRuleMap {
      * @param value the value to set
      * @param <T> the type of value
      */
-    public <T> void set(GameRule<T> key, T value) {
+    public <T> void set(@Nonnull GameRule<T> key, T value) {
         if (!key.getDefault().equals(value)) {
             this.changes.put(key, value);
         }
