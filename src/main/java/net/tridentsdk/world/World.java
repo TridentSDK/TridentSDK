@@ -94,8 +94,8 @@ public interface World {
      * Obtains the chunk that is located at the given X/Z
      * horizontal plane coordinates.
      *
-     * @param x the x coordinate which to find the chunk
-     * @param z the z coordinate which to find the chunk
+     * @param x the chunk X coordinate (not block XYZ!)
+     * @param z the chunk Z coordinate (not block XYZ!)
      * @return the chunk at the given coordinates
      */
     @Nonnull
@@ -122,6 +122,14 @@ public interface World {
      * @return the collection of loaded chunks
      */
     Collection<? extends Chunk> getLoadedChunks();
+
+    /**
+     * Obtains the highest non-air block at the given two
+     * coordinates.
+     *
+     * @return the highest Y
+     */
+    int getHighestY(int x, int z);
 
     /**
      * Obtains the block that is located at the given XYZ

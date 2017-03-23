@@ -109,7 +109,7 @@ public final class GameRuleMap {
      *
      * @param map the map to copy
      */
-    public void copy(GameRuleMap map) {
-        this.changes.putAll(map.changes);
+    public void copyTo(GameRuleMap map) {
+        map.changes.putAll(this.changes);
     }
 }

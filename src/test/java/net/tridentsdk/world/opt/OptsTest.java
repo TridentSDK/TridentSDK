@@ -100,8 +100,8 @@ public class OptsTest {
         GameRuleMap map2 = new GameRuleMap();
         map2.set(DAYLIGHT_CYCLE, false);
         map2.set(SEND_CMD_FEEDBACK, false);
-        map.copy(map2);
-        assertFalse(map.get(DAYLIGHT_CYCLE));
-        assertFalse(map.get(SEND_CMD_FEEDBACK));
+        map.copyTo(map2);
+        assertFalse(map2.get(DAYLIGHT_CYCLE));
+        assertFalse(map2.get(SEND_CMD_FEEDBACK));
     }
 }
