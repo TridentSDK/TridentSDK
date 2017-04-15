@@ -21,6 +21,7 @@ import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
+import net.tridentsdk.ui.title.Title;
 import net.tridentsdk.world.opt.GameMode;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -179,6 +180,24 @@ public interface Player extends Entity {
      * Updates this player's boss bars, sending any required packets.
      */
     void updateBossBars();
+
+    /**
+     * Sends a title to this player, sending any required packets.
+     */
+    void sendTitle(Title title);
+
+    /**
+     * Resets this player's title.
+     */
+    void resetTitle();
+
+    /**
+     * Hides all titles from the player. Must be reset in order
+     * for players to receive titles in the future.
+     *
+     * @see #resetTitle()
+     */
+    void hideTitle();
 
     /**
      * Gets whether or not this player is in god mode.
