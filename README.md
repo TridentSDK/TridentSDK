@@ -3,7 +3,7 @@ TridentSDK [![Build Status](https://travis-ci.org/TridentSDK/TridentSDK.svg?bran
 
 The TridentSDK project. The API for the new generation of multithreaded, high-performance, cleanroom Minecraft servers.
 
-* [Website](https://tridentsdk.net)
+* [Website](https://tsdk.xyz)
 * [Chat](https://www.hipchat.com/g20bt22H2?v=2)
 * [Issues](https://tridentsdk.atlassian.net/projects/SDK/issues)
 * [Wiki](https://tridentsdkwiki.atlassian.net/wiki/dashboard.action)
@@ -60,7 +60,7 @@ For a precompiled solution, one which has passed the tests we have wrote, as wel
 
 ### Method three: Get one from us ###
 
-If we've released a JAR for you to use, it usually comes with a nice read. So if you like nice reads or the look of our [official website](https://tridentsdk.net), you can go rummage around the releases forum and look for a download link.
+If we've released a JAR for you to use, it usually comes with a nice read. So if you like nice reads or the look of our [official website](https://tsdk.xyz), you can go rummage around the releases forum and look for a download link.
 
 #### Prerequisites ####
 
