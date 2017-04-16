@@ -28,6 +28,7 @@ import net.tridentsdk.inventory.Item;
 import net.tridentsdk.meta.ItemMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
+import net.tridentsdk.ui.title.Title;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
@@ -140,6 +141,7 @@ public final class Impl {
 
         TabList newTabList();
         BossBar newBossBar();
+        Title newTitle();
 
         // Inventory
         Inventory newInventory(InventoryType type, int slots);

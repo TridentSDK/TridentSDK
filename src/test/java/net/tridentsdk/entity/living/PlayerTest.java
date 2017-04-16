@@ -24,6 +24,7 @@ import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.entity.meta.living.PlayerMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
+import net.tridentsdk.ui.title.Title;
 import net.tridentsdk.world.World;
 import net.tridentsdk.world.opt.GameMode;
 import org.junit.Test;
@@ -175,6 +176,21 @@ public class PlayerTest {
 
         @Override
         public void updateBossBars() {
+
+        }
+
+        @Override
+        public void sendTitle(Title title) {
+
+        }
+
+        @Override
+        public void resetTitle() {
+
+        }
+
+        @Override
+        public void hideTitle() {
 
         }
 
