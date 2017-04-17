@@ -27,5 +27,6 @@ cache:
 after_success:
 #   - mvn cobertura:cobertura coveralls:report
   - "git clone -b travis `git config --get remote.origin.url` travis"
-  - mvn clean install test deploy jacoco:report coveralls:report --settings ./travis/settings.xml
+  - mvn clean install test deploy jacoco:report coveralls:report cobertura:cobertura --settings ./travis/settings.xml
   - ls -lah target/
+  - bash <(curl -s https://codecov.io/bash)
