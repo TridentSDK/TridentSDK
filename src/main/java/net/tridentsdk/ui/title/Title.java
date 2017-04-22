@@ -19,16 +19,45 @@ package net.tridentsdk.ui.title;
 import net.tridentsdk.Impl;
 import net.tridentsdk.chat.ChatComponent;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * Represents a Title which is displayed in the
  * center of the client's screen. A title consists
  * of a main title and a subtitle, both of which are
  * optional.
  *
- * @author mattrick
+ * <p>Titles are independent of the player they are sent to.
+ * This means that updates made to a title must use
+ * {@link net.tridentsdk.entity.living.Player#sendTitle(Title)}
+ * for every change after it is already sent in order for
+ * the new changes to be effected.</p>
+ *
+ * <p>Unlike most classes in the TridentSDK API, this class
+ * is <strong>not thread-safe</strong>.<p>
+ *
+ * @author TridentSDK
  * @since 0.5-alpha
  */
+@NotThreadSafe
 public interface Title {
+    /**
+     * The default number of ticks that it takes the title
+     * to become the full opaqueness
+     */
+    int DEFAULT_FADE_IN = 10;
+    /**
+     * The default number of ticks that the title will stay
+     * on the client's screen
+     */
+    int DEFAULT_STAY = 70;
+    /**
+     * The default number of ticks that it takes for the
+     * title to become fully transparent and disappear from
+     * the player's screen
+     */
+    int DEFAULT_FADE_OUT = 20;
+
     /**
      * Creates a new title.
      *
@@ -43,7 +72,7 @@ public interface Title {
      *
      * @return The main title.
      */
-    ChatComponent getTitle();
+    ChatComponent getHeader();
 
     /**
      * Sets the main title.
@@ -51,7 +80,7 @@ public interface Title {
      * @param value The new title.
      * @return This title.
      */
-    Title setTitle(ChatComponent value);
+    Title setHeader(ChatComponent value);
 
     /**
      * Gets the subtitle.
@@ -121,9 +150,10 @@ public interface Title {
 
     /**
      * Gets if this title is using the default timings
-     * or if it has been manually overridden
+     * or if it has been manually overridden using the
+     * setters for this Title.
      *
      * @return If the title is using default timings
      */
-    boolean isDefaultTimings();
+    boolean isDefaultFadeTimes();
 }

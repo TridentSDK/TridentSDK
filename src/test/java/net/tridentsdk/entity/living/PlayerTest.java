@@ -43,7 +43,7 @@ public class PlayerTest {
 
     @Test
     public void testSendMessageDefault() {
-        List<SentMessage> messages = new LinkedList<>();
+        List<PlayerTest.SentMessage> messages = new LinkedList<>();
         Player player = new DummyPlayer(messages);
         ChatComponent component = ChatComponent.text("hi there");
         player.sendMessage(component, ChatType.CHAT);
@@ -67,7 +67,7 @@ public class PlayerTest {
     @AllArgsConstructor
     private final class DummyPlayer implements Player {
 
-        private final List<SentMessage> sentMessages;
+        private final List<PlayerTest.SentMessage> sentMessages;
 
         @Override
         public int getId() {
@@ -126,7 +126,7 @@ public class PlayerTest {
 
         @Override
         public void sendMessage(ChatComponent message, ChatType type) {
-            this.sentMessages.add(new SentMessage(message, type));
+            this.sentMessages.add(new PlayerTest.SentMessage(message, type));
         }
 
         @Override
@@ -190,11 +190,6 @@ public class PlayerTest {
         }
 
         @Override
-        public void hideTitle() {
-
-        }
-
-        @Override
         public boolean isGodMode() {
             return false;
         }
@@ -243,7 +238,5 @@ public class PlayerTest {
         public void setWalkingSpeed(float walkingSpeed) {
 
         }
-
     }
-
 }

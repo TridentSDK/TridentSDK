@@ -182,22 +182,18 @@ public interface Player extends Entity {
     void updateBossBars();
 
     /**
-     * Sends a title to this player, sending any required packets.
+     * Sends a title to this player, sending any required
+     * packets.
+     *
+     * @param title the title which to send to the player
      */
     void sendTitle(Title title);
 
     /**
-     * Resets this player's title.
+     * Resets this player's title, removing the title
+     * completely.
      */
     void resetTitle();
-
-    /**
-     * Hides all titles from the player. Must be reset in order
-     * for players to receive titles in the future.
-     *
-     * @see #resetTitle()
-     */
-    void hideTitle();
 
     /**
      * Gets whether or not this player is in god mode.
