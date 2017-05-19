@@ -1,6 +1,10 @@
 ### Java ###
 *.class
 
+### Python ###
+*.pyc
+*.pyo
+
 # Package Files #
 *.jar
 *.war
