@@ -1,6 +1,5 @@
 package {package_name};
 
-import lombok.Getter;
 import javax.annotation.concurrent.Immutable;
 import net.tridentsdk.util.Int2ReferenceOpenHashMap;
 
@@ -12,7 +11,6 @@ import net.tridentsdk.util.Int2ReferenceOpenHashMap;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@Getter
 @Immutable
 public enum {class_name} {{
 
@@ -23,10 +21,18 @@ public enum {class_name} {{
 
 {items}
 {fields}
+{methods}
     /**
      * The constructor for all {class_name}s.
      */
 {constructor}
+{is_item_method}
+
+    @Override
+    public String toString() {{
+        return this.stringId;
+    }}
+
     /**
      * Mapping of ID values to their respective substance,
      * substances can contain 400+ entries and that is not
@@ -39,13 +45,6 @@ public enum {class_name} {{
         }}
         SUBSTANCE_MAP.trim();
     }}
-
-    @Override
-    public String toString() {{
-        return this.stringId;
-    }}
-
-{is_item_method}
 
     /**
      * Obtains the substance that is represented by the

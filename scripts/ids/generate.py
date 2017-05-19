@@ -49,15 +49,28 @@ def main(package_name, class_name):
         items_string += f'    {enum_name}({item["id"]}, "{item["string_id"]}", "{item["name"]}", {sup_params}){eol}\n'
 
     fields_string = ''
-    for _, type, fname, ret, doc in fields:
+    methods_string = ''
+    for _, type, fname, field_doc, method_doc in fields:
+        mname = fname
+        if type != 'boolean':
+            mname = 'get' + fname[0].upper() + fname[1:]
         if fields_string != '':
             fields_string +=  '\n'
         fields_string +=  '    /**\n'
-        fields_string +=  '     * ' + html.escape(doc.format(class_name = class_name)) + '\n'
-        fields_string +=  '     *\n'
-        fields_string +=  '     * ' + html.escape(ret.format(class_name = class_name)) + '\n'
+        fields_string +=  '     * ' + html.escape(field_doc.format(class_name = class_name)) + '\n'
         fields_string +=  '     */\n'
         fields_string += f'    private final {type} {fname};\n'
+
+        if methods_string != '':
+            methods_string +=  '\n'
+        methods_string +=  '    /**\n'
+        methods_string +=  '     * ' + html.escape(method_doc.format(class_name = class_name)) + '\n'
+        methods_string +=  '     *\n'
+        methods_string +=  '     * @return ' + html.escape(field_doc.format(class_name = class_name)) + '\n'
+        methods_string +=  '     */\n'
+        methods_string += f'    public {type} {mname}() {{\n'
+        methods_string += f'        return this.{fname};\n'
+        methods_string +=  '    }\n'
 
     constructor_string = ''
     params = ', '.join(map(lambda field: f'{field[1]} {field[2]}', fields))
@@ -69,6 +82,8 @@ def main(package_name, class_name):
     is_item_method = ''
     is_item_method +=  '    /**\n'
     is_item_method += f'     * Gets if this {class_name} is a block.\n'
+    is_item_method +=  '     *\n'
+    is_item_method +=  '     * @return true iff it is a block\n'
     is_item_method +=  '     */\n'
     is_item_method +=  '    public boolean isBlock() {\n'
     is_item_method += f'        return this.id <= {last_block_id}; // generated\n'
@@ -76,6 +91,8 @@ def main(package_name, class_name):
     is_item_method +=  '\n'
     is_item_method +=  '    /**\n'
     is_item_method += f'     * Gets if this {class_name} is an item.\n'
+    is_item_method +=  '     *\n'
+    is_item_method +=  '     * @return true iff it is an item\n'
     is_item_method +=  '     */\n'
     is_item_method +=  '    public boolean isItem() {\n'
     is_item_method +=  '        return !this.isBlock();\n'
@@ -87,6 +104,7 @@ def main(package_name, class_name):
         blocks = blocks_string,
         items = items_string,
         fields = fields_string,
+        methods = methods_string,
         constructor = constructor_string,
         is_item_method = is_item_method
     )
@@ -94,14 +112,14 @@ def main(package_name, class_name):
     print(output)
 
 fields = [
-    ('_', 'int', 'id', "The {class_name}'s numeric ID", "The {class_name}'s numeric ID."),
-    ('_', 'String', 'stringId', "The {class_name}'s string ID", "The {class_name}'s string ID."),
-    ('_', 'String', 'displayName', "The {class_name}'s display name", "The {class_name}'s display name"),
-    ('S', 'boolean', 'needsData', 'Whether this {class_name} needs data.', "Requires additional data from the saved game's Data array to fully define the {class_name}."), # blocks
-    ('B', 'boolean', 'needsDamage', 'Whether this {class_name} needs damage.', "Requires additional data in the {class_name}'s Damage field to fully define the inventory item."), # blocks and items
-    ('E', 'boolean', 'needsBlockEntity', 'Whether this {class_name} needs a block entity.', 'Requires a block entity to store additional data about the {class_name}.'), # blocks
-    ('I', 'boolean', 'hasSeparateItemID', 'Whether this {class_name} has a different ID in item form to when in block form.', 'Has a separate ID as an inventory item.'), # blocks
-    ('D', 'boolean', 'hasDurability', 'Whether this {class_name} has durability.', "Uses the {class_name}'s Damage field to define its durability."), # items
+    ('_', 'int', 'id', "The {class_name}'s numeric ID", "Gets the {class_name}'s numeric ID."),
+    ('_', 'String', 'stringId', "The {class_name}'s string ID", "Gets the {class_name}'s string ID."),
+    ('_', 'String', 'displayName', "The {class_name}'s display name", "Gets the {class_name}'s display name"),
+    ('S', 'boolean', 'needsData', 'Whether this {class_name} needs data.', "Gets whether additional data from the saved game's Data array is required to fully define the {class_name}."), # blocks
+    ('B', 'boolean', 'needsDamage', 'Whether this {class_name} needs damage.', "Gets whether additional data in the {class_name}'s Damage field is required to fully define the inventory item."), # blocks and items
+    ('E', 'boolean', 'needsBlockEntity', 'Whether this {class_name} needs a block entity.', 'Gets whether a block entity is required to store additional data about the {class_name}.'), # blocks
+    ('I', 'boolean', 'hasSeparateItemID', 'Whether this {class_name} has a different ID in item form to when in block form.', 'Gets whether this {class_name} has a separate ID when it an inventory item.'), # blocks
+    ('D', 'boolean', 'hasDurability', 'Whether this {class_name} has durability.', "Gets whether this {class_name} uses the Damage field to define its durability."), # items
 ]
 
 def to_enum_name(string):
