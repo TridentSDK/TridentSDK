@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.base;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.concurrent.Immutable;
 import net.tridentsdk.util.Int2ReferenceOpenHashMap;
 
@@ -654,16 +656,21 @@ public enum Substance {
     }
 
     /**
-     * Mapping of ID values to their respective substance,
+     * Mappings of ID values to their respective substances,
      * substances can contain 400+ entries and that is not
      * worth using O(n) iteration.
      */
-    private static final Int2ReferenceOpenHashMap<Substance> SUBSTANCE_MAP = new Int2ReferenceOpenHashMap<>();
+    private static final Int2ReferenceOpenHashMap<Substance> SUBSTANCE_BY_NUMERIC_MAP = new Int2ReferenceOpenHashMap<>();
+    private static final Map<String, Substance> SUBSTANCE_BY_STRING_MAP = new HashMap<>();
+    private static final Map<String, Substance> SUBSTANCE_BY_NAME_MAP = new HashMap<>();
+
     static {
         for (Substance s : values()) {
-            SUBSTANCE_MAP.put(s.id, s);
+            SUBSTANCE_BY_NUMERIC_MAP.put(s.id, s);
+            SUBSTANCE_BY_STRING_MAP.put(s.stringId, s);
+            SUBSTANCE_BY_NAME_MAP.put(s.displayName, s);
         }
-        SUBSTANCE_MAP.trim();
+        SUBSTANCE_BY_NUMERIC_MAP.trim();
     }
 
     /**
@@ -673,10 +680,39 @@ public enum Substance {
      * @param id the ID value of the substance to find
      * @return the substance
      */
-    public static Substance of(int id) {
-        Substance substance = SUBSTANCE_MAP.get(id);
+    public static Substance fromNumericId(int id) {
+        Substance substance = SUBSTANCE_BY_NUMERIC_MAP.get(id);
         if (substance == null) {
-            throw new IndexOutOfBoundsException("Provided Substance ID (" + id + ") is out of bounds");
+            throw new IllegalArgumentException("Invalid Substance ID (" + id + ")");
+        }
+        return substance;
+    }
+
+    /**
+     * Obtains the substance that is represented by the
+     * given string ID.
+     *
+     * @param id the string ID value of the substance to find
+     * @return the substance
+     */
+    public static Substance fromStringId(String id) {
+        Substance substance = SUBSTANCE_BY_STRING_MAP.get(id);
+        if (substance == null) {
+            throw new IllegalArgumentException("Invalid Substance ID (" + id + ")");
+        }
+        return substance;
+    }
+
+    /**
+     * Obtains the substance with the given name.
+     *
+     * @param name the name of the substance to find
+     * @return the substance
+     */
+    public static Substance fromName(String name) {
+        Substance substance = SUBSTANCE_BY_NAME_MAP.get(name);
+        if (substance == null) {
+            throw new IllegalArgumentException("Invalid Substance name (" + name + ")");
         }
         return substance;
     }

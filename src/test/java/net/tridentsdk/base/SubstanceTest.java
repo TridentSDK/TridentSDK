@@ -21,28 +21,21 @@ import org.junit.Test;
 
 public class SubstanceTest {
     @Test
-    public void testId() throws Exception {
-        for (Substance substance : Substance.values()) {
-            Assert.assertEquals(substance.getId(), substance.ordinal());
-        }
-    }
-
-    @Test
     public void testToString() throws Exception {
         for (Substance substance : Substance.values()) {
-            Assert.assertEquals(substance.toString(), "minecraft:" + substance.name().toLowerCase());
+            Assert.assertEquals(substance.toString(), substance.getStringId());
         }
     }
 
     @Test
     public void testOf() throws Exception {
         for (Substance substance : Substance.values()) {
-            Assert.assertEquals(substance, Substance.of(substance.getId()));
+            Assert.assertEquals(substance, Substance.fromNumericId(substance.getId()));
         }
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testOobOf() {
-        Substance.of(Integer.MAX_VALUE);
+        Substance.fromNumericId(Integer.MAX_VALUE);
     }
 }
