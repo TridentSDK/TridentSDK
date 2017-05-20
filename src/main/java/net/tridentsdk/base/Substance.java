@@ -545,6 +545,20 @@ public enum Substance {
     private final boolean hasDurability;
 
     /**
+     * The constructor for all Substances.
+     */
+    private Substance(int id, String stringId, String displayName, boolean needsData, boolean needsDamage, boolean needsBlockEntity, boolean hasSeparateItemID, boolean hasDurability) {
+        this.id = id;
+        this.stringId = stringId;
+        this.displayName = displayName;
+        this.needsData = needsData;
+        this.needsDamage = needsDamage;
+        this.needsBlockEntity = needsBlockEntity;
+        this.hasSeparateItemID = hasSeparateItemID;
+        this.hasDurability = hasDurability;
+    }
+
+    /**
      * Gets the Substance&#x27;s numeric ID.
      *
      * @return The Substance&#x27;s numeric ID
@@ -614,20 +628,6 @@ public enum Substance {
      */
     public boolean hasDurability() {
         return this.hasDurability;
-    }
-
-    /**
-     * The constructor for all Substances.
-     */
-    private Substance(int id, String stringId, String displayName, boolean needsData, boolean needsDamage, boolean needsBlockEntity, boolean hasSeparateItemID, boolean hasDurability) {
-        this.id = id;
-        this.stringId = stringId;
-        this.displayName = displayName;
-        this.needsData = needsData;
-        this.needsDamage = needsDamage;
-        this.needsBlockEntity = needsBlockEntity;
-        this.hasSeparateItemID = hasSeparateItemID;
-        this.hasDurability = hasDurability;
     }
 
     /**

@@ -43,11 +43,11 @@ public enum {class_name} {{
 
 {items}
 {fields}
-{methods}
     /**
      * The constructor for all {class_name}s.
      */
 {constructor}
+{methods}
 {is_item_method}
 
     @Override
