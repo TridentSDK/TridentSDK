@@ -31,7 +31,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @ThreadSafe
 public class TagCompound {
     /**
-     * The list of tags contaed by this compound
+     * The list of tags contained by this compound
      */
     private final Queue<NbtTag> tags = new ConcurrentLinkedQueue<>();
 
