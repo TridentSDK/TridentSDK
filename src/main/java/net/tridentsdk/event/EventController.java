@@ -32,9 +32,13 @@ public interface EventController {
      * Registers the given listener object to receive
      * events dispatched by the controller.
      *
+     * <p>This method should be default accept duplicates.
+     * Events being fired twice should be checked to ensure
+     * that they were not already registered.</p>
+     *
      * @param listener the listener to register
      */
-    void register(Object listener);
+    void register(Listener listener);
 
     /**
      * Removes the given listener from being handling
@@ -42,7 +46,7 @@ public interface EventController {
      *
      * @param listener the listener to remove
      */
-    void unregister(Class<?> listener);
+    void unregister(Class<? extends Listener> listener);
 
     /**
      * Dispatches the event to the event listener/handlers

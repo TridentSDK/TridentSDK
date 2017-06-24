@@ -14,20 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.plugin;
+package net.tridentsdk.entity.meta.living.animal;
 
-import java.lang.annotation.*;
+import lombok.Getter;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
- * This annotation should be added to handler classes that
- * should be skipped by the automatic registrar during
- * plugin load.
+ * Represents the different types of Horse armor.
  *
  * @author TridentSDK
- * @since 0.3-alpha-DP
+ * @since 0.5-alpha
  */
-@Documented
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface SelfRegistered {
+@Immutable
+public enum HorseArmor {
+    /**
+     * Leather horse armor.
+     */
+    LEATHER(3),
+
+    /**
+     * Iron horse armor.
+     */
+    IRON(5),
+
+    /**
+     * Gold horse armor.
+     */
+    GOLD(7),
+
+    /**
+     * Diamond horse armor.
+     */
+    DIAMOND(11);
+
+    @Getter
+    private final int armor;
+
+    HorseArmor(int armor) {
+        this.armor = armor;
+    }
 }

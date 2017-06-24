@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity.meta.living.animal;
 
 import lombok.Getter;
 
@@ -22,62 +22,57 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different types of Villagers.
+ * Represents the different types of Ocelots.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public enum VillagerProfession {
+public enum OcelotType {
     /**
-     * A farmer villager.
+     * A wild ocelot.
      */
-    FARMER(0),
+    WILD(0),
 
     /**
-     * A librarian villager.
+     * A tuxedo ocelot.
      */
-    LIBRARIAN(1),
+    TUXEDO(1),
 
     /**
-     * A priest villager.
+     * A tabby ocelot.
      */
-    PRIEST(2),
+    TABBY(2),
 
     /**
-     * A blacksmith villager.
+     * A siamese ocelot.
      */
-    BLACKSMITH(3),
-
-    /**
-     * A butcher villager.
-     */
-    BUTCHER(4);
+    SIAMESE(3);
 
     @Getter
     private final int data;
 
-    VillagerProfession(int data) {
+    OcelotType(int data) {
         this.data = data;
     }
 
     /**
-     * Gets the villager profession corresponding to the given internal identification number.
+     * Gets the ocelot type corresponding to the given internal identification number.
      * <br>
      * If none are found, an {@link IllegalArgumentException} will be thrown.
      *
      * @param id The identification number.
      *
-     * @return The villager profession.
+     * @return The ocelot type.
      */
     @Nonnull
-    public static VillagerProfession of(int id) {
-        for (VillagerProfession prof : values()) {
-            if (prof.data == id) {
-                return prof;
+    public static OcelotType of(int id) {
+        for (OcelotType type : values()) {
+            if (type.data == id) {
+                return type;
             }
         }
 
-        throw new IllegalArgumentException("no villager profession with id = " + id);
+        throw new IllegalArgumentException("no ocelot type with id = " + id);
     }
 }

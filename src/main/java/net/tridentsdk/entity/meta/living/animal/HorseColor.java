@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity.meta.living.animal;
 
 import lombok.Getter;
 
@@ -22,57 +22,62 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different types of Ocelots.
+ * Represents the different colors of Horses.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public enum OcelotType {
+public enum HorseColor {
     /**
-     * A wild ocelot.
+     * No extra colour (brown).
      */
-    WILD(0),
+    NONE(0),
 
     /**
-     * A tuxedo ocelot.
+     * White.
      */
-    TUXEDO(1),
+    WHITE(1),
 
     /**
-     * A tabby ocelot.
+     * White field.
      */
-    TABBY(2),
+    WHITE_FIELD(2),
 
     /**
-     * A siamese ocelot.
+     * White dots.
      */
-    SIAMESE(3);
+    WHITE_DOTS(3),
+
+    /**
+     * Black dots.
+     */
+    BLACK_DOTS(4);
 
     @Getter
     private final int data;
 
-    OcelotType(int data) {
+    HorseColor(int data) {
         this.data = data;
     }
 
     /**
-     * Gets the ocelot type corresponding to the given internal identification number.
+     * Gets the horse color corresponding to the given internal identification number.
      * <br>
      * If none are found, an {@link IllegalArgumentException} will be thrown.
      *
      * @param id The identification number.
      *
-     * @return The ocelot type.
+     * @return The horse color.
      */
     @Nonnull
-    public static OcelotType of(int id) {
-        for (OcelotType type : values()) {
-            if (type.data == id) {
-                return type;
+    public static HorseColor of(int id) {
+        for (HorseColor color : values()) {
+            if (color.data == id) {
+                return color;
             }
         }
 
-        throw new IllegalArgumentException("no ocelot type with id = " + id);
+        throw new IllegalArgumentException("no horse color with id = " + id);
     }
 }

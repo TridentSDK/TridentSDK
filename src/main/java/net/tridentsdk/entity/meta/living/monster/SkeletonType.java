@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity.meta.living.monster;
 
 import lombok.Getter;
 
@@ -22,72 +22,52 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different types of Horse markings.
+ * Represents the different types of Skeletons.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public enum HorseMarkings {
+public enum SkeletonType {
     /**
-     * White markings.
+     * A normal skeleton.
      */
-    WHITE(0),
+    NORMAL(0),
 
     /**
-     * Creamy markings.
+     * A wither skeleton.
      */
-    CREAMY(1),
+    WITHER(1),
 
     /**
-     * Chestnut markings.
+     * A stray skeleton.
      */
-    CHESTNUT(2),
-
-    /**
-     * Brown markings.
-     */
-    BROWN(3),
-
-    /**
-     * Black markings.
-     */
-    BLACK(4),
-
-    /**
-     * Gray markings.
-     */
-    GRAY(5),
-
-    /**
-     * Dark brown markings.
-     */
-    DARK_BROWN(6);
+    STRAY(2);
 
     @Getter
     private final int data;
 
-    HorseMarkings(int data) {
+    SkeletonType(int data) {
         this.data = data;
     }
 
     /**
-     * Gets the horse markings corresponding to the given internal identification number.
+     * Gets the skeleton type corresponding to the given internal identification number.
      * <br>
      * If none are found, an {@link IllegalArgumentException} will be thrown.
      *
      * @param id The identification number.
      *
-     * @return The horse markings.
+     * @return The skeleton type.
      */
     @Nonnull
-    public static HorseMarkings of(int id) {
-        for (HorseMarkings markings : values()) {
-            if (markings.data == id) {
-                return markings;
+    public static SkeletonType of(int id) {
+        for (SkeletonType type : values()) {
+            if (type.data == id) {
+                return type;
             }
         }
 
-        throw new IllegalArgumentException("no horse markings with id = " + id);
+        throw new IllegalArgumentException("no skeleton type with id = " + id);
     }
 }

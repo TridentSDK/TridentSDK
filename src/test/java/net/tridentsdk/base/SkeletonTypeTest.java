@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.base;
 
+import net.tridentsdk.entity.meta.living.monster.SkeletonType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

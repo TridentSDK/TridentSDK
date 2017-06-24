@@ -16,11 +16,6 @@
  */
 package net.tridentsdk.entity.meta.living.animal;
 
-import net.tridentsdk.base.HorseArmor;
-import net.tridentsdk.base.HorseColor;
-import net.tridentsdk.base.HorseMarkings;
-import net.tridentsdk.base.HorseType;
-
 import java.util.UUID;
 
 /**

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity.meta.living.animal;
 
 import lombok.Getter;
 
@@ -22,76 +22,72 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different types of Zombies.
+ * Represents the different types of Rabbits.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public enum ZombieType {
+public enum RabbitType {
     /**
-     * A normal zombie.
+     * A brown rabbit.
      */
-    NORMAL(0),
+    BROWN(0),
 
     /**
-     * A zombie that looks like a villager of type {@link VillagerProfession#FARMER}.
+     * A white rabbit.
      */
-    VILLAGER_FARMER(1),
+    WHITE(1),
 
     /**
-     * A zombie that looks like a villager of type {@link VillagerProfession#LIBRARIAN}.
+     * A black rabbit.
      */
-    VILLAGER_LIBRARIAN(2),
+    BLACK(2),
 
     /**
-     * A zombie that looks like a villager of type {@link VillagerProfession#PRIEST}.
+     * A black and white rabbit.
      */
-    VILLAGER_PRIEST(3),
+    BLACK_AND_WHITE(3),
 
     /**
-     * A zombie that looks like a villager of type {@link VillagerProfession#BLACKSMITH}.
+     * A golden rabbit.
      */
-    VILLAGER_BLACKSMITH(4),
+    GOLD(4),
 
     /**
-     * A zombie that looks like a villager of type {@link VillagerProfession#BUTCHER}.
+     * A salt and pepper rabbit.
      */
-    VILLAGER_BUTCHER(5),
+    SALT_AND_PEPPER(5),
 
     /**
-     * A husk Zombie.
+     * A killer bunny.
      */
-    HUSK(6);
+    KILLER_BUNNY(99);
 
     @Getter
     private final int data;
 
-    @Getter
-    private final boolean villager;
-
-    ZombieType(int data) {
+    RabbitType(int data) {
         this.data = data;
-        this.villager = data >= 1 && data <= 5;
     }
 
     /**
-     * Gets the zombie type corresponding to the given internal identification number.
+     * Gets the rabbit type corresponding to the given internal identification number.
      * <br>
      * If none are found, an {@link IllegalArgumentException} will be thrown.
      *
      * @param id The identification number.
      *
-     * @return The zombie type.
+     * @return The rabbit type.
      */
     @Nonnull
-    public static ZombieType of(int id) {
-        for (ZombieType type : values()) {
+    public static RabbitType of(int id) {
+        for (RabbitType type : values()) {
             if (type.data == id) {
                 return type;
             }
         }
 
-        throw new IllegalArgumentException("no zombie type with id = " + id);
+        throw new IllegalArgumentException("no rabbit type with id = " + id);
     }
 }

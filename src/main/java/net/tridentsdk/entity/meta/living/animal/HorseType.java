@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity.meta.living.animal;
 
 import lombok.Getter;
 
@@ -22,52 +22,62 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different types of Skeletons.
+ * Represents the different types of Horses.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public enum SkeletonType {
+public enum HorseType {
     /**
-     * A normal skeleton.
+     * A horse.
      */
-    NORMAL(0),
+    HORSE(0),
 
     /**
-     * A wither skeleton.
+     * A donkey.
      */
-    WITHER(1),
+    DONKEY(1),
 
     /**
-     * A stray skeleton.
+     * A mule.
      */
-    STRAY(2);
+    MULE(2),
+
+    /**
+     * A zombie.
+     */
+    ZOMBIE(3),
+
+    /**
+     * A skeleton.
+     */
+    SKELETON(4);
 
     @Getter
     private final int data;
 
-    SkeletonType(int data) {
+    HorseType(int data) {
         this.data = data;
     }
 
     /**
-     * Gets the skeleton type corresponding to the given internal identification number.
+     * Gets the horse type corresponding to the given internal identification number.
      * <br>
      * If none are found, an {@link IllegalArgumentException} will be thrown.
      *
      * @param id The identification number.
      *
-     * @return The skeleton type.
+     * @return The horse type.
      */
     @Nonnull
-    public static SkeletonType of(int id) {
-        for (SkeletonType type : values()) {
+    public static HorseType of(int id) {
+        for (HorseType type : values()) {
             if (type.data == id) {
                 return type;
             }
         }
 
-        throw new IllegalArgumentException("no skeleton type with id = " + id);
+        throw new IllegalArgumentException("no horse type with id = " + id);
     }
 }

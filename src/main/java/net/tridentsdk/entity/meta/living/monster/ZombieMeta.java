@@ -16,8 +16,6 @@
  */
 package net.tridentsdk.entity.meta.living.monster;
 
-import net.tridentsdk.base.ZombieType;
-
 /**
  * @author TridentSDK
  * @since 0.5-alpha

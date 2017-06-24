@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.base;
+package net.tridentsdk.entity.meta.living;
 
 import lombok.Getter;
 
@@ -22,62 +22,62 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Represents the different colors of Horses.
+ * Represents the different types of Villagers.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public enum HorseColor {
+public enum VillagerProfession {
     /**
-     * No extra colour (brown).
+     * A farmer villager.
      */
-    NONE(0),
+    FARMER(0),
 
     /**
-     * White.
+     * A librarian villager.
      */
-    WHITE(1),
+    LIBRARIAN(1),
 
     /**
-     * White field.
+     * A priest villager.
      */
-    WHITE_FIELD(2),
+    PRIEST(2),
 
     /**
-     * White dots.
+     * A blacksmith villager.
      */
-    WHITE_DOTS(3),
+    BLACKSMITH(3),
 
     /**
-     * Black dots.
+     * A butcher villager.
      */
-    BLACK_DOTS(4);
+    BUTCHER(4);
 
     @Getter
     private final int data;
 
-    HorseColor(int data) {
+    VillagerProfession(int data) {
         this.data = data;
     }
 
     /**
-     * Gets the horse color corresponding to the given internal identification number.
+     * Gets the villager profession corresponding to the given internal identification number.
      * <br>
      * If none are found, an {@link IllegalArgumentException} will be thrown.
      *
      * @param id The identification number.
      *
-     * @return The horse color.
+     * @return The villager profession.
      */
     @Nonnull
-    public static HorseColor of(int id) {
-        for (HorseColor color : values()) {
-            if (color.data == id) {
-                return color;
+    public static VillagerProfession of(int id) {
+        for (VillagerProfession prof : values()) {
+            if (prof.data == id) {
+                return prof;
             }
         }
 
-        throw new IllegalArgumentException("no horse color with id = " + id);
+        throw new IllegalArgumentException("no villager profession with id = " + id);
     }
 }
