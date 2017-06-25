@@ -108,15 +108,17 @@ public class CmdHandler {
             CmdDispatcher disp = new CmdDispatcher(access, listener, m, annotation, m.getAnnotationsByType(Constrain.class));
 
             Alias aliases = m.getAnnotation(Alias.class);
-            for (String a : aliases.value()) {
-                if (this.dispatchers.containsKey(a)) {
-                    String newCmd = desc.id() + '$' + a;
-                    Logger.get(CmdHandler.class).warn("Command with name \"" + a + "\" in " + cls.getName() + " already registered for alias");
-                    Logger.get(CmdHandler.class).warn("Setting to: " + newCmd);
-                    a = newCmd;
-                }
+            if (aliases != null) {
+                for (String a : aliases.value()) {
+                    if (this.dispatchers.containsKey(a)) {
+                        String newCmd = desc.id() + '$' + a;
+                        Logger.get(CmdHandler.class).warn("Command with name \"" + a + "\" in " + cls.getName() + " already registered for alias");
+                        Logger.get(CmdHandler.class).warn("Setting to: " + newCmd);
+                        a = newCmd;
+                    }
 
-                this.dispatchers.put(a, disp);
+                    this.dispatchers.put(a, disp);
+                }
             }
 
             this.dispatchers.put(name, disp);
