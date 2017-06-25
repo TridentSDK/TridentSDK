@@ -17,7 +17,7 @@
 package net.tridentsdk.inventory;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;

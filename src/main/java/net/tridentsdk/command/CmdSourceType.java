@@ -21,6 +21,15 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 
+import javax.annotation.concurrent.Immutable;
+
+/**
+ * The type of command source that is being dispatched.
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
+ */
+@Immutable
 public enum CmdSourceType {
     PLAYER {
         @Override

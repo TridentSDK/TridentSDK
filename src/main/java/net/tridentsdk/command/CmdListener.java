@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.command;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * This is simply a marker interface for classes that
  * implement methods which handle commands.
@@ -23,5 +25,6 @@ package net.tridentsdk.command;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@NotThreadSafe
 public interface CmdListener {
 }

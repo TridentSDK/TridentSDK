@@ -16,12 +16,14 @@
  */
 package net.tridentsdk.command;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Types of available constraints on a command.
  *
- * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public enum ConstraintType {
     STRING, INT, SOURCE, NONE
 }

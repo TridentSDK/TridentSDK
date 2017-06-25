@@ -16,8 +16,8 @@
  */
 package net.tridentsdk.event.player;
 
-import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
  * Represents a player that has successfully logged onto the

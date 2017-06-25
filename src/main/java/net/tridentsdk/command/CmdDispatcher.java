@@ -17,7 +17,9 @@
 package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import lombok.Getter;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -30,6 +32,7 @@ import java.util.Map;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@NotThreadSafe
 public class CmdDispatcher {
     /**
      * The cache of constraint types to their constraint
@@ -50,8 +53,25 @@ public class CmdDispatcher {
      */
     private final int idx;
     /**
+     * The fallback string
+     */
+    @Getter
+    private final String fallback;
+    /**
+     * Whether or not this dispatcher is an alias of the
+     * actual command
+     */
+    @Getter
+    private final boolean alias;
+    /**
+     * Aliases for this command
+     */
+    @Getter
+    private final String[] aliases;
+    /**
      * The command to run
      */
+    @Getter
     private final Cmd cmd;
     /**
      * The command constraints
@@ -61,16 +81,21 @@ public class CmdDispatcher {
     /**
      * Creates a new command dispatcher with the given
      * command properties.
-     *
      * @param access the method accessor for the class
      * @param container the container object
      * @param method the method to invoke
+     * @param fallback the fallback string
+     * @param alias the alias
+     * @param aliases the aliases for the command
      * @param cmd the command properties
      * @param constraints the dispatch constraints
      */
-    public CmdDispatcher(MethodAccess access, Object container, Method method, Cmd cmd, Constrain... constraints) {
+    public CmdDispatcher(MethodAccess access, Object container, Method method, String fallback, boolean alias, String[] aliases, Cmd cmd, Constrain... constraints) {
         this.access = access;
         this.container = container;
+        this.fallback = fallback;
+        this.alias = alias;
+        this.aliases = aliases;
         this.idx = access.getIndex(method.getName(), method.getParameterTypes());
         this.cmd = cmd;
         this.constrains = constraints;

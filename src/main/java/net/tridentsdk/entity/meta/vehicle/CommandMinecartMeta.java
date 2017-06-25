@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.entity.meta.vehicle;
 
-import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
  * @author TridentSDK

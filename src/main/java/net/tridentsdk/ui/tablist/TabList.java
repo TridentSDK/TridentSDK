@@ -17,8 +17,8 @@
 package net.tridentsdk.ui.tablist;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 import java.util.Collection;
 

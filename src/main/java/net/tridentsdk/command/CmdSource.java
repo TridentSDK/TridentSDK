@@ -16,7 +16,9 @@
  */
 package net.tridentsdk.command;
 
-import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatComponent;
+
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * This represents an abstract dispatcher of a command that
@@ -25,6 +27,7 @@ import net.tridentsdk.chat.ChatComponent;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface CmdSource {
     /**
      * Runs the given command and sends it to the command

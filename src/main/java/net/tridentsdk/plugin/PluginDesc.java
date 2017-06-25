@@ -34,6 +34,9 @@ public @interface PluginDesc {
      * A unique ID that identifies a particular plugin. This
      * will also be used as the plugin's config folder name.
      *
+     * <p>The ID cannot be "minecraft" or "trident" as they
+     * are reserved names.</p>
+     *
      * <p>While not necessarily needing to conform to a
      * particular set of guidelines, it is recommended that
      * this does not change version to version to prevent

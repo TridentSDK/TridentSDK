@@ -17,13 +17,14 @@
 package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import lombok.Getter;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.logger.Logger;
-import net.tridentsdk.plugin.PluginDesc;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -56,6 +57,11 @@ public class CmdHandler {
      * runner
      */
     private final Map<String, CmdDispatcher> dispatchers = new HashMap<>();
+    /**
+     * The amount of non-alias commands present
+     */
+    @Getter
+    private int cmdCount;
 
     /**
      * Creates a new command handler. Cannot be used by
@@ -71,10 +77,13 @@ public class CmdHandler {
      * Registers the given instance of the command listener
      * to the registry.
      *
+     * <p>Command names are always registered as lowercase.
+     * </p>
+     *
      * @param listener the listener to register
      */
     @Policy("handle on plugin thread")
-    public void register(PluginDesc desc, CmdListener listener) {
+    public void register(String fallback, CmdListener listener) {
         Class<? extends CmdListener> cls = listener.getClass();
         MethodAccess access = MethodAccess.get(cls);
         Method[] methods = cls.getDeclaredMethods();
@@ -85,43 +94,46 @@ public class CmdHandler {
                 continue;
             }
 
-            String name = annotation.name();
+            String name = annotation.name().toLowerCase();
             if (!Arrays.equals(m.getParameterTypes(), PARAMS)) {
-                Logger.get(CmdHandler.class).error(
-                        "Error registering command \"" + name + "\" in " + cls.getName() + ": method must have params (String, CmdSender, String[])");
+                Logger.get(CmdHandler.class).error("Error registering command \"" + name + "\" in " +
+                                cls.getName() + ": method must have params (String, CmdSender, String[])");
                 continue;
             }
 
             if (name.contains(" ")) {
-                Logger.get(CmdHandler.class).error(
-                        "Error registering command \"" + name + "\" in " + cls.getName() + ": command may not have a space in it");
+                Logger.get(CmdHandler.class).error("Error registering command \"" + name + "\" in " +
+                                cls.getName() + ": command may not have a space in it");
                 continue;
             }
 
             if (this.dispatchers.containsKey(name)) {
-                String newCmd = desc.id() + '$' + name;
+                String newCmd = fallback + '$' + name;
                 Logger.get(CmdHandler.class).warn("Command with name \"" + name + "\" in " + cls.getName() + " already registered");
                 Logger.get(CmdHandler.class).warn("Setting to: " + newCmd);
                 name = newCmd;
             }
 
-            CmdDispatcher disp = new CmdDispatcher(access, listener, m, annotation, m.getAnnotationsByType(Constrain.class));
-
             Alias aliases = m.getAnnotation(Alias.class);
             if (aliases != null) {
                 for (String a : aliases.value()) {
                     if (this.dispatchers.containsKey(a)) {
-                        String newCmd = desc.id() + '$' + a;
+                        String newCmd = fallback + '$' + a;
                         Logger.get(CmdHandler.class).warn("Command with name \"" + a + "\" in " + cls.getName() + " already registered for alias");
                         Logger.get(CmdHandler.class).warn("Setting to: " + newCmd);
                         a = newCmd;
                     }
 
-                    this.dispatchers.put(a, disp);
+                    this.dispatchers.put(a, new CmdDispatcher(access, listener, m,
+                            fallback, true, aliases.value(),
+                            annotation, m.getAnnotationsByType(Constrain.class)));
                 }
             }
 
-            this.dispatchers.put(name, disp);
+            this.dispatchers.put(name, new CmdDispatcher(access, listener, m,
+                    fallback, false, aliases == null ? new String[0] : aliases.value(),
+                    annotation, m.getAnnotationsByType(Constrain.class)));
+            this.cmdCount++;
         }
     }
 
@@ -133,7 +145,14 @@ public class CmdHandler {
      */
     @Policy("handle on plugin thread")
     public void unregister(Class<? extends CmdListener> listener) {
-        this.dispatchers.entrySet().removeIf(e -> e.getValue().isContainedBy(listener));
+        this.dispatchers.entrySet().removeIf(e -> {
+            boolean by = e.getValue().isContainedBy(listener);
+            if (by && !e.getValue().isAlias()) {
+                this.cmdCount--;
+            }
+
+            return by;
+        });
     }
 
     /**
@@ -150,7 +169,7 @@ public class CmdHandler {
     @Policy("handle on plugin thread")
     public boolean dispatch(String cmd, CmdSource source) {
         String[] split = cmd.split(" ");
-        CmdDispatcher runner = this.dispatchers.get(split[0]);
+        CmdDispatcher runner = this.dispatchers.get(split[0].toLowerCase());
         if (runner == null) {
             return false;
         }
@@ -162,5 +181,14 @@ public class CmdHandler {
 
         runner.run(split[0], source, args);
         return true;
+    }
+
+    /**
+     * Obtains an immutable copy of the dispatchers map.
+     *
+     * @return a copy of the dispatchers map
+     */
+    public Map<String, CmdDispatcher> getDispatchers() {
+        return Collections.unmodifiableMap(this.dispatchers);
     }
 }

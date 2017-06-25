@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.command;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * A constraint is a property of a command such as min. args
  * length, max. args length, source, etc...
@@ -23,6 +25,7 @@ package net.tridentsdk.command;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public interface Constraint {
     /**
      * Handles the command that has been dispatched.

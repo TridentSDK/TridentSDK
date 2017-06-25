@@ -17,7 +17,7 @@
 package net.tridentsdk.ui.title;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -135,7 +135,7 @@ public interface Title {
      * Gets the fade out timing for the title
      * and subtitle.
      *
-     * @return The fade out timing.
+     * @return The fade out timing in ticks.
      */
     int getFadeOut();
 

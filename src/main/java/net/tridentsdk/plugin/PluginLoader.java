@@ -22,9 +22,9 @@ import javassist.NotFoundException;
 import lombok.Getter;
 import net.tridentsdk.Server;
 import net.tridentsdk.command.CmdListener;
-import net.tridentsdk.logger.Logger;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.event.Listener;
+import net.tridentsdk.logger.Logger;
 import net.tridentsdk.util.Misc;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -190,6 +190,10 @@ public class PluginLoader {
 
                 CtClass cls = PLUGIN_CP.get(name);
                 PluginDesc desc = (PluginDesc) cls.getAnnotation(PluginDesc.class);
+                if (desc.name().equals("trident") || desc.name().equals("minecraft")) {
+                    throw new RuntimeException("ID has illegal name");
+                }
+
                 if (desc != null && cls.getSuperclass().getName().equals(Plugin.class.getName())) {
                     if (description != null) {
                         throw new RuntimeException("Plugin cannot have more than two plugin main classes");
@@ -241,7 +245,7 @@ public class PluginLoader {
                 }
 
                 if (cls.isAssignableFrom(CmdListener.class)) {
-                    Server.getInstance().getCmdHandler().register(description,
+                    Server.getInstance().getCmdHandler().register(description.name(),
                             cls.asSubclass(CmdListener.class).getConstructor().newInstance());
                 }
             }

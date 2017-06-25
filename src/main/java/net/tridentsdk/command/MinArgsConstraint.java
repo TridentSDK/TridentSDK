@@ -16,8 +16,10 @@
  */
 package net.tridentsdk.command;
 
-import net.tridentsdk.chat.ChatColor;
-import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatColor;
+import net.tridentsdk.ui.chat.ChatComponent;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Minimum args constraint. Any number of args below the
@@ -28,6 +30,7 @@ import net.tridentsdk.chat.ChatComponent;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+@Immutable
 public class MinArgsConstraint implements Constraint {
     @Override
     public boolean handle(Cmd cmd, String label, CmdSource source, String[] args, Object constraint) {

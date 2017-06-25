@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.chat;
+package net.tridentsdk.ui.chat;
 
 import org.junit.Test;
 

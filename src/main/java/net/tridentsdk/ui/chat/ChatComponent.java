@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.chat;
+package net.tridentsdk.ui.chat;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -648,37 +648,32 @@ public class ChatComponent {
                     } else {
                         // formatting code
                         switch (color) {
-                            case BOLD: {
+                            case BOLD:
                                 if (!bold) {
                                     curr.setBold(bold = true);
                                 }
                                 break;
-                            }
-                            case ITALIC: {
+                            case ITALIC:
                                 if (!italic) {
                                     curr.setItalic(italic = true);
                                 }
                                 break;
-                            }
-                            case UNDERLINE: {
+                            case UNDERLINE:
                                 if (!underline) {
                                     curr.setUnderlined(underline = true);
                                 }
                                 break;
-                            }
-                            case STRIKETHROUGH: {
+                            case STRIKETHROUGH:
                                 if (!strikethrough) {
                                     curr.setStrikethrough(strikethrough = true);
                                 }
                                 break;
-                            }
-                            case OBFUSCATED: {
+                            case OBFUSCATED:
                                 if (!obfuscate) {
                                     curr.setObfuscated(obfuscate = true);
                                 }
                                 break;
-                            }
-                            case RESET: {
+                            case RESET:
                                 // remove current color
                                 currentColor = null;
                                 // disable all formatting
@@ -693,7 +688,6 @@ public class ChatComponent {
                                 if (obfuscate)
                                     curr.setObfuscated(obfuscate = false);
                                 break;
-                            }
                         }
                     }
                 }

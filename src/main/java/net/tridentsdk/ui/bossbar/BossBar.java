@@ -17,7 +17,7 @@
 package net.tridentsdk.ui.bossbar;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 import java.util.UUID;
 

@@ -16,11 +16,11 @@
  */
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.chat.ChatComponent;
-import net.tridentsdk.chat.ChatType;
 import net.tridentsdk.command.CmdSource;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.ui.bossbar.BossBar;
+import net.tridentsdk.ui.chat.ChatComponent;
+import net.tridentsdk.ui.chat.ChatType;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.ui.title.Title;
 import net.tridentsdk.world.opt.GameMode;
@@ -97,6 +97,7 @@ public interface Player extends Entity, CmdSource {
      *
      * @param message The message.
      */
+    @Override
     default void sendMessage(ChatComponent message) {
         this.sendMessage(message, ChatType.SYSTEM);
     }

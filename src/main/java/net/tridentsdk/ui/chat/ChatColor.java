@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.chat;
+package net.tridentsdk.ui.chat;
 
 import lombok.Getter;
 
@@ -140,6 +140,9 @@ public enum ChatColor {
     RESET('r');
 
     @Getter
+    public static final char escape = '\u00A7';
+
+    @Getter
     private final char colorChar;
 
     /**
@@ -180,7 +183,7 @@ public enum ChatColor {
      */
     @Override
     public String toString() {
-        return "\u00A7" + this.colorChar;
+        return String.valueOf(escape) + this.colorChar;
     }
 
     /**

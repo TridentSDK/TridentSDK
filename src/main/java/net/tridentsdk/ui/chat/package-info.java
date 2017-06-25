@@ -19,4 +19,4 @@
  * chat messages with or without special Minecraft
  * formatting such as hover text, text colors, etc...
  */
-package net.tridentsdk.chat;
+package net.tridentsdk.ui.chat;
