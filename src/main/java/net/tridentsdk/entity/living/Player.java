@@ -192,8 +192,8 @@ public interface Player extends Entity, CmdSource {
     void sendTitle(Title title);
 
     /**
-     * Resets this player's title, removing the title
-     * completely.
+     * Removes the player's title and sets the timing back
+     * to the default.
      */
     void resetTitle();
 
