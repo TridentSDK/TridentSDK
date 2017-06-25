@@ -14,14 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.event;
+package net.tridentsdk.command;
+
+import java.lang.annotation.*;
 
 /**
- * Marker interface used to indicate that the given subclass
- * is a listener.
+ * This annotates a command handler that has multiple
+ * different commands that could execute it.
  *
  * @author TridentSDK
- * @since 0.3-alpha-DP
+ * @since 0.5-alpha
  */
-public interface Listener {
+@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Alias {
+    /**
+     * The list of aliases. No spaces allowed.
+     */
+    String[] value();
 }

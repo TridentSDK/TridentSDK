@@ -14,14 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.event;
-
 /**
- * Marker interface used to indicate that the given subclass
- * is a listener.
- *
- * @author TridentSDK
- * @since 0.3-alpha-DP
+ * This package contains classes pertaining to logging
+ * messages to the system logger.
  */
-public interface Listener {
-}
+package net.tridentsdk.logger;

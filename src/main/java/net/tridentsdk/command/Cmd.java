@@ -14,8 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package net.tridentsdk.command;
+
+import java.lang.annotation.*;
+
 /**
- * This package contains classes pertaining to logging
- * messages to the system logger.
+ * Annotates methods which are command handlers.
+ *
+ * @author TridentSDK
+ * @since 0.5-alpha
  */
-package net.tridentsdk.command.logger;
+@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Cmd {
+    /**
+     * The name of the command that the method will handle.
+     * No spaces allowed.
+     */
+    String name();
+
+    /**
+     * Command help, otherwise known as usage which displays
+     * the arguments for the command.
+     */
+    String help() default "No help for this command";
+
+    /**
+     * What the command does.
+     */
+    String desc() default "What does this do?";
+}

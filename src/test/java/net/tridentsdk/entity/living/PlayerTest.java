@@ -21,6 +21,7 @@ import lombok.Data;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.chat.ChatComponent;
 import net.tridentsdk.chat.ChatType;
+import net.tridentsdk.command.CmdSourceType;
 import net.tridentsdk.entity.meta.living.PlayerMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
@@ -237,6 +238,16 @@ public class PlayerTest {
         @Override
         public void setWalkingSpeed(float walkingSpeed) {
 
+        }
+
+        @Override
+        public void runCommand(String command) {
+
+        }
+
+        @Override
+        public CmdSourceType getCmdType() {
+            return null;
         }
     }
 }

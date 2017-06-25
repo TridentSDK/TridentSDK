@@ -14,30 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command.logger;
+package net.tridentsdk.logger;
 
 import net.tridentsdk.Impl;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
-public class LogHandlerTest {
-    private static final Logger logger = Mockito.mock(Logger.class);
-    private static final LogHandler handler = message -> true;
+public class LoggerTest {
+    private static final String NAME = LoggerTest.class.getSimpleName();
 
     static {
         Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
-        Mockito.when(Impl.get().removeHandler(logger, handler)).thenReturn(true);
+        Mockito.when(Impl.get().newLogger(NAME)).thenReturn(Mockito.mock(Logger.class));
     }
 
     @Test
-    public void intercept() throws Exception {
-        LogHandler.intercept(logger, handler);
+    public void get() throws Exception {
+        assertNotNull(Logger.get(NAME));
     }
 
     @Test
-    public void removeHandler() throws Exception {
-        assertTrue(LogHandler.removeHandler(logger, handler));
+    public void get1() throws Exception {
+        assertNotNull(Logger.get(this.getClass()));
     }
 }

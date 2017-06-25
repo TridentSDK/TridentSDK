@@ -101,10 +101,6 @@ public class Plugin {
      * Special case function used to register needed classes
      * for use by server functions such as world generators.
      *
-     * <p>Avoid placing any API related calls as much as
-     * possible unless used for the above mentioned
-     * functions as the server has not fully initialized.</p>
-     *
      * <p>Many developers fall victim to the fallacy that
      * plugin lifecycle methods are tied to the server
      * lifecycle. Unfortunately, this is simply not the case

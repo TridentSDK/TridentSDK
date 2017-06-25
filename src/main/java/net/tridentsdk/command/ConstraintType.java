@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.event;
+package net.tridentsdk.command;
 
 /**
- * Marker interface used to indicate that the given subclass
- * is a listener.
+ * Types of available constraints on a command.
  *
  * @author TridentSDK
- * @since 0.3-alpha-DP
+ * @since 0.5-alpha
  */
-public interface Listener {
+public enum ConstraintType {
+    STRING, INT, SOURCE, NONE
 }

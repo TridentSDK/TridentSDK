@@ -16,10 +16,13 @@
  */
 package net.tridentsdk;
 
-import net.tridentsdk.command.logger.Logger;
+import net.tridentsdk.command.CmdHandler;
+import net.tridentsdk.command.CmdSource;
+import net.tridentsdk.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.EventController;
+import net.tridentsdk.plugin.PluginLoader;
 import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -36,7 +39,7 @@ import java.util.Collection;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Server {
+public interface Server extends CmdSource {
     /**
      * The current version of the server
      */
@@ -82,7 +85,7 @@ public interface Server {
 
     /**
      * Obtains the configuration file that is used to set
-     * options regarding how the server is to be run.
+     * options regarding how the server is to be handle.
      *
      * @return the server config
      */
@@ -110,6 +113,21 @@ public interface Server {
      * @return the server's event controller
      */
     EventController getEventController();
+
+    /**
+     * Obtains the plugin loader for the server.
+     *
+     * @return the server's plugin loader
+     */
+    PluginLoader getPluginLoader();
+
+    /**
+     * Obtains the server's command registry used to handle
+     * and manage command listeners and dispatches.
+     *
+     * @return the server's command handler
+     */
+    CmdHandler getCmdHandler();
 
     /**
      * This method causes the server to save the current

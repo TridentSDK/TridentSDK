@@ -14,14 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.event;
+package net.tridentsdk.command;
 
 /**
- * Marker interface used to indicate that the given subclass
- * is a listener.
- *
+ * A constraint is a property of a command such as min. args
+ * length, max. args length, source, etc...
+ * 
  * @author TridentSDK
- * @since 0.3-alpha-DP
+ * @since 0.5-alpha
  */
-public interface Listener {
+public interface Constraint {
+    /**
+     * Handles the command that has been dispatched.
+     * 
+     * @param cmd the command info
+     * @param label the command that was sent
+     * @param source the command source
+     * @param args the arguments to the command
+     * @param constraint the constraint to use
+     * @return {@code true} if it passes the constraints,
+     * {@code false} otherwise
+     */
+    boolean handle(Cmd cmd, String label, CmdSource source, String[] args, Object constraint);
 }

@@ -17,8 +17,8 @@
 package net.tridentsdk;
 
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.command.logger.LogHandler;
-import net.tridentsdk.command.logger.Logger;
+import net.tridentsdk.logger.LogHandler;
+import net.tridentsdk.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.doc.Policy;

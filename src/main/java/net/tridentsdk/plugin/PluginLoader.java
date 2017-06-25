@@ -19,11 +19,10 @@ package net.tridentsdk.plugin;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import net.tridentsdk.Server;
-import net.tridentsdk.command.logger.Logger;
+import net.tridentsdk.command.CmdListener;
+import net.tridentsdk.logger.Logger;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.util.Misc;
@@ -38,7 +37,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -57,13 +56,12 @@ import java.util.jar.JarFile;
  * @since 0.3-alpha-DP
  */
 @NotThreadSafe
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PluginLoader {
     /**
-     * The static singleton instance of the plugin loader
+     * A thread-safe init field which protects the
+     * constructor from being called a second time
      */
-    @Getter
-    private static final PluginLoader instance = new PluginLoader();
+    private static final AtomicInteger init = new AtomicInteger();
     /**
      * The plugin folder's class pool for use in loading
      * plugins
@@ -74,18 +72,28 @@ public class PluginLoader {
      * A hashtable of name-plugins that have been loaded
      */
     @Getter
-    private final Map<String, Plugin> loaded = new ConcurrentHashMap<>();
+    private final Map<String, Plugin> loaded = new HashMap<>();
+
+    /**
+     * Creates a new plugin loader. Cannot be used by
+     * plu
+     */
+    public PluginLoader() {
+        if (!init.compareAndSet(0, 1)) {
+            throw new IllegalStateException("Use Server#getPluginLoader()");
+        }
+    }
 
     /**
      * Attempts to load all plugins in the server's plugin
      * directory by walking the file tree and calling
      * {@link #load(Path)}.
      *
-     * <p>This method must be explicitly run on the plugin
+     * <p>This method must be explicitly handle on the plugin
      * thread because plugins calling this method will cause
      * the executor to livelock.</p>
      */
-    @Policy("run on plugin thread")
+    @Policy("handle on plugin thread")
     public void loadAll() {
         this.loadAll(new HashSet<>());
     }
@@ -95,14 +103,14 @@ public class PluginLoader {
      * directory by walking the file tree and calling
      * {@link #load(Path)}.
      *
-     * <p>This method must be explicitly run on the plugin
+     * <p>This method must be explicitly handle on the plugin
      * thread because plugins calling this method will cause
      * the executor to livelock.</p>
      *
      * @param skip the plugins to skip as they have already
      * been loaded or are being loaded to mask out depends
      */
-    @Policy("run on plugin thread")
+    @Policy("handle on plugin thread")
     private void loadAll(Set<Path> skip) {
         try {
             Files.walkFileTree(Misc.HOME_PATH.resolve("plugins"), new SimpleFileVisitor<Path>() {
@@ -124,7 +132,7 @@ public class PluginLoader {
     /**
      * Loads a particular given path jar file.
      *
-     * <p>This method must be explicitly run on the path
+     * <p>This method must be explicitly handle on the path
      * thread because plugins calling this method will cause
      * the executor to livelock.</p>
      *
@@ -135,7 +143,7 @@ public class PluginLoader {
      * @return the path which was loaded by calling this
      * method, or {@code null} if it failed for some reason
      */
-    @Policy("run on path thread")
+    @Policy("handle on path thread")
     public Plugin load(Path path) {
         return this.load(path, new HashSet<>());
     }
@@ -143,7 +151,7 @@ public class PluginLoader {
     /**
      * Loads a particular given path jar file.
      *
-     * <p>This method must be explicitly run on the path
+     * <p>This method must be explicitly handle on the path
      * thread because plugins calling this method will cause
      * the executor to livelock.</p>
      *
@@ -157,7 +165,7 @@ public class PluginLoader {
      * @return the path which was loaded by calling this
      * method, or {@code null} if it failed for some reason
      */
-    @Policy("run on path thread")
+    @Policy("handle on path thread")
     private Plugin load(Path path, Set<Path> skip) {
         skip.add(path);
 
@@ -215,7 +223,6 @@ public class PluginLoader {
                 }
             }
 
-            // TODO commands
             PluginClassLoader loader = new PluginClassLoader(pluginFile);
             Class<? extends Plugin> pluginClass = null;
             for (String name : names) {
@@ -231,6 +238,11 @@ public class PluginLoader {
                 if (cls.isAssignableFrom(Listener.class)) {
                     Server.getInstance().getEventController().register(
                             cls.asSubclass(Listener.class).getConstructor().newInstance());
+                }
+
+                if (cls.isAssignableFrom(CmdListener.class)) {
+                    Server.getInstance().getCmdHandler().register(description,
+                            cls.asSubclass(CmdListener.class).getConstructor().newInstance());
                 }
             }
 
@@ -263,7 +275,7 @@ public class PluginLoader {
      * succeeds, {@code false} if it fails or there is no
      * such ID
      */
-    @Policy("run on plugin thread")
+    @Policy("handle on plugin thread")
     public boolean unload(String plugin) {
         Plugin p = this.loaded.remove(plugin);
         if (p == null) {
@@ -277,6 +289,10 @@ public class PluginLoader {
         for (Class<?> cls : classes) {
             if (cls.isAssignableFrom(Listener.class)) {
                 Server.getInstance().getEventController().unregister(cls.asSubclass(Listener.class));
+            }
+
+            if (cls.isAssignableFrom(CmdListener.class)) {
+                Server.getInstance().getCmdHandler().unregister(cls.asSubclass(CmdListener.class));
             }
         }
 
@@ -292,13 +308,17 @@ public class PluginLoader {
      * @return {@code true} if all plugins succeed in
      * unloading, {@code false} if one or more fail
      */
-    @Policy("run on plugin thread")
+    @Policy("handle on plugin thread")
     public boolean unloadAll() {
         for (Plugin plugin : this.loaded.values()) {
             Set<Class<?>> classes = plugin.getClassLoader().getClasses();
             for (Class<?> cls : classes) {
                 if (cls.isAssignableFrom(Listener.class)) {
                     Server.getInstance().getEventController().unregister(cls.asSubclass(Listener.class));
+                }
+
+                if (cls.isAssignableFrom(CmdListener.class)) {
+                    Server.getInstance().getCmdHandler().unregister(cls.asSubclass(CmdListener.class));
                 }
             }
 
@@ -315,7 +335,7 @@ public class PluginLoader {
      * cleanup hooks, and then reloading and setting up the
      * plugins again without restarting the server.
      */
-    @Policy("run on plugin thread")
+    @Policy("handle on plugin thread")
     public void reload() {
         if (this.unloadAll()) {
             this.loadAll();
