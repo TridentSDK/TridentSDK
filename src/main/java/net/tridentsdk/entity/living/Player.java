@@ -19,6 +19,7 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.Impl;
 import net.tridentsdk.command.CmdSource;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.permission.Permissible;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.chat.ChatComponent;
 import net.tridentsdk.ui.chat.ChatType;
@@ -41,7 +42,7 @@ import java.util.UUID;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Player extends Entity, CmdSource {
+public interface Player extends Entity, CmdSource, Permissible {
     /**
      * The default flying speed for a player
      */

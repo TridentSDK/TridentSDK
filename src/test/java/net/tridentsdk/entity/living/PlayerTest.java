@@ -249,5 +249,30 @@ public class PlayerTest {
         public CmdSourceType getCmdType() {
             return null;
         }
+
+        @Override
+        public boolean hasPerm(String perm) {
+            return false;
+        }
+
+        @Override
+        public void addPerm(String perm) {
+
+        }
+
+        @Override
+        public boolean removePerm(String perm) {
+            return false;
+        }
+
+        @Override
+        public void setOp(boolean op) {
+
+        }
+
+        @Override
+        public boolean isOp() {
+            return false;
+        }
     }
 }

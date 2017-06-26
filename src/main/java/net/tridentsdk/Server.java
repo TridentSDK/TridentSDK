@@ -18,15 +18,16 @@ package net.tridentsdk;
 
 import net.tridentsdk.command.CmdHandler;
 import net.tridentsdk.command.CmdSource;
-import net.tridentsdk.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.EventController;
+import net.tridentsdk.logger.Logger;
 import net.tridentsdk.plugin.PluginLoader;
 import net.tridentsdk.world.WorldLoader;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * This is the representation of the server process' main
@@ -90,6 +91,19 @@ public interface Server extends CmdSource {
      * @return the server config
      */
     Config getConfig();
+
+    /**
+     * Obtains a collection of the UUIDs of the server
+     * operators loaded from {@code ops.json}.
+     *
+     * <p>Thiscollection is not mutable. Use
+     * {@link Player#setOp(boolean)} to set operators, or
+     * load the file itself and reload the server. Use
+     * the former option of at all possible.</p>
+     *
+     * @return the collection of operators
+     */
+    Collection<UUID> getOps();
 
     /**
      * Obtains a collection of players which are currently
