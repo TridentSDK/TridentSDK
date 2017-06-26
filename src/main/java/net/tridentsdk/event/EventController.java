@@ -16,7 +16,9 @@
  */
 package net.tridentsdk.event;
 
-import javax.annotation.concurrent.ThreadSafe;
+import net.tridentsdk.doc.Policy;
+
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.function.Consumer;
 
 /**
@@ -26,7 +28,7 @@ import java.util.function.Consumer;
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@ThreadSafe
+@NotThreadSafe
 public interface EventController {
     /**
      * Registers the given listener object to receive
@@ -52,12 +54,16 @@ public interface EventController {
      * Dispatches the event to the event listener/handlers
      * that are registered under the event controller.
      *
+     * <p>This method must always be called on the plugin
+     * thread.</p>
+     *
      * <p>This method passes events to their respective
      * listeners without responding to them.</p>
      *
      * @param event the event to dispatch
      * @param <T> the event type
      */
+    @Policy("call on plugin thread")
     <T extends Event> void dispatch(T event);
 
     /**
