@@ -17,22 +17,25 @@
 package net.tridentsdk;
 
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.logger.LogHandler;
-import net.tridentsdk.logger.Logger;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.doc.Policy;
+import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.inventory.Inventory;
 import net.tridentsdk.inventory.InventoryType;
 import net.tridentsdk.inventory.Item;
+import net.tridentsdk.logger.LogHandler;
+import net.tridentsdk.logger.Logger;
 import net.tridentsdk.meta.ItemMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.ui.title.Title;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -55,7 +58,7 @@ public final class Impl {
      * The instance of the implementation provider
      */
     @Policy("Sync writes")
-    private static ImplementationProvider impl;
+    private static Impl.ImplementationProvider impl;
 
     /**
      * The lock used for writing the impl field
@@ -97,7 +100,7 @@ public final class Impl {
      *
      * @param i the implementation provider instance
      */
-    public static void setImpl(ImplementationProvider i) {
+    public static void setImpl(Impl.ImplementationProvider i) {
         // Ignore static synchronization warning
         // Static method synchronization must use a static
         // synchronizer, period. There is no way around this
@@ -111,7 +114,7 @@ public final class Impl {
     }
 
     @Nonnull
-    public static ImplementationProvider get() {
+    public static Impl.ImplementationProvider get() {
         try {
             IMPL_LATCH.await();
             return impl;
@@ -138,13 +141,19 @@ public final class Impl {
 
         // UI
         TabList getGlobalTabList();
-
         TabList newTabList();
+
         BossBar newBossBar();
         Title newTitle();
 
         // Inventory
         Inventory newInventory(InventoryType type, int slots);
         Item newItem(Substance substance, int count, byte damage, ItemMeta meta);
+
+        // Players
+        @Nonnull
+        Map<String, Player> findByName(String name);
+        @Nullable
+        Player getByName(String name);
     }
 }

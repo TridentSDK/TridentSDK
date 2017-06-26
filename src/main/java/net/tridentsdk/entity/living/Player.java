@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.entity.living;
 
+import net.tridentsdk.Impl;
 import net.tridentsdk.command.CmdSource;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.ui.bossbar.BossBar;
@@ -25,8 +26,11 @@ import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.ui.title.Title;
 import net.tridentsdk.world.opt.GameMode;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -38,7 +42,6 @@ import java.util.UUID;
  */
 @ThreadSafe
 public interface Player extends Entity, CmdSource {
-
     /**
      * The default flying speed for a player
      */
@@ -48,6 +51,33 @@ public interface Player extends Entity, CmdSource {
      * The default walking speed for a player
      */
     float DEFAULT_WALKING_SPEED = 0.699999988079071F;
+
+    /**
+     * Attempts to obtain a player by their IGN username.
+     *
+     * @param name the name to search the player by
+     * @return the player, or {@code null} if no player by
+     * the name is online
+     */
+    @Nullable
+    static Player byName(String name) {
+        return Impl.get().getByName(name);
+    }
+
+    /**
+     * Obtains a mapping of possible players by the given
+     * name.
+     *
+     * <p>The returned map is not modifiable.</p>
+     *
+     * @param search the search query
+     * @return a mapping of names to players with that name,
+     * or an empty map if no player has a similar name
+     */
+    @Nonnull
+    static Map<String, Player> search(String search) {
+        return Impl.get().findByName(search);
+    }
 
     /**
      * Obtains the name that this player had logged in.
