@@ -16,14 +16,17 @@
  */
 package net.tridentsdk.service;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents a transaction of a type between supported entities, including players via the
- * {@link net.tridentsdk.service.TransactionHandler}, and the callback which is executed for the transaction to occur
+ * {@link Transactions}, and the callback which is executed for the transaction to occur
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public abstract class Transaction<S, R> {
     private final Object item;
     private final S sender;
@@ -57,7 +60,7 @@ public abstract class Transaction<S, R> {
     public static <S, R> Transaction<S, R> quietTransaction(Object item, S sender, R receiver, int amount) {
         return new Transaction<S, R>(item, sender, receiver, amount) {
             @Override
-            void doTransaction(Type type) {
+            public void doTransaction(Type type) {
             }
         };
     }
@@ -67,7 +70,7 @@ public abstract class Transaction<S, R> {
      *
      * @param type the type of transaction occuring
      */
-    abstract void doTransaction(Type type);
+    public abstract void doTransaction(Type type);
 
     /**
      * The item type being transacted

@@ -17,15 +17,43 @@
 
 package net.tridentsdk.world;
 
-import net.tridentsdk.Position;
-import net.tridentsdk.Difficulty;
-import net.tridentsdk.GameMode;
 import net.tridentsdk.base.Block;
+import net.tridentsdk.base.BoundingBox;
+import net.tridentsdk.base.Position;
+import net.tridentsdk.effect.particle.ParticleEffect;
+import net.tridentsdk.effect.particle.ParticleEffectType;
+import net.tridentsdk.effect.sound.SoundEffect;
+import net.tridentsdk.effect.sound.SoundEffectType;
+import net.tridentsdk.effect.visual.VisualEffect;
+import net.tridentsdk.effect.visual.VisualEffectType;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.types.EntityType;
+import net.tridentsdk.registry.Registered;
+import net.tridentsdk.world.settings.WorldSettings;
 
+import javax.annotation.concurrent.ThreadSafe;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
+import java.util.function.Predicate;
 
+/**
+ * A Minecraft world
+ *
+ * <p>Worlds can be created using the following code:
+ * <pre>{@code
+ *      WorldLoader loader = WorldLoader.newLoader();
+ *      // Set world settings
+ *      loader.createWorld("New world");
+ * }</pre>
+ * You can use your own generator using {@link WorldLoader#newLoader(Class)}</p>
+ *
+ * <p>A collection of the worlds on the server can be obtained using {@link Registered#worlds()}</p>
+ *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
+ */
+@ThreadSafe
 public interface World extends Cloneable {
     /**
      * Gets the name of the world
@@ -35,60 +63,46 @@ public interface World extends Cloneable {
     String name();
 
     /**
-     * Gets the chunk on the given location, and generates the chunk if it does not exist.
+     * Obtains the loaded chunks in the world
      *
-     * @return The chunk on the given location
+     * @return the loaded chunks
+     */
+    Collection<Chunk> chunks();
+
+    /**
+     * Gets the chunk on the given position, and generates the chunk if it does not exist.
+     *
+     * @return The chunk on the given position
      */
     Chunk chunkAt(ChunkLocation loc, boolean generateIfNotFound);
 
     /**
      * Gets the chunk on the given x and z , and generates the chunk if it does not exist
      *
-     * @return The chunk on the given location
+     * @return The chunk on the given position
      */
     Chunk chunkAt(int x, int z, boolean generateIfNotFound);
 
     /**
-     * Generates the chunk on the given location
+     * Generates the chunk on the given position
      *
      * @return The generated chunk
      */
     Chunk generateChunk(int x, int z);
 
     /**
-     * Generates the chunk on the given location
+     * Generates the chunk on the given position
      *
      * @return The generated chunk
      */
-    Chunk generateChunk(ChunkLocation location);
+    Chunk generateChunk(ChunkLocation position);
 
     /**
-     * Gets the block on the given location
+     * Gets the block on the given position
      *
-     * @return The block on the given location
+     * @return The block on the given position
      */
-    Block blockAt(Position location);
-
-    /**
-     * Gets the dimension of a world
-     *
-     * @return The dimension of a world
-     */
-    Dimension dimension();
-
-    /**
-     * Gets the difficulty set in a world
-     *
-     * @return The difficulty set in a world
-     */
-    Difficulty difficulty();
-
-    /**
-     * Gets the default gamemode in a given chunk
-     *
-     * @return The default gamemode in a given chunk
-     */
-    GameMode defaultGamemode();
+    Block blockAt(Position position);
 
     /**
      * Obtains the loading handler which created this object, passed in from the constructor
@@ -98,95 +112,39 @@ public interface World extends Cloneable {
     WorldLoader loader();
 
     /**
-     * Gets the type of a world
+     * Gets the time in the world
      *
-     * @return The type of a world
-     */
-    LevelType levelType();
-
-    /**
-     * Gets the set boolean for the given gamerule
-     *
-     * @return The set boolean for the given gamerule
-     */
-    boolean gameRule(String rule);
-
-    /**
-     * Gets the time in a world
-     *
-     * @return The time in a world
+     * @return The time in the world
      */
     long time();
 
     /**
-     * Gets the spawn location of a world
+     * Gets the spawn position of the world
      *
-     * @return The spawn location in a world
+     * @return The spawn position in the world
      */
     Position spawnPosition();
 
     /**
-     * Checks if it is raining in a world
+     * Obtains the weather controller for the world
      *
-     * @return True if it is raining in a world
+     * @return the weather controller
      */
-    boolean isRaining();
+    WeatherConditions weather();
 
     /**
-     * Gets the number of ticks before raining is toggled
+     * Obtains the settings which modify the behavior of the world
      *
-     * @return The number of ticks before raining is toggled
+     * @return the world settigs
      */
-    int rainTime();
+    WorldSettings settings();
 
     /**
-     * Checks if it is thundering in a world
+     * Obtains the world border properties of this world
      *
-     * @return True if it is thundering in a world
+     * @return the border properties
      */
-    boolean isThundering();
-
-    /**
-     * Gets the number of ticks before thundering is toggled
-     *
-     * @return The number of ticks before thundering is toggled
-     */
-    int thunderTime();
-
-    /**
-     * Checks if structures are generated in a world (Stronghold, villages, dungeons)
-     *
-     * @return True if structures are generated in a world (Stronghold, villages, dungeons)
-     */
-    boolean canGenerateStructures();
-
-    /**
-     * Gets the size of the worldborder
-     *
-     * @return The size of the worldborder
-     */
-    double borderSize();
-
-    /**
-     * Gets the location where the worldborder is centered
-     *
-     * @return The location where the worldborder is centered
-     */
-    Position borderCenter();
-
-    /**
-     * Gets to what size a border is contracting, 60000000 by default
-     *
-     * @return To what size a border is contracting, 60000000 by default
-     */
-    int borderSizeContraction();
-
-    /**
-     * Gets the time the border has to contract to the contraction target
-     *
-     * @return The time the border has to contract to the contraction target
-     */
-    int borderSizeContractionTime();
+    WorldBorder border();
 
     /**
      * Spawns an entity in the world
@@ -202,4 +160,53 @@ public interface World extends Cloneable {
      * @return the entities in the world
      */
     Set<Entity> entities();
+
+    /**
+     * Find all entities that are colliding with the bounding box
+     *
+     * @param exclude the entity to exclude from searching
+     * @param boundingBox The bounding box to search in
+     * @param predicate Predicate to filter results
+     * @return List of entities inside the bounding box
+     */
+    ArrayList<Entity> getEntities(Entity exclude, BoundingBox boundingBox, Predicate<? super Entity> predicate);
+
+    /**
+     * Creates a new particle effect
+     *
+     * @param particle The particle to spawn
+     * @return A new instance of ParticleEffect
+     */
+    ParticleEffect spawnParticle(ParticleEffectType particle);
+
+    /**
+     * Creates a new visual effect
+     *
+     * @param visual The visual to spawn
+     * @return A new instance of VisualEffect
+     */
+    VisualEffect spawnVisual(VisualEffectType visual);
+
+    /**
+     * Creates a new sound effect
+     *
+     * @param sound The sound to play
+     * @return A new instance of VisualEffect
+     */
+    SoundEffect playSound(SoundEffectType sound);
+
+    /**
+     * Strikes lightning at the given location.
+     *
+     * @param location the location that the lightning will hit
+     * @param isEffect determines if the lightning is just a effect or can cause damage
+     */
+    void lightning(Position location, boolean isEffect);
+
+    /**
+     * Sets the time of the world
+     *
+     * @param time the new time of the world
+     */
+    void setTime(long time);
 }

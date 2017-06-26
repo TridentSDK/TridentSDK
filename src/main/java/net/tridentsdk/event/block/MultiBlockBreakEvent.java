@@ -25,6 +25,7 @@ import net.tridentsdk.event.Cancellable;
  * BlockBreak event listeners during explosions
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class MultiBlockBreakEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;

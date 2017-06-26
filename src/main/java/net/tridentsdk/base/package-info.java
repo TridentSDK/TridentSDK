@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * This package contains basic elements in Minecraft, such as Tiles, orientation, directions, instruments, and sounds
- */
 
+/**
+ * This package contains basic elements in Minecraft, such as blocks, orientation, directions, instruments, and sounds
+ */
 package net.tridentsdk.base;

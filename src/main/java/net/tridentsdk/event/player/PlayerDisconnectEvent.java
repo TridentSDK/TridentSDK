@@ -23,6 +23,7 @@ import net.tridentsdk.entity.living.Player;
  * Called when a player disconnects from the server
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerDisconnectEvent extends PlayerEvent {
     /**

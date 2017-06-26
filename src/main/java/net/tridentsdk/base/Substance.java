@@ -18,6 +18,7 @@
 package net.tridentsdk.base;
 
 import com.google.common.collect.Maps;
+import net.tridentsdk.effect.sound.SoundEffectType;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -26,9 +27,10 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * Enumeration of possible materials in minecraft
+ * Enumeration of possible substances in minecraft
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum Substance {
     /**
@@ -295,32 +297,32 @@ public enum Substance {
     FLINT("318"),
     PORK("319"),
     GRILLED_PORK("320"),
-    PAINTING("321"),
+    PAINTING("321"),                // Can place
     GOLDEN_APPLE("322"),
-    SIGN("323", 16),
-    WOOD_DOOR("324"),
+    SIGN("323", 16),                // Can place
+    WOOD_DOOR("324"),               // Can place
     BUCKET("325", 16),
-    WATER_BUCKET("326", 1),
-    LAVA_BUCKET("327", 1),
-    MINECART("328", 1),
+    WATER_BUCKET("326", 1),         // Can place
+    LAVA_BUCKET("327", 1),          // Can place
+    MINECART("328", 1),             // Can spawn
     SADDLE("329", 1),
-    IRON_DOOR("330", 1),
-    REDSTONE("331"),
-    SNOW_BALL("332", 16),
-    BOAT("333", 1),
+    IRON_DOOR("330", 1),            // Can place
+    REDSTONE("331"),                // Can place
+    SNOW_BALL("332", 16),           // Can spawn
+    BOAT("333", 1),                 // Can spawn
     LEATHER("334"),
     MILK_BUCKET("335", 1),
     CLAY_BRICK("336"),
     CLAY_BALL("337"),
-    SUGAR_CANE("338"),
+    SUGAR_CANE("338"),              // Can place
     PAPER("339"),
     BOOK("340"),
     SLIME_BALL("341"),
-    STORAGE_MINECART("342", 1),
-    POWERED_MINECART("343", 1),
-    EGG("344", 16),
+    STORAGE_MINECART("342", 1),     // Can spawn
+    POWERED_MINECART("343", 1),     // Can spawn
+    EGG("344", 16),                 // Can spawn
     COMPASS("345"),
-    FISHING_ROD("346", 1),
+    FISHING_ROD("346", 1),          // Can spawn
     WATCH("347"),
     GLOWSTONE_DUST("348"),
     RAW_FISH("349"),
@@ -328,13 +330,13 @@ public enum Substance {
     INK_SACK("351"),
     BONE("352"),
     SUGAR("353"),
-    CAKE("354", 1),
-    BED("355", 1),
-    DIODE("356"),
+    CAKE("354", 1),                 // Can place
+    BED("355", 1),                  // Can place
+    DIODE("356"),                   // Can place
     COOKIE("357"),
     MAP("358"),
     SHEARS("359", 1),
-    MELON("360"),
+    MELON("360"),                   // Can place
     PUMPKIN_SEEDS("361"),
     MELON_SEEDS("362"),
     RAW_BEEF("363"),
@@ -342,46 +344,46 @@ public enum Substance {
     RAW_CHICKEN("365"),
     COOKED_CHICKEN("366"),
     ROTTEN_FLESH("367"),
-    ENDER_PEARL("368", 16),
+    ENDER_PEARL("368", 16),         // Can spawn
     BLAZE_ROD("369"),
     GHAST_TEAR("370"),
     GOLD_NUGGET("371"),
-    POTION("373", 1),
+    POTION("373", 1),               // Can spawn
     GLASS_BOTTLE("374"),
     SPIDER_EYE("375"),
     FERMENTED_SPIDER_EYE("376"),
     BLAZE_POWDER("377"),
     MAGMA_CREAM("378"),
     BREWING_STAND_ITEM("379"),
-    CAULDRON_ITEM("380"),
-    EYE_OF_ENDER("381"),
+    CAULDRON_ITEM("380"),           // Can place?
+    EYE_OF_ENDER("381"),            // Can spawn
     SPECKLED_MELON("382"),
-    MONSTER_EGG("383"),
-    EXP_BOTTLE("384"),
+    MONSTER_EGG("383"),             // Can spawn
+    EXP_BOTTLE("384"),              // Can spawn
     FIREBALL("385"),
     BOOK_AND_QUILL("386", 1),
     WRITTEN_BOOK("387", 16),
     EMERALD("388"),
-    ITEM_FRAME("389"),
-    FLOWER_POT_ITEM("390"),
+    ITEM_FRAME("389"),              // Can spawn
+    FLOWER_POT_ITEM("390"),         // Applyable
     CARROT_ITEM("391"),
     POTATO_ITEM("392"),
     BAKED_POTATO("393"),
     POISONOUS_POTATO("394"),
     EMPTY_MAP("395"),
     GOLDEN_CARROT("396"),
-    SKULL_ITEM("397"),
+    SKULL_ITEM("397"),              // Can place
     CARROT_STICK("398", 1),
     NETHER_STAR("399"),
     PUMPKIN_PIE("400"),
-    FIREWORK("401"),
+    FIREWORK("401"),                // Can spawn
     FIREWORK_CHARGE("402"),
     ENCHANTED_BOOK("403", 1),
-    REDSTONE_COMPARATOR("404"),
+    REDSTONE_COMPARATOR("404"),     // Can place
     NETHER_BRICK_ITEM("405"),
     QUARTZ("406"),
-    EXPLOSIVE_MINECART("407", 1),
-    HOPPER_MINECART("408", 1),
+    EXPLOSIVE_MINECART("407", 1),   // Can spawn
+    HOPPER_MINECART("408", 1),      // Can spawn
     PRISMARINE_SHARD("409"),
     PRISMARINE_CRYSTALS("410"),
     RABBIT("411"),
@@ -395,15 +397,16 @@ public enum Substance {
     DIAMOND_BARDING("419", 1),
     LEASH("420"),
     NAME_TAG("421"),
-    COMMAND_MINECART("422", 1),
+    COMMAND_MINECART("422", 1),     // Can spawn
     MUTTON("423"),
     COOKED_MUTTON("424"),
-    BANNER("425"),
-    SPRUCE_DOOR("427"),
-    BIRCH_DOOR("428"),
-    JUNGLE_DOOR("429"),
-    ACACIA_DOOR("430"),
-    DARK_OAK_DOOR("431"),
+    BANNER("425"),                  // Can place?
+    SPRUCE_DOOR("427"),             // Can place
+    BIRCH_DOOR("428"),              // Can place
+    JUNGLE_DOOR("429"),             // Can place
+    ACACIA_DOOR("430"),             // Can place
+    DARK_OAK_DOOR("431"),           // Can place
+    SHIELD("442", 1),
     GOLD_RECORD("2256", 1),
     GREEN_RECORD("2257", 1),
     RECORD_3("2258", 1),
@@ -475,8 +478,8 @@ public enum Substance {
      * @param id
      * @return
      */
-    public static Substance fromId (byte id) {
-        return ids.get((int) id);
+    public static Substance fromId(int id) {
+        return ids.get(id);
     }
 
     /**
@@ -506,9 +509,9 @@ public enum Substance {
     }
 
     /**
-     * Checks if the material is a block
+     * Checks if the substance is a block
      *
-     * @return True if the material is a block
+     * @return True if the substance is a block
      */
     public boolean isBlock() {
         return Integer.parseInt(this.id) < 255;
@@ -524,9 +527,9 @@ public enum Substance {
     }
 
     /**
-     * Checks if the material is edible or not
+     * Checks if the substance is edible or not
      *
-     * @return True if the material is edible
+     * @return True if the substance is edible
      */
     public boolean isEdible() {
         switch (this) {
@@ -557,6 +560,7 @@ public enum Substance {
             case RABBIT_STEW:
             case MUTTON:
             case COOKED_MUTTON:
+            case POTION:
                 return true;
             default:
                 return false;
@@ -783,6 +787,27 @@ public enum Substance {
     }
 
     /**
+     * Returns whether or not the item is a weapon
+     *
+     * @return {@code true} if it is a weapon
+     */
+    public boolean isWeapon() {
+        if (isBlock()) return false;
+
+        switch (this) {
+            case WOOD_SWORD:
+            case STONE_SWORD:
+            case GOLD_SWORD:
+            case IRON_SWORD:
+            case DIAMOND_SWORD:
+            case BOW:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
      * Gets if a block is affected by gravity, and falls when you place it.
      *
      * @return True if the block is affected by gravity, and falls when you place it.
@@ -802,8 +827,321 @@ public enum Substance {
         }
     }
 
+    /**
+     * Returns the break sound of the block
+     *
+     * @return The break sound of the block
+     */
+    public SoundEffectType breakSound(){
+        if(!this.isBlock()){
+            return null;
+        }
+
+        switch(this){
+            case WOOL:
+            case CACTUS:
+            case CAKE_BLOCK:
+            case CARPET:
+                return SoundEffectType.BLOCK_CLOTH_BREAK;
+            case GRASS:
+            case SPONGE:
+            case LEAVES:
+            case LEAVES_2:
+            case LONG_GRASS:
+            case SAPLING:
+            case DEAD_BUSH:
+            case YELLOW_FLOWER:
+            case RED_ROSE:
+            case DOUBLE_PLANT:
+            case BROWN_MUSHROOM:
+            case RED_MUSHROOM:
+            case TNT:
+            case CROPS:
+            case SUGAR_CANE_BLOCK:
+            case VINE:
+            case MYCEL:
+            case WATER_LILY:
+            case HAY_BLOCK:
+                return SoundEffectType.BLOCK_GRASS_BREAK;
+            case DIRT:
+            case GRAVEL:
+            case SOIL:
+            case CLAY:
+                return SoundEffectType.BLOCK_GRAVEL_BREAK;
+            case SAND:
+            case SOUL_SAND:
+                return SoundEffectType.BLOCK_SAND_BREAK;
+            case SNOW:
+            case SNOW_BLOCK:
+                return SoundEffectType.BLOCK_SNOW_BREAK;
+            case WOOD:
+            case LOG:
+            case LOG_2:
+            case BED_BLOCK:
+            case BOOKSHELF:
+            case TORCH:
+            case FIRE:
+            case ACACIA_STAIRS:
+            case BIRCH_WOOD_STAIRS:
+            case DARK_OAK_STAIRS:
+            case JUNGLE_WOOD_STAIRS:
+            case SPRUCE_WOOD_STAIRS:
+            case WOOD_STAIRS:
+            case CHEST:
+            case WORKBENCH:
+            case LADDER:
+            case SIGN_POST:
+            case WALL_SIGN:
+            case LEVER:
+            case WOOD_PLATE:
+            case REDSTONE_TORCH_OFF:
+            case REDSTONE_TORCH_ON:
+            case FENCE:
+            case ACACIA_FENCE:
+            case BIRCH_FENCE:
+            case DARK_OAK_FENCE:
+            case JUNGLE_FENCE:
+            case SPRUCE_FENCE:
+            case ACACIA_FENCE_GATE:
+            case BIRCH_FENCE_GATE:
+            case DARK_OAK_FENCE_GATE:
+            case FENCE_GATE:
+            case JUNGLE_FENCE_GATE:
+            case SPRUCE_FENCE_GATE:
+            case PUMPKIN:
+            case PUMPKIN_STEM:
+            case MELON_BLOCK:
+            case MELON_STEM:
+            case JACK_O_LANTERN:
+            case DIODE_BLOCK_ON:
+            case DIODE_BLOCK_OFF:
+            case TRAP_DOOR:
+            case HUGE_MUSHROOM_1:
+            case HUGE_MUSHROOM_2:
+            case WOOD_STEP:
+            case WOOD_DOUBLE_STEP:
+            case COCOA:
+            case WOOD_BUTTON:
+            case GOLD_PLATE:
+            case IRON_PLATE:
+            case STONE_PLATE:
+            case REDSTONE_COMPARATOR_OFF:
+            case REDSTONE_COMPARATOR_ON:
+            case DAYLIGHT_DETECTOR:
+            case DAYLIGHT_DETECTOR_INVERTED:
+            case STANDING_BANNER:
+            case WALL_BANNER:
+            case ACACIA_DOOR:
+            case BIRCH_DOOR:
+            case DARK_OAK_DOOR:
+            case JUNGLE_DOOR:
+            case SPRUCE_DOOR:
+            case WOOD_DOOR:
+            case WOODEN_DOOR:
+                return SoundEffectType.BLOCK_WOOD_BREAK;
+            case GLASS:
+            case ICE:
+            case PACKED_ICE:
+            case GLOWSTONE:
+            case PORTAL:
+            case STAINED_GLASS:
+            case THIN_GLASS:
+            case STAINED_GLASS_PANE:
+            case SEA_LANTERN:
+                return SoundEffectType.BLOCK_GLASS_BREAK;
+            default:
+                return SoundEffectType.BLOCK_STONE_BREAK;
+        }
+    }
+
     public char asExtended () {
         return (char) (this.idInt << 4);
+    }
+
+    /**
+     * Returns the place sound of the block
+     *
+     * @return The place sound of the block
+     */
+    public SoundEffectType placeSound(){
+        if(!this.isBlock()){
+            return null;
+        }
+
+        switch(this){
+            case CROPS:
+            case WATER_LILY:
+            case REDSTONE_WIRE:
+            case IRON_DOOR:
+            case NETHER_WARTS:
+            case BED_BLOCK:
+            case PUMPKIN_STEM:
+            case MELON_STEM:
+            case COCOA:
+            case WALL_BANNER:
+            case STANDING_BANNER:
+            case ACACIA_DOOR:
+            case BIRCH_DOOR:
+            case DARK_OAK_DOOR:
+            case JUNGLE_DOOR:
+            case SPRUCE_DOOR:
+            case WOOD_DOOR:
+            case WOODEN_DOOR:
+                return null;
+            case WOOL:
+            case CACTUS:
+            case CAKE_BLOCK:
+            case CARPET:
+                return SoundEffectType.BLOCK_CLOTH_PLACE;
+            case GRASS:
+            case SPONGE:
+            case LEAVES:
+            case LEAVES_2:
+            case LONG_GRASS:
+            case SAPLING:
+            case DEAD_BUSH:
+            case YELLOW_FLOWER:
+            case RED_ROSE:
+            case DOUBLE_PLANT:
+            case BROWN_MUSHROOM:
+            case RED_MUSHROOM:
+            case TNT:
+            case SUGAR_CANE_BLOCK:
+            case VINE:
+            case MYCEL:
+            case HAY_BLOCK:
+                return SoundEffectType.BLOCK_GRASS_PLACE;
+            case DIRT:
+            case GRAVEL:
+            case SOIL:
+            case CLAY:
+                return SoundEffectType.BLOCK_GRAVEL_PLACE;
+            case SAND:
+            case SOUL_SAND:
+                return SoundEffectType.BLOCK_SAND_PLACE;
+            case SNOW:
+            case SNOW_BLOCK:
+                return SoundEffectType.BLOCK_SNOW_PLACE;
+            case WOOD:
+            case LOG:
+            case LOG_2:
+            case BOOKSHELF:
+            case TORCH:
+            case FIRE:
+            case ACACIA_STAIRS:
+            case BIRCH_WOOD_STAIRS:
+            case DARK_OAK_STAIRS:
+            case JUNGLE_WOOD_STAIRS:
+            case SPRUCE_WOOD_STAIRS:
+            case WOOD_STAIRS:
+            case CHEST:
+            case WORKBENCH:
+            case LADDER:
+            case SIGN_POST:
+            case WALL_SIGN:
+            case LEVER:
+            case WOOD_PLATE:
+            case REDSTONE_TORCH_OFF:
+            case REDSTONE_TORCH_ON:
+            case FENCE:
+            case ACACIA_FENCE:
+            case BIRCH_FENCE:
+            case DARK_OAK_FENCE:
+            case JUNGLE_FENCE:
+            case SPRUCE_FENCE:
+            case ACACIA_FENCE_GATE:
+            case BIRCH_FENCE_GATE:
+            case DARK_OAK_FENCE_GATE:
+            case FENCE_GATE:
+            case JUNGLE_FENCE_GATE:
+            case SPRUCE_FENCE_GATE:
+            case PUMPKIN:
+            case MELON_BLOCK:
+            case JACK_O_LANTERN:
+            case DIODE_BLOCK_ON:
+            case DIODE_BLOCK_OFF:
+            case TRAP_DOOR:
+            case HUGE_MUSHROOM_1:
+            case HUGE_MUSHROOM_2:
+            case WOOD_STEP:
+            case WOOD_DOUBLE_STEP:
+            case WOOD_BUTTON:
+            case GOLD_PLATE:
+            case IRON_PLATE:
+            case STONE_PLATE:
+            case REDSTONE_COMPARATOR_OFF:
+            case REDSTONE_COMPARATOR_ON:
+            case DAYLIGHT_DETECTOR:
+            case DAYLIGHT_DETECTOR_INVERTED:
+                return SoundEffectType.BLOCK_WOOD_PLACE;
+            case GLASS:
+            case ICE:
+            case PACKED_ICE:
+            case GLOWSTONE:
+            case PORTAL:
+            case STAINED_GLASS:
+            case THIN_GLASS:
+            case STAINED_GLASS_PANE:
+            case SEA_LANTERN:
+                return SoundEffectType.BLOCK_STONE_PLACE;
+            case ANVIL:
+                return SoundEffectType.BLOCK_ANVIL_PLACE;
+            default:
+                return SoundEffectType.BLOCK_STONE_PLACE;
+        }
+    }
+
+    public boolean isFunctional(){
+        switch(this){
+            case DISPENSER:
+            case NOTE_BLOCK:
+            case BED_BLOCK:
+            case CHEST:
+            case WORKBENCH:
+            case FURNACE:
+            case BURNING_FURNACE:
+            case LEVER:
+            case WOOD_BUTTON:
+            case STONE_BUTTON:
+            case ACACIA_DOOR:
+            case BIRCH_DOOR:
+            case DARK_OAK_DOOR:
+            case JUNGLE_DOOR:
+            case SPRUCE_DOOR:
+            case WOOD_DOOR:
+            case WOODEN_DOOR:
+            case TRAP_DOOR:
+            case DIODE_BLOCK_OFF:
+            case DIODE_BLOCK_ON:
+            case ANVIL:
+            case DROPPER:
+            case ACACIA_FENCE_GATE:
+            case BIRCH_FENCE_GATE:
+            case DARK_OAK_FENCE_GATE:
+            case FENCE_GATE:
+            case JUNGLE_FENCE_GATE:
+            case SPRUCE_FENCE_GATE:
+            case HOPPER:
+            case REDSTONE_COMPARATOR_ON:
+            case REDSTONE_COMPARATOR_OFF:
+            case ENCHANTMENT_TABLE:
+            case TRAPPED_CHEST:
+            case ENDER_CHEST:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean canBeReplaced(){
+        switch(this){
+            case LONG_GRASS:
+            case DEAD_BUSH:
+            case SNOW:
+                return true;
+            default:
+                return false;
+        }
     }
 
 }

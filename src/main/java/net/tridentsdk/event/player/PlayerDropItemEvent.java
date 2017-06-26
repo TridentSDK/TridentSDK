@@ -19,12 +19,13 @@ package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Occurs when a player drops an item out of their inventory, usually by default pressing 'q'
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerDropItemEvent extends PlayerEvent implements Cancellable {
     private final Item item;

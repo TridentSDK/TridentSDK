@@ -16,20 +16,20 @@
  */
 package net.tridentsdk.reflect;
 
-import javax.annotation.Nonnull;
-
 /**
  * Produces an object for a particular injection class
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@FunctionalInterface
 public interface Producer<T> {
     /**
      * Produces an empty inject object
      *
      * @return the produced object
      */
-    public T produce();
+    T produce();
 
     /**
      * Produce an object for an {@link Inject#meta()} class provided by the annotation
@@ -42,6 +42,7 @@ public interface Producer<T> {
      * @param metadata the provided class in the {@link Inject} annotation
      * @return the produced object
      */
-    @Nonnull
-    public T produce(Class<?> metadata);
+    default T produce(Class<?> metadata) {
+        return produce();
+    }
 }

@@ -18,19 +18,20 @@
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Block;
-import net.tridentsdk.base.BlockOrientation;
+import net.tridentsdk.base.BlockDirection;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Called whenever a Block is broken
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class BlockBreakEvent extends BlockEvent implements Cancellable {
     private final Player player;
-    private final BlockOrientation blockFace;
+    private final BlockDirection blockFace;
     private final Item itemInHand;
     private boolean cancelled;
 
@@ -40,7 +41,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      * @param blockFace  BlockFace
      * @param itemInHand ItemStack
      */
-    public BlockBreakEvent(Player player, Block block, BlockOrientation blockFace, Item itemInHand) {
+    public BlockBreakEvent(Player player, Block block, BlockDirection blockFace, Item itemInHand) {
         super(block);
         this.player = player;
         this.blockFace = blockFace;
@@ -71,7 +72,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
      *
      * @return BlockFlace of the clicked block
      */
-    public BlockOrientation blockFace() {
+    public BlockDirection blockFace() {
         return this.blockFace;
     }
 

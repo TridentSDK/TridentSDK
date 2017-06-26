@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.util.Vector;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,42 +25,42 @@ public class BlockOrientationTest {
 
     @Test
     public void testGetDifference() throws Exception {
-        Assert.assertEquals(BlockOrientation.NORTH.difference(), new Vector(0, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH.difference(), new Vector(0, 0, 1));
-        Assert.assertEquals(BlockOrientation.EAST.difference(), new Vector(1, 0, 0));
-        Assert.assertEquals(BlockOrientation.WEST.difference(), new Vector(-1, 0, 0));
-        Assert.assertEquals(BlockOrientation.NORTH_EAST.difference(), new Vector(1, 0, -1));
-        Assert.assertEquals(BlockOrientation.NORTH_WEST.difference(), new Vector(-1, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH_EAST.difference(), new Vector(1, 0, 1));
-        Assert.assertEquals(BlockOrientation.SOUTH_WEST.difference(), new Vector(-1, 0, 1));
-        Assert.assertEquals(BlockOrientation.TOP.difference(), new Vector(0, 1, 0));
-        Assert.assertEquals(BlockOrientation.BOTTOM.difference(), new Vector(0, -1, 0));
-        Assert.assertEquals(BlockOrientation.SELF.difference(), new Vector(0, 0, 0));
+        Assert.assertEquals(BlockDirection.NORTH.difference(), new Vector(0, 0, -1));
+        Assert.assertEquals(BlockDirection.SOUTH.difference(), new Vector(0, 0, 1));
+        Assert.assertEquals(BlockDirection.EAST.difference(), new Vector(1, 0, 0));
+        Assert.assertEquals(BlockDirection.WEST.difference(), new Vector(-1, 0, 0));
+        Assert.assertEquals(BlockDirection.NORTH_EAST.difference(), new Vector(1, 0, -1));
+        Assert.assertEquals(BlockDirection.NORTH_WEST.difference(), new Vector(-1, 0, -1));
+        Assert.assertEquals(BlockDirection.SOUTH_EAST.difference(), new Vector(1, 0, 1));
+        Assert.assertEquals(BlockDirection.SOUTH_WEST.difference(), new Vector(-1, 0, 1));
+        Assert.assertEquals(BlockDirection.TOP.difference(), new Vector(0, 1, 0));
+        Assert.assertEquals(BlockDirection.BOTTOM.difference(), new Vector(0, -1, 0));
+        Assert.assertEquals(BlockDirection.SELF.difference(), new Vector(0, 0, 0));
     }
 
     @Test
     public void testApply() throws Exception {
-        Assert.assertEquals(BlockOrientation.NORTH.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.NORTH.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 0, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.SOUTH.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 0, 0, 1));
-        Assert.assertEquals(BlockOrientation.EAST.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.EAST.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 1, 0, 0));
-        Assert.assertEquals(BlockOrientation.WEST.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.WEST.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, -1, 0, 0));
-        Assert.assertEquals(BlockOrientation.NORTH_EAST.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.NORTH_EAST.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 1, 0, -1));
-        Assert.assertEquals(BlockOrientation.NORTH_WEST.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.NORTH_WEST.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, -1, 0, -1));
-        Assert.assertEquals(BlockOrientation.SOUTH_EAST.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.SOUTH_EAST.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 1, 0, 1));
-        Assert.assertEquals(BlockOrientation.SOUTH_WEST.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.SOUTH_WEST.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, -1, 0, 1));
-        Assert.assertEquals(BlockOrientation.TOP.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.TOP.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 0, 1, 0));
-        Assert.assertEquals(BlockOrientation.BOTTOM.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.BOTTOM.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 0, -1, 0));
-        Assert.assertEquals(BlockOrientation.SELF.apply(Position.create(null, 0d, 0d, 0d)),
+        Assert.assertEquals(BlockDirection.SELF.apply(Position.create(null, 0d, 0d, 0d)),
                 Position.create(null, 0, 0, 0));
     }
 }

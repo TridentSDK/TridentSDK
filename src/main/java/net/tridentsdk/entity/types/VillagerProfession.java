@@ -21,6 +21,7 @@ package net.tridentsdk.entity.types;
  * Role of the villager in the village
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum VillagerProfession {
     /**

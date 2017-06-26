@@ -19,8 +19,10 @@ package net.tridentsdk.util;
 
 import com.google.common.base.Preconditions;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Arrays;
 
+@NotThreadSafe
 public final class NibbleArray {
     private final byte[] data;
 
@@ -46,27 +48,13 @@ public final class NibbleArray {
     }
 
     public byte get(int index) {
-        byte b = data[index / 2];
-
-        if ((index & 1) == 0) {
-            return (byte) (b & 0x0f);
-        }
-
-        return (byte) ((b & 0xf0) >> 4);
+        return get(data, index);
     }
 
     public static void set(byte[] data, int index, byte value) {
-        value &= 0xf;
-
-        int half = index / 2;
-        byte prev = data[half];
-
-        if ((index & 1) == 0) {
-            data[half] = (byte) ((prev & 0xf0) | value);
-            return;
-        }
-
-        data[half] = (byte) ((prev & 0x0f) | value);
+        value &= 0xF;
+        data[index / 2] &= (byte) (0xF << ((index + 1) % 2 * 4));
+        data[index / 2] |= (byte) (value << (index % 2 * 4));
     }
 
     public void fill(byte value) {
@@ -80,14 +68,7 @@ public final class NibbleArray {
         System.arraycopy(source, 0, data, 0, source.length);
     }
 
-
     public static byte get (byte[] source, int index) {
-        byte b = source[index / 2];
-
-        if ((index & 1) == 0) {
-            return (byte) (b & 0x0f);
-        }
-
-        return (byte) ((b & 0xf0) >> 4);
+        return (byte) (source[index / 2] >> ((index) % 2 * 4) & 0xF);
     }
 }

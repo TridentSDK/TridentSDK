@@ -20,6 +20,7 @@ package net.tridentsdk.entity.traits;
  * Represents various settings of pace of which the player can move at
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface PlayerSpeed {
     /**

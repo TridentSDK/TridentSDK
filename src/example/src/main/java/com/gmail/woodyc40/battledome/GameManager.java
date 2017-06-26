@@ -1,11 +1,10 @@
 package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
+import net.tridentsdk.config.Config;
 import net.tridentsdk.config.ConfigSection;
-import net.tridentsdk.config.JsonConfig;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.factory.Factories;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.util.WeakEntity;
 
 import javax.annotation.Nullable;
@@ -17,22 +16,25 @@ import java.util.Map;
  * @author Pierre C
  */
 public class GameManager {
-    // TODO plugin storage config way to verbose
-    // TODO find values in a config/section
+    public final String SNAP_SHOTS = "snapshots";
+    private final String STORED_COUNT = "counter";
+    private final Map<Integer, Game> GAMES = Maps.newHashMap();
+    private final Map<WeakEntity<Player>, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
+    private final Config storage = new Config(Plugin.instance(BattleDome.class), "games.json");
+    private int counter = 0;
 
-    public static final String SNAP_SHOTS = "snapshots";
-    private static final String STORED_COUNT = "counter";
-    private static final Map<Integer, Game> GAMES = Maps.newHashMap();
-    private static final Map<WeakEntity<Player>, PlayerSnapshot> SNAPSHOTS = Maps.newHashMap();
-    private static final JsonConfig storage = Factories.configs().
-            createConfig(TridentPlugin.instance(BattleDome.class).configDirectory() + "games.json");
-    private static int counter = 0;
+    private static GameManager instance;
 
     private GameManager() {
     }
 
-    public static GameManager newHandler() {
-        return new GameManager();
+    public static GameManager instance() {
+        GameManager manager = instance;
+        if (manager == null) {
+            manager = instance = new GameManager();
+        }
+
+        return manager;
     }
 
     ////////////////////////////////////////////////// GAME MANAGEMENT /////////////////////////////////////////////////
@@ -82,13 +84,10 @@ public class GameManager {
         counter = storage.getInt(STORED_COUNT);
 
         // Load each arena ID
-        for (int i = 0; i <= counter; i++) {
-            // Once we reach the tail, it becomes null
-            String tag = String.valueOf(i);
-            if (!storage.contains(tag))
-                break;
+        for (String key : storage.keys()) {
+            int i = Integer.parseInt(key);
 
-            GAMES.put(i, Game.newGame(i, storage.getObject(tag, Game.class)));
+            GAMES.put(i, Game.newGame(i, storage.getObject(key, Game.class)));
         }
     }
 
@@ -117,7 +116,7 @@ public class GameManager {
     }
 
     public Game removePlayer(Player player) {
-        PlayerSnapshot snapshot = SNAPSHOTS.remove(WeakEntity.finderOf(player));
+        PlayerSnapshot snapshot = SNAPSHOTS.remove(WeakEntity.searchFor(player));
         if (snapshot == null)
             return null;
 
@@ -134,13 +133,13 @@ public class GameManager {
 
     @Nullable
     public Game findGame(Player player) {
-        PlayerSnapshot snapshot = SNAPSHOTS.get(WeakEntity.finderOf(player));
+        PlayerSnapshot snapshot = SNAPSHOTS.get(WeakEntity.searchFor(player));
         if (snapshot == null)
             return null;
         return GAMES.get(snapshot.gameId());
     }
 
     public boolean isPlaying(Player player) {
-        return SNAPSHOTS.containsKey(WeakEntity.finderOf(player));
+        return SNAPSHOTS.containsKey(WeakEntity.searchFor(player));
     }
 }

@@ -19,9 +19,10 @@ package net.tridentsdk.meta.nbt;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class ByteArrayTag extends NBTTag {
-    byte[] value;
+    volatile byte[] value;
 
     public ByteArrayTag(String name) {
         super(name);

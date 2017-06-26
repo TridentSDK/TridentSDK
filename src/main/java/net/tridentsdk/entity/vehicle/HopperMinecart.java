@@ -17,14 +17,14 @@
 
 package net.tridentsdk.entity.vehicle;
 
-import net.tridentsdk.entity.traits.InventoryHolder;
+import net.tridentsdk.entity.traits.WindowHolder;
 
 /**
  * Represents a Hopper Minecart
  *
  * @author TridentSDK Team
  */
-public interface HopperMinecart extends MinecartBase, InventoryHolder {
+public interface HopperMinecart extends MinecartBase, WindowHolder {
 
     /**
      * Gets the transfer cooldown of this Hopper Minecart

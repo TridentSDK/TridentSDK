@@ -24,6 +24,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a block is destroyed due to fire
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class BlockBurnEvent extends BlockEvent implements Cancellable {
     private boolean cancelled;

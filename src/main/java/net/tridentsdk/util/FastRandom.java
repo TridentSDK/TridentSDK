@@ -17,8 +17,10 @@
 
 package net.tridentsdk.util;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
- * A fast random class which generates medium-quality pseudo-random values
+ * A fast random class which generates low-quality pseudo-random values
  *
  * <p>Normally such a class should have been implemented upon using the time system with currentTimeMills(), however
  * this was avoided for two reasons:
@@ -36,8 +38,10 @@ package net.tridentsdk.util;
  * a hash do not create a new object, rather it does not hash the nanoTime at all.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
-public class FastRandom {
+@ThreadSafe
+public final class FastRandom {
     private FastRandom() {
     }
 
@@ -66,7 +70,7 @@ public class FastRandom {
         x ^= (x >>> 35);
         x ^= (x << 4);
 
-        long rand = x % upper;
+        long rand = x & (upper - 1);
         return (rand > 0) ? rand : -rand;
     }
 
@@ -97,7 +101,7 @@ public class FastRandom {
         x ^= (x >>> 35);
         x ^= (x << 4);
 
-        long rand = x % upper;
+        long rand = x & (upper - 1);
         return (rand > 0) ? rand : -rand;
     }
 }

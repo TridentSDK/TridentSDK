@@ -17,19 +17,23 @@
 
 package net.tridentsdk.plugin.cmd;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+import net.tridentsdk.Console;
+
 /**
  * ANSI codes for coloring the console
  *
- * <p>Don't use this class if you need console colors. Use {@link net.tridentsdk.plugin.cmd.ServerConsole}</p>
+ * <p>Don't use this class if you need console colors. Use {@link Console}</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@Immutable
 public final class PlatformColor {
     /**
      * An empty string
      */
     public static final String EMPTY = "";
-    private static final String ESC = String.valueOf((char) 0x1B);
 
     private PlatformColor() {
     }
@@ -79,14 +83,12 @@ public final class PlatformColor {
                 return "\u001B[36m";
             case "white":
                 return "\u001B[37m";
-            case "cursoreol2":
-                return ESC + "[2C";
         }
 
         return EMPTY;
     }
 
-    private static boolean isWindows() {
+    public static boolean isWindows() {
         String os = System.getProperty("os.name");
         return os.toLowerCase().contains("windows");
     }

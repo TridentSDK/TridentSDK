@@ -17,6 +17,7 @@
 
 package net.tridentsdk.world;
 
+import net.tridentsdk.world.settings.LevelType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,11 +34,11 @@ public class LevelTypeTest {
 
     @Test
     public void testGetLevelType() throws Exception {
-        Assert.assertEquals(LevelType.levelTypeOf("default"), LevelType.DEFAULT);
-        Assert.assertEquals(LevelType.levelTypeOf("flat"), LevelType.FLAT);
-        Assert.assertEquals(LevelType.levelTypeOf("largeBiomes"), LevelType.LARGE_BIOMES);
-        Assert.assertEquals(LevelType.levelTypeOf("amplified"), LevelType.AMPLIFIED);
-        Assert.assertEquals(LevelType.levelTypeOf("default_1_1"), LevelType.DEFAULT_1_1);
-        Assert.assertEquals(LevelType.levelTypeOf("invalid"), LevelType.DEFAULT);
+        Assert.assertEquals(LevelType.of("default"), LevelType.DEFAULT);
+        Assert.assertEquals(LevelType.of("flat"), LevelType.FLAT);
+        Assert.assertEquals(LevelType.of("largeBiomes"), LevelType.LARGE_BIOMES);
+        Assert.assertEquals(LevelType.of("amplified"), LevelType.AMPLIFIED);
+        Assert.assertEquals(LevelType.of("default_1_1"), LevelType.DEFAULT_1_1);
+        Assert.assertEquals(LevelType.of("invalid"), LevelType.DEFAULT);
     }
 }

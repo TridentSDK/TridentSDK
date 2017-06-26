@@ -17,7 +17,7 @@
 /**
  * Configuration wrappers over JSON/facilities provided by GSON
  *
- * <p>Configs can be used and created using the {@link net.tridentsdk.config.JsonConfig}</p>
+ * <p>Configs can be used and created using the {@link net.tridentsdk.config.Config}</p>
  *
  * <p>The Factories API also contains access methods to JSON configurations, which can be accessed using
  * {@link net.tridentsdk.factory.Factories#configs()}</p>

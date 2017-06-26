@@ -24,6 +24,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a Player's hunger level changes
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerHungerEvent extends PlayerEvent implements Cancellable {
     private double feed;

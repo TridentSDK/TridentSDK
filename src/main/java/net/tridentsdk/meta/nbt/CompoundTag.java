@@ -18,16 +18,19 @@
 package net.tridentsdk.meta.nbt;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class CompoundTag extends NBTTag implements TagContainer {
-    final Map<String, NBTTag> tags = Maps.newHashMap(); //Hashmap for quick lookup with names
+    // Will work for now
+    final Map<String, NBTTag> tags = Collections.synchronizedMap(new LinkedHashMap<>()); //Hashmap for quick lookup with names
 
     public CompoundTag(String name) {
         super(name);

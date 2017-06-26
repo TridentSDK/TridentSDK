@@ -17,24 +17,19 @@
 
 package net.tridentsdk;
 
-import net.tridentsdk.config.JsonConfig;
-import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.entity.living.ai.AiHandler;
-import net.tridentsdk.plugin.cmd.ServerConsole;
-import net.tridentsdk.world.World;
-import net.tridentsdk.world.WorldLoader;
-import net.tridentsdk.world.gen.AbstractGenerator;
-import org.slf4j.Logger;
+import net.tridentsdk.config.Config;
+import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.net.InetAddress;
-import java.util.Map;
-import java.util.UUID;
 
 /**
- * The access to the server internals
+ * The access point to the server information
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Server {
     /**
      * Gets the port the server currently runs on
@@ -44,40 +39,39 @@ public interface Server {
     int port();
 
     /**
-     * The server's console
-     *
-     * @return the server console
-     */
-    ServerConsole console();
-
-    /**
-     * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
-     */
-    void shutdown();
-
-    /**
-     * Get all the worlds loaded on the server
-     *
-     * @return a Map of all the worlds, where the String is the world name
-     */
-    Map<String, World> worlds();
-
-    /**
-     * Creates a new world loader, which can use its own generator
-     *
-     * <p>The provided class must have a no-arg constructor.</p>
-     *
-     * @param generator the generator to use, a class to defensively protect the signature
-     * @return the new world loader
-     */
-    WorldLoader newWorldLoader(Class<? extends AbstractGenerator> generator);
-
-    /**
      * Gets the Internet Address of this server
      *
      * @return the address of this server
      */
-    InetAddress serverIp();
+    InetAddress ip();
+
+    /**
+     * The server's console
+     *
+     * @return the server console
+     */
+    Console console();
+
+    /**
+     * Gets the server's console logger for the this class
+     *
+     * @return the server's logger
+     */
+    TridentLogger logger();
+
+    /**
+     * The server configuration file
+     *
+     * @return the server config
+     */
+    Config config();
+
+    /**
+     * Gets the server's display information on the server list
+     *
+     * @return the display information manager
+     */
+    PingInfo info();
 
     /**
      * Gets the version of Trident that the server is currently running
@@ -87,36 +81,7 @@ public interface Server {
     String version();
 
     /**
-     * Gets the server's display information on the server list
-     *
-     * @return the display information manager
+     * Closes the connections of the server, disconnects all clients, and unloads everything, then exits the JVM.
      */
-    DisplayInfo info();
-
-    /**
-     * Gets the server's console logger for the this class
-     *
-     * @return the server's logger
-     */
-    Logger logger();
-
-    /**
-     * The server configuration file
-     *
-     * @return the server config
-     */
-    JsonConfig config();
-
-    /**
-     * Get the player by UUID
-     *
-     * @param id the UUID to find the player with
-     * @return the player who has the specified UUID
-     */
-    Player playerBy(UUID id);
-
-    /**
-     * Returns the AI handler for the server, determines what AI entities use
-     */
-    AiHandler aiHandler();
+    void shutdown();
 }

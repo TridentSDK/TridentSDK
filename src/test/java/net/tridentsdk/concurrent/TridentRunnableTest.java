@@ -17,12 +17,12 @@
 
 package net.tridentsdk.concurrent;
 
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TridentRunnableTest {
-    private final TridentRunnable runnable = new TridentRunnable() {
+    private final ScheduledRunnable runnable = new ScheduledRunnable() {
         @Override
         public void run() {
         }
@@ -54,17 +54,17 @@ public class TridentRunnableTest {
             }
 
             @Override
-            public SchedulerType type() {
-                return SchedulerType.ASYNC_LATER;
+            public TaskType type() {
+                return TaskType.ASYNC_LATER;
             }
 
             @Override
-            public TridentRunnable runnable() {
+            public ScheduledRunnable runnable() {
                 return runnable;
             }
 
             @Override
-            public TridentPlugin owner() {
+            public Plugin owner() {
                 return null;
             }
 
@@ -80,7 +80,7 @@ public class TridentRunnableTest {
         runnable.setInterval(21);
         Assert.assertEquals(runnable.interval(), 21);
         Assert.assertEquals(runnable.id(), 1);
-        Assert.assertEquals(runnable.task(), task);
+        Assert.assertEquals(runnable.asScheduledTask(), task);
         runnable.cancel(); // Just for the heck of it
     }
 }

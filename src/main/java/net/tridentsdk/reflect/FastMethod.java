@@ -24,6 +24,7 @@ import net.tridentsdk.docs.InternalUseOnly;
  * Wrapper for the provided ReflectASM method library
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class FastMethod {
     private final MethodAccess access;

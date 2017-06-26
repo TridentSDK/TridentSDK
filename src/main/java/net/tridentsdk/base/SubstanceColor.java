@@ -21,6 +21,7 @@ package net.tridentsdk.base;
  * Represents a color in minecraft
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum SubstanceColor {
     WHITE(0), ORANGE(1), MAGENTA(2), LIGHT_BLUE(3),
@@ -36,23 +37,27 @@ public enum SubstanceColor {
     }
 
     /**
+     * Gets a substance color from the byte value
+     *
+     * @param v the byte value
+     * @return the substance color with that value, or {@code null} if it is out of bounds (bound: 0 <= x <= 15)
+     */
+    public static SubstanceColor of(byte v) {
+        for (SubstanceColor color : values()) {
+            if (color.asInt() == v) {
+                return color;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Gets the color value as an int
      *
      * @return the value given to the color by the protocol
      */
     public int asInt() {
         return value;
-    }
-
-    /**
-     * Returns the color as a minecraft byte which can be used in entity
-     *
-     * @param index the metadata index, specified in the protocol
-     * @return the byte to send as metadata
-     */
-    // TODO I suck at this
-    public byte[] asBytes(int index) {
-        // Don't simplify this
-        return new byte[] { (byte) ((index & 0x1F) & 0xFF), (byte) value };
     }
 }

@@ -17,13 +17,14 @@
 
 package net.tridentsdk.concurrent;
 
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 
 /**
  * The internal representation of a scheduled task, implemented inside the scheduler to manage the wrapping for {@link
- * net.tridentsdk.concurrent.TridentRunnable}
+ * ScheduledRunnable}
  *
- * @author The TridentSDk Team
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface ScheduledTask extends Runnable {
     /**
@@ -50,21 +51,21 @@ public interface ScheduledTask extends Runnable {
      *
      * @return the type the task is scheduled according to
      */
-    SchedulerType type();
+    TaskType type();
 
     /**
      * The execution runnable, invoked when the task is scheduled to occur
      *
      * @return the runnable that is run at scheduled time
      */
-    TridentRunnable runnable();
+    ScheduledRunnable runnable();
 
     /**
      * The plugin that scheduled the task, or passed in when scheduled
      *
      * @return the scheduling plugin
      */
-    TridentPlugin owner();
+    Plugin owner();
 
     /**
      * Cancels the task, only needed for repeating tasks. Scheduled later and run tasks are auto cancelled.

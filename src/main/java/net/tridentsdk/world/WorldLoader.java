@@ -17,14 +17,51 @@
 
 package net.tridentsdk.world;
 
-import net.tridentsdk.world.gen.AbstractGenerator;
+import net.tridentsdk.registry.Registered;
+import net.tridentsdk.world.gen.ChunkGenerator;
+import net.tridentsdk.world.gen.FeatureGenerator;
+import net.tridentsdk.world.settings.WorldCreateOptions;
+
+import javax.annotation.concurrent.ThreadSafe;
+import java.util.List;
 
 /**
  * Manages the worlds for the server
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface WorldLoader {
+    /**
+     * Creates a new world loader using the default generator
+     *
+     * @return the new world loader
+     */
+    static WorldLoader newLoader() {
+        return Registered.impl().newLoader(null);
+    }
+
+    /**
+     * Creates a new world loader using the generator specified
+     *
+     * @param clas the class of the generator to use
+     * @return the new world loaer
+     */
+    static WorldLoader newLoader(Class<? extends ChunkGenerator> clas) {
+        return Registered.impl().newLoader(clas);
+    }
+
+    /**
+     * Checks if the world has been loaded yet
+     *
+     * @param world the name of the folder to check
+     * @return {@code true} if the world has been loaded
+     */
+    static boolean worldExists(String world) {
+        return Registered.worlds().containsKey(world);
+    }
+
     /**
      * Load an existing world inside the server's file container
      *
@@ -32,13 +69,6 @@ public interface WorldLoader {
      * @return the world loaded
      */
     World load(String world);
-
-    /**
-     * Writes the changes made to the world to the world folder
-     *
-     * @param world the world to save the changes
-     */
-    void save(World world);
 
     /**
      * Creates a new world
@@ -49,50 +79,43 @@ public interface WorldLoader {
     World createWorld(String name);
 
     /**
-     * Checks if the world has been loaded yet
-     *
-     * @param world the name of the folder to check
-     * @return {@code true} if the world has been loaded
+     * Writes the changes made to the world to the world folder
      */
-    boolean worldExists(String world);
+    void save();
 
     /**
      * Checks the existence of a chunk in a world, based on the world directory
      *
-     * @param world the world which to check the existence of a chunk
      * @param x     the X coordinate of the chunk
      * @param z     the Z coordinate of the chunk
      * @return {@code true} if the chunk is not present within the world directory
      */
-    boolean chunkExists(World world, int x, int z);
+    boolean chunkExists(int x, int z);
 
     /**
      * Checks the existence of a chunk in a world, based on the world directory
      *
-     * @param world    the world which to check the existence of a chunk
-     * @param location the location which the chunk should be checked for existence
+     * @param position the position which the chunk should be checked for existence
      * @return {@code true} if the chunk is not present within the world directory
      */
-    boolean chunkExists(World world, ChunkLocation location);
+    boolean chunkExists(ChunkLocation position);
 
     /**
      * Loads the chunk into the world
      *
-     * @param world the world which to load the chunk
      * @param x     the X of the chunk
      * @param z     the Z of the chunk
      * @return the chunk which was loaded
      */
-    Chunk loadChunk(World world, int x, int z);
+    Chunk loadChunk(int x, int z);
 
     /**
      * Loads the chunk into the world
      *
-     * @param world    the world which to load the chunk
-     * @param location the location of the chunk to load
+     * @param position the position of the chunk to load
      * @return the chunk which was loaded
      */
-    Chunk loadChunk(World world, ChunkLocation location);
+    Chunk loadChunk(ChunkLocation position);
 
     /**
      * Writes the changes in the chunk to the world file
@@ -102,9 +125,23 @@ public interface WorldLoader {
     void saveChunk(Chunk chunk);
 
     /**
+     * Options used for creating the world
+     *
+     * @return the world creation options
+     */
+    WorldCreateOptions options();
+
+    /**
      * The generator used to load new chunks used by this world loader
      *
      * @return the generation abstraction to generated chunks
      */
-    AbstractGenerator generator();
+    ChunkGenerator generator();
+
+    /**
+     * Obtains a mutable collection of the overlay brushes used to generate the world
+     *
+     * @return the overlay brushes
+     */
+    List<FeatureGenerator> brushes();
 }

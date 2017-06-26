@@ -3016,7 +3016,7 @@ public class SubstanceTest {
         Assert.assertEquals(BLAZE_ROD.isEdible(), false);
         Assert.assertEquals(GHAST_TEAR.isEdible(), false);
         Assert.assertEquals(GOLD_NUGGET.isEdible(), false);
-        Assert.assertEquals(POTION.isEdible(), false);
+        Assert.assertEquals(POTION.isEdible(), true);
         Assert.assertEquals(GLASS_BOTTLE.isEdible(), false);
         Assert.assertEquals(SPIDER_EYE.isEdible(), true);
         Assert.assertEquals(FERMENTED_SPIDER_EYE.isEdible(), false);

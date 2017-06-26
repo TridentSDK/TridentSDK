@@ -1,7 +1,7 @@
 package com.gmail.woodyc40.battledome;
 
 import com.google.common.collect.Maps;
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Listener;
@@ -23,10 +23,14 @@ public class BattleListener implements Listener {
 
     // Listeners loaded after the plugin has
     // therefore, this is safe no matter what
-    private final GameManager manager = GameManager.newHandler();
+    private final GameManager manager = GameManager.instance();
 
     public void putSession(Player player, Game game) {
         sessions.put(player, new SetupSession(player, game));
+    }
+
+    public void join(PlayerJoinEvent event) {
+        event.player().grantPermission("bd.all");
     }
 
     public void breakBlock(BlockBreakEvent event) {
@@ -45,7 +49,7 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.FIGHT) {
                 Game.Team team = game.teamOf(player);
-                Position position = event.block().location();
+                Position position = event.block().position();
 
                 if (team == Game.Team.PURPLE) {
                     if (position.equals(game.purpleObby())) {
@@ -82,16 +86,16 @@ public class BattleListener implements Listener {
 
             if (game.state() == Game.GameState.IN_GAME) {
                 Game.Team team = game.teamOf(player);
-                Position location = event.block().location();
+                Position position = event.block().position();
 
                 boolean done;
                 if (team == Game.Team.PURPLE)
-                    done = game.setGreenObby(location);
+                    done = game.setGreenObby(position);
                 else
-                    done = game.setPurpleObby(location);
+                    done = game.setPurpleObby(position);
 
                 if (done)
-                    player.sendMessage(CommandHandler.PREFIX + "Set the obsidian at the placed location.");
+                    player.sendMessage(CommandHandler.PREFIX + "Set the obsidian at the placed position.");
                 else {
                     player.sendMessage(
                             CommandHandler.ERROR + "Obsidian already set, removing the one you placed.");
@@ -108,7 +112,7 @@ public class BattleListener implements Listener {
 
         SetupSession session = sessions.get(player);
         if (session != null) {
-            Position position = event.block().location();
+            Position position = event.block().position();
             Game game = session.game();
             switch (session.stage()) {
                 case SPAWN:

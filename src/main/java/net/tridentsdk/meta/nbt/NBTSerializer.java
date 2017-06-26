@@ -17,31 +17,31 @@
 
 package net.tridentsdk.meta.nbt;
 
-import net.tridentsdk.reflect.FastClass;
-import net.tridentsdk.reflect.FastField;
-import net.tridentsdk.util.TridentLogger;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class NBTSerializer {
+import net.tridentsdk.reflect.FastClass;
+import net.tridentsdk.reflect.FastField;
+import net.tridentsdk.util.TridentLogger;
 
+public final class NBTSerializer {
     public static <T> T deserialize(Class<T> clzz, CompoundTag tag) {
-        if (!(NBTSerializable.class.isAssignableFrom(clzz))) {
-            TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
+        if (!NBTSerializable.class.isAssignableFrom(clzz)) {
+            TridentLogger.get().error(new IllegalArgumentException("Provided object is not serializable!"));
         }
 
         FastClass cls = FastClass.get(clzz);
         T instance = cls.constructor().newInstance();
 
-        return deserialize(instance, tag);
+        return NBTSerializer.deserialize(instance, tag);
     }
 
     public static <T> T deserialize(T instance, CompoundTag tag) {
-        if (!(NBTSerializable.class.isAssignableFrom(instance.getClass()))) {
-            TridentLogger.error(new IllegalArgumentException("Provided object is not serializable!"));
+        if (!NBTSerializable.class.isAssignableFrom(instance.getClass())) {
+            TridentLogger.get().error(new IllegalArgumentException("Provided object is not serializable!"));
+            return null;
         }
 
         FastClass cls = FastClass.get(instance.getClass());
@@ -53,11 +53,16 @@ public final class NBTSerializer {
                 continue;
             }
 
-            String tagName = f.getAnnotation(NBTField.class).name();
-            TagType type = f.getAnnotation(NBTField.class).type();
+            NBTField nf = f.getAnnotation(NBTField.class);
+            String tagName = nf.name();
+            TagType type = nf.type();
             NBTTag value;
 
             if (!tag.containsTag(tagName)) {
+                if (nf.required()) {
+                    TridentLogger.get().error(new UnsupportedOperationException("Provided NBT does not contain tag: " + tagName));
+                    return null;
+                }
                 value = new NullTag(tagName);
             } else {
                 value = tag.getTag(tagName);
@@ -67,82 +72,92 @@ public final class NBTSerializer {
                 continue;
             }
 
-            switch (value.type()) {
-                case BYTE:
-                    field.set(instance, value.asType(ByteTag.class).value());
-                    break;
-
-                case BYTE_ARRAY:
-                    field.set(instance, value.asType(ByteArrayTag.class).value());
-                    break;
-
-                case COMPOUND:
-                    if (NBTSerializable.class.isAssignableFrom(field.toField().getType())) {
-                        field.set(instance, deserialize(field.toField().getType(), value.asType(CompoundTag.class)));
-                    } else {
-                        field.set(instance, value);
-                    }
-
-                    break;
-
-                case DOUBLE:
-                    field.set(instance, value.asType(DoubleTag.class).value());
-                    break;
-
-                case FLOAT:
-                    field.set(instance, value.asType(FloatTag.class).value());
-                    break;
-
-                case INT:
-                    field.set(instance, value.asType(IntTag.class).value());
-                    break;
-
-                case INT_ARRAY:
-                    field.set(instance, value.asType(IntArrayTag.class).value());
-                    break;
-
-                case LONG:
-                    field.set(instance, value.asType(LongTag.class).value());
-                    break;
-
-                case SHORT:
-                    field.set(instance, value.asType(ShortTag.class).value());
-                    break;
-
-                case LIST:
-                    ListTag list = value.asType(ListTag.class);
-                    Class<?> listType = (Class<?>) ((ParameterizedType) f.getGenericType())
-                            .getActualTypeArguments()[0];
-
-                    if (!(NBTSerializable.class.isAssignableFrom(listType))) {
-                        break;
-                    }
-
-                    List<Object> l = new ArrayList<>();
-
-                    for (NBTTag t : list.listTags()) {
-                        CompoundTag compound = t.asType(CompoundTag.class);
-
-                        l.add(deserialize(listType, compound));
-                    }
-
-                    field.set(instance, l);
-                    break;
-
-                case STRING:
-                    field.set(instance, value.asType(StringTag.class).value());
-                    break;
-
-                case NULL:
-                    field.set(instance, null);
-                    break;
-
-                default:
-                    break;
-            }
+            field.set(instance, NBTSerializer.findJavaValue(value, field, f));
         }
 
+        // This allows NBTSerializable classes to process their newly-found data. Useful for caching stuff into fields.
+        ((NBTSerializable) instance).process();
+
         return instance;
+    }
+
+    private static Object findJavaValue(NBTTag value, FastField field, Field f) {
+
+        NBTField nf = field.toField().getAnnotation(NBTField.class);
+
+        switch (value.type()) {
+            case BYTE:
+
+                if (field.toField().getType() == boolean.class) {
+                    return value.asType(ByteTag.class).value() == 1;
+                } else {
+                    return value.asType(ByteTag.class).value();
+                }
+
+            case BYTE_ARRAY:
+                return value.asType(ByteArrayTag.class).value();
+
+            case COMPOUND:
+                if (nf != null && nf.asClass() != null && nf.asClass() != NBTSerializable.class) {
+                    return NBTSerializer.deserialize(nf.asClass(), value.asType(CompoundTag.class));
+                } else if (NBTSerializable.class.isAssignableFrom(field.toField().getType())) {
+                    return NBTSerializer.deserialize(field.toField().getType(), value.asType(CompoundTag.class));
+                } else {
+                    return value;
+                }
+
+            case DOUBLE:
+                return value.asType(DoubleTag.class).value();
+
+            case FLOAT:
+                return value.asType(FloatTag.class).value();
+
+            case INT:
+                return value.asType(IntTag.class).value();
+
+            case INT_ARRAY:
+                return value.asType(IntArrayTag.class).value();
+
+            case LONG:
+                return value.asType(LongTag.class).value();
+
+            case SHORT:
+                return value.asType(ShortTag.class).value();
+
+            case LIST:
+                ListTag list = value.asType(ListTag.class);
+                Class<?> listType = (Class<?>) ((ParameterizedType) f.getGenericType())
+                        .getActualTypeArguments()[0];
+                boolean isPrimitive = listType.isPrimitive() || listType.equals(String.class);
+
+                if (!NBTSerializable.class.isAssignableFrom(listType) && !isPrimitive) {
+                    break;
+                }
+
+                List<Object> l = new ArrayList<>();
+
+                for (NBTTag t : list.listTags()) {
+                    if (isPrimitive) {
+                        l.add(NBTSerializer.findJavaValue(t, null, null));
+                        continue;
+                    }
+
+                    CompoundTag compound = t.asType(CompoundTag.class);
+
+                    l.add(NBTSerializer.deserialize(listType, compound));
+                }
+
+                return f.getType().cast(l);
+
+            case STRING:
+                return value.asType(StringTag.class).value();
+
+            case NULL:
+            default:
+                return null;
+        }
+
+        return null;
     }
 
     public static CompoundTag serialize(NBTSerializable serializable, String name) {
@@ -218,6 +233,6 @@ public final class NBTSerializer {
     }
 
     public static CompoundTag serialize(NBTSerializable serializable) {
-        return serialize(serializable, serializable.getClass().getSimpleName());
+        return NBTSerializer.serialize(serializable, serializable.getClass().getSimpleName());
     }
 }

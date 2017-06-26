@@ -21,6 +21,7 @@ package net.tridentsdk.base.board;
  * The type of board, also where it is displayed
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum BoardType {
     LIST(0),

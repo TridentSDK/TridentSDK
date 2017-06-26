@@ -23,6 +23,7 @@ import net.tridentsdk.entity.Entity;
  * Called when an entity gets set on fire by another entity
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityBurnByEntityEvent extends EntityBurnEvent {
     private final Entity causer;

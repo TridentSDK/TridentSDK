@@ -17,15 +17,17 @@
 package net.tridentsdk.service;
 
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.plugin.TridentPlugin;
+import net.tridentsdk.plugin.Plugin;
 
 /**
- * Provides chat properties to the {@link net.tridentsdk.service.ChatHandler}
+ * Provides chat properties to the {@link ChatFormatter}
  *
  * <p>The formatting provides only the left most portion (the player name and prompt), not the actual chat message</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@FunctionalInterface
 public interface ChatIdentityFormatter {
     /**
      * Obtains a formatted string of the chat identifier
@@ -67,5 +69,6 @@ public interface ChatIdentityFormatter {
      * @param other the chat provider that is being set
      * @param overrider the plugin that is setting the overrider
      */
-    void overriden(ChatIdentityFormatter other, TridentPlugin overrider);
+    default void overriden(ChatIdentityFormatter other, Plugin overrider) {
+    }
 }

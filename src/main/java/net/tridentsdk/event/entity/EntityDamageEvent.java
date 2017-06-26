@@ -24,6 +24,7 @@ import net.tridentsdk.entity.LivingEntity;
  * This event occurs when an entity is damaged, should only apply to living entities specifically
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntityDamageEvent extends EntityEvent {
     private final Cause cause;
@@ -82,6 +83,7 @@ public class EntityDamageEvent extends EntityEvent {
      * The cause of a damage event
      *
      * @author The TridentSDK Team
+     * @since 0.3-alpha-DP
      */
     public enum Cause {
         STARVATION,

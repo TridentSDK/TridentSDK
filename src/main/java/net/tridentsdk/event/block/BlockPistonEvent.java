@@ -18,7 +18,7 @@
 package net.tridentsdk.event.block;
 
 import net.tridentsdk.base.Block;
-import net.tridentsdk.base.Orientation;
+import net.tridentsdk.base.BlockDirection;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.event.Cancellable;
 
@@ -28,14 +28,15 @@ import net.tridentsdk.event.Cancellable;
  * <p>This is an umbrella event, do not listen to it</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class BlockPistonEvent extends BlockEvent implements Cancellable {
-    private final Orientation direction;
+    private final BlockDirection direction;
     private final boolean retract;
     private final Block influenced;
     private boolean cancelled;
 
-    public BlockPistonEvent(Block block, Orientation direction, boolean retract, Block influenced) {
+    public BlockPistonEvent(Block block, BlockDirection direction, boolean retract, Block influenced) {
         super(block);
         this.direction = direction;
         this.retract = retract;
@@ -49,7 +50,7 @@ public abstract class BlockPistonEvent extends BlockEvent implements Cancellable
      *
      * @return Orientation
      */
-    public Orientation direction() {
+    public BlockDirection direction() {
         return this.direction;
     }
 

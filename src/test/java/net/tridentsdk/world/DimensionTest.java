@@ -17,6 +17,7 @@
 
 package net.tridentsdk.world;
 
+import net.tridentsdk.world.settings.Dimension;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,9 +32,9 @@ public class DimensionTest {
 
     @Test
     public void testGetDimension() throws Exception {
-        Assert.assertEquals(Dimension.dimension(-1), Dimension.NETHER);
-        Assert.assertEquals(Dimension.dimension(0), Dimension.OVERWORLD);
-        Assert.assertEquals(Dimension.dimension(1), Dimension.END);
-        Assert.assertEquals(Dimension.dimension(5), null);
+        Assert.assertEquals(Dimension.of(-1), Dimension.NETHER);
+        Assert.assertEquals(Dimension.of(0), Dimension.OVERWORLD);
+        Assert.assertEquals(Dimension.of(1), Dimension.END);
+        Assert.assertEquals(Dimension.of(5), null);
     }
 }

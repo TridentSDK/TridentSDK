@@ -22,12 +22,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.tridentsdk.entity.living.Player;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * Builds a formatted message using JSON to be sent to the player(s)
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 // FIXME
+@NotThreadSafe
 public final class MessageBuilder {
     static final Gson GSON = new Gson();
 
@@ -149,6 +153,15 @@ public final class MessageBuilder {
      */
     public String asJson() {
         return this.toString();
+    }
+
+    /**
+     * Returns if the {@link #build()} method has been called or not
+     *
+     * @return if the build method has been called or not
+     */
+    public boolean isBuilt() {
+        return buildingObject == null;
     }
 
     /**

@@ -1,7 +1,8 @@
 package com.gmail.woodyc40.battledome;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.inventory.Inventory;
 
 import java.util.UUID;
 
@@ -13,11 +14,13 @@ import java.util.UUID;
 public class PlayerSnapshot {
     private final int gameId;
     private final Position home;
+    private final Inventory window;
     private final UUID uuid;
 
     private PlayerSnapshot(Player player, int gameId) {
         this.gameId = gameId;
         this.home = player.position();
+        this.window = player.window();
         this.uuid = player.uniqueId();
     }
 

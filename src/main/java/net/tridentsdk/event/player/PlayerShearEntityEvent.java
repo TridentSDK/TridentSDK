@@ -26,6 +26,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a player shears an entity
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerShearEntityEvent extends PlayerEvent implements Cancellable {
     private final LivingEntity sheared;

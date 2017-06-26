@@ -25,6 +25,7 @@ import net.tridentsdk.event.entity.EntityDamageEvent;
  * Called when a player is damaged
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerDamageEvent extends EntityDamageEvent {
     /**

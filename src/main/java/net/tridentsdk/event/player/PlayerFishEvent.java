@@ -19,12 +19,13 @@ package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.Cancellable;
-import net.tridentsdk.window.inventory.Item;
+import net.tridentsdk.inventory.Item;
 
 /**
  * Called when a player's fishing state changes,e.g. throws line, catches a fish, catches an entity, etc.
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerFishEvent extends PlayerEvent implements Cancellable {
     private final State state;
@@ -73,6 +74,7 @@ public class PlayerFishEvent extends PlayerEvent implements Cancellable {
      * The state of a fishing inject when deployed
      *
      * @author The TridentSDK Team
+     * @since 0.3-alpha-DP
      */
     public enum State {
         /**

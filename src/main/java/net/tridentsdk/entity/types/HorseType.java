@@ -21,6 +21,7 @@ package net.tridentsdk.entity.types;
  * Types of horses which differ in appearence
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum HorseType {
     /**

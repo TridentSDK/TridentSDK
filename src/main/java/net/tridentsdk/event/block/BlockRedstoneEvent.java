@@ -24,6 +24,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a block's redstone state is updated, called on each individual section of wire when they change, etc.
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class BlockRedstoneEvent extends BlockEvent implements Cancellable {
     private final int strength;

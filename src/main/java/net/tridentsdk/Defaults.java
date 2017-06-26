@@ -20,16 +20,17 @@ package net.tridentsdk;
 // if these shouldn't exist, or should go somewhere else, just move them
 // this is probably temporary
 
-import net.tridentsdk.concurrent.TaskExecutor;
 import net.tridentsdk.util.TridentLogger;
+import net.tridentsdk.world.settings.Difficulty;
 
 import javax.annotation.concurrent.ThreadSafe;
-import java.util.concurrent.*;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Contains the default values used in server.json
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public final class Defaults {
@@ -37,10 +38,6 @@ public final class Defaults {
      * Maximum allowed players on the server
      */
     public static final int MAX_PLAYERS = 10;
-    /**
-     * The interval which to clean out chunks
-     */
-    public static final int CHUNK_CLEAN_TICK_INTERVAL = 150;
     /**
      * The text displayed below the server name in the multiplayer menu
      */
@@ -52,11 +49,11 @@ public final class Defaults {
     /**
      * The icon on the left of the server
      */
-    public static final String MOTD_IMAGE_LOCATION = "/server-icon.png";
+    public static final String MOTD_IMAGE_LOCATION = "server-icon.png";
     /**
      * The threshold used for compression
      */
-    public static final int COMPRESSION_THRESHHOLD = 256;
+    public static final int COMPRESSION_THRESHOLD = 256;
     /**
      * The server port
      */
@@ -70,11 +67,7 @@ public final class Defaults {
      */
     public static final int VIEW_DISTANCE = 15;
 
-    /**
-     * The server's default exception handler
-     */
-    public static final Thread.UncaughtExceptionHandler EXCEPTION_HANDLER =
-            (thread, throwable) -> TridentLogger.error(throwable);
+    public static final boolean IMAGE_CHANGING_ALLOWED = false;
 
     /**
      * The thread factory which makes a thread that handles exceptions
@@ -83,39 +76,9 @@ public final class Defaults {
         try {
             runnable.run();
         } catch (Exception e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
         }
     });
-
-    /**
-     * Executes tasks on the same thread that inserts it
-     */
-    public static final TaskExecutor DIRECT_EXECUTOR = new TaskExecutor() {
-        @Override
-        public void addTask(Runnable task) {
-            task.run();
-        }
-
-        @Override
-        public <V> Future<V> submitTask(Callable<V> task) {
-            RunnableFuture<V> future = new FutureTask<>(task);
-            try {
-                future.run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return future;
-        }
-
-        @Override
-        public void interrupt() {
-        }
-
-        @Override
-        public Thread asThread() {
-            return Thread.currentThread();
-        }
-    };
 
     private Defaults() {
     }

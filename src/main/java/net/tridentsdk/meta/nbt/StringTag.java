@@ -19,9 +19,10 @@ package net.tridentsdk.meta.nbt;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class StringTag extends NBTTag {
-    String value;
+    volatile String value;
 
     public StringTag(String name) {
         super(name);

@@ -17,13 +17,17 @@
 
 package net.tridentsdk.entity.living;
 
-import net.tridentsdk.GameMode;
 import net.tridentsdk.Messagable;
+import net.tridentsdk.bar.BarReceiver;
 import net.tridentsdk.entity.LivingEntity;
 import net.tridentsdk.entity.traits.PlayerSpeed;
-import net.tridentsdk.entity.traits.InventoryHolder;
+import net.tridentsdk.entity.traits.WindowHolder;
+import net.tridentsdk.inventory.Item;
+import net.tridentsdk.meta.MessageBuilder;
 import net.tridentsdk.plugin.cmd.CommandIssuer;
-import net.tridentsdk.service.PermissionHolder;
+import net.tridentsdk.service.PermissionOwner;
+import net.tridentsdk.title.TitleReceiver;
+import net.tridentsdk.world.settings.GameMode;
 
 import java.util.Locale;
 
@@ -31,9 +35,36 @@ import java.util.Locale;
  * Represents a player entity after joining the server
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
-public interface Player extends LivingEntity, Messagable, CommandIssuer, InventoryHolder, PermissionHolder {
+public interface Player extends LivingEntity, Messagable, CommandIssuer, WindowHolder, PermissionOwner, TitleReceiver, BarReceiver {
     // TODO: Use word settings?
+
+    /**
+     * Current header on TAB, returns null if non-existent
+     *
+     * @return current header on TAB
+     */
+    String header();
+
+    default void setHeader(String message) {
+        setHeader(new MessageBuilder(message));
+    }
+
+    void setHeader(MessageBuilder builder);
+
+    /**
+     * Current footer on TAB, returns null if non-existent
+     *
+     * @return current footer on TAB
+     */
+    String footer();
+
+    default void setFooter(String message) {
+        setFooter(new MessageBuilder(message));
+    }
+
+    void setFooter(MessageBuilder builder);
 
     /**
      * The name of the player, matches that of Mojang servers
@@ -57,6 +88,11 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
     GameMode gameMode();
 
     /**
+     * Sets the player's gamemode to the specified gamemode
+     */
+    void setGameMode(GameMode mode);
+
+    /**
      * Obtains the settings for the player's speed
      *
      * @return the player speed settings
@@ -69,4 +105,15 @@ public interface Player extends LivingEntity, Messagable, CommandIssuer, Invento
      * @param message the message to display to the player
      */
     void sendMessage(String message);
+
+    /**
+     * Obtains whether this player is currently on the server or not
+     *
+     * @return {@true to indicate the player is connected to the server}
+     */
+    boolean connected();
+
+    Item pickedItem();
+
+    void setPickedItem(Item item);
 }

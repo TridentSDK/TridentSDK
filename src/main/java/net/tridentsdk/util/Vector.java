@@ -18,24 +18,27 @@
 package net.tridentsdk.util;
 
 import com.google.common.base.Objects;
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.world.World;
 
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.Serializable;
 
 /**
  * Just like in math, a vector represents magnitude and direction, where magnitude is usually the speed of an entity.
  *
+ * <p>This class is essentially just 3 arbitrary values</p>
+ *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
-@NotThreadSafe
+@ThreadSafe
 public class Vector implements Serializable, Cloneable {
     private static final long serialVersionUID = -7634050835106851288L;
 
-    private double x;
-    private double y;
-    private double z;
+    protected volatile double x;
+    protected volatile double y;
+    protected volatile double z;
 
     /**
      * Creates a default vector with x, y, and z set to (0, 0, 0)
@@ -106,7 +109,7 @@ public class Vector implements Serializable, Cloneable {
      */
     public Vector add(int x, int y, int z) {
         return this.add((double) x, (double) y, (double) z);
-        /* TODO: Implementation detail:
+        /* Implementation detail:
         DO NOT CREATE A NEW VECTOR HERE JUST BECAUSE (!)
         Doing so wastes memory and adds unnecessary object
         creation overhead, therefore, delegate to the
@@ -305,7 +308,7 @@ public class Vector implements Serializable, Cloneable {
     }
 
     /**
-     * Returns a new location in this world, with the coordinates the x, y, and z values
+     * Returns a new position in this world, with the coordinates the x, y, and z values
      */
     public Position asLocation(World world) {
         return Position.create(world, this.x, this.y, this.z);
@@ -399,5 +402,14 @@ public class Vector implements Serializable, Cloneable {
     @Override
     public int hashCode() {
         return Objects.hashCode(x, y, z);
+    }
+
+    @Override
+    public String toString(){
+        return "Vector{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
     }
 }

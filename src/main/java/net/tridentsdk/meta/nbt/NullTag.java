@@ -21,9 +21,9 @@ package net.tridentsdk.meta.nbt;
  * Default Tag used to obey the NullObject pattern (and avoid NPEs)
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class NullTag extends NBTTag {
-
     public NullTag(String name) {
         super(name);
     }

@@ -17,34 +17,35 @@
 
 package net.tridentsdk.event.entity;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.Entity;
 
 /**
  * Called when an entity spawns
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class EntitySpawnEvent extends EntityEvent {
-    private final Position location;
+    private final Position position;
     private boolean cancelled;
 
     /**
      * @param entity   the entity spawned
-     * @param location the location of the spawning
+     * @param position the position of the spawning
      */
 
-    public EntitySpawnEvent(Entity entity, Position location) {
+    public EntitySpawnEvent(Entity entity, Position position) {
         super(entity);
-        this.location = location;
+        this.position = position;
     }
 
     /**
-     * @return return the location where the entity was spawned
+     * @return return the position where the entity was spawned
      */
 
-    public Position location() {
-        return this.location;
+    public Position position() {
+        return this.position;
     }
 
     @Override

@@ -26,6 +26,7 @@ import java.util.List;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class NBTEncoder {
     final DataOutput output;
@@ -38,7 +39,7 @@ public class NBTEncoder {
         try {
             this.writeTag(tag);
         } catch (IOException e) {
-            TridentLogger.error(new NBTException("IO Error encoding the NBT Data", e));
+            TridentLogger.get().error(new NBTException("IO Error encoding the NBT Data", e));
         }
     }
 
@@ -55,7 +56,7 @@ public class NBTEncoder {
         this.output.writeByte(tag.getInnerType().id());
 
         List<NBTTag> innerTags = tag.listTags();
-        this.output.writeInt(innerTags.size() - 1);
+        this.output.writeInt(innerTags.size());
 
         for (NBTTag inner : innerTags) {
             this.writeTag(inner, false, false);
@@ -95,7 +96,6 @@ public class NBTEncoder {
             case FLOAT:
                 this.output.writeFloat(tag.asType(FloatTag.class).value());
                 break;
-
             case DOUBLE:
                 this.output.writeDouble(tag.asType(DoubleTag.class).value());
                 break;

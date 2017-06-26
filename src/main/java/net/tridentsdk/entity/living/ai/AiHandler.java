@@ -23,6 +23,7 @@ import net.tridentsdk.entity.types.EntityType;
  * Handles the assigning of AIs to Entities on the server.
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface AiHandler {
     /**

@@ -24,6 +24,7 @@ import net.tridentsdk.event.weather.LightningStrikeEvent;
  * Called when a creeper gets struck by lightning and turns into a charged creeper
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class CreeperLightningStrikeEvent extends EntityEvent {
     private final LightningStrikeEvent cause;

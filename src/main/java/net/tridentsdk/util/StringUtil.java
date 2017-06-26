@@ -17,11 +17,15 @@
 
 package net.tridentsdk.util;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 /**
  * String utilities
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@Immutable
 public final class StringUtil {
     private StringUtil() {
     }

@@ -23,6 +23,7 @@ import net.tridentsdk.entity.Projectile;
  * A inject at the end of the fishing rod that can catch fish or damage entities
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface FishHook extends Projectile {
     /**

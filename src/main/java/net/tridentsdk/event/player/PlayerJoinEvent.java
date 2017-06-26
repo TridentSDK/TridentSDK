@@ -18,17 +18,31 @@
 package net.tridentsdk.event.player;
 
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.event.Cancellable;
 
 /**
  * Called when a player joins the server
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
-public class PlayerJoinEvent extends PlayerEvent {
+public class PlayerJoinEvent extends PlayerEvent implements Cancellable {
+    private boolean cancelled;
+
     /**
      * @param player the player associated with this event
      */
     public PlayerJoinEvent(Player player) {
         super(player);
+    }
+
+    @Override
+    public boolean isIgnored() {
+        return cancelled;
+    }
+
+    @Override
+    public void cancel(boolean cancel) {
+        this.cancelled = cancel;
     }
 }

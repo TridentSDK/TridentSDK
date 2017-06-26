@@ -17,8 +17,8 @@
 
 package net.tridentsdk.meta;
 
+import net.tridentsdk.Console;
 import net.tridentsdk.plugin.cmd.PlatformColor;
-import net.tridentsdk.plugin.cmd.ServerConsole;
 
 import javax.annotation.Nullable;
 
@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
  * <a href="http://minecraft.gamepedia.com/Formatting_codes">Minecraft Wiki</a>.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public enum ChatColor {
     BLACK {
@@ -171,7 +172,7 @@ public enum ChatColor {
      * @return the chat color with that character
      */
     @Nullable
-    public static ChatColor forColor(char color) {
+    public static ChatColor of(char color) {
         String find = String.valueOf(color);
         for (ChatColor chatColor : values()) {
             if (chatColor.toString().contains(find))
@@ -182,16 +183,25 @@ public enum ChatColor {
     }
 
     /**
+     * Obtains the section symbol preceeding chat colors
+     *
+     * @return the precceding section symbol
+     */
+    public static char magicCharacter() {
+        return '§';
+    }
+
+    /**
      * Returns the console color representation of the chat color
      *
      * <p>Supported colors:
      * <ul>
      * <li>{@link net.tridentsdk.meta.ChatColor#BLACK}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#DARK_PURPLE} -
-     * {@link net.tridentsdk.plugin.cmd.ServerConsole#PURPLE}</li>
+     * {@link Console#PURPLE}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#BLUE}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#GREEN}</li>
-     * <li>{@link net.tridentsdk.meta.ChatColor#AQUA} - {@link net.tridentsdk.plugin.cmd.ServerConsole#CYAN}</li>
+     * <li>{@link net.tridentsdk.meta.ChatColor#AQUA} - {@link Console#CYAN}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#RED}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#YELLOW}</li>
      * <li>{@link net.tridentsdk.meta.ChatColor#WHITE}</li>
@@ -204,23 +214,23 @@ public enum ChatColor {
     public static String consoleFormat(ChatColor color) {
         switch (color) {
             case BLACK:
-                return ServerConsole.BLACK;
+                return Console.BLACK;
             case DARK_PURPLE:
-                return ServerConsole.PURPLE;
+                return Console.PURPLE;
             case BLUE:
-                return ServerConsole.BLUE;
+                return Console.BLUE;
             case GREEN:
-                return ServerConsole.GREEN;
+                return Console.GREEN;
             case AQUA:
-                return ServerConsole.CYAN;
+                return Console.CYAN;
             case RED:
-                return ServerConsole.RED;
+                return Console.RED;
             case YELLOW:
-                return ServerConsole.YELLOW;
+                return Console.YELLOW;
             case WHITE:
-                return ServerConsole.WHITE;
+                return Console.WHITE;
             case RESET:
-                return ServerConsole.RESET;
+                return Console.RESET;
             default:
                 return PlatformColor.EMPTY;
         }

@@ -14,8 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * Other entities and general abstractions and types
+ *
+ * <p>This package and all subpackages are thread-safe</p>
  */
-
 package net.tridentsdk.entity;

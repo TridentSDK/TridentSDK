@@ -25,6 +25,7 @@ import net.tridentsdk.event.Cancellable;
  * Called when a player interacts with something
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     private boolean cancelled;

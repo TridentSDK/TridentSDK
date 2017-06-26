@@ -17,45 +17,60 @@
 
 package net.tridentsdk.util;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import net.tridentsdk.Handler;
+import com.google.common.collect.ForwardingCollection;
+import com.google.common.collect.ImmutableList;
+import net.tridentsdk.Console;
 import net.tridentsdk.Trident;
 import net.tridentsdk.docs.InternalUseOnly;
-import net.tridentsdk.docs.Volatile;
-import net.tridentsdk.meta.ChatColor;
-import net.tridentsdk.plugin.TridentPlugin;
-import net.tridentsdk.plugin.cmd.ServerConsole;
+import net.tridentsdk.docs.Policy;
+import net.tridentsdk.registry.Registry;
 import org.apache.log4j.*;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
+import javax.annotation.concurrent.ThreadSafe;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Logger for Trident, automatically obtains the correct logger for the class
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
-@Volatile(policy = "Init FIRST", reason = "Requires SLF4J to be configured", fix = "first static block in main class")
-public final class TridentLogger {
-    private static final String[] ERRORS = { "Aw, Mazen! Really?", "I feel funny", "9 + 10 does not equal 21", "Dang", "Tony Abbot, the fax didn't go through", "This wasn't supposed to happen. It did anyways.", "Houston, we have a problem", "Oh great, a stacktrace. Can't we write good software for once?", "Trust me " + "this isn't a bug, it's a feature!" };
-
-    private TridentLogger() {
-    }
+@ThreadSafe
+@Policy("Ensure initialization ASAP in main class")
+public final class TridentLogger extends ForwardingCollection<TridentLogger> implements Registry<TridentLogger> {
+    private static final Map<String, TridentLogger> LOGGERS = new ConcurrentHashMap<>();
 
     @InternalUseOnly
-    public static void init() {
-        String PATTERN = "%d{dd MMM HH:mm} [%p] %m%n";
-
+    public static void init(Level level) {
         ConsoleAppender console = new ConsoleAppender(); //create appender
-        console.setLayout(new PatternLayout(PATTERN));
-        console.setThreshold(Level.INFO);
+        console.setLayout(new PatternLayout("%d{dd MMM HH:mm} [%p] %m%n"));
+        console.setThreshold(level);
         console.activateOptions();
+        console.setWriter(new Writer() {
+            BufferedWriter writer = new BufferedWriter(new PrintWriter(System.out));
+
+            @Override
+            public void write(char[] cbuf, int off, int len) throws IOException {
+                writer.write(("\r" + new String(cbuf)).toCharArray(), off, len + 1);
+                writer.write("$ ".toCharArray());
+            }
+
+            @Override
+            public void flush() throws IOException {
+                writer.flush();
+            }
+
+            @Override
+            public void close() throws IOException {
+                writer.close();
+            }
+        });
 
         Logger.getRootLogger().addAppender(console);
 
@@ -86,10 +101,45 @@ public final class TridentLogger {
 
         fa.setName("FileLogger");
         fa.setFile("trident.log");
-        fa.setLayout(new PatternLayout(PATTERN));
+        fa.setLayout(new PatternLayout("%d{dd MMM HH:mm} [%p][%c{1}][%t] %m%n"));
         fa.setThreshold(Level.DEBUG);
         fa.setAppend(true);
         fa.activateOptions();
+        try {
+            fa.setWriter(new Writer() {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fa.getFile()));
+
+                @Override
+                public void write(char[] cbuf, int off, int len) throws IOException {
+                    String s = new String(cbuf, off, len);
+                    String[] ss = s.split("\n");                   // Prevents losing newlines
+                    for (int i = 0; i < ss.length; i++) {
+                        String sss = ss[i];
+                        ss[i] = sss.replaceAll("\\P{Print}", "")   // Replaces Unicode escapes
+                                .replaceAll("\\[[\\d]{1,2}m", ""); // Replaces colors
+                    }
+                    StringBuilder finalS = new StringBuilder();
+                    for (String sss : ss) {
+                        finalS.append(sss).append("\n");
+                    }
+                    s = finalS.toString();
+
+                    writer.write(s.toCharArray());
+                }
+
+                @Override
+                public void flush() throws IOException {
+                    writer.flush();
+                }
+
+                @Override
+                public void close() throws IOException {
+                    writer.close();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Logger.getRootLogger().addAppender(fa);
     }
@@ -99,13 +149,63 @@ public final class TridentLogger {
         Files.copy(original, newPath);
     }
 
+    private final LoggerDelegate logger;
+
+    private TridentLogger(String name) {
+        this.logger = new LoggerDelegate(LoggerFactory.getLogger(name));
+    }
+
+    /**
+     * Obtains the internal underlying representation of the logger
+     *
+     * @return the SLF4J raw logger
+     */
+    public LoggerDelegate internal() {
+        return this.logger;
+    }
+
+    @Override
+    protected Collection<TridentLogger> delegate() {
+        return ImmutableList.copyOf(LOGGERS.values());
+    }
+
     /**
      * Obtains the logger for the class that calls this method
      *
      * @return the logger for that class
      */
-    public static org.slf4j.Logger logger() {
-        return LoggerFactory.getLogger(Trident.findCaller(4));
+    public static TridentLogger get() {
+        return get(Trident.findCaller(3));
+    }
+
+    /**
+     * Obtains the logger for the class that is specified
+     *
+     * @param cls the specified class
+     * @return the logger for that class
+     */
+    public static TridentLogger get(Class<?> cls) {
+        return get(cls.getName());
+    }
+
+    /**
+     * Wraps the logger with a TridentLogger instance
+     *
+     * @param logger the logger to wrap
+     * @return the cached, or a new instance of a logger wrapper
+     */
+    public static TridentLogger get(org.slf4j.Logger logger) {
+        return get(logger.getName());
+    }
+
+    /**
+     * Obtains a logger, creating a new one if it does not exist in the logger registry
+     *
+     * @param name the logger name
+     * @return the new logger
+     */
+    public static TridentLogger get(String name) {
+        return LOGGERS.computeIfAbsent(name, k -> new TridentLogger(name));
     }
 
     /**
@@ -113,8 +213,17 @@ public final class TridentLogger {
      *
      * @param item the item to log
      */
-    public static void log(String item) {
-        logger().info(parse(item) + ServerConsole.RESET);
+    public void log(String item) {
+        internal().info(item + Console.RESET);
+    }
+
+    /**
+     * Logs debug to the logger output
+     *
+     * @param message the message to log
+     */
+    public void debug(String message) {
+        internal().debug(message);
     }
 
     /**
@@ -122,8 +231,8 @@ public final class TridentLogger {
      *
      * @param message the message to log
      */
-    public static void error(String message) {
-        logger().error(ServerConsole.RED + parse(message) + ServerConsole.RESET);
+    public void error(String message) {
+        internal().error(Console.RED + message + Console.RESET);
     }
 
     /**
@@ -131,8 +240,8 @@ public final class TridentLogger {
      *
      * @param item the item to log
      */
-    public static void warn(String item) {
-        logger().warn(ServerConsole.YELLOW + parse(item) + ServerConsole.RESET);
+    public void warn(String item) {
+        internal().warn(Console.YELLOW + item + Console.RESET);
     }
 
     /**
@@ -140,110 +249,19 @@ public final class TridentLogger {
      *
      * @param item the item to log
      */
-    public static void success(String item) {
-        log(ServerConsole.GREEN + item);
-    }
-
-    private static String parse(String item) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < item.length(); i++) {
-            char c = item.charAt(i);
-            if (c == '§') {
-                // Find the character after that
-                char esc = item.charAt(i + 1);
-                ChatColor color = ChatColor.forColor(esc);
-
-                // Not a real color, continue on
-                if (color == null) {
-                    builder.append(c);
-                } else {
-                    String s = ChatColor.consoleFormat(color);
-
-                    // Not a console color, append it anyways
-                    if ("".equals(s)) {
-                        builder.append(c);
-                    } else {
-                        // Append the console format instead of the chat color
-                        builder.append(s);
-
-                        // Skip the next character, don't even append it
-                        i++;
-                    }
-                }
-            } else {
-                // No color escape, append normally
-                builder.append(c);
-            }
-        }
-
-        return builder.toString();
+    public void success(String item) {
+        log(Console.GREEN + item);
     }
 
     /**
      * Formats a throwable to be logged to the console
      *
-     * <p>By default this is not needed as the threads which runs almost all operations by default have a set
+     * <p>By default this is not needed as the concurrent which runs almost all operations by default have a set
      * uncaught exception handler</p>
      *
      * @param throwable the error to log
      */
-    public static void error(Throwable throwable) {
-        org.slf4j.Logger logger = logger();
-        StackTraceElement[] stackTrace = throwable.getStackTrace();
-
-        logger.error("========  BEGIN ERROR =========");
-
-        logger.error("");
-        String errorMessage = throwable.getMessage();
-
-        if (errorMessage == null || errorMessage.equals("null")) {
-            errorMessage = throwable.getClass().getSimpleName();
-        }
-
-        logger.error(ERRORS[(int) FastRandom.random(ERRORS.length - 1)]);
-        logger.error("");
-        logger.error("Error occurred in thread \"" + Thread.currentThread().getName() + "\": ");
-        logger.error(errorMessage);
-        logger.error("");
-        logger.error("======== Generating Debug Information =========");
-        StackTraceElement main = stackTrace[0];
-        logger.error("Class:  " + main.getClassName());
-        logger.error("Method: " + main.getMethodName());
-        logger.error("Line:   " + (main.getLineNumber() > 0 ? main.getLineNumber() : "Native method"));
-        logger.error("========   Ending Debug Information   =========");
-
-        logger.error("");
-
-        logger.error("======== Printing Stacktrace =========");
-        for (StackTraceElement element : stackTrace) {
-            logger.error("    at " + element.getClassName() + "." +
-                    element.getMethodName() + "(...) : " +
-                    (!element.isNativeMethod() ? element.getLineNumber() : "Native method"));
-        }
-        logger.error("========  Ending Stacktrace  =========");
-
-        logger.error("");
-
-        logger.error("========     Server info    =========");
-        logger.error("Trident version: " + Trident.version());
-        logger.error("Plugins:         " + Arrays.toString(
-                Lists.transform(Handler.forPlugins().plugins(), new Function<TridentPlugin, String>() {
-                    @Nullable
-                    @Override
-                    public String apply(TridentPlugin plugin) {
-                        return plugin.description().name();
-                    }
-                }).toArray()));
-        logger.error("Java:            version " + System.getProperty("java.version") + " distributed by " +
-                System.getProperty("java.vendor"));
-        logger.error("OS:              running " +
-                System.getProperty("os.name") + " version " +
-                System.getProperty("os.version") + " " +
-                System.getProperty("os.arch"));
-        logger.error("======== Ending Server info =========");
-
-        logger.error("");
-
-        logger.error("========  END ERROR  =========");
+    public void error(Throwable throwable) {
+        internal().error(throwable);
     }
 }

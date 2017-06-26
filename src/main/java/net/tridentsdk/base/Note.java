@@ -25,16 +25,17 @@ import javax.annotation.concurrent.Immutable;
  * Immutable value representing the pitch of a note played
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Immutable
-public class Note {
+public final class Note {
     private final short id;
 
     public Note(int id) {
         if (id > 24) {
-            TridentLogger.error(new IllegalArgumentException("Note is too high!"));
+            TridentLogger.get().error(new IllegalArgumentException("Note is too high!"));
         } else if (id < 0) {
-            TridentLogger.error(new IllegalArgumentException("Note is too low!"));
+            TridentLogger.get().error(new IllegalArgumentException("Note is too low!"));
         }
 
         this.id = (short) id;
@@ -45,7 +46,7 @@ public class Note {
      */
     public Note sharpen() {
         if ((int) this.id + 1 > 24) {
-            TridentLogger.error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
+            TridentLogger.get().error(new IllegalArgumentException("Cannot sharpen this note, it is already the max"));
         }
         return new Note((int) this.id + 1);
     }
@@ -55,7 +56,7 @@ public class Note {
      */
     public Note flatten() {
         if ((int) this.id - 1 < 0) {
-            TridentLogger.error(new IllegalArgumentException("Cannot flatten this note, it is already the min"));
+            TridentLogger.get().error(new IllegalArgumentException("Cannot flatten this note, it is already the min"));
         }
         return new Note((int) this.id - 1);
     }

@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * Provides management services, which include conflicting handling utilities concerning chat, permissions, and
  * transactions (economy).
  *
- * <p>The classes in this package can be accessed in the {@link net.tridentsdk.factory.Factories} API.</p>
+ * <p>The classes in this package can be accessed in {@link net.tridentsdk.registry.Factory}.</p>
  */
 package net.tridentsdk.service;

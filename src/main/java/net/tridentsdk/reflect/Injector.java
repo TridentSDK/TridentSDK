@@ -22,6 +22,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.PeekingIterator;
 import net.tridentsdk.util.TridentLogger;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -35,8 +36,10 @@ import java.util.Map;
  * Injects the target class, or creates a new instance of an injected class
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  * @param <T> the type to inject for
  */
+@ThreadSafe
 public final class Injector<T> {
     private static final Map<Class<?>, Producer<?>> injectors = Maps.newConcurrentMap();
 
@@ -142,7 +145,7 @@ public final class Injector<T> {
                         }
                     }
 
-                    TridentLogger.error(new IllegalArgumentException(
+                    TridentLogger.get().error(new IllegalArgumentException(
                             "Constructor " + clazz.getName() + "(" +
                                     Arrays.toString(constructorParameters)
                                             .replaceAll("class ", "")
@@ -166,7 +169,7 @@ public final class Injector<T> {
                 }
                 return t;
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                TridentLogger.error(e);
+                TridentLogger.get().error(e);
                 return null;
             }
         }
@@ -178,7 +181,7 @@ public final class Injector<T> {
             }
             return t;
         } catch (InstantiationException | IllegalAccessException e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
             return null;
         }
     }
@@ -200,7 +203,7 @@ public final class Injector<T> {
         Class<?> type = field.getType();
         Producer<?> producer = injectors.get(type);
         if (producer == null) {
-            TridentLogger.error(new IllegalArgumentException("Class " +
+            TridentLogger.get().error(new IllegalArgumentException("Class " +
                     instance.getClass().getName() + " does not have bound injector for type " + type.getName()));
             return;
         }
@@ -213,7 +216,7 @@ public final class Injector<T> {
                 field.set(instance, producer.produce(inject.meta()));
             }
         } catch (IllegalAccessException e) {
-            TridentLogger.error(e);
+            TridentLogger.get().error(e);
         }
     }
 

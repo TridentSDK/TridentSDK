@@ -17,13 +17,16 @@
 
 package net.tridentsdk.plugin.cmd;
 
+import net.tridentsdk.Console;
 import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.plugin.annotation.CommandDesc;
 
 /**
- * Overriden by the command handler, annotated with {@link net.tridentsdk.plugin.annotation.CommandDescription} to
+ * Overriden by the command handler, annotated with {@link CommandDesc} to
  * process executed commands
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public abstract class Command {
     /**
@@ -44,7 +47,7 @@ public abstract class Command {
      * @param arguments may be null
      * @param alias     the alias for the command
      */
-    public void handleConsole(ServerConsole sender, String arguments, String alias) {
+    public void handleConsole(Console sender, String arguments, String alias) {
         // Method intentionally left blank
     }
 

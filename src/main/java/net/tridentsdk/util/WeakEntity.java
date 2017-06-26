@@ -19,8 +19,9 @@ package net.tridentsdk.util;
 
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
-import net.tridentsdk.Position;
 import net.tridentsdk.Trident;
+import net.tridentsdk.base.BoundingBox;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.docs.InternalUseOnly;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.traits.EntityProperties;
@@ -139,7 +140,7 @@ import java.util.stream.Collectors;
  * <pre><code>
  *     Map&lt;WeakEntity&lt;Entity&gt;, Object&gt; map = Maps.newHashMap();
  *     ...
- *     Object o = map.get(WeakEntity.finderOf(entity));
+ *     Object o = map.get(WeakEntity.searchFor(entity));
  * </code></pre>
  *
  * <p>Finally, WeakEntity can be used to find and prevent bugs which would otherwise cause NullPointerExceptions.</p>
@@ -163,6 +164,7 @@ import java.util.stream.Collectors;
  * </code></pre>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @ThreadSafe
 public final class WeakEntity<T extends Entity> {
@@ -265,13 +267,13 @@ public final class WeakEntity<T extends Entity> {
      * a WeakEntity from a collection or to match with a stored version.</p>
      *
      * <p>This method never returns null. If there is no entity which is known to exist with a WeakEntity, then the
-     * returned object {@code finderOf(null).equals(null)}.</p>
+     * returned object {@code searchFor(null).equals(null)}.</p>
      *
      * @param entity the entity to get the finder for
      * @return an object that possesses the properties of the entity so that they match up with an WeakEntity containing
      * the same entity
      */
-    public static Object finderOf(Entity entity) {
+    public static Object searchFor(Entity entity) {
         if (entity == null)
             return RefList.NULL;
         return REFERENCE_QUEUE.finderOf(entity);
@@ -436,7 +438,7 @@ public final class WeakEntity<T extends Entity> {
     }
 
     /**
-     * Instance method of {@link #finderOf(net.tridentsdk.entity.Entity)}. See that method for the documentation and
+     * Instance method of {@link #searchFor(net.tridentsdk.entity.Entity)}. See that method for the documentation and
      * implementation.
      *
      * <p>This method still internally polls the reference queue for the entity's cached finder.</p>
@@ -775,7 +777,10 @@ public final class WeakEntity<T extends Entity> {
         private static final Entity NULL = new Entity() {
             @Override public void teleport(double x, double y, double z) {}
             @Override public void teleport(Entity entity) {}
-            @Override public void teleport(Position location) {}
+
+            @Override
+            public void teleport(Position position) {
+            }
             @Override public World world() {return null;}
             @Override public Position position() {return null;}
             @Override public Vector velocity() {return null;}
@@ -794,6 +799,8 @@ public final class WeakEntity<T extends Entity> {
             @Override public void eject() {}
             @Override public EntityType type() {return null;}
             @Override public void applyProperties(EntityProperties properties) {}
+            @Override public void setSize(float width, float height) {}
+            @Override public BoundingBox boundingBox() {return null;}
 
             @Override
             public int hashCode() {
@@ -880,7 +887,7 @@ public final class WeakEntity<T extends Entity> {
      * <p>Before iterating, this method makes sure {@link WeakEntity#isNull()} returns {@code false}. In the case that
      * it is {@code true}, the iterator removes that entry from the collection being iterated.</p>
      *
-     * <p>This iterator is not shareable between threads. It is designed for single-threaded iteration. The changes
+     * <p>This iterator is not shareable between concurrent. It is designed for single-threaded iteration. The changes
      * made in this iterator do not necessarily reflect to the changes to different iterators of the same collection.
      * This will only become a problem in concurrent iteration, depending on the iterator implementation, as specified
      * by the collection class.</p>

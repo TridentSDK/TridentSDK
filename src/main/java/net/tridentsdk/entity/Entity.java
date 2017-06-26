@@ -17,7 +17,8 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.BoundingBox;
+import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.traits.EntityProperties;
 import net.tridentsdk.entity.types.EntityType;
 import net.tridentsdk.util.Vector;
@@ -30,30 +31,31 @@ import java.util.UUID;
  * Represents the abstraction for a mob, player, animal, or other "object" that is not a block type
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Entity {
     /**
-     * Moves the entity to the specified location
+     * Moves the entity to the specified position
      *
-     * @param x the x coordinate of the location
-     * @param y the y coordinate of the location
-     * @param z the z coordinate of the location
+     * @param x the x coordinate of the position
+     * @param y the y coordinate of the position
+     * @param z the z coordinate of the position
      */
     void teleport(double x, double y, double z);
 
     /**
-     * Moves the current entity to the provided entity's location
+     * Moves the current entity to the provided entity's position
      *
      * @param entity the entity to move the current entity to
      */
     void teleport(Entity entity);
 
     /**
-     * Moves the entity to the coordinates specified by the location object passed in
+     * Moves the entity to the coordinates specified by the position object passed in
      *
-     * @param location the location to move the entity to
+     * @param position the position to move the entity to
      */
-    void teleport(Position location);
+    void teleport(Position position);
 
     /**
      * The world which the entity resides in
@@ -63,9 +65,9 @@ public interface Entity {
     World world();
 
     /**
-     * The location of the entity with respect to the coordinate grid
+     * The position of the entity with respect to the coordinate grid
      *
-     * @return the entity's location
+     * @return the entity's position
      */
     Position position();
 
@@ -179,4 +181,19 @@ public interface Entity {
      * @param properties the properties to set
      */
     void applyProperties(EntityProperties properties);
+
+    /**
+     * Set the width and height of the entity
+     *
+     * @param width Width of entity
+     * @param height Height of entity
+     */
+    void setSize(float width, float height);
+
+    /**
+     * Returns the bounding box of the entity
+     *
+     * @return The bounding box of the entity
+     */
+    BoundingBox boundingBox();
 }

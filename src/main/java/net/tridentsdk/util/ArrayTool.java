@@ -31,7 +31,7 @@ import java.lang.reflect.Array;
  * @param <T> the type held by the array to be converted
  */
 @ThreadSafe
-public class ArrayTool<T> {
+public final class ArrayTool<T> {
     private final T[] array;
     private final TypeToken<T> typeToken = new TypeToken<T>() {
     };

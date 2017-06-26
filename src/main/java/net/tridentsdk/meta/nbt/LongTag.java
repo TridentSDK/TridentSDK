@@ -19,9 +19,10 @@ package net.tridentsdk.meta.nbt;
 
 /**
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public class LongTag extends NBTTag {
-    long value;
+    volatile long value;
 
     public LongTag(String name) {
         super(name);

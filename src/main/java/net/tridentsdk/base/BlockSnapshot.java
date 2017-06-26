@@ -17,7 +17,6 @@
 
 package net.tridentsdk.base;
 
-import net.tridentsdk.Position;
 import net.tridentsdk.docs.InternalUseOnly;
 
 import javax.annotation.concurrent.Immutable;
@@ -28,32 +27,33 @@ import javax.annotation.concurrent.Immutable;
  * <p>Snapshot using the {@link #of(Block)} method</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Immutable
 public final class BlockSnapshot {
-    private final Position location;
-    private final Substance material;
-    private final byte data;
+    private final Position position;
+    private final Substance substance;
+    private final byte meta;
 
-    private BlockSnapshot(Position location, Substance material, byte data) {
-        this.location = location;
-        this.material = material;
-        this.data = data;
+    private BlockSnapshot(Position position, Substance substance, byte data) {
+        this.position = position;
+        this.substance = substance;
+        this.meta = data;
     }
 
     /**
-     * Creates a view of the block at the time when "snapshotted"
+     * Creates a view of the block at the time when taken
      *
      * @param block the tile to view
      * @return the snapshot of the tile
      */
     public static BlockSnapshot of(Block block) {
-        return new BlockSnapshot(block.location(), block.substance(), block.meta());
+        return new BlockSnapshot(block.position(), block.substance(), block.meta());
     }
 
     @InternalUseOnly
-    public static BlockSnapshot from(Position location, Substance material, byte data) {
-        return new BlockSnapshot(location, material, data);
+    public static BlockSnapshot from(Position position, Substance substance, byte data) {
+        return new BlockSnapshot(position, substance, data);
     }
 
     /**
@@ -62,20 +62,35 @@ public final class BlockSnapshot {
      * <p>Does not clear data from this snapshot</p>
      */
     public void load() {
-        Block block = location.world().blockAt(location);
-        block.setSubstance(material);
-        block.setMeta(data);
+        Block block = position.world().blockAt(position);
+        block.setSubstance(substance);
+        block.setMeta(meta);
     }
 
+    /**
+     * Obtains the position of the block
+     *
+     * @return the position
+     */
     public Position position() {
-        return location;
+        return position;
     }
 
+    /**
+     * Obtains the block substance
+     *
+     * @return the substance
+     */
     public Substance type() {
-        return material;
+        return substance;
     }
 
-    public byte data() {
-        return data;
+    /**
+     * Obtains the block meta
+     *
+     * @return the block meta
+     */
+    public byte meta() {
+        return meta;
     }
 }

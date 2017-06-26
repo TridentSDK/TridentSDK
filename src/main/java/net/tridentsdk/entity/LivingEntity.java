@@ -17,7 +17,9 @@
 
 package net.tridentsdk.entity;
 
-import net.tridentsdk.Position;
+import net.tridentsdk.base.Position;
+import net.tridentsdk.effect.entity.EntityStatusEffect;
+import net.tridentsdk.effect.entity.EntityStatusEffectType;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.entity.living.ProjectileLauncher;
 import net.tridentsdk.entity.living.ai.AiModule;
@@ -28,6 +30,7 @@ import net.tridentsdk.event.entity.EntityDamageEvent;
  * An entity that is alive, which can be damaged and move with AI
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface LivingEntity extends Entity, ProjectileLauncher {
     /**
@@ -101,9 +104,9 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
     String displayName();
 
     /**
-     * Returns the location of the Entity's eye
+     * Returns the position of the Entity's eye
      *
-     * @return Location the location of the Entity's eye
+     * @return Location the position of the Entity's eye
      */
     Position headLocation();
 
@@ -163,4 +166,12 @@ public interface LivingEntity extends Entity, ProjectileLauncher {
      * Sets a path for this entity to follow, should only be used in an AiHandler
      */
     void setPath(Path path);
+
+    /**
+     * Creates a new entity status effect
+     *
+     * @param status The status to apply
+     * @return A new instance of EntityStatusEffect
+     */
+    EntityStatusEffect createStatusEffect(EntityStatusEffectType status);
 }

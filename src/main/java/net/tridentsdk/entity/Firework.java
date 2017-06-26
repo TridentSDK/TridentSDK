@@ -23,6 +23,7 @@ import net.tridentsdk.entity.traits.FireworkProperties;
  * A charge that explodes with various specified colors and properties
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Firework extends Entity {
     /**

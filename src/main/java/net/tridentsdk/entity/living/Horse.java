@@ -19,7 +19,7 @@ package net.tridentsdk.entity.living;
 
 import net.tridentsdk.entity.types.HorseType;
 import net.tridentsdk.entity.types.HorseVariant;
-import net.tridentsdk.entity.traits.InventoryHolder;
+import net.tridentsdk.entity.traits.WindowHolder;
 import net.tridentsdk.entity.traits.Peaceful;
 import net.tridentsdk.entity.traits.Saddleable;
 import net.tridentsdk.entity.traits.Tameable;
@@ -29,7 +29,7 @@ import net.tridentsdk.entity.traits.Tameable;
  *
  * @author TridentSDK Team
  */
-public interface Horse extends Tameable, Saddleable, InventoryHolder, Peaceful {
+public interface Horse extends Tameable, Saddleable, WindowHolder, Peaceful {
     /**
      * What breed of horse this is
      *

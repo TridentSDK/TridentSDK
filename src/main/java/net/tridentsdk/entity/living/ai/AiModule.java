@@ -31,6 +31,7 @@ import net.tridentsdk.entity.LivingEntity;
  * than 0, the entity can effectively be made to "sleep," where it will not move at all.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface AiModule {
     /**

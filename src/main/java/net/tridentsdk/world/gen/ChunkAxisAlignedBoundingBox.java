@@ -16,26 +16,38 @@
  */
 package net.tridentsdk.world.gen;
 
+import net.tridentsdk.docs.AccessNoDoc;
 import net.tridentsdk.world.ChunkLocation;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
-* Created by Dildas on 2/7/2015.
-*/
+ * Represents an iterator over chunks within a specified range
+ *
+ * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
+ */
+@NotThreadSafe
 public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
     final int minX;
     final int minZ;
     final int maxX;
     final int maxZ;
 
-    public ChunkAxisAlignedBoundingBox(ChunkLocation location1, ChunkLocation location2) {
-        minX = (location1.x() < location2.x()) ? location1.x() : location2.x();
-        minZ = (location1.z() < location2.z()) ? location1.z() : location2.z();
+    /**
+     * Creates a new Chunk bounding box
+     *
+     * @param position1 the first chunk corner
+     * @param position2 the second chunk corner
+     */
+    public ChunkAxisAlignedBoundingBox(ChunkLocation position1, ChunkLocation position2) {
+        minX = (position1.x() < position2.x()) ? position1.x() : position2.x();
+        minZ = (position1.z() < position2.z()) ? position1.z() : position2.z();
 
-        maxX = (location1.x() > location2.x()) ? location1.x() : location2.x();
-        maxZ = (location1.z() > location2.z()) ? location1.z() : location2.z();
+        maxX = (position1.x() > position2.x()) ? position1.x() : position2.x();
+        maxZ = (position1.z() > position2.z()) ? position1.z() : position2.z();
     }
 
     @Override
@@ -43,6 +55,7 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
         return new ChunkAABBIterator(this);
     }
 
+    @AccessNoDoc
     private class ChunkAABBIterator implements Iterator<ChunkLocation> {
         private final ChunkAxisAlignedBoundingBox parent;
 
@@ -88,6 +101,7 @@ public class ChunkAxisAlignedBoundingBox implements Iterable<ChunkLocation> {
 
         @Override
         public void remove() {
+            throw new UnsupportedOperationException("Cannot remove items from CAABB");
         }
     }
 }

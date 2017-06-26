@@ -17,11 +17,15 @@
 
 package net.tridentsdk;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Implemented to represent an object which messages can be sent to
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@ThreadSafe
 public interface Messagable {
     /**
      * Send an array of messages to this recipient

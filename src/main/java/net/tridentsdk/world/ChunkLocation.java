@@ -17,17 +17,24 @@
 
 package net.tridentsdk.world;
 
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
- * Stores the location of a Chunk
+ * Stores the position (the X and Z coordinates) of a Chunk
+ *
+ * <p>One produces a new ChunkLocation using {@link #create(int, int)}</p>
+ *
+ * <p>You may reuse ChunkLocations, but never modify them. This is so Chunks occupying a ChunkLocation within a world
+ * cannot chnage its position. This comes at a cost of memory, but offers advantages of low overhead thread-safety and
+ * defensive programming.</p>
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 @Immutable
-public class ChunkLocation implements Serializable, Cloneable {
+public final class ChunkLocation implements Serializable, Cloneable {
     private static final long serialVersionUID = 9083698035337137603L;
     private final int x;
     private final int z;
@@ -37,14 +44,31 @@ public class ChunkLocation implements Serializable, Cloneable {
         this.z = z;
     }
 
+    /**
+     * Produces a new chunk coordinate using the two positions specified
+     *
+     * @param x the X coordinate
+     * @param z the Z coordinate
+     * @return the new chunk location
+     */
     public static ChunkLocation create(int x, int z) {
         return new ChunkLocation(x, z);
     }
 
+    /**
+     * Obtains the X coordinate for the ChunkLocation
+     *
+     * @return the X coordinate
+     */
     public int x() {
         return this.x;
     }
 
+    /**
+     * Obtains the Z coordinate ofr the ChunkLocation
+     *
+     * @return the Z coordinate
+     */
     public int z() {
         return this.z;
     }
@@ -56,14 +80,17 @@ public class ChunkLocation implements Serializable, Cloneable {
     }
 
     @Override
-    @Nullable
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+    public int hashCode() {
+        return Objects.hash(x, z);
+    }
 
-        return null;
+    @Override
+    public Object clone() {
+        return ChunkLocation.create(x, z);
+    }
+
+    @Override
+    public String toString() {
+        return "ChunkLocation(" + x() + ", " + z() + ")@" + hashCode();
     }
 }

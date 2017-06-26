@@ -21,6 +21,7 @@ package net.tridentsdk.event;
  * An event that implements this supports the ability to cancel (cancel) the event actions and calling behavior
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
 public interface Cancellable {
     /**

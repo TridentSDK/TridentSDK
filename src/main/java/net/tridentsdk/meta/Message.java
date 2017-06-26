@@ -19,11 +19,15 @@ package net.tridentsdk.meta;
 
 import com.google.gson.JsonObject;
 
+import javax.annotation.concurrent.NotThreadSafe;
+
 /**
  * Chat message properties, encoded in the JSON format
  *
  * @author The TridentSDK Team
+ * @since 0.3-alpha-DP
  */
+@NotThreadSafe
 public final class Message {
     private final JsonObject message;
 
