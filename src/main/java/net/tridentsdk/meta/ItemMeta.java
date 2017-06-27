@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.meta;
 
-import net.tridentsdk.meta.nbt.TagCompound;
+import net.tridentsdk.meta.nbt.Tag;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
@@ -35,7 +35,24 @@ public class ItemMeta {
      * The NBT data which contains modifications made to
      * this item.
      */
-    private final TagCompound nbt = new TagCompound();
+    private final Tag.Compound nbt;
+
+    /**
+     * Creates a new empty meta object for items
+     */
+    public ItemMeta() {
+        this.nbt = new Tag.Compound("tag");
+    }
+
+    /**
+     * Creates a new item meta object with the attributes
+     * specified in the "tag" tag of the given compound
+     *
+     * @param compound the tag compound to read data
+     */
+    public ItemMeta(Tag.Compound compound) {
+        this.nbt = compound;
+    }
 
     /**
      * Obtains the NBT data of this particular item.
@@ -44,11 +61,7 @@ public class ItemMeta {
      * not modified
      */
     @Nullable
-    public TagCompound toNbt() {
-        if (this.nbt.isEmpty()) {
-            return null;
-        }
-
+    public Tag.Compound toNbt() {
         return this.nbt;
     }
 }

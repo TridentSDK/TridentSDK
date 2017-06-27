@@ -62,7 +62,7 @@ public enum Difficulty {
      * does not have an NBT value, but rather uses the
      * {@code hardcore boolean} tag in level.dat</p>
      */
-    HARDCORE(3);
+    HARDCORE(-1);
 
     /** The NBT value of the current difficulty */
     private final byte b;
