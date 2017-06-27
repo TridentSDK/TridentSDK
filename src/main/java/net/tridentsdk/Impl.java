@@ -27,6 +27,8 @@ import net.tridentsdk.inventory.Item;
 import net.tridentsdk.logger.LogHandler;
 import net.tridentsdk.logger.Logger;
 import net.tridentsdk.meta.ItemMeta;
+import net.tridentsdk.plugin.channel.PluginChannel;
+import net.tridentsdk.plugin.channel.SimpleChannelListener;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.tablist.TabList;
 import net.tridentsdk.ui.title.Title;
@@ -155,5 +157,15 @@ public final class Impl {
         Map<String, Player> findByName(String name);
         @Nullable
         Player getByName(String name);
+
+        // Channels
+        PluginChannel open(String name, Player... targets);
+        PluginChannel open(String name, Iterable<Player> players);
+        PluginChannel openAll(String name);
+        PluginChannel tryOpen(String name);
+        PluginChannel get(String name);
+
+        void register(SimpleChannelListener listener);
+        boolean unregister(Class<? extends SimpleChannelListener> cls);
     }
 }
