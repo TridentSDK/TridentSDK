@@ -37,6 +37,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
@@ -160,7 +161,7 @@ public final class Impl {
 
         // Channels
         PluginChannel open(String name, Player... targets);
-        PluginChannel open(String name, Iterable<Player> players);
+        PluginChannel open(String name, Collection<? extends Player> players);
         PluginChannel openAll(String name);
         PluginChannel tryOpen(String name);
         PluginChannel get(String name);

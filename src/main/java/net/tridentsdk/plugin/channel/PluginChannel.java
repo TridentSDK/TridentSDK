@@ -92,7 +92,7 @@ public interface PluginChannel {
      * @return the new plugin channel, or an existing
      * channel with the players in the given method
      */
-    static PluginChannel open(String name, Iterable<Player> targets) {
+    static PluginChannel open(String name, Collection<Player> targets) {
         return Impl.get().open(name, targets);
     }
 
@@ -117,6 +117,10 @@ public interface PluginChannel {
      * Attempts to open the plugin channel with the given
      * channel name with a random player on the server,
      * adding that random player to the recipients list.
+     *
+     * <p>If no player is on the server, no channel will be
+     * created, in which case {@code null} will be returned.
+     * </p>
      *
      * @param name the name of the channel
      * @return the new plugin channel, or {@code null} if
@@ -166,7 +170,7 @@ public interface PluginChannel {
      * @return {@code true} if all players in the iterable
      * are removed
      */
-    boolean closeFor(Iterable<Player> players);
+    boolean closeFor(Collection<Player> players);
 
     /**
      * Closes the channel for players that are contained in
@@ -195,6 +199,15 @@ public interface PluginChannel {
      * @param recipients the players to add
      */
     void addRecipient(Player... recipients);
+
+    /**
+     * Adds the given recipient(s) to the list of players
+     * contained in this channel, sending them the
+     * {@code REGISTER} channel packet.
+     *
+     * @param recipients the players to add
+     */
+    void addRecipient(Collection<? extends Player> recipients);
 
     /**
      * Obtains the recipients that have been registered in

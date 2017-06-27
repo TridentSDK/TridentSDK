@@ -67,7 +67,7 @@ public abstract class SimpleChannelListener {
      * the server and then sent to the client)
      */
     @Policy("call on plugin thread")
-    public void channelOpened(PluginChannel channel, Destination dest) {
+    public void channelOpened(PluginChannel channel, Destination dest, Collection<? extends Player> players) {
     }
 
     /**
