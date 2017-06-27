@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 public class OptsTest {
     @Test(expected = IllegalArgumentException.class)
     public void difficultyTest() {
-        assertEquals(3, Difficulty.HARDCORE.asByte());
+        assertEquals(-1, Difficulty.HARDCORE.asByte());
         assertEquals(0, Difficulty.PEACEFUL.asByte());
         assertEquals(1, Difficulty.EASY.asByte());
         assertEquals(2, Difficulty.NORMAL.asByte());
