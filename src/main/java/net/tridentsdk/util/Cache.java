@@ -23,7 +23,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**
@@ -46,12 +46,12 @@ public class Cache<T, M> {
      * A no-op removal listener used for evictions that
      * require no further action
      */
-    private static final BiConsumer NOP = (a, b) -> {};
+    private static final BiFunction NOP = (a, b) -> null;
 
     /**
      * The internal mapping of the cache entries
      */
-    private final Map<T, Tuple<M, Long>> cache = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<T, Tuple<M, Long>> cache = new ConcurrentHashMap<>();
     /**
      * The amount of time, in millis, in which a cache entry
      * will timeout
@@ -61,7 +61,7 @@ public class Cache<T, M> {
      * The the expiry listener, which is notified whenever
      * an entry is evicted do to a timeout
      */
-    private final BiConsumer<T, M> expire;
+    private final BiFunction<T, M, Boolean> expire;
 
     /**
      * Builds a cache with the given number of milliseconds
@@ -84,7 +84,7 @@ public class Cache<T, M> {
      * entries will timeout
      * @param expire the expiry listener
      */
-    public Cache(long timeout, BiConsumer<T, M> expire) {
+    public Cache(long timeout, BiFunction<T, M, Boolean> expire) {
         this.timeout = timeout;
         this.expire = expire;
     }
@@ -119,14 +119,36 @@ public class Cache<T, M> {
             return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
         } else {
             if (System.currentTimeMillis() - instance.getB() > this.timeout) {
-                if (this.cache.remove(key, instance)) {
-                    this.expire.accept(key, instance.getA());
-                }
+                this.cache.computeIfPresent(key, (k, v) -> this.expire.apply(key, instance.getA()) ? null : instance);
                 return this.cache.computeIfAbsent(key, t -> new Tuple<>(loader.get(), System.currentTimeMillis())).getA();
             }
 
             return instance.getA();
         }
+    }
+
+    /**
+     * Computes the value at this cache entry, returning the
+     * new value to put into or returning {@code null} to
+     * remove it.
+     *
+     * @param key the key to check
+     * @param loader the value loader
+     * @return the value, or {@code null} if it is now or
+     * was {@code null}
+     */
+    public M compute(T key, BiFunction<T, M, M> loader) {
+        Tuple<M, Long> compute = this.cache.compute(key, (k, v) -> {
+            if (v == null) {
+                M apply = loader.apply(k, null);
+                return new Tuple<>(apply, System.currentTimeMillis());
+            } else {
+                M apply = loader.apply(k, v.getA());
+                return apply == null ? null : new Tuple<>(apply, System.currentTimeMillis());
+            }
+        });
+
+        return compute == null ? null : compute.getA();
     }
 
     /**
@@ -157,10 +179,8 @@ public class Cache<T, M> {
         }
 
         if (System.currentTimeMillis() - instance.getB() > this.timeout) {
-            if (this.cache.remove(key, instance)) {
-                this.expire.accept(key, instance.getA());
-            }
-            return null;
+            Tuple<M, Long> tuple = this.cache.computeIfPresent(key, (k, v) -> this.expire.apply(key, instance.getA()) ? null : instance);
+            return tuple == null ? null : tuple.getA();
         }
 
         return instance.getA();
@@ -198,9 +218,7 @@ public class Cache<T, M> {
              rounds++) {
             Map.Entry<T, Tuple<M, Long>> e = it.next();
 
-            if (this.cache.remove(e.getKey(), e.getValue())) {
-                this.expire.accept(e.getKey(), e.getValue().getA());
-            }
+            this.cache.computeIfPresent(e.getKey(), (k, v) -> this.expire.apply(e.getKey(), e.getValue().getA()) ? null : e.getValue());
         }
     }
 }
