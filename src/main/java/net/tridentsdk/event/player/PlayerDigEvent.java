@@ -16,27 +16,34 @@
  */
 package net.tridentsdk.event.player;
 
+import lombok.Getter;
+import lombok.Setter;
+import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.ui.chat.ChatComponent;
+import net.tridentsdk.event.Cancellable;
 
-import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
- * Represents a player that has successfully logged onto the
- * server, and will commence with sending the necessary
- * packets in order to spawn the player entity later on.
- *
- * <p>This event is not cancellable because removing a
- * player requires more logic that is out of scope of this
- * event. Use {@link Player#kick(ChatComponent)} for this.
- * </p>
+ * Called when a player breaks a block.
  *
  * @author TridentSDK
  * @since 0.4-alpha
  */
-@Immutable
-public class PlayerJoinEvent extends PlayerEvent {
-    public PlayerJoinEvent(Player player) {
+@NotThreadSafe
+public class PlayerDigEvent extends PlayerEvent implements Cancellable {
+    /**
+     * The block that has been broken
+     */
+    @Getter
+    private final Block block;
+
+    @Getter
+    @Setter
+    private boolean cancelled;
+
+    public PlayerDigEvent(Player player, Block block) {
         super(player);
+        this.block = block;
     }
 }
