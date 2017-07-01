@@ -16,8 +16,8 @@
  */
 package net.tridentsdk.base;
 
-import net.tridentsdk.entity.meta.living.VillagerProfession;
-import net.tridentsdk.entity.meta.living.monster.ZombieType;
+import net.tridentsdk.meta.entity.living.VillagerProfession;
+import net.tridentsdk.meta.entity.living.monster.ZombieType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

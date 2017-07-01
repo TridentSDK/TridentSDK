@@ -17,7 +17,7 @@
 package net.tridentsdk.entity;
 
 import net.tridentsdk.base.Position;
-import net.tridentsdk.entity.meta.EntityMeta;
+import net.tridentsdk.meta.entity.EntityMeta;
 import net.tridentsdk.world.World;
 
 import javax.annotation.concurrent.ThreadSafe;

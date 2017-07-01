@@ -19,6 +19,8 @@ package net.tridentsdk.entity.living;
 import net.tridentsdk.Impl;
 import net.tridentsdk.command.CmdSource;
 import net.tridentsdk.entity.Entity;
+import net.tridentsdk.inventory.Inventory;
+import net.tridentsdk.inventory.PlayerInventory;
 import net.tridentsdk.permission.Permissible;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.chat.ChatComponent;
@@ -227,6 +229,21 @@ public interface Player extends Entity, CmdSource, Permissible {
      * to the default.
      */
     void resetTitle();
+
+    /**
+     * Gets the inventory held by this player.
+     *
+     * @return the player's inventory
+     */
+    PlayerInventory getInventory();
+
+    /**
+     * Opens a new inventory window for this player. The
+     * inventory cannot be a player inventory.
+     *
+     * @param inventory the inventory to open
+     */
+    void openInventory(Inventory inventory);
 
     /**
      * Gets whether or not this player is in god mode.

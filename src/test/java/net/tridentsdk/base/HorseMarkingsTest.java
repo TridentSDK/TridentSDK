@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.base;
 
-import net.tridentsdk.entity.meta.living.animal.HorseMarkings;
+import net.tridentsdk.meta.entity.living.animal.HorseMarkings;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

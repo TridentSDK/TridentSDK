@@ -66,9 +66,12 @@ public interface Inventory {
      * 4.</p>
      *
      * @param item the item to add
-     * @param quantity the quantity of that item to add
+     * @param quantity the quantity of that item to add,
+     * numbers above the valid stack size are valid but will
+     * take up more slots
      * @return {@code true} if the operation succeeded,
-     * {@code false} if the inventory was full
+     * {@code false} if some or all of the items failed to
+     * be added
      */
     boolean add(Item item, int quantity);
 
@@ -84,37 +87,43 @@ public interface Inventory {
      * <p>The quantity acts independently of the item's
      * count, thus if the item had a count of 3 and the
      * quantity 4, then the amount of items added would be
-     * 4.</p>
+     * 4. A quantity exceeding the stack size for the given
+     * item always complete successfully, only adding the
+     * max stack size.</p>
      *
      * @param slot the slot which to add the item
      * @param item the item to add to the inventory
      * @param quantity the quantity of items to add
-     * @return {@code null} if the item was successfully
-     * added, or the item that was replaced by this method
+     * @return non-null value of the item after adding if it
+     * completed successfully, otherwise {@code null} if it
+     * failed
      */
+    @Nullable
     Item add(int slot, Item item, int quantity);
 
     /**
      * Removes the specified quantity of items from the
      * specified slot in the inventory.
      *
+     * <p>Having an a quantity above that existing in the
+     * inventory is not invalid and will clear only that
+     * slot successfully.</p>
+     *
      * @param slot the slot to remove items
-     * @param quantity the quantity to remove
-     * @return {@code null} if no items exists, otherwise
-     * current number of item <strong>after</strong> this
-     * operation has completed
+     * @param quantity the quantity of that item to remove
+     * @return the item left over after applying this
+     * operation, or
+     * {@link net.tridentsdk.base.Substance#AIR} if none
      */
-    @Nullable
     Item remove(int slot, int quantity);
 
     /**
      * Obtains the item at the given slot in the inventory.
      *
      * @param slot the slot which to get the item from
-     * @return the item, or {@code null} if none exists at
-     * that slot
+     * @return the item, or
+     * {@link net.tridentsdk.base.Substance#AIR} if none
      */
-    @Nullable
     Item get(int slot);
 
     /**

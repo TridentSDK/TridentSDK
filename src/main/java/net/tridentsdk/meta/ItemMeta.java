@@ -18,8 +18,8 @@ package net.tridentsdk.meta;
 
 import net.tridentsdk.meta.nbt.Tag;
 
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
+import java.io.DataOutputStream;
 
 /**
  * A class representing an item's extra metadata such as
@@ -29,7 +29,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@ThreadSafe
+@Immutable
 public class ItemMeta {
     /**
      * The NBT data which contains modifications made to
@@ -55,13 +55,12 @@ public class ItemMeta {
     }
 
     /**
-     * Obtains the NBT data of this particular item.
+     * Writes out the NBT value for this item metadata to
+     * the given stream.
      *
-     * @return the NBT data, or {@code null} if the item was
-     * not modified
+     * @param stream the stream to write
      */
-    @Nullable
-    public Tag.Compound toNbt() {
-        return this.nbt;
+    public void writeNbt(DataOutputStream stream) {
+        this.nbt.write(stream);
     }
 }

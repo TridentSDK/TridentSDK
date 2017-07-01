@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.base;
 
-import net.tridentsdk.entity.meta.living.animal.HorseArmor;
+import net.tridentsdk.meta.entity.living.animal.HorseArmor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

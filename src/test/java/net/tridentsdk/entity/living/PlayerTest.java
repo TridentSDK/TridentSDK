@@ -20,7 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.command.CmdSourceType;
-import net.tridentsdk.entity.meta.living.PlayerMeta;
+import net.tridentsdk.inventory.Inventory;
+import net.tridentsdk.inventory.PlayerInventory;
+import net.tridentsdk.meta.entity.living.PlayerMeta;
 import net.tridentsdk.ui.bossbar.BossBar;
 import net.tridentsdk.ui.chat.ChatComponent;
 import net.tridentsdk.ui.chat.ChatType;
@@ -187,6 +189,16 @@ public class PlayerTest {
 
         @Override
         public void resetTitle() {
+
+        }
+
+        @Override
+        public PlayerInventory getInventory() {
+            return null;
+        }
+
+        @Override
+        public void openInventory(Inventory inventory) {
 
         }
 
