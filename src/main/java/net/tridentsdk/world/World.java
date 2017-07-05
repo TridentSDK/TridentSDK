@@ -162,7 +162,7 @@ public interface World {
      *
      * @return the world's directory
      */
-    Path getWorldDirectory();
+    Path getDirectory();
 
     /**
      * Saves this world to the region files in the world

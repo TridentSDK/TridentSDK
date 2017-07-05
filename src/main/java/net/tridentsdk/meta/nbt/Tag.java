@@ -16,10 +16,7 @@
  */
 package net.tridentsdk.meta.nbt;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -38,6 +35,7 @@ import java.util.function.BiFunction;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
+@ToString
 @NotThreadSafe
 @AllArgsConstructor
 public class Tag {
@@ -320,7 +318,6 @@ public class Tag {
             public void write(Object o, DataOutputStream stream) {
                 Compound compound = (Compound) o;
                 for (Map.Entry<String, Tag> entry : compound.getEntries().entrySet()) {
-                    System.out.println("W: " + entry.getKey() + " - " + entry.getValue().getObject() + " (" + entry.getValue().getType() + ")");
                     entry.getValue().getType().writeFully(entry.getKey(), entry.getValue().getObject(), stream);
                 }
                 END.writeFully("", null, stream);

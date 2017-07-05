@@ -86,11 +86,20 @@ public class HoverEvent {
         return new HoverEvent(HoverAction.SHOW_ACHIEVEMENT, new JsonPrimitive(achievement));
     }
 
+    /**
+     * Adds an item property to the chat component.
+     *
+     * @param item the item
+     * @return the new hover action event
+     */
     public static HoverEvent item(Item item) {
         JsonObject json = new JsonObject();
-        json.addProperty("id", item.getSubstance().toString());
+        json.addProperty("id", item.getSubstance().getId());
+        json.addProperty("Damage", item.getDamage());
+        json.addProperty("Count", item.getCount());
 
-        return new HoverEvent(HoverAction.SHOW_ITEM, json);
+        String string = json.toString().replaceAll("\"", "");
+        return new HoverEvent(HoverAction.SHOW_ITEM, new JsonPrimitive(string));
     }
 
     /**
