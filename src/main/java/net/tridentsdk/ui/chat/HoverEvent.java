@@ -94,9 +94,10 @@ public class HoverEvent {
      */
     public static HoverEvent item(Item item) {
         JsonObject json = new JsonObject();
-        json.addProperty("id", item.getSubstance().getId());
+        json.addProperty("id", item.getSubstance().toString().replaceAll("minecraft:", ""));
         json.addProperty("Damage", item.getDamage());
         json.addProperty("Count", item.getCount());
+        json.addProperty("tag", "{}");
 
         String string = json.toString().replaceAll("\"", "");
         return new HoverEvent(HoverAction.SHOW_ITEM, new JsonPrimitive(string));

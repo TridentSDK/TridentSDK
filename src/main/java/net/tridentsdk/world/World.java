@@ -18,6 +18,8 @@ package net.tridentsdk.world;
 
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Position;
+import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.world.opt.GenOpts;
 import net.tridentsdk.world.opt.Weather;
 import net.tridentsdk.world.opt.WorldBorder;
@@ -28,6 +30,8 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * This class is a representation of a world
@@ -61,8 +65,27 @@ public interface World {
     int getTime();
 
     /**
+     * Obtains a collection of players occupying this world.
+     *
+     * @return the collection of players that inhabit this
+     * world
+     */
+    Set<? extends Player> getPlayers();
+
+    /**
+     * Obtains a stream of the entities, including players,
+     * that currently inhabit this world.
+     *
+     * @return the players and entities in this world
+     */
+    Stream<? extends Entity> getEntities();
+
+    /**
      * Obtains the options that this world has been created
      * to use.
+     *
+     * <p>The returned collection is immutable; it cannot
+     * be modified.</p>
      *
      * @return the world options
      */

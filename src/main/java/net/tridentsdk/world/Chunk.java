@@ -17,8 +17,12 @@
 package net.tridentsdk.world;
 
 import net.tridentsdk.base.Block;
+import net.tridentsdk.entity.Entity;
+import net.tridentsdk.entity.living.Player;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * This class represents a Minecraft world chunk, a 16x16
@@ -63,4 +67,22 @@ public interface Chunk {
      * @return the container world
      */
     World getWorld();
+
+    /**
+     * Obtains a collection that contains the players that
+     * currently occupy this chunk.
+     *
+     * <p>This collection may not be modified.</p>
+     *
+     * @return the players in this chunk
+     */
+    Set<? extends Player> getPlayers();
+
+    /**
+     * Obtains a stream of the entities, including players,
+     * that currently occupy this chunk.
+     *
+     * @return the entities, including players in this chunk
+     */
+    Stream<? extends Entity> getEntities();
 }

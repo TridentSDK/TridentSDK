@@ -16,11 +16,11 @@
  */
 package net.tridentsdk.base;
 
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * A vector is a container of 3 number values that can be
- * arbitrarily used or as a directional construct.
+ * A vector is an immutable container of 3 coordinate
+ * values.
  *
  * <p>The three arbitrary values are represented internally
  * as doubles.</p>
@@ -28,7 +28,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author TridentSDK
  * @since 0.3-alpha-DP
  */
-@ThreadSafe
+@Immutable
 public final class Vector extends AbstractVector<Vector> {
     private static final long serialVersionUID = 9128045730182148574L;
 
@@ -62,6 +62,26 @@ public final class Vector extends AbstractVector<Vector> {
         super(x, y, z);
     }
 
+    @Override
+    public Vector setX(double x) {
+        return new Vector(x, this.y, this.z);
+    }
+
+    @Override
+    public Vector setY(double y) {
+        return new Vector(this.x, y, this.z);
+    }
+
+    @Override
+    public Vector setZ(double z) {
+        return new Vector(this.x, this.y, z);
+    }
+
+    @Override
+    public Vector set(double x, double y, double z) {
+        return new Vector(x, y, z);
+    }
+
     /**
      * Obtains the square of the magnitude of this Vector.
      *
@@ -71,14 +91,9 @@ public final class Vector extends AbstractVector<Vector> {
      * @return the magnitude squared
      */
     public double getMagnitudeSquared() {
-        double x;
-        double y;
-        double z;
-        synchronized (this.lock) {
-            x = this.x;
-            y = this.y;
-            z = this.z;
-        }
+        double x = this.x;
+        double y = this.y;
+        double z = this.z;
 
         return square(x) + square(y) + square(z);
     }
@@ -104,8 +119,7 @@ public final class Vector extends AbstractVector<Vector> {
      *
      * <p>The usage of {@link #getMagnitude()} in this
      * operation means that it should be avoided if
-     * possible
-     * due to performance concerns.</p>
+     * possible due to performance concerns.</p>
      *
      * @return the normalized vector
      */

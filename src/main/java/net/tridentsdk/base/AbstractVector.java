@@ -16,31 +16,33 @@
  */
 package net.tridentsdk.base;
 
+import lombok.Getter;
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.world.World;
 
-import javax.annotation.concurrent.GuardedBy;
-import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.concurrent.Immutable;
 import java.io.Serializable;
 
 /**
- * A vector is a container of 3 number values that can be
- * arbitrarily used or as a directional construct.
+ * A vector is an immutable tuple consisting of 3 arbitrary
+ * {@code double} values that could be used to represent
+ * locations, coordinates, etc...
  *
- * <p>The three arbitrary values are represented internally
- * as doubles.</p>
- *
- * <p>Subclasses need to implement their own hashcode,
- * equals, and toString methods.</p>
+ * <p>Any method that is prefixed with {@code set}
+ * <strong>WILL NOT</strong> produce any changes to the
+ * existing {@code AbstractVector}. It will instead, return
+ * a new {@code AbstractVector} containing the same fields,
+ * save for the ones that were modified by that operation.
+ * </p>
  *
  * @param <T> this must be the subclass type in order to
  *            provide the proper functionality
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@ThreadSafe
+@Immutable
 @Internal("public access for convenience only")
-public class AbstractVector<T extends AbstractVector<T>> implements Serializable {
+public abstract class AbstractVector<T extends AbstractVector<T>> implements Serializable {
     private static final long serialVersionUID = 218773668333902972L;
 
     /**
@@ -79,28 +81,12 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     /**
      * The AbstractVector states holding arbitrary values
      */
-    @GuardedBy("lock")
-    protected double x;
-    @GuardedBy("lock")
-    protected double y;
-    @GuardedBy("lock")
-    protected double z;
-
-    /**
-     * The lock used to protect compound read/writes.
-     */
-    protected final Object lock = new Object();
-
-    /**
-     * Hook method used to append additional fields in
-     * subclasses for the writeTo method.
-     *
-     * @param vector the vector to which this vector will
-     *               write its fields
-     */
-    @GuardedBy("lock")
-    protected void writeFields(T vector) {
-    }
+    @Getter
+    protected final double x;
+    @Getter
+    protected final double y;
+    @Getter
+    protected final double z;
 
     /**
      * Creates a new AbstractVector object with all 3 values set to
@@ -111,7 +97,8 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
-     * Creates a new AbstractVector object using {@code int}s.
+     * Creates a new AbstractVector object using
+     * {@code int}s.
      *
      * @param x the x value
      * @param y the y value
@@ -122,7 +109,8 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
-     * Creates a new AbstractVector object using {@code double}s.
+     * Creates a new AbstractVector object using
+     * {@code double}s.
      *
      * @param x the x value
      * @param y the y value
@@ -135,39 +123,13 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
     }
 
     /**
-     * Obtains the {@code double} representation of this
-     * vector's x value.
-     *
-     * @return the x value
-     */
-    public double getX() {
-        synchronized (this.lock) {
-            return this.x;
-        }
-    }
-
-    /**
      * Obtains the {@code int} representation of this
      * vector's x value.
      *
      * @return the x value
      */
     public int getIntX() {
-        synchronized (this.lock) {
-            return (int) this.x;
-        }
-    }
-
-    /**
-     * Obtains the {@code double} representation of this
-     * vector's y value.
-     *
-     * @return the y value
-     */
-    public double getY() {
-        synchronized (this.lock) {
-            return this.y;
-        }
+        return (int) this.x;
     }
 
     /**
@@ -177,21 +139,7 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * @return the y value
      */
     public int getIntY() {
-        synchronized (this.lock) {
-            return (int) this.y;
-        }
-    }
-
-    /**
-     * Obtains the {@code double} representation of this
-     * vector's z value.
-     *
-     * @return the z value
-     */
-    public double getZ() {
-        synchronized (this.lock) {
-            return this.z;
-        }
+        return (int) this.y;
     }
 
     /**
@@ -201,462 +149,311 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
      * @return the z value
      */
     public int getIntZ() {
-        synchronized (this.lock) {
-            return (int) this.z;
-        }
+        return (int) this.z;
     }
 
     /**
-     * Sets the x value of this vector
+     * Creates a new vector, containing all of the same
+     * fields as this vector, but with the X value set to
+     * the given number.
      *
-     * @param x the new value to set x
+     * @param x the new X value to set in the created vector
+     * @return the vector with the new X value and all of
+     * the rest of its fields unmodified
      */
-    public void setX(int x) {
-        synchronized (this.lock) {
-            this.x = x;
-        }
+    public T setX(int x) {
+        return this.setX((double) x);
     }
 
     /**
-     * Sets the x value of this vector
+     * Creates a new vector, containing all of the same
+     * fields as this vector, but with the X value set to
+     * the given number.
      *
-     * @param x the new value to set x
+     * @param x the new X value to set in the created vector
+     * @return the vector with the new X value and all of
+     * the rest of its fields unmodified
      */
-    public void setX(double x) {
-        synchronized (this.lock) {
-            this.x = x;
-        }
-    }
+    public abstract T setX(double x);
 
     /**
-     * Sets the y value of this vector
+     * Creates a new vector, containing all of the same
+     * fields as this vector, but with the Y value set to
+     * the given number.
      *
-     * @param y the new value to set y
+     * @param y the new Y value to set in the created vector
+     * @return the vector with the new Y value and all of
+     * the rest of its fields unmodified
      */
-    public void setY(int y) {
-        synchronized (this.lock) {
-            this.y = y;
-        }
+    public T setY(int y) {
+        return this.setY((double) y);
     }
 
     /**
-     * Sets the y value of this vector
+     * Creates a new vector, containing all of the same
+     * fields as this vector, but with the Y value set to
+     * the given number.
      *
-     * @param y the new value to set y
+     * @param y the new Y value to set in the created vector
+     * @return the vector with the new Y value and all of
+     * the rest of its fields unmodified
      */
-    public void setY(double y) {
-        synchronized (this.lock) {
-            this.y = y;
-        }
-    }
+    public abstract T setY(double y);
 
     /**
-     * Sets the z value of this vector
+     * Creates a new vector, containing all of the same
+     * fields as this vector, but with the Z value set to
+     * the given number.
      *
-     * @param z the new value to set z
+     * @param z the new Z value to set in the created vector
+     * @return the vector with the new Z value and all of
+     * the rest of its fields unmodified
      */
-    public void setZ(int z) {
-        synchronized (this.lock) {
-            this.z = z;
-        }
+    public T setZ(int z) {
+        return this.setZ((double) z);
     }
 
     /**
-     * Sets the z value of this vector
+     * Creates a new vector, containing all of the same
+     * fields as this vector, but with the Z value set to
+     * the given number.
      *
-     * @param z the new value to set z
+     * @param z the new Z value to set in the created vector
+     * @return the vector with the new Z value and all of
+     * the rest of its fields unmodified
      */
-    public void setZ(double z) {
-        synchronized (this.lock) {
-            this.z = z;
-        }
-    }
+    public abstract T setZ(double z);
 
     /**
-     * Sets all of the values contained by this vector to
-     * those given in the integer arguments.
+     * Creates a new vector, with the given new set of XYZ
+     * numbers, saving the non-vector fields.
      *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param x the new X value
+     * @param y the new Y value
+     * @param z the new Z value
+     * @return the new vector containing the specified XYZ
+     * coordinates, but retaining the same fields that may
+     * be possessed by a subclass
      */
-    public void set(int x, int y, int z) {
-        synchronized (this.lock) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
+    public T set(int x, int y, int z) {
+        return this.set((double) x, (double) y, (double) z);
     }
 
     /**
-     * Sets all of the values contained by this vector to
-     * those given in the {@code double} arguments.
+     * Creates a new vector, with the given new set of XYZ
+     * numbers, saving the non-vector fields.
      *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     * @param z the z coordinate
+     * @param x the new X value
+     * @param y the new Y value
+     * @param z the new Z value
+     * @return the new vector containing the specified XYZ
+     * coordinates, but retaining the same fields that may
+     * be possessed by a subclass
      */
-    public void set(double x, double y, double z) {
-        synchronized (this.lock) {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
-    }
+    public abstract T set(double x, double y, double z);
 
     /**
-     * Adds the values defined in the given vector to the
-     * values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector added with the XYZ fields of the given
+     * vector.
      *
-     * <p>Please avoid using this method. It was designed to
-     * be completely correct and thus requires the use of
-     * two acquires of the monitor of both this and the
-     * vector on which to operate. Often more corrent and
-     * better performing idioms may be used (for example if
-     * you'd like to add a single constant) instead of this
-     * one is recommended.</p>
-     *
-     * <p>The monitor of the current vector must always be
-     * acquired first in compound read and writes.</p>
-     *
-     * @param vector the vector values to add
-     * @return the current vector, after the operation
+     * @param vector the XYZ fields of which to add to this
+     * vector
+     * @return the new vector with this vector's XYZ values
+     * added to the given vector's XYZ values
      */
     public T add(T vector) {
-        synchronized (this.lock) {
-            synchronized (vector.lock) {
-                this.addImpl(vector.x, vector.y, vector.z);
-            }
-        }
-
-        return (T) this;
+        return this.set(this.x + vector.x, this.y + vector.y, this.z + vector.z);
     }
 
     /**
-     * Adds the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector added with the given values.
      *
-     * @param x the x to add
-     * @param y the y to add
-     * @param z the z to add
-     * @return the current vector, after the operation
+     * @param x the amount to add to this vector's X value
+     * @param y the amount to add to this vector's Y value
+     * @param z the amount to add to this vector's Z value
+     * @return the new vector with this vector's XYZ values
+     * added to those given in the parameters
      */
     public T add(int x, int y, int z) {
-        synchronized (this.lock) {
-            this.addImpl((double) x, (double) y, (double) z);
-        }
-
-        return (T) this;
+        return this.set(this.x + x, this.y + y, this.z + z);
     }
 
     /**
-     * Adds the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector added with the given values.
      *
-     * @param x the x to add
-     * @param y the y to add
-     * @param z the z to add
-     * @return the current vector, after the operation
+     * @param x the amount to add to this vector's X value
+     * @param y the amount to add to this vector's Y value
+     * @param z the amount to add to this vector's Z value
+     * @return the new vector with this vector's XYZ values
+     * added to those given in the parameters
      */
     public T add(double x, double y, double z) {
-        synchronized (this.lock) {
-            this.addImpl(x, y, z);
-        }
-
-        return (T) this;
+        return this.set(this.x + x, this.y + y, this.z + z);
     }
 
     /**
-     * JIT Compiler inlining hint
-     */
-    // The most useful part of this method is avoiding the
-    // invokevirtual opcode which produces an albiet minor
-    // speedup in methods that delegate down the chain
-    // the same model is used with all other compound adds
-    // for vector
-    //
-    // This method is only 31 byte in opcodes and 32 bytes
-    // as detected by the JVM (this is why you must do real
-    // world tests!) so it is inlined on the second pass
-    // by the JIT compiler on my machine. The default
-    // MaxInlineSize is 35 bytes, therefore this method fits
-    // it quite well, actually.
-    @Internal
-    @GuardedBy("lock")
-    private void addImpl(double x, double y, double z) {
-        this.x += x;
-        this.y += y;
-        this.z += z;
-    }
-
-    /**
-     * Subtracts the values defined in the given vector to the
-     * values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector subtracted with the XYZ fields of the
+     * given vector.
      *
-     * <p>Please avoid using this method. It was designed to
-     * be completely correct and thus requires the use of
-     * two acquires of the monitor of both this and the
-     * vector on which to operate. Often more corrent and
-     * better performing idioms may be used (for example if
-     * you'd like to add a single constant) instead of this
-     * one is recommended.</p>
-     *
-     * <p>The monitor of the current vector must always be
-     * acquired first in compound read and writes.</p>
-     *
-     * @param vector the vector values to subtract
-     * @return the current vector, after the operation
+     * @param vector the XYZ fields of which to subtract
+     * from this vector
+     * @return the new vector with this vector's XYZ values
+     * subtracted with the given vector's XYZ values
      */
     public T subtract(T vector) {
-        synchronized (this.lock) {
-            synchronized (vector.lock) {
-                this.subImpl(vector.x, vector.y, vector.z);
-            }
-        }
-
-        return (T) this;
+        return this.set(this.x - vector.x, this.y - vector.y, this.z - vector.z);
     }
 
     /**
-     * Subtracts the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector subtracted with the given values.
      *
-     * @param x the x to subtract
-     * @param y the y to subtract
-     * @param z the z to subtract
-     * @return the current vector, after the operation
+     * @param x the amount to subtract from this vector's X
+     * value
+     * @param y the amount to subtract from this vector's Y
+     * value
+     * @param z the amount to subtract from this vector's Z
+     * value
+     * @return the new vector with this vector's XYZ values
+     * subtracted with those given in the parameters
      */
     public T subtract(int x, int y, int z) {
-        synchronized (this.lock) {
-            this.subImpl((double) x, (double) y, (double) z);
-        }
-
-        return (T) this;
+        return this.set(this.x - x, this.y - y, this.z - z);
     }
 
     /**
-     * Subtracts the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector subtracted with the given values.
      *
-     * @param x the x to subtract
-     * @param y the y to subtract
-     * @param z the z to subtract
-     * @return the current vector, after the operation
+     * @param x the amount to subtract from this vector's X
+     * value
+     * @param y the amount to subtract from this vector's Y
+     * value
+     * @param z the amount to subtract from this vector's Z
+     * value
+     * @return the new vector with this vector's XYZ values
+     * subtracted with those given in the parameters
      */
     public T subtract(double x, double y, double z) {
-        synchronized (this.lock) {
-            this.subImpl(x, y, z);
-        }
-
-        return (T) this;
-    }
-
-    @Internal
-    @GuardedBy("lock")
-    private void subImpl(double x, double y, double z) {
-        this.x -= x;
-        this.y -= y;
-        this.z -= z;
+        return this.set(this.x - x, this.y - y, this.z - z);
     }
 
     /**
-     * Multiplies the values defined in the given vector to
-     * the values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector multiplied with the XYZ fields of the
+     * given vector.
      *
-     * <p>Please avoid using this method. It was designed to
-     * be completely correct and thus requires the use of
-     * two acquires of the monitor of both this and the
-     * vector on which to operate. Often more corrent and
-     * better performing idioms may be used (for example if
-     * you'd like to add a single constant) instead of this
-     * one is recommended.</p>
-     *
-     * <p>The monitor of the current vector must always be
-     * acquired first in compound read and writes.</p>
-     *
-     * @param vector the vector values to multiply
-     * @return the current vector, after the operation
+     * @param vector the XYZ fields of which to multiply
+     * with this vector
+     * @return the new vector with this vector's XYZ values
+     * multiplied to the given vector's XYZ values
      */
     public T multiply(T vector) {
-        synchronized (this.lock) {
-            synchronized (vector.lock) {
-                this.mulImpl(vector.x, vector.y, vector.z);
-            }
-        }
-
-        return (T) this;
+        return this.set(this.x * vector.x, this.y * vector.y, this.z * vector.z);
     }
 
     /**
-     * Multiplies the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector multiplied with the given values.
      *
-     * @param x the x to multiply
-     * @param y the y to multiply
-     * @param z the z to multiply
-     * @return the current vector, after the operation
+     * @param x the amount to multiply with this vector's X
+     * value
+     * @param y the amount to multiply with this vector's Y
+     * value
+     * @param z the amount to multiply with this vector's Z
+     * value
+     * @return the new vector with this vector's XYZ values
+     * multiplied with those given in the parameters
      */
     public T multiply(int x, int y, int z) {
-        synchronized (this.lock) {
-            this.mulImpl((double) x, (double) y, (double) z);
-        }
-
-        return (T) this;
+        return this.set(this.x * x, this.y * y, this.z * z);
     }
 
     /**
-     * Multiplies the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector multiplied with the given values.
      *
-     * @param x the x to multiply
-     * @param y the y to multiply
-     * @param z the z to multiply
-     * @return the current vector, after the operation
+     * @param x the amount to multiply with this vector's X
+     * value
+     * @param y the amount to multiply with this vector's Y
+     * value
+     * @param z the amount to multiply with this vector's Z
+     * value
+     * @return the new vector with this vector's XYZ values
+     * multiplied with those given in the parameters
      */
     public T multiply(double x, double y, double z) {
-        synchronized (this.lock) {
-            this.mulImpl(x, y, z);
-        }
-
-        return (T) this;
-    }
-
-    @Internal
-    @GuardedBy("lock")
-    private void mulImpl(double x, double y, double z) {
-        this.x *= x;
-        this.y *= y;
-        this.z *= z;
+        return this.set(this.x * x, this.y * y, this.z * z);
     }
 
     /**
-     * Dividess the values defined in the given vector to
-     * the values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector divided with the XYZ fields of the given
+     * vector.
      *
-     * <p>Please avoid using this method. It was designed to
-     * be completely correct and thus requires the use of
-     * two acquires of the monitor of both this and the
-     * vector on which to operate. Often more corrent and
-     * better performing idioms may be used (for example if
-     * you'd like to add a single constant) instead of this
-     * one is recommended.</p>
-     *
-     * <p>The monitor of the current vector must always be
-     * acquired first in compound read and writes.</p>
-     *
-     * @param vector the vector values to divide
-     * @return the current vector, after the operation
+     * @param vector the XYZ fields of which to divide from
+     * this vector
+     * @return the new vector with this vector's XYZ values
+     * divided with the given vector's XYZ values
      */
     public T divide(T vector) {
-        synchronized (this.lock) {
-            synchronized (vector.lock) {
-                this.divImpl(vector.x, vector.y, vector.z);
-            }
-        }
-
-        return (T) this;
+        return this.set(this.x / vector.x, this.y / vector.y, this.z / vector.z);
     }
 
     /**
-     * Divides the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector divided with the given values.
      *
-     * @param x the x to divide
-     * @param y the y to divide
-     * @param z the z to divide
-     * @return the current vector, after the operation
+     * @param x the amount to divide the this vector's X
+     * value
+     * @param y the amount to divide the this vector's Y
+     * value
+     * @param z the amount to divide the this vector's Z
+     * value
+     * @return the new vector with this vector's XYZ values
+     * divided with those given in the parameters
      */
     public T divide(int x, int y, int z) {
-        synchronized (this.lock) {
-            this.divImpl((double) x, (double) y, (double) z);
-        }
-
-        return (T) this;
+        return this.set(this.x / x, this.y / y, this.z / z);
     }
 
     /**
-     * Divides the values given by the parameters to those
-     * associated values contained in this vector.
+     * Creates a new vector but its XYZ fields are those of
+     * this vector divided with the given values.
      *
-     * @param x the x to divide
-     * @param y the y to divide
-     * @param z the z to divide
-     * @return the current vector, after the operation
+     * @param x the amount to divide the this vector's X
+     * value
+     * @param y the amount to divide the this vector's Y
+     * value
+     * @param z the amount to divide the this vector's Z
+     * value
+     * @return the new vector with this vector's XYZ values
+     * divided with those given in the parameters
      */
     public T divide(double x, double y, double z) {
-        synchronized (this.lock) {
-            this.divImpl(x, y, z);
-        }
-
-        return (T) this;
-    }
-
-    @Internal
-    @GuardedBy("lock")
-    private void divImpl(double x, double y, double z) {
-        this.x /= x;
-        this.y /= y;
-        this.z /= z;
-    }
-
-    /**
-     * Writes the 3 vector fields to the given one.
-     *
-     * @param vector the vector to which this vector will
-     *               write its fields
-     */
-    public void vecWrite(AbstractVector<?> vector) {
-        synchronized (this.lock) {
-            synchronized (vector.lock) {
-                vector.x = this.x;
-                vector.y = this.y;
-                vector.z = this.z;
-            }
-        }
+        return this.set(this.x / x, this.y / y, this.z / z);
     }
 
     /**
      * Create a position based from this vector with
-     * a provided world
+     * a provided world.
      *
      * @param world The world of the position
      * @return A Position representation of this vector
      */
     public Position toPosition(World world){
-        synchronized (this.lock) {
-            return new Position(world, this.x, this.y, this.z);
-        }
-    }
-
-    /**
-     * Writes the fields of this vector to the fields of the
-     * given vector, along with the additional fields that
-     * may be present in the subclass.
-     *
-     * @param vector the vector to which this vector will
-     *               write its fields
-     */
-    public void write(T vector) {
-        synchronized (this.lock) {
-            synchronized (vector.lock) {
-                vector.x = this.x;
-                vector.y = this.y;
-                vector.z = this.z;
-
-                this.writeFields(vector);
-            }
-        }
+        return new Position(world, this.x, this.y, this.z);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof AbstractVector) {
             AbstractVector v = (AbstractVector) obj;
-            synchronized (this.lock) {
-                synchronized (v.lock) {
-                    return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
-                }
-            }
+            return eq(this.x, v.x) && eq(this.y, v.y) && eq(this.z, v.z);
         }
 
         return false;
@@ -664,22 +461,15 @@ public class AbstractVector<T extends AbstractVector<T>> implements Serializable
 
     @Override
     public int hashCode() {
-        // Ignore IntelliJ warning for final field not in hashcode
-        // anyone who uses a vector or position object as a
-        // key is probably mentally retarded
-        synchronized (this.lock) {
-            int hash = 1;
-            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
-            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
-            hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
-            return hash;
-        }
+        int hash = 1;
+        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.x));
+        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.y));
+        hash = 31 * hash + Long.hashCode(Double.doubleToLongBits(this.z));
+        return hash;
     }
 
     @Override
     public String toString() {
-        synchronized (this.lock) {
-            return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
-        }
+        return "Vector{" + this.x + ',' + this.y + ',' + this.z + '}';
     }
 }

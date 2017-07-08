@@ -29,7 +29,7 @@ public class PositionTest {
     
     @Test
     public void testWorld() {
-        assertNotNull(new Position(this.world).world());
+        assertNotNull(new Position(this.world).getWorld());
     }
 
     @Test
@@ -64,18 +64,6 @@ public class PositionTest {
     }
 
     @Test
-    public void testWrite() {
-        Position p0 = new Position(this.world);
-        Position p1 = new Position(this.world);
-
-        Vector vector = VectorsTest.rand();
-        vector.vecWrite(p0);
-        p0.write(p1);
-
-        assertEquals(p0, p1);
-    }
-
-    @Test
     public void testBlock() {
         Position position = new Position(this.world);
         Block block = position.getBlock();
@@ -95,8 +83,8 @@ public class PositionTest {
         Position p1 = new Position(this.world);
 
         Vector vector = VectorsTest.rand();
-        vector.vecWrite(p0);
-        vector.vecWrite(p1);
+        p0 = p0.set(vector.getX(), vector.getY(), vector.getZ());
+        p1 = p1.set(vector.getX(), vector.getY(), vector.getZ());
 
         assertEquals(p0, p1);
         assertNotEquals(p0, VectorsTest.rand());
@@ -128,34 +116,5 @@ public class PositionTest {
 
         assertEquals(p0.getIntX() / 16, p0.getChunkX());
         assertEquals(p0.getIntZ() / 16, p0.getChunkZ());
-    }
-
-    @Test
-    public void testClone() {
-        ThreadLocalRandom r = ThreadLocalRandom.current();
-        double x = r.nextDouble();
-        double y = r.nextDouble();
-        double z = r.nextDouble();
-        float yaw = r.nextFloat();
-        float pitch = r.nextFloat();
-        Position p0 = new Position(this.world, x, y, z, yaw, pitch);
-
-        assertEquals(p0, p0.clone());
-    }
-
-    @Test
-    public void testToWorldVec() {
-        ThreadLocalRandom r = ThreadLocalRandom.current();
-        double x = r.nextDouble();
-        double y = r.nextDouble();
-        double z = r.nextDouble();
-
-        Position p = new Position(this.world, x, y, z);
-        ImmutableWorldVector vec = p.toWorldVector();
-
-        assertEquals(vec.getWorld(), p.world());
-        assertEquals(vec.getX(), p.getIntX());
-        assertEquals(vec.getY(), p.getIntY());
-        assertEquals(vec.getZ(), p.getIntZ());
     }
 }

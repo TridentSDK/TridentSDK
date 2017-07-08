@@ -100,22 +100,12 @@ public class VectorsTest {
         this.vec.divide(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         this.vec.divide(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I);
 
-        assertEquals(new AbstractVector(), this.vec);
+        assertEquals(new Vector(), this.vec);
     }
 
     @Test
     public void testIntConstructor() {
-        assertEquals(new AbstractVector(0, 0, 0), this.vec);
         assertEquals(new Vector(0, 0, 0), this.vec);
-    }
-
-    @Test
-    public void testWrite() {
-        Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
-        v2.vecWrite(this.vec);
-        v2.write(this.vec);
-
-        assertEquals(this.vec, v2);
     }
 
     @Test
@@ -135,7 +125,7 @@ public class VectorsTest {
     public void testToPosition() {
         World world = Mockito.mock(World.class);
         Position position = this.vec.toPosition(world);
-        assertEquals(world, position.world());
+        assertEquals(world, position.getWorld());
         assertEquals(position.getX(), this.vec.getX(), 0);
         assertEquals(position.getY(), this.vec.getY(), 0);
         assertEquals(position.getZ(), this.vec.getZ(), 0);
