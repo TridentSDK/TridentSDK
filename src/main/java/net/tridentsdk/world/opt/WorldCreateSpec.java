@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import net.tridentsdk.base.Vector;
+import net.tridentsdk.world.gen.GeneratorProvider;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
@@ -46,40 +47,41 @@ public class WorldCreateSpec {
      * specification, which sets all of the settings to
      * their default in a vanilla world.
      */
-    private static final WorldCreateSpec DEFAULT = new DefaultSpec();
+    private static final WorldCreateSpec DEFAULT = new WorldCreateSpec(true);
 
     // BUILDER FIELDS
     @Getter
-    private Difficulty difficulty = Difficulty.NORMAL;
+    private final Difficulty difficulty = Difficulty.NORMAL;
     @Getter
-    private Dimension dimension = Dimension.OVERWORLD;
+    private final Dimension dimension = Dimension.OVERWORLD;
     @Getter
-    private GameMode gameMode = GameMode.SURVIVAL;
+    private final GameMode gameMode = GameMode.SURVIVAL;
     @Getter
-    private GameRuleMap gameRules = new GameRuleMap();
+    private final GameRuleMap gameRules = new GameRuleMap();
     @Getter
-    private boolean allowFlight = false;
+    private final boolean allowFlight;
     @Getter
-    private boolean allowPvp = true;
+    private final boolean allowPvp = true;
     @Getter
-    private boolean allowPortals = true;
+    private final boolean allowPortals = true;
     @Getter
-    private boolean forceGameMode = false;
+    private final boolean forceGameMode;
     @Getter
-    private boolean difficultyLocked = false;
+    private final boolean difficultyLocked;
     @Getter
-    private int spawnProtectionRadius = 5;
+    private final int spawnProtectionRadius = 5;
     @Getter
-    private Vector spawn = null;
-
-    /**
-     * Custom class used to deny changes to the world spec
-     */
-    private static class DefaultSpec extends WorldCreateSpec {
-        private DefaultSpec() {
-            super(true);
-        }
-    }
+    private final Vector spawn;
+    @Getter
+    private final GeneratorProvider provider;
+    @Getter
+    private final long seed;
+    @Getter
+    private final LevelType levelType = LevelType.DEFAULT;
+    @Getter
+    private final boolean allowFeatures = true;
+    @Getter
+    private final String optionString = "";
 
     /**
      * Whether this spec uses the default world options

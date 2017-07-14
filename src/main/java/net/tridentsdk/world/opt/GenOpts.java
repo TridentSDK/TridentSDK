@@ -18,7 +18,6 @@ package net.tridentsdk.world.opt;
 
 import net.tridentsdk.world.gen.GeneratorProvider;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 /**
@@ -28,6 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author TridentSDK
  * @since 0.5-alpha
  */
+// TODO: options string
 @ThreadSafe
 public interface GenOpts {
     /**
@@ -53,13 +53,12 @@ public interface GenOpts {
     long getSeed();
 
     /**
-     * The input used to create the seed for the generator,
-     * or an empty string if it was randomly generated.
+     * Obtains the option string used to generate superflat
+     * and customized worlds.
      *
-     * @return the input that created the seed
+     * @return the layer options string
      */
-    @Nonnull
-    String getSeedInput();
+    String getOptionString();
 
     /**
      * Obtains the level type of the world, which also

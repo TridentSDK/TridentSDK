@@ -95,9 +95,9 @@ public class PositionTest {
     @Test
     public void testSettersAndGetters() {
         Position p0 = new Position(this.world);
-        p0.set(1, 2, 3);
-        p0.setYaw(4);
-        p0.setPitch(5);
+        p0 = p0.set(1, 2, 3);
+        p0 = p0.setYaw(4);
+        p0 = p0.setPitch(5);
         assertEquals(1, p0.getX(), 0);
         assertEquals(2, p0.getY(), 0);
         assertEquals(3, p0.getZ(), 0);

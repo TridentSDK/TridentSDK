@@ -18,6 +18,7 @@ package net.tridentsdk.meta.nbt;
 
 import lombok.*;
 
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
@@ -469,6 +470,7 @@ public class Tag {
          * @return the tag value, or {@code null} if not
          * found
          */
+        @Nullable
         public <T> T get(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
@@ -493,7 +495,7 @@ public class Tag {
         public byte getByte(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return 0;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (byte) tag.getObject();
@@ -514,7 +516,7 @@ public class Tag {
         public short getShort(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return 0;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (short) tag.getObject();
@@ -535,7 +537,7 @@ public class Tag {
         public int getInt(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return 0;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (int) tag.getObject();
@@ -556,7 +558,7 @@ public class Tag {
         public long getLong(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return 0;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (long) tag.getObject();
@@ -577,7 +579,7 @@ public class Tag {
         public float getFloat(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return 0;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (float) tag.getObject();
@@ -598,7 +600,7 @@ public class Tag {
         public byte[] getByteArray(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return null;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (byte[]) tag.getObject();
@@ -619,7 +621,7 @@ public class Tag {
         public String getString(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return null;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (String) tag.getObject();
@@ -637,10 +639,10 @@ public class Tag {
          * @return the tag, or the tag's default value
          * if it cannot be {@code null}
          */
-        public <T> List<T> getList(String key, Class<T> type) {
+        public <T> List<T> getList(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return null;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (List<T>) tag.getObject();
@@ -661,7 +663,7 @@ public class Tag {
         public Compound getCompound(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return null;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (Compound) tag.getObject();
@@ -682,7 +684,7 @@ public class Tag {
         public int[] getIntArray(String key) {
             Tag tag = this.entries.get(key);
             if (tag == null) {
-                return null;
+                throw new IllegalArgumentException("No key found for: " + key);
             }
 
             return (int[]) tag.getObject();

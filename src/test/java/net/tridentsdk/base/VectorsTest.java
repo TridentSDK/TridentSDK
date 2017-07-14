@@ -39,7 +39,7 @@ public class VectorsTest {
     // numbers selected from "fair dice roll"
     private static final double CHANGE_TO = -1.382;
     private static final int CHANGE_TO_I = 2919;
-    private final Vector vec = new Vector();
+    private Vector vec = new Vector();
 
     public static Vector rand() {
         ThreadLocalRandom r = ThreadLocalRandom.current();
@@ -48,9 +48,9 @@ public class VectorsTest {
 
     @Test
     public void testSetsEqualsHash() {
-        this.vec.setX(CHANGE_TO);
-        this.vec.setY(CHANGE_TO);
-        this.vec.setZ(CHANGE_TO);
+        this.vec = this.vec.setX(CHANGE_TO);
+        this.vec = this.vec.setY(CHANGE_TO);
+        this.vec = this.vec.setZ(CHANGE_TO);
 
         Vector v2 = new Vector(CHANGE_TO, CHANGE_TO, CHANGE_TO);
         assertEquals(v2, this.vec);
@@ -60,9 +60,9 @@ public class VectorsTest {
 
     @Test
     public void testSGDouble() {
-        this.vec.setX(CHANGE_TO);
-        this.vec.setY(CHANGE_TO);
-        this.vec.setZ(CHANGE_TO);
+        this.vec = this.vec.setX(CHANGE_TO);
+        this.vec = this.vec.setY(CHANGE_TO);
+        this.vec = this.vec.setZ(CHANGE_TO);
 
         assertEquals(CHANGE_TO, this.vec.getX(), 0);
         assertEquals(CHANGE_TO, this.vec.getY(), 0);
@@ -71,9 +71,9 @@ public class VectorsTest {
 
     @Test
     public void testSGInt() {
-        this.vec.setX(CHANGE_TO_I);
-        this.vec.setY(CHANGE_TO_I);
-        this.vec.setZ(CHANGE_TO_I);
+        this.vec = this.vec.setX(CHANGE_TO_I);
+        this.vec = this.vec.setY(CHANGE_TO_I);
+        this.vec = this.vec.setZ(CHANGE_TO_I);
 
         assertEquals(CHANGE_TO_I, this.vec.getIntX());
         assertEquals(CHANGE_TO_I, this.vec.getIntY());
@@ -110,8 +110,7 @@ public class VectorsTest {
 
     @Test
     public void testNormalize() {
-        Vector v2 = new Vector(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I);
-        v2.normalize();
+        Vector v2 = new Vector(CHANGE_TO_I, CHANGE_TO_I, CHANGE_TO_I).normalize();
 
         assertEquals(1, v2.getMagnitude(), 0);
     }
