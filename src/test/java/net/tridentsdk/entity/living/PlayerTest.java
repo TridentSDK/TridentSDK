@@ -253,6 +253,26 @@ public class PlayerTest {
         }
 
         @Override
+        public void setSprinting(boolean sprinting) {
+
+        }
+
+        @Override
+        public boolean isSprinting() {
+            return false;
+        }
+
+        @Override
+        public void setCrouching(boolean crouching) {
+
+        }
+
+        @Override
+        public boolean isCrouching() {
+            return false;
+        }
+
+        @Override
         public void runCommand(String command) {
 
         }

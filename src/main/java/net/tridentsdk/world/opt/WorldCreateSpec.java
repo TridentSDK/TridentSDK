@@ -59,23 +59,23 @@ public class WorldCreateSpec {
     @Getter
     private final GameRuleMap gameRules = new GameRuleMap();
     @Getter
-    private final boolean allowFlight;
+    private boolean allowFlight;
     @Getter
     private final boolean allowPvp = true;
     @Getter
     private final boolean allowPortals = true;
     @Getter
-    private final boolean forceGameMode;
+    private boolean forceGameMode;
     @Getter
-    private final boolean difficultyLocked;
+    private boolean difficultyLocked;
     @Getter
     private final int spawnProtectionRadius = 5;
     @Getter
-    private final Vector spawn;
+    private Vector spawn;
     @Getter
-    private final GeneratorProvider provider;
+    private GeneratorProvider provider;
     @Getter
-    private final long seed;
+    private long seed;
     @Getter
     private final LevelType levelType = LevelType.DEFAULT;
     @Getter

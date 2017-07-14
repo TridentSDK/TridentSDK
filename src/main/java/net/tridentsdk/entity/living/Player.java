@@ -18,7 +18,6 @@ package net.tridentsdk.entity.living;
 
 import net.tridentsdk.Impl;
 import net.tridentsdk.command.CmdSource;
-import net.tridentsdk.entity.Entity;
 import net.tridentsdk.inventory.Inventory;
 import net.tridentsdk.inventory.PlayerInventory;
 import net.tridentsdk.permission.Permissible;
@@ -44,16 +43,21 @@ import java.util.UUID;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Player extends Entity, CmdSource, Permissible {
+public interface Player extends EntityLiving, CmdSource, Permissible {
     /**
      * The default flying speed for a player
      */
-    float DEFAULT_FLYING_SPEED = 0.159F;
+    float DEFAULT_FLYING_SPEED = 0.4000000059604645F;
 
     /**
      * The default walking speed for a player
      */
     float DEFAULT_WALKING_SPEED = 0.699999988079071F;
+
+    /**
+     * The default sprinting speed for a player
+     */
+    float DEFAULT_SPRINT_SPEED = 0.30000001192092896F;
 
     /**
      * Attempts to obtain a player by their IGN username.
