@@ -55,7 +55,7 @@ public class OptsTest {
     @Test(expected = IllegalArgumentException.class)
     public void gameRuleTest() {
         assertTrue(CMD_BLOCK_OUTPUT.getDefault());
-        assertTrue(MOVE_CHECK.getDefault());
+        assertFalse(MOVE_CHECK.getDefault());
         assertTrue(DAYLIGHT_CYCLE.getDefault());
         assertTrue(FIRE_TICK.getDefault());
         assertTrue(MOB_LOOT.getDefault());
