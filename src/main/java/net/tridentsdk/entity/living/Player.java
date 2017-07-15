@@ -47,7 +47,7 @@ public interface Player extends EntityLiving, CmdSource, Permissible {
     /**
      * The default flying speed for a player
      */
-    float DEFAULT_FLYING_SPEED = 0.4000000059604645F;
+    float DEFAULT_FLYING_SPEED = 0.159F;
 
     /**
      * The default walking speed for a player
