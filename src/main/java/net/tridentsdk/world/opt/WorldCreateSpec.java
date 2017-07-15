@@ -69,7 +69,7 @@ public class WorldCreateSpec {
     @Getter
     private boolean difficultyLocked;
     @Getter
-    private final int spawnProtectionRadius = 5;
+    private final int spawnProtectionRadius = 16;
     @Getter
     private Vector spawn;
     @Getter
