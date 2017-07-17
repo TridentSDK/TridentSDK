@@ -22,7 +22,7 @@ import org.mockito.Mockito;
 
 public class ServerTest {
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().getServer()).thenReturn(Mockito.mock(Server.class));
     }
 

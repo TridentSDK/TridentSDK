@@ -27,7 +27,7 @@ public class LogHandlerTest {
     private static final LogHandler handler = message -> true;
 
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().removeHandler(logger, handler)).thenReturn(true);
     }
 

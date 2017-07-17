@@ -61,7 +61,7 @@ public final class Impl {
      * The instance of the implementation provider
      */
     @Policy("Sync writes")
-    private static Impl.ImplementationProvider impl;
+    private static Provider impl;
 
     /**
      * The lock used for writing the impl field
@@ -103,7 +103,7 @@ public final class Impl {
      *
      * @param i the implementation provider instance
      */
-    public static void setImpl(Impl.ImplementationProvider i) {
+    public static void setImpl(Provider i) {
         // Ignore static synchronization warning
         // Static method synchronization must use a static
         // synchronizer, period. There is no way around this
@@ -117,7 +117,7 @@ public final class Impl {
     }
 
     @Nonnull
-    public static Impl.ImplementationProvider get() {
+    public static Provider get() {
         try {
             IMPL_LATCH.await();
             return impl;
@@ -128,7 +128,7 @@ public final class Impl {
 
     // Functions implementation
     @Internal
-    public interface ImplementationProvider {
+    public interface Provider {
         // Obtains the implementation of the server object
         // that represents the API side version
         Server getServer();

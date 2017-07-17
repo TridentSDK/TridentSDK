@@ -26,7 +26,7 @@ public class LoggerTest {
     private static final String NAME = LoggerTest.class.getSimpleName();
 
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().newLogger(NAME)).thenReturn(Mockito.mock(Logger.class));
     }
 

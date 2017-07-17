@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class InventoryTest {
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().newInventory(InventoryType.PLAYER, 49)).
                 thenReturn(Mockito.mock(Inventory.class));
     }

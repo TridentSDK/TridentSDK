@@ -31,7 +31,7 @@ public class ConfigTest {
     private static final String TEST_PATH = Misc.HOME + "/kek/cfg.json";
 
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().newCfg(Paths.get(TEST_PATH))).thenReturn(Mockito.mock(Config.class));
     }
 

@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNotNull;
 public class ImplTest {
     @Test
     public void testSetGet() {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         assertNotNull(Impl.get());
     }
 }

@@ -20,17 +20,18 @@ import net.tridentsdk.Impl;
 import net.tridentsdk.base.Substance;
 import net.tridentsdk.meta.ItemMeta;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertNotNull;
 
 public class ItemTest {
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
-        Mockito.when(Impl.get().newItem(Mockito.eq(Substance.AIR),
-                Mockito.eq(1),
-                Mockito.eq((byte) 0),
-                Mockito.any(ItemMeta.class))).
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
+        Mockito.when(Impl.get().newItem(Matchers.eq(Substance.AIR),
+                Matchers.eq(1),
+                Matchers.eq((byte) 0),
+                Matchers.any(ItemMeta.class))).
                 thenReturn(Mockito.mock(Item.class));
     }
 

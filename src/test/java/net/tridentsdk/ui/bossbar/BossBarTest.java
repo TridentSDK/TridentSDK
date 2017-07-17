@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class BossBarTest {
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().newBossBar()).thenReturn(Mockito.mock(BossBar.class));
     }
 

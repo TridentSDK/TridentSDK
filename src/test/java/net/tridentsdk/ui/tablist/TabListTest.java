@@ -24,7 +24,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class TabListTest {
     static {
-        Impl.setImpl(Mockito.mock(Impl.ImplementationProvider.class));
+        Impl.setImpl(Mockito.mock(Impl.Provider.class));
         Mockito.when(Impl.get().getGlobalTabList()).
                 thenReturn(Mockito.mock(TabList.class));
         Mockito.when(Impl.get().newTabList()).
