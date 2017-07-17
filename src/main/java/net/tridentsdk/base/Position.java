@@ -102,8 +102,8 @@ public final class Position extends AbstractVector<Position> {
     public Position(@Nonnull World world, double x, double y, double z, float yaw, float pitch) {
         super(x, y, z);
         this.world = world;
-        this.yaw = yaw;
-        this.pitch = pitch;
+        this.yaw = yaw > 360 || yaw < -360 ? yaw % 360 : yaw;
+        this.pitch = pitch > 90 || pitch < -90 ? pitch % 90 : pitch;
     }
 
     /**

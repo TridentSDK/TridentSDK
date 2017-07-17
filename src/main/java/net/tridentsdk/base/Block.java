@@ -56,6 +56,15 @@ public interface Block {
     void setData(byte data);
 
     /**
+     * Sets both the substance and data of the block in one
+     * operation.
+     *
+     * @param substance the substance of the block
+     * @param data the data
+     */
+    void setSubstanceData(Substance substance, byte data);
+
+    /**
      * Obtains the position at which this block is located
      *
      * @return the block position

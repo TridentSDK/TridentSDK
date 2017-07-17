@@ -80,13 +80,6 @@ public interface WorldOpts {
     void setDifficultyLocked(boolean locked);
 
     /**
-     * Obtains the dimension of the world.
-     *
-     * @return the world's dimension
-     */
-    Dimension getDimension();
-
-    /**
      * Obtains the XYZ coordinates of this world's spawn
      * position.
      *

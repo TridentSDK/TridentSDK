@@ -20,10 +20,7 @@ import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.Entity;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.world.opt.GenOpts;
-import net.tridentsdk.world.opt.Weather;
-import net.tridentsdk.world.opt.WorldBorder;
-import net.tridentsdk.world.opt.WorldOpts;
+import net.tridentsdk.world.opt.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -112,6 +109,13 @@ public interface World {
      * @return the world border options
      */
     WorldBorder getBorder();
+
+    /**
+     * Obtains which dimension this world is.
+     *
+     * @return this world's dimension
+     */
+    Dimension getDimension();
 
     /**
      * Obtains the chunk that is located at the given X/Z
