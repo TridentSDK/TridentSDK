@@ -104,4 +104,12 @@ public interface Item {
      * @return the item metadata
      */
     ItemMeta getMeta();
+
+    /**
+     * Checks to see if this item is {@link Substance#AIR},
+     * and therefore does not represent an actual item.
+     *
+     * @return {@code true} if the item doesn't exist
+     */
+    boolean isEmpty();
 }

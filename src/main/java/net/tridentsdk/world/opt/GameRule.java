@@ -21,6 +21,8 @@ import net.tridentsdk.util.Misc;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -322,6 +324,16 @@ public class GameRule<T> {
         }
 
         return rule;
+    }
+
+    /**
+     * Obtains all the possible game rule keys.
+     *
+     * @return the set of valid game rule keys, not
+     * modifiable
+     */
+    public static Collection<String> getKeyStrings() {
+        return Collections.unmodifiableCollection(GAME_RULES.keySet());
     }
 
     /**

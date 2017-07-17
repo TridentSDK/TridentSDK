@@ -19,6 +19,7 @@ package net.tridentsdk.inventory;
 import net.tridentsdk.Impl;
 import net.tridentsdk.ui.chat.ChatComponent;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -115,6 +116,7 @@ public interface Inventory {
      * operation, or
      * {@link net.tridentsdk.base.Substance#AIR} if none
      */
+    @Nonnull
     Item remove(int slot, int quantity);
 
     /**
@@ -124,6 +126,7 @@ public interface Inventory {
      * @return the item, or
      * {@link net.tridentsdk.base.Substance#AIR} if none
      */
+    @Nonnull
     Item get(int slot);
 
     /**

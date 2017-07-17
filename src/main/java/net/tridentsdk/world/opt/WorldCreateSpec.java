@@ -59,17 +59,7 @@ public class WorldCreateSpec {
     @Getter
     private final GameRuleMap gameRules = new GameRuleMap();
     @Getter
-    private boolean allowFlight;
-    @Getter
-    private final boolean allowPvp = true;
-    @Getter
-    private final boolean allowPortals = true;
-    @Getter
-    private boolean forceGameMode;
-    @Getter
     private boolean difficultyLocked;
-    @Getter
-    private final int spawnProtectionRadius = 16;
     @Getter
     private Vector spawn;
     @Getter

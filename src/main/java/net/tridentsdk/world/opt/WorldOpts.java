@@ -31,79 +31,6 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public interface WorldOpts {
     /**
-     * Checks the world in order to determine whether
-     * players with client-side flight mods can fly.
-     *
-     * @return {@code true} if those players can fly,
-     *         {@code false} to kick players who are flying
-     */
-    boolean isAllowFlight();
-
-    /**
-     * Changes whether flight is allowed using client-side
-     * mods.
-     *
-     * @param allow {@code true} to allow flying,
-     *              {@code false} to disallow
-     */
-    void setAllowFlight(boolean allow);
-
-    /**
-     * Checks the world in order to determine whether player
-     * versus player damage is allowed.
-     *
-     * @return {@code true} if pvp is allowed, {@code false}
-     *         if not
-     */
-    boolean isAllowPvp();
-
-    /**
-     * Changes whether or not PvP is allowed in the world.
-     *
-     * @param allow {@code true} to allow, {@code false} to
-     *              disallow
-     */
-    void setAllowPvp(boolean allow);
-
-    /**
-     * Checks the world in order to determine if travel to
-     * the nether via portals is allowed.
-     *
-     * @return {@code true} if nether travel is allowed,
-     *         {@code false} if not
-     */
-    boolean isAllowPortals();
-
-    /**
-     * Sets whether or not nether portals are allowed in the
-     * world.
-     *
-     * @param allow {@code true} to allow, {@code false} to
-     *              disallow
-     */
-    void setAllowPortals(boolean allow);
-
-    /**
-     * Checks the world in order to determine if joining
-     * players will use the game mode they left with or the
-     * game mode of the current world.
-     *
-     * @return {@code true} to use the world game mode,
-     *         {@code false} to use the player's last game
-     *         mode
-     */
-    boolean isForceGameMode();
-
-    /**
-     * Sets whether the player will join with their last
-     * game mode, or will be set to the world default.
-     *
-     * @param force {@code true} to force, {@code false} to
-     *              use the last player game mode
-     */
-    void setForceGameMode(boolean force);
-
-    /**
      * Obtains the game type to which players in the world
      * are set.
      *
@@ -151,23 +78,6 @@ public interface WorldOpts {
      *               unlock
      */
     void setDifficultyLocked(boolean locked);
-
-    /**
-     * The radius of spawn protection, {@code 0} does not
-     * mean no spawn protection.
-     *
-     * @return the spawn protection radius
-     */
-    int getSpawnProtectionRadius();
-
-    /**
-     * Sets the new spawn protection radius to the given
-     * value.
-     *
-     * @param radius the new protection radius
-     * @see #getSpawnProtectionRadius()
-     */
-    void setSpawnProtectionRadius(int radius);
 
     /**
      * Obtains the dimension of the world.
