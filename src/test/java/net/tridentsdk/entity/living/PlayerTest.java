@@ -16,8 +16,6 @@
  */
 package net.tridentsdk.entity.living;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.command.CmdSourceType;
 import net.tridentsdk.inventory.Inventory;
@@ -61,16 +59,31 @@ public class PlayerTest {
         assertEquals(messages.get(2).getType(), ChatType.SYSTEM);
     }
 
-    @Data
     private final class SentMessage {
         private final ChatComponent message;
         private final ChatType type;
+
+        public SentMessage(ChatComponent message, ChatType type){
+            this.message = message;
+            this.type = type;
+        }
+
+        public ChatComponent getMessage(){
+            return message;
+        }
+
+        public ChatType getType(){
+            return type;
+        }
     }
 
-    @AllArgsConstructor
     private final class DummyPlayer implements Player {
 
         private final List<PlayerTest.SentMessage> sentMessages;
+
+        public DummyPlayer(List<SentMessage> sentMessages){
+            this.sentMessages = sentMessages;
+        }
 
         @Override
         public int getId() {
