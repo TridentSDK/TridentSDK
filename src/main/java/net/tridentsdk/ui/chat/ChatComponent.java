@@ -576,7 +576,7 @@ public class ChatComponent {
                 JsonValue el = array.get(i);
                 if (el.isString() || el.isNumber() || el.isBoolean())
                     cc.addExtra(el.asString());
-                else if (el.isString() || el.isNumber() || el.isBoolean())
+                else if (el.isObject())
                     cc.addExtra(fromJson(el.asObject()));
             }
         }

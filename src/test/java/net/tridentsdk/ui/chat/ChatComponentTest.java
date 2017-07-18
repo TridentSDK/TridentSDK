@@ -64,7 +64,7 @@ public class ChatComponentTest {
         assertNotNull(json.get("bold"));
         assertNotNull(json.get("italic"));
         assertNotNull(json.get("underlined"));
-        assertNotNull(json.get("obfuscated"));
+        assertNull(json.get("obfuscated"));
         assertEquals("blue", json.get("color").asString());
         assertTrue(json.get("bold").asBoolean());
         assertTrue(json.get("italic").asBoolean());
