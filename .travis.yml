@@ -10,10 +10,6 @@ install: true
 
 sudo: false
 
-before_install:
-  - chmod 777 "scripts/build.sh"
-  - chmod 777 "scripts/deploy.sh"
-
 script: ./scripts/build.sh
 
 deploy:
