@@ -68,6 +68,7 @@ public interface WorldLoader {
      *
      * @param name the name of the new world
      * @param spec the world options
+     * @return the new world
      */
     World create(String name, WorldCreateSpec spec);
 

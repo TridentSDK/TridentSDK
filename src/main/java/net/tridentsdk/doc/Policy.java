@@ -37,6 +37,8 @@ public @interface Policy {
     /**
      * The message that describes the purpose of this
      * annotation being labeled on a member.
+     *
+     * @return the message
      */
     String value();
 }

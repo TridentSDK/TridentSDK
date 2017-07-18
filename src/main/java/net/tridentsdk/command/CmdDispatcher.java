@@ -105,8 +105,9 @@ public class CmdDispatcher {
      * Runs the command handled by the method wrapped by
      * this command source.
      *
-     * @param args the command arguments
+     * @param cmd the command to run
      * @param source the command sender
+     * @param args the command arguments
      */
     public void run(String cmd, CmdSource source, String[] args) {
         for (Constrain constrain : this.constrains) {

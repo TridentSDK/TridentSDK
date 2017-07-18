@@ -31,17 +31,23 @@ public @interface Cmd {
     /**
      * The name of the command that the method will handle.
      * No spaces allowed.
+     *
+     * @return the name
      */
     String name();
 
     /**
      * Command help, otherwise known as usage which displays
      * the arguments for the command.
+     *
+     * @return the help message
      */
     String help() default "No help for this command";
 
     /**
      * What the command does.
+     *
+     * @return the command description
      */
     String desc() default "What does this do?";
 }

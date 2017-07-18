@@ -45,6 +45,8 @@ public @interface PluginDesc {
      * or even the same {@link #name()}, but perhaps
      * incorporate a prefix or an author name or something
      * of the like.</p>
+     *
+     * @return the id
      */
     String id();
 
@@ -52,16 +54,22 @@ public @interface PluginDesc {
      * The name of the plugin. This need not be unique, but
      * is recommended to be short and iconic. Avoid using
      * newlines.
+     *
+     * @return the name
      */
     String name() default "";
 
     /**
      * The plugin version.
+     *
+     * @return the version
      */
     String version() default "1.0";
 
     /**
      * The plugin author.
+     *
+     * @return the author
      */
     String author() default "";
 
@@ -72,6 +80,8 @@ public @interface PluginDesc {
      * should be formatted {@code <id>:<version>} such that
      * the correct plugin and version should be loaded prior
      * to loading the plugin.</p>
+     *
+     * @return the plugin dependencies
      */
     String[] depends() default {};
 }

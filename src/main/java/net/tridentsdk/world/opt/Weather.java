@@ -26,7 +26,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * to some, as it is difficult to understand what happens
  * if clear weather and rain are both toggled. In order to
  * clear up (no pun intended) any confusion, this is how
- * weather in the world will work:
+ * weather in the world will work:</p>
  * <ul>
  *     <li>When a time "resets" it means that the time has
  *     reached {@code 0} and will be set to a random time
@@ -59,7 +59,7 @@ import javax.annotation.concurrent.ThreadSafe;
  *     the case, unless {@link #RANDOM_TIME} is passed).</li>
  *     <li>Clear weather is defined as the state of the
  *     weather NOT raining AND NOT thundering.</li>
- * </ul></p>
+ * </ul>
  *
  * <p>Summary for non-implementation developers: if is clear
  * and {@link #getRainTime()} reaches {@code 0}, nothing

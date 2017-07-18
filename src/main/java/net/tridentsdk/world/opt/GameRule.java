@@ -311,6 +311,7 @@ public class GameRule<T> {
      *
      * <p>This method ignores case.</p>
      *
+     * @param <T> the type of value that the game rule holds
      * @param s the NBT form of the game rule to find
      * @return the game rule, if found
      * @throws IllegalArgumentException if the game rule is

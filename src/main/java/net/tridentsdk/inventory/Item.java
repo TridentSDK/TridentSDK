@@ -47,6 +47,7 @@ public interface Item {
      * parameter.
      *
      * @param substance the item's substance
+     * @param count the item count
      * @return the new item
      */
     static Item newItem(Substance substance, int count) {
@@ -58,10 +59,12 @@ public interface Item {
      * parameter.
      *
      * @param substance the item's substance
+     * @param count the item count
+     * @param damage the item damage
      * @return the new item
      */
-    static Item newItem(Substance substance, int count, byte dmg) {
-        return newItem(substance, count, dmg, new ItemMeta());
+    static Item newItem(Substance substance, int count, byte damage) {
+        return newItem(substance, count, damage, new ItemMeta());
     }
 
     /**
@@ -69,6 +72,9 @@ public interface Item {
      * parameter.
      *
      * @param substance the item's substance
+     * @param count the item count
+     * @param damage the item damage
+     * @param meta the item meta
      * @return the new item
      */
     static Item newItem(Substance substance, int count, byte damage, ItemMeta meta) {

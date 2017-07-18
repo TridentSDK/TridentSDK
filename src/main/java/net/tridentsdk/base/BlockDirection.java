@@ -91,6 +91,7 @@ public enum BlockDirection {
     /**
      * Gets the first block direction in the anticlockwise direction, optionally ignoring diagonals.
      *
+     * @param includeDiagonals whether to include diagonals
      * @return The direction.
      */
     public BlockDirection anticlockwise(boolean includeDiagonals) {
@@ -111,6 +112,7 @@ public enum BlockDirection {
     /**
      * Gets the first block direction in the clockwise direction, optionally ignoring diagonals.
      *
+     * @param includeDiagonals whether to include diagonals
      * @return The direction.
      */
     public BlockDirection clockwise(boolean includeDiagonals) {

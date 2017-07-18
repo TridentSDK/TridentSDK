@@ -72,6 +72,8 @@ public interface GeneratorContext {
      * Obtains the height of the max Y value at the given
      * x and z coordinates.
      *
+     * @param x the x coordinate
+     * @param z the z coordinate
      * @return the max generated Y value
      */
     int maxHeight(int x, int z);

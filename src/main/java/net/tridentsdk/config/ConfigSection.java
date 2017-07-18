@@ -32,7 +32,7 @@ import java.util.stream.Stream;
  * name of the value stored at them. Keys can contain
  * periods if the value is stored inside of a child config
  * section. For example, the key {@code sec1.sec2.key} leads
- * to:
+ * to:</p>
  * <pre>{@code
  *  {
  *      "comment": "The key for this is simply comment",
@@ -44,7 +44,7 @@ import java.util.stream.Stream;
  *          }
  *      }
  *  }
- * }</pre></p>
+ * }</pre>
  *
  * <p><strong>Get value:</strong> Obtains the value at the
  * given key. A key that does not exist <b>NEVER</b> returns

@@ -154,6 +154,8 @@ public interface World {
      * Obtains the highest non-air block at the given two
      * coordinates.
      *
+     * @param x the x coordinate
+     * @param z the z coordinate
      * @return the highest Y
      */
     int getHighestY(int x, int z);

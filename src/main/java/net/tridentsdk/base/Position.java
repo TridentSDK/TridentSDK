@@ -111,6 +111,7 @@ public final class Position extends AbstractVector<Position> {
      * of the same data points as this position, except that
      * its world is set to the one given.
      *
+     * @param world the world from which to create a position
      * @return the new position with the given world
      */
     public Position setWorld(World world) {
@@ -122,6 +123,7 @@ public final class Position extends AbstractVector<Position> {
      * of the same data points as this position, except that
      * its yaw is set to the one given.
      *
+     * @param yaw the yaw from which to create a position
      * @return the new position with the given yaw
      */
     public Position setYaw(float yaw) {
@@ -133,6 +135,7 @@ public final class Position extends AbstractVector<Position> {
      * of the same data points as this position, except that
      * its pitch is set to the one given.
      *
+     * @param pitch the pitch from which to create a position
      * @return the new position with the given pitch
      */
     public Position setPitch(float pitch) {

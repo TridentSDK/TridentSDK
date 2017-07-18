@@ -635,6 +635,7 @@ public class Tag {
          * availability to {@code null} instead of this
          * method.</p>
          *
+         * @param <T> the type of value that the list contains
          * @param key the key to obtain the tag at
          * @return the tag, or the tag's default value
          * if it cannot be {@code null}

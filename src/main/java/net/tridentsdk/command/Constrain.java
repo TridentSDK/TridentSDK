@@ -35,11 +35,15 @@ import java.lang.annotation.*;
 public @interface Constrain {
     /**
      * The constraining handler.
+     *
+     * @return the handler
      */
     Class<? extends Constraint> value();
 
     /**
      * The constraint type, by default there is none.
+     *
+     * @return the type
      */
     ConstraintType type() default ConstraintType.NONE;
 
@@ -47,18 +51,24 @@ public @interface Constrain {
      * The type of command sources allowed to run the
      * command. Must set {@link #type()} to
      * {@link ConstraintType#SOURCE}.
+     *
+     * @return the sources
      */
     CmdSourceType[] src() default { CmdSourceType.ALL };
 
     /**
      * An integer constraint. Must set {@link #type()} to
      * {@link ConstraintType#INT}.
+     *
+     * @return an integer constraint
      */
     int integer() default 0;
 
     /**
      * A string constraint. Must set {@link #type()} to
      * {@link ConstraintType#STRING}.
+     *
+     * @return a string constraint
      */
     String str() default "";
 }

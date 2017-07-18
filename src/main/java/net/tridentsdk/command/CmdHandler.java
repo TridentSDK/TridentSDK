@@ -80,6 +80,7 @@ public class CmdHandler {
      * <p>Command names are always registered as lowercase.
      * </p>
      *
+     * @param fallback the fallback name if already taken
      * @param listener the listener to register
      */
     @Policy("handle on plugin thread")

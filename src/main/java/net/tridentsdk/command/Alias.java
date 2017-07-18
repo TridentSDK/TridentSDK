@@ -31,6 +31,8 @@ import java.lang.annotation.*;
 public @interface Alias {
     /**
      * The list of aliases. No spaces allowed.
+     *
+     * @return a list of aliases
      */
     String[] value();
 }
