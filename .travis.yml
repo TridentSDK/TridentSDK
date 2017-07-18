@@ -14,5 +14,5 @@ cache:
   - $HOME/.gradle
 
 after_success:
-  - gradlew clean build jar jacocoTestReport uploadArchives
+  - ./gradlew clean build jar jacocoTestReport uploadArchives
   - bash <(curl -s https://codecov.io/bash)
