@@ -16,8 +16,8 @@
  */
 package net.tridentsdk.ui.chat;
 
-import com.google.gson.JsonObject;
 import lombok.Data;
+import org.hjson.JsonObject;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -69,7 +69,7 @@ public class ClickEvent {
      * @return The click event.
      */
     public static ClickEvent fromJson(JsonObject json) {
-        return of(ClickAction.valueOf(json.get("action").getAsString().toUpperCase()), json.get("value").getAsString());
+        return of(ClickAction.valueOf(json.get("action").asString().toUpperCase()), json.get("value").asString());
     }
 
     /**
@@ -97,8 +97,8 @@ public class ClickEvent {
      */
     public JsonObject asJson() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("action", this.action.name().toLowerCase());
-        obj.addProperty("value", this.value);
+        obj.add("action", this.action.name().toLowerCase());
+        obj.add("value", this.value);
         return obj;
     }
 

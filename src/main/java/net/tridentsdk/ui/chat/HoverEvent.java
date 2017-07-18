@@ -16,11 +16,10 @@
  */
 package net.tridentsdk.ui.chat;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 import lombok.Data;
 import net.tridentsdk.inventory.Item;
+import org.hjson.JsonObject;
+import org.hjson.JsonValue;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -40,7 +39,7 @@ public class HoverEvent {
     /**
      * The text that triggerd this event
      */
-    private final JsonElement value;
+    private final JsonValue value;
 
     /**
      * Creates a new hover event with the given action
@@ -49,7 +48,7 @@ public class HoverEvent {
      * @param action the triggering action
      * @param value the triggering text value
      */
-    private HoverEvent(HoverAction action, JsonElement value) {
+    private HoverEvent(HoverAction action, JsonValue value) {
         this.action = action;
         this.value = value;
     }
@@ -83,7 +82,7 @@ public class HoverEvent {
      * @return The hover action event.
      */
     public static HoverEvent achievement(String achievement) {
-        return new HoverEvent(HoverAction.SHOW_ACHIEVEMENT, new JsonPrimitive(achievement));
+        return new HoverEvent(HoverAction.SHOW_ACHIEVEMENT, JsonValue.valueOf(achievement));
     }
 
     /**
@@ -94,13 +93,13 @@ public class HoverEvent {
      */
     public static HoverEvent item(Item item) {
         JsonObject json = new JsonObject();
-        json.addProperty("id", item.getSubstance().toString().replaceAll("minecraft:", ""));
-        json.addProperty("Damage", item.getDamage());
-        json.addProperty("Count", item.getCount());
-        json.addProperty("tag", "{}");
+        json.add("id", item.getSubstance().toString().replaceAll("minecraft:", ""));
+        json.add("Damage", item.getDamage());
+        json.add("Count", item.getCount());
+        json.add("tag", "{}");
 
         String string = json.toString().replaceAll("\"", "");
-        return new HoverEvent(HoverAction.SHOW_ITEM, new JsonPrimitive(string));
+        return new HoverEvent(HoverAction.SHOW_ITEM, JsonValue.valueOf(string));
     }
 
     /**
@@ -109,8 +108,8 @@ public class HoverEvent {
      * @param json The JSON.
      * @return The click event.
      */
-    public static HoverEvent fromJson(JsonObject json) {
-        return new HoverEvent(HoverAction.valueOf(json.get("action").getAsString().toUpperCase()), json.get("value"));
+    public static HoverEvent fromJson(JsonValue json) {
+        return new HoverEvent(HoverAction.valueOf(json.asObject().get("action").asString().toUpperCase()), json.asObject().get("value"));
     }
 
     /**
@@ -127,7 +126,7 @@ public class HoverEvent {
      *
      * @return The value.
      */
-    public JsonElement getValue() {
+    public JsonValue getValue() {
         return this.value;
     }
 
@@ -137,9 +136,9 @@ public class HoverEvent {
      *
      * @return The JSON.
      */
-    public JsonObject asJson() {
+    public JsonValue asJson() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("action", this.action.name().toLowerCase());
+        obj.add("action", this.action.name().toLowerCase());
         obj.add("value", this.value);
         return obj;
     }

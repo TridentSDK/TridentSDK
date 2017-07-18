@@ -16,8 +16,8 @@
  */
 package net.tridentsdk.ui.chat;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import org.hjson.JsonObject;
+import org.hjson.JsonValue;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -26,18 +26,18 @@ public class ChatComponentTest {
 
     @Test
     public void testPlain() {
-        assertEquals(new Gson().fromJson("{\"text\":\"test\"}", JsonObject.class), ChatComponent.text("test").asJson());
+        assertEquals(JsonValue.readJSON("{\"text\":\"test\"}"), ChatComponent.text("test").asJson());
     }
 
     @Test
     public void testEmpty() {
-        assertEquals(new Gson().fromJson("{\"text\":\"\"}", JsonObject.class), ChatComponent.empty().asJson());
+        assertEquals(JsonValue.readJSON("{\"text\":\"\"}"), ChatComponent.empty().asJson());
     }
 
     @Test
     public void testFromFormatString() {
         ChatComponent cc = ChatComponent.fromFormat("\u00A7e\u00A7kHello! \u00A7r\u00A7cNice to meet you! :)");
-        assertEquals(new Gson().fromJson("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}", JsonObject.class), cc.asJson());
+        assertEquals(JsonValue.readJSON("{\"text\":\"Hello! \",\"extra\":[{\"text\":\"Nice to meet you! :)\",\"obfuscated\":false,\"color\":\"red\"}],\"obfuscated\":true,\"color\":\"yellow\"}"), cc.asJson());
     }
 
     @Test
@@ -54,22 +54,22 @@ public class ChatComponentTest {
 
     @Test
     public void testTranslateWith() {
-        assertEquals(new Gson().fromJson("{\"translate\":\"chat.type.text\",\"with\":[\"my awesome message\"]}", JsonObject.class), ChatComponent.create().setTranslate("chat.type.text").addWith("my awesome message").asJson());
+        assertEquals(JsonValue.readJSON("{\"translate\":\"chat.type.text\",\"with\":[\"my awesome message\"]}"), ChatComponent.create().setTranslate("chat.type.text").addWith("my awesome message").asJson());
     }
 
     @Test
     public void testColors() {
-        JsonObject json = ChatComponent.create().setColor(ChatColor.BLUE).setBold(true).setItalic(true).setUnderlined(false).asJson().getAsJsonObject();
-        assertTrue(json.has("color"));
-        assertTrue(json.has("bold"));
-        assertTrue(json.has("italic"));
-        assertTrue(json.has("underlined"));
-        assertFalse(json.has("obfuscated"));
-        assertEquals("blue", json.get("color").getAsString());
-        assertTrue(json.get("bold").getAsBoolean());
-        assertTrue(json.get("italic").getAsBoolean());
-        assertFalse(json.get("underlined").getAsBoolean());
-        assertEquals(new Gson().fromJson("{\"bold\":true,\"italic\":true,\"underlined\":false,\"color\":\"blue\"}", JsonObject.class), json);
+        JsonObject json = ChatComponent.create().setColor(ChatColor.BLUE).setBold(true).setItalic(true).setUnderlined(false).asJson().asObject();
+        assertNotNull(json.get("color"));
+        assertNotNull(json.get("bold"));
+        assertNotNull(json.get("italic"));
+        assertNotNull(json.get("underlined"));
+        assertNotNull(json.get("obfuscated"));
+        assertEquals("blue", json.get("color").asString());
+        assertTrue(json.get("bold").asBoolean());
+        assertTrue(json.get("italic").asBoolean());
+        assertFalse(json.get("underlined").asBoolean());
+        assertEquals(JsonValue.readJSON("{\"bold\":true,\"italic\":true,\"underlined\":false,\"color\":\"blue\"}"), json);
     }
 
     @Test
@@ -142,8 +142,8 @@ public class ChatComponentTest {
         assertEquals(clickEvent, cc.setClickEvent(clickEvent).getClickEvent());
         assertEquals(hoverEvent, cc.setHoverEvent(hoverEvent).getHoverEvent());
 
-        assertEquals(cc, ChatComponent.fromJson(cc.asJson().getAsJsonObject()));
-        assertEquals(cc.asJson(), new Gson().fromJson(cc.toString(), JsonObject.class));
+        assertEquals(cc, ChatComponent.fromJson(cc.asJson().asObject()));
+        assertEquals(cc.asJson(), JsonValue.readJSON(cc.toString()));
     }
 
 }
