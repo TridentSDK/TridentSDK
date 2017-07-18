@@ -114,3 +114,5 @@ ops.txt
 server.json
 trident.log
 whitelist.txt
+
+!/gradle/**/*
