@@ -21,6 +21,7 @@ apply plugin: 'maven'
 apply plugin: 'io.codearte.nexus-staging'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'maven-publish'
+apply plugin: 'jacoco'
 //apply plugin: "com.github.hierynomus.license"
 
 group = 'net.tridentsdk'
@@ -88,7 +89,6 @@ subprojects {
 allprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
-    apply plugin: 'jacoco'
 
     uploadArchives {
         repositories {
@@ -133,23 +133,14 @@ nexusStaging {
     password = ossrhPassword
 }
 
-task codeCoverageReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    subprojects.each {
-        sourceSets it.sourceSets.main
-    }
-
+jacocoTestReport {
     reports {
         xml.enabled true
-        xml.destination file("${buildDir}/reports/jacoco/report.xml")
+        html.enabled false
     }
-
 }
 
-codeCoverageReport.dependsOn {
-    subprojects*.test
-}
+check.dependsOn jacocoTestReport
 
 /*
 

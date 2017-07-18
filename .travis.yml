@@ -10,11 +10,23 @@ install: true
 
 sudo: false
 
+before_install:
+  - chmod 777 "scripts/build.sh"
+  - chmod 777 "scripts/deploy.sh"
+
+script: ./scripts/build.sh
+
+deploy:
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: revamp
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
-  - .autoconf
-  - $HOME/.gradle
-
-after_success:
-  - ./gradlew clean build jar jacocoTestReport uploadArchives
-  - bash <(curl -s https://codecov.io/bash)
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
