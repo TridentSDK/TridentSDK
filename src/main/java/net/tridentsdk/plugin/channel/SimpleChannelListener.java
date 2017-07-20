@@ -65,6 +65,7 @@ public abstract class SimpleChannelListener {
      * @param dest the destination of the registry packet
      * (i.e. dest=CLIENT means the channel was created by
      * the server and then sent to the client)
+     * @param players the players that are contained in the channel
      */
     @Policy("call on plugin thread")
     public void channelOpened(PluginChannel channel, Destination dest, Collection<? extends Player> players) {
