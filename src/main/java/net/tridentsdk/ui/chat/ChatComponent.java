@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.ui.chat;
 
+import java.util.List;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.hjson.JsonArray;
@@ -25,7 +26,6 @@ import org.hjson.Stringify;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Represents a component in a Minecraft chat format.
@@ -90,12 +90,12 @@ public class ChatComponent {
     /**
      * The list of chat components added to the 'with' array.
      */
-    private final Collection<ChatComponent> with = new ArrayList<>();
+    private final List<ChatComponent> with = new ArrayList<>();
 
     /**
      * The list of chat components added to the 'extra' array.
      */
-    private final Collection<ChatComponent> extra = new ArrayList<>();
+    private final List<ChatComponent> extra = new ArrayList<>();
 
     /**
      * Whether or not this message is bolded
@@ -129,7 +129,7 @@ public class ChatComponent {
      *
      * @return The with elements.
      */
-    public Collection<ChatComponent> getWith() {
+    public List<ChatComponent> getWith() {
         return this.with;
     }
 
@@ -166,13 +166,14 @@ public class ChatComponent {
      * component's hierarchy.
      */
     public boolean hasWith(ChatComponent component, boolean recursive) {
-        if (this.with.contains(component)) {
+        List<ChatComponent> with = this.with;
+        if (component == this || with.contains(component)) {
             return true;
         } else if (!recursive) {
             return false;
         }
 
-        for (ChatComponent child : this.with) {
+        for (ChatComponent child : with) {
             if (child.hasWith(component, true)) {
                 return true;
             }
@@ -188,7 +189,7 @@ public class ChatComponent {
      *
      * @return The extra components.
      */
-    public Collection<ChatComponent> getExtra() {
+    public List<ChatComponent> getExtra() {
         return this.extra;
     }
 
@@ -226,8 +227,8 @@ public class ChatComponent {
      * component's hierarchy.
      */
     public boolean hasExtra(ChatComponent component, boolean recursive) {
-        Collection<ChatComponent> extra = this.extra;
-        if (extra.contains(component)) {
+        List<ChatComponent> extra = this.extra;
+        if (component == this || extra.contains(component)) {
             return true;
         } else if (!recursive) {
             return false;
@@ -382,7 +383,7 @@ public class ChatComponent {
             json.add("selector", selector);
         }
 
-        Collection<ChatComponent> extra = this.extra;
+        List<ChatComponent> extra = this.extra;
         if (!extra.isEmpty()) {
             JsonArray extraArray = new JsonArray();
             extra.forEach(e -> extraArray.add(e.stripColor()));
@@ -441,7 +442,7 @@ public class ChatComponent {
             json.add("selector", selector);
         }
 
-        Collection<ChatComponent> extra = this.extra;
+        List<ChatComponent> extra = this.extra;
         if (!extra.isEmpty()) {
             JsonArray extraArray = new JsonArray();
             extra.forEach(e -> extraArray.add(e.asJson()));
