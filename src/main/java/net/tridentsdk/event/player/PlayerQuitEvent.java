@@ -22,24 +22,19 @@ import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
- * Represents a player that has successfully logged onto the
+ * Represents a player that has successfully logged off the
  * server, and will commence with sending the necessary
  * packets in order to spawn the player entity later on.
- *
- * <p>This event is not cancellable because removing a
- * player requires more logic that is out of scope of this
- * event. Use {@link Player#kick(ChatComponent)} for this.
- * </p>
  *
  * @author TridentSDK
  * @since 0.4-alpha
  */
 @Getter
-public class PlayerJoinEvent extends PlayerEvent {
+public class PlayerQuitEvent extends PlayerEvent {
 
     @Setter private final ChatComponent message;
 
-    public PlayerJoinEvent(Player player, ChatComponent message) {
+    public PlayerQuitEvent(Player player, ChatComponent message) {
         super(player);
         this.message = message;
     }
