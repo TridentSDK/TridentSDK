@@ -32,7 +32,7 @@ import net.tridentsdk.ui.chat.ChatComponent;
 @Getter
 public class PlayerQuitEvent extends PlayerEvent {
 
-    @Setter private final ChatComponent message;
+    @Setter private ChatComponent message;
 
     public PlayerQuitEvent(Player player, ChatComponent message) {
         super(player);

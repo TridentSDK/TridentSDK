@@ -37,7 +37,7 @@ import net.tridentsdk.ui.chat.ChatComponent;
 @Getter
 public class PlayerJoinEvent extends PlayerEvent {
 
-    @Setter private final ChatComponent message;
+    @Setter private ChatComponent message;
 
     public PlayerJoinEvent(Player player, ChatComponent message) {
         super(player);
