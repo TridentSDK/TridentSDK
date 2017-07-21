@@ -27,7 +27,7 @@ import net.tridentsdk.ui.chat.ChatComponent;
  * packets in order to spawn the player entity later on.
  *
  * @author TridentSDK
- * @since 0.4-alpha
+ * @since 0.5-alpha
  */
 @Getter
 public class PlayerQuitEvent extends PlayerEvent {
