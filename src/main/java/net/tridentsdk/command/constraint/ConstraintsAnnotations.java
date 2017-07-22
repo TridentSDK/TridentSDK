@@ -15,13 +15,6 @@ import net.tridentsdk.command.CommandSourceType;
 public interface ConstraintsAnnotations {
 
     /**
-     * Add to a method so the Constraints framework will register it.
-     */
-    @Target(ElementType.METHOD)
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface Constraints {}
-
-    /**
      * A constraint for the command handler.
      *
      * <p>A constraint is a property which filters out illegal
