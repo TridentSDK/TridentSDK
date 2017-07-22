@@ -14,8 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.constraint;
 
+import net.tridentsdk.command.Command;
+import net.tridentsdk.command.CommandSource;
+import net.tridentsdk.command.CommandSourceType;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
@@ -35,23 +38,18 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public class PermsConstraint implements Constraint {
     @Override
-    public boolean handle(Cmd cmd, String label, CmdSource source, String[] args, Object constraint) {
+    public boolean handle(Command command, String label, CommandSource source, String[] args, Object constraint) {
         if (!(constraint instanceof String)) {
             throw new IllegalArgumentException("PermsConstraint does not have the correct constraint arg");
         }
 
-        if (source.getCmdType() == CmdSourceType.CONSOLE || source.getCmdType() == CmdSourceType.BLOCK) {
-            return true;
-        } else {
-            Player player = (Player) source;
-            boolean b = player.hasPerm((String) constraint);
-            if (!b) {
-                player.sendMessage(ChatComponent.create().setColor(ChatColor.RED).
-                        setText("You do not have the appropriate permissions to execute this command. " +
-                                "Contact the server administrators if you believe that this is in error."));
-            }
-
-            return b;
+        boolean b = source.hasPermission((String) constraint);
+        if (!b) {
+            source.sendMessage(ChatComponent.create().setColor(ChatColor.RED).
+                    setText("You do not have the appropriate permissions to execute this command. " +
+                            "Contact the server administrators if you believe that this is in error."));
         }
+
+        return b;
     }
 }

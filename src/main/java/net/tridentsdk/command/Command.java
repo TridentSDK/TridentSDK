@@ -19,8 +19,7 @@ package net.tridentsdk.command;
 import java.lang.annotation.*;
 
 /**
- * This annotates a command handler that has multiple
- * different commands that could execute it.
+ * Annotates methods which are command handlers.
  *
  * @author TridentSDK
  * @since 0.5-alpha
@@ -28,11 +27,34 @@ import java.lang.annotation.*;
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Alias {
+public @interface Command {
     /**
-     * The list of aliases. No spaces allowed.
+     * The name of the command that the method will handle.
+     * No spaces allowed.
+     *
+     * @return the name
+     */
+    String name();
+
+    /**
+     * The list of aliases.
      *
      * @return a list of aliases
      */
-    String[] value();
+    String[] aliases() default {};
+
+    /**
+     * Command help, otherwise known as usage which displays
+     * the arguments for the command.
+     *
+     * @return the help message
+     */
+    String help() default "";
+
+    /**
+     * What the command does.
+     *
+     * @return the command description
+     */
+    String desc() default "";
 }

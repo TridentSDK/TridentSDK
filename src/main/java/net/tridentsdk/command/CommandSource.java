@@ -16,6 +16,7 @@
  */
 package net.tridentsdk.command;
 
+import net.tridentsdk.permission.Permissible;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -28,7 +29,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface CmdSource {
+public interface CommandSource extends Permissible {
     /**
      * Runs the given command and sends it to the command
      * dispatcher from the implementing dispatcher.
@@ -49,5 +50,13 @@ public interface CmdSource {
      *
      * @return the command source's type
      */
-    CmdSourceType getCmdType();
+    CommandSourceType getCmdType();
+
+    /**
+     * Gets whether or not this CommandSource has the given permission.
+     *
+     * @param permission The permission.
+     * @return True iff the source has the permission.
+     */
+    boolean hasPermission(String permission);
 }

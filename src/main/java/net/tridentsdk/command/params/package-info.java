@@ -14,20 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
-
-import java.lang.annotation.*;
-
 /**
- * A repeater class used to repeat the {@link Constrain}
- * annotation.
+ * This package contains classes pertaining to the handling
+ * of commands using the Params framework.
  *
- * @author TridentSDK
- * @since 0.5-alpha
+ * @author Nick Robson
  */
-@Documented
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Constrains {
-    Constrain[] value();
-}
+package net.tridentsdk.command.params;

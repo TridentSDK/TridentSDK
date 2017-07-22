@@ -14,16 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
-
-import javax.annotation.concurrent.Immutable;
-
 /**
- * Types of available constraints on a command.
- *
- * @since 0.5-alpha
+ * This package contains classes pertaining to the handling
+ * of commands using the Constraints framework.
  */
-@Immutable
-public enum ConstraintType {
-    STRING, INT, SOURCE, NONE
-}
+package net.tridentsdk.command.constraint;

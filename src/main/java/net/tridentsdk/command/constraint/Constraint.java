@@ -14,9 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.constraint;
 
 import javax.annotation.concurrent.Immutable;
+import net.tridentsdk.command.Command;
+import net.tridentsdk.command.CommandSource;
 
 /**
  * A constraint is a property of a command such as min. args
@@ -30,7 +32,7 @@ public interface Constraint {
     /**
      * Handles the command that has been dispatched.
      * 
-     * @param cmd the command info
+     * @param command the command info
      * @param label the command that was sent
      * @param source the command source
      * @param args the arguments to the command
@@ -38,5 +40,13 @@ public interface Constraint {
      * @return {@code true} if it passes the constraints,
      * {@code false} otherwise
      */
-    boolean handle(Cmd cmd, String label, CmdSource source, String[] args, Object constraint);
+    boolean handle(Command command, String label, CommandSource source, String[] args, Object constraint);
+
+    default String getHelp(Command command) {
+        String help = command.help();
+        if (help.isEmpty()) {
+            help = "(no help message set)";
+        }
+        return help;
+    }
 }

@@ -33,6 +33,9 @@ description = "TridentSDK"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+compileJava.options.compilerArgs.add '-parameters'
+compileTestJava.options.compilerArgs.add '-parameters'
+
 def ossrhUser = System.getenv("CENTRAL_USER")
 def ossrhPassword = System.getenv("CENTRAL_PASS")
 

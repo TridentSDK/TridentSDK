@@ -17,7 +17,7 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.base.Position;
-import net.tridentsdk.command.CmdSourceType;
+import net.tridentsdk.command.CommandSourceType;
 import net.tridentsdk.inventory.Inventory;
 import net.tridentsdk.inventory.PlayerInventory;
 import net.tridentsdk.meta.entity.living.PlayerMeta;
@@ -291,7 +291,7 @@ public class PlayerTest {
         }
 
         @Override
-        public CmdSourceType getCmdType() {
+        public CommandSourceType getCmdType() {
             return null;
         }
 

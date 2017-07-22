@@ -21,7 +21,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import lombok.Getter;
 import net.tridentsdk.Server;
-import net.tridentsdk.command.CmdListener;
+import net.tridentsdk.command.CommandListener;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.event.Listener;
 import net.tridentsdk.logger.Logger;
@@ -244,9 +244,9 @@ public class PluginLoader {
                             cls.asSubclass(Listener.class).getConstructor().newInstance());
                 }
 
-                if (cls.isAssignableFrom(CmdListener.class)) {
-                    Server.getInstance().getCmdHandler().register(description.name(),
-                            cls.asSubclass(CmdListener.class).getConstructor().newInstance());
+                if (cls.isAssignableFrom(CommandListener.class)) {
+                    Server.getInstance().getCommandHandler().register(description.name(),
+                            cls.asSubclass(CommandListener.class).getConstructor().newInstance());
                 }
             }
 
@@ -295,8 +295,8 @@ public class PluginLoader {
                 Server.getInstance().getEventController().unregister(cls.asSubclass(Listener.class));
             }
 
-            if (cls.isAssignableFrom(CmdListener.class)) {
-                Server.getInstance().getCmdHandler().unregister(cls.asSubclass(CmdListener.class));
+            if (cls.isAssignableFrom(CommandListener.class)) {
+                Server.getInstance().getCommandHandler().unregister(cls.asSubclass(CommandListener.class));
             }
         }
 
@@ -321,8 +321,8 @@ public class PluginLoader {
                     Server.getInstance().getEventController().unregister(cls.asSubclass(Listener.class));
                 }
 
-                if (cls.isAssignableFrom(CmdListener.class)) {
-                    Server.getInstance().getCmdHandler().unregister(cls.asSubclass(CmdListener.class));
+                if (cls.isAssignableFrom(CommandListener.class)) {
+                    Server.getInstance().getCommandHandler().unregister(cls.asSubclass(CommandListener.class));
                 }
             }
 

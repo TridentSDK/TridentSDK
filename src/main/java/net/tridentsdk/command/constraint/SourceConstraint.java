@@ -14,8 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.constraint;
 
+import net.tridentsdk.command.Command;
+import net.tridentsdk.command.CommandSource;
+import net.tridentsdk.command.CommandSourceType;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
 
@@ -33,17 +36,17 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public class SourceConstraint implements Constraint {
     @Override
-    public boolean handle(Cmd cmd, String label, CmdSource source, String[] args, Object constraint) {
-        if (!(constraint instanceof CmdSourceType[])) {
+    public boolean handle(Command command, String label, CommandSource source, String[] args, Object constraint) {
+        if (!(constraint instanceof CommandSourceType[])) {
             throw new IllegalArgumentException("SourceConstraint does not have the correct constraint arg");
         }
 
-        CmdSourceType[] sources = (CmdSourceType[]) constraint;
+        CommandSourceType[] sources = (CommandSourceType[]) constraint;
         if (sources.length == 0) {
             return false;
         }
 
-        for (CmdSourceType s : sources) {
+        for (CommandSourceType s : sources) {
             if (s.isTypeOf(source)) {
                 return true;
             }

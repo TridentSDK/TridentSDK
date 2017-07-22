@@ -14,17 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.constraint;
 
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.Immutable;
 
 /**
- * This is simply a marker interface for classes that
- * implement methods which handle commands.
+ * Types of available constraints on a command.
  *
- * @author TridentSDK
  * @since 0.5-alpha
  */
-@NotThreadSafe
-public interface CmdListener {
+@Immutable
+public enum ConstraintType {
+    STRING, INT, SOURCE, NONE
 }

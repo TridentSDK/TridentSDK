@@ -30,25 +30,25 @@ import javax.annotation.concurrent.Immutable;
  * @since 0.5-alpha
  */
 @Immutable
-public enum CmdSourceType {
+public enum CommandSourceType {
     PLAYER {
         @Override
-        public boolean isTypeOf(CmdSource o) {
+        public boolean isTypeOf(CommandSource o) {
             return o instanceof Player;
         }
     }, CONSOLE {
         @Override
-        public boolean isTypeOf(CmdSource o) {
+        public boolean isTypeOf(CommandSource o) {
             return o instanceof Server;
         }
     }, BLOCK {
         @Override
-        public boolean isTypeOf(CmdSource o) {
+        public boolean isTypeOf(CommandSource o) {
             return o instanceof Block && ((Block) o).getSubstance() == Substance.COMMAND_BLOCK;
         }
     }, ALL {
         @Override
-        public boolean isTypeOf(CmdSource o) {
+        public boolean isTypeOf(CommandSource o) {
             return true;
         }
     };
@@ -61,5 +61,5 @@ public enum CmdSourceType {
      * @return {@code true} if it is a type of the command
      * source
      */
-    public abstract boolean isTypeOf(CmdSource o);
+    public abstract boolean isTypeOf(CommandSource o);
 }

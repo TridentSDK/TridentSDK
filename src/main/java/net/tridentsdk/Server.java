@@ -16,8 +16,10 @@
  */
 package net.tridentsdk;
 
-import net.tridentsdk.command.CmdHandler;
-import net.tridentsdk.command.CmdSource;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import net.tridentsdk.command.CommandHandler;
+import net.tridentsdk.command.CommandSource;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.entity.living.Player;
 import net.tridentsdk.event.EventController;
@@ -40,7 +42,7 @@ import java.util.UUID;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Server extends CmdSource {
+public interface Server extends CommandSource {
     /**
      * The current version of the server
      */
@@ -114,6 +116,40 @@ public interface Server extends CmdSource {
     Collection<? extends Player> getPlayers();
 
     /**
+     * Gets the player with the UUID given
+     * @param uuid The UUID
+     * @return The player, or null if none
+     */
+    Player getPlayer(UUID uuid);
+
+    /**
+     * Gets the player with the exact name given
+     * @param name The name
+     * @return The player, or null if none
+     */
+    Player getPlayerExact(String name);
+
+    /**
+     * Obtains a collection of players which are currently
+     * connected to this server, and whose names contain the
+     * given string.
+     *
+     * @param name The name
+     * @return the matching players
+     */
+    Collection<? extends Player> getPlayersMatching(String name);
+
+    /**
+     * Obtains a collection of players which are currently
+     * connected to this server, and whose names fuzzy match
+     * the given string.
+     *
+     * @param filter The fuzzy match filter
+     * @return the matching players
+     */
+    Collection<? extends Player> getPlayersFuzzyMatching(String filter);
+
+    /**
      * Obtains the singleton instance of the global world
      * handler.
      *
@@ -141,7 +177,7 @@ public interface Server extends CmdSource {
      *
      * @return the server's command handler
      */
-    CmdHandler getCmdHandler();
+    CommandHandler getCommandHandler();
 
     /**
      * This method causes the server to save the current

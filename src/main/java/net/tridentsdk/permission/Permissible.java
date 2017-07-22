@@ -37,7 +37,7 @@ public interface Permissible {
      * @return {@code true} if the holder does have the
      * given permission
      */
-    boolean hasPerm(String perm);
+    boolean hasPermission(String perm);
 
     /**
      * Adds the given permission to this holder's collection
@@ -45,7 +45,7 @@ public interface Permissible {
      *
      * @param perm the permission to add
      */
-    void addPerm(String perm);
+    void addPermission(String perm);
 
     /**
      * Removes the permission from this holder's collection
@@ -57,7 +57,7 @@ public interface Permissible {
      * it failed or it was not contained in the holder's
      * collection
      */
-    boolean removePerm(String perm);
+    boolean removePermission(String perm);
 
     /**
      * Sets whether or not the permissible is an operator,

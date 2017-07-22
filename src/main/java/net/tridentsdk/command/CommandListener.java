@@ -16,38 +16,15 @@
  */
 package net.tridentsdk.command;
 
-import java.lang.annotation.*;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
- * Annotates methods which are command handlers.
+ * This is simply a marker interface for classes that
+ * implement methods which handle commands.
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
-@Documented
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Cmd {
-    /**
-     * The name of the command that the method will handle.
-     * No spaces allowed.
-     *
-     * @return the name
-     */
-    String name();
-
-    /**
-     * Command help, otherwise known as usage which displays
-     * the arguments for the command.
-     *
-     * @return the help message
-     */
-    String help() default "No help for this command";
-
-    /**
-     * What the command does.
-     *
-     * @return the command description
-     */
-    String desc() default "What does this do?";
+@NotThreadSafe
+public interface CommandListener {
 }

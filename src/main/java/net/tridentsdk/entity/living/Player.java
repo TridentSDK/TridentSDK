@@ -17,7 +17,7 @@
 package net.tridentsdk.entity.living;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.command.CmdSource;
+import net.tridentsdk.command.CommandSource;
 import net.tridentsdk.inventory.Inventory;
 import net.tridentsdk.inventory.PlayerInventory;
 import net.tridentsdk.permission.Permissible;
@@ -43,7 +43,7 @@ import java.util.UUID;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Player extends EntityLiving, CmdSource, Permissible {
+public interface Player extends EntityLiving, CommandSource, Permissible {
     /**
      * The default flying speed for a player
      */

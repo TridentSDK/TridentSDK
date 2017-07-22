@@ -14,34 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.constraint;
 
+import net.tridentsdk.command.Command;
+import net.tridentsdk.command.CommandSource;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 import javax.annotation.concurrent.Immutable;
 
 /**
- * Maximum args constraint. Any number of args above the
+ * Minimum args constraint. Any number of args below the
  * constraint results in displaying the help message.
  *
- * <p>Must use an intenger constraint.</p>
+ * <p>Must use an integer constraint.</p>
  *
  * @author TridentSDK
  * @since 0.5-alpha
  */
 @Immutable
-public class MaxArgsConstraint implements Constraint {
+public class MinArgsConstraint implements Constraint {
     @Override
-    public boolean handle(Cmd cmd, String label, CmdSource source, String[] args, Object constraint) {
+    public boolean handle(Command command, String label, CommandSource source, String[] args, Object constraint) {
         if (!(constraint instanceof Integer)) {
-            throw new IllegalArgumentException("MaxArgsConstraint does not have the correct constraint arg");
+            throw new IllegalArgumentException("MinArgsConstraint does not have the correct constraint arg");
         }
 
         int i = (int) constraint;
 
-        if (args.length > i) {
-            source.sendMessage(ChatComponent.create().setColor(ChatColor.RED).setText("Usage: " + cmd.help()));
+        if (args.length < i) {
+            source.sendMessage(ChatComponent.create().setColor(ChatColor.RED).setText("Usage: " + getHelp(command)));
             return false;
         }
 

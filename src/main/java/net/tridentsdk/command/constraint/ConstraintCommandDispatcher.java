@@ -14,16 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.tridentsdk.command;
+package net.tridentsdk.command.constraint;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
-import lombok.Getter;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
+import net.tridentsdk.command.Command;
+import net.tridentsdk.command.CommandDispatcher;
+import net.tridentsdk.command.CommandListener;
+import net.tridentsdk.command.CommandSource;
 
 /**
  * A command dispatcher functions as the method wrapper for
@@ -33,50 +37,15 @@ import java.util.Map;
  * @since 0.5-alpha
  */
 @NotThreadSafe
-public class CmdDispatcher {
-    /**
-     * The cache of constraint types to their constraint
-     * runner
-     */
+public class ConstraintCommandDispatcher extends CommandDispatcher {
     private static final Map<Class<? extends Constraint>, Constraint> constraints = new HashMap<>();
 
-    /**
-     * Method accessor for the class to run the command
-     */
     private final MethodAccess access;
-    /**
-     * The object which is used to run the instance method
-     */
     private final Object container;
-    /**
-     * The method index
-     */
     private final int idx;
-    /**
-     * The fallback string
-     */
-    @Getter
-    private final String fallback;
-    /**
-     * Whether or not this dispatcher is an alias of the
-     * actual command
-     */
-    @Getter
-    private final boolean alias;
-    /**
-     * Aliases for this command
-     */
-    @Getter
-    private final String[] aliases;
-    /**
-     * The command to run
-     */
-    @Getter
-    private final Cmd cmd;
-    /**
-     * The command constraints
-     */
-    private final Constrain[] constrains;
+    @Getter private final String fallback;
+    @Getter private final Command command;
+    private final ConstraintsAnnotations.Constrain[] constrains;
 
     /**
      * Creates a new command dispatcher with the given
@@ -84,20 +53,15 @@ public class CmdDispatcher {
      * @param access the method accessor for the class
      * @param container the container object
      * @param method the method to invoke
-     * @param fallback the fallback string
-     * @param alias the alias
-     * @param aliases the aliases for the command
-     * @param cmd the command properties
+     * @param command the command properties
      * @param constraints the dispatch constraints
      */
-    public CmdDispatcher(MethodAccess access, Object container, Method method, String fallback, boolean alias, String[] aliases, Cmd cmd, Constrain... constraints) {
+    public ConstraintCommandDispatcher(MethodAccess access, Object container, Method method, String fallback, Command command, ConstraintsAnnotations.Constrain... constraints) {
         this.access = access;
         this.container = container;
-        this.fallback = fallback;
-        this.alias = alias;
-        this.aliases = aliases;
         this.idx = access.getIndex(method.getName(), method.getParameterTypes());
-        this.cmd = cmd;
+        this.fallback = fallback;
+        this.command = command;
         this.constrains = constraints;
     }
 
@@ -109,8 +73,8 @@ public class CmdDispatcher {
      * @param source the command sender
      * @param args the command arguments
      */
-    public void run(String cmd, CmdSource source, String[] args) {
-        for (Constrain constrain : this.constrains) {
+    public void run(String cmd, CommandSource source, String[] args) {
+        for (ConstraintsAnnotations.Constrain constrain : this.constrains) {
             Constraint constraint = constraints.computeIfAbsent(constrain.value(), k -> {
                 try {
                     return k.getConstructor().newInstance();
@@ -130,7 +94,7 @@ public class CmdDispatcher {
                 o = constrain.src();
             }
 
-            if (!constraint.handle(this.cmd, cmd, source, args, o)) {
+            if (!constraint.handle(this.command, cmd, source, args, o)) {
                 return;
             }
         }
@@ -146,7 +110,7 @@ public class CmdDispatcher {
      * @return {@code true} if the class is the class which
      * contains the command
      */
-    public boolean isContainedBy(Class<? extends CmdListener> cls) {
+    public boolean isContainedBy(Class<? extends CommandListener> cls) {
         return this.container.getClass().equals(cls);
     }
 }
