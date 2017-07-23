@@ -18,19 +18,18 @@ package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 import java.lang.reflect.Parameter;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import lombok.Getter;
-import net.tridentsdk.command.constraint.ConstraintCommandDispatcher;
-import net.tridentsdk.command.constraint.ConstraintsAnnotations;
-import net.tridentsdk.command.params.ParamsCommandDispatcher;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.logger.Logger;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -53,11 +52,11 @@ import net.tridentsdk.ui.chat.ChatComponent;
 public class CommandHandler {
 
     public static <T> void registerTransformer(Class<T> clazz, BiFunction<String, Parameter, ?> transformer) {
-        ParamsCommandDispatcher.registerTransformer(clazz, transformer);
+        Transformers.registerTransformer(clazz, transformer);
     }
 
     public static <T> T transform(String input, Parameter parameter, Class<T> clazz) throws Exception {
-        return ParamsCommandDispatcher.transform(input, parameter, clazz);
+        return Transformers.transform(input, parameter, clazz);
     }
 
     /**
@@ -66,9 +65,9 @@ public class CommandHandler {
      */
     private static final AtomicInteger init = new AtomicInteger();
     /**
-     * Command method parameter order
+     * Providers of dispatchers for different method structures
      */
-    private static final Class<?>[] PARAMS = { String.class, CommandSource.class, String[].class };
+    private final Map<Predicate<Method>, Function<Method, CommandDispatcher>> dispatcherProviders = new LinkedHashMap<>();
     /**
      * Hashtable of command names to their respective runner
      */
@@ -130,10 +129,8 @@ public class CommandHandler {
                 continue;
             }
 
-            CommandDispatcher dispatcher;
-            if (Arrays.equals(parameterTypes, PARAMS)) {
-                dispatcher = new ConstraintCommandDispatcher(access, listener, method, fallback, cmd, method.getAnnotationsByType(ConstraintsAnnotations.Constrain.class));
-            } else if (parameterTypes.length >= 2 && parameterTypes[0] == CommandSource.class && parameterTypes[1] == String[].class) {
+            CommandDispatcher dispatcher = null;
+            if (parameterTypes.length >= 2 && parameterTypes[0] == CommandSource.class && parameterTypes[1] == String[].class) {
                 try {
                     dispatcher = new ParamsCommandDispatcher(access, listener, method, fallback, cmd);
                 } catch (Throwable ex) {
@@ -142,18 +139,27 @@ public class CommandHandler {
                     continue;
                 }
             } else {
-                Logger.get(CommandHandler.class).error("Error registering command \"" + name + "\" from " + methodSignature + ": does not match any expected method signature");
+                for (Map.Entry<Predicate<Method>, Function<Method, CommandDispatcher>> provider : this.dispatcherProviders.entrySet()) {
+                    if (provider.getKey().test(method)) {
+                        dispatcher = provider.getValue().apply(method);
+                        if (dispatcher != null)
+                            break;
+                    }
+                }
+                if (dispatcher == null)
+                    Logger.get(CommandHandler.class).error("Error registering command \"" + name + "\" from " + methodSignature + ": does not match any expected method signature");
                 continue;
             }
 
             CommandDispatcher oldDispatcher = this.dispatchers.put(name, dispatcher);
+            CommandDispatcher newDispatcher = dispatcher;
             if (oldDispatcher != null) {
                 Logger.get(CommandHandler.class).warn("Overwriting old /" + name + " from " + oldDispatcher.getPlugin() + " with new handler from " + dispatcher.getPlugin());
             }
             this.pluginDispatchers.compute(fallback, (x, m) -> {
                 if (m == null)
                     m = new ConcurrentHashMap<>();
-                m.put(name, dispatcher);
+                m.put(name, newDispatcher);
                 return m;
             });
             for (String _alias : cmd.aliases()) {
@@ -169,7 +175,7 @@ public class CommandHandler {
                 this.pluginDispatchers.compute(fallback, (x, m) -> {
                     if (m == null)
                         m = new ConcurrentHashMap<>();
-                    m.put(alias, dispatcher);
+                    m.put(alias, newDispatcher);
                     return m;
                 });
             }
@@ -278,4 +284,18 @@ public class CommandHandler {
     public Map<String, Map<String, CommandDispatcher>> getPluginDispatchers() {
         return Collections.unmodifiableMap(this.pluginDispatchers);
     }
+
+    /**
+     * Adds a dispatcher provider
+     *
+     * @param predicate the predicate to test against when checking if a method should use this type of dispatcher
+     * @param function the function to create a dispatcher from a method
+     */
+    public void addDispatcherProvider(Predicate<Method> predicate, Function<Method, CommandDispatcher> function) {
+        Objects.requireNonNull(predicate, "predicate cannot be null");
+        Objects.requireNonNull(function, "function cannot be null");
+
+        this.dispatcherProviders.put(predicate, function);
+    }
+
 }

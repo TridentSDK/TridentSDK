@@ -1,4 +1,4 @@
-package net.tridentsdk.command.params;
+package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 import java.lang.reflect.Array;
@@ -7,20 +7,11 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiFunction;
-import java.util.regex.Pattern;
 import lombok.Getter;
-import net.tridentsdk.Server;
-import net.tridentsdk.command.Command;
-import net.tridentsdk.command.CommandDispatcher;
-import net.tridentsdk.command.CommandHandler;
-import net.tridentsdk.command.CommandListener;
-import net.tridentsdk.command.CommandSource;
-import net.tridentsdk.command.CommandSourceType;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.command.annotation.AllowedSourceTypes;
+import net.tridentsdk.command.annotation.MaxCount;
+import net.tridentsdk.command.annotation.MinCount;
+import net.tridentsdk.command.annotation.PermissionRequired;
 import net.tridentsdk.logger.Logger;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
@@ -29,112 +20,6 @@ import net.tridentsdk.ui.chat.ChatComponent;
  * @author Nick Robson
  */
 public class ParamsCommandDispatcher extends CommandDispatcher {
-
-    private static final Map<Class<?>, BiFunction<String, Parameter, ?>> transformers = new ConcurrentHashMap<>();
-    private static final Map<Class<?>, BiFunction<String, Parameter, ?>> inheritedTransformers = new ConcurrentHashMap<>();
-
-    static {
-        registerTransformer(Byte.class, (s, p) -> {
-            try {
-                return Byte.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter an integer in -128 to 127!");
-            }
-        });
-        registerTransformer(Short.class, (s, p) -> {
-            try {
-                return Short.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter an integer in -65536 to 65535!");
-            }
-        });
-        registerTransformer(Integer.class, (s, p) -> {
-            try {
-                return Integer.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter an integer!");
-            }
-        });
-        registerTransformer(Long.class, (s, p) -> {
-            try {
-                return Long.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter an integer!");
-            }
-        });
-        registerTransformer(Float.class, (s, p) -> {
-            try {
-                return Float.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter a number!");
-            }
-        });
-        registerTransformer(Double.class, (s, p) -> {
-            try {
-                return Double.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter a number!");
-            }
-        });
-        registerTransformer(Number.class, (s, p) -> {
-            try {
-                return Double.valueOf(s);
-            } catch (Exception ex) {
-                throw new TransformationException("Invalid input! Enter a number!");
-            }
-        });
-        registerTransformer(Boolean.class, (s, p) -> s.length() > 0 && (s.charAt(0) == 'y' || s.charAt(0) == 't'));
-        registerTransformer(String.class, (s, p) -> s);
-        registerTransformer(Object.class, (s, p) -> s);
-        registerTransformer(Player.class, (s, p) -> {
-            ParamsAnnotations.PlayerExactMatch pem = p != null ? p.getAnnotation(ParamsAnnotations.PlayerExactMatch.class) : null;
-            ParamsAnnotations.PlayerFuzzyMatch pfm = p != null ? p.getAnnotation(ParamsAnnotations.PlayerFuzzyMatch.class) : null;
-            ParamsAnnotations.PlayerRegexMatch prm = p != null ? p.getAnnotation(ParamsAnnotations.PlayerRegexMatch.class) : null;
-            if (pem != null) {
-                return Server.getInstance().getPlayerExact(s);
-            } else if (pfm != null) {
-                return Server.getInstance().getPlayersFuzzyMatching(s).stream().findAny().orElse(null);
-            } else if (prm != null) {
-                Pattern pattern;
-                try {
-                    pattern = Pattern.compile(s);
-                } catch (Exception ex) {
-                    throw new TransformationException("Invalid regex pattern provided");
-                }
-                return Server.getInstance().getPlayers().stream()
-                        .filter(x -> pattern.matcher(x.getName()).find())
-                        .findAny()
-                        .orElse(null);
-            } else {
-                return Server.getInstance().getPlayersMatching(s).stream().findAny().orElse(null);
-            }
-        });
-    }
-
-    public static <T> void registerTransformer(Class<T> clazz, BiFunction<String, Parameter, ?> transformer) {
-        Objects.requireNonNull(clazz, "class cannot be null");
-        Objects.requireNonNull(transformer, "transformer for " + clazz + " cannot be null");
-        if (transformers.putIfAbsent(clazz, transformer) != null)
-            return;
-        Class<?> cls = clazz.getSuperclass();
-        while (cls != null && cls != Object.class) {
-            if (inheritedTransformers.putIfAbsent(cls, transformer) != null)
-                break;
-            cls = cls.getSuperclass();
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public static <T> T transform(String input, Parameter parameter, Class<T> clazz) throws Exception {
-        Objects.requireNonNull(input, "input cannot be null");
-        Objects.requireNonNull(parameter, "parameter cannot be null");
-        BiFunction<String, Parameter, ?> transformer = transformers.get(clazz);
-        if (transformer == null)
-            transformer = inheritedTransformers.get(clazz);
-        if (transformer == null)
-            throw new UnsupportedOperationException("transformer missing for " + clazz);
-        return (T) transformer.apply(input, parameter);
-    }
 
     private final MethodAccess access;
     private final CommandListener container;
@@ -177,7 +62,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
                 if (vai != -1)
                     throw new RuntimeException("cannot have more than one variable length parameter");
                 vai = i;
-                ParamsAnnotations.MinCount a0 = param.getAnnotation(ParamsAnnotations.MinCount.class);
+                MinCount a0 = param.getAnnotation(MinCount.class);
                 if (a0 != null) {
                     if ((minVar = a0.value()) < 0)
                         throw new IllegalArgumentException("minimum cannot be less than 0");
@@ -185,7 +70,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
                 } else {
                     min -= 1;
                 }
-                ParamsAnnotations.MaxCount a1 = param.getAnnotation(ParamsAnnotations.MaxCount.class);
+                MaxCount a1 = param.getAnnotation(MaxCount.class);
                 if (a1 != null) {
                     if ((maxVar = a1.value()) < 0)
                         throw new IllegalArgumentException("maximum cannot be less than 0");
@@ -203,14 +88,14 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
         this.minimumVariableArgs = minVar;
         this.maximumVariableArgs = maxVar;
 
-        ParamsAnnotations.PermissionRequired permissionRequired = method.getAnnotation(ParamsAnnotations.PermissionRequired.class);
+        PermissionRequired permissionRequired = method.getAnnotation(PermissionRequired.class);
         if (permissionRequired != null && permissionRequired.value().length > 0) {
             this.permissionRequired = permissionRequired.value();
         } else {
             this.permissionRequired = null;
         }
 
-        ParamsAnnotations.AllowedSourceTypes sources = method.getAnnotation(ParamsAnnotations.AllowedSourceTypes.class);
+        AllowedSourceTypes sources = method.getAnnotation(AllowedSourceTypes.class);
         if (sources != null && sources.value().length > 0) {
             this.allowedSourceTypes = sources.value();
         } else {
@@ -294,7 +179,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
             Class<?> paramType = param.getType().isArray() ? param.getType().getComponentType() : param.getType();
             Object result;
             try {
-                result = transform(args[i], param, paramType);
+                result = Transformers.transform(args[i], param, paramType);
             } catch (UnsupportedOperationException ex) {
                 source.sendMessage(ChatComponent.create().setColor(ChatColor.RED).setText("Failed to parse \"" + args[i] + "\" as a " + paramType.getSimpleName() + " (no transformer!)"));
                 return;
@@ -328,13 +213,6 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
                 Array.set(arr, i, variableArgs.get(i));
             invokeArguments[2 + varargsIndex] = arr;
         }
-
-//      (String cmd, CommandSource src, int a, int b, int[] c, int d)
-//                               args.length = 7, parameters.length = 4
-//                                      20     20     1 2 3 4  20
-//                         args idx     0      1      2 3 4 5  6
-//                       params idx     0      1      2 2 2 2  3
-
         this.access.invoke(this.container, this.methodIndex, invokeArguments);
     }
 

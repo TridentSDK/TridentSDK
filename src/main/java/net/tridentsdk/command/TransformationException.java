@@ -1,4 +1,4 @@
-package net.tridentsdk.command.params;
+package net.tridentsdk.command;
 
 /**
  * @author Nick Robson

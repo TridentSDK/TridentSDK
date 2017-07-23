@@ -18,6 +18,7 @@ package net.tridentsdk;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import net.tridentsdk.command.CommandHandler;
 import net.tridentsdk.command.CommandSource;
 import net.tridentsdk.config.Config;
@@ -120,6 +121,7 @@ public interface Server extends CommandSource {
      * @param uuid The UUID
      * @return The player, or null if none
      */
+    @Nullable
     Player getPlayer(UUID uuid);
 
     /**
@@ -127,6 +129,7 @@ public interface Server extends CommandSource {
      * @param name The name
      * @return The player, or null if none
      */
+    @Nullable
     Player getPlayerExact(String name);
 
     /**
