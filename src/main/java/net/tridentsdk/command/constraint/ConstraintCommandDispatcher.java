@@ -43,7 +43,7 @@ public class ConstraintCommandDispatcher extends CommandDispatcher {
     private final MethodAccess access;
     private final Object container;
     private final int idx;
-    @Getter private final String fallback;
+    @Getter private final String plugin;
     @Getter private final Command command;
     private final ConstraintsAnnotations.Constrain[] constrains;
 
@@ -53,14 +53,15 @@ public class ConstraintCommandDispatcher extends CommandDispatcher {
      * @param access the method accessor for the class
      * @param container the container object
      * @param method the method to invoke
+     * @param plugin the plugin name
      * @param command the command properties
      * @param constraints the dispatch constraints
      */
-    public ConstraintCommandDispatcher(MethodAccess access, Object container, Method method, String fallback, Command command, ConstraintsAnnotations.Constrain... constraints) {
+    public ConstraintCommandDispatcher(MethodAccess access, Object container, Method method, String plugin, Command command, ConstraintsAnnotations.Constrain... constraints) {
         this.access = access;
         this.container = container;
         this.idx = access.getIndex(method.getName(), method.getParameterTypes());
-        this.fallback = fallback;
+        this.plugin = plugin;
         this.command = command;
         this.constrains = constraints;
     }

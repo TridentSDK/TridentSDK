@@ -190,7 +190,7 @@ public class PluginLoader {
 
                 CtClass cls = PLUGIN_CP.get(name);
                 PluginDesc desc = (PluginDesc) cls.getAnnotation(PluginDesc.class);
-                if (desc.name().equals("trident") || desc.name().equals("minecraft")) {
+                if (desc != null && (desc.name().equals("trident") || desc.name().equals("minecraft"))) {
                     throw new RuntimeException("ID has illegal name");
                 }
 
@@ -229,6 +229,7 @@ public class PluginLoader {
 
             PluginClassLoader loader = new PluginClassLoader(pluginFile);
             Class<? extends Plugin> pluginClass = null;
+            List<Class<? extends CommandListener>> commandClasses = new ArrayList<>();
             for (String name : names) {
                 Class<?> cls = loader.loadClass(name);
                 if (name.equals(main)) {
@@ -240,18 +241,20 @@ public class PluginLoader {
                 }
 
                 if (cls.isAssignableFrom(Listener.class)) {
-                    Server.getInstance().getEventController().register(
-                            cls.asSubclass(Listener.class).getConstructor().newInstance());
+                    Server.getInstance().getEventController().register(cls.asSubclass(Listener.class).getConstructor().newInstance());
                 }
 
                 if (cls.isAssignableFrom(CommandListener.class)) {
-                    Server.getInstance().getCommandHandler().register(description.name(),
-                            cls.asSubclass(CommandListener.class).getConstructor().newInstance());
+                    commandClasses.add(cls.asSubclass(CommandListener.class));
                 }
             }
 
             Plugin plugin = pluginClass.getConstructor().newInstance();
             plugin.init(path, description, loader);
+
+            for (Class<? extends CommandListener> cls : commandClasses) {
+                Server.getInstance().getCommandHandler().register(plugin, cls.asSubclass(CommandListener.class).getConstructor().newInstance());
+            }
 
             this.loaded.put(description.id(), plugin);
             plugin.load();

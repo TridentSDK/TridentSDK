@@ -296,17 +296,15 @@ public class PlayerTest {
         }
 
         @Override
-        public boolean hasPerm(String perm) {
+        public boolean hasPermission(String perm) {
             return false;
         }
 
         @Override
-        public void addPerm(String perm) {
-
-        }
+        public void addPermission(String perm) {}
 
         @Override
-        public boolean removePerm(String perm) {
+        public boolean removePermission(String perm) {
             return false;
         }
 

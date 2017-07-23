@@ -125,7 +125,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T transform(String input, Parameter parameter, Class<T> clazz) throws IllegalStateException {
+    public static <T> T transform(String input, Parameter parameter, Class<T> clazz) throws Exception {
         Objects.requireNonNull(input, "input cannot be null");
         Objects.requireNonNull(parameter, "parameter cannot be null");
         BiFunction<String, Parameter, ?> transformer = transformers.get(clazz);
@@ -140,7 +140,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
     private final CommandListener container;
     private final Method method;
     private final int methodIndex;
-    @Getter private final String fallback;
+    @Getter private final String plugin;
     @Getter private final Command command;
 
     private final Parameter[] parameters;
@@ -156,12 +156,12 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
     private final String[] permissionRequired;
     private final CommandSourceType[] allowedSourceTypes;
 
-    public ParamsCommandDispatcher(MethodAccess access, CommandListener container, Method method, String fallback, Command command) {
+    public ParamsCommandDispatcher(MethodAccess access, CommandListener container, Method method, String plugin, Command command) {
         this.access = access;
         this.container = container;
         this.method = method;
         this.methodIndex = access.getIndex(this.method.getName(), this.method.getParameterTypes());
-        this.fallback = fallback;
+        this.plugin = plugin;
         this.command = command;
         this.parameters = Arrays.copyOfRange(method.getParameters(), 2, method.getParameterCount());
         int vai = -1, min = parameters.length, max = parameters.length;

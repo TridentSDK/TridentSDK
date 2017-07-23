@@ -30,7 +30,7 @@ public abstract class CommandDispatcher {
      *
      * @return The fallback.
      */
-    public abstract String getFallback();
+    public abstract String getPlugin();
 
     /**
      * Gets the associated {@link Command}.

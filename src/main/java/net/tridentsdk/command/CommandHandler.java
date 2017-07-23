@@ -17,11 +17,11 @@
 package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
-import java.lang.reflect.Parameter;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import lombok.Getter;
 import net.tridentsdk.command.constraint.ConstraintCommandDispatcher;
 import net.tridentsdk.command.constraint.ConstraintsAnnotations;
-import net.tridentsdk.command.params.ParamsAnnotations;
 import net.tridentsdk.command.params.ParamsCommandDispatcher;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.logger.Logger;
@@ -30,9 +30,9 @@ import javax.annotation.concurrent.NotThreadSafe;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
 
@@ -59,10 +59,13 @@ public class CommandHandler {
      */
     private static final Class<?>[] PARAMS = { String.class, CommandSource.class, String[].class };
     /**
-     * Hashtable of command names to their respective
-     * runner
+     * Hashtable of command names to their respective runner
      */
-    private final Map<String, CommandDispatcher> dispatchers = new HashMap<>();
+    private final Map<String, CommandDispatcher> dispatchers = new ConcurrentHashMap<>();
+    /**
+     * Hashtables of commands and plugins to their dispatcher (used for fallbacks)
+     */
+    private final Map<String, Map<String, CommandDispatcher>> pluginDispatchers = new ConcurrentHashMap<>();
     /**
      * The amount of non-alias commands present
      */
@@ -86,14 +89,19 @@ public class CommandHandler {
      * <p>Command names are always registered as lowercase.
      * </p>
      *
-     * @param fallback the fallback name if already taken
+     * @param plugin the plugin
      * @param listener the listener to register
      */
     @Policy("handle on plugin thread")
-    public void register(String fallback, CommandListener listener) {
+    public void register(Plugin plugin, CommandListener listener) {
+        Objects.requireNonNull(plugin, "plugin cannot be null");
+        Objects.requireNonNull(listener, "listener cannot be null");
+
         Class<? extends CommandListener> cls = listener.getClass();
         MethodAccess access = MethodAccess.get(cls);
         Method[] methods = cls.getDeclaredMethods();
+
+        String fallback = plugin.getDescription().id().toLowerCase();
 
         for (Method method : methods) {
             Command cmd = method.getAnnotation(Command.class);
@@ -109,13 +117,6 @@ public class CommandHandler {
             if (!isValidCommandName(name)) {
                 Logger.get(CommandHandler.class).error("Error registering command \"" + name + "\" from " + methodSignature + ": command may not have a space in it");
                 continue;
-            }
-
-            if (this.dispatchers.containsKey(name)) {
-                String newCmd = fallback + '$' + name;
-                Logger.get(CommandHandler.class).warn("Error registering command \"" + name + "\" from " + methodSignature + ": command with that name already registered");
-                Logger.get(CommandHandler.class).warn("Setting to: " + newCmd);
-                name = newCmd;
             }
 
             CommandDispatcher dispatcher;
@@ -134,20 +135,33 @@ public class CommandHandler {
                 continue;
             }
 
-            for (String alias : cmd.aliases()) {
-                if (!isValidCommandName(alias)) {
-                    Logger.get(CommandHandler.class).error("Error registering command \"" + alias + "\" from " + methodSignature + ": command may not have a space in it");
-                    continue;
-                } else if (this.dispatchers.containsKey(alias)) {
-                    String newCmd = fallback + '$' + alias;
-                    Logger.get(CommandHandler.class).warn("Command with name \"" + alias + "\" from " + methodSignature + " already registered for alias");
-                    Logger.get(CommandHandler.class).warn("Setting to: " + newCmd);
-                    alias = newCmd;
-                }
-
-                this.dispatchers.put(alias, dispatcher);
+            CommandDispatcher oldDispatcher = this.dispatchers.put(name, dispatcher);
+            if (oldDispatcher != null) {
+                Logger.get(CommandHandler.class).warn("Overwriting old /" + name + " from " + oldDispatcher.getPlugin() + " with new handler from " + dispatcher.getPlugin());
             }
-            this.dispatchers.put(name, dispatcher);
+            this.pluginDispatchers.compute(fallback, (x, m) -> {
+                if (m == null)
+                    m = new ConcurrentHashMap<>();
+                m.put(name, dispatcher);
+                return m;
+            });
+            for (String _alias : cmd.aliases()) {
+                final String alias = _alias.toLowerCase();
+                if (!isValidCommandName(alias)) {
+                    Logger.get(CommandHandler.class).error("Error registering command \"" + alias + "\" from " + methodSignature + ": alias may not have a space in it");
+                    continue;
+                }
+                oldDispatcher = this.dispatchers.put(alias, dispatcher);
+                if (oldDispatcher != null) {
+                    Logger.get(CommandHandler.class).warn("Overwriting old /" + alias + " from " + oldDispatcher.getPlugin() + " with new handler from " + dispatcher.getPlugin());
+                }
+                this.pluginDispatchers.compute(fallback, (x, m) -> {
+                    if (m == null)
+                        m = new ConcurrentHashMap<>();
+                    m.put(alias, dispatcher);
+                    return m;
+                });
+            }
             this.cmdCount++;
         }
     }
@@ -208,8 +222,17 @@ public class CommandHandler {
     @Policy("handle on plugin thread")
     public boolean dispatch(String cmd, CommandSource source) {
         String[] split = cmd.split("\\s+");
-        CommandDispatcher runner = this.dispatchers.get(split[0].toLowerCase());
-        if (runner == null) {
+        String label = split[0].toLowerCase();
+        CommandDispatcher dispatcher;
+        int colon;
+        if ((colon = label.indexOf(':')) >= 0) {
+            String plugin = cmd.substring(0, colon);
+            label = cmd.substring(colon + 1);
+            dispatcher = this.pluginDispatchers.getOrDefault(plugin, Collections.emptyMap()).get(label);
+        } else {
+            dispatcher = this.dispatchers.get(label);
+        }
+        if (dispatcher == null) {
             return false;
         }
 
@@ -219,7 +242,7 @@ public class CommandHandler {
         }
 
         try {
-            runner.run(split[0], source, args);
+            dispatcher.run(split[0], source, args);
         } catch (Exception ex) {
             ex.printStackTrace();
             source.sendMessage(ChatComponent.create().setColor(ChatColor.RED).setText("An error occurred while executing the command."));
@@ -234,5 +257,14 @@ public class CommandHandler {
      */
     public Map<String, CommandDispatcher> getDispatchers() {
         return Collections.unmodifiableMap(this.dispatchers);
+    }
+
+    /**
+     * Obtains an immutable copy of the dispatchers map.
+     *
+     * @return a copy of the dispatchers map
+     */
+    public Map<String, Map<String, CommandDispatcher>> getPluginDispatchers() {
+        return Collections.unmodifiableMap(this.pluginDispatchers);
     }
 }
