@@ -87,9 +87,9 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
         registerTransformer(String.class, (s, p) -> s);
         registerTransformer(Object.class, (s, p) -> s);
         registerTransformer(Player.class, (s, p) -> {
-            ParamsAnnotations.PlayerExactMatch pem = p.getAnnotation(ParamsAnnotations.PlayerExactMatch.class);
-            ParamsAnnotations.PlayerFuzzyMatch pfm = p.getAnnotation(ParamsAnnotations.PlayerFuzzyMatch.class);
-            ParamsAnnotations.PlayerRegexMatch prm = p.getAnnotation(ParamsAnnotations.PlayerRegexMatch.class);
+            ParamsAnnotations.PlayerExactMatch pem = p != null ? p.getAnnotation(ParamsAnnotations.PlayerExactMatch.class) : null;
+            ParamsAnnotations.PlayerFuzzyMatch pfm = p != null ? p.getAnnotation(ParamsAnnotations.PlayerFuzzyMatch.class) : null;
+            ParamsAnnotations.PlayerRegexMatch prm = p != null ? p.getAnnotation(ParamsAnnotations.PlayerRegexMatch.class) : null;
             if (pem != null) {
                 return Server.getInstance().getPlayerExact(s);
             } else if (pfm != null) {

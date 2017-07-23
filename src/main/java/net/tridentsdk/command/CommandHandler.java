@@ -17,8 +17,10 @@
 package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import java.lang.reflect.Parameter;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiFunction;
 import lombok.Getter;
 import net.tridentsdk.command.constraint.ConstraintCommandDispatcher;
 import net.tridentsdk.command.constraint.ConstraintsAnnotations;
@@ -49,6 +51,15 @@ import net.tridentsdk.ui.chat.ChatComponent;
  */
 @NotThreadSafe
 public class CommandHandler {
+
+    public static <T> void registerTransformer(Class<T> clazz, BiFunction<String, Parameter, ?> transformer) {
+        ParamsCommandDispatcher.registerTransformer(clazz, transformer);
+    }
+
+    public static <T> T transform(String input, Parameter parameter, Class<T> clazz) throws Exception {
+        return ParamsCommandDispatcher.transform(input, parameter, clazz);
+    }
+
     /**
      * Initializer state which is set to 1 to indicate that
      * it was first used by and only by the server
