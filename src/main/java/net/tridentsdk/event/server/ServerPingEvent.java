@@ -57,8 +57,6 @@ public class ServerPingEvent implements Event {
 
         @NonNull
         private String name;
-
-        @NonNull
         private int protocol;
 
         public JsonObject asJson() {
