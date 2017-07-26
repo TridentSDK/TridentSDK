@@ -16,27 +16,29 @@
  */
 package net.tridentsdk.event.player;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
+import java.util.concurrent.atomic.AtomicBoolean;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.event.Event;
-import net.tridentsdk.event.Supertype;
-
-import javax.annotation.concurrent.Immutable;
+import net.tridentsdk.event.Cancellable;
 
 /**
- * Represents an event that is dispatched as a result of an
- * action taken by a player.
- *
- * @author TridentSDK
- * @since 0.4-alpha
+ * @author Nick Robson
  */
-@Immutable
-@Supertype
-@AllArgsConstructor
-public class PlayerEvent implements Event {
-    @Getter
-    @NonNull
-    private final Player player;
+public abstract class CancellablePlayerEvent extends PlayerEvent implements Cancellable {
+
+    private final AtomicBoolean cancelled = new AtomicBoolean(false);
+
+    public CancellablePlayerEvent(Player player) {
+        super(player);
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.cancelled.get();
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled.set(cancelled);
+    }
+
 }

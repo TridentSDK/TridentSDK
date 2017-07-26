@@ -16,27 +16,31 @@
  */
 package net.tridentsdk.event.player;
 
-import lombok.AllArgsConstructor;
+import java.util.Collection;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import net.tridentsdk.entity.living.Player;
-import net.tridentsdk.event.Event;
-import net.tridentsdk.event.Supertype;
-
-import javax.annotation.concurrent.Immutable;
+import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
- * Represents an event that is dispatched as a result of an
- * action taken by a player.
- *
- * @author TridentSDK
- * @since 0.4-alpha
+ * @author Nick Robson
  */
-@Immutable
-@Supertype
-@AllArgsConstructor
-public class PlayerEvent implements Event {
-    @Getter
+@Getter
+@Setter
+public class PlayerChatEvent extends CancellablePlayerEvent {
+
     @NonNull
-    private final Player player;
+    private ChatComponent chatComponent;
+
+    @NonNull
+    private Collection<Player> recipients;
+
+    public PlayerChatEvent(Player player, ChatComponent chatComponent, Collection<Player> recipients) {
+        super(player);
+        this.chatComponent = Objects.requireNonNull(chatComponent, "chat component cannot be null");
+        this.recipients = Objects.requireNonNull(recipients, "recipients cannot be null");
+    }
+
 }

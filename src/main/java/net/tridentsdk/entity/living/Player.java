@@ -161,6 +161,14 @@ public interface Player extends EntityLiving, CommandSource, Permissible {
     void kick(ChatComponent reason);
 
     /**
+     * Sends a message in chat as this player.
+     * Commands are not handled.
+     *
+     * @param msg The message.
+     */
+    void chat(String msg);
+
+    /**
      * Obtains the game mode which the player is currently
      * using.
      *

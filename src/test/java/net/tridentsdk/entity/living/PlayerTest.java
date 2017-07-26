@@ -138,6 +138,11 @@ public class PlayerTest {
         }
 
         @Override
+        public void chat(String msg) {
+
+        }
+
+        @Override
         public GameMode getGameMode() {
             return null;
         }
