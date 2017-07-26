@@ -1,3 +1,4 @@
 #!/bin/bash
 
-./gradlew clean install
+echo "Compiling without deployment"
+mvn clean install --settings target/travis/settings.xml

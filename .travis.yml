@@ -6,11 +6,10 @@ jdk:
   - oraclejdk8
   - openjdk8
 
-install: true
-
-sudo: false
-
 script: ./scripts/build.sh
+
+install: true
+sudo: false
 
 deploy:
   provider: script
@@ -19,11 +18,7 @@ deploy:
     branch: revamp
     jdk: openjdk8
 
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - .autoconf
+  - $HOME/.m2
