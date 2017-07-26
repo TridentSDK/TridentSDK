@@ -26,6 +26,37 @@ package net.tridentsdk.command;
 public abstract class CommandDispatcher {
 
     /**
+     * Gets whether or not this string is the same as the main command.
+     * (returns false even it is an alias)
+     *
+     * @param command the string to test against
+     *
+     * @return true iff the given parameter is the main command name.
+     */
+    public final boolean isMainCommand(String command) {
+        String main = getCommand().name();
+        return main != null && main.equalsIgnoreCase(command);
+    }
+
+    /**
+     * Gets whether or not this string is an alias of this command.
+     * (returns false even it is the main command name)
+     *
+     * @param command the string to test against
+     *
+     * @return true iff the given parameter is an alias of the command.
+     */
+    public final boolean isAlias(String command) {
+        String[] aliases = getCommand().aliases();
+        for (String string : aliases) {
+            if (string != null && string.equalsIgnoreCase(command)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Gets the associated fallback.
      *
      * @return The fallback.
