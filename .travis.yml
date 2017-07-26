@@ -11,13 +11,6 @@ script: ./scripts/build.sh
 install: true
 sudo: false
 
-deploy:
-  provider: script
-  script: scripts/deploy.sh
-  on:
-    branch: revamp
-    jdk: openjdk8
-
 cache:
   directories:
   - .autoconf
