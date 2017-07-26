@@ -588,6 +588,26 @@ public class Tag {
         /**
          * Obtains the key of the specified type at the
          * given key.
+         * <p>Use {@link #get(String)} to check for
+         * availability to {@code null} instead of this
+         * method.</p>
+         *
+         * @param key the key to obtain the tag at
+         * @return the tag, or the tag's default value
+         * if it cannot be {@code null}
+         */
+        public double getDouble(String key) {
+            Tag tag = this.entries.get(key);
+            if (tag == null) {
+                throw new IllegalArgumentException("No key found for: " + key);
+            }
+
+            return (double) tag.getObject();
+        }
+
+        /**
+         * Obtains the key of the specified type at the
+         * given key.
          *
          * <p>Use {@link #get(String)} to check for
          * availability to {@code null} instead of this

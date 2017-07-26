@@ -58,7 +58,12 @@ public interface EventController {
      * thread.</p>
      *
      * <p>This method passes events to their respective
-     * listeners without responding to them.</p>
+     * listeners without responding to them. This means that
+     * when this method complete, not all event handlers
+     * have been guaranteed to run yet. There still may be
+     * handlers that run after this method is called. If a
+     * response is needed from this method, use {@link
+     * #dispatch(Event, Consumer)}.</p>
      *
      * @param event the event to dispatch
      * @param <T> the event type
@@ -73,6 +78,12 @@ public interface EventController {
      * <p>This method dispatches events to their listeners
      * and processes the event when done in the plugin
      * thread.</p>
+     *
+     * <p>Only the callback is guaranteed to run once all
+     * event handlers are finished. Checking upon the event
+     * state prematurely (i.e. as soon as the method
+     * completes) may result in unexpected behavior. Always
+     * check for the event state in the callback.</p>
      *
      * @param event the event to dispatch
      * @param callback the callback to execute when the

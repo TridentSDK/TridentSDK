@@ -19,17 +19,32 @@ package net.tridentsdk.world.opt;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ConstantsTest {
     private final Weather weather = new Weather() {
         @Override
-        public boolean isRaining() {
-            return false;
+        public void clear() {
+
         }
 
         @Override
-        public void setRaining(boolean raining) {
+        public void beginRaining() {
+
+        }
+
+        @Override
+        public void beginThunder() {
+
+        }
+
+        @Override
+        public void stopThunder() {
+
+        }
+
+        @Override
+        public boolean isRaining() {
+            return false;
         }
 
         @Override
@@ -47,10 +62,6 @@ public class ConstantsTest {
         }
 
         @Override
-        public void setThundering(boolean thundering) {
-        }
-
-        @Override
         public int getThunderTime() {
             return 0;
         }
@@ -60,7 +71,8 @@ public class ConstantsTest {
         }
 
         @Override
-        public void setClear() {
+        public boolean isClear() {
+            return false;
         }
 
         @Override
@@ -72,15 +84,9 @@ public class ConstantsTest {
         public void setClearTime(int ticks) {
         }
     };
-
-    @Test
-    public void testWeather() {
-        assertTrue(this.weather.isClear());
-    }
-
     @Test
     public void testWorldBorder() {
-        assertEquals(0, WorldBorder.DEFAULT_CENTER.getX());
-        assertEquals(0, WorldBorder.DEFAULT_CENTER.getZ());
+        assertEquals(0, WorldBorder.DEFAULT_CENTER.getX(), 0);
+        assertEquals(0, WorldBorder.DEFAULT_CENTER.getZ(), 0);
     }
 }

@@ -27,7 +27,6 @@ import javax.annotation.concurrent.ThreadSafe;
  * @author TridentSDK
  * @since 0.5-alpha
  */
-// TODO: options string
 @ThreadSafe
 public interface GenOpts {
     /**
