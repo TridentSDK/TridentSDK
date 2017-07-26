@@ -30,13 +30,9 @@ import javax.annotation.concurrent.ThreadSafe;
  * <ul>
  *     <li>When a time "resets" it means that the time has
  *     reached {@code 0} and will be set to a random time
- *     (in jurisdiction of the implementation).</li>
- *     <li>Whatever weather condition already set cannot
- *     be overridden. That means that if it is raining,
- *     then if {@link #getClearTime()} reaches 0, it will be
- *     "reset" with no effect on the weather, and vice
- *     versa. Raining or clear weather can only occur once
- *     the other weather event is toggled.</li>
+ *     (in jurisdiction of the implementation)</li>
+ *     <li>The current weather only toggles when its timer
+ *     resets. Suppose that it is currently clear.</li>
  *     <li>Thundering is a special case because it may only
  *     happen if the weather is raining as well. However, if
  *     raining is toggled, then thundering is also toggled
@@ -45,10 +41,9 @@ import javax.annotation.concurrent.ThreadSafe;
  *     be reset without any weather effect if it is not
  *     raining.</li>
  *     <li>Setting the weather using
- *     {@link #setRaining(boolean)} or
- *     {@link #setThundering(boolean)} has no effect on the
- *     toggle times. It will simply cause the weather state
- *     to be toggled <em>as if</em> the time has reached
+ *     {@code #beginXYZ()} has no effect on the toggle
+ *     times. It will simply cause the weather state to be
+ *     toggled <em>as if</em> the time has reached
  *     {@code 0}, but this time is not reset.</li>
  *     <li>Anytime that {@link #RANDOM_TIME} is passed to
  *     the {@code setXYZTime(int)} methods, the time should
@@ -88,6 +83,27 @@ public interface Weather {
     int RANDOM_TIME = -1;
 
     /**
+     * Causes the weather to cease raining and thundering.
+     */
+    void clear();
+
+    /**
+     * Begins raining.
+     */
+    void beginRaining();
+
+    /**
+     * Begins thundering, if it is currently raining.
+     * Otherwise has no effect.
+     */
+    void beginThunder();
+
+    /**
+     * Ceases thundering.
+     */
+    void stopThunder();
+
+    /**
      * Whether or not the weather is currently raining in
      * the world
      *
@@ -95,14 +111,6 @@ public interface Weather {
      *         if it is not
      */
     boolean isRaining();
-
-    /**
-     * Sets the current rain state in the world to the given
-     * {@code boolean} until the next toggle.
-     *
-     * @param raining whether or not to rain
-     */
-    void setRaining(boolean raining);
 
     /**
      * Obtains the amount of ticks until the weather will be
@@ -131,14 +139,6 @@ public interface Weather {
     boolean isThundering();
 
     /**
-     * Sets whether the world is currently thundering to the
-     * given {@code boolean} until the toggle.
-     *
-     * @param thundering whether or not to thunder
-     */
-    void setThundering(boolean thundering);
-
-    /**
      * Obtains the amount of ticks until the weather will
      * be toggled to or from thundering and this time will
      * be reset.
@@ -161,17 +161,7 @@ public interface Weather {
      * @return {@code true} if the weather is clear,
      *         {@code false} if it isn't
      */
-    default boolean isClear() {
-        return !(this.isThundering() && this.isRaining());
-    }
-
-    /**
-     * Clears the weather, if not clear already.
-     *
-     * <p>This method causes raining and thundering to stop,
-     * resetting both of their times.</p>
-     */
-    void setClear();
+    boolean isClear();
 
     /**
      * Obtains the amount of ticks until clear weather is

@@ -16,7 +16,7 @@
  */
 package net.tridentsdk.world.opt;
 
-import net.tridentsdk.world.IntPair;
+import lombok.Data;
 
 import javax.annotation.concurrent.ThreadSafe;
 
@@ -31,11 +31,11 @@ public interface WorldBorder {
     /**
      * The default center of a world border
      */
-    IntPair DEFAULT_CENTER = IntPair.make(0, 0);
+    DoubleXZ DEFAULT_CENTER = new DoubleXZ(0, 0);
     /**
      * The default width between two sides of a world border
      */
-    int DEFAULT_SIZE = 60_000_000;
+    double DEFAULT_SIZE = 60_000_000;
     /**
      * The default distance for the safe zone and warning
      * zone
@@ -53,6 +53,25 @@ public interface WorldBorder {
     double DEFAULT_DAMAGE = 0.2;
 
     /**
+     * Represents a pair of doubles that signify the X and
+     * Z coordinates of a world border's center.
+     *
+     * @author TridentSDK
+     * @since 0.5-alpha
+     */
+    @Data
+    class DoubleXZ {
+        private final double x;
+        private final double z;
+    }
+
+    /**
+     * Initializes the world border, bringing it into view
+     * for players on this world.
+     */
+    void init();
+
+    /**
      * Obtains the center of the world border.
      *
      * <p>By default, returns an IntPair with the
@@ -60,7 +79,7 @@ public interface WorldBorder {
      *
      * @return the center of the border
      */
-    IntPair getCenter();
+    DoubleXZ getCenter();
 
     /**
      * Sets the center of the world border.
@@ -70,42 +89,68 @@ public interface WorldBorder {
      *
      * @param center the new border center
      */
-    void setCenter(IntPair center);
+    void setCenter(DoubleXZ center);
 
     /**
-     * Obtains the size of the world border.
+     * Obtains the <em>current</em> size of the world
+     * border.
      *
      * <p>The world border is always a square, the size is
      * the width and length across the border.</p>
      *
      * @return the border size
      */
-    int getSize();
+    double getSize();
+
+    /**
+     * Obtains the size that is expected to be of the world
+     * border once {@link #getTargetTime()} seconds have
+     * elapsed unless another call to either
+     * {@link #setSize(double, long)} or
+     * {@link #grow(double, long)} occurs during the time
+     * elapsed, in which case this method will return target
+     * size set by the newest invocation.
+     * <p>The value returned by this method may match that
+     * given by {@link #getSize()} if the world border has
+     * grown to the target size already.</p>
+     *
+     * @return the size that this border is set to grow
+     */
+    double getTargetSize();
+
+    /**
+     * Obtains the remaining time that it will take for
+     * {@link #getSize()} to reach {@link #getTargetSize()}
+     * in seconds, if the border size is not already at the
+     * target size.
+     *
+     * @return the time the border will take to shrink or
+     * grow in MILLISECONDS
+     */
+    long getTargetTime();
 
     /**
      * Sets the size of the world border.
      *
      * <p>One may use {@link #DEFAULT_SIZE} to reset the
      * border to its default size.</p>
-     *
-     * @param size the new size to set the world border to
-     * @param time the time in seconds that the border to
+     *  @param size the new size to set the world border to
+     * @param time the time in MILLIS that the border to
      *             grow or shrink to the new size, or
      *             {@code 0} to take immediate effect
      */
-    void setSize(int size, int time);
+    void setSize(double size, long time);
 
     /**
      * Grows the world border, or shrinks it given a
      * negative {@code delta}.
-     *
-     * @param delta the size to grow or shrink, if it is
+     *  @param delta the size to grow or shrink, if it is
      *              negative
-     * @param time the time in seconds that the border to
+     * @param time the time in MILLIS that the border to
      *             grow or shrink to the new size, or
      *             {@code 0} to take immediate effect
      */
-    void grow(int delta, int time);
+    void grow(double delta, long time);
 
     /**
      * Obtains the amount of damage being outside the world
@@ -136,7 +181,7 @@ public interface WorldBorder {
      * @return the amount of blocks players are safe before
      *         being dealt damage
      */
-    int getSafeZoneDistance();
+    double getSafeZoneDistance();
 
     /**
      * Sets the amount of blocks on the other side of the
@@ -175,9 +220,17 @@ public interface WorldBorder {
     void setWarnDistance(int dist);
 
     /**
-     * Obtains the time which a shrinking border will reach
-     * the player and thus warn them by tinting the screen
-     * red.
+     * Adds the given distance (negative numbers valid) to
+     * the distance away from the border which the player
+     * must be in order to be dealt damage.
+     *
+     * @param dist the distance to grow or shrink
+     */
+    void growWarnDistance(int dist);
+
+    /**
+     * Obtains the time in which the player will be warned
+     * before a shrinking world border will reach them.
      *
      * @return the time in seconds before the border will
      *         reach the player until they are warned
@@ -185,14 +238,12 @@ public interface WorldBorder {
     int getWarnTime();
 
     /**
-     * Sets the time before the world border will reach the
-     * player before they are warned.
+     * Sets the number of seconds before a shrinking world
+     * border will reach a player in which they will be
+     * warned.
      *
-     * <p>One may set this to
-     * {@link #DEFAULT_WARN_TIME} in order to reset
-     * the warning time.</p>
-     *
-     * @param time the time in seconds
+     * @param seconds the number of seconds until the border
+     * will reach the player before warning the player
      */
-    void setWarnTime(int time);
+    void setWarnTime(int seconds);
 }

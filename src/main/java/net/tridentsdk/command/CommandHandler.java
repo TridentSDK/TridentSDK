@@ -17,25 +17,25 @@
 package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
-import java.lang.reflect.Parameter;
-import java.util.LinkedHashMap;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import lombok.Getter;
 import net.tridentsdk.doc.Policy;
 import net.tridentsdk.logger.Logger;
-
-import javax.annotation.concurrent.NotThreadSafe;
-import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import net.tridentsdk.plugin.Plugin;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
+
+import javax.annotation.concurrent.NotThreadSafe;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * A command handler is a registry for command listeners,
@@ -261,8 +261,8 @@ public class CommandHandler {
         try {
             dispatcher.run(split[0], source, args);
         } catch (Exception ex) {
-            ex.printStackTrace();
             source.sendMessage(ChatComponent.create().setColor(ChatColor.RED).setText("An error occurred while executing the command."));
+            throw new RuntimeException(ex);
         }
         return true;
     }
