@@ -31,8 +31,6 @@ import javax.annotation.concurrent.ThreadSafe;
  *     <li>When a time "resets" it means that the time has
  *     reached {@code 0} and will be set to a random time
  *     (in jurisdiction of the implementation)</li>
- *     <li>The current weather only toggles when its timer
- *     resets. Suppose that it is currently clear.</li>
  *     <li>Thundering is a special case because it may only
  *     happen if the weather is raining as well. However, if
  *     raining is toggled, then thundering is also toggled

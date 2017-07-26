@@ -142,9 +142,10 @@ public interface WorldBorder {
     void setSize(double size, long time);
 
     /**
-     * Grows the world border, or shrinks it given a
-     * negative {@code delta}.
-     *  @param delta the size to grow or shrink, if it is
+     * Grows the <em>TARGET</em> size by the given amount,
+     * shrinking it for negative numbers.
+     *
+     * @param delta the size to grow or shrink, if it is
      *              negative
      * @param time the time in MILLIS that the border to
      *             grow or shrink to the new size, or

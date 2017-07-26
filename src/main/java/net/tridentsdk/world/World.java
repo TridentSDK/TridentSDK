@@ -54,10 +54,11 @@ public interface World {
     /**
      * Obtains the current world time in ticks.
      *
-     * <p>Each day-night cycle takes 23999 ticks to complete
-     * where 0 is sunrise and 24000 is the next day's 0.</p>
+     * <p>Each day-night cycle takes 24000 ticks to complete
+     * where 0 is sunrise and 23999 is the end of the day.
+     * </p>
      *
-     * @return the current 24000 tick time cycle time
+     * @return the time between 0 and 23999
      */
     int getTime();
 
