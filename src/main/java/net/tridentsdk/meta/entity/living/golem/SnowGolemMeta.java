@@ -25,6 +25,6 @@ public interface SnowGolemMeta extends GolemMeta {
 
     boolean hasPumpkinHead();
 
-    void setHasPumpkinHead(boolean hasPumpkinHead);
+    SnowGolemMeta setHasPumpkinHead(boolean hasPumpkinHead);
 
 }

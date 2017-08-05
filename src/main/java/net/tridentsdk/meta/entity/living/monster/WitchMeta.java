@@ -23,8 +23,8 @@ package net.tridentsdk.meta.entity.living.monster;
 // TODO - documentation
 public interface WitchMeta extends MonsterMeta {
 
-    boolean isAggressive();
+    boolean isDrinkingPotion();
 
-    void setAggressive(boolean aggressive);
+    WitchMeta setDrinkingPotion(boolean drinkingPotion);
 
 }

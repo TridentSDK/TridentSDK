@@ -29,26 +29,26 @@ public interface AreaEffectCloudMeta extends EntityMeta {
 
     float getRadius();
 
-    void setRadius(float radius);
+    AreaEffectCloudMeta setRadius(float radius);
 
     Color getColor();
 
-    void setColor(Color color);
+    AreaEffectCloudMeta setColor(Color color);
 
     boolean isSinglePoint();
 
-    void setSinglePoint(boolean singlePoint);
+    AreaEffectCloudMeta setSinglePoint(boolean singlePoint);
 
     int getParticleID();
 
-    void setParticleID(int id);
+    AreaEffectCloudMeta setParticleID(int id);
 
     int getParticleParameter1();
 
-    void setParticleParameter1(int par);
+    AreaEffectCloudMeta setParticleParameter1(int par);
 
     int getParticleParameter2();
 
-    void setParticleParameter2(int par);
+    AreaEffectCloudMeta setParticleParameter2(int par);
 
 }

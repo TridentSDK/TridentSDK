@@ -27,6 +27,6 @@ public interface TippedArrowMeta extends ArrowMeta {
 
     Color getColor();
 
-    void setColor(Color color);
+    TippedArrowMeta setColor(Color color);
 
 }

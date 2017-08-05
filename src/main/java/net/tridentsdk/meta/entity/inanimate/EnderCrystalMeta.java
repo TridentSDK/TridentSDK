@@ -28,10 +28,10 @@ public interface EnderCrystalMeta extends EntityMeta {
 
     Vector getBeamTarget();
 
-    void setBeamTarget(Vector beamTarget);
+    EnderCrystalMeta setBeamTarget(Vector beamTarget);
 
     boolean isShowBottom();
 
-    void setShowBottom(boolean showBottom);
+    EnderCrystalMeta setShowBottom(boolean showBottom);
 
 }

@@ -21,10 +21,10 @@ package net.tridentsdk.meta.entity.living.animal;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface OcelotMeta extends TameableAnimalMeta {
+public interface OcelotMeta extends TameableMeta {
 
     OcelotType getOcelotType();
 
-    void setOcelotType(OcelotType type);
+    OcelotMeta setOcelotType(OcelotType type);
 
 }

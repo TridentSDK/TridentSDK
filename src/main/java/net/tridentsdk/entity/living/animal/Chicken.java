@@ -1,0 +1,10 @@
+package net.tridentsdk.entity.living.animal;
+
+/**
+ * This class represents a Chicken.
+ *
+ * @author TridentSDK
+ * @since 0.3-alpha-DP
+ */
+public interface Chicken extends Animal {
+}

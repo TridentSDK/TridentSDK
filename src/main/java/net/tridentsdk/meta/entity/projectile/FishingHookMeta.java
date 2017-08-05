@@ -16,17 +16,15 @@
  */
 package net.tridentsdk.meta.entity.projectile;
 
-import net.tridentsdk.meta.entity.EntityMeta;
-
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface FishingHookMeta extends EntityMeta {
+public interface FishingHookMeta extends ProjectileMeta {
 
     int getHookedEntityID();
 
-    void setHookedEntityID(int entityID);
+    FishingHookMeta setHookedEntityID(int entityID);
 
 }

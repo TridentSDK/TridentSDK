@@ -27,10 +27,10 @@ public interface CommandMinecartMeta extends MinecartMeta {
 
     String getCommand();
 
-    void setCommand(String command);
+    CommandMinecartMeta setCommand(String command);
 
     ChatComponent getLastOutput();
 
-    void setLastOutput(ChatComponent component);
+    CommandMinecartMeta setLastOutput(ChatComponent component);
 
 }

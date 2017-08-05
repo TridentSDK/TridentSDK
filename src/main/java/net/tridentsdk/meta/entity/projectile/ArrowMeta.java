@@ -16,17 +16,15 @@
  */
 package net.tridentsdk.meta.entity.projectile;
 
-import net.tridentsdk.meta.entity.EntityMeta;
-
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface ArrowMeta extends EntityMeta {
+public interface ArrowMeta extends ProjectileMeta {
 
     boolean isCritical();
 
-    void setCritical(boolean critical);
+    ArrowMeta setCritical(boolean critical);
 
 }

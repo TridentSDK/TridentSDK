@@ -16,17 +16,17 @@
  */
 package net.tridentsdk.meta.entity.living.monster;
 
-import net.tridentsdk.meta.entity.living.InsentientEntityMeta;
+import net.tridentsdk.meta.entity.living.ComplexLivingMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface EnderDragonMeta extends InsentientEntityMeta{
+public interface EnderDragonMeta extends ComplexLivingMeta {
 
     int getDragonPhase();
 
-    void setDragonPhase(int phase);
+    EnderDragonMeta setDragonPhase(int phase);
 
 }

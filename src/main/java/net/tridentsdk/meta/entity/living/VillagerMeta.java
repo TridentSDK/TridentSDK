@@ -21,10 +21,10 @@ package net.tridentsdk.meta.entity.living;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface VillagerMeta extends AgeableMeta{
+public interface VillagerMeta extends AgeableMeta {
 
     VillagerProfession getProfession();
 
-    void setProfession(VillagerProfession profession);
+    VillagerMeta setProfession(VillagerProfession profession);
 
 }

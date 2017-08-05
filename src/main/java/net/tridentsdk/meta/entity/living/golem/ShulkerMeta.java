@@ -17,6 +17,7 @@
 package net.tridentsdk.meta.entity.living.golem;
 
 import net.tridentsdk.base.BlockDirection;
+import net.tridentsdk.base.DyeColor;
 import net.tridentsdk.base.Vector;
 
 /**
@@ -28,14 +29,18 @@ public interface ShulkerMeta {
 
     BlockDirection getFacingDirection();
 
-    void setFacingDirection(BlockDirection direction);
+    IronGolemMeta setFacingDirection(BlockDirection direction);
 
     Vector getAttachmentPosition();
 
-    void setAttachmentPosition(Vector position);
+    IronGolemMeta setAttachmentPosition(Vector position);
 
     byte getShieldHeight();
 
-    void setShieldHeight(byte height);
+    IronGolemMeta setShieldHeight(byte height);
+
+    DyeColor getColor();
+
+    ShulkerMeta setColor(DyeColor color);
 
 }

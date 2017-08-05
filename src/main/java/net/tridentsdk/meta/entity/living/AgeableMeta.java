@@ -23,8 +23,12 @@ package net.tridentsdk.meta.entity.living;
 // TODO - documentation
 public interface AgeableMeta extends CreatureMeta {
 
+    int getAge();
+
+    AgeableMeta setAge(int age);
+
     boolean isBaby();
 
-    void setBaby(boolean baby);
+    AgeableMeta setBaby(boolean baby);
 
 }

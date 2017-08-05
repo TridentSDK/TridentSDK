@@ -16,17 +16,17 @@
  */
 package net.tridentsdk.meta.entity.living.monster;
 
-import net.tridentsdk.meta.entity.living.InsentientEntityMeta;
+import net.tridentsdk.meta.entity.living.InsentientMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface SlimeMeta extends InsentientEntityMeta {
+public interface SlimeMeta extends InsentientMeta {
 
     int getSize();
 
-    void setSize(int size);
+    SlimeMeta setSize(int size);
 
 }

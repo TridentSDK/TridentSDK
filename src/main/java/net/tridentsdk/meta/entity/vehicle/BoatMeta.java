@@ -27,26 +27,26 @@ public interface BoatMeta extends EntityMeta {
 
     int getTimeSinceLastHit();
 
-    void setTimeSinceLastHit(int timeSinceLastHit);
+    BoatMeta setTimeSinceLastHit(int timeSinceLastHit);
 
     int getForwardDirection();
 
-    void setForwardDirection(int forwardDirection);
+    BoatMeta setForwardDirection(int forwardDirection);
 
     float getDamageTaken();
 
-    void setDamageTaken(float damageTaken);
+    BoatMeta setDamageTaken(float damageTaken);
 
     int getBoatType();
 
-    void setBoatType(int boatType);
+    BoatMeta setBoatType(int boatType);
 
     boolean isLeftPaddleTurning();
 
-    void setLeftPaddleTurning(boolean leftPaddleTurning);
+    BoatMeta setLeftPaddleTurning(boolean leftPaddleTurning);
 
     boolean isRightPaddleTurning();
 
-    void setRightPaddleTurning(boolean rightPaddleTurning);
+    BoatMeta setRightPaddleTurning(boolean rightPaddleTurning);
 
 }

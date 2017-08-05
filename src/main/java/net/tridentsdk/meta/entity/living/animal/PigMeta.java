@@ -25,6 +25,6 @@ public interface PigMeta extends AnimalMeta {
 
     boolean isSaddled();
 
-    void setSaddled(boolean saddle);
+    PigMeta setSaddled(boolean saddle);
 
 }

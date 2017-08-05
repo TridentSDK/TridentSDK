@@ -25,14 +25,14 @@ public interface EndermanMeta extends MonsterMeta {
 
     int getCarriedBlockID();
 
-    void setCarriedBlockID(int blockID);
+    EndermanMeta setCarriedBlockID(int blockID);
 
     int getCarriedBlockData();
 
-    void setCarriedBlockData(int blockData);
+    EndermanMeta setCarriedBlockData(int blockData);
 
     boolean isScreaming();
 
-    void setScreaming(boolean screaming);
+    EndermanMeta setScreaming(boolean screaming);
 
 }

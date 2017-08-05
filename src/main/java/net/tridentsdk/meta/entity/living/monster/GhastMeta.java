@@ -21,10 +21,10 @@ package net.tridentsdk.meta.entity.living.monster;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface GhastMeta extends FlyingEntityMeta {
+public interface GhastMeta extends FlyingMeta {
 
     boolean isAttacking();
 
-    void setAttacking(boolean attacking);
+    GhastMeta setAttacking(boolean attacking);
 
 }

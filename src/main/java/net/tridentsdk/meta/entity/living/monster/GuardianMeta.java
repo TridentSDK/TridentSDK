@@ -16,6 +16,8 @@
  */
 package net.tridentsdk.meta.entity.living.monster;
 
+import net.tridentsdk.entity.Entity;
+
 /**
  * @author TridentSDK
  * @since 0.5-alpha
@@ -25,14 +27,10 @@ public interface GuardianMeta extends MonsterMeta {
 
     boolean isRetractingSpikes();
 
-    void setRetractingSpikes(boolean retractingSpikes);
+    GuardianMeta setRetractingSpikes(boolean retractingSpikes);
 
-    boolean isElderly();
+    Entity getTargetEntity();
 
-    void setElderly(boolean elderly);
-
-    int getTargetEntityID();
-
-    void setTargetEntityID();
+    GuardianMeta setTargetEntity();
 
 }

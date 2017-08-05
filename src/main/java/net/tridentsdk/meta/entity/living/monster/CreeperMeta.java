@@ -25,14 +25,14 @@ public interface CreeperMeta extends MonsterMeta {
 
     int getCreeperState();
 
-    void setCreeperState(int state);
+    CreeperMeta setCreeperState(int state);
 
     boolean isCharged();
 
-    void setCharged(boolean charged);
+    CreeperMeta setCharged(boolean charged);
 
     boolean isIgnited();
 
-    void setIgnited(boolean ignited);
+    CreeperMeta setIgnited(boolean ignited);
 
 }

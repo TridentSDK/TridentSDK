@@ -25,6 +25,6 @@ public interface FurnaceMinecartMeta extends MinecartMeta {
 
     boolean isPowered();
 
-    void setPowered(boolean powered);
+    FurnaceMinecartMeta setPowered(boolean powered);
 
 }

@@ -27,6 +27,6 @@ public interface TNTPrimedMeta extends EntityMeta {
 
     int getFuseTime();
 
-    void setFuseTime(int fuseTime);
+    TNTPrimedMeta setFuseTime(int fuseTime);
 
 }

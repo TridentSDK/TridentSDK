@@ -21,10 +21,10 @@ package net.tridentsdk.meta.entity.projectile;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface WitherSkullMeta extends FireballMeta {
+public interface WitherSkullMeta extends ProjectileMeta {
 
     boolean isInvulnerable();
 
-    void setInvulnerable(boolean invulnerable);
+    WitherSkullMeta setInvulnerable(boolean invulnerable);
 
 }

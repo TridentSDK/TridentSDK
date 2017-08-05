@@ -42,7 +42,7 @@ import java.util.UUID;
  * @since 0.3-alpha-DP
  */
 @ThreadSafe
-public interface Player extends EntityLiving, CommandSource {
+public interface Player extends Living, CommandSource {
     /**
      * The default flying speed for a player
      */

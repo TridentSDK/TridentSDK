@@ -16,15 +16,17 @@
  */
 package net.tridentsdk.meta.entity.living.animal;
 
+import net.tridentsdk.meta.entity.living.AmbientMeta;
+
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface BatMeta extends AmbientEntityMeta {
+public interface BatMeta extends AmbientMeta {
 
     boolean isHanging();
 
-    void setHanging(boolean hanging);
+    BatMeta setHanging(boolean hanging);
 
 }

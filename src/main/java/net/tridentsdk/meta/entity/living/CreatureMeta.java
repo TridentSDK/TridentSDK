@@ -21,5 +21,5 @@ package net.tridentsdk.meta.entity.living;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface CreatureMeta extends InsentientEntityMeta {
+public interface CreatureMeta extends InsentientMeta {
 }

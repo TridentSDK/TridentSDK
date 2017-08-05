@@ -27,6 +27,6 @@ public interface BlazeMeta extends MonsterMeta {
     boolean isOnFire();
 
     @Override
-    void setOnFire(boolean onFire);
+    BlazeMeta setOnFire(boolean onFire);
 
 }

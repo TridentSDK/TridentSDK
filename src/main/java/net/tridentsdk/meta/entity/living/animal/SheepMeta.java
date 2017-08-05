@@ -27,10 +27,10 @@ public interface SheepMeta extends AnimalMeta {
 
     DyeColor getSheepColor();
 
-    void setSheepColor(DyeColor color);
+    SheepMeta setSheepColor(DyeColor color);
 
     boolean isSheared();
 
-    void setSheared(boolean sheared);
+    SheepMeta setSheared(boolean sheared);
 
 }

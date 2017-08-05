@@ -25,6 +25,6 @@ public interface RabbitMeta extends AnimalMeta {
 
     RabbitType getRabbitType();
 
-    void setRabbitType(RabbitType type);
+    RabbitMeta setRabbitType(RabbitType type);
 
 }

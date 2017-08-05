@@ -25,6 +25,6 @@ public interface IronGolemMeta extends GolemMeta {
 
     boolean isPlayerCreated();
 
-    void setPlayerCreated(boolean playerCreated);
+    IronGolemMeta setPlayerCreated(boolean playerCreated);
 
 }

@@ -23,18 +23,18 @@ import net.tridentsdk.base.DyeColor;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface WolfMeta extends TameableAnimalMeta {
+public interface WolfMeta extends TameableMeta {
 
     float getDamageTaken();
 
-    void setDamageTaken(float damageTaken);
+    WolfMeta setDamageTaken(float damageTaken);
 
     boolean isBegging();
 
-    void setBegging(boolean begging);
+    WolfMeta setBegging(boolean begging);
 
     DyeColor getCollarColor();
 
-    void setCollarColor(DyeColor color);
+    WolfMeta setCollarColor(DyeColor color);
 
 }

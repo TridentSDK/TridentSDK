@@ -23,54 +23,50 @@ import java.util.UUID;
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface HorseMeta extends AnimalMeta {
-
-    boolean isTame();
-
-    void setTame(boolean tame);
+public interface HorseMeta extends TameableMeta {
 
     boolean isSaddled();
 
-    void setSaddled(boolean saddled);
+    HorseMeta setSaddled(boolean saddled);
 
     boolean hasChest();
 
-    void setHasChest(boolean hasChest);
+    HorseMeta setHasChest(boolean hasChest);
 
     boolean isBred();
 
-    void setBred(boolean isBred);
+    HorseMeta setBred(boolean isBred);
 
     boolean isHorseEating();
 
-    void setHorseEating(boolean eating);
+    HorseMeta setHorseEating(boolean eating);
 
     boolean isRearing();
 
-    void setRearing(boolean rearing);
+    HorseMeta setRearing(boolean rearing);
 
     boolean isMouthOpen();
 
-    void setMouthOpen(boolean mouthOpen);
+    HorseMeta setMouthOpen(boolean mouthOpen);
 
     HorseType getHorseType();
 
-    void setHorseType(HorseType type);
+    HorseMeta setHorseType(HorseType type);
 
     HorseColor getHorseColor();
 
-    void setHorseColor(HorseColor color);
+    HorseMeta setHorseColor(HorseColor color);
 
     HorseMarkings getHorseMarkings();
 
-    void setHorseMarkings(HorseMarkings markings);
+    HorseMeta setHorseMarkings(HorseMarkings markings);
 
     UUID getOwner();
 
-    void setOwner(UUID uuid);
+    HorseMeta setOwner(UUID uuid);
 
     HorseArmor getHorseArmor();
 
-    void setHorseArmor(HorseArmor armor);
+    HorseMeta setHorseArmor(HorseArmor armor);
 
 }

@@ -25,6 +25,6 @@ public interface PolarBearMeta extends AnimalMeta {
 
     boolean isStandingUp();
 
-    void setStandingUp(boolean standing);
+    PolarBearMeta setStandingUp(boolean standing);
 
 }

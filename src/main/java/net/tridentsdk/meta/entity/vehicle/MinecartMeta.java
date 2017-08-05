@@ -27,30 +27,30 @@ public interface MinecartMeta extends EntityMeta {
 
     int getShakingPower();
 
-    void setShakingPower(int shakingPower);
+    MinecartMeta setShakingPower(int shakingPower);
 
     int getShakingDirection();
 
-    void setShakingDirection(int shakingDirection);
+    MinecartMeta setShakingDirection(int shakingDirection);
 
     float getShakingMultiplier();
 
-    void setShakingMultiplier(boolean shakingMultiplier);
+    MinecartMeta setShakingMultiplier(boolean shakingMultiplier);
 
     int getMinecartBlockID();
 
-    void setMinecartBlockID(int blockID);
+    MinecartMeta setMinecartBlockID(int blockID);
 
     int getMinecartBlockData();
 
-    void setMinecartBlockData(int blockData);
+    MinecartMeta setMinecartBlockData(int blockData);
 
     int getMinecartBlockY();
 
-    void setMinecartBlockY(int blockY);
+    MinecartMeta setMinecartBlockY(int blockY);
 
     boolean isShowBlock();
 
-    void setShowBlock(boolean showBlock);
+    MinecartMeta setShowBlock(boolean showBlock);
 
 }

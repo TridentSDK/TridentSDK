@@ -25,18 +25,18 @@ public interface WitherMeta extends MonsterMeta {
 
     int getFirstHeadTarget();
 
-    void setFirstHeadTarget(int target);
+    WitherMeta setFirstHeadTarget(int target);
 
     int getSecondHeadTarget();
 
-    void setSecondHeadTarget(int target);
+    WitherMeta setSecondHeadTarget(int target);
 
     int getThirdHeadTarget();
 
-    void setThirdHeadTarget(int target);
+    WitherMeta setThirdHeadTarget(int target);
 
     int getInvulnerableTime();
 
-    void setInvulnerableTime(int invulnerableTime);
+    WitherMeta setInvulnerableTime(int invulnerableTime);
 
 }

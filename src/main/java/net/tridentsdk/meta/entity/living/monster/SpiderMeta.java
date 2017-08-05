@@ -25,6 +25,6 @@ public interface SpiderMeta extends MonsterMeta {
 
     boolean isClimbing();
 
-    void setClimbing(boolean climbing);
+    SpiderMeta setClimbing(boolean climbing);
 
 }

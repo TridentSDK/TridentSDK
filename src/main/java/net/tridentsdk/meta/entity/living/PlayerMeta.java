@@ -16,55 +16,65 @@
  */
 package net.tridentsdk.meta.entity.living;
 
+import net.tridentsdk.entity.Entity;
+
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface PlayerMeta extends LivingEntityMeta {
+public interface PlayerMeta extends LivingMeta {
 
     float getAdditionalHearts();
 
-    void setAdditionalHearts(float hearts);
+    PlayerMeta setAdditionalHearts(float hearts);
 
     int getScore();
 
-    void setScore(int score);
+    PlayerMeta setScore(int score);
 
     byte getSkinFlags();
 
-    void setSkinFlags(byte skinFlags);
+    PlayerMeta setSkinFlags(byte skinFlags);
 
     boolean isCapeEnabled();
 
-    void setCapeEnabled(boolean enabled);
+    PlayerMeta setCapeEnabled(boolean enabled);
 
     boolean isJacketEnabled();
 
-    void setJacketEnabled(boolean enabled);
+    PlayerMeta setJacketEnabled(boolean enabled);
 
     boolean isLeftSleeveEnabled();
 
-    void setLeftSleeveEnabled(boolean enabled);
+    PlayerMeta setLeftSleeveEnabled(boolean enabled);
 
     boolean isRightSleeveEnabled();
 
-    void setRightSleeveEnabled(boolean enabled);
+    PlayerMeta setRightSleeveEnabled(boolean enabled);
 
     boolean isLeftLegPantsEnabled();
 
-    void setLeftLegPantsEnabled(boolean enabled);
+    PlayerMeta setLeftLegPantsEnabled(boolean enabled);
 
     boolean isRightLegPantsEnabled();
 
-    void setRightLegPantsEnabled(boolean enabled);
+    PlayerMeta setRightLegPantsEnabled(boolean enabled);
 
     boolean isHatEnabled();
 
-    void setHatEnabled(boolean enabled);
+    PlayerMeta setHatEnabled(boolean enabled);
 
     boolean isLeftHandMain();
 
-    void setLeftHandMain(boolean main);
+    PlayerMeta setLeftHandMain(boolean main);
+
+    Entity getLeftShoulderEntity();
+
+    PlayerMeta setLeftShoulderEntity(Entity parrot);
+
+    Entity getRightShoulderEntity();
+
+    PlayerMeta setRightShoulderEntity(Entity parrot);
 
 }

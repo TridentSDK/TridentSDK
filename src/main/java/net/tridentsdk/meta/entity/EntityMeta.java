@@ -25,49 +25,49 @@ public interface EntityMeta {
 
     boolean isOnFire();
 
-    void setOnFire(boolean onFire);
+    EntityMeta setOnFire(boolean onFire);
 
     boolean isCrouched();
 
-    void setCrouched(boolean crouched);
+    EntityMeta setCrouched(boolean crouched);
 
     boolean isSprinting();
 
-    void setSprinting(boolean sprinting);
+    EntityMeta setSprinting(boolean sprinting);
 
     boolean isEating();
 
-    void setEating(boolean eating);
+    EntityMeta setEating(boolean eating);
 
     boolean isInvisible();
 
-    void setInvisible(boolean invisible);
+    EntityMeta setInvisible(boolean invisible);
 
     boolean isGlowing();
 
-    void setGlowing(boolean glowing);
+    EntityMeta setGlowing(boolean glowing);
 
     boolean isUsingElytra();
 
-    void setUsingElytra(boolean usingElytra);
+    EntityMeta setUsingElytra(boolean usingElytra);
 
     int getAir();
 
-    void setAir(int air);
+    EntityMeta setAir(int air);
 
     String getCustomName();
 
-    void setCustomName(String name);
+    EntityMeta setCustomName(String name);
 
     boolean isCustomNameVisible();
 
-    void setCustomNameVisible(boolean visible);
+    EntityMeta setCustomNameVisible(boolean visible);
 
     boolean isSilent();
 
-    void setSilent(boolean silent);
+    EntityMeta setSilent(boolean silent);
 
     boolean isNoGravity();
 
-    void setNoGravity(boolean noGravity);
+    EntityMeta setNoGravity(boolean noGravity);
 }

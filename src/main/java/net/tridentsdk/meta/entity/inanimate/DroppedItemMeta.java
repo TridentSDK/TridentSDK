@@ -27,6 +27,6 @@ public interface DroppedItemMeta extends EntityMeta {
 
     // Slot getItem(); TODO
 
-    // void setItem(Slot item); TODO
+    // DroppedItemMeta setItem(Slot item); TODO
 
 }

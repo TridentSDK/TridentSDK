@@ -17,53 +17,53 @@
 package net.tridentsdk.meta.entity.inanimate;
 
 import net.tridentsdk.base.Vector;
-import net.tridentsdk.meta.entity.living.LivingEntityMeta;
+import net.tridentsdk.meta.entity.living.LivingMeta;
 
 /**
  * @author TridentSDK
  * @since 0.5-alpha
  */
 // TODO - documentation
-public interface ArmorStandMeta extends LivingEntityMeta {
+public interface ArmorStandMeta extends LivingMeta {
 
     boolean isSmall();
 
-    void setSmall(boolean small);
+    ArmorStandMeta setSmall(boolean small);
 
     boolean hasArms();
 
-    void setHasArms(boolean hasArms);
+    ArmorStandMeta setHasArms(boolean hasArms);
 
     boolean hasBasePlate();
 
-    void setHasBasePlate(boolean basePlate);
+    ArmorStandMeta setHasBasePlate(boolean basePlate);
 
     boolean hasMarker();
 
-    void setHasMarker(boolean hasMarker);
+    ArmorStandMeta setHasMarker(boolean hasMarker);
 
     Vector getHeadRotation();
 
-    void setHeadRotation(Vector rotation);
+    ArmorStandMeta setHeadRotation(Vector rotation);
 
     Vector getBodyRotation();
 
-    void setBodyRotation(Vector rotation);
+    ArmorStandMeta setBodyRotation(Vector rotation);
 
     Vector getLeftArmRotation();
 
-    void setLeftArmRotation(Vector rotation);
+    ArmorStandMeta setLeftArmRotation(Vector rotation);
 
     Vector getRightArmRotation();
 
-    void setRightArmRotation(Vector rotation);
+    ArmorStandMeta setRightArmRotation(Vector rotation);
 
     Vector getLeftLegRotation();
 
-    void setLeftLegRotation(Vector rotation);
+    ArmorStandMeta setLeftLegRotation(Vector rotation);
 
     Vector getRightLegRotation();
 
-    void setRightLegRotation(Vector rotation);
+    ArmorStandMeta setRightLegRotation(Vector rotation);
 
 }
