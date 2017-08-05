@@ -18,7 +18,7 @@ package net.tridentsdk.event.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
@@ -28,7 +28,7 @@ import net.tridentsdk.ui.chat.ChatComponent;
  *
  * <p>This event is not cancellable because removing a
  * player requires more logic that is out of scope of this
- * event. Use {@link Player#kick(ChatComponent)} for this.
+ * event. Use {@link EntityPlayer#kick(ChatComponent)} for this.
  * </p>
  *
  * @author TridentSDK
@@ -39,7 +39,7 @@ public class PlayerJoinEvent extends PlayerEvent {
 
     @Setter private ChatComponent message;
 
-    public PlayerJoinEvent(Player player, ChatComponent message) {
+    public PlayerJoinEvent(EntityPlayer player, ChatComponent message) {
         super(player);
         this.message = message;
     }

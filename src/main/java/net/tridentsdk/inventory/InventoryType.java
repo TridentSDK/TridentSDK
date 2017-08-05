@@ -32,7 +32,7 @@ public enum InventoryType {
      * only, no explicit type for an inventory of this type
      * may be created sent by the server.
      */
-    PLAYER("Player"),
+    PLAYER("EntityPlayer"),
     CONTAINER,
     CHEST,
     CRAFTING_TABLE,

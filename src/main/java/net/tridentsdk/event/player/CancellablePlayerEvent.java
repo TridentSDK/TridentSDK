@@ -17,7 +17,8 @@
 package net.tridentsdk.event.player;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import net.tridentsdk.entity.living.Player;
+
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.event.Cancellable;
 
 /**
@@ -27,7 +28,7 @@ public abstract class CancellablePlayerEvent extends PlayerEvent implements Canc
 
     private final AtomicBoolean cancelled = new AtomicBoolean(false);
 
-    public CancellablePlayerEvent(Player player) {
+    public CancellablePlayerEvent(EntityPlayer player) {
         super(player);
     }
 

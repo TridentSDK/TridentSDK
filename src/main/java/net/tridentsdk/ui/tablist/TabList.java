@@ -17,7 +17,7 @@
 package net.tridentsdk.ui.tablist;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 import java.util.Collection;
@@ -114,21 +114,21 @@ public interface TabList {
      *
      * @return list of tablist users
      */
-    Collection<Player> getUserList();
+    Collection<EntityPlayer> getUserList();
 
     /**
      * Subscribes a player as a user of this tablist
      *
      * @param player the player to subscribe
      */
-    void subscribe(Player player);
+    void subscribe(EntityPlayer player);
 
     /**
      * Unsubscribes a player as a user of this tablist
      *
      * @param player the player to unsubscribe
      */
-    void unsubscribe(Player player);
+    void unsubscribe(EntityPlayer player);
 
     /**
      * Updates this tablist, sending it to all subscribed players.

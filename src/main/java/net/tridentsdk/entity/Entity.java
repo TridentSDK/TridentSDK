@@ -28,7 +28,7 @@ import javax.annotation.concurrent.ThreadSafe;
  * position, world, etc...
  *
  * @author TridentSDK
- * @since 0.3-alpha-DP
+ * @since 0.5-alpha
  */
 @ThreadSafe
 public interface Entity {

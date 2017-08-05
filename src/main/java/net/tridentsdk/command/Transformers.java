@@ -26,7 +26,7 @@ import net.tridentsdk.Server;
 import net.tridentsdk.command.annotation.PlayerExactMatch;
 import net.tridentsdk.command.annotation.PlayerFuzzyMatch;
 import net.tridentsdk.command.annotation.PlayerRegexMatch;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 
 /**
  * @author Nick Robson
@@ -89,7 +89,7 @@ public class Transformers {
         registerTransformer(Boolean.class, (s, p) -> s.length() > 0 && (s.charAt(0) == 'y' || s.charAt(0) == 't'));
         registerTransformer(String.class, (s, p) -> s);
         registerTransformer(Object.class, (s, p) -> s);
-        registerTransformer(Player.class, (s, p) -> {
+        registerTransformer(EntityPlayer.class, (s, p) -> {
             PlayerExactMatch pem = p != null ? p.getAnnotation(PlayerExactMatch.class) : null;
             PlayerFuzzyMatch pfm = p != null ? p.getAnnotation(PlayerFuzzyMatch.class) : null;
             PlayerRegexMatch prm = p != null ? p.getAnnotation(PlayerRegexMatch.class) : null;

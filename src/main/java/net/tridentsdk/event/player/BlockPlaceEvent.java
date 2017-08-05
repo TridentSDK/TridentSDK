@@ -19,7 +19,7 @@ package net.tridentsdk.event.player;
 import lombok.Getter;
 import lombok.Setter;
 import net.tridentsdk.base.Block;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.event.Cancellable;
 import net.tridentsdk.inventory.Item;
 
@@ -47,7 +47,7 @@ public class BlockPlaceEvent extends PlayerEvent implements Cancellable {
     @Getter
     private boolean cancelled;
 
-    public BlockPlaceEvent(Player player, Block previous, Item place) {
+    public BlockPlaceEvent(EntityPlayer player, Block previous, Item place) {
         super(player);
         this.previous = previous;
         this.itemToPlace = place;

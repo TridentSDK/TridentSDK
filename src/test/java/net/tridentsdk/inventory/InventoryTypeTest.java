@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class InventoryTypeTest {
     @Test
     public void testTypes() {
-        String types = "Player\n" +
+        String types = "EntityPlayer\n" +
                 "minecraft:container\n" +
                 "minecraft:chest\n" +
                 "minecraft:crafting_table\n" +

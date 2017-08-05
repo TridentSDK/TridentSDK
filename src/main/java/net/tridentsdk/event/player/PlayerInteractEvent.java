@@ -18,7 +18,7 @@ package net.tridentsdk.event.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.event.Cancellable;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -36,7 +36,7 @@ public class PlayerInteractEvent extends PlayerEvent implements Cancellable {
     @Setter
     private boolean cancelled;
 
-    public PlayerInteractEvent(Player player) {
+    public PlayerInteractEvent(EntityPlayer player) {
         super(player);
     }
 }

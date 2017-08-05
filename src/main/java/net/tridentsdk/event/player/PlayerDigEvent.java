@@ -19,7 +19,7 @@ package net.tridentsdk.event.player;
 import lombok.Getter;
 import lombok.Setter;
 import net.tridentsdk.base.Block;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.event.Cancellable;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -42,7 +42,7 @@ public class PlayerDigEvent extends PlayerEvent implements Cancellable {
     @Setter
     private boolean cancelled;
 
-    public PlayerDigEvent(Player player, Block block) {
+    public PlayerDigEvent(EntityPlayer player, Block block) {
         super(player);
         this.block = block;
     }

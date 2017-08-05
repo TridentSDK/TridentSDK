@@ -19,7 +19,7 @@ package net.tridentsdk.world;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Position;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.world.opt.*;
 
 import javax.annotation.Nonnull;
@@ -68,7 +68,7 @@ public interface World {
      * @return the collection of players that inhabit this
      * world
      */
-    Set<? extends Player> getPlayers();
+    Set<? extends EntityPlayer> getPlayers();
 
     /**
      * Obtains a stream of the entities, including players,

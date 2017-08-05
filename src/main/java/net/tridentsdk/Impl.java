@@ -20,7 +20,7 @@ import net.tridentsdk.base.Substance;
 import net.tridentsdk.config.Config;
 import net.tridentsdk.doc.Internal;
 import net.tridentsdk.doc.Policy;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.inventory.Inventory;
 import net.tridentsdk.inventory.InventoryType;
 import net.tridentsdk.inventory.Item;
@@ -155,13 +155,13 @@ public final class Impl {
 
         // Players
         @Nonnull
-        Map<String, Player> findByName(String name);
+        Map<String, EntityPlayer> findByName(String name);
         @Nullable
-        Player getByName(String name);
+        EntityPlayer getByName(String name);
 
         // Channels
-        PluginChannel open(String name, Player... targets);
-        PluginChannel open(String name, Collection<? extends Player> players);
+        PluginChannel open(String name, EntityPlayer... targets);
+        PluginChannel open(String name, Collection<? extends EntityPlayer> players);
         PluginChannel openAll(String name);
         PluginChannel tryOpen(String name);
         PluginChannel get(String name);

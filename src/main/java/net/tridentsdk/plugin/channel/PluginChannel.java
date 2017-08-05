@@ -17,7 +17,7 @@
 package net.tridentsdk.plugin.channel;
 
 import net.tridentsdk.Impl;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
@@ -69,7 +69,7 @@ public interface PluginChannel {
      * @return the new plugin channel, or an existing
      * channel with the players in the given method
      */
-    static PluginChannel open(String name, Player... targets) {
+    static PluginChannel open(String name, EntityPlayer... targets) {
         return Impl.get().open(name, targets);
     }
 
@@ -92,7 +92,7 @@ public interface PluginChannel {
      * @return the new plugin channel, or an existing
      * channel with the players in the given method
      */
-    static PluginChannel open(String name, Collection<Player> targets) {
+    static PluginChannel open(String name, Collection<EntityPlayer> targets) {
         return Impl.get().open(name, targets);
     }
 
@@ -158,7 +158,7 @@ public interface PluginChannel {
      * @param function returs {@code true} for players that
      * should be removed, {@code false} for those that stay
      */
-    void closeFor(Function<Player, Boolean> function);
+    void closeFor(Function<EntityPlayer, Boolean> function);
 
     /**
      * Closes the channel for the players that are contained
@@ -170,7 +170,7 @@ public interface PluginChannel {
      * @return {@code true} if all players in the iterable
      * are removed
      */
-    boolean closeFor(Collection<Player> players);
+    boolean closeFor(Collection<EntityPlayer> players);
 
     /**
      * Closes the channel for players that are contained in
@@ -198,7 +198,7 @@ public interface PluginChannel {
      *
      * @param recipients the players to add
      */
-    void addRecipient(Player... recipients);
+    void addRecipient(EntityPlayer... recipients);
 
     /**
      * Adds the given recipient(s) to the list of players
@@ -207,7 +207,7 @@ public interface PluginChannel {
      *
      * @param recipients the players to add
      */
-    void addRecipient(Collection<? extends Player> recipients);
+    void addRecipient(Collection<? extends EntityPlayer> recipients);
 
     /**
      * Obtains the recipients that have been registered in
@@ -216,7 +216,7 @@ public interface PluginChannel {
      * @return a collection of players that are on the
      * recipients list
      */
-    Collection<Player> getRecipients();
+    Collection<EntityPlayer> getRecipients();
 
     /**
      * Sends all the recipients of this plugin channel the

@@ -19,7 +19,7 @@ package net.tridentsdk.command;
 import net.tridentsdk.Server;
 import net.tridentsdk.base.Block;
 import net.tridentsdk.base.Substance;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -34,7 +34,7 @@ public enum CommandSourceType {
     PLAYER {
         @Override
         public boolean isTypeOf(CommandSource o) {
-            return o instanceof Player;
+            return o instanceof EntityPlayer;
         }
     }, CONSOLE {
         @Override

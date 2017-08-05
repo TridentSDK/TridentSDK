@@ -19,7 +19,7 @@ package net.tridentsdk.event.player;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.event.Event;
 import net.tridentsdk.event.Supertype;
 
@@ -38,5 +38,5 @@ import javax.annotation.concurrent.Immutable;
 public class PlayerEvent implements Event {
     @Getter
     @NonNull
-    private final Player player;
+    private final EntityPlayer player;
 }

@@ -21,7 +21,7 @@ import java.util.Objects;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
@@ -35,9 +35,9 @@ public class PlayerChatEvent extends CancellablePlayerEvent {
     private ChatComponent chatComponent;
 
     @NonNull
-    private Collection<Player> recipients;
+    private Collection<EntityPlayer> recipients;
 
-    public PlayerChatEvent(Player player, ChatComponent chatComponent, Collection<Player> recipients) {
+    public PlayerChatEvent(EntityPlayer player, ChatComponent chatComponent, Collection<EntityPlayer> recipients) {
         super(player);
         this.chatComponent = Objects.requireNonNull(chatComponent, "chat component cannot be null");
         this.recipients = Objects.requireNonNull(recipients, "recipients cannot be null");

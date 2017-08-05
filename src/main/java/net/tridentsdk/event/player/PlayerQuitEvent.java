@@ -18,7 +18,7 @@ package net.tridentsdk.event.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 /**
@@ -34,7 +34,7 @@ public class PlayerQuitEvent extends PlayerEvent {
 
     @Setter private ChatComponent message;
 
-    public PlayerQuitEvent(Player player, ChatComponent message) {
+    public PlayerQuitEvent(EntityPlayer player, ChatComponent message) {
         super(player);
         this.message = message;
     }

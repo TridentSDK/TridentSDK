@@ -16,13 +16,11 @@
  */
 package net.tridentsdk;
 
-import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import net.tridentsdk.command.CommandHandler;
 import net.tridentsdk.command.CommandSource;
 import net.tridentsdk.config.Config;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.event.EventController;
 import net.tridentsdk.logger.Logger;
 import net.tridentsdk.plugin.PluginLoader;
@@ -100,7 +98,7 @@ public interface Server extends CommandSource {
      * operators loaded from {@code ops.json}.
      *
      * <p>Thiscollection is not mutable. Use
-     * {@link Player#setOp(boolean)} to set operators, or
+     * {@link EntityPlayer#setOp(boolean)} to set operators, or
      * load the file itself and reload the server. Use
      * the former option of at all possible.</p>
      *
@@ -114,7 +112,7 @@ public interface Server extends CommandSource {
      *
      * @return the current online players
      */
-    Collection<? extends Player> getPlayers();
+    Collection<? extends EntityPlayer> getPlayers();
 
     /**
      * Gets the player with the UUID given
@@ -122,7 +120,7 @@ public interface Server extends CommandSource {
      * @return The player, or null if none
      */
     @Nullable
-    Player getPlayer(UUID uuid);
+    EntityPlayer getPlayer(UUID uuid);
 
     /**
      * Gets the player with the exact name given
@@ -130,7 +128,7 @@ public interface Server extends CommandSource {
      * @return The player, or null if none
      */
     @Nullable
-    Player getPlayerExact(String name);
+    EntityPlayer getPlayerExact(String name);
 
     /**
      * Obtains a collection of players which are currently
@@ -140,7 +138,7 @@ public interface Server extends CommandSource {
      * @param name The name
      * @return the matching players
      */
-    Collection<? extends Player> getPlayersMatching(String name);
+    Collection<? extends EntityPlayer> getPlayersMatching(String name);
 
     /**
      * Obtains a collection of players which are currently
@@ -150,7 +148,7 @@ public interface Server extends CommandSource {
      * @param filter The fuzzy match filter
      * @return the matching players
      */
-    Collection<? extends Player> getPlayersFuzzyMatching(String filter);
+    Collection<? extends EntityPlayer> getPlayersFuzzyMatching(String filter);
 
     /**
      * Obtains the singleton instance of the global world

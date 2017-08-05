@@ -18,7 +18,7 @@ package net.tridentsdk.world;
 
 import net.tridentsdk.base.Block;
 import net.tridentsdk.entity.Entity;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -76,7 +76,7 @@ public interface Chunk {
      *
      * @return the players in this chunk
      */
-    Set<? extends Player> getPlayers();
+    Set<? extends EntityPlayer> getPlayers();
 
     /**
      * Obtains a stream of the entities, including players,

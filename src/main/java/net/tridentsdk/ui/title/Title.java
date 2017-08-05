@@ -17,6 +17,7 @@
 package net.tridentsdk.ui.title;
 
 import net.tridentsdk.Impl;
+import net.tridentsdk.entity.living.EntityPlayer;
 import net.tridentsdk.ui.chat.ChatComponent;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -29,7 +30,7 @@ import javax.annotation.concurrent.NotThreadSafe;
  *
  * <p>Titles are independent of the player they are sent to.
  * This means that updates made to a title must use
- * {@link net.tridentsdk.entity.living.Player#sendTitle(Title)}
+ * {@link EntityPlayer#sendTitle(Title)}
  * for every change after it is already sent in order for
  * the new changes to be effected.</p>
  *

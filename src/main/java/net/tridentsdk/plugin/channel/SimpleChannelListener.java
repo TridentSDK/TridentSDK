@@ -18,7 +18,7 @@ package net.tridentsdk.plugin.channel;
 
 import net.tridentsdk.Impl;
 import net.tridentsdk.doc.Policy;
-import net.tridentsdk.entity.living.Player;
+import net.tridentsdk.entity.living.EntityPlayer;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Collection;
@@ -68,7 +68,7 @@ public abstract class SimpleChannelListener {
      * @param players the players that are contained in the channel
      */
     @Policy("call on plugin thread")
-    public void channelOpened(PluginChannel channel, Destination dest, Collection<? extends Player> players) {
+    public void channelOpened(PluginChannel channel, Destination dest, Collection<? extends EntityPlayer> players) {
     }
 
     /**
@@ -89,7 +89,7 @@ public abstract class SimpleChannelListener {
      * the server and then sent to the client)
      */
     @Policy("call on plugin thread")
-    public void channelClosed(PluginChannel channel, Destination dest, Collection<? extends Player> players) {
+    public void channelClosed(PluginChannel channel, Destination dest, Collection<? extends EntityPlayer> players) {
     }
 
     /**
@@ -107,7 +107,7 @@ public abstract class SimpleChannelListener {
      * @param message the message received
      */
     @Policy("call on plugin thread")
-    public void messageReceived(String channel, Player sender, byte[] message) {
+    public void messageReceived(String channel, EntityPlayer sender, byte[] message) {
     }
 
     /**
