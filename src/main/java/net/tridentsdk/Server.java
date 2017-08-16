@@ -16,9 +16,6 @@
  */
 package net.tridentsdk;
 
-import java.util.Objects;
-import java.util.stream.Collectors;
-import javax.annotation.Nullable;
 import net.tridentsdk.command.CommandHandler;
 import net.tridentsdk.command.CommandSource;
 import net.tridentsdk.config.Config;
@@ -28,6 +25,7 @@ import net.tridentsdk.logger.Logger;
 import net.tridentsdk.plugin.PluginLoader;
 import net.tridentsdk.world.WorldLoader;
 
+import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.UUID;

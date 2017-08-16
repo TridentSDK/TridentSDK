@@ -16,22 +16,23 @@
  */
 package net.tridentsdk.command;
 
-import java.lang.reflect.Parameter;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiFunction;
-import java.util.regex.Pattern;
 import net.tridentsdk.Server;
 import net.tridentsdk.command.annotation.PlayerExactMatch;
 import net.tridentsdk.command.annotation.PlayerFuzzyMatch;
 import net.tridentsdk.command.annotation.PlayerRegexMatch;
 import net.tridentsdk.entity.living.Player;
 
+import java.lang.reflect.Parameter;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiFunction;
+import java.util.regex.Pattern;
+
 /**
  * @author Nick Robson
  */
-public class Transformers {
+public final class Transformers {
 
     private static final Map<Class<?>, BiFunction<String, Parameter, ?>> transformers = new ConcurrentHashMap<>();
     private static final Map<Class<?>, BiFunction<String, Parameter, ?>> inheritedTransformers = new ConcurrentHashMap<>();
@@ -86,7 +87,7 @@ public class Transformers {
                 throw new TransformationException("Invalid input! Enter a number!");
             }
         });
-        registerTransformer(Boolean.class, (s, p) -> s.length() > 0 && (s.charAt(0) == 'y' || s.charAt(0) == 't'));
+        registerTransformer(Boolean.class, (s, p) -> !s.isEmpty() && (s.charAt(0) == 'y' || s.charAt(0) == 't'));
         registerTransformer(String.class, (s, p) -> s);
         registerTransformer(Object.class, (s, p) -> s);
         registerTransformer(Player.class, (s, p) -> {
@@ -114,6 +115,9 @@ public class Transformers {
         });
     }
 
+    private Transformers() {
+    }
+
     public static <T> void registerTransformer(Class<T> clazz, BiFunction<String, Parameter, ?> transformer) {
         Objects.requireNonNull(clazz, "class cannot be null");
         Objects.requireNonNull(transformer, "transformer for " + clazz + " cannot be null");
@@ -127,7 +131,6 @@ public class Transformers {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static <T> T transform(String input, Parameter parameter, Class<T> clazz) throws Exception {
         Objects.requireNonNull(input, "input cannot be null");
         Objects.requireNonNull(parameter, "parameter cannot be null");

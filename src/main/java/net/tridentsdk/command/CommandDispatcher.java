@@ -34,7 +34,7 @@ public abstract class CommandDispatcher {
      * @return true iff the given parameter is the main command name.
      */
     public final boolean isMainCommand(String command) {
-        String main = getCommand().name();
+        String main = this.getCommand().name();
         return main != null && main.equalsIgnoreCase(command);
     }
 
@@ -47,7 +47,7 @@ public abstract class CommandDispatcher {
      * @return true iff the given parameter is an alias of the command.
      */
     public final boolean isAlias(String command) {
-        String[] aliases = getCommand().aliases();
+        String[] aliases = this.getCommand().aliases();
         for (String string : aliases) {
             if (string != null && string.equalsIgnoreCase(command)) {
                 return true;

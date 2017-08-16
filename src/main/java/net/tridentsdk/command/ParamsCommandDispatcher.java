@@ -17,12 +17,6 @@
 package net.tridentsdk.command;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import lombok.Getter;
 import net.tridentsdk.command.annotation.AllowedSourceTypes;
 import net.tridentsdk.command.annotation.MaxCount;
@@ -32,6 +26,13 @@ import net.tridentsdk.logger.Logger;
 import net.tridentsdk.ui.chat.ChatColor;
 import net.tridentsdk.ui.chat.ChatComponent;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author Nick Robson
  */
@@ -39,7 +40,6 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
 
     private final MethodAccess access;
     private final CommandListener container;
-    private final Method method;
     private final int methodIndex;
     @Getter private final String plugin;
     @Getter private final Command command;
@@ -60,8 +60,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
     public ParamsCommandDispatcher(MethodAccess access, CommandListener container, Method method, String plugin, Command command) {
         this.access = access;
         this.container = container;
-        this.method = method;
-        this.methodIndex = access.getIndex(this.method.getName(), this.method.getParameterTypes());
+        this.methodIndex = access.getIndex(method.getName(), method.getParameterTypes());
         this.plugin = plugin;
         this.command = command;
         this.parameters = Arrays.copyOfRange(method.getParameters(), 2, method.getParameterCount());
@@ -170,7 +169,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
         if (tooFewArguments || tooManyArguments) {
             ChatComponent cc = ChatComponent.create().setColor(ChatColor.RED).setBold(true);
             cc.setText(tooFewArguments ? "Too few arguments! " : "Too many arguments! ");
-            source.sendMessage(cc.addExtra(ChatComponent.create().setColor(ChatColor.RED).setBold(false).setText(getUsage())));
+            source.sendMessage(cc.addExtra(ChatComponent.create().setColor(ChatColor.RED).setBold(false).setText(this.getUsage())));
             return;
         }
 
@@ -221,7 +220,7 @@ public class ParamsCommandDispatcher extends CommandDispatcher {
             if (tooFewArguments || tooManyArguments) {
                 ChatComponent cc = ChatComponent.create().setColor(ChatColor.RED).setBold(true);
                 cc.setText(tooFewArguments ? "Too few arguments! " : "Too many arguments! ");
-                source.sendMessage(cc.addExtra(ChatComponent.create().setColor(ChatColor.RED).setBold(false).setText(getUsage())));
+                source.sendMessage(cc.addExtra(ChatComponent.create().setColor(ChatColor.RED).setBold(false).setText(this.getUsage())));
                 return;
             }
             Object arr = Array.newInstance(parameters[varargsIndex].getType().getComponentType(), variableArgs.size());

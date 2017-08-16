@@ -58,5 +58,6 @@ public interface CommandSource extends Permissible {
      * @param permission The permission.
      * @return True iff the source has the permission.
      */
+    @Override
     boolean hasPermission(String permission);
 }

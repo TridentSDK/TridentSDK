@@ -16,7 +16,6 @@
  */
 package net.tridentsdk.ui.chat;
 
-import java.util.List;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.hjson.JsonArray;
@@ -26,6 +25,7 @@ import org.hjson.Stringify;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a component in a Minecraft chat format.
@@ -717,12 +717,18 @@ public class ChatComponent {
         return component;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == null || o == this || o.getClass() != this.getClass()) {
             return o == this;
         }
         ChatComponent cc = (ChatComponent) o;
         return this.asJson().equals(cc.asJson());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.asJson().hashCode();
     }
 
     @Getter
