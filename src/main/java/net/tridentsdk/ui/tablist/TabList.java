@@ -28,10 +28,11 @@ import java.util.Collection;
  * <p>A tab list is a wall of entries that are displayed
  * when a player polls for a list of players, but doesn't
  * necessarily have to reply with a list of players. It
- * can,
- * for example, display information isntead of player
- * names.
- * </p>
+ * can, for example, display information instead of player
+ * names.</p>
+ *
+ * <p>One can replace a tablist for a player by using that
+ * player's {@link Player#setTabList(TabList)} method.</p>
  *
  * <p>Tab lists can be obtained using the two static factory
  * methods provided, {@link #getGlobalTabList()} to obtain
@@ -115,20 +116,6 @@ public interface TabList {
      * @return list of tablist users
      */
     Collection<Player> getUserList();
-
-    /**
-     * Subscribes a player as a user of this tablist
-     *
-     * @param player the player to subscribe
-     */
-    void subscribe(Player player);
-
-    /**
-     * Unsubscribes a player as a user of this tablist
-     *
-     * @param player the player to unsubscribe
-     */
-    void unsubscribe(Player player);
 
     /**
      * Updates this tablist, sending it to all subscribed players.
