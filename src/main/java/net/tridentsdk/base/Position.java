@@ -212,7 +212,7 @@ public final class Position extends AbstractVector<Position> {
      * Obtains the X coordinate of the chunk in which this
      * position is located.
      *
-     * @return the chunk xx
+     * @return the chunk x
      */
     public int getChunkX() {
         return this.getIntX() >> 4;
