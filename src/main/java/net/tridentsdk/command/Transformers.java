@@ -95,9 +95,9 @@ public final class Transformers {
             PlayerFuzzyMatch pfm = p != null ? p.getAnnotation(PlayerFuzzyMatch.class) : null;
             PlayerRegexMatch prm = p != null ? p.getAnnotation(PlayerRegexMatch.class) : null;
             if (pem != null) {
-                return Server.getInstance().getPlayerExact(s);
+                return Player.byName(s);
             } else if (pfm != null) {
-                return Server.getInstance().getPlayersFuzzyMatching(s).stream().findAny().orElse(null);
+                return Player.fuzzySearch(s).entrySet().stream().findAny().map(Map.Entry::getValue).orElse(null);
             } else if (prm != null) {
                 Pattern pattern;
                 try {
@@ -110,7 +110,7 @@ public final class Transformers {
                         .findAny()
                         .orElse(null);
             } else {
-                return Server.getInstance().getPlayersMatching(s).stream().findAny().orElse(null);
+                return Player.search(s).entrySet().stream().findAny().map(Map.Entry::getValue).orElse(null);
             }
         });
     }

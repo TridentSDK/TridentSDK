@@ -113,7 +113,7 @@ public interface TabList {
      * Return a list of all players that currently use
      * this tablist.
      *
-     * @return list of tablist users
+     * @return list of tablist users, not modifiable
      */
     Collection<Player> getUserList();
 

@@ -71,6 +71,19 @@ public interface Player extends EntityLiving, CommandSource {
     }
 
     /**
+     * Attempts to get a player by the given UUID who is
+     * connected to this server.
+     *
+     * @param uuid the UUID to find the player
+     * @return the player, or {@code null} if there is no
+     * player online by that UUID
+     */
+    @Nullable
+    static Player byUuid(UUID uuid) {
+        return Impl.get().getByUuid(uuid);
+    }
+
+    /**
      * Obtains a mapping of possible players by the given
      * name.
      *
@@ -83,6 +96,23 @@ public interface Player extends EntityLiving, CommandSource {
     @Nonnull
     static Map<String, Player> search(String search) {
         return Impl.get().findByName(search);
+    }
+
+    /**
+     * Performs a fuzzy search over ALL connected players in
+     * order to find a player whose name contains the
+     * characters of the given filter string.
+     *
+     * <p>Modifying the returned collection has no effect.
+     * </p>
+     *
+     * @param filter the characters which should be present
+     *               in the player name
+     * @return a collection of player names to players whose
+     * names match that of the fuzzy filter
+     */
+    static Map<String, Player> fuzzySearch(String filter) {
+        return Impl.get().findByNameFuzzy(filter);
     }
 
     /**

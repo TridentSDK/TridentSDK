@@ -25,7 +25,6 @@ import net.tridentsdk.logger.Logger;
 import net.tridentsdk.plugin.PluginLoader;
 import net.tridentsdk.world.WorldLoader;
 
-import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.UUID;
@@ -113,42 +112,6 @@ public interface Server extends CommandSource {
      * @return the current online players
      */
     Collection<? extends Player> getPlayers();
-
-    /**
-     * Gets the player with the UUID given
-     * @param uuid The UUID
-     * @return The player, or null if none
-     */
-    @Nullable
-    Player getPlayer(UUID uuid);
-
-    /**
-     * Gets the player with the exact name given
-     * @param name The name
-     * @return The player, or null if none
-     */
-    @Nullable
-    Player getPlayerExact(String name);
-
-    /**
-     * Obtains a collection of players which are currently
-     * connected to this server, and whose names contain the
-     * given string.
-     *
-     * @param name The name
-     * @return the matching players
-     */
-    Collection<? extends Player> getPlayersMatching(String name);
-
-    /**
-     * Obtains a collection of players which are currently
-     * connected to this server, and whose names fuzzy match
-     * the given string.
-     *
-     * @param filter The fuzzy match filter
-     * @return the matching players
-     */
-    Collection<? extends Player> getPlayersFuzzyMatching(String filter);
 
     /**
      * Obtains the singleton instance of the global world

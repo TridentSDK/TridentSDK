@@ -39,6 +39,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -156,6 +157,12 @@ public final class Impl {
         // Players
         @Nonnull
         Map<String, Player> findByName(String name);
+
+        @Nonnull
+        Map<String, Player> findByNameFuzzy(String name);
+
+        @Nullable
+        Player getByUuid(UUID uuid);
         @Nullable
         Player getByName(String name);
 
