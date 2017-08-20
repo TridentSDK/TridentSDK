@@ -239,7 +239,7 @@ public interface Player extends EntityLiving, CommandSource {
     List<BossBar> getBossBars();
 
     /**
-     * Adds a boss bar to this player.
+     * Displays the given boss bar to this player,
      *
      * @param bar The boss bar.
      */
@@ -253,7 +253,8 @@ public interface Player extends EntityLiving, CommandSource {
     void removeBossBar(BossBar bar);
 
     /**
-     * Updates this player's boss bars, sending any required packets.
+     * Updates changes made to the bossbars after they have
+     * been added to this player.
      */
     void updateBossBars();
 

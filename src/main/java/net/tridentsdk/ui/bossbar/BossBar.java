@@ -53,15 +53,6 @@ public interface BossBar {
     UUID getUuid();
 
     /**
-     * Checks to see whether the current boss bar is the
-     * default.
-     *
-     * @return {@code true} if the current bar is default,
-     * {@code false} otherwise
-     */
-    boolean isDefault();
-
-    /**
      * Gets the title of this boss bar.
      *
      * @return The title.
