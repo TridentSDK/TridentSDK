@@ -116,9 +116,4 @@ public interface TabList {
      * @return list of tablist users, not modifiable
      */
     Collection<Player> getUserList();
-
-    /**
-     * Updates this tablist, sending it to all subscribed players.
-     */
-    void update();
 }

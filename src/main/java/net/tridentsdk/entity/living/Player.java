@@ -134,18 +134,20 @@ public interface Player extends EntityLiving, CommandSource {
     UUID getUuid();
 
     /**
-     * Gets this player's display name.
+     * Gets the name of the player as displayed in the tab
+     * list.
      *
-     * @return The display name.
+     * @return the tab list name
      */
-    ChatComponent getDisplayName();
+    ChatComponent getTabListName();
 
     /**
-     * Sets this player's display name.
+     * Sets the displayed player name in the appropriate
+     * tab lists that list this player.
      *
-     * @param displayName The display name.
+     * @param name the name to be displayed in the tab list
      */
-    void setDisplayName(ChatComponent displayName);
+    void setTabListName(ChatComponent name);
 
     /**
      * Sends this player a message.

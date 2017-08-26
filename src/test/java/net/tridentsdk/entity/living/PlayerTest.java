@@ -118,12 +118,12 @@ public class PlayerTest {
         }
 
         @Override
-        public ChatComponent getDisplayName() {
+        public ChatComponent getTabListName() {
             return null;
         }
 
         @Override
-        public void setDisplayName(ChatComponent displayName) {
+        public void setTabListName(ChatComponent name) {
 
         }
 

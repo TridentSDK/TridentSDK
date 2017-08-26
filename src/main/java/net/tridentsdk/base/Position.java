@@ -271,7 +271,7 @@ public final class Position extends AbstractVector<Position> {
 
     @Override
     public String toString() {
-        return String.format("Position{%s-%f,%f,%f-pitch=%f,yaw=%f}",
+        return String.format("Position{%s, (%f, %f, %f), pitch=%f, yaw=%f}",
                 this.world.getName(), this.x, this.y, this.z, this.pitch, this.yaw);
     }
 }

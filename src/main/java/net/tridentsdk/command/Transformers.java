@@ -38,56 +38,56 @@ public final class Transformers {
     private static final Map<Class<?>, BiFunction<String, Parameter, ?>> inheritedTransformers = new ConcurrentHashMap<>();
 
     static {
-        registerTransformer(Byte.class, (s, p) -> {
+        registerTransformer(byte.class, (s, p) -> {
             try {
                 return Byte.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter an integer in -128 to 127!");
             }
         });
-        registerTransformer(Short.class, (s, p) -> {
+        registerTransformer(short.class, (s, p) -> {
             try {
                 return Short.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter an integer in -65536 to 65535!");
             }
         });
-        registerTransformer(Integer.class, (s, p) -> {
+        registerTransformer(int.class, (s, p) -> {
             try {
                 return Integer.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter an integer!");
             }
         });
-        registerTransformer(Long.class, (s, p) -> {
+        registerTransformer(long.class, (s, p) -> {
             try {
                 return Long.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter an integer!");
             }
         });
-        registerTransformer(Float.class, (s, p) -> {
+        registerTransformer(float.class, (s, p) -> {
             try {
                 return Float.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter a number!");
             }
         });
-        registerTransformer(Double.class, (s, p) -> {
+        registerTransformer(double.class, (s, p) -> {
             try {
                 return Double.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter a number!");
             }
         });
-        registerTransformer(Number.class, (s, p) -> {
+        registerTransformer(Number.class, (s, p) -> { // ? @ Nick
             try {
                 return Double.valueOf(s);
             } catch (Exception ex) {
                 throw new TransformationException("Invalid input! Enter a number!");
             }
         });
-        registerTransformer(Boolean.class, (s, p) -> !s.isEmpty() && (s.charAt(0) == 'y' || s.charAt(0) == 't'));
+        registerTransformer(boolean.class, (s, p) -> !s.isEmpty() && (s.charAt(0) == 'y' || s.charAt(0) == 't'));
         registerTransformer(String.class, (s, p) -> s);
         registerTransformer(Object.class, (s, p) -> s);
         registerTransformer(Player.class, (s, p) -> {
